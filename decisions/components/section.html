@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RME Section Container Component</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../design_tokens.css">
+    <style>
+        /* ========================================
+           SECTION CONTAINER COMPONENT
+           ======================================== */
+
+        .section {
+            width: 100%;
+        }
+
+        /* Background variants */
+        .section--white {
+            background-color: var(--color-white);
+        }
+
+        .section--light {
+            background-color: var(--color-light);
+        }
+
+        .section--dark {
+            background-color: var(--color-dark-base);
+            color: var(--color-white);
+        }
+
+        /* Padding variants */
+        .section--pad-md {
+            padding-top: var(--space-lg);
+            padding-bottom: var(--space-lg);
+        }
+
+        .section--pad-lg {
+            padding-top: var(--space-xl);
+            padding-bottom: var(--space-xl);
+        }
+
+        .section--pad-xl {
+            padding-top: var(--space-xxl);
+            padding-bottom: var(--space-xxl);
+        }
+
+        /* Inner container - constrains content width */
+        .section__inner {
+            max-width: var(--max-width-content);
+            margin: 0 auto;
+            padding-left: var(--padding-desktop);
+            padding-right: var(--padding-desktop);
+        }
+
+        /* Narrow variant for focused reading */
+        .section__inner--narrow {
+            max-width: var(--max-width-narrow);
+        }
+
+        /* Full width variant (edge to edge) */
+        .section__inner--full {
+            max-width: none;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        /* ----------------------------------------
+           RESPONSIVE
+           ---------------------------------------- */
+
+        @media (max-width: 1199px) {
+            .section__inner {
+                padding-left: var(--padding-tablet);
+                padding-right: var(--padding-tablet);
+            }
+
+            .section--pad-lg {
+                padding-top: 64px;
+                padding-bottom: 64px;
+            }
+
+            .section--pad-xl {
+                padding-top: var(--space-xl);
+                padding-bottom: var(--space-xl);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .section__inner {
+                padding-left: var(--padding-mobile);
+                padding-right: var(--padding-mobile);
+            }
+
+            .section--pad-md {
+                padding-top: var(--space-md);
+                padding-bottom: var(--space-md);
+            }
+
+            .section--pad-lg {
+                padding-top: var(--space-lg);
+                padding-bottom: var(--space-lg);
+            }
+
+            .section--pad-xl {
+                padding-top: 64px;
+                padding-bottom: 64px;
+            }
+        }
+
+
+        /* ========================================
+           DEMO PAGE STYLES
+           ======================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: #e5e5e5;
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        .demo-header {
+            background: var(--color-white);
+            padding: 40px;
+            margin-bottom: 20px;
+        }
+
+        .demo-header h1 {
+            font-size: var(--font-size-h2);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-sm);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-header p {
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--color-muted);
+        }
+
+        .demo-label {
+            display: inline-block;
+            background: rgba(0,0,0,0.1);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--space-sm);
+            font-family: monospace;
+        }
+
+        .section--dark .demo-label {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .demo-content {
+            min-height: 100px;
+        }
+
+        .demo-content h2 {
+            font-size: var(--font-size-h3);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-xs);
+        }
+
+        .demo-content p {
+            font-size: var(--font-size-body);
+            opacity: 0.8;
+        }
+
+        .section--dark .demo-content h2,
+        .section--dark .demo-content p {
+            color: var(--color-white);
+        }
+
+        .demo-divider {
+            height: 20px;
+            background: #e5e5e5;
+        }
+
+        /* Documentation section */
+        .docs {
+            background: var(--color-white);
+            padding: 40px;
+            margin-top: 20px;
+        }
+
+        .docs__inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .docs h2 {
+            font-size: var(--font-size-h3);
+            font-weight: var(--font-weight-semibold);
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-sm);
+            color: var(--color-muted);
+        }
+
+        .docs h2:first-child {
+            margin-top: 0;
+        }
+
+        .docs-section {
+            background: var(--color-light);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .docs ul {
+            padding-left: var(--space-md);
+        }
+
+        .docs li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .docs code {
+            background: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .docs table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .docs th, .docs td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .docs th {
+            font-weight: var(--font-weight-semibold);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="demo-header">
+        <h1>Section Container Component</h1>
+        <p>Wrapper for page sections. Controls background color, vertical padding, and content width. Scroll down to see all variants.</p>
+    </div>
+
+    <!-- WHITE + LARGE PADDING -->
+    <section class="section section--white section--pad-lg">
+        <div class="section__inner">
+            <span class="demo-label">.section--white .section--pad-lg</span>
+            <div class="demo-content">
+                <h2>White Background, Large Padding</h2>
+                <p>Default for most content sections. Clean and readable.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="demo-divider"></div>
+
+    <!-- LIGHT + LARGE PADDING -->
+    <section class="section section--light section--pad-lg">
+        <div class="section__inner">
+            <span class="demo-label">.section--light .section--pad-lg</span>
+            <div class="demo-content">
+                <h2>Light Background, Large Padding</h2>
+                <p>Use to alternate with white sections. Creates visual rhythm.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="demo-divider"></div>
+
+    <!-- DARK + LARGE PADDING -->
+    <section class="section section--dark section--pad-lg">
+        <div class="section__inner">
+            <span class="demo-label">.section--dark .section--pad-lg</span>
+            <div class="demo-content">
+                <h2>Dark Background, Large Padding</h2>
+                <p>Use sparingly for emphasis. CTA blocks, footer-adjacent sections.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="demo-divider"></div>
+
+    <!-- WHITE + XL PADDING (Hero) -->
+    <section class="section section--white section--pad-xl">
+        <div class="section__inner">
+            <span class="demo-label">.section--white .section--pad-xl</span>
+            <div class="demo-content">
+                <h2>Extra Large Padding</h2>
+                <p>Reserved for hero sections. Maximum breathing room.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="demo-divider"></div>
+
+    <!-- NARROW CONTENT -->
+    <section class="section section--white section--pad-lg">
+        <div class="section__inner section__inner--narrow">
+            <span class="demo-label">.section__inner--narrow</span>
+            <div class="demo-content">
+                <h2>Narrow Content Width</h2>
+                <p>Max-width 720px. Use for focused reading like long-form text, terms pages, or centered content blocks.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="demo-divider"></div>
+
+    <!-- MEDIUM PADDING -->
+    <section class="section section--light section--pad-md">
+        <div class="section__inner">
+            <span class="demo-label">.section--pad-md</span>
+            <div class="demo-content">
+                <h2>Medium Padding</h2>
+                <p>Tighter spacing for smaller sections or when content is dense.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCUMENTATION -->
+    <div class="docs">
+        <div class="docs__inner">
+            <h2>Usage</h2>
+            <div class="docs-section">
+                <pre style="font-size: 12px; overflow-x: auto;"><code>&lt;section class="section section--white section--pad-lg"&gt;
+  &lt;div class="section__inner"&gt;
+    &lt;!-- Your content here --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+            </div>
+
+            <h2>Classes</h2>
+            <div class="docs-section">
+                <table>
+                    <tr>
+                        <th>Class</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td><code>.section</code></td>
+                        <td>Base class (required)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.section--white</code></td>
+                        <td>White background (#fafcfc)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.section--light</code></td>
+                        <td>Light teal background (#ccfbf1)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.section--dark</code></td>
+                        <td>Dark teal background (#134e4a), white text</td>
+                    </tr>
+                    <tr>
+                        <td><code>.section--pad-md</code></td>
+                        <td>Medium padding (48px desktop)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.section--pad-lg</code></td>
+                        <td>Large padding (80px desktop)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.section--pad-xl</code></td>
+                        <td>Extra large padding (120px desktop)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.section__inner</code></td>
+                        <td>Content container (1200px max)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.section__inner--narrow</code></td>
+                        <td>Narrow container (720px max)</td>
+                    </tr>
+                    <tr>
+                        <td><code>.section__inner--full</code></td>
+                        <td>Full width, no padding</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h2>Page Rhythm Pattern</h2>
+            <div class="docs-section">
+                <p>Alternate backgrounds to create visual flow:</p>
+                <pre style="font-size: 12px; margin-top: 12px;"><code>Hero        → white, pad-xl
+Problem     → light, pad-lg
+Solution    → white, pad-lg
+Features    → light, pad-lg
+Testimonial → white, pad-lg
+CTA         → dark, pad-lg
+Footer      → dark</code></pre>
+            </div>
+
+            <h2>Responsive Behavior</h2>
+            <div class="docs-section">
+                <ul>
+                    <li><strong>Desktop:</strong> Full padding, 80px horizontal margins</li>
+                    <li><strong>Tablet:</strong> Reduced padding, 48px horizontal margins</li>
+                    <li><strong>Mobile:</strong> ~30% less vertical padding, 24px horizontal margins</li>
+                </ul>
+            </div>
+
+            <h2>Accessibility</h2>
+            <div class="docs-section">
+                <ul>
+                    <li>Use semantic <code>&lt;section&gt;</code> element</li>
+                    <li>Add <code>id</code> for anchor links</li>
+                    <li>Dark sections maintain WCAG AA contrast</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

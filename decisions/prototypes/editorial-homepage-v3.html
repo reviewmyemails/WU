@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails — Editorial Prototype v3</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           DESIGN TOKENS
+           ======================================== */
+
+        :root {
+            /* Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #fafcfc;
+            --color-light: #f0fdfa;
+            --color-lighter: #f8fafa;
+            --color-muted: #64748b;
+            --color-border: #e2e8f0;
+
+            /* Typography */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+            --space-xxl: 100px;
+
+            /* Layout */
+            --container: 1140px;
+            --content: 680px;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background: var(--color-white);
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .container--narrow {
+            max-width: var(--content);
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+
+        h1 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--color-dark);
+        }
+
+        h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            color: var(--color-dark);
+        }
+
+        h3 {
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--color-dark);
+        }
+
+        .text-muted {
+            color: var(--color-muted);
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        .text-small {
+            font-size: 16px;
+        }
+
+        .text-large {
+            font-size: 20px;
+        }
+
+        /* ========================================
+           BUTTON
+           ======================================== */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 180ms ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-light);
+        }
+
+        /* ========================================
+           ICONS (Simple SVG)
+           ======================================== */
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon--large {
+            width: 48px;
+            height: 48px;
+        }
+
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: var(--color-accent);
+            border-radius: 8px;
+            color: var(--color-white);
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: var(--space-sm) var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .header__logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .header__link {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-muted);
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+
+        .header__link:hover {
+            color: var(--color-dark);
+        }
+
+        .header__cta {
+            font-size: 15px;
+            padding: 10px 20px;
+        }
+
+        /* ========================================
+           HERO — Centered but with character
+           ======================================== */
+
+        .hero {
+            padding: 160px 0 var(--space-xxl);
+            text-align: center;
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: transparent;
+            border: 1px solid var(--color-accent);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: var(--space-md);
+            text-decoration: none;
+            transition: all 180ms ease;
+        }
+
+        .hero__badge:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .hero__headline {
+            max-width: 700px;
+            margin: 0 auto var(--space-md);
+        }
+
+        .hero__subhead {
+            font-size: 20px;
+            color: var(--color-muted);
+            max-width: 540px;
+            margin: 0 auto var(--space-lg);
+            line-height: 1.6;
+        }
+
+        .hero__actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .hero__proof {
+            margin-top: var(--space-xl);
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .hero__bridge {
+            margin-top: var(--space-sm);
+            font-size: 15px;
+            color: var(--color-muted);
+            opacity: 0.8;
+        }
+
+        /* ========================================
+           SYMPTOMS SECTION — Recognition list
+           ======================================== */
+
+        .symptoms {
+            padding: var(--space-xxl) 0;
+            background: var(--color-light);
+        }
+
+        .symptoms__inner {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .symptoms__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .symptoms__header h2 {
+            font-size: clamp(28px, 4vw, 36px);
+        }
+
+        .symptoms__list {
+            list-style: none;
+        }
+
+        .symptoms__list li {
+            font-size: 18px;
+            color: var(--color-dark);
+            line-height: 1.5;
+            padding: var(--space-sm) 0;
+            padding-left: 28px;
+            position: relative;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .symptoms__list li:last-child {
+            border-bottom: none;
+        }
+
+        .symptoms__list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 22px;
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        .symptoms__crisis {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 2px solid var(--color-accent);
+        }
+
+        .symptoms__crisis-header {
+            margin-bottom: var(--space-md);
+        }
+
+        .symptoms__crisis-header h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: var(--space-xs);
+        }
+
+        .symptoms__crisis-header p {
+            font-size: 16px;
+            color: var(--color-muted);
+            line-height: 1.5;
+        }
+
+        .symptoms__crisis-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: var(--space-md);
+            padding: 10px 20px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-dark);
+            background: transparent;
+            border: 2px solid var(--color-dark);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 180ms ease;
+        }
+
+        .symptoms__crisis-cta:hover {
+            background: var(--color-dark);
+            color: var(--color-white);
+        }
+
+        .symptoms__clarification {
+            margin-top: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--color-white);
+            border-radius: 8px;
+            font-size: 16px;
+            color: var(--color-muted);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .symptoms__cta {
+            text-align: center;
+            margin-top: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        @media (max-width: 600px) {
+            .symptoms__cta {
+                flex-direction: column;
+            }
+        }
+
+        /* ========================================
+           STEPS SECTION — With icons, staggered
+           ======================================== */
+
+        .steps {
+            padding: var(--space-xxl) 0;
+            background: var(--color-lighter);
+        }
+
+        .steps__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .steps__header h2 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .steps__header p {
+            color: var(--color-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .steps__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .step {
+            position: relative;
+        }
+
+        /* Stagger effect */
+        .step:nth-child(2) {
+            margin-top: var(--space-lg);
+        }
+
+        .step__icon {
+            margin-bottom: var(--space-md);
+        }
+
+        .step__number {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .step h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .step p {
+            font-size: 16px;
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+
+        /* Whisper between steps */
+        .steps__whisper {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--space-lg) 0;
+            font-size: 15px;
+            font-style: italic;
+            color: var(--color-accent);
+        }
+
+        /* ========================================
+           PULL QUOTE
+           ======================================== */
+
+        .pull-quote {
+            padding: var(--space-xxl) var(--space-md);
+            background: var(--color-dark);
+            color: var(--color-white);
+        }
+
+        .pull-quote__inner {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .pull-quote__text {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: var(--space-lg);
+        }
+
+        .pull-quote__attribution {
+            font-size: 15px;
+            opacity: 0.7;
+        }
+
+        /* Manifesto variant */
+        .manifesto {
+            background: var(--color-accent);
+        }
+
+        .manifesto__text {
+            font-size: clamp(20px, 2.5vw, 26px);
+            font-weight: 500;
+            line-height: 1.8;
+            letter-spacing: 0.01em;
+        }
+
+        /* ========================================
+           WHAT YOU GET — Cards
+           ======================================== */
+
+        .features {
+            padding: var(--space-xxl) 0;
+        }
+
+        .features__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .features__header h2 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .features__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .feature-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            transition: all 200ms ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 4px 24px rgba(13, 148, 136, 0.08);
+        }
+
+        .feature-card__icon {
+            margin-bottom: var(--space-md);
+            color: var(--color-accent);
+        }
+
+        .feature-card h3 {
+            margin-bottom: var(--space-sm);
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           TESTIMONIALS — Editorial
+           ======================================== */
+
+        .testimonials {
+            padding: var(--space-xxl) 0;
+            background: var(--color-lighter);
+        }
+
+        .testimonials__header {
+            margin-bottom: var(--space-xl);
+        }
+
+        .testimonials__header h2 {
+            margin-bottom: var(--space-xs);
+        }
+
+        .testimonials__header p {
+            color: var(--color-muted);
+        }
+
+        .testimonial {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: var(--space-lg);
+            padding: var(--space-lg) 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .testimonial:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .testimonial__meta {
+            font-size: 14px;
+        }
+
+        .testimonial__name {
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 4px;
+        }
+
+        .testimonial__role {
+            color: var(--color-muted);
+            line-height: 1.4;
+        }
+
+        .testimonial__quote {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark);
+        }
+
+        /* ========================================
+           CTA BLOCK
+           ======================================== */
+
+        .cta-block {
+            padding: var(--space-xxl) var(--space-md);
+            text-align: center;
+        }
+
+        .cta-block__inner {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .cta-block h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .cta-block__subtext {
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .cta-block__footer {
+            margin-top: var(--space-md);
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+
+        .footer {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: var(--space-xl) var(--space-md);
+        }
+
+        .footer__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .footer__brand p {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-top: var(--space-xs);
+            max-width: 240px;
+        }
+
+        .footer__column h4 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-sm);
+            opacity: 0.5;
+        }
+
+        .footer__column a {
+            display: block;
+            font-size: 15px;
+            color: var(--color-white);
+            text-decoration: none;
+            opacity: 0.8;
+            margin-bottom: var(--space-xs);
+            transition: opacity 180ms ease;
+        }
+
+        .footer__column a:hover {
+            opacity: 1;
+        }
+
+        .footer__bottom {
+            grid-column: 1 / -1;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+
+        @media (max-width: 900px) {
+            .steps__grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+            }
+
+            .step:nth-child(2) {
+                margin-top: 0;
+            }
+
+            .features__grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .testimonial {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer__brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header__nav {
+                gap: var(--space-md);
+            }
+
+            .header__link {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .hero__actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         HEADER
+         ======================================== -->
+
+    <header class="header">
+        <div class="header__inner">
+            <a href="/" class="header__logo">
+                <img src="../../SVG/Horizontal Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <nav class="header__nav">
+                <a href="#" class="header__link">Pricing</a>
+                <a href="#" class="header__link">SOS Hotline</a>
+                <a href="#" class="btn btn-primary header__cta">Get Answers</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========================================
+         HERO
+         ======================================== -->
+
+    <section class="hero">
+        <div class="container">
+            <a href="https://linkedin.com/in/yannatorry" target="_blank" class="hero__badge">By Yanna-Torry Aspraki</a>
+            <h1 class="hero__headline">Stop guessing what is wrong with your list.<br>I find the problems tools miss.</h1>
+            <p class="hero__subhead">Validation tools check syntax. I check safety. You get clear labels — Keep, Monitor, Suppress — and the reasoning behind each one.</p>
+            <div class="hero__actions">
+                <a href="https://anchor.reviewmyemails.com/buy-credits" class="btn btn-primary">Get answers about your list</a>
+                <a href="../../diagnostic-quiz-v2.html" class="btn btn-secondary">Take the diagnostic quiz</a>
+            </div>
+            <p class="hero__bridge">Most email problems trace back to list quality.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SYMPTOMS — Recognition section
+         "Sound familiar?" creates the "that's me" moment
+         ======================================== -->
+
+    <section class="symptoms">
+        <div class="container">
+            <div class="symptoms__inner">
+
+                <div class="symptoms__header">
+                    <h2>Sound familiar?</h2>
+                </div>
+
+                <ul class="symptoms__list">
+                    <li>No idea where half this list came from.</li>
+                    <li>One tool says clean. Another says risky.</li>
+                    <li>Scared to remove subscribers — even the ones who never open.</li>
+                    <li>Haven't emailed this list in months. Afraid to restart.</li>
+                    <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    <li>Open rates dropped and nobody can explain why.</li>
+                    <li>List keeps growing. Revenue doesn't.</li>
+                </ul>
+
+                <div class="symptoms__crisis">
+                    <div class="symptoms__crisis-header">
+                        <h3>Crisis</h3>
+                        <p>If any of these are true, start here.</p>
+                    </div>
+                    <ul class="symptoms__list">
+                        <li>ESP sent a compliance warning or paused your sending.</li>
+                        <li>Blocklisted — or you think you might be.</li>
+                        <li>Last send spiked bounces. Now everyone's afraid to send again.</li>
+                    </ul>
+                    <a href="#" class="symptoms__crisis-cta">Start here →</a>
+                </div>
+
+                <p class="symptoms__clarification">Validation tools check if addresses exist. We tell you why your emails aren't working — list quality, deliverability, or both — and what to do next.</p>
+
+                <div class="symptoms__cta">
+                    <a href="#" class="btn btn-primary">Get answers about your list</a>
+                    <a href="#" class="btn btn-secondary">Take the 2-minute risk check</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         STEPS — How we work
+         ======================================== -->
+
+    <section class="steps">
+        <div class="container">
+            <div class="steps__header">
+                <h2>How we actually work</h2>
+                <p>Simple process. Expert execution. Real results.</p>
+            </div>
+
+            <div class="steps__grid">
+
+                <div class="step">
+                    <div class="step__icon">
+                        <div class="icon-box">
+                            <svg class="icon icon--large" viewBox="0 0 24 24">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step__number">Step 01</div>
+                    <h3>Send us your list</h3>
+                    <p>CSV, Excel, whatever you have. We've seen it all. No judgment, no questions.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step__icon">
+                        <div class="icon-box">
+                            <svg class="icon icon--large" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                <line x1="11" y1="8" x2="11" y2="14"/>
+                                <line x1="8" y1="11" x2="14" y2="11"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step__number">Step 02</div>
+                    <h3>We review every address</h3>
+                    <p>One by one. Looking for bounces, spam traps, disposables, and reputation killers.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step__icon">
+                        <div class="icon-box">
+                            <svg class="icon icon--large" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step__number">Step 03</div>
+                    <h3>Get your clean list back</h3>
+                    <p>With clear labels and a report. You'll know exactly what to do with each address.</p>
+                </div>
+
+                <p class="steps__whisper">No automation. No outsourcing. No AI guesswork.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         OPTION A: TESTIMONIAL PULL QUOTE
+         ======================================== -->
+
+    <section class="pull-quote">
+        <div class="pull-quote__inner">
+            <p class="pull-quote__text">"I didn't realize how much of my list was dead weight until I saw the report. It was eye-opening."</p>
+            <p class="pull-quote__attribution">Marketing Director, E-commerce brand</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         WHY TOOLS AREN'T ENOUGH
+         A symptom that hooks the "burned by tools" visitor
+         ======================================== -->
+
+    <section class="pull-quote manifesto">
+        <div class="pull-quote__inner">
+            <p class="manifesto__text">You've probably run your list through a tool before.<br>It said 95% valid. You sent anyway. Bounces happened.<br>That's the gap between validation and understanding.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         WHAT YOU GET — Features
+         ======================================== -->
+
+    <section class="features">
+        <div class="container">
+            <div class="features__header">
+                <h2>What you actually get</h2>
+            </div>
+
+            <div class="features__grid">
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg class="icon icon--large" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h3>Clear action labels</h3>
+                    <p>Every email marked Keep, Monitor, or Suppress. No ambiguity, no guessing what to do next.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg class="icon icon--large" viewBox="0 0 24 24">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>Detailed reasoning</h3>
+                    <p>Not just "risky", we tell you why. Spam trap patterns, domain issues, behavioral signals.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg class="icon icon--large" viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Expert interpretation included</h3>
+                    <p>Not just data, context. We explain what we found and what it means for your sending reputation. Book a free walkthrough to apply your results to your specific situation.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         NOT READY? — Soft conversion point
+         For the 40-second visitor who isn't converting today
+         ======================================== -->
+
+    <section class="cta-block" style="background: var(--color-light);">
+        <div class="cta-block__inner">
+            <h2>Not sure if your list needs this?</h2>
+            <p class="cta-block__subtext">Take a 2-minute self-assessment. Six questions about how you built your list, and we'll tell you what risk level you're probably at.</p>
+            <a href="#" class="btn btn-secondary">Check Your List Risk</a>
+        </div>
+    </section>
+
+    <!-- ========================================
+         TESTIMONIALS
+         ======================================== -->
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials__header">
+                <h2>People who trusted us</h2>
+                <p>Real feedback from real senders.</p>
+            </div>
+
+            <article class="testimonial">
+                <div class="testimonial__meta">
+                    <p class="testimonial__name">Sarah M.</p>
+                    <p class="testimonial__role">Marketing Director<br>E-commerce brand</p>
+                </div>
+                <blockquote class="testimonial__quote">
+                    "The report was more detailed than anything I've seen from automated tools. I finally understood why my open rates were tanking."
+                </blockquote>
+            </article>
+
+            <article class="testimonial">
+                <div class="testimonial__meta">
+                    <p class="testimonial__name">James T.</p>
+                    <p class="testimonial__role">Founder<br>B2B SaaS</p>
+                </div>
+                <blockquote class="testimonial__quote">
+                    "I used to guess which emails to keep. Now I know. Worth every penny."
+                </blockquote>
+            </article>
+
+            <article class="testimonial">
+                <div class="testimonial__meta">
+                    <p class="testimonial__name">Priya K.</p>
+                    <p class="testimonial__role">Email Strategist<br>Agency</p>
+                </div>
+                <blockquote class="testimonial__quote">
+                    "I recommend RME to every client now. It's the only service I trust to not break things."
+                </blockquote>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ========================================
+         CTA BLOCK
+         ======================================== -->
+
+    <section class="cta-block">
+        <div class="cta-block__inner">
+            <h2>Ready to know what's in your list?</h2>
+            <p class="cta-block__subtext">Send us your list. We'll tell you exactly what's safe to send, what needs watching, and what will hurt you.</p>
+            <a href="#" class="btn btn-primary">Get Answers About Your List</a>
+            <p class="cta-block__footer">Most lists returned within 24 hours.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <img src="../../SVG/Dark Horizontal Logo.svg" alt="Review My Emails" height="50">
+                <p>Expert email list review. Human judgment, not algorithms.</p>
+            </div>
+
+            <div class="footer__column">
+                <h4>Services</h4>
+                <a href="#">Pricing</a>
+                <a href="#">SOS Hotline</a>
+            </div>
+
+            <div class="footer__column">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Partner</a>
+            </div>
+
+            <div class="footer__column">
+                <h4>Contact</h4>
+                <a href="mailto:ahoy@reviewmyemails.com">ahoy@reviewmyemails.com</a>
+            </div>
+
+            <div class="footer__bottom">
+                <span>© 2026 Review My Emails. All rights reserved.</span>
+                <span>Privacy Policy · Terms</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

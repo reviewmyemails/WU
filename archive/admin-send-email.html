@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Email Sender | Review My Emails</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #7B1FA2 0%, #6A1B9A 100%);
+      color: white;
+      padding: 20px 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .warning-banner {
+      background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+      padding: 15px 30px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .warning-banner .icon {
+      font-size: 24px;
+    }
+
+    .warning-banner p {
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .info-box {
+      background: #E8F5E9;
+      border-left: 4px solid #4CAF50;
+      padding: 15px 20px;
+      margin-bottom: 30px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .info-box h3 {
+      color: #2E7D32;
+      margin-bottom: 10px;
+    }
+
+    .info-box ul {
+      margin-left: 20px;
+      color: #1B5E20;
+    }
+
+    .email-forms {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 30px;
+    }
+
+    .form-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .form-card-header {
+      padding: 20px 25px;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .form-card-header.purchase {
+      background: linear-gradient(135deg, #0C92E1 0%, #0a7bc4 100%);
+    }
+
+    .form-card-header.abandoned {
+      background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+    }
+
+    .form-card-header .icon {
+      font-size: 32px;
+    }
+
+    .form-card-header h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .form-card-header p {
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .form-card-body {
+      padding: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .form-group label .required {
+      color: #D32F2F;
+    }
+
+    .form-group label .optional {
+      color: #666;
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #0C92E1;
+    }
+
+    .form-group input:disabled {
+      background: #f5f5f5;
+      color: #666;
+    }
+
+    .form-group .help-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .auto-generated {
+      background: #E3F2FD;
+      border: 2px dashed #0C92E1;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .auto-generated h4 {
+      color: #0C92E1;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .auto-generated p {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-primary {
+      background: #0C92E1;
+      color: white;
+    }
+
+    .btn-warning {
+      background: #FF9800;
+      color: white;
+    }
+
+    .btn .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .btn.loading .spinner {
+      display: block;
+    }
+
+    .btn.loading .btn-text {
+      display: none;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .result-panel {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .result-panel.success {
+      background: #E8F5E9;
+      border: 2px solid #4CAF50;
+      display: block;
+    }
+
+    .result-panel.error {
+      background: #FFEBEE;
+      border: 2px solid #D32F2F;
+      display: block;
+    }
+
+    .result-panel h4 {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .result-panel.success h4 {
+      color: #2E7D32;
+    }
+
+    .result-panel.error h4 {
+      color: #C62828;
+    }
+
+    .result-details {
+      background: white;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 13px;
+      overflow-x: auto;
+    }
+
+    .result-details .row {
+      display: flex;
+      padding: 5px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .result-details .row:last-child {
+      border-bottom: none;
+    }
+
+    .result-details .label {
+      font-weight: 600;
+      min-width: 150px;
+      color: #555;
+    }
+
+    .result-details .value {
+      color: #333;
+      word-break: break-all;
+    }
+
+    .result-details .value.success {
+      color: #2E7D32;
+    }
+
+    .result-details .value.error {
+      color: #C62828;
+    }
+
+    .log-console {
+      background: #1e1e1e;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 30px;
+    }
+
+    .log-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .log-header h3 {
+      color: white;
+      font-size: 16px;
+    }
+
+    .log-output {
+      background: #252525;
+      border-radius: 4px;
+      padding: 15px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+      font-size: 13px;
+      color: #d4d4d4;
+    }
+
+    .log-line {
+      margin-bottom: 4px;
+    }
+
+    .log-line.info {
+      color: #4FC3F7;
+    }
+
+    .log-line.success {
+      color: #66BB6A;
+    }
+
+    .log-line.error {
+      color: #EF5350;
+    }
+
+    .log-line.warning {
+      color: #FFB74D;
+    }
+
+    .clear-btn {
+      background: #444;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .clear-btn:hover {
+      background: #555;
+    }
+
+    .preview-box {
+      background: #FFF3E0;
+      border: 2px solid #FF9800;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .preview-box.visible {
+      display: block;
+    }
+
+    .preview-box h4 {
+      color: #E65100;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .preview-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px dashed #FFB74D;
+    }
+
+    .preview-row:last-child {
+      border-bottom: none;
+    }
+
+    .preview-label {
+      color: #5D4037;
+      font-weight: 500;
+    }
+
+    .preview-value {
+      color: #333;
+      font-weight: 600;
+    }
+
+    .preview-value.highlight {
+      color: #2E7D32;
+      font-size: 16px;
+    }
+
+    .preview-value.free {
+      color: #7B1FA2;
+      font-weight: 700;
+    }
+
+    .pricing-tier {
+      font-size: 11px;
+      color: #666;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #FFB74D;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Admin Email Sender</h1>
+    <p>Send ad-hoc Brevo emails for list cleaning requests (separate from marketing lists)</p>
+  </div>
+
+  <div class="warning-banner">
+    <span class="icon">&#9888;</span>
+    <p><strong>Ad-Hoc Requests Only:</strong> Contacts will be added to a separate list (not marketing). Dropbox links are auto-generated. All other fields must be filled manually.</p>
+  </div>
+
+  <div class="container">
+    <div class="info-box">
+      <h3>How It Works</h3>
+      <ul>
+        <li><strong>Dropbox Link:</strong> Automatically generated for each request - no manual input needed</li>
+        <li><strong>Upload ID & Email:</strong> Auto-generated with ADH prefix (Ad-Hoc)</li>
+        <li><strong>Contact List:</strong> Added to Ad-Hoc list (List 11) - NOT marketing lists</li>
+        <li><strong>All other fields:</strong> Must be entered manually</li>
+      </ul>
+    </div>
+
+    <div class="email-forms">
+      <!-- Purchase Confirmation Form -->
+      <div class="form-card">
+        <div class="form-card-header purchase">
+          <span class="icon">&#128230;</span>
+          <div>
+            <h2>Purchase Confirmation</h2>
+            <p>Template #27 - Send order confirmation email</p>
+          </div>
+        </div>
+        <div class="form-card-body">
+          <form id="purchaseForm">
+            <div class="auto-generated">
+              <h4>&#9889; Auto-Generated Fields</h4>
+              <p>Upload ID, Upload Email, and Dropbox Link will be automatically created when you send.</p>
+            </div>
+
+            <div class="form-group">
+              <label>Recipient Email <span class="required">*</span></label>
+              <input type="email" name="recipientEmail" required placeholder="customer@example.com">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Credits Purchased <span class="required">*</span></label>
+                <input type="number" name="creditsPurchased" required placeholder="5000" min="1">
+              </div>
+              <div class="form-group">
+                <label>Bonus Credits <span class="optional">(optional)</span></label>
+                <input type="number" name="bonusCredits" placeholder="750" min="0">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Total Credits <span class="required">*</span></label>
+                <input type="number" name="totalCredits" required placeholder="5750" min="1">
+                <p class="help-text">Credits Purchased + Bonus Credits</p>
+              </div>
+              <div class="form-group">
+                <label>Purchase Amount ($) <span class="required">*</span></label>
+                <input type="number" name="purchaseAmount" required placeholder="37.00" step="0.01" min="0">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Promo Code <span class="optional">(optional)</span></label>
+              <input type="text" name="promoCode" placeholder="BONUS50">
+            </div>
+
+            <div class="preview-box" id="purchasePreview">
+              <h4>&#128202; Email Preview (What Customer Will See)</h4>
+              <div class="preview-row">
+                <span class="preview-label">Total Credits:</span>
+                <span class="preview-value" id="previewTotalCredits">-</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">Regular Price:</span>
+                <span class="preview-value" id="previewOriginalPrice">-</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">They Paid:</span>
+                <span class="preview-value" id="previewPaidAmount">-</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">Savings:</span>
+                <span class="preview-value highlight" id="previewSavings">-</span>
+              </div>
+              <div class="preview-row">
+                <span class="preview-label">Promo Code:</span>
+                <span class="preview-value" id="previewPromoCode">-</span>
+              </div>
+              <div class="pricing-tier" id="previewTier">-</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" id="purchaseBtn">
+              <span class="spinner"></span>
+              <span class="btn-text">&#128232; Send Purchase Confirmation</span>
+            </button>
+
+            <div class="result-panel" id="purchaseResult"></div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Abandoned Cart Form -->
+      <div class="form-card">
+        <div class="form-card-header abandoned">
+          <span class="icon">&#128722;</span>
+          <div>
+            <h2>Abandoned Cart Recovery</h2>
+            <p>Template #28 - Send cart recovery email with coupon</p>
+          </div>
+        </div>
+        <div class="form-card-body">
+          <form id="abandonedForm">
+            <div class="auto-generated">
+              <h4>&#9889; Auto-Generated Fields</h4>
+              <p>Upload ID, Upload Email, and Dropbox Link will be automatically created when you send.</p>
+            </div>
+
+            <div class="form-group">
+              <label>Recipient Email <span class="required">*</span></label>
+              <input type="email" name="recipientEmail" required placeholder="customer@example.com">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Base Credits <span class="required">*</span></label>
+                <input type="number" name="abandonedBaseCredits" required placeholder="5000" min="1">
+              </div>
+              <div class="form-group">
+                <label>Bonus Credits <span class="optional">(optional)</span></label>
+                <input type="number" name="abandonedBonusCredits" placeholder="750" min="0">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Total Credits <span class="required">*</span></label>
+                <input type="number" name="abandonedTotalCredits" required placeholder="5750" min="1">
+              </div>
+              <div class="form-group">
+                <label>Price ($) <span class="required">*</span></label>
+                <input type="number" name="abandonedPrice" required placeholder="37.00" step="0.01" min="0">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Coupon Code <span class="required">*</span></label>
+                <input type="text" name="abandonedCoupon" required placeholder="LOSTATSEA15">
+              </div>
+              <div class="form-group">
+                <label>Coupon Expiry <span class="optional">(optional)</span></label>
+                <input type="date" name="abandonedCouponExpiry">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Bonus Value ($) <span class="optional">(optional)</span></label>
+                <input type="number" name="abandonedBonusValue" placeholder="5.55" step="0.01" min="0">
+              </div>
+              <div class="form-group">
+                <label>Total Value ($) <span class="optional">(optional)</span></label>
+                <input type="number" name="abandonedTotalValue" placeholder="42.55" step="0.01" min="0">
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-warning" id="abandonedBtn">
+              <span class="spinner"></span>
+              <span class="btn-text">&#128232; Send Abandoned Cart Email</span>
+            </button>
+
+            <div class="result-panel" id="abandonedResult"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Log Console -->
+    <div class="log-console">
+      <div class="log-header">
+        <h3>Activity Log</h3>
+        <button class="clear-btn" onclick="clearLog()">Clear</button>
+      </div>
+      <div class="log-output" id="logOutput">
+        <div class="log-line info">[INFO] Admin Email Sender loaded. Ready to send emails.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = '/api/test-suite?test=admin-email';
+
+    function log(message, type = 'info') {
+      const logOutput = document.getElementById('logOutput');
+      const timestamp = new Date().toLocaleTimeString();
+      const line = document.createElement('div');
+      line.className = `log-line ${type}`;
+      line.textContent = `[${timestamp}] ${message}`;
+      logOutput.appendChild(line);
+      logOutput.scrollTop = logOutput.scrollHeight;
+    }
+
+    function clearLog() {
+      document.getElementById('logOutput').innerHTML = '';
+      log('Log cleared', 'info');
+    }
+
+    function showResult(panelId, success, data) {
+      const panel = document.getElementById(panelId);
+      panel.className = `result-panel ${success ? 'success' : 'error'}`;
+
+      if (success) {
+        panel.innerHTML = `
+          <h4>&#9989; Email Sent Successfully</h4>
+          <div class="result-details">
+            <div class="row"><span class="label">Upload ID:</span><span class="value">${data.uploadId}</span></div>
+            <div class="row"><span class="label">Upload Email:</span><span class="value">${data.uploadEmail}</span></div>
+            <div class="row"><span class="label">Dropbox:</span><span class="value ${data.dropbox?.success ? 'success' : 'error'}">${data.dropbox?.success ? data.dropbox.url : data.dropbox?.error || 'Failed'}</span></div>
+            <div class="row"><span class="label">Brevo Contact:</span><span class="value ${data.brevo?.success ? 'success' : 'error'}">${data.brevo?.success ? 'Added to list' : data.brevo?.error || 'Failed'}</span></div>
+            <div class="row"><span class="label">Email Sent:</span><span class="value ${data.email?.success ? 'success' : 'error'}">${data.email?.success ? 'Yes (ID: ' + data.email.messageId + ')' : data.email?.error || 'Failed'}</span></div>
+          </div>
+        `;
+      } else {
+        panel.innerHTML = `
+          <h4>&#10060; Error</h4>
+          <div class="result-details">
+            <div class="row"><span class="label">Error:</span><span class="value error">${data.error || 'Unknown error'}</span></div>
+            ${data.uploadId ? `<div class="row"><span class="label">Upload ID:</span><span class="value">${data.uploadId}</span></div>` : ''}
+          </div>
+        `;
+      }
+    }
+
+    async function sendEmail(formId, emailType, buttonId, resultPanelId) {
+      const form = document.getElementById(formId);
+      const button = document.getElementById(buttonId);
+      const formData = new FormData(form);
+
+      // Build request body
+      const body = { emailType };
+      for (const [key, value] of formData.entries()) {
+        if (value) body[key] = value;
+      }
+
+      log(`Sending ${emailType} email to ${body.recipientEmail}...`, 'info');
+
+      button.classList.add('loading');
+      button.disabled = true;
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          log(`Email sent successfully! Upload ID: ${data.uploadId}`, 'success');
+          if (data.dropbox?.success) {
+            log(`Dropbox link created: ${data.dropbox.url}`, 'success');
+          } else {
+            log(`Dropbox failed: ${data.dropbox?.error || 'Unknown'}`, 'warning');
+          }
+          showResult(resultPanelId, true, data);
+        } else {
+          log(`Failed to send email: ${data.error}`, 'error');
+          showResult(resultPanelId, false, data);
+        }
+
+      } catch (error) {
+        log(`Error: ${error.message}`, 'error');
+        showResult(resultPanelId, false, { error: error.message });
+      } finally {
+        button.classList.remove('loading');
+        button.disabled = false;
+      }
+    }
+
+    // Purchase form handler
+    document.getElementById('purchaseForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await sendEmail('purchaseForm', 'purchase_confirmation', 'purchaseBtn', 'purchaseResult');
+    });
+
+    // Abandoned cart form handler
+    document.getElementById('abandonedForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      await sendEmail('abandonedForm', 'abandoned_cart', 'abandonedBtn', 'abandonedResult');
+    });
+
+    // Pricing tiers (must match lib/pricing.js)
+    function getPricePerCredit(credits) {
+      if (credits < 1000) return null;
+      if (credits <= 1000) return 0.008;
+      if (credits <= 5000) return 0.0074;
+      if (credits <= 10000) return 0.007;
+      if (credits <= 50000) return 0.0062;
+      if (credits <= 100000) return 0.0052;
+      if (credits <= 250000) return 0.0039;
+      if (credits <= 500000) return 0.00325;
+      if (credits <= 1000000) return 0.0026;
+      return null;
+    }
+
+    function getTierName(credits) {
+      if (credits < 1000) return 'Below minimum (1000)';
+      if (credits <= 1000) return 'Tier: 1,000 credits @ $0.0080/credit';
+      if (credits <= 5000) return 'Tier: 1,001-5,000 credits @ $0.0074/credit';
+      if (credits <= 10000) return 'Tier: 5,001-10,000 credits @ $0.0070/credit';
+      if (credits <= 50000) return 'Tier: 10,001-50,000 credits @ $0.0062/credit';
+      if (credits <= 100000) return 'Tier: 50,001-100,000 credits @ $0.0052/credit';
+      if (credits <= 250000) return 'Tier: 100,001-250,000 credits @ $0.0039/credit';
+      if (credits <= 500000) return 'Tier: 250,001-500,000 credits @ $0.0032/credit';
+      if (credits <= 1000000) return 'Tier: 500,001-1,000,000 credits @ $0.0026/credit';
+      return 'Over 1M (contact us)';
+    }
+
+    function formatNumber(num) {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    function updatePurchasePreview() {
+      const totalCredits = parseInt(document.querySelector('#purchaseForm input[name="totalCredits"]').value) || 0;
+      const purchaseAmount = parseFloat(document.querySelector('#purchaseForm input[name="purchaseAmount"]').value) || 0;
+      const promoCode = document.querySelector('#purchaseForm input[name="promoCode"]').value || '';
+
+      const previewBox = document.getElementById('purchasePreview');
+
+      if (totalCredits < 1000) {
+        previewBox.classList.remove('visible');
+        return;
+      }
+
+      const pricePerCredit = getPricePerCredit(totalCredits);
+      const originalPrice = totalCredits * pricePerCredit;
+      const savings = originalPrice - purchaseAmount;
+      const isFree = purchaseAmount === 0;
+
+      document.getElementById('previewTotalCredits').textContent = formatNumber(totalCredits);
+      document.getElementById('previewOriginalPrice').textContent = '$' + originalPrice.toFixed(2);
+
+      if (isFree) {
+        document.getElementById('previewPaidAmount').textContent = 'FREE';
+        document.getElementById('previewPaidAmount').classList.add('free');
+        document.getElementById('previewPromoCode').textContent = promoCode || 'FREE100 (added automatically)';
+      } else {
+        document.getElementById('previewPaidAmount').textContent = '$' + purchaseAmount.toFixed(2);
+        document.getElementById('previewPaidAmount').classList.remove('free');
+        document.getElementById('previewPromoCode').textContent = promoCode || '(none)';
+      }
+
+      if (savings > 0) {
+        document.getElementById('previewSavings').textContent = 'You saved $' + savings.toFixed(2) + '!';
+        document.getElementById('previewSavings').classList.add('highlight');
+      } else {
+        document.getElementById('previewSavings').textContent = '$0.00';
+        document.getElementById('previewSavings').classList.remove('highlight');
+      }
+
+      document.getElementById('previewTier').textContent = getTierName(totalCredits);
+      previewBox.classList.add('visible');
+    }
+
+    // Auto-calculate total credits for purchase form
+    const purchaseCreditFields = ['creditsPurchased', 'bonusCredits'];
+    purchaseCreditFields.forEach(field => {
+      document.querySelector(`#purchaseForm input[name="${field}"]`).addEventListener('input', () => {
+        const credits = parseInt(document.querySelector('#purchaseForm input[name="creditsPurchased"]').value) || 0;
+        const bonus = parseInt(document.querySelector('#purchaseForm input[name="bonusCredits"]').value) || 0;
+        document.querySelector('#purchaseForm input[name="totalCredits"]').value = credits + bonus;
+        updatePurchasePreview();
+      });
+    });
+
+    // Also update preview when other fields change
+    document.querySelector('#purchaseForm input[name="totalCredits"]').addEventListener('input', updatePurchasePreview);
+    document.querySelector('#purchaseForm input[name="purchaseAmount"]').addEventListener('input', updatePurchasePreview);
+    document.querySelector('#purchaseForm input[name="promoCode"]').addEventListener('input', updatePurchasePreview);
+
+    // Auto-calculate total credits for abandoned form
+    const abandonedCreditFields = ['abandonedBaseCredits', 'abandonedBonusCredits'];
+    abandonedCreditFields.forEach(field => {
+      document.querySelector(`#abandonedForm input[name="${field}"]`).addEventListener('input', () => {
+        const base = parseInt(document.querySelector('#abandonedForm input[name="abandonedBaseCredits"]').value) || 0;
+        const bonus = parseInt(document.querySelector('#abandonedForm input[name="abandonedBonusCredits"]').value) || 0;
+        document.querySelector('#abandonedForm input[name="abandonedTotalCredits"]').value = base + bonus;
+      });
+    });
+  </script>
+</body>
+</html>

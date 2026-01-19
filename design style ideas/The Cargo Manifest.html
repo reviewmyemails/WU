@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails — Cargo Manifest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Manifest Palette */
+            --color-bg: #f1f5f9;
+            --color-card: #ffffff;
+            --color-ink: #0f172a;
+            --color-accent: #0d9488; /* Brand Teal */
+            --color-stamp: #ef4444; /* Red for "Suppress" stamps */
+            --font-main: 'Inter', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-ink);
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 0;
+            /* Subtle paper texture */
+            background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23cbd5e1' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Mono Labels for the "Cargo" feel */
+        .label-mono {
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        /* Hero: The Top Sheet */
+        .hero {
+            margin-top: 80px;
+            background: var(--color-card);
+            padding: 80px;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--color-accent);
+            position: relative;
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+        }
+
+        .hero:hover {
+            transform: rotate(0deg);
+        }
+
+        /* Paper "Clip" or Stamp visual */
+        .hero::after {
+            content: "CONFIDENTIAL";
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            font-family: var(--font-mono);
+            color: #cbd5e1;
+            border: 2px solid #cbd5e1;
+            padding: 8px 16px;
+            transform: rotate(12deg);
+            font-weight: 700;
+            opacity: 0.5;
+        }
+
+        h1 {
+            font-size: 48px;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--color-ink);
+        }
+
+        p.lead {
+            font-size: 20px;
+            line-height: 1.5;
+            color: #475569;
+            max-width: 600px;
+        }
+
+        /* The Stack Section */
+        .stack-section {
+            margin: 120px 0;
+            position: relative;
+        }
+
+        .stack-card {
+            background: var(--color-card);
+            padding: 40px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Stacking Effect */
+        .stack-card:nth-child(1) { transform: rotate(2deg); z-index: 1; margin-bottom: -200px; }
+        .stack-card:nth-child(2) { transform: rotate(-1deg); z-index: 2; margin-bottom: -200px; }
+        .stack-card:nth-child(3) { transform: rotate(1deg); z-index: 3; }
+
+        /* Hover spreads the stack */
+        .stack-section:hover .stack-card:nth-child(1) { transform: translateX(-50px) rotate(-5deg); margin-bottom: -150px; }
+        .stack-section:hover .stack-card:nth-child(2) { transform: translateX(50px) rotate(5deg); margin-bottom: -150px; }
+        .stack-section:hover .stack-card:nth-child(3) { transform: translateY(-20px); }
+
+        .stamp {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .stamp-keep { background: #d1fae5; color: #059669; }
+        .stamp-monitor { background: #ffedd5; color: #ea580c; }
+        .stamp-suppress { background: #fee2e2; color: #ef4444; }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 120px 0 60px;
+        }
+
+        .btn-manifest {
+            background: var(--color-ink);
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.2s;
+        }
+        
+        .btn-manifest:hover {
+            transform: translateY(-2px);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header style="padding: 40px 0; display: flex; justify-content: space-between;">
+            <div style="font-weight: 700;">RME // LOGISTICS</div>
+            <div style="font-family: var(--font-mono); font-size: 14px;">STATUS: DOCKED</div>
+        </header>
+
+        <div class="hero">
+            <span class="label-mono">Subject: List Hygiene Report</span>
+            <h1>The cargo manifest<br>for your email list.</h1>
+            <p class="lead">Don't set sail with dead weight. We review every address line-by-line to ensure your delivery arrives safely.</p>
+            <div style="margin-top: 40px;">
+                <a href="#" class="btn-manifest">
+                    <span>Submit List for Review</span>
+                    <!-- Simple Arrow -->
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="stack-section">
+            
+            <div class="stack-card">
+                <span class="stamp stamp-keep">KEEP</span>
+                <h3>The Good Cargo</h3>
+                <p>These addresses are safe. Validated, active, and ready for transport.</p>
+            </div>
+
+            <div class="stack-card">
+                <span class="stamp stamp-monitor">MONITOR</span>
+                <h3>Handle With Care</h3>
+                <p>Technically valid, but showing signs of decay. We recommend a quarantine protocol (segmentation).</p>
+            </div>
+
+            <div class="stack-card">
+                <span class="stamp stamp-suppress">SUPPRESS</span>
+                <h3>Jettison Immediately</h3>
+                <p>Spam traps and hard bounces. Keeping these on board will sink the whole ship.</p>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <h2 style="font-size: 24px; margin-bottom: 24px;">Overwhelmed by the logistics?</h2>
+            <!-- Octopus Icon SVG -->
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                <path d="M8 10c0-2 1-3 2-3s2 1 2 3"></path>
+                <path d="M9 14h6"></path>
+            </svg>
+            <p style="font-size: 28px; font-weight: 700; margin-bottom: 8px;">Need a hand (or eight)?</p>
+            <p style="color: #64748b;">Our experts are standing by to help you sort the cargo.</p>
+            <a href="mailto:ahoy@reviewmyemails.com" style="color: var(--color-accent); text-decoration: none; font-weight: 600; margin-top: 16px; display: block;">Contact the Crew &rarr;</a>
+        </footer>
+    </div>
+</body>
+</html>

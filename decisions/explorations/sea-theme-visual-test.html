@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea Theme Visual Exploration - RME</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           DESIGN TOKENS (from design_tokens.css)
+           ======================================== */
+        :root {
+            --color-dark-base: #134e4a;
+            --color-accent: #0d9488;
+            --color-white: #fafcfc;
+            --color-light: #ccfbf1;
+            --color-muted: #6b7280;
+            --color-secondary: #fbbf24;
+
+            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-weight-regular: 400;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 48px;
+            --space-xl: 80px;
+
+            --radius-md: 8px;
+            --radius-lg: 12px;
+
+            --shadow-md: 0 4px 6px rgba(19, 78, 74, 0.07);
+            --shadow-lg: 0 10px 20px rgba(19, 78, 74, 0.1);
+
+            --transition-normal: 200ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark-base);
+            background: var(--color-white);
+        }
+
+        /* ========================================
+           EXPLORATION PAGE LAYOUT
+           ======================================== */
+
+        .exploration-header {
+            background: var(--color-dark-base);
+            color: var(--color-white);
+            padding: var(--space-lg) var(--space-md);
+            text-align: center;
+        }
+
+        .exploration-header h1 {
+            font-size: 28px;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-sm);
+        }
+
+        .exploration-header p {
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .comparison-section {
+            padding: var(--space-xl) var(--space-md);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .comparison-section h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .comparison-section > p {
+            text-align: center;
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+        }
+
+        @media (max-width: 900px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-box {
+            border: 2px solid #e5e7eb;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+        }
+
+        .comparison-box__label {
+            background: #f3f4f6;
+            padding: var(--space-sm);
+            text-align: center;
+            font-weight: var(--font-weight-semibold);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-muted);
+        }
+
+        .comparison-box__content {
+            padding: 0;
+        }
+
+        /* ========================================
+           OPTION A: HINT OF WAVES
+           Section dividers + footer texture only
+           ======================================== */
+
+        /* Wave divider - subtle curve */
+        .wave-divider-subtle {
+            height: 40px;
+            background: var(--color-white);
+            position: relative;
+        }
+
+        .wave-divider-subtle::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: var(--color-light);
+            clip-path: ellipse(60% 100% at 50% 100%);
+        }
+
+        /* Reverse wave (light to white) */
+        .wave-divider-subtle--reverse {
+            background: var(--color-light);
+        }
+
+        .wave-divider-subtle--reverse::after {
+            background: var(--color-white);
+            clip-path: ellipse(60% 100% at 50% 0%);
+            top: 0;
+            bottom: auto;
+        }
+
+        /* ========================================
+           OPTION B: CONSISTENT SEA PRESENCE
+           Dividers + textures + gradients
+           ======================================== */
+
+        /* Wave divider - more pronounced */
+        .wave-divider-full {
+            height: 60px;
+            background: var(--color-white);
+            position: relative;
+        }
+
+        .wave-divider-full::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--color-light);
+            clip-path: polygon(
+                0% 100%,
+                0% 60%,
+                10% 65%,
+                20% 60%,
+                30% 70%,
+                40% 60%,
+                50% 65%,
+                60% 55%,
+                70% 65%,
+                80% 60%,
+                90% 70%,
+                100% 60%,
+                100% 100%
+            );
+        }
+
+        /* Topographic/wave line pattern */
+        .texture-waves {
+            background-image:
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(13, 148, 136, 0.03) 30px,
+                    rgba(13, 148, 136, 0.03) 31px
+                );
+        }
+
+        /* Subtle dot pattern */
+        .texture-dots {
+            background-image: radial-gradient(
+                rgba(13, 148, 136, 0.08) 1px,
+                transparent 1px
+            );
+            background-size: 20px 20px;
+        }
+
+        /* Gradient depth effect */
+        .gradient-depth {
+            background: linear-gradient(
+                180deg,
+                var(--color-dark-base) 0%,
+                #0f3d3a 50%,
+                #0a2e2b 100%
+            );
+        }
+
+        /* ========================================
+           DEMO SECTIONS
+           ======================================== */
+
+        .demo-hero {
+            padding: var(--space-xl) var(--space-md);
+            text-align: center;
+        }
+
+        .demo-hero--light {
+            background: var(--color-light);
+        }
+
+        .demo-hero--dark {
+            background: var(--color-dark-base);
+            color: var(--color-white);
+        }
+
+        .demo-hero h3 {
+            font-size: 32px;
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-sm);
+        }
+
+        .demo-hero p {
+            max-width: 500px;
+            margin: 0 auto var(--space-md);
+            opacity: 0.9;
+        }
+
+        .demo-btn {
+            display: inline-block;
+            background: var(--color-accent);
+            color: var(--color-white);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .demo-section {
+            padding: var(--space-lg) var(--space-md);
+        }
+
+        .demo-section--light {
+            background: var(--color-light);
+        }
+
+        .demo-section h4 {
+            font-size: 22px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .demo-section p {
+            color: var(--color-muted);
+            max-width: 400px;
+        }
+
+        .demo-footer {
+            background: var(--color-dark-base);
+            color: var(--color-white);
+            padding: var(--space-lg) var(--space-md);
+            text-align: center;
+        }
+
+        .demo-footer p {
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Footer with wave texture */
+        .demo-footer--textured {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-footer--textured::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(255, 255, 255, 0.02) 40px,
+                    rgba(255, 255, 255, 0.02) 80px
+                );
+            pointer-events: none;
+        }
+
+        /* ========================================
+           INDIVIDUAL ELEMENT DEMOS
+           ======================================== */
+
+        .elements-section {
+            padding: var(--space-xl) var(--space-md);
+            background: #f9fafb;
+        }
+
+        .elements-section h2 {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .elements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-md);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .element-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .element-card__label {
+            padding: var(--space-sm);
+            background: var(--color-dark-base);
+            color: white;
+            font-size: 14px;
+            font-weight: var(--font-weight-semibold);
+        }
+
+        .element-card__demo {
+            padding: var(--space-md);
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CTA Block with wave top */
+        .cta-wave-top {
+            background: var(--color-dark-base);
+            color: white;
+            padding: var(--space-lg) var(--space-md);
+            text-align: center;
+            position: relative;
+            clip-path: polygon(
+                0% 15%,
+                10% 10%,
+                20% 15%,
+                30% 8%,
+                40% 12%,
+                50% 5%,
+                60% 10%,
+                70% 8%,
+                80% 15%,
+                90% 10%,
+                100% 12%,
+                100% 100%,
+                0% 100%
+            );
+            margin-top: -20px;
+            padding-top: calc(var(--space-lg) + 20px);
+        }
+
+        /* Card with ripple hover */
+        .card-ripple {
+            background: white;
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            border: 1px solid #e5e7eb;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+        }
+
+        .card-ripple:hover {
+            box-shadow:
+                0 0 0 1px var(--color-accent),
+                0 4px 20px rgba(13, 148, 136, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Gradient hero background */
+        .hero-gradient {
+            background: linear-gradient(
+                135deg,
+                var(--color-dark-base) 0%,
+                #0f5f5a 50%,
+                var(--color-accent) 100%
+            );
+            color: white;
+            padding: var(--space-lg);
+            text-align: center;
+            border-radius: var(--radius-md);
+        }
+
+        /* Horizontal line styles */
+        .divider-demo {
+            width: 100%;
+            height: 60px;
+            position: relative;
+            background: var(--color-light);
+        }
+
+        .divider-straight {
+            border-top: 2px solid var(--color-accent);
+        }
+
+        .divider-wave-small::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: var(--color-accent);
+            clip-path: polygon(
+                0% 50%, 5% 0%, 10% 50%, 15% 100%, 20% 50%,
+                25% 0%, 30% 50%, 35% 100%, 40% 50%,
+                45% 0%, 50% 50%, 55% 100%, 60% 50%,
+                65% 0%, 70% 50%, 75% 100%, 80% 50%,
+                85% 0%, 90% 50%, 95% 100%, 100% 50%
+            );
+            opacity: 0.3;
+        }
+
+        /* ========================================
+           SUMMARY SECTION
+           ======================================== */
+
+        .summary {
+            padding: var(--space-xl) var(--space-md);
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .summary h2 {
+            margin-bottom: var(--space-md);
+        }
+
+        .summary-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        @media (max-width: 600px) {
+            .summary-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .summary-option {
+            border: 2px solid #e5e7eb;
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            text-align: left;
+        }
+
+        .summary-option h3 {
+            font-size: 18px;
+            margin-bottom: var(--space-sm);
+            color: var(--color-accent);
+        }
+
+        .summary-option ul {
+            font-size: 15px;
+            color: var(--color-muted);
+            padding-left: 20px;
+        }
+
+        .summary-option ul li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="exploration-header">
+        <h1>Sea Theme Visual Exploration</h1>
+        <p>Comparing two approaches: "Hint of waves" vs "Consistent sea presence" — scroll to see full page mockups and individual elements.</p>
+    </div>
+
+    <!-- ========================================
+         FULL PAGE COMPARISON
+         ======================================== -->
+
+    <div class="comparison-section">
+        <h2>Full Page Flow Comparison</h2>
+        <p>How each approach feels as you scroll through a page</p>
+
+        <div class="comparison-grid">
+
+            <!-- Option A: Hint of Waves -->
+            <div class="comparison-box">
+                <div class="comparison-box__label">Option A: Hint of Waves</div>
+                <div class="comparison-box__content">
+
+                    <!-- Hero -->
+                    <div class="demo-hero demo-hero--light">
+                        <h3>Clean your email list</h3>
+                        <p>Every email manually reviewed by a deliverability expert.</p>
+                        <a href="#" class="demo-btn">Get My List Cleaned</a>
+                    </div>
+
+                    <!-- Subtle wave divider -->
+                    <div class="wave-divider-subtle"></div>
+
+                    <!-- Content section -->
+                    <div class="demo-section demo-section--light">
+                        <h4>How It Works</h4>
+                        <p>Simple three-step process to protect your sender reputation.</p>
+                    </div>
+
+                    <!-- Reverse wave -->
+                    <div class="wave-divider-subtle--reverse" style="height: 40px; background: var(--color-light); position: relative;">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 40px; background: var(--color-white); clip-path: ellipse(60% 100% at 50% 0%);"></div>
+                    </div>
+
+                    <!-- Another section -->
+                    <div class="demo-section">
+                        <h4>What You Get</h4>
+                        <p>Clear action labels: Keep, Monitor, or Suppress.</p>
+                    </div>
+
+                    <!-- Footer with subtle texture -->
+                    <div class="demo-footer demo-footer--textured">
+                        <p>Review My Emails</p>
+                        <p style="margin-top: 8px;">Subtle diagonal texture in footer</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Option B: Consistent Sea Presence -->
+            <div class="comparison-box">
+                <div class="comparison-box__label">Option B: Consistent Sea Presence</div>
+                <div class="comparison-box__content">
+
+                    <!-- Hero with gradient -->
+                    <div class="demo-hero demo-hero--dark gradient-depth">
+                        <h3>Clean your email list</h3>
+                        <p>Every email manually reviewed by a deliverability expert.</p>
+                        <a href="#" class="demo-btn" style="background: var(--color-white); color: var(--color-dark-base);">Get My List Cleaned</a>
+                    </div>
+
+                    <!-- More pronounced wave divider -->
+                    <div class="wave-divider-full" style="background: var(--color-dark-base);">
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: var(--color-light); clip-path: polygon(0% 100%, 0% 60%, 10% 65%, 20% 55%, 30% 70%, 40% 55%, 50% 65%, 60% 50%, 70% 65%, 80% 55%, 90% 70%, 100% 55%, 100% 100%);"></div>
+                    </div>
+
+                    <!-- Content section with texture -->
+                    <div class="demo-section demo-section--light texture-dots">
+                        <h4>How It Works</h4>
+                        <p>Simple three-step process to protect your sender reputation.</p>
+                    </div>
+
+                    <!-- Another section with line texture -->
+                    <div class="demo-section texture-waves">
+                        <h4>What You Get</h4>
+                        <p>Clear action labels: Keep, Monitor, or Suppress.</p>
+                    </div>
+
+                    <!-- CTA with wave top -->
+                    <div class="cta-wave-top">
+                        <h4 style="font-size: 20px; margin-bottom: 8px;">Ready to clean your list?</h4>
+                        <p style="opacity: 0.8; font-size: 16px;">Wave-shaped top edge on CTA block</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================================
+         INDIVIDUAL ELEMENTS
+         ======================================== -->
+
+    <div class="elements-section">
+        <h2>Individual Elements</h2>
+
+        <div class="elements-grid">
+
+            <!-- Straight divider -->
+            <div class="element-card">
+                <div class="element-card__label">Divider: Straight Line</div>
+                <div class="element-card__demo" style="background: var(--color-light);">
+                    <div style="width: 80%; height: 2px; background: var(--color-accent); opacity: 0.3;"></div>
+                </div>
+            </div>
+
+            <!-- Ellipse divider -->
+            <div class="element-card">
+                <div class="element-card__label">Divider: Subtle Curve (A)</div>
+                <div class="element-card__demo" style="background: var(--color-white); position: relative; overflow: hidden;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: var(--color-light); clip-path: ellipse(55% 100% at 50% 100%);"></div>
+                </div>
+            </div>
+
+            <!-- Wave divider -->
+            <div class="element-card">
+                <div class="element-card__label">Divider: Wavy Edge (B)</div>
+                <div class="element-card__demo" style="background: var(--color-white); position: relative; overflow: hidden;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: var(--color-light); clip-path: polygon(0% 100%, 0% 60%, 15% 40%, 30% 70%, 45% 35%, 60% 65%, 75% 40%, 90% 60%, 100% 45%, 100% 100%);"></div>
+                </div>
+            </div>
+
+            <!-- Dot texture -->
+            <div class="element-card">
+                <div class="element-card__label">Texture: Subtle Dots (B)</div>
+                <div class="element-card__demo texture-dots" style="background: var(--color-light);">
+                    <span style="font-size: 14px; color: var(--color-muted);">Background pattern</span>
+                </div>
+            </div>
+
+            <!-- Line texture -->
+            <div class="element-card">
+                <div class="element-card__label">Texture: Horizontal Lines (B)</div>
+                <div class="element-card__demo texture-waves">
+                    <span style="font-size: 14px; color: var(--color-muted);">Background pattern</span>
+                </div>
+            </div>
+
+            <!-- Gradient -->
+            <div class="element-card">
+                <div class="element-card__label">Hero: Depth Gradient (B)</div>
+                <div class="element-card__demo hero-gradient">
+                    <span style="font-size: 14px;">Gradient depth effect</span>
+                </div>
+            </div>
+
+            <!-- Card ripple -->
+            <div class="element-card">
+                <div class="element-card__label">Card: Ripple Hover (B)</div>
+                <div class="element-card__demo" style="background: #f9fafb;">
+                    <div class="card-ripple" style="width: 80%;">
+                        <strong style="font-size: 16px;">Hover me</strong>
+                        <p style="font-size: 14px; color: var(--color-muted); margin-top: 4px;">Teal glow on hover</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer texture -->
+            <div class="element-card">
+                <div class="element-card__label">Footer: Diagonal Texture (A/B)</div>
+                <div class="element-card__demo demo-footer--textured" style="background: var(--color-dark-base); color: white; border-radius: var(--radius-md);">
+                    <span style="font-size: 14px; position: relative; z-index: 1;">Subtle diagonal lines</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================================
+         SUMMARY
+         ======================================== -->
+
+    <div class="summary">
+        <h2>Which feels right?</h2>
+        <p>Both maintain professionalism. The question is how much visual personality to add.</p>
+
+        <div class="summary-options">
+            <div class="summary-option">
+                <h3>A: Hint of Waves</h3>
+                <ul>
+                    <li>Subtle curved section dividers</li>
+                    <li>Light texture in footer only</li>
+                    <li>Sea theme mainly in copy</li>
+                    <li>Clean, minimal, lets content lead</li>
+                </ul>
+            </div>
+
+            <div class="summary-option">
+                <h3>B: Consistent Sea Presence</h3>
+                <ul>
+                    <li>More pronounced wave edges</li>
+                    <li>Dot/line textures in sections</li>
+                    <li>Depth gradients in dark areas</li>
+                    <li>Unmistakably "ocean" brand</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

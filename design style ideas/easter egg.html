@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails — Surface vs Abyss</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           V3 TOKENS
+           ======================================== */
+        :root {
+            /* LIGHT MODE (Surface) */
+            --bg-body: #fafcfc;
+            --bg-section: #f0fdfa;
+            --bg-card: #ffffff;
+            --color-text: #134e4a;
+            --color-muted: #64748b;
+            --color-accent: #0d9488;
+            --color-border: #e2e8f0;
+            --shadow: 0 4px 12px rgba(13, 148, 136, 0.08);
+            
+            --font: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* DARK MODE (Abyss) */
+        body.mode-abyss {
+            --bg-body: #020617;
+            --bg-section: #0f172a;
+            --bg-card: rgba(255,255,255,0.03);
+            --color-text: #f1f5f9;
+            --color-muted: #94a3b8;
+            --color-accent: #2dd4bf;
+            --color-border: rgba(255,255,255,0.1);
+            --shadow: 0 0 30px rgba(45, 212, 191, 0.1);
+        }
+
+        /* ========================================
+           BASE STYLES
+           ======================================== */
+        body {
+            font-family: var(--font);
+            background: var(--bg-body);
+            color: var(--color-text);
+            margin: 0; line-height: 1.6;
+            transition: background 0.5s ease, color 0.5s ease;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        
+        /* The Searchlight (Hidden by default) */
+        .spotlight {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 999;
+            /* The gradient creates a clear hole in the dark overlay */
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 100px, rgba(2, 6, 23, 0.98) 350px);
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        body.mode-abyss .spotlight { opacity: 1; }
+
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 10; }
+
+        /* ========================================
+           HEADER & TOGGLE
+           ======================================== */
+        .header {
+            padding: 24px 0; position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(var(--bg-body), 0.8); backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+            transition: border-color 0.5s;
+        }
+        body.mode-abyss .header { background: rgba(2, 6, 23, 0.8); }
+
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        
+        .logo { height: 40px; transition: filter 0.5s; }
+        body.mode-abyss .logo { filter: brightness(0) invert(1); }
+
+        .nav { display: flex; align-items: center; gap: 24px; }
+        .nav-link { font-size: 14px; font-weight: 500; color: var(--color-muted); transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-accent); }
+
+        /* THE ABYSS TOGGLE */
+        .dive-switch {
+            display: flex; align-items: center; gap: 8px;
+            background: var(--color-border); padding: 4px; border-radius: 30px;
+            cursor: pointer; position: relative; width: 140px; height: 36px;
+            transition: background 0.3s;
+        }
+        body.mode-abyss .dive-switch { background: #1e293b; }
+
+        .dive-label {
+            flex: 1; text-align: center; font-size: 11px; font-weight: 700; 
+            text-transform: uppercase; letter-spacing: 0.5px; z-index: 2;
+            transition: color 0.3s;
+        }
+        
+        .toggle-knob {
+            position: absolute; top: 4px; left: 4px; width: 66px; height: 28px;
+            background: white; border-radius: 24px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s var(--ease); z-index: 1;
+        }
+        
+        body.mode-abyss .toggle-knob { transform: translateX(66px); background: var(--color-accent); }
+
+        /* ========================================
+           COMPONENTS
+           ======================================== */
+        .btn {
+            display: inline-flex; padding: 14px 28px; border-radius: 8px; font-weight: 600;
+            transition: all 0.3s var(--ease); border: 2px solid transparent;
+        }
+        .btn-primary { background: var(--color-accent); color: white; }
+        body.mode-abyss .btn-primary { background: transparent; border-color: var(--color-accent); color: var(--color-accent); }
+        body.mode-abyss .btn-primary:hover { background: var(--color-accent); color: #020617; box-shadow: 0 0 20px var(--color-accent); }
+        
+        .btn-secondary { background: transparent; border: 2px solid var(--color-accent); color: var(--color-accent); }
+        
+        h1 { font-size: clamp(40px, 5vw, 64px); line-height: 1.1; margin-bottom: 24px; color: var(--color-text); }
+        h2 { font-size: 32px; color: var(--color-text); margin-bottom: 20px; }
+        p { color: var(--color-muted); margin-bottom: 24px; }
+
+        /* ========================================
+           EASTER EGG (THE SECRET)
+           ======================================== */
+        .secret-container { position: relative; } /* Wrapper for manifesto */
+        
+        .easter-egg {
+            position: absolute;
+            top: 50%; right: 0;
+            transform: translateY(-50%) translateX(80px); /* Pushes it into the empty space */
+            font-family: var(--font-mono);
+            color: var(--color-accent);
+            font-size: 12px;
+            letter-spacing: 2px;
+            opacity: 0;
+            pointer-events: none; /* Can't click it in light mode */
+            transition: opacity 0.5s;
+            white-space: nowrap;
+        }
+
+        body.mode-abyss .easter-egg {
+            opacity: 0.3; /* Faint until spotlight hits it */
+            pointer-events: auto;
+            animation: bio-pulse 4s infinite;
+        }
+
+        body.mode-abyss .easter-egg:hover {
+            opacity: 1;
+            text-shadow: 0 0 15px var(--color-accent);
+            cursor: help;
+        }
+
+        @keyframes bio-pulse {
+            0%, 100% { opacity: 0.1; text-shadow: 0 0 0px var(--color-accent); }
+            50% { opacity: 0.5; text-shadow: 0 0 10px var(--color-accent); }
+        }
+
+        /* ========================================
+           SECTIONS
+           ======================================== */
+        .hero { padding: 180px 0 120px; text-align: center; max-width: 800px; margin: 0 auto; }
+        .hero-badge {
+            display: inline-block; padding: 6px 16px; border-radius: 50px; border: 1px solid var(--color-accent);
+            color: var(--color-accent); font-size: 13px; font-weight: 600; margin-bottom: 24px;
+        }
+        
+        .section-alt { background: var(--bg-section); padding: 100px 0; transition: background 0.5s; }
+        
+        .symptoms-list li {
+            font-size: 18px; padding: 16px 0; border-bottom: 1px solid var(--color-border); list-style: none; position: relative; padding-left: 24px;
+        }
+        .symptoms-list li::before {
+            content: ""; position: absolute; left: 0; top: 26px; width: 6px; height: 6px; background: var(--color-accent); border-radius: 50%;
+        }
+
+        .crisis-box {
+            border: 1px solid var(--color-border); background: var(--bg-card); padding: 32px; margin-top: 40px; border-left: 4px solid #ef4444;
+        }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 60px; }
+        .card {
+            background: var(--bg-card); padding: 40px; border: 1px solid var(--color-border); border-radius: 12px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--color-accent); box-shadow: var(--shadow); }
+
+        .testimonial { padding: 40px 0; border-top: 1px solid var(--color-border); text-align: left; }
+        .quote { font-size: 20px; font-style: italic; color: var(--color-text); margin-bottom: 16px; display: block; }
+        .author { font-size: 14px; font-weight: 600; color: var(--color-accent); text-transform: uppercase; }
+
+        .footer { background: #134e4a; color: white; padding: 80px 0 40px; transition: background 0.5s; }
+        body.mode-abyss .footer { background: #020617; border-top: 1px solid var(--color-border); }
+        .footer a { color: rgba(255,255,255,0.7); display: block; margin-bottom: 12px; }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s var(--ease); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; } .delay-2 { transition-delay: 0.2s; }
+
+    </style>
+</head>
+<body>
+
+    <!-- THE SEARCHLIGHT -->
+    <div class="spotlight" id="spotlight"></div>
+
+    <header class="header">
+        <div class="container header-inner">
+            <img src="https://anchor.reviewmyemails.com/assets/logo.svg" alt="RME" class="logo">
+            <div style="display: flex; align-items: center; gap: 40px;">
+                <nav class="nav" style="display: none; @media(min-width: 768px){ display: flex; }">
+                    <a href="#" class="nav-link">Pricing</a>
+                    <a href="#" class="nav-link">SOS Hotline</a>
+                </nav>
+                <div class="dive-switch" id="modeSwitch">
+                    <div class="toggle-knob"></div>
+                    <span class="dive-label" style="color: var(--color-text);">Surface</span>
+                    <span class="dive-label" style="color: var(--color-muted);">Dive</span>
+                </div>
+                <a href="#" class="btn btn-primary" style="padding: 10px 20px;">Get Answers</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="reveal">
+            <a href="#" class="hero-badge">By Yanna-Torry Aspraki</a>
+            <h1>Stop guessing what is <br>wrong with your list.</h1>
+            <p style="font-size: 20px; max-width: 600px; margin: 0 auto 40px auto;">Validation tools check syntax. I check safety. You get clear labels — Keep, Monitor, Suppress — and the reasoning behind each one.</p>
+            <div>
+                <a href="#" class="btn btn-primary">Get answers about your list</a>
+                <a href="#" class="btn btn-secondary" style="margin-left: 16px;">Take diagnostic quiz</a>
+            </div>
+            <p style="margin-top: 32px; font-size: 14px; opacity: 0.7; font-style: italic;">Most email problems trace back to list quality.</p>
+        </div>
+    </section>
+
+    <section class="section-alt">
+        <div class="container" style="max-width: 800px;">
+            <h2 class="reveal">Sound familiar?</h2>
+            <ul class="symptoms-list">
+                <li class="reveal delay-1">No idea where half this list came from.</li>
+                <li class="reveal delay-1">One tool says clean. Another says risky.</li>
+                <li class="reveal delay-1">Scared to remove subscribers — even the ones who never open.</li>
+                <li class="reveal delay-1">Haven't emailed this list in months. Afraid to restart.</li>
+                <li class="reveal delay-1">Paid for list cleaning yesterday. Bounces today.</li>
+                <li class="reveal delay-1">Open rates dropped and nobody can explain why.</li>
+            </ul>
+
+            <div class="crisis-box reveal">
+                <h3 style="margin-top: 0; color: #ef4444;">Crisis Mode?</h3>
+                <p>ESP sent a compliance warning? Blocklisted? If you can't send right now, skip the check.</p>
+                <a href="#" style="color: var(--color-text); font-weight: 700; text-decoration: underline;">Go to SOS Hotline &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 120px 24px;">
+        <h2 style="text-align: center;" class="reveal">How we actually work</h2>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto;" class="reveal">Simple process. Expert execution.</p>
+        
+        <div class="grid-3">
+            <div class="card reveal delay-1">
+                <h3 style="color: var(--color-accent); font-size: 40px; margin-bottom: 10px;">01</h3>
+                <h3>Send us your list</h3>
+                <p>CSV, Excel, whatever you have. We've seen it all. No judgment.</p>
+            </div>
+            <div class="card reveal delay-2">
+                <h3 style="color: var(--color-accent); font-size: 40px; margin-bottom: 10px;">02</h3>
+                <h3>We review every address</h3>
+                <p>One by one. Looking for bounces, spam traps, and reputation killers.</p>
+            </div>
+            <div class="card reveal delay-1">
+                <h3 style="color: var(--color-accent); font-size: 40px; margin-bottom: 10px;">03</h3>
+                <h3>Get your clean list</h3>
+                <p>With clear labels and a report. You'll know exactly what to do.</p>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 40px; color: var(--color-accent); font-style: italic;" class="reveal">No automation. No outsourcing. No AI guesswork.</p>
+    </section>
+
+    <!-- MANIFESTO WITH EASTER EGG -->
+    <section class="section-alt" style="text-align: center; position: relative; overflow: hidden;">
+        <div class="container reveal secret-container">
+            <p style="font-size: 28px; line-height: 1.4; max-width: 800px; margin: 0 auto; color: var(--color-text);">"You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened. <span style="color: var(--color-accent);">That's the gap between validation and understanding.</span>"</p>
+            
+            <!-- THE HIDDEN EGG -->
+            <div class="easter-egg">
+                🐙 SECRET FOUND: CODE 'OCTOPUS'
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 120px 24px;">
+        <h2 style="text-align: center;" class="reveal">What you actually get</h2>
+        <div class="grid-3">
+            <div class="card reveal delay-1">
+                <h3>Clear action labels</h3>
+                <p>Every email marked Keep, Monitor, or Suppress. No ambiguity.</p>
+            </div>
+            <div class="card reveal delay-2">
+                <h3>Detailed reasoning</h3>
+                <p>Not just "risky", we tell you why. Spam trap patterns, domain issues.</p>
+            </div>
+            <div class="card reveal delay-1">
+                <h3>Expert interpretation</h3>
+                <p>Context on what it means for your reputation. Includes walkthrough.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-alt">
+        <div class="container">
+            <h2 class="reveal">People who trusted us</h2>
+            <div class="testimonial reveal delay-1">
+                <span class="quote">"The report was more detailed than anything I've seen from automated tools. I finally understood why my open rates were tanking."</span>
+                <span class="author">Sarah M. — Marketing Director</span>
+            </div>
+            <div class="testimonial reveal delay-2">
+                <span class="quote">"I used to guess which emails to keep. Now I know. Worth every penny."</span>
+                <span class="author">James T. — Founder</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" style="padding: 100px 24px; text-align: center;">
+        <h2 class="reveal">Ready to know what's in your list?</h2>
+        <p class="reveal">Send us your list. We'll tell you exactly what's safe to send.</p>
+        <a href="#" class="btn btn-primary reveal">Get Answers About Your List</a>
+        <p style="font-size: 14px; margin-top: 20px;" class="reveal">Most lists returned within 24 hours.</p>
+    </section>
+
+    <footer class="footer">
+        <div class="container" style="text-align: center;">
+            <img src="https://anchor.reviewmyemails.com/assets/logo.svg" height="40" style="filter: brightness(0) invert(1); opacity: 0.8; margin-bottom: 24px;">
+            <p style="font-size: 24px; font-weight: 700; color: white;">Need a hand (or eight)?</p>
+            <a href="mailto:ahoy@reviewmyemails.com" style="font-size: 20px; color: var(--color-accent);">ahoy@reviewmyemails.com</a>
+            <div style="margin-top: 40px; font-size: 14px; opacity: 0.6;">
+                <span style="margin: 0 10px;">Pricing</span>
+                <span style="margin: 0 10px;">About</span>
+                <span style="margin: 0 10px;">Partner</span>
+                <p style="margin-top: 20px;">© 2026 Review My Emails</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Toggle Logic
+        const switchBtn = document.getElementById('modeSwitch');
+        const body = document.body;
+        switchBtn.addEventListener('click', () => {
+            body.classList.toggle('mode-abyss');
+        });
+
+        // 2. Searchlight Logic
+        const spotlight = document.getElementById('spotlight');
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            spotlight.style.setProperty('--x', x + '%');
+            spotlight.style.setProperty('--y', y + '%');
+        });
+
+        // 3. Scroll Reveal Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

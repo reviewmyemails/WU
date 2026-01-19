@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails — Editorial Prototype</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           DESIGN TOKENS
+           ======================================== */
+
+        :root {
+            /* Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-white: #fafcfc;
+            --color-light: #e8f5f3;
+            --color-muted: #6b7280;
+            --color-border: #e5e7eb;
+
+            /* Typography */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 48px;
+            --space-xl: 80px;
+            --space-xxl: 120px;
+            --space-huge: 160px;
+
+            /* Layout */
+            --container: 1200px;
+            --content: 720px;
+            --narrow: 560px;
+            --left-offset: 120px;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 20px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background: var(--color-white);
+        }
+
+        /* ========================================
+           LAYOUT PRIMITIVES
+           ======================================== */
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .asymmetric {
+            padding-left: var(--left-offset);
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+
+        h1 {
+            font-size: 64px;
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            color: var(--color-dark);
+        }
+
+        h2 {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--color-dark);
+        }
+
+        h3 {
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--color-dark);
+        }
+
+        p {
+            max-width: 680px;
+        }
+
+        .text-muted {
+            color: var(--color-muted);
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        .text-small {
+            font-size: 17px;
+        }
+
+        .text-caption {
+            font-size: 14px;
+            letter-spacing: 0.02em;
+        }
+
+        .text-uppercase {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ========================================
+           BUTTON
+           ======================================== */
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            font-family: var(--font);
+            font-size: 17px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 200ms ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: #0f766e;
+        }
+
+        /* ========================================
+           HEADER (Minimal)
+           ======================================== */
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--color-white);
+        }
+
+        .header__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: var(--space-sm) var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--color-dark);
+            text-decoration: none;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .header__link {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-dark);
+            text-decoration: none;
+            transition: color 200ms ease;
+        }
+
+        .header__link:hover {
+            color: var(--color-accent);
+        }
+
+        .header__cta {
+            font-size: 15px;
+            padding: 12px 24px;
+        }
+
+        /* ========================================
+           HERO — Asymmetric, pushed down
+           ======================================== */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: var(--space-xxl);
+            padding-top: var(--space-huge);
+        }
+
+        .hero__content {
+            max-width: 640px;
+        }
+
+        .hero__headline {
+            margin-bottom: var(--space-md);
+        }
+
+        .hero__subhead {
+            font-size: 22px;
+            color: var(--color-muted);
+            max-width: 480px;
+            margin-bottom: var(--space-lg);
+            line-height: 1.5;
+        }
+
+        /* ========================================
+           BROKEN GRID SECTION
+           ======================================== */
+
+        .broken-grid {
+            padding: var(--space-huge) 0;
+        }
+
+        .broken-grid__title {
+            margin-bottom: var(--space-xl);
+        }
+
+        .broken-grid__items {
+            position: relative;
+        }
+
+        .broken-grid__item {
+            max-width: 520px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .broken-grid__item:nth-child(2) {
+            margin-left: 240px;
+        }
+
+        .broken-grid__item:nth-child(3) {
+            margin-top: var(--space-lg);
+        }
+
+        .broken-grid__item h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .broken-grid__item p {
+            color: var(--color-muted);
+            font-size: 18px;
+        }
+
+        /* Whisper — margin note */
+        .whisper {
+            position: absolute;
+            right: 0;
+            top: 280px;
+            width: 200px;
+            font-size: 15px;
+            font-style: italic;
+            color: var(--color-accent);
+            line-height: 1.5;
+            text-align: right;
+        }
+
+        /* ========================================
+           PULL QUOTE — Interruption
+           ======================================== */
+
+        .pull-quote {
+            background: var(--color-light);
+            padding: var(--space-xxl) var(--space-md);
+        }
+
+        .pull-quote__inner {
+            max-width: var(--narrow);
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .pull-quote__text {
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: var(--color-dark);
+            margin-bottom: var(--space-lg);
+        }
+
+        .pull-quote__attribution {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           TESTIMONIAL — Editorial layout
+           ======================================== */
+
+        .testimonials {
+            padding: var(--space-huge) 0;
+        }
+
+        .testimonials__title {
+            margin-bottom: var(--space-xl);
+        }
+
+        .testimonial {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: var(--space-lg);
+            padding: var(--space-lg) 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .testimonial:first-of-type {
+            border-top: none;
+        }
+
+        .testimonial__meta {
+            font-size: 14px;
+        }
+
+        .testimonial__name {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 4px;
+        }
+
+        .testimonial__title {
+            color: var(--color-muted);
+            margin-bottom: 2px;
+        }
+
+        .testimonial__company {
+            color: var(--color-muted);
+        }
+
+        .testimonial__quote {
+            font-size: 24px;
+            line-height: 1.5;
+            max-width: 600px;
+        }
+
+        /* ========================================
+           CTA BLOCK — Quiet, proposal-style
+           ======================================== */
+
+        .cta-block {
+            padding: var(--space-xxl) var(--space-md);
+            text-align: center;
+        }
+
+        .cta-block__headline {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: var(--space-lg);
+        }
+
+        .cta-block__button {
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-block__subtext {
+            font-size: 15px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           FOOTER — Minimal
+           ======================================== */
+
+        .footer {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: var(--space-xl) var(--space-md);
+        }
+
+        .footer__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: var(--space-lg);
+        }
+
+        .footer__brand {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .footer__links {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        .footer__column h4 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-sm);
+            opacity: 0.6;
+        }
+
+        .footer__column a {
+            display: block;
+            font-size: 15px;
+            color: var(--color-white);
+            text-decoration: none;
+            opacity: 0.8;
+            margin-bottom: var(--space-xs);
+            transition: opacity 200ms ease;
+        }
+
+        .footer__column a:hover {
+            opacity: 1;
+        }
+
+        .footer__legal {
+            width: 100%;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 13px;
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+
+        @media (max-width: 1024px) {
+            :root {
+                --left-offset: 60px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            h2 {
+                font-size: 32px;
+            }
+
+            .broken-grid__item:nth-child(2) {
+                margin-left: 120px;
+            }
+
+            .whisper {
+                position: relative;
+                right: auto;
+                top: auto;
+                width: 100%;
+                text-align: left;
+                margin-top: var(--space-lg);
+                margin-bottom: var(--space-lg);
+                padding-left: 120px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --left-offset: 0;
+            }
+
+            body {
+                font-size: 18px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            h3 {
+                font-size: 24px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding-top: 140px;
+                padding-bottom: var(--space-xl);
+            }
+
+            .hero__subhead {
+                font-size: 18px;
+            }
+
+            .asymmetric {
+                padding-left: 0;
+            }
+
+            .broken-grid__item:nth-child(2) {
+                margin-left: 0;
+            }
+
+            .whisper {
+                padding-left: 0;
+                border-left: 3px solid var(--color-accent);
+                padding-left: var(--space-sm);
+            }
+
+            .pull-quote__text {
+                font-size: 24px;
+            }
+
+            .testimonial {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+
+            .testimonial__quote {
+                font-size: 20px;
+            }
+
+            .footer__inner {
+                flex-direction: column;
+            }
+
+            .footer__links {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+        }
+
+        /* ========================================
+           BOLD DECISIONS
+           ======================================== */
+
+        /* Extra whitespace after hero */
+        .hero + section {
+            margin-top: var(--space-xl);
+        }
+
+        /* Testimonial section breathing */
+        .testimonials {
+            background: var(--color-white);
+        }
+
+        /* No decoration anywhere */
+        * {
+            text-decoration-skip-ink: auto;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         HEADER
+         ======================================== -->
+
+    <header class="header">
+        <div class="header__inner">
+            <a href="/" class="header__logo">Review My Emails</a>
+            <nav class="header__nav">
+                <a href="#" class="header__link">Pricing</a>
+                <a href="#" class="header__link">SOS</a>
+                <a href="#" class="btn btn-primary header__cta">Get My List Cleaned</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========================================
+         HERO — Asymmetric, confident emptiness
+         ======================================== -->
+
+    <section class="hero">
+        <div class="container asymmetric">
+            <div class="hero__content">
+                <h1 class="hero__headline">Your email list,<br>reviewed by hand.</h1>
+                <p class="hero__subhead">Every address checked by a deliverability expert. Not a script. Not AI. A person who knows what they're looking at.</p>
+                <a href="#" class="btn btn-primary">Get My List Cleaned</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         BROKEN GRID — How we actually work
+         ======================================== -->
+
+    <section class="broken-grid">
+        <div class="container asymmetric">
+            <h2 class="broken-grid__title">How we actually work</h2>
+
+            <div class="broken-grid__items">
+
+                <div class="broken-grid__item">
+                    <h3>You send us your list.</h3>
+                    <p>CSV, Excel, whatever you have. We've seen it all. No judgment, no questions about how it got this way.</p>
+                </div>
+
+                <div class="broken-grid__item">
+                    <h3>We review every single address.</h3>
+                    <p>One by one. Looking for bounces waiting to happen, spam traps, disposables, role accounts, and the addresses that are slowly killing your sender reputation.</p>
+                </div>
+
+                <aside class="whisper">No automation.<br>No outsourcing.<br>No AI.</aside>
+
+                <div class="broken-grid__item">
+                    <h3>You get back a clean list.</h3>
+                    <p>With clear labels: Keep. Monitor. Suppress. You'll know exactly what to do with each address.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PULL QUOTE — Reflective interruption
+         ======================================== -->
+
+    <section class="pull-quote">
+        <div class="pull-quote__inner">
+            <p class="pull-quote__text">"I didn't realize how much of my list was dead weight until I saw the report."</p>
+            <p class="pull-quote__attribution">— A client, after their first clean</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         TESTIMONIALS — Editorial treatment
+         ======================================== -->
+
+    <section class="testimonials">
+        <div class="container asymmetric">
+            <h2 class="testimonials__title">People who trusted us</h2>
+
+            <article class="testimonial">
+                <div class="testimonial__meta">
+                    <p class="testimonial__name">Sarah M.</p>
+                    <p class="testimonial__title">Marketing Director</p>
+                    <p class="testimonial__company">E-commerce brand</p>
+                </div>
+                <blockquote class="testimonial__quote">
+                    "The report was more detailed than anything I've seen from automated tools. I finally understood why my open rates were tanking."
+                </blockquote>
+            </article>
+
+            <article class="testimonial">
+                <div class="testimonial__meta">
+                    <p class="testimonial__name">James T.</p>
+                    <p class="testimonial__title">Founder</p>
+                    <p class="testimonial__company">B2B SaaS</p>
+                </div>
+                <blockquote class="testimonial__quote">
+                    "I used to guess which emails to keep. Now I know. Worth every penny."
+                </blockquote>
+            </article>
+
+            <article class="testimonial">
+                <div class="testimonial__meta">
+                    <p class="testimonial__name">Priya K.</p>
+                    <p class="testimonial__title">Email Strategist</p>
+                    <p class="testimonial__company">Agency</p>
+                </div>
+                <blockquote class="testimonial__quote">
+                    "I recommend RME to every client now. It's the only service I trust to not break things."
+                </blockquote>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ========================================
+         CTA BLOCK — Quiet, confident
+         ======================================== -->
+
+    <section class="cta-block">
+        <p class="cta-block__headline">Ready when you are.</p>
+        <div class="cta-block__button">
+            <a href="#" class="btn btn-primary">Get My List Cleaned</a>
+        </div>
+        <p class="cta-block__subtext">Most lists are returned within 24 hours.</p>
+    </section>
+
+    <!-- ========================================
+         FOOTER — Minimal
+         ======================================== -->
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">Review My Emails</div>
+
+            <div class="footer__links">
+                <div class="footer__column">
+                    <h4>Services</h4>
+                    <a href="#">Pricing</a>
+                    <a href="#">SOS</a>
+                </div>
+                <div class="footer__column">
+                    <h4>Company</h4>
+                    <a href="#">About</a>
+                    <a href="#">Partner</a>
+                </div>
+                <div class="footer__column">
+                    <h4>Contact</h4>
+                    <a href="mailto:ahoy@reviewmyemails.com">ahoy@reviewmyemails.com</a>
+                </div>
+            </div>
+
+            <p class="footer__legal">© 2026 Review My Emails. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

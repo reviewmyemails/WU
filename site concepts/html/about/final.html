@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Conversations | Review My Emails</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            background-color: #F9FCFC;
+            color: #182C33;
+        }
+
+        p, span, li {
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.8;
+        }
+
+        /* Allow Tailwind text size classes to work */
+        .text-lg { font-size: 1.125rem !important; }
+        .text-xl { font-size: 1.25rem !important; }
+        .text-2xl { font-size: 1.5rem !important; }
+        .text-3xl { font-size: 1.875rem !important; }
+        .text-4xl { font-size: 2.25rem !important; }
+        .text-5xl { font-size: 3rem !important; }
+        .text-6xl { font-size: 3.75rem !important; }
+        .text-7xl { font-size: 4.5rem !important; }
+        .text-8xl { font-size: 6rem !important; }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Baloo 2', sans-serif !important;
+            font-weight: 700;
+        }
+
+        :root {
+            --rme-primary: #0C92E1;
+            --rme-text-dark: #182C33;
+            --rme-bg-light: #D4E2F9;
+            --rme-bg-white: #F9FCFC;
+            --rme-green: #1fa95c;
+            --rme-orange: #f9943b;
+        }
+
+        .bg-rme-primary { background-color: var(--rme-primary); }
+        .bg-rme-bg-light { background-color: var(--rme-bg-light); }
+        .bg-rme-text-dark { background-color: var(--rme-text-dark); }
+        .bg-rme-green { background-color: var(--rme-green); }
+        .text-rme-primary { color: var(--rme-primary); }
+        .text-rme-text-dark { color: var(--rme-text-dark); }
+        .text-rme-text-light { color: #3D4F56; }
+        .border-rme-primary { border-color: var(--rme-primary); }
+
+        /* Hero dark section */
+        .hero-dark {
+            background-color: var(--rme-text-dark);
+        }
+
+        /* Glow effects */
+        .glow { text-shadow: 0 0 40px rgba(12, 146, 225, 0.5); }
+
+        /* Slide-up animations */
+        .slide-up { animation: slideUp 0.8s ease-out forwards; opacity: 0; transform: translateY(30px); }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* ==========================================
+           FLOATING CARDS
+           ========================================== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .float-card {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .float-card:nth-child(2) { animation-delay: -2s; }
+        .float-card:nth-child(3) { animation-delay: -4s; }
+
+        /* ==========================================
+           BENEFIT CARDS WITH SHINE
+           ========================================== */
+        .benefit-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(12, 146, 225, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .benefit-card:hover::before { left: 100%; }
+
+        .benefit-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(12, 146, 225, 0.2);
+        }
+
+        /* ==========================================
+           SECTION ANIMATIONS
+           ========================================== */
+        .section-fade {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==========================================
+           OCTOPUS PULSE
+           ========================================== */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .octopus-pulse {
+            animation: pulse 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        /* ==========================================
+           QUESTION CAROUSEL - Inline Style
+           ========================================== */
+        .question-carousel {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-item {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.4s ease;
+            position: absolute;
+            width: 100%;
+        }
+
+        .question-item.active {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
+        }
+
+        .carousel-inline {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .carousel-btn {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255,255,255,0.25);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 12px;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: white;
+        }
+    </style>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5PB5VX9D');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5PB5VX9D"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <!-- ==========================================
+         HERO SECTION - Dark Mode Only
+         ========================================== -->
+    <div class="hero-dark">
+        <header class="py-6 px-6">
+            <div class="max-w-6xl mx-auto">
+                <a href="https://reviewmyemails.com">
+                    <img src="/assets/PNG/RME - Dark Horizontal Logo.png" alt="Review My Emails" class="h-14 w-auto">
+                </a>
+            </div>
+        </header>
+
+        <section class="py-24 md:py-32 px-6">
+            <div class="max-w-6xl mx-auto">
+                <p class="text-rme-primary font-bold text-lg mb-6 slide-up">MONTHLY EXPERT SERIES</p>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold leading-none mb-8 slide-up delay-1">
+                    <span class="text-white">HONEST</span><br>
+                    <span class="text-rme-primary glow">CONVERSATIONS</span><br>
+                    <span class="text-white">ABOUT EMAIL</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-2xl leading-relaxed slide-up delay-2">
+                    Real insights from practitioners. Not theory. Not best practices. <span class="text-white font-semibold">What actually happens.</span>
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <!-- ==========================================
+         WHAT THIS IS - Light Mode
+         ========================================== -->
+    <section id="learn-more" class="py-20 px-6 section-fade">
+        <div class="max-w-4xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <span class="inline-block bg-rme-bg-light text-rme-primary font-semibold px-4 py-2 rounded-full text-sm mb-4">THE IDEA</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-rme-text-dark">What This Is</h2>
+            </div>
+
+            <!-- Text Content -->
+            <div class="max-w-3xl mx-auto text-center mb-12">
+                <p class="text-xl text-rme-text-light mb-6">
+                    Each month, we record focused discussions around a specific deliverability theme.
+                </p>
+                <p class="text-xl text-rme-text-light">
+                    These aren't promotional interviews or scripted webinars. They're <strong class="text-rme-text-dark">practical conversations</strong> about inbox problems, list quality issues, and the trade-offs experienced operators actually deal with, but rarely talk about publicly.
+                </p>
+            </div>
+
+            <!-- Three Floating Boxes -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="float-card bg-rme-text-dark text-white p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-rme-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Hands-On Operators</h4>
+                    <p class="text-gray-300 text-base">Work directly with email, deliverability, or list management</p>
+                </div>
+
+                <div class="float-card bg-rme-text-dark text-white p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-rme-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-brain text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Real Experience</h4>
+                    <p class="text-gray-300 text-base">Not just certifications or theory, actual field knowledge</p>
+                </div>
+
+                <div class="float-card bg-rme-text-dark text-white p-6 rounded-xl text-center">
+                    <div class="w-16 h-16 bg-rme-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-comments text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Honest Perspectives</h4>
+                    <p class="text-gray-300 text-base">Willing to share what doesn't work, not just what does</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         WHAT YOU GET - Light Mode with Icons
+         ========================================== -->
+    <section class="py-20 px-6 bg-gradient-to-b from-white to-rme-bg-light section-fade">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="inline-block bg-rme-bg-light text-rme-primary font-semibold px-4 py-2 rounded-full text-sm mb-4">THE VALUE</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-rme-text-dark mb-4">What You Get</h2>
+                <p class="text-xl text-rme-text-light">Your expertise, amplified across our channels <strong class="text-rme-primary">all year long</strong>.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="benefit-card bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-14 h-14 bg-rme-primary rounded-xl flex items-center justify-center">
+                            <i class="fas fa-newspaper text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-2 text-rme-text-dark">Featured Blog Content</h4>
+                            <p class="text-rme-text-light">Your best answers become the anchor of that month's article, with full transcript and attribution.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefit-card bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-14 h-14 bg-rme-primary rounded-xl flex items-center justify-center">
+                            <i class="fas fa-clapperboard text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-2 text-rme-text-dark">Video Clips for Social</h4>
+                            <p class="text-rme-text-light">Short-form cuts promoted across LinkedIn, TikTok, and Instagram throughout the year.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefit-card bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-14 h-14 bg-rme-primary rounded-xl flex items-center justify-center">
+                            <i class="fas fa-user-tag text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-2 text-rme-text-dark">Permanent Attribution</h4>
+                            <p class="text-rme-text-light">Your name, handle, and links included everywhere your insights appear.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefit-card bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
+                    <div class="flex items-start gap-4">
+                        <div class="flex-shrink-0 w-14 h-14 bg-rme-primary rounded-xl flex items-center justify-center">
+                            <i class="fas fa-retweet text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-2 text-rme-text-dark">Cross-Promotion</h4>
+                            <p class="text-rme-text-light">Tagged, linked, and referenced every time we share your clips.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 text-center">
+                <div class="inline-flex items-center gap-3 bg-rme-text-dark text-white px-6 py-4 rounded-xl">
+                    <i class="fas fa-infinity text-rme-primary text-xl"></i>
+                    <span>This isn't a one-time feature. Your insights stay in rotation as long as they're relevant.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         HOW IT WORKS - Wavy Flow with Boxes
+         ========================================== -->
+    <section class="py-20 px-6 bg-rme-bg-light section-fade">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="inline-block bg-white text-rme-primary font-semibold px-4 py-2 rounded-full text-sm mb-4">THE PROCESS</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-rme-text-dark">How It Works</h2>
+            </div>
+
+            <div class="relative">
+                <!-- SVG Wavy Line (subtle curve) -->
+                <svg class="absolute top-1/2 left-0 right-0 w-full h-20 -translate-y-1/2 pointer-events-none hidden md:block" preserveAspectRatio="none" viewBox="0 0 1000 80">
+                    <path
+                        d="M 0 40 Q 166 20, 333 40 T 666 40 T 1000 40"
+                        stroke="#0C92E1"
+                        stroke-width="3"
+                        fill="none"
+                        stroke-linecap="round"
+                        opacity="0.4"
+                    />
+                </svg>
+
+                <div class="grid md:grid-cols-3 gap-6 relative z-10">
+                    <!-- Step 1 - slightly up -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-center md:-translate-y-4">
+                        <div class="w-14 h-14 bg-rme-primary rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-list-check text-white text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-rme-text-dark mb-2">Pick Questions</h4>
+                        <p class="text-rme-text-light text-sm">Choose the topics that interest you most</p>
+                    </div>
+
+                    <!-- Step 2 - center (down) -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-center md:translate-y-4">
+                        <div class="w-14 h-14 bg-rme-primary rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-video text-white text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-rme-text-dark mb-2">Have a Chat</h4>
+                        <p class="text-rme-text-light text-sm">~60 min relaxed conversation</p>
+                    </div>
+
+                    <!-- Step 3 - slightly up -->
+                    <div class="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-center md:-translate-y-4">
+                        <div class="w-14 h-14 bg-rme-primary rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-wand-magic-sparkles text-white text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-rme-text-dark mb-2">We Do The Rest</h4>
+                        <p class="text-rme-text-light text-sm">Recording, editing, distribution</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         THIS MONTH'S THEME - Dark Style with Question Carousel
+         ========================================== -->
+    <section id="this-month" class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-rme-text-dark rounded-3xl p-10 md:p-14 text-white">
+                <div class="flex items-center gap-3 mb-6">
+                    <span id="month-badge" class="bg-rme-primary text-white text-sm font-bold px-4 py-2 rounded-full">JANUARY 2026</span>
+                </div>
+
+                <h2 id="theme-title" class="text-3xl md:text-4xl font-bold mb-3">Post-Holiday Deliverability Recovery</h2>
+                <p id="theme-subtitle" class="text-rme-primary text-xl font-semibold italic mb-6">"The Deliverability Detox"</p>
+
+                <p id="theme-description" class="text-gray-300 text-lg leading-relaxed mb-8">
+                    Q4 creates reputation debt. Over-mailing, relaxed hygiene, inflated metrics, and ignored suppression rules compound quietly. January is about repairing list damage, resetting expectations, and stabilizing sender reputation before further harm is done.
+                </p>
+
+                <div class="bg-white/10 rounded-xl p-5">
+                    <p class="text-white/60 text-sm mb-3 text-center">This Month's Questions</p>
+
+                    <div class="carousel-inline">
+                        <button class="carousel-btn" id="prevBtn">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+
+                        <div class="question-carousel flex-1" id="questionCarousel">
+                            <!-- Questions will be inserted by JS -->
+                        </div>
+
+                        <button class="carousel-btn" id="nextBtn">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="carousel-dots" id="carouselDots">
+                        <!-- Dots will be inserted by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         WHO'S BEHIND THIS - Light Mode
+         ========================================== -->
+    <section class="py-20 px-6 section-fade">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="inline-block bg-rme-bg-light text-rme-primary font-semibold px-4 py-2 rounded-full text-sm mb-4">THE TEAM</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-rme-text-dark">Who's Behind This</h2>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-10 flex flex-col md:flex-row gap-8 items-center">
+                <!-- Founder Photo -->
+                <div class="flex-shrink-0">
+                    <img src="/assets/Yanna-Torry Aspraki - Founder - Square.jpg" alt="Yanna-Torry Aspraki" class="w-40 h-40 rounded-full object-cover shadow-lg">
+                </div>
+
+                <!-- Text Right -->
+                <div>
+                    <h3 class="text-2xl font-bold text-rme-text-dark mb-4">Review My Emails</h3>
+                    <p class="text-rme-text-light mb-4">
+                        A deliverability-focused list intelligence company founded by <a href="https://linkedin.com/in/yannatorry" target="_blank" class="text-rme-primary font-semibold hover:underline inline-flex items-center gap-1">Yanna-Torry Aspraki <i class="fas fa-arrow-up-right-from-square text-xs"></i></a>.
+                    </p>
+                    <p class="text-rme-text-light">
+                        We clean email lists, yes, but more importantly, we help senders understand what's actually happening with their data. This conversation series is an extension of that mission: <strong class="text-rme-text-dark">capturing real practitioner knowledge that doesn't exist in ESP documentation</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="bg-rme-text-dark py-12 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="mb-6">
+                <a href="https://reviewmyemails.com">
+                    <img src="/assets/PNG/RME - Dark Horizontal Logo.png" alt="Review My Emails" class="h-10 mx-auto">
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm mb-6">Manchester • Montreal • Rhodes • Amsterdam</p>
+            <p class="text-gray-600 text-sm">&copy; 2026 Review My Emails. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+    <script>
+        // Intersection Observer for section animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section-fade').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Dynamic Monthly Theme Data
+        const monthlyThemes = {
+            1: {
+                badge: "JANUARY 2026",
+                title: "Post-Holiday Deliverability Recovery",
+                subtitle: '"The Deliverability Detox"',
+                description: "Q4 creates reputation debt. Over-mailing, relaxed hygiene, inflated metrics, and ignored suppression rules compound quietly. January is about repairing list damage, resetting expectations, and stabilizing sender reputation before further harm is done.",
+                questions: [
+                    "From a deliverability perspective, what long-term damage do brands usually carry out of November and December without realizing it?",
+                    "Which January performance metrics give a false sense of recovery, and why are they misleading for deliverability?",
+                    "What part of Q4 damage do brands almost never attribute to email, even though it clearly is?",
+                    "If inbox placement is down and revenue is under pressure, what do you stop sending first in January?",
+                    "What is the most common January decision that quietly locks in poor inbox placement for months?"
+                ]
+            },
+            2: {
+                badge: "FEBRUARY 2026",
+                title: "Engagement Reality and Subscriber Trust",
+                subtitle: '"Crew Loyalty Under Pressure"',
+                description: "February moves from panic to clarity. The focus is separating real engagement from vanity metrics, reinforcing consent and expectations, and recognizing when subscribers no longer want your emails.",
+                questions: [
+                    "From a deliverability and inbox placement perspective, what does real engagement actually mean today?",
+                    "Why do email teams confuse opens and clicks with subscriber trust?",
+                    "What is the hidden deliverability cost of keeping subscribers who have not engaged in over six months?",
+                    "What behavior do subscribers tolerate without complaint, but mailbox providers still punish?",
+                    "If you had to choose between list size and inbox placement in February, which do you sacrifice and why?"
+                ]
+            }
+        };
+
+        // Update content based on current month
+        const currentMonth = new Date().getMonth() + 1;
+        const theme = monthlyThemes[currentMonth] || monthlyThemes[1];
+
+        document.getElementById('month-badge').textContent = theme.badge;
+        document.getElementById('theme-title').textContent = theme.title;
+        document.getElementById('theme-subtitle').textContent = theme.subtitle;
+        document.getElementById('theme-description').textContent = theme.description;
+
+        // Question Carousel
+        let currentQuestion = 0;
+        const questions = theme.questions;
+        const carousel = document.getElementById('questionCarousel');
+        const dotsContainer = document.getElementById('carouselDots');
+
+        // Create question items (no numbering)
+        questions.forEach((q, i) => {
+            const item = document.createElement('div');
+            item.className = `question-item ${i === 0 ? 'active' : ''}`;
+            item.innerHTML = `<p class="text-white/90 text-base leading-relaxed">${q}</p>`;
+            carousel.appendChild(item);
+
+            // Create dot
+            const dot = document.createElement('div');
+            dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => goToQuestion(i));
+            dotsContainer.appendChild(dot);
+        });
+
+        function goToQuestion(index) {
+            const items = carousel.querySelectorAll('.question-item');
+            const dots = dotsContainer.querySelectorAll('.carousel-dot');
+
+            items[currentQuestion].classList.remove('active');
+            dots[currentQuestion].classList.remove('active');
+
+            currentQuestion = index;
+            if (currentQuestion < 0) currentQuestion = questions.length - 1;
+            if (currentQuestion >= questions.length) currentQuestion = 0;
+
+            items[currentQuestion].classList.add('active');
+            dots[currentQuestion].classList.add('active');
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => goToQuestion(currentQuestion - 1));
+        document.getElementById('nextBtn').addEventListener('click', () => goToQuestion(currentQuestion + 1));
+
+        // Auto-advance carousel
+        setInterval(() => {
+            goToQuestion(currentQuestion + 1);
+        }, 6000);
+    </script>
+
+</body>
+</html>

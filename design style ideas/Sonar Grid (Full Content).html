@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails — Sonar Grid</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-line: rgba(34, 211, 238, 0.2);
+            --color-bright: #22d3ee;
+            --color-text: #ecfeff;
+            --font-ui: 'Inter', sans-serif;
+            --font-data: 'JetBrains Mono', monospace;
+        }
+        body {
+            background-color: #083344; color: var(--color-text); font-family: var(--font-ui); margin: 0;
+            background-image: linear-gradient(var(--color-line) 1px, transparent 1px), linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; border-left: 1px solid var(--color-line); border-right: 1px solid var(--color-line); background: rgba(8, 51, 68, 0.9); }
+        
+        /* --- Nav --- */
+        .nav-bar { display: flex; justify-content: space-between; padding: 20px 40px; border-bottom: 1px solid var(--color-line); font-family: var(--font-data); font-size: 12px; color: var(--color-bright); }
+
+        /* --- Hero --- */
+        .hero { padding: 100px 60px; border-bottom: 1px solid var(--color-line); }
+        h1 { font-size: 64px; line-height: 1.1; margin-bottom: 32px; letter-spacing: -0.02em; }
+        .btn-sonar {
+            background: transparent; border: 1px solid var(--color-bright); color: var(--color-bright);
+            padding: 12px 24px; font-family: var(--font-data); text-transform: uppercase; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s;
+        }
+        .btn-sonar:hover { background: var(--color-bright); color: #083344; box-shadow: 0 0 20px var(--color-bright); }
+
+        /* --- Grid Layouts --- */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--color-line); }
+        .cell { padding: 60px; border-right: 1px solid var(--color-line); position: relative; }
+        .cell:last-child { border-right: none; }
+        .cell h3 { font-family: var(--font-data); color: var(--color-bright); margin-top: 0; }
+        
+        .list-mono li { font-family: var(--font-data); margin-bottom: 12px; list-style: square; color: #a5f3fc; }
+        
+        .alert-cell { background: rgba(220, 38, 38, 0.1); border-top: 1px solid #ef4444; }
+
+        .big-stat { font-family: var(--font-data); font-size: 48px; color: var(--color-bright); display: block; margin-bottom: 16px; }
+
+        /* --- Footer --- */
+        .footer { padding: 80px 60px; display: flex; justify-content: space-between; align-items: flex-end; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="nav-bar">
+            <span><img src="https://anchor.reviewmyemails.com/assets/logo.svg" height="20" style="vertical-align: middle;"> RME_SYS_V3</span>
+            <span>STATUS: ACTIVE</span>
+        </nav>
+
+        <section class="hero">
+            <span style="font-family: var(--font-data); color: var(--color-bright); display: block; margin-bottom: 24px;">// BY YANNA-TORRY ASPRAKI</span>
+            <h1>Navigating the depths<br>of your data.</h1>
+            <p style="font-size: 20px; max-width: 600px; color: #a5f3fc; margin-bottom: 40px;">Validation tools check syntax. I check safety. You get clear labels — Keep, Monitor, Suppress — and the reasoning behind each one.</p>
+            <a href="#" class="btn-sonar">Initiate Scan (Get Answers)</a>
+        </section>
+
+        <section class="grid-2">
+            <div class="cell">
+                <h3>Signal Interference (Symptoms)</h3>
+                <ul class="list-mono">
+                    <li>Origin unknown for 50% of list</li>
+                    <li>Conflicting tool reports</li>
+                    <li>Fear of removal (FOMO)</li>
+                    <li>Inactive sending schedule</li>
+                    <li>Bounce spike detected</li>
+                </ul>
+            </div>
+            <div class="cell alert-cell">
+                <h3 style="color: #ef4444;">SYSTEM ALERT (CRISIS)</h3>
+                <p>ESP Warning detected?</p>
+                <p>Blocklist entry found?</p>
+                <p style="margin-bottom: 30px;">Immediate intervention required.</p>
+                <a href="#" class="btn-sonar" style="border-color: #ef4444; color: #ef4444;">Engage SOS Protocol</a>
+            </div>
+        </section>
+
+        <section class="grid-2">
+            <div class="cell" style="grid-column: span 2; border-right: none; padding-bottom: 0;">
+                <h2 style="font-size: 32px;">Processing Protocol</h2>
+            </div>
+            <div class="cell">
+                <span class="big-stat">01</span>
+                <h3>Data Ingestion</h3>
+                <p>CSV/Excel upload. No judgment.</p>
+            </div>
+            <div class="cell">
+                <span class="big-stat">02</span>
+                <h3>Deep Scan</h3>
+                <p>Manual review of bounces and traps.</p>
+            </div>
+            <div class="cell" style="grid-column: span 2; border-right: none; border-top: 1px solid var(--color-line);">
+                 <span class="big-stat">03</span>
+                 <h3>Output Generation</h3>
+                 <p>Clean list + Full Report.</p>
+                 <p style="font-family: var(--font-data); color: var(--color-bright); margin-top: 20px;">// NO AI GUESSWORK ALLOWED.</p>
+            </div>
+        </section>
+
+        <div class="cell" style="text-align: center; border-bottom: 1px solid var(--color-line);">
+            <p style="font-size: 24px; font-style: italic;">"I didn't realize how much of my list was dead weight until I saw the report. It was eye-opening."</p>
+            <p style="font-family: var(--font-data); color: var(--color-bright); margin-top: 16px;">-- MARKETING DIRECTOR</p>
+        </div>
+
+        <section class="grid-2">
+            <div class="cell">
+                <h3>Resolution Specs (Features)</h3>
+                <p><strong>Action Labels:</strong> Keep, Monitor, Suppress.</p>
+                <p><strong>Reasoning:</strong> Spam trap patterns, domain issues.</p>
+                <p><strong>Context:</strong> Reputation impact analysis.</p>
+            </div>
+            <div class="cell">
+                <h3>Diagnostic Check</h3>
+                <p>Not sure if you need a scan?</p>
+                <a href="#" class="btn-sonar" style="margin-top: 20px;">Run Self-Assessment</a>
+            </div>
+        </section>
+
+        <div style="padding: 100px 60px; text-align: center; border-bottom: 1px solid var(--color-line);">
+            <h2>Ready to map your list?</h2>
+            <a href="#" class="btn-sonar">Get Answers</a>
+        </div>
+
+        <footer class="footer">
+            <div>
+                <h3>CONTACT_SIGNAL</h3>
+                <p style="font-size: 20px;">Need a hand (or eight)?</p>
+                <a href="mailto:ahoy@reviewmyemails.com" style="color: var(--color-bright); text-decoration: none;">ahoy@reviewmyemails.com</a>
+            </div>
+            <div style="text-align: right; font-family: var(--font-data); font-size: 12px; opacity: 0.6;">
+                Pricing // About // Partner<br>
+                © 2026 Review My Emails
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

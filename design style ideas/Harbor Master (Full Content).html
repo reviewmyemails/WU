@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails — Harbor Master</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-red: #ef4444; --color-green: #10b981;
+            --color-dark: #0f172a; --color-white: #ffffff;
+        }
+        body { font-family: 'Inter', sans-serif; margin: 0; color: var(--color-dark); }
+        .grid-line { position: fixed; background: #e5e7eb; z-index: -1; }
+        .grid-v { width: 1px; height: 100%; top: 0; } .v-1 { left: 10%; } .v-2 { left: 50%; } .v-3 { left: 90%; }
+        .container { max-width: 1400px; margin: 0 auto; position: relative; background: rgba(255,255,255,0.9); }
+        
+        /* --- Header --- */
+        .header { padding: 40px; display: flex; justify-content: space-between; border-bottom: 2px solid var(--color-dark); }
+        
+        /* --- Hero --- */
+        .hero { padding: 100px 40px; border-bottom: 2px solid var(--color-dark); }
+        h1 { font-size: clamp(60px, 8vw, 120px); line-height: 0.9; letter-spacing: -0.04em; margin: 0; text-transform: uppercase; }
+        .hero-sub { font-size: 24px; max-width: 600px; margin-top: 40px; font-weight: 500; }
+        
+        .btn-harbor {
+            background: var(--color-dark); color: white; padding: 20px 40px; font-size: 18px; font-weight: 700; text-transform: uppercase; text-decoration: none; display: inline-block; margin-top: 40px;
+        }
+        
+        /* --- Flags --- */
+        .signals { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 2px solid var(--color-dark); }
+        .signal-block { padding: 80px 40px; border-right: 1px solid #e5e7eb; }
+        .flag { width: 60px; height: 60px; margin-bottom: 24px; border: 2px solid var(--color-dark); }
+        
+        /* --- Lists --- */
+        .check-list li { font-size: 20px; margin-bottom: 16px; list-style: none; border-bottom: 1px solid #e5e7eb; padding-bottom: 16px; }
+        
+        /* --- Crisis --- */
+        .crisis-strip { background: var(--color-red); color: white; padding: 40px; text-transform: uppercase; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* --- Steps --- */
+        .step-row { display: flex; justify-content: space-between; padding: 80px 40px; border-bottom: 2px solid var(--color-dark); }
+        .step { width: 30%; }
+        .step-num { font-size: 80px; font-weight: 900; opacity: 0.2; display: block; }
+        
+        /* --- Footer --- */
+        .footer { padding: 60px 40px; background: var(--color-dark); color: white; }
+    </style>
+</head>
+<body>
+    <div class="grid-line grid-v v-1"></div>
+    <div class="grid-line grid-v v-2"></div>
+    <div class="grid-line grid-v v-3"></div>
+
+    <div class="container">
+        <header class="header">
+            <img src="https://anchor.reviewmyemails.com/assets/logo.svg" height="40">
+            <div style="font-weight: 700; text-transform: uppercase;">Port Authority // List Control</div>
+        </header>
+
+        <section class="hero">
+            <span style="display: block; margin-bottom: 20px; font-weight: 700;">// BY YANNA-TORRY ASPRAKI</span>
+            <h1>We control<br>the flow.</h1>
+            <p class="hero-sub">Email delivery is about traffic control. We are the Harbor Master deciding who gets to dock (Inbox) and who gets turned away (Spam).</p>
+            <a href="#" class="btn-harbor">Request Inspection (Get Answers)</a>
+        </section>
+
+        <section style="padding: 80px 40px; border-bottom: 1px solid #e5e7eb;">
+            <h2 style="font-size: 48px; margin-bottom: 40px; text-transform: uppercase;">Docking Hazards (Symptoms)</h2>
+            <ul class="check-list">
+                <li>No idea where half this list came from.</li>
+                <li>Conflicting safety reports (Tools say clean, we say risky).</li>
+                <li>Fear of offloading (Removing subscribers).</li>
+                <li>Inactive vessel (Haven't emailed in months).</li>
+            </ul>
+        </section>
+
+        <div class="crisis-strip">
+            <span>Collision Warning: ESP Alert? Blocklisted?</span>
+            <a href="#" style="color: white; border: 2px solid white; padding: 10px 20px; text-decoration: none;">Signal SOS</a>
+        </div>
+
+        <section class="step-row">
+            <div class="step">
+                <span class="step-num">01</span>
+                <h3>Manifest Review</h3>
+                <p>Send us your list (CSV). We review the cargo.</p>
+            </div>
+            <div class="step">
+                <span class="step-num">02</span>
+                <h3>Inspection</h3>
+                <p>Manual check for traps and hazards.</p>
+            </div>
+            <div class="step">
+                <span class="step-num">03</span>
+                <h3>Clearance</h3>
+                <p>Receive your labeled list and report.</p>
+            </div>
+        </section>
+
+        <section class="signals">
+            <div class="signal-block">
+                <div class="flag" style="background: var(--color-green);"></div>
+                <h3>Clearance Granted</h3>
+                <p><strong>Status: KEEP.</strong> Safe for entry. Active and valid.</p>
+            </div>
+            <div class="signal-block">
+                <div class="flag" style="background: var(--color-red);"></div>
+                <h3>Access Denied</h3>
+                <p><strong>Status: SUPPRESS.</strong> Traps and hazards. Immediate rejection.</p>
+            </div>
+        </section>
+
+        <section style="padding: 80px 40px; text-align: center;">
+            <p style="font-size: 32px; max-width: 900px; margin: 0 auto; font-weight: 700;">"I didn't realize how much of my list was dead weight until I saw the report. It was eye-opening."</p>
+            <p style="margin-top: 20px;">— MARKETING DIRECTOR</p>
+        </section>
+        
+        <div style="padding: 80px 40px; background: #f3f4f6; text-align: center;">
+            <h3>Unsure of vessel status?</h3>
+            <a href="#" style="color: var(--color-dark); font-weight: 700;">Run Diagnostic Check &rarr;</a>
+        </div>
+
+        <footer class="footer">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                <div>
+                    <h2 style="margin: 0 0 20px 0;">Need a hand (or eight)?</h2>
+                    <a href="mailto:ahoy@reviewmyemails.com" style="color: white; font-size: 24px; text-decoration: none;">ahoy@reviewmyemails.com</a>
+                </div>
+                <div style="text-align: right; opacity: 0.6;">
+                    Pricing · About · Partner<br>© 2026 RME
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

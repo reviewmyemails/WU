@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails — Deep Ocean</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Deep Ocean Palette */
+            --color-abyss: #042f2e;
+            --color-depth: #115e59;
+            --color-teal: #14b8a6;
+            --color-biolum: #5eead4; /* Glowing cyan */
+            --color-text: #f0fdfa;
+            --color-text-muted: #ccfbf1;
+            
+            --ease-buoyant: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--color-abyss);
+            color: var(--color-text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% 0%, #134e4a 0%, #042f2e 60%);
+            line-height: 1.6;
+        }
+
+        /* Ambient "Current" Animation */
+        .ocean-particles {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 0; opacity: 0.3;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1' fill='%235eead4' opacity='0.5'/%3E%3Ccircle cx='50' cy='60' r='1' fill='%235eead4' opacity='0.3'/%3E%3C/svg%3E");
+            animation: drift 60s linear infinite;
+        }
+
+        @keyframes drift { from { transform: translateY(0); } to { transform: translateY(-100px); } }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- Header --- */
+        .header {
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img { height: 40px; width: auto; }
+        
+        .nav-link { color: var(--color-text-muted); text-decoration: none; margin-left: 32px; font-size: 14px; transition: color 0.3s; }
+        .nav-link:hover { color: var(--color-biolum); text-shadow: 0 0 8px rgba(94, 234, 212, 0.4); }
+
+        /* --- Hero --- */
+        .hero { padding: 120px 0 160px; max-width: 760px; }
+        
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid var(--color-teal);
+            color: var(--color-biolum);
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            margin-bottom: 24px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .hero-badge:hover { background: var(--color-teal); color: var(--color-abyss); }
+
+        .hero h1 {
+            font-size: clamp(40px, 5vw, 64px);
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #fff, #5eead4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--color-text-muted);
+            margin-bottom: 40px;
+            border-left: 1px solid var(--color-depth);
+            padding-left: 24px;
+        }
+
+        .btn-glow {
+            display: inline-block;
+            padding: 16px 32px;
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid var(--color-teal);
+            color: var(--color-biolum);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-glow:hover {
+            background: rgba(20, 184, 166, 0.2);
+            box-shadow: 0 0 20px rgba(94, 234, 212, 0.2);
+            text-shadow: 0 0 8px rgba(94, 234, 212, 0.6);
+            border-color: var(--color-biolum);
+        }
+        
+        .btn-ghost {
+            display: inline-block;
+            padding: 16px 32px;
+            color: var(--color-text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .btn-ghost:hover { color: var(--color-biolum); }
+
+        /* --- Section Styling --- */
+        .section-dark { padding: 100px 0; border-top: 1px solid rgba(255,255,255,0.05); }
+        h2 { font-size: 32px; color: var(--color-biolum); margin-bottom: 40px; }
+        
+        /* --- Symptoms --- */
+        .symptoms-list li {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            list-style: none;
+            position: relative;
+            padding-left: 24px;
+        }
+        .symptoms-list li::before {
+            content: "•"; color: var(--color-biolum); 
+            position: absolute; left: 0; font-size: 20px; line-height: 1.4;
+        }
+
+        .crisis-box {
+            margin-top: 40px; padding: 24px;
+            border: 1px solid var(--color-depth);
+            border-radius: 8px;
+            background: rgba(17, 94, 89, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .crisis-box::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: #be123c;
+        }
+
+        /* --- Steps --- */
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 60px;
+        }
+        .step-num {
+            font-size: 64px; font-weight: 700; color: var(--color-depth);
+            line-height: 1; margin-bottom: 16px; opacity: 0.5;
+        }
+        .step h3 { color: #fff; margin-bottom: 12px; }
+
+        /* --- Manifesto / Pull Quote --- */
+        .manifesto {
+            padding: 80px 0; text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: rgba(20, 184, 166, 0.05);
+        }
+        .manifesto p {
+            font-size: 28px; max-width: 800px; margin: 0 auto; line-height: 1.4; color: #fff;
+        }
+
+        /* --- Features Cards --- */
+        .grid-cards {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;
+        }
+        .card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 40px; transition: transform 0.5s var(--ease-buoyant);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.04);
+            border-color: var(--color-depth);
+        }
+        .card h3 { color: var(--color-biolum); margin-bottom: 16px; font-size: 20px; }
+        .card p { color: var(--color-text-muted); font-size: 16px; }
+
+        /* --- Soft CTA --- */
+        .soft-cta {
+            background: var(--color-depth); color: #fff;
+            padding: 60px; border-radius: 12px; text-align: center; margin: 80px 0;
+        }
+
+        /* --- Testimonials --- */
+        .testimonial {
+            border-left: 2px solid var(--color-depth); padding-left: 24px; margin-bottom: 40px;
+        }
+        .quote { font-size: 18px; font-style: italic; color: #fff; margin-bottom: 16px; }
+        .author { font-size: 14px; color: var(--color-biolum); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- Footer --- */
+        .footer {
+            padding: 120px 0 60px; text-align: center; position: relative;
+        }
+        .footer-tentacle {
+            position: absolute; bottom: -50px; right: 10%;
+            width: 300px; height: 300px; opacity: 0.1;
+            z-index: 0; pointer-events: none;
+        }
+        .footer a { color: var(--color-biolum); text-decoration: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="ocean-particles"></div>
+
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header">
+            <a href="/" class="logo">
+                <img src="https://anchor.reviewmyemails.com/assets/logo.svg" alt="Review My Emails">
+            </a>
+            <nav>
+                <a href="#" class="nav-link">Pricing</a>
+                <a href="#" class="nav-link">SOS Hotline</a>
+                <a href="#" class="btn-glow" style="margin-left: 24px; padding: 10px 20px;">Get Answers</a>
+            </nav>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <a href="https://linkedin.com/in/yannatorry" target="_blank" class="hero-badge">By Yanna-Torry Aspraki</a>
+            <h1>Stop guessing what is <br>wrong with your list.</h1>
+            <p>Validation tools check syntax. I check safety. You get clear labels — Keep, Monitor, Suppress — and the reasoning behind each one.</p>
+            <div>
+                <a href="#" class="btn-glow">Get answers about your list</a>
+                <a href="#" class="btn-ghost">Take the diagnostic quiz</a>
+            </div>
+            <p style="margin-top: 40px; font-size: 14px; opacity: 0.7; font-style: italic; border: none; padding: 0;">Most email problems trace back to list quality.</p>
+        </section>
+
+        <!-- SYMPTOMS -->
+        <section class="section-dark">
+            <div style="max-width: 700px; margin: 0 auto;">
+                <h2>Sound familiar?</h2>
+                <ul class="symptoms-list">
+                    <li>No idea where half this list came from.</li>
+                    <li>One tool says clean. Another says risky.</li>
+                    <li>Scared to remove subscribers — even the ones who never open.</li>
+                    <li>Haven't emailed this list in months. Afraid to restart.</li>
+                    <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    <li>Open rates dropped and nobody can explain why.</li>
+                    <li>List keeps growing. Revenue doesn't.</li>
+                </ul>
+
+                <div class="crisis-box">
+                    <h3 style="color: #fff; margin-bottom: 8px; margin-top: 0;">Crisis Mode?</h3>
+                    <p style="font-size: 15px; margin-bottom: 16px; color: #ccfbf1;">ESP sent a compliance warning? Blocklisted? Last send spiked bounces?</p>
+                    <a href="#" style="color: var(--color-biolum); font-weight: 600; text-decoration: none;">Go to SOS Hotline →</a>
+                </div>
+
+                <p style="text-align: center; margin-top: 40px; opacity: 0.8;">Validation tools check if addresses exist. We tell you why your emails aren't working.</p>
+                <div style="text-align: center; margin-top: 24px;">
+                    <a href="#" class="btn-glow">Get answers</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEPS -->
+        <section class="section-dark">
+            <h2>How we actually work</h2>
+            <p style="margin-bottom: 60px; max-width: 600px;">Simple process. Expert execution. Real results.</p>
+            
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-num">01</div>
+                    <h3>Send us your list</h3>
+                    <p style="color: var(--color-text-muted);">CSV, Excel, whatever you have. We've seen it all. No judgment, no questions.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">02</div>
+                    <h3>We review every address</h3>
+                    <p style="color: var(--color-text-muted);">One by one. Looking for bounces, spam traps, disposables, and reputation killers.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">03</div>
+                    <h3>Get your clean list back</h3>
+                    <p style="color: var(--color-text-muted);">With clear labels and a report. You'll know exactly what to do with each address.</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 60px; font-style: italic; color: var(--color-biolum);">No automation. No outsourcing. No AI guesswork.</p>
+        </section>
+
+        <!-- PULL QUOTE -->
+        <div style="padding: 80px 0; text-align: center;">
+            <p style="font-size: 24px; max-width: 700px; margin: 0 auto; font-style: italic; color: #fff;">
+                "I didn't realize how much of my list was dead weight until I saw the report. It was eye-opening."
+            </p>
+            <p style="margin-top: 20px; color: var(--color-biolum); font-size: 14px; text-transform: uppercase;">— Marketing Director, E-commerce brand</p>
+        </div>
+
+        <!-- MANIFESTO -->
+        <div class="manifesto">
+            <p>
+                You've probably run your list through a tool before.<br>
+                It said 95% valid. You sent anyway. Bounces happened.<br>
+                That's the gap between validation and understanding.
+            </p>
+        </div>
+
+        <!-- FEATURES -->
+        <section class="section-dark">
+            <h2>What you actually get</h2>
+            <div class="grid-cards">
+                <div class="card">
+                    <h3>Clear action labels</h3>
+                    <p>Every email marked Keep, Monitor, or Suppress. No ambiguity, no guessing what to do next.</p>
+                </div>
+                <div class="card">
+                    <h3>Detailed reasoning</h3>
+                    <p>Not just "risky", we tell you why. Spam trap patterns, domain issues, behavioral signals.</p>
+                </div>
+                <div class="card">
+                    <h3>Expert interpretation</h3>
+                    <p>Not just data, context. We explain what we found and what it means for your sending reputation. Includes free walkthrough.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOFT CTA -->
+        <div class="soft-cta">
+            <h2 style="color: #fff; margin-bottom: 16px;">Not sure if your list needs this?</h2>
+            <p style="margin-bottom: 32px;">Take a 2-minute self-assessment. Six questions about how you built your list.</p>
+            <a href="#" class="btn-glow" style="background: white; color: var(--color-depth); border-color: white;">Check Your List Risk</a>
+        </div>
+
+        <!-- TESTIMONIALS -->
+        <section class="section-dark">
+            <h2>People who trusted us</h2>
+            <div class="grid-cards">
+                <div class="testimonial">
+                    <p class="quote">"The report was more detailed than anything I've seen from automated tools. I finally understood why my open rates were tanking."</p>
+                    <p class="author">Sarah M. — Marketing Director</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"I used to guess which emails to keep. Now I know. Worth every penny."</p>
+                    <p class="author">James T. — Founder</p>
+                </div>
+                <div class="testimonial">
+                    <p class="quote">"I recommend RME to every client now. It's the only service I trust to not break things."</p>
+                    <p class="author">Priya K. — Email Strategist</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <div style="text-align: center; padding: 100px 0;">
+            <h2>Ready to know what's in your list?</h2>
+            <p style="font-size: 20px; color: var(--color-text-muted); margin-bottom: 40px;">Send us your list. We'll tell you exactly what's safe to send.</p>
+            <a href="#" class="btn-glow">Get Answers About Your List</a>
+            <p style="margin-top: 24px; font-size: 14px; opacity: 0.6;">Most lists returned within 24 hours.</p>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <svg class="footer-tentacle" viewBox="0 0 200 200">
+                <path d="M100 200 Q 80 100 150 50" stroke="#5eead4" stroke-width="4" fill="none" />
+                <path d="M120 200 Q 140 120 90 60" stroke="#5eead4" stroke-width="2" fill="none" />
+            </svg>
+
+            <img src="https://anchor.reviewmyemails.com/assets/logo.svg" alt="RME" style="height: 40px; opacity: 0.8; margin-bottom: 24px; filter: brightness(0) invert(1);">
+            
+            <h2 style="font-size: 24px; margin-bottom: 16px; color: var(--color-biolum);">Need a hand (or eight)?</h2>
+            <a href="mailto:ahoy@reviewmyemails.com" style="font-size: 20px;">ahoy@reviewmyemails.com</a>
+            
+            <div style="margin-top: 40px; display: flex; justify-content: center; gap: 24px; font-size: 14px; opacity: 0.6;">
+                <a href="#">Pricing</a>
+                <a href="#">About</a>
+                <a href="#">Partner</a>
+                <a href="#">Terms</a>
+            </div>
+            <p style="font-size: 12px; opacity: 0.4; margin-top: 40px;">© 2026 Review My Emails.</p>
+        </footer>
+    </div>
+</body>
+</html>

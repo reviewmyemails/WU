@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RME Button Component</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../design_tokens.css">
+    <style>
+        /* ========================================
+           BUTTON COMPONENT
+           ======================================== */
+
+        /**
+         * Base Button
+         *
+         * All buttons share these properties.
+         * Variants override specific values.
+         */
+        .btn {
+            /* Reset */
+            appearance: none;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-decoration: none;
+
+            /* Typography */
+            font-family: var(--font-family);
+            font-size: 16px;
+            font-weight: var(--font-weight-semibold);
+            line-height: 1;
+
+            /* Layout */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+
+            /* Sizing (medium default) */
+            padding: 12px 24px;
+            min-height: 44px; /* Touch target */
+
+            /* Shape */
+            border-radius: var(--radius-md);
+
+            /* Interaction */
+            transition:
+                background-color var(--transition-normal),
+                border-color var(--transition-normal),
+                color var(--transition-normal),
+                transform var(--transition-fast),
+                box-shadow var(--transition-normal);
+
+            /* Prevent text selection on double-click */
+            user-select: none;
+        }
+
+        /* ----------------------------------------
+           PRIMARY VARIANT
+           ---------------------------------------- */
+
+        .btn--primary {
+            background-color: var(--color-btn-primary-bg);
+            color: var(--color-btn-primary-text);
+        }
+
+        .btn--primary:hover {
+            background-color: var(--color-btn-primary-hover);
+        }
+
+        .btn--primary:active {
+            background-color: #0e8078; /* Slightly darker than hover */
+            transform: scale(0.98);
+        }
+
+        .btn--primary:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .btn--primary:disabled,
+        .btn--primary[aria-disabled="true"] {
+            background-color: var(--color-btn-disabled-bg);
+            color: var(--color-btn-disabled-text);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ----------------------------------------
+           SECONDARY VARIANT
+           ---------------------------------------- */
+
+        .btn--secondary {
+            background-color: var(--color-btn-secondary-bg);
+            border: var(--border-width-thick) solid var(--color-btn-secondary-border);
+            color: var(--color-btn-secondary-text);
+        }
+
+        .btn--secondary:hover {
+            background-color: var(--color-btn-secondary-hover-bg);
+        }
+
+        .btn--secondary:active {
+            background-color: #b2f5ea; /* Teal-100 */
+            transform: scale(0.98);
+        }
+
+        .btn--secondary:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .btn--secondary:disabled,
+        .btn--secondary[aria-disabled="true"] {
+            border-color: var(--color-btn-disabled-bg);
+            color: var(--color-btn-disabled-text);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* ----------------------------------------
+           TERTIARY VARIANT (Text Link)
+           ---------------------------------------- */
+
+        .btn--tertiary {
+            background: none;
+            color: var(--color-link);
+            padding: 8px 0;
+            min-height: auto;
+        }
+
+        .btn--tertiary::after {
+            content: '→';
+            margin-left: 4px;
+            transition: transform var(--transition-normal);
+        }
+
+        .btn--tertiary:hover {
+            color: var(--color-link-hover);
+        }
+
+        .btn--tertiary:hover::after {
+            transform: translateX(4px);
+        }
+
+        .btn--tertiary:active {
+            color: #0e8078;
+        }
+
+        .btn--tertiary:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .btn--tertiary:disabled,
+        .btn--tertiary[aria-disabled="true"] {
+            color: var(--color-btn-disabled-text);
+            cursor: not-allowed;
+        }
+
+        .btn--tertiary:disabled::after,
+        .btn--tertiary[aria-disabled="true"]::after {
+            transform: none;
+        }
+
+        /* ----------------------------------------
+           SIZE MODIFIERS
+           ---------------------------------------- */
+
+        .btn--sm {
+            padding: 8px 16px;
+            font-size: 14px;
+            min-height: 36px;
+        }
+
+        .btn--lg {
+            padding: 16px 32px;
+            font-size: 18px;
+            min-height: 52px;
+        }
+
+        /* ----------------------------------------
+           FULL WIDTH MODIFIER
+           ---------------------------------------- */
+
+        .btn--full {
+            width: 100%;
+        }
+
+        /* ----------------------------------------
+           LOADING STATE
+           ---------------------------------------- */
+
+        .btn--loading {
+            position: relative;
+            color: transparent !important;
+            pointer-events: none;
+        }
+
+        .btn--loading::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: btn-spin 0.6s linear infinite;
+        }
+
+        .btn--primary.btn--loading::before {
+            border-color: var(--color-white);
+            border-right-color: transparent;
+        }
+
+        .btn--secondary.btn--loading::before {
+            border-color: var(--color-accent);
+            border-right-color: transparent;
+        }
+
+        @keyframes btn-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ----------------------------------------
+           DARK BACKGROUND CONTEXT
+           Buttons on dark sections need adjustments
+           ---------------------------------------- */
+
+        .bg-dark .btn--secondary {
+            border-color: var(--color-white);
+            color: var(--color-white);
+        }
+
+        .bg-dark .btn--secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .bg-dark .btn--tertiary {
+            color: var(--color-white);
+        }
+
+        .bg-dark .btn--tertiary:hover {
+            color: var(--color-light);
+        }
+
+
+        /* ========================================
+           DEMO PAGE STYLES (Not part of component)
+           ======================================== */
+
+        body {
+            font-family: var(--font-family);
+            background: #f5f5f5;
+            padding: 40px;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+        }
+
+        h1 {
+            font-size: var(--font-size-h2);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-md);
+        }
+
+        h2 {
+            font-size: var(--font-size-h3);
+            font-weight: var(--font-weight-semibold);
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-sm);
+            color: var(--color-muted);
+        }
+
+        .demo-section {
+            background: white;
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .demo-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .demo-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .demo-label {
+            font-size: var(--font-size-small);
+            color: var(--color-muted);
+            min-width: 100px;
+        }
+
+        .bg-dark {
+            background: var(--color-dark-base);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+        }
+
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .note {
+            font-size: var(--font-size-small);
+            color: var(--color-muted);
+            margin-top: var(--space-xs);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Button Component</h1>
+    <p>All button variants, states, and sizes. Test interactions by hovering, clicking, and tabbing.</p>
+
+    <!-- PRIMARY -->
+    <h2>Primary Button</h2>
+    <div class="demo-section">
+        <div class="demo-row">
+            <span class="demo-label">Default</span>
+            <button class="btn btn--primary">Get My List Cleaned</button>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">Hover</span>
+            <p class="note">Hover over the button above to see</p>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">Disabled</span>
+            <button class="btn btn--primary" disabled>Get My List Cleaned</button>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">Loading</span>
+            <button class="btn btn--primary btn--loading">Get My List Cleaned</button>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">As Link</span>
+            <a href="#" class="btn btn--primary">Get My List Cleaned</a>
+        </div>
+    </div>
+
+    <!-- SECONDARY -->
+    <h2>Secondary Button</h2>
+    <div class="demo-section">
+        <div class="demo-row">
+            <span class="demo-label">Default</span>
+            <button class="btn btn--secondary">Learn More</button>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">Disabled</span>
+            <button class="btn btn--secondary" disabled>Learn More</button>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">Loading</span>
+            <button class="btn btn--secondary btn--loading">Learn More</button>
+        </div>
+    </div>
+
+    <!-- TERTIARY -->
+    <h2>Tertiary Button (Text Link)</h2>
+    <div class="demo-section">
+        <div class="demo-row">
+            <span class="demo-label">Default</span>
+            <button class="btn btn--tertiary">See Pricing</button>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">Disabled</span>
+            <button class="btn btn--tertiary" disabled>See Pricing</button>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">As Link</span>
+            <a href="#" class="btn btn--tertiary">See Pricing</a>
+        </div>
+    </div>
+
+    <!-- SIZES -->
+    <h2>Sizes</h2>
+    <div class="demo-section">
+        <div class="demo-row">
+            <span class="demo-label">Small</span>
+            <button class="btn btn--primary btn--sm">Small Button</button>
+            <button class="btn btn--secondary btn--sm">Small Button</button>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">Medium (default)</span>
+            <button class="btn btn--primary">Medium Button</button>
+            <button class="btn btn--secondary">Medium Button</button>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label">Large</span>
+            <button class="btn btn--primary btn--lg">Large Button</button>
+            <button class="btn btn--secondary btn--lg">Large Button</button>
+        </div>
+    </div>
+
+    <!-- FULL WIDTH -->
+    <h2>Full Width</h2>
+    <div class="demo-section">
+        <div style="max-width: 400px;">
+            <button class="btn btn--primary btn--full">Full Width Button</button>
+        </div>
+        <p class="note">Use <code>.btn--full</code> for mobile layouts</p>
+    </div>
+
+    <!-- ON DARK BACKGROUND -->
+    <h2>On Dark Background</h2>
+    <div class="demo-section">
+        <div class="bg-dark demo-row">
+            <button class="btn btn--primary">Primary</button>
+            <button class="btn btn--secondary">Secondary</button>
+            <button class="btn btn--tertiary">Tertiary</button>
+        </div>
+        <p class="note">Primary stays the same. Secondary and tertiary adapt to white.</p>
+    </div>
+
+    <!-- FOCUS STATE -->
+    <h2>Focus State (Tab to test)</h2>
+    <div class="demo-section">
+        <div class="demo-row">
+            <button class="btn btn--primary">Tab to me</button>
+            <button class="btn btn--secondary">Then me</button>
+            <button class="btn btn--tertiary">Then me</button>
+        </div>
+        <p class="note">All buttons show a 2px teal outline on focus. Essential for keyboard users.</p>
+    </div>
+
+    <!-- BUTTON VS LINK -->
+    <h2>Button vs Link: When to Use Which</h2>
+    <div class="demo-section">
+        <div class="demo-row">
+            <span class="demo-label"><code>&lt;button&gt;</code></span>
+            <button class="btn btn--primary">Submit Form</button>
+            <p class="note">Actions: submit, toggle, open modal</p>
+        </div>
+        <div class="demo-row">
+            <span class="demo-label"><code>&lt;a&gt;</code></span>
+            <a href="/pricing" class="btn btn--primary">Go to Pricing</a>
+            <p class="note">Navigation: goes to a URL</p>
+        </div>
+    </div>
+
+</body>
+</html>

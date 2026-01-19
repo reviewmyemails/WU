@@ -1,0 +1,266 @@
+<html><style>
+    /* RME Diagnostic Specific Styles */
+    .diagnostic-section {
+        background-color: var(--color-light); /* Uses your site variables */
+        padding: 80px 0;
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .diagnostic-container {
+        max-width: 720px;
+        margin: 0 auto;
+        background: var(--color-white);
+        border: 1px solid var(--color-border);
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        overflow: hidden;
+        position: relative;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Header */
+    .diag-header {
+        padding: 32px 40px;
+        border-bottom: 1px solid var(--color-border);
+        background: #fff;
+    }
+    .diag-header h3 { font-size: 20px; margin-bottom: 8px; color: var(--color-dark); }
+    .diag-progress { height: 4px; background: #eee; border-radius: 2px; width: 100%; margin-top: 16px; }
+    .diag-bar { height: 100%; background: var(--color-accent); width: 0%; transition: width 0.3s ease; border-radius: 2px; }
+
+    /* Content Area */
+    .diag-content { padding: 40px; }
+    
+    /* Question Styles */
+    .question-step { display: none; animation: fadeIn 0.4s ease; }
+    .question-step.active { display: block; }
+    .q-text { font-size: 24px; font-weight: 600; color: var(--color-dark); margin-bottom: 32px; line-height: 1.3; }
+    
+    /* Answer Buttons */
+    .answer-btn {
+        display: block;
+        width: 100%;
+        padding: 20px 24px;
+        margin-bottom: 12px;
+        background: #fff;
+        border: 2px solid var(--color-border);
+        border-radius: 8px;
+        text-align: left;
+        font-size: 18px;
+        color: var(--color-dark);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+    }
+    .answer-btn:hover { border-color: var(--color-accent); background: var(--color-light); transform: translateY(-1px); }
+    
+    /* Result Styles */
+    .result-step { display: none; text-align: center; padding: 20px; }
+    .result-step.active { display: block; animation: slideUp 0.4s ease; }
+    
+    .verdict-badge {
+        display: inline-block;
+        background: var(--color-dark);
+        color: #fff;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 12px;
+        margin-bottom: 24px;
+    }
+    
+    /* Dynamic Verdict Colors */
+    .verdict-toxic { background: #ef4444; } /* Red */
+    .verdict-blind { background: #f97316; } /* Orange */
+    .verdict-decay { background: #eab308; color: #000; } /* Yellow */
+    .verdict-decay { background: #134e4a; } /* Your Brand Dark */
+
+    .result-headline { font-size: 36px; font-weight: 700; margin-bottom: 16px; color: var(--color-dark); line-height: 1.1; }
+    .result-subhead { font-size: 20px; color: var(--color-muted); margin-bottom: 32px; line-height: 1.5; }
+    
+    .reality-check {
+        background: var(--color-lighter);
+        padding: 24px;
+        border-radius: 8px;
+        text-align: left;
+        margin-bottom: 32px;
+        border-left: 4px solid var(--color-accent);
+    }
+    .reality-check h4 { font-size: 14px; text-transform: uppercase; color: var(--color-muted); margin-bottom: 8px; letter-spacing: 0.5px; }
+    .reality-check p { font-size: 16px; margin: 0; color: var(--color-dark); }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* Mobile Tweaks */
+    @media (max-width: 600px) {
+        .diagnostic-container { border: none; box-shadow: none; }
+        .diag-content { padding: 20px; }
+        .q-text { font-size: 20px; }
+        .answer-btn { font-size: 16px; padding: 16px; }
+    }
+</style>
+
+<section class="diagnostic-section" id="diagnostic">
+    <div class="diagnostic-container">
+        
+        <div class="diag-header">
+            <h3>Is Your List Safe?</h3>
+            <div class="diag-progress"><div class="diag-bar" id="progressBar"></div></div>
+        </div>
+
+        <div class="diag-content">
+            
+            <div class="question-step active" id="q1">
+                <p class="q-text">Let’s start with the hard truth. How did the majority of these emails get on your list?</p>
+                <button class="answer-btn" onclick="nextStep(2)">A) They filled out a form on my website or app.</button>
+                <button class="answer-btn" onclick="showResult('gambler')">B) I bought, rented, or scraped the list.</button>
+                <button class="answer-btn" onclick="showResult('cold')">C) I'm sending cold outreach to business contacts.</button>
+                <button class="answer-btn" onclick="nextStep(2)">D) It's a mix / I inherited this list and honestly don't know.</button>
+            </div>
+
+            <div class="question-step" id="q2">
+                <p class="q-text">Have you run this list through a validation tool recently?</p>
+                <button class="answer-btn" onclick="nextStep(3)">A) No, never / Not in the last 6 months.</button>
+                <button class="answer-btn" onclick="showResult('false_positive')">B) Yes. It said "Valid" but I'm still seeing bounces or issues.</button>
+                <button class="answer-btn" onclick="showResult('ghost_hunter')">C) Yes. It marked a huge chunk as "Unknown" or "Catch-All".</button>
+                <button class="answer-btn" onclick="nextStep(3)">D) Yes, and everything seems fine.</button>
+            </div>
+
+            <div class="question-step" id="q3">
+                <p class="q-text">Be honest: When do you remove subscribers who haven't opened your emails?</p>
+                <button class="answer-btn" onclick="nextStep(4)">A) Automatically after 3-6 months of inactivity.</button>
+                <button class="answer-btn" onclick="showResult('hoarder')">B) I don't. I'm afraid to delete them in case they buy later.</button>
+                <button class="answer-btn" onclick="showResult('hoarder')">C) I only remove them if they bounce or unsubscribe.</button>
+            </div>
+
+            <div class="question-step" id="q4">
+                <p class="q-text">What is the specific pain point that brought you here today?</p>
+                <button class="answer-btn" onclick="showResult('sleepwalker')">A) My open rates are slowly dropping over time.</button>
+                <button class="answer-btn" onclick="showResult('crisis')">B) My ESP (Mailchimp, Klaviyo, etc) gave me a warning/suspension.</button>
+                <button class="answer-btn" onclick="showResult('prudent')">C) I just want to be safe before a big send.</button>
+            </div>
+
+
+            <div class="result-step" id="res-gambler">
+                <span class="verdict-badge verdict-toxic">Verdict: Toxic Data</span>
+                <h2 class="result-headline">Your list is Toxic.</h2>
+                <p class="result-subhead">You cannot "validate" a purchased list into safety. Sending to this list puts your entire domain reputation at risk.</p>
+                
+                <div class="reality-check">
+                    <h4>The Reality Check</h4>
+                    <p>Validation checks if an email <em>exists</em>. It does not check if they <em>want</em> to hear from you. Purchased lists are full of recycled honeypots (spam traps) that tools miss.</p>
+                </div>
+                
+                <a href="#" class="btn btn-primary">See if anything is salvageable</a>
+            </div>
+
+            <div class="result-step" id="res-false_positive">
+                <span class="verdict-badge verdict-blind">Verdict: Blind Validation</span>
+                <h2 class="result-headline">You are suffering from Tool Failure.</h2>
+                <p class="result-subhead">You paid for a tool to check syntax, but you were punished for reputation.</p>
+                
+                <div class="reality-check">
+                    <h4>The Reality Check</h4>
+                    <p>A "Valid" email can still be a Spam Trap or a chronic complainer. Automated tools cannot see behavioral history; they only see code. We catch the "Valid but Dangerous" addresses they miss.</p>
+                </div>
+                
+                <a href="#" class="btn btn-primary">Find the hidden errors</a>
+            </div>
+
+            <div class="result-step" id="res-hoarder">
+                <span class="verdict-badge verdict-decay">Verdict: Revenue Block</span>
+                <h2 class="result-headline">You are prioritizing "Potential Revenue" over "Actual Reach."</h2>
+                
+                <div class="reality-check">
+                    <h4>The Reality Check</h4>
+                    <p>Keeping inactive subscribers doesn't give you a chance to sell to them later; it prevents you from reaching the people who want to buy <em>now</em>. Gmail sees your low engagement and punishes your active subscribers.</p>
+                </div>
+                
+                <a href="#" class="btn btn-primary">Identify safe-to-cut emails</a>
+            </div>
+
+            <div class="result-step" id="res-sleepwalker">
+                <span class="verdict-badge">Verdict: Reputation Decay</span>
+                <h2 class="result-headline">Your list is slowly suffocating your delivery.</h2>
+                
+                <div class="reality-check">
+                    <h4>The Reality Check</h4>
+                    <p>There is no "event" (like a bounce spike) to warn you. Your list has accumulated dead weight, and mailbox providers have quietly started filtering you to spam.</p>
+                </div>
+                
+                <a href="#" class="btn btn-primary">Get the Diagnosis</a>
+            </div>
+            
+             <div class="result-step" id="res-crisis">
+                <span class="verdict-badge verdict-toxic">Verdict: Critical</span>
+                <h2 class="result-headline">You need Triage, not just cleaning.</h2>
+                
+                <div class="reality-check">
+                    <h4>The Reality Check</h4>
+                    <p>An ESP warning is the final straw. It means your reputation is already damaged. Automated cleaning alone is not enough to get reinstated; you need a remediation strategy.</p>
+                </div>
+                
+                <a href="#" class="btn btn-primary">Open Emergency Ticket</a>
+            </div>
+
+             <div class="result-step" id="res-cold">
+                <span class="verdict-badge">Not a Fit</span>
+                <h2 class="result-headline">We are not the right fit for you.</h2>
+                <p class="result-subhead">Review My Emails specializes in protecting the reputation of opt-in, permission-based senders.</p>
+                
+                <div class="reality-check">
+                    <h4>Why?</h4>
+                    <p>Cold email relies on different mechanics than newsletter marketing. Our "Suppress" criteria are too strict for cold outreach goals.</p>
+                </div>
+            </div>
+
+             <div class="result-step" id="res-prudent">
+                <span class="verdict-badge">Verdict: Low Risk</span>
+                <h2 class="result-headline">You are in a good spot. Let's keep it that way.</h2>
+                
+                <div class="reality-check">
+                    <h4>The Reality Check</h4>
+                    <p>Even healthy lists decay by 22% every year. A preventative review before a big send ensures you don't accidentally hit a recycled trap that formed since your last campaign.</p>
+                </div>
+                
+                <a href="#" class="btn btn-primary">Get a Safety Check</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function nextStep(step) {
+        // Hide all questions
+        document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
+        // Show next question
+        document.getElementById('q' + step).classList.add('active');
+        // Update bar
+        let percent = (step - 1) * 25;
+        document.getElementById('progressBar').style.width = percent + '%';
+    }
+
+    function showResult(type) {
+        // Hide all questions
+        document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
+        // Hide header elements
+        document.querySelector('.diag-header h3').style.display = 'none';
+        document.querySelector('.diag-progress').style.display = 'none';
+        
+        // Show specific result logic
+        let id = 'res-' + type;
+        if(type === 'ghost_hunter') id = 'res-sleepwalker'; // Merge logic for simplicity if needed
+        
+        const resultEl = document.getElementById(id);
+        if(resultEl) {
+            resultEl.classList.add('active');
+        }
+    }
+</script></html>

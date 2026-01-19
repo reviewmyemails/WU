@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RME Header Component</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../design_tokens.css">
+    <style>
+        /* ========================================
+           BUTTON COMPONENT (copied for demo)
+           ======================================== */
+
+        .btn {
+            appearance: none;
+            border: none;
+            background: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: var(--font-family);
+            font-size: 16px;
+            font-weight: var(--font-weight-semibold);
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            padding: 12px 24px;
+            min-height: 44px;
+            border-radius: var(--radius-md);
+            transition:
+                background-color var(--transition-normal),
+                border-color var(--transition-normal),
+                color var(--transition-normal),
+                transform var(--transition-fast);
+            user-select: none;
+        }
+
+        .btn--primary {
+            background-color: var(--color-btn-primary-bg);
+            color: var(--color-btn-primary-text);
+        }
+
+        .btn--primary:hover {
+            background-color: var(--color-btn-primary-hover);
+        }
+
+        .btn--primary:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .btn--sm {
+            padding: 8px 16px;
+            font-size: 14px;
+            min-height: 36px;
+        }
+
+        /* ========================================
+           HEADER COMPONENT
+           ======================================== */
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: var(--z-sticky);
+            background-color: var(--color-white);
+        }
+
+        /* Inner container */
+        .header__inner {
+            max-width: var(--max-width-content);
+            margin: 0 auto;
+            padding: var(--space-sm) var(--padding-desktop);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-md);
+        }
+
+        /* Skip link for accessibility */
+        .header__skip {
+            position: absolute;
+            top: -100px;
+            left: var(--padding-desktop);
+            background: var(--color-accent);
+            color: var(--color-white);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-size-small);
+            font-weight: var(--font-weight-semibold);
+            z-index: 1000;
+            transition: top var(--transition-normal);
+        }
+
+        .header__skip:focus {
+            top: var(--space-sm);
+        }
+
+        /* Logo */
+        .header__logo {
+            flex-shrink: 0;
+            display: block;
+        }
+
+        .header__logo img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+
+        /* Visually hidden text for screen readers */
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Navigation */
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .header__nav-list {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header__nav-link {
+            font-size: 16px;
+            font-weight: var(--font-weight-regular);
+            color: var(--color-dark-base);
+            text-decoration: none;
+            padding: var(--space-xs) 0;
+            position: relative;
+            transition: color var(--transition-normal);
+        }
+
+        .header__nav-link:hover {
+            color: var(--color-accent);
+        }
+
+        .header__nav-link:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 4px;
+        }
+
+        /* Active page indicator */
+        .header__nav-link--active {
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+        }
+
+        /* Mobile menu button */
+        .header__menu-btn {
+            display: none;
+            appearance: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-xs);
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header__menu-btn:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .header__menu-icon {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-dark-base);
+            position: relative;
+            transition: background-color var(--transition-normal);
+        }
+
+        .header__menu-icon::before,
+        .header__menu-icon::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 2px;
+            background-color: var(--color-dark-base);
+            transition: transform var(--transition-normal);
+        }
+
+        .header__menu-icon::before {
+            top: -7px;
+        }
+
+        .header__menu-icon::after {
+            bottom: -7px;
+        }
+
+        /* Menu open state - X icon */
+        .header__menu-btn[aria-expanded="true"] .header__menu-icon {
+            background-color: transparent;
+        }
+
+        .header__menu-btn[aria-expanded="true"] .header__menu-icon::before {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .header__menu-btn[aria-expanded="true"] .header__menu-icon::after {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Mobile menu panel */
+        .header__mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 280px;
+            max-width: 80vw;
+            background-color: var(--color-white);
+            z-index: var(--z-modal);
+            padding: var(--space-xl) var(--space-md) var(--space-md);
+            transform: translateX(100%);
+            transition: transform var(--transition-normal);
+            overflow-y: auto;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .header__mobile-menu--open {
+            transform: translateX(0);
+        }
+
+        .header__mobile-nav-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header__mobile-nav-item {
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header__mobile-nav-link {
+            display: block;
+            padding: var(--space-sm) 0;
+            font-size: 18px;
+            font-weight: var(--font-weight-regular);
+            color: var(--color-dark-base);
+            text-decoration: none;
+            transition: color var(--transition-normal);
+        }
+
+        .header__mobile-nav-link:hover {
+            color: var(--color-accent);
+        }
+
+        .header__mobile-nav-link:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .header__mobile-nav-link--active {
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-accent);
+        }
+
+        .header__mobile-cta {
+            margin-top: var(--space-md);
+        }
+
+        .header__mobile-cta .btn {
+            width: 100%;
+        }
+
+        /* ----------------------------------------
+           RESPONSIVE - Tablet
+           ---------------------------------------- */
+
+        @media (max-width: 1199px) {
+            .header__inner {
+                padding-left: var(--padding-tablet);
+                padding-right: var(--padding-tablet);
+            }
+
+            .header__nav-list {
+                gap: var(--space-sm);
+            }
+        }
+
+        /* ----------------------------------------
+           RESPONSIVE - Mobile
+           ---------------------------------------- */
+
+        @media (max-width: 767px) {
+            .header__inner {
+                padding-left: var(--padding-mobile);
+                padding-right: var(--padding-mobile);
+            }
+
+            .header__nav {
+                display: none;
+            }
+
+            .header__menu-btn {
+                display: flex;
+            }
+
+            .header__mobile-menu {
+                display: block;
+            }
+
+            .header__skip {
+                left: var(--padding-mobile);
+            }
+        }
+
+
+        /* ========================================
+           DEMO PAGE STYLES
+           ======================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-white);
+            color: var(--color-text-primary);
+            line-height: 1.6;
+        }
+
+        main {
+            padding-top: 80px; /* Account for fixed header */
+        }
+
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: var(--font-size-h2);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-md);
+        }
+
+        h2 {
+            font-size: var(--font-size-h3);
+            font-weight: var(--font-weight-semibold);
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-sm);
+            color: var(--color-muted);
+        }
+
+        .demo-section {
+            background: var(--color-light);
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        code {
+            background: rgba(0,0,0,0.05);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        .note {
+            font-size: var(--font-size-small);
+            color: var(--color-muted);
+            margin-top: var(--space-xs);
+        }
+
+        ul {
+            padding-left: var(--space-md);
+        }
+
+        li {
+            margin-bottom: var(--space-xs);
+        }
+
+        /* Logo placeholder for demo */
+        .logo-placeholder {
+            height: 40px;
+            width: 160px;
+            background: var(--color-dark-base);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-size: 12px;
+            font-weight: var(--font-weight-semibold);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER COMPONENT -->
+    <header class="header" id="header">
+        <a href="#main-content" class="header__skip">Skip to main content</a>
+
+        <div class="header__inner">
+            <!-- Logo (is the Home link) -->
+            <a href="/" class="header__logo" aria-label="Review My Emails - Home">
+                <!-- Replace src with actual logo -->
+                <img src="/images/logo.svg" alt="" aria-hidden="true" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+                <span class="logo-placeholder" style="display: none;">LOGO HERE</span>
+                <span class="visually-hidden">Review My Emails</span>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="header__nav" aria-label="Main navigation">
+                <ul class="header__nav-list">
+                    <li><a href="/pricing" class="header__nav-link">Pricing</a></li>
+                    <li><a href="/sos" class="header__nav-link">SOS</a></li>
+                </ul>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn--primary btn--sm">Get My List Cleaned</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button
+                class="header__menu-btn"
+                aria-label="Open menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+                id="menu-btn"
+            >
+                <span class="header__menu-icon"></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <nav class="header__mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+        <ul class="header__mobile-nav-list">
+            <li class="header__mobile-nav-item">
+                <a href="/pricing" class="header__mobile-nav-link">Pricing</a>
+            </li>
+            <li class="header__mobile-nav-item">
+                <a href="/sos" class="header__mobile-nav-link">SOS</a>
+            </li>
+        </ul>
+        <div class="header__mobile-cta">
+            <a href="https://anchor.reviewmyemails.com" class="btn btn--primary">Get My List Cleaned</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main id="main-content">
+        <div class="demo-container">
+            <h1>Header Component</h1>
+            <p>Minimal header. Logo is Home. Resize to mobile to test hamburger menu.</p>
+
+            <h2>Structure</h2>
+            <div class="demo-section">
+                <ul>
+                    <li><strong>Logo</strong> — Links to Home (/)</li>
+                    <li><strong>Pricing</strong> — Nav link</li>
+                    <li><strong>SOS</strong> — Nav link</li>
+                    <li><strong>CTA</strong> — "Get My List Cleaned" → anchor.reviewmyemails.com</li>
+                </ul>
+                <p class="note">About is in the footer, not the header.</p>
+            </div>
+
+            <h2>What Changed</h2>
+            <div class="demo-section">
+                <ul>
+                    <li>✓ Removed Home nav item (logo is Home)</li>
+                    <li>✓ Logo is now an image with visually-hidden text fallback</li>
+                    <li>✓ Nav: Pricing, SOS only</li>
+                    <li>✓ CTA: "Get My List Cleaned" → anchor.reviewmyemails.com</li>
+                    <li>✓ About removed from header</li>
+                    <li>✓ Solid background (light neutral), no scroll effects</li>
+                    <li>✓ Mobile: simple slide panel, no overlay</li>
+                    <li>✓ Skip link, focus states, aria attributes preserved</li>
+                </ul>
+            </div>
+
+            <h2>HTML Structure</h2>
+            <div class="demo-section">
+                <pre style="font-size: 12px; overflow-x: auto;"><code>&lt;header class="header"&gt;
+  &lt;a href="#main" class="header__skip"&gt;Skip to main content&lt;/a&gt;
+
+  &lt;div class="header__inner"&gt;
+    &lt;a href="/" class="header__logo" aria-label="Review My Emails - Home"&gt;
+      &lt;img src="/images/logo.svg" alt="" aria-hidden="true"&gt;
+      &lt;span class="visually-hidden"&gt;Review My Emails&lt;/span&gt;
+    &lt;/a&gt;
+
+    &lt;nav class="header__nav" aria-label="Main navigation"&gt;
+      &lt;ul class="header__nav-list"&gt;
+        &lt;li&gt;&lt;a href="/pricing"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href="/sos"&gt;SOS&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+      &lt;a href="https://anchor.reviewmyemails.com" class="btn btn--primary btn--sm"&gt;
+        Get My List Cleaned
+      &lt;/a&gt;
+    &lt;/nav&gt;
+
+    &lt;button class="header__menu-btn" aria-expanded="false"&gt;...&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</code></pre>
+            </div>
+
+            <h2>Accessibility</h2>
+            <div class="demo-section">
+                <ul>
+                    <li><code>aria-label</code> on logo link for screen readers</li>
+                    <li><code>visually-hidden</code> text inside logo</li>
+                    <li>Skip link (Tab to reveal)</li>
+                    <li><code>aria-expanded</code> on mobile menu button</li>
+                    <li>Escape key closes mobile menu</li>
+                    <li>Focus visible on all interactive elements</li>
+                </ul>
+            </div>
+
+            <h2>Test Checklist</h2>
+            <div class="demo-section">
+                <ul>
+                    <li>□ Tab through — skip link appears first</li>
+                    <li>□ Logo links to / (Home)</li>
+                    <li>□ Resize to mobile — hamburger appears</li>
+                    <li>□ Open mobile menu — panel slides in</li>
+                    <li>□ Press Escape — menu closes</li>
+                    <li>□ CTA links to anchor.reviewmyemails.com</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function openMenu() {
+            menuBtn.setAttribute('aria-expanded', 'true');
+            menuBtn.setAttribute('aria-label', 'Close menu');
+            mobileMenu.classList.add('header__mobile-menu--open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            menuBtn.setAttribute('aria-expanded', 'false');
+            menuBtn.setAttribute('aria-label', 'Open menu');
+            mobileMenu.classList.remove('header__mobile-menu--open');
+            document.body.style.overflow = '';
+        }
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
+
+        // Close menu on resize to desktop
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 767) {
+                closeMenu();
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Express Interest | Review My Emails</title>
+    <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐙</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 18px; background-color: #182C33; color: #F9FCFC; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Baloo 2', sans-serif !important; font-weight: 700; }
+        :root { --rme-primary: #0C92E1; --rme-text-dark: #182C33; --rme-bg-light: #D4E2F9; --rme-green: #1fa95c; }
+        .bg-rme-primary { background-color: var(--rme-primary); }
+        .text-rme-primary { color: var(--rme-primary); }
+
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.05);
+            color: white;
+        }
+        input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.4); }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--rme-primary);
+            background: rgba(12, 146, 225, 0.1);
+        }
+
+        .question-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background: rgba(255,255,255,0.03);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        .question-card:hover {
+            border-color: var(--rme-primary);
+            background: rgba(12, 146, 225, 0.1);
+        }
+        .question-card.selected {
+            border-color: var(--rme-primary);
+            background: linear-gradient(135deg, rgba(12, 146, 225, 0.2) 0%, rgba(12, 146, 225, 0.1) 100%);
+            box-shadow: 0 0 30px rgba(12, 146, 225, 0.2);
+        }
+        .question-card.selected .radio-circle {
+            background-color: var(--rme-primary);
+            border-color: var(--rme-primary);
+        }
+        .question-card.selected .radio-circle::after { opacity: 1; }
+
+        .radio-circle {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            position: relative;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .radio-circle::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .glow-border {
+            position: relative;
+        }
+        .glow-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--rme-primary), transparent, var(--rme-primary));
+            border-radius: 24px;
+            z-index: -1;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="py-6 px-6 border-b border-white/10">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <a href="https://reviewmyemails.com" class="text-white text-xl font-bold flex items-center gap-2">
+                <span class="text-2xl">🐙</span>
+                <span>Review My Emails</span>
+            </a>
+            <span class="text-rme-primary text-sm font-semibold">JANUARY 2026</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-6 py-12">
+
+        <!-- Hero -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-rme-primary">The Deliverability</span> Detox
+            </h1>
+            <p class="text-xl text-gray-400">
+                Post-Holiday Deliverability Recovery — Express Your Interest
+            </p>
+        </div>
+
+        <form class="space-y-16">
+
+            <!-- Section: About You -->
+            <section>
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 bg-rme-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-user text-white"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">About You</h2>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-300">First Name</label>
+                        <input type="text" name="first_name" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-300">Last Name</label>
+                        <input type="text" name="last_name" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-300">Company</label>
+                        <input type="text" name="company">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2 text-gray-300">Email</label>
+                        <input type="email" name="email" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-semibold mb-2 text-gray-300">Social Links</label>
+                        <input type="text" name="social" placeholder="LinkedIn, Twitter, website...">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: Questions -->
+            <section>
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 bg-rme-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-comments text-white"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Select Your Questions</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <label class="question-card block rounded-2xl p-6">
+                        <div class="flex gap-4">
+                            <div class="radio-circle"></div>
+                            <input type="checkbox" name="q1" class="hidden">
+                            <p>What long-term damage do brands carry out of November and December without realizing it?</p>
+                        </div>
+                    </label>
+
+                    <label class="question-card block rounded-2xl p-6">
+                        <div class="flex gap-4">
+                            <div class="radio-circle"></div>
+                            <input type="checkbox" name="q2" class="hidden">
+                            <p>Which January performance metrics give a false sense of recovery?</p>
+                        </div>
+                    </label>
+
+                    <label class="question-card block rounded-2xl p-6">
+                        <div class="flex gap-4">
+                            <div class="radio-circle"></div>
+                            <input type="checkbox" name="q3" class="hidden">
+                            <div>
+                                <span class="inline-block bg-yellow-500/20 text-yellow-400 text-xs font-bold px-2 py-1 rounded mb-2">SURPRISING</span>
+                                <p>What part of Q4 damage do brands almost never attribute to email?</p>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="question-card block rounded-2xl p-6">
+                        <div class="flex gap-4">
+                            <div class="radio-circle"></div>
+                            <input type="checkbox" name="q4" class="hidden">
+                            <div>
+                                <span class="inline-block bg-blue-500/20 text-blue-400 text-xs font-bold px-2 py-1 rounded mb-2">REALITY CHECK</span>
+                                <p>If inbox placement is down and revenue is under pressure, what do you stop sending first?</p>
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="question-card block rounded-2xl p-6">
+                        <div class="flex gap-4">
+                            <div class="radio-circle"></div>
+                            <input type="checkbox" name="q5" class="hidden">
+                            <div>
+                                <span class="inline-block bg-red-500/20 text-red-400 text-xs font-bold px-2 py-1 rounded mb-2">OPERATOR MISTAKE</span>
+                                <p>What is the most common January decision that quietly locks in poor inbox placement for months?</p>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Section: Different Angle -->
+            <section>
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 bg-rme-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-white"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Different Angle?</h2>
+                </div>
+
+                <textarea name="custom_angle" rows="4" placeholder="Tell us if you'd approach this topic differently..."></textarea>
+            </section>
+
+            <!-- Section: Confirmation -->
+            <section>
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-10 h-10 bg-rme-primary rounded-lg flex items-center justify-center">
+                        <i class="fas fa-check-double text-white"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold">Confirm</h2>
+                </div>
+
+                <div class="bg-white/5 rounded-2xl p-6 space-y-4 border border-white/10">
+                    <label class="flex gap-4 cursor-pointer">
+                        <input type="checkbox" name="consent_recording" required class="mt-1 w-5 h-5 accent-rme-primary">
+                        <span class="text-gray-300">I agree that this session will be recorded and used across Review My Emails channels with credit.</span>
+                    </label>
+
+                    <label class="flex gap-4 cursor-pointer">
+                        <input type="checkbox" name="consent_quality" required class="mt-1 w-5 h-5 accent-rme-primary">
+                        <span class="text-gray-300">I agree to meet basic audio, video, and environment quality standards.</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Submit -->
+            <div class="text-center pt-8">
+                <button type="submit" class="bg-rme-primary hover:bg-opacity-90 text-white font-bold py-5 px-12 rounded-xl text-xl transition-all inline-flex items-center gap-3">
+                    <span>Submit Interest</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-white/10 mt-12">
+        <div class="max-w-4xl mx-auto text-center text-gray-500">
+            <span class="text-3xl mb-4 inline-block">🐙</span>
+            <p>&copy; 2026 Review My Emails</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.question-card').forEach(card => {
+            card.addEventListener('click', () => card.classList.toggle('selected'));
+        });
+    </script>
+
+</body>
+</html>

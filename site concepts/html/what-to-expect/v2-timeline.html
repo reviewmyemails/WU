@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What to Expect | Review My Emails</title>
+    <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐙</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 18px; background-color: #F9FCFC; color: #182C33; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Baloo 2', sans-serif !important; font-weight: 700; }
+        :root { --rme-primary: #0C92E1; --rme-text-dark: #182C33; --rme-bg-light: #D4E2F9; --rme-green: #1fa95c; }
+        .bg-rme-primary { background-color: var(--rme-primary); }
+        .bg-rme-text-dark { background-color: var(--rme-text-dark); }
+        .text-rme-primary { color: var(--rme-primary); }
+        .text-rme-text-dark { color: var(--rme-text-dark); }
+        .text-rme-text-light { color: #3D4F56; }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 60px;
+            padding-bottom: 40px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 40px;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--rme-primary), var(--rme-bg-light));
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 42px;
+            height: 42px;
+            background: var(--rme-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 12px rgba(12, 146, 225, 0.3);
+        }
+
+        .fade-in { animation: fadeIn 0.6s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-rme-text-dark py-6 px-6">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <a href="https://reviewmyemails.com" class="inline-flex items-center gap-2 text-white">
+                <span class="text-2xl">🐙</span>
+                <span class="font-bold">Review My Emails</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="bg-rme-text-dark pb-16 px-6">
+        <div class="max-w-3xl mx-auto text-center fade-in">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">What to Expect</h1>
+            <p class="text-xl text-gray-400">Your guide to a smooth recording experience</p>
+        </div>
+    </section>
+
+    <!-- Wave -->
+    <div class="bg-rme-text-dark">
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+            <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1350,60 1440,40 L1440,80 L0,80 Z" fill="#F9FCFC"/>
+        </svg>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-6 py-12">
+
+        <!-- Quick Summary -->
+        <section class="mb-16">
+            <div class="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-rme-primary">
+                <h2 class="text-xl font-bold mb-4">Quick Summary</h2>
+                <p class="text-rme-text-light">
+                    These conversations are real discussions—not presentations, interviews, or sales pitches. Show up with your experience. We handle the rest.
+                </p>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-10 text-center">Your Journey</h2>
+
+            <div class="timeline-item">
+                <div class="timeline-icon"><i class="fas fa-calendar-check"></i></div>
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                    <h3 class="font-bold text-xl mb-2">Before: No Prep Required</h3>
+                    <p class="text-rme-text-light mb-4">You've already picked your questions. That's all the prep you need.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="inline-block bg-red-100 text-red-700 text-sm px-3 py-1 rounded-full">No slides</span>
+                        <span class="inline-block bg-red-100 text-red-700 text-sm px-3 py-1 rounded-full">No stats</span>
+                        <span class="inline-block bg-red-100 text-red-700 text-sm px-3 py-1 rounded-full">No scripts</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-icon"><i class="fas fa-video"></i></div>
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                    <h3 class="font-bold text-xl mb-2">During: Have a Conversation</h3>
+                    <p class="text-rme-text-light mb-4">~60 minutes of guided discussion. Questions are anchors, not a rigid agenda.</p>
+                    <ul class="space-y-2 text-rme-text-light">
+                        <li><i class="fas fa-check text-rme-green mr-2"></i>Relaxed, professional tone</li>
+                        <li><i class="fas fa-check text-rme-green mr-2"></i>Pause, think, rephrase—it's all fine</li>
+                        <li><i class="fas fa-check text-rme-green mr-2"></i>Not live—we edit for clarity</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-icon"><i class="fas fa-magic"></i></div>
+                <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+                    <h3 class="font-bold text-xl mb-2">After: We Do The Work</h3>
+                    <p class="text-rme-text-light mb-4">We curate and distribute your insights across channels.</p>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <i class="fas fa-blog text-rme-primary text-2xl mb-2"></i>
+                            <p class="text-sm">Blog</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <i class="fas fa-video text-rme-primary text-2xl mb-2"></i>
+                            <p class="text-sm">Social Clips</p>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <i class="fas fa-scroll text-rme-primary text-2xl mb-2"></i>
+                            <p class="text-sm">Transcripts</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What Helps -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-center">What Makes Great Content</h2>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-green-50 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-thumbs-up text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3 text-green-800">Bring This</h3>
+                    <ul class="space-y-2 text-green-700">
+                        <li>Real experiences from your work</li>
+                        <li>Trade-offs you've seen</li>
+                        <li>Honest opinions you can explain</li>
+                        <li>Willingness to disagree</li>
+                    </ul>
+                </div>
+
+                <div class="bg-red-50 rounded-xl p-6">
+                    <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-thumbs-down text-white text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-3 text-red-800">Skip This</h3>
+                    <ul class="space-y-2 text-red-700">
+                        <li>Prepared presentations</li>
+                        <li>Marketing messages</li>
+                        <li>Safe, generic answers</li>
+                        <li>Stats you'd need to look up</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote -->
+        <section class="mb-16">
+            <div class="bg-rme-text-dark rounded-2xl p-8 text-center">
+                <div class="text-5xl mb-4 text-rme-primary">"</div>
+                <p class="text-xl text-white mb-4">
+                    The best clips come from honest opinions, not safe answers.
+                </p>
+                <p class="text-gray-400">Disagreement is welcome.</p>
+            </div>
+        </section>
+
+        <!-- Final Note -->
+        <section class="text-center">
+            <div class="inline-block bg-rme-bg-light rounded-2xl p-8">
+                <h2 class="text-2xl font-bold mb-4 text-rme-text-dark">You don't need to perform.</h2>
+                <p class="text-rme-text-light">
+                    Show up with honest experience and a willingness to think out loud.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-rme-text-dark py-8 px-6 mt-12">
+        <div class="max-w-4xl mx-auto text-center text-gray-500">
+            <span class="text-3xl mb-3 inline-block">🐙</span>
+            <p>&copy; 2026 Review My Emails</p>
+        </div>
+    </footer>
+
+</body>
+</html>

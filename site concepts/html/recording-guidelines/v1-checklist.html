@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recording Guidelines | Review My Emails</title>
+    <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🐙</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Raleway', sans-serif; font-weight: 500; font-size: 18px; background-color: #F9FCFC; color: #182C33; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Baloo 2', sans-serif !important; font-weight: 700; }
+        :root { --rme-primary: #0C92E1; --rme-text-dark: #182C33; --rme-bg-light: #D4E2F9; --rme-green: #1fa95c; --rme-orange: #f9943b; }
+        .bg-rme-primary { background-color: var(--rme-primary); }
+        .bg-rme-text-dark { background-color: var(--rme-text-dark); }
+        .text-rme-primary { color: var(--rme-primary); }
+        .text-rme-text-dark { color: var(--rme-text-dark); }
+        .text-rme-text-light { color: #3D4F56; }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .check-box {
+            width: 24px;
+            height: 24px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .check-box:hover { border-color: var(--rme-primary); }
+        .check-box.checked {
+            background-color: var(--rme-green);
+            border-color: var(--rme-green);
+        }
+        .check-box.checked::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 12px;
+        }
+
+        .priority-high { border-left: 4px solid var(--rme-primary); }
+        .priority-medium { border-left: 4px solid var(--rme-orange); }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-rme-text-dark py-8 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <a href="https://reviewmyemails.com" class="inline-flex items-center gap-2 text-white mb-4">
+                <span class="text-3xl">🐙</span>
+                <span class="text-xl font-bold">Review My Emails</span>
+            </a>
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Recording Guidelines</h1>
+            <p class="text-gray-400 mt-2">Technical setup checklist</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-3xl mx-auto px-6 py-12">
+
+        <!-- Intro -->
+        <section class="mb-12">
+            <div class="bg-rme-bg-light rounded-xl p-6">
+                <p class="text-rme-text-dark">
+                    <strong>These guidelines ensure a smooth recording and consistent quality.</strong> This isn't about perfection—it's about clarity and minimal distractions.
+                </p>
+            </div>
+        </section>
+
+        <!-- Audio Section -->
+        <section class="mb-10">
+            <div class="bg-white rounded-xl shadow-sm border-2 border-gray-100 overflow-hidden priority-high">
+                <div class="bg-rme-primary px-6 py-4 flex items-center gap-3">
+                    <i class="fas fa-microphone text-white text-xl"></i>
+                    <h2 class="text-xl font-bold text-white">Audio</h2>
+                    <span class="ml-auto bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full">MOST IMPORTANT</span>
+                </div>
+                <div class="p-6">
+                    <p class="text-rme-text-light mb-4">Good audio matters more than good video. If you have to choose, choose audio.</p>
+
+                    <div class="space-y-1">
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>External microphone or quality headset</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Wired headphones (more reliable than Bluetooth)</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Quiet space with minimal echo</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Close windows, turn off fans</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 bg-red-50 rounded-lg p-4 text-red-700 text-sm">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        <strong>Avoid:</strong> Laptop built-in microphone, echo-heavy rooms, background noise
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="mb-10">
+            <div class="bg-white rounded-xl shadow-sm border-2 border-gray-100 overflow-hidden priority-medium">
+                <div class="bg-rme-text-dark px-6 py-4 flex items-center gap-3">
+                    <i class="fas fa-video text-white text-xl"></i>
+                    <h2 class="text-xl font-bold text-white">Video & Framing</h2>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-1">
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Camera at eye level (not looking down)</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Stable setup (no handheld devices)</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Landscape orientation</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Head and shoulders in frame</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lighting Section -->
+        <section class="mb-10">
+            <div class="bg-white rounded-xl shadow-sm border-2 border-gray-100 overflow-hidden">
+                <div class="bg-rme-text-dark px-6 py-4 flex items-center gap-3">
+                    <i class="fas fa-lightbulb text-white text-xl"></i>
+                    <h2 class="text-xl font-bold text-white">Lighting</h2>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-1">
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Face a natural or soft light source</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Light from in front, not behind</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Avoid strong overhead lighting</span>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-rme-text-light">
+                        <i class="fas fa-info-circle text-rme-primary mr-1"></i>
+                        A window works well. You don't need studio lights.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Background Section -->
+        <section class="mb-10">
+            <div class="bg-white rounded-xl shadow-sm border-2 border-gray-100 overflow-hidden">
+                <div class="bg-rme-text-dark px-6 py-4 flex items-center gap-3">
+                    <i class="fas fa-image text-white text-xl"></i>
+                    <h2 class="text-xl font-bold text-white">Background</h2>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-1">
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Neutral, uncluttered background</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Quiet, private space</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>No visual distractions behind you</span>
+                        </div>
+                    </div>
+                    <p class="mt-4 text-sm text-rme-text-light">
+                        Virtual backgrounds are fine if your setup supports them cleanly.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What to Wear -->
+        <section class="mb-10">
+            <div class="bg-white rounded-xl shadow-sm border-2 border-gray-100 overflow-hidden">
+                <div class="bg-rme-text-dark px-6 py-4 flex items-center gap-3">
+                    <i class="fas fa-tshirt text-white text-xl"></i>
+                    <h2 class="text-xl font-bold text-white">What to Wear</h2>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-1">
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Professional and comfortable</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Solid colors work best</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Avoid tight patterns or shiny fabrics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Internet -->
+        <section class="mb-10">
+            <div class="bg-white rounded-xl shadow-sm border-2 border-gray-100 overflow-hidden">
+                <div class="bg-rme-text-dark px-6 py-4 flex items-center gap-3">
+                    <i class="fas fa-wifi text-white text-xl"></i>
+                    <h2 class="text-xl font-bold text-white">Internet</h2>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-1">
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Stable connection required</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Wired connection preferred</span>
+                        </div>
+                        <div class="checklist-item">
+                            <div class="check-box"></div>
+                            <span>Close unnecessary apps before recording</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsibility Split -->
+        <section class="mb-12">
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-rme-primary rounded-xl p-6 text-white">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                        <i class="fas fa-hands-helping"></i>
+                        We Handle
+                    </h3>
+                    <ul class="space-y-2 text-white/90">
+                        <li><i class="fas fa-check mr-2"></i>Recording</li>
+                        <li><i class="fas fa-check mr-2"></i>Editing</li>
+                        <li><i class="fas fa-check mr-2"></i>Clip selection</li>
+                        <li><i class="fas fa-check mr-2"></i>Transcripts & captions</li>
+                        <li><i class="fas fa-check mr-2"></i>Publishing & distribution</li>
+                    </ul>
+                </div>
+
+                <div class="bg-rme-text-dark rounded-xl p-6 text-white">
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+                        <i class="fas fa-user-check"></i>
+                        You're Responsible For
+                    </h3>
+                    <ul class="space-y-2 text-white/90">
+                        <li><i class="fas fa-arrow-right mr-2"></i>Arriving on time</li>
+                        <li><i class="fas fa-arrow-right mr-2"></i>Audio & video setup</li>
+                        <li><i class="fas fa-arrow-right mr-2"></i>Recording environment</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Questions -->
+        <section class="text-center">
+            <p class="text-rme-text-light mb-4">Something unclear or difficult to meet? Let us know ahead of time.</p>
+            <a href="mailto:support@reviewmyemails.com" class="inline-flex items-center gap-2 text-rme-primary font-semibold hover:underline">
+                <i class="fas fa-envelope"></i>
+                support@reviewmyemails.com
+            </a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-rme-text-dark py-8 px-6 mt-12">
+        <div class="max-w-4xl mx-auto text-center text-gray-500">
+            <p class="mb-2">Review My Emails 🐙</p>
+            <p class="text-sm">&copy; 2026 All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.check-box').forEach(box => {
+            box.addEventListener('click', () => box.classList.toggle('checked'));
+        });
+    </script>
+
+</body>
+</html>

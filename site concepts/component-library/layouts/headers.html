@@ -1,0 +1,181 @@
+<!--
+    RME HEADER LAYOUTS
+    ==================
+    Various header options for RME pages
+-->
+
+<!-- ========================================
+     OPTION 1: DARK HEADER WITH TRUST STRIP + FLOATING CARD
+     From: credit-purchase-system/index.html
+     ======================================== -->
+
+<div class="header-dark-floating">
+    <!-- Dark header with logo and trust badges -->
+    <div class="bg-rme-text-dark pt-8 pb-28 px-6">
+        <!-- Logo -->
+        <div class="text-center mb-4">
+            <a href="https://reviewmyemails.com">
+                <img src="https://reviewmyemails.com/assets/logo.svg" alt="Review My Emails Logo" class="h-16 w-auto mx-auto" onerror="this.innerHTML='<span class=\'text-white text-2xl font-bold\'>Review My Emails 🐙</span>';">
+            </a>
+        </div>
+
+        <!-- Gradient divider -->
+        <div class="h-0.5 bg-gradient-to-r from-transparent via-rme-primary to-transparent mb-4"></div>
+
+        <!-- Trust badges inline -->
+        <div class="trust-strip flex flex-wrap justify-center gap-x-6 gap-y-2 md:gap-6 text-white/80">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-lock text-rme-primary"></i>
+                <span class="font-medium">256-Bit Encryption</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fas fa-user-check text-rme-primary"></i>
+                <span class="font-medium">Human Reviewed</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fas fa-file-shield text-rme-primary"></i>
+                <span class="font-medium">GDPR Compliant</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating white card -->
+    <div class="max-w-4xl mx-auto -mt-20 px-4 relative z-10">
+        <div class="bg-white rounded-xl floating-card pt-12 pb-8 px-8 md:pt-14 md:pb-10 md:px-10 border-t-4 border-rme-primary">
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-6 text-rme-text-dark leading-tight">
+                Your Headline Here. <span class="text-rme-primary">Highlighted Text.</span>
+            </h1>
+            <p class="text-center mb-6 max-w-3xl mx-auto leading-relaxed text-lg">
+                Your subheadline text goes here. Keep it concise and compelling.
+            </p>
+            <!-- Optional CTA -->
+            <div class="flex items-center justify-center mt-8">
+                <a href="#" class="inline-flex items-center gap-2 text-rme-primary font-semibold">
+                    <i class="fas fa-arrow-right"></i>
+                    Call to Action
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ========================================
+     OPTION 2: MINIMAL HEADER (Logo only)
+     ======================================== -->
+
+<header class="header-minimal bg-rme-text-dark py-6 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center">
+            <a href="https://reviewmyemails.com">
+                <img src="https://reviewmyemails.com/assets/logo.svg" alt="Review My Emails Logo" class="h-14 w-auto mx-auto">
+            </a>
+        </div>
+    </div>
+</header>
+
+
+<!-- ========================================
+     OPTION 3: HEADER WITH NAV
+     ======================================== -->
+
+<header class="header-with-nav bg-rme-text-dark py-4 px-6">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <a href="https://reviewmyemails.com">
+            <img src="https://reviewmyemails.com/assets/logo.svg" alt="Review My Emails Logo" class="h-12 w-auto">
+        </a>
+        <nav class="hidden md:flex items-center gap-6">
+            <a href="#" class="text-white/80 hover:text-white transition-colors">About</a>
+            <a href="#" class="text-white/80 hover:text-white transition-colors">Pricing</a>
+            <a href="#" class="text-white/80 hover:text-white transition-colors">Contact</a>
+            <a href="#" class="bg-rme-primary hover:bg-opacity-90 text-white font-semibold px-4 py-2 rounded-lg transition-all">
+                Get Started
+            </a>
+        </nav>
+    </div>
+</header>
+
+
+<!-- ========================================
+     OPTION 4: FULLSCREEN HERO HEADER
+     From: about-page-v2.html
+     ======================================== -->
+
+<header class="hero-fullscreen min-h-screen flex flex-col relative overflow-hidden" style="background: linear-gradient(135deg, #182C33 0%, #1a3a45 50%, #0C92E1 100%); background-size: 200% 200%; animation: gradientShift 15s ease infinite;">
+    <!-- Decorative circles -->
+    <div class="absolute top-20 right-10 w-64 h-64 bg-rme-primary opacity-10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 left-10 w-96 h-96 bg-rme-primary opacity-5 rounded-full blur-3xl"></div>
+
+    <!-- Logo -->
+    <div class="pt-8 px-6 text-center">
+        <a href="https://reviewmyemails.com">
+            <img src="https://reviewmyemails.com/assets/logo.svg" alt="Review My Emails Logo" class="h-14 w-auto mx-auto">
+        </a>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="flex-grow flex items-center justify-center px-6 py-16">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <p class="text-rme-primary font-semibold text-lg mb-4 tracking-wide uppercase">Eyebrow Text</p>
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight">
+                Your Main Headline <span class="text-rme-primary">With Accent</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
+                Your subheadline text. Make it compelling and benefit-focused.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="bg-rme-primary text-white font-bold px-8 py-4 rounded-xl text-lg inline-flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all">
+                    <span>Primary CTA</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#" class="bg-white/10 backdrop-blur text-white font-bold px-8 py-4 rounded-xl text-lg inline-flex items-center justify-center gap-2 border-2 border-white/30 hover:bg-white/20 transition-all">
+                    <span>Secondary CTA</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wave divider -->
+    <div class="relative h-20">
+        <svg viewBox="0 0 1440 80" preserveAspectRatio="none" class="absolute bottom-0 w-full h-20">
+            <path fill="#F9FCFC" d="M0,60 C360,100 1080,20 1440,60 L1440,80 L0,80 Z"></path>
+        </svg>
+    </div>
+</header>
+
+
+<!-- ========================================
+     OPTION 5: SPLIT HERO (Image + Text)
+     ======================================== -->
+
+<header class="hero-split bg-rme-text-dark">
+    <div class="max-w-6xl mx-auto px-6 py-16">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <!-- Text side -->
+            <div class="text-white">
+                <p class="text-rme-primary font-semibold text-sm mb-4 tracking-wide uppercase">Eyebrow Text</p>
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                    Your Headline Here
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 leading-relaxed">
+                    Your subheadline text goes here. Keep it compelling and focused on benefits.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#" class="bg-rme-primary text-white font-bold px-6 py-3 rounded-lg inline-flex items-center justify-center gap-2 hover:bg-opacity-90 transition-all">
+                        <span>Get Started</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Image side -->
+            <div class="flex justify-center">
+                <div class="w-64 h-64 bg-rme-primary/20 rounded-2xl flex items-center justify-center">
+                    <span class="text-8xl">🐙</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

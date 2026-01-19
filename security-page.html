@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security & Privacy - Review My Emails</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Raleway + Baloo 2 -->
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Raleway:wght@500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            background-color: #F9FCFC;
+            color: #182C33;
+        }
+
+        /* Minimum 18px for all text except trust strip */
+        p, span, li {
+            font-size: 18px;
+        }
+
+        /* Links inherit size from parent */
+        a {
+            font-size: inherit;
+        }
+
+        /* Headings use Baloo 2 */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Baloo 2', sans-serif !important;
+            font-weight: 600;
+        }
+
+        :root {
+            --rme-primary: #0C92E1;
+            --rme-text-dark: #182C33;
+            --rme-bg-light: #D4E2F9;
+            --rme-green: #1fa95c;
+        }
+
+        .bg-rme-primary { background-color: var(--rme-primary); }
+        .bg-rme-text-dark { background-color: var(--rme-text-dark); }
+        .text-rme-primary { color: var(--rme-primary); }
+        .text-rme-text-dark { color: var(--rme-text-dark); }
+        .text-rme-text-light { color: #3D4F56; }
+        .border-rme-primary { border-color: var(--rme-primary); }
+
+        /* Trust strip exception - can be smaller */
+        .trust-strip, .trust-strip span {
+            font-size: 14px;
+        }
+
+        .floating-card {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- NEW HEADER DESIGN -->
+    <div>
+        <!-- Dark header with logo and trust badges -->
+        <div class="bg-rme-text-dark pt-8 pb-28 px-6">
+            <!-- Logo -->
+            <div class="text-center mb-8">
+                <a href="https://reviewmyemails.com">
+                    <img src="assets/logo.svg" alt="Review My Emails Logo" class="h-16 w-auto mx-auto" onerror="this.style.display='none';">
+                </a>
+            </div>
+
+            <!-- Gradient divider -->
+            <div class="h-0.5 bg-gradient-to-r from-transparent via-rme-primary to-transparent mb-8"></div>
+
+            <!-- Trust badges inline -->
+            <div class="trust-strip flex flex-wrap justify-center gap-x-6 gap-y-2 md:gap-6 text-white/80">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-lock text-rme-primary"></i>
+                    <span class="font-medium">256-Bit Encryption & Protected Transfer</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-user-check text-rme-primary"></i>
+                    <span class="font-medium">Human Reviewed by a Deliverability Expert</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-file-shield text-rme-primary"></i>
+                    <span class="font-medium">GDPR Compliant & Privacy First</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-desktop text-rme-primary"></i>
+                    <span class="font-medium">Local Processing, Zero Outsourcing</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating white card -->
+        <div class="max-w-6xl mx-auto -mt-20 px-4 relative z-10">
+            <div class="bg-white rounded-xl floating-card p-8 md:p-10 border-t-4 border-rme-primary">
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-4 text-rme-text-dark">
+                    Your Data. Your Trust. <span class="text-rme-primary text-4xl md:text-5xl">Reviewed With Care.</span>
+                </h1>
+                <p class="text-center mb-6 max-w-3xl mx-auto leading-relaxed">
+                    Your email list is protected with enterprise-grade encryption and reviewed only by <a href="https://linkedin.com/in/yannatorry" target="_blank" class="text-rme-primary font-semibold inline-flex items-center gap-1">Yanna-Torry Aspraki <i class="fas fa-arrow-up-right-from-square text-xs"></i></a>. <strong>No outsourcing. No automated guesswork.</strong> Your data stays <strong>private, secure, and fully under your control</strong>.
+                </p>
+                <!-- CTA -->
+                <div class="flex items-center justify-center mt-8">
+                    <a href="/index.html" class="inline-flex items-center gap-2 text-rme-primary font-semibold">
+                        <i class="fas fa-shopping-cart"></i>
+                        Purchase Credits With Secure Checkout
+                        <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Trust Signals - Dark Background -->
+    <div class="bg-rme-text-dark px-6 pt-24 pb-12 -mt-14">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <div class="w-12 h-12 bg-green-100 rounded-full mx-auto mb-3 flex items-center justify-center">
+                        <i class="fas fa-lock text-2xl" style="color: var(--rme-green);"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">256-Bit Encryption</h3>
+                    <p class="text-rme-text-light">Bank-level encryption for every file transfer, upload, and download</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full mx-auto mb-3 flex items-center justify-center">
+                        <i class="fas fa-user-shield text-2xl text-rme-primary"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Human Review Only</h3>
+                    <p class="text-rme-text-light">Your data is reviewed only by Yanna-Torry on a secured local workstation</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg text-center">
+                    <div class="w-12 h-12 bg-red-100 rounded-full mx-auto mb-3 flex items-center justify-center">
+                        <i class="fas fa-trash-alt text-2xl text-red-600"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Auto-Deletion</h3>
+                    <p class="text-rme-text-light">Files permanently deleted within 48 hours, with instant deletion on request</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blue consultation strip -->
+    <div class="bg-rme-primary py-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <div class="lg:col-span-2 text-center lg:text-left lg:pl-6">
+                    <div class="flex items-center justify-center lg:justify-start gap-2 mb-2">
+                        <i class="fas fa-calendar-check text-rme-text-dark text-xl" style="filter: drop-shadow(0 0 4px rgba(255,255,255,0.3));"></i>
+                        <h3 class="font-semibold text-2xl text-rme-text-dark" style="text-shadow: 0 0 6px rgba(255,255,255,0.3);">Have Questions? Speak With a Deliverability Expert</h3>
+                    </div>
+                    <p class="text-white leading-relaxed">Get expert help with list decisions, deliverability questions, and safe sending practices — <strong>before or after your cleaning</strong>.</p>
+                </div>
+                <div class="flex justify-center lg:justify-end">
+                    <a href="https://calendly.com/ahoy-reviewmyemails" target="_blank" class="bg-white hover:bg-gray-100 text-rme-text-dark font-semibold px-6 md:px-8 py-4 rounded-lg transition-all inline-flex items-center justify-center gap-2 leading-tight text-center">
+                        <i class="fas fa-calendar flex-shrink-0"></i>
+                        <span>Schedule Free Strategy Call</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 1: How We Protect Your Data - FULL WIDTH -->
+    <div class="bg-gray-100 py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3">
+                <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background-color: rgba(12, 146, 225, 0.1);">
+                    <i class="fas fa-shield-alt text-rme-primary text-2xl"></i>
+                </div>
+                How We Protect Your Data
+            </h2>
+            <p class="text-center text-rme-text-light mb-10 max-w-2xl mx-auto">We apply strict security controls for every file transfer, review action, and deletion step.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 bg-rme-primary rounded-full flex items-center justify-center text-white font-semibold">1</div>
+                        <h3 class="font-bold text-xl">🔐 End-to-End Encryption</h3>
+                    </div>
+                    <p class="text-rme-text-light">All files are protected with AES 256-bit encryption during upload, storage, and review — the same encryption used by global financial institutions.</p>
+                    <p class="text-rme-text-light mt-3">We use <strong>Dropbox File Requests</strong> with AES 256-bit at rest and TLS 1.2+ in transit. <a href="https://www.dropbox.com/business/trust/security" target="_blank" class="text-rme-primary font-semibold inline-flex items-center gap-1">Learn more <i class="fas fa-arrow-up-right-from-square text-xs"></i></a></p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 bg-rme-primary rounded-full flex items-center justify-center text-white font-semibold">2</div>
+                        <h3 class="font-bold text-xl">🔒 Secure Upload Methods</h3>
+                    </div>
+                    <p class="text-rme-text-light mb-3">Choose from two encrypted upload methods, each fully protected end-to-end:</p>
+                    <div class="space-y-2 text-rme-text-light">
+                        <div class="flex items-start gap-2">
+                            <i class="fas fa-check text-rme-primary mt-1"></i>
+                            <span><strong>Unique Email Address:</strong> Private email for your preferred transfer method.</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <i class="fas fa-check text-rme-primary mt-1"></i>
+                            <span><strong>Dropbox File Request:</strong> Encrypted upload links with AES 256-bit protection.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 bg-rme-primary rounded-full flex items-center justify-center text-white font-semibold">3</div>
+                        <h3 class="font-bold text-xl">👤 Human-Only Access</h3>
+                    </div>
+                    <p class="text-rme-text-light">Your list is reviewed only by <a href="https://linkedin.com/in/yannatorry" target="_blank" class="text-rme-primary font-semibold inline-flex items-center gap-1">Yanna-Torry Aspraki <i class="fas fa-arrow-up-right-from-square text-xs"></i></a> on a secured, encrypted offline workstation. No external systems, no outsourcing, no AI processing.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 bg-rme-primary rounded-full flex items-center justify-center text-white font-semibold">4</div>
+                        <h3 class="font-bold text-xl">🗑️ Automatic Deletion</h3>
+                    </div>
+                    <p class="text-rme-text-light">Files are securely erased within 48 hours, or sooner on request, with no backups or stored copies. No archives, no traces.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 2: What We Never Do - FULL WIDTH DARK SECTION -->
+    <div class="bg-rme-text-dark py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center text-white flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3">
+                <div class="w-14 h-14 bg-red-500/20 rounded-full flex items-center justify-center">
+                    <i class="fas fa-ban text-red-500 text-2xl"></i>
+                </div>
+                What We Never Do
+            </h2>
+            <p class="text-center text-gray-400 mb-10 max-w-2xl mx-auto">Your trust is non-negotiable. Here's our ironclad promise.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white/5 backdrop-blur rounded-xl p-6 border border-red-500/30 hover:border-red-500/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-times text-red-500"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-white">Never Sell or Share</h3>
+                    </div>
+                    <p class="text-gray-300">Your data is never sold, rented, shared, or accessed by third parties.</p>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur rounded-xl p-6 border border-red-500/30 hover:border-red-500/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-times text-red-500"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-white">Never Use for Marketing</h3>
+                    </div>
+                    <p class="text-gray-300">We never use your list for marketing, internal testing, or contact enrichment.</p>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur rounded-xl p-6 border border-red-500/30 hover:border-red-500/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-times text-red-500"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-white">Never Store Permanently</h3>
+                    </div>
+                    <p class="text-gray-300">We never store your lists long-term or maintain backups after delivery.</p>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur rounded-xl p-6 border border-red-500/30 hover:border-red-500/50 transition-all">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-times text-red-500"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-white">Never Use AI Processing</h3>
+                    </div>
+                    <p class="text-gray-300">Your list is never uploaded to AI tools. We do not use AI models to analyse, classify, or score your data.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 3: Our Security Standards - FULL WIDTH -->
+    <div class="bg-gray-50 py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3">
+                <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background-color: rgba(12, 146, 225, 0.1);">
+                    <i class="fas fa-certificate text-rme-primary text-2xl"></i>
+                </div>
+                Our Security Standards
+            </h2>
+            <p class="text-center text-rme-text-light mb-10 max-w-2xl mx-auto">Industry-leading compliance and protection.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: rgba(12, 146, 225, 0.1);">
+                            <i class="fas fa-credit-card text-rme-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Payment Security</h3>
+                    </div>
+                    <p class="text-rme-text-light">Payments are processed through Stripe with PCI DSS Level 1 certification — the highest global payment security standard.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: rgba(12, 146, 225, 0.1);">
+                            <i class="fas fa-file-shield text-rme-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Data Privacy</h3>
+                    </div>
+                    <p class="text-rme-text-light">GDPR compliant handling with locked access controls, audit logs, and human-only review.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 4: Your Data Rights - FULL WIDTH -->
+    <div class="bg-gray-100 py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3">
+                <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background-color: rgba(31, 169, 92, 0.1);">
+                    <i class="fas fa-balance-scale text-2xl" style="color: var(--rme-green);"></i>
+                </div>
+                Your Data Rights
+            </h2>
+            <p class="text-center text-rme-text-light mb-10 max-w-2xl mx-auto">You maintain complete control over your data.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl p-6 border-l-4 shadow-sm" style="border-color: var(--rme-green);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold" style="background-color: var(--rme-green);">
+                            <i class="fas fa-eye text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Right to Access</h3>
+                    </div>
+                    <p class="text-rme-text-light">You may request a full export of any files or data at any time.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 shadow-sm" style="border-color: var(--rme-green);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold" style="background-color: var(--rme-green);">
+                            <i class="fas fa-trash-alt text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Right to Deletion</h3>
+                    </div>
+                    <p class="text-rme-text-light">You can request instant removal of all data with written confirmation.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 shadow-sm" style="border-color: var(--rme-green);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold" style="background-color: var(--rme-green);">
+                            <i class="fas fa-info-circle text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Right to Know</h3>
+                    </div>
+                    <p class="text-rme-text-light">You have full transparency into how your files are handled, reviewed, and deleted.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 shadow-sm" style="border-color: var(--rme-green);">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold" style="background-color: var(--rme-green);">
+                            <i class="fas fa-download text-sm"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Right to Export</h3>
+                    </div>
+                    <p class="text-rme-text-light">You may export your data at any time in your preferred portable format.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 5: Compliance & Standards - FULL WIDTH -->
+    <div class="bg-gray-50 py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3">
+                <div class="w-14 h-14 rounded-full flex items-center justify-center" style="background-color: rgba(12, 146, 225, 0.1);">
+                    <i class="fas fa-clipboard-check text-rme-primary text-2xl"></i>
+                </div>
+                Compliance & Standards
+            </h2>
+            <p class="text-center text-rme-text-light mb-10 max-w-2xl mx-auto">Meeting global privacy and security requirements.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: rgba(12, 146, 225, 0.1);">
+                            <i class="fas fa-globe-europe text-rme-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">GDPR</h3>
+                    </div>
+                    <p class="text-rme-text-light">Full GDPR compliance for all EU customers with strict data controls.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: rgba(12, 146, 225, 0.1);">
+                            <i class="fas fa-flag-usa text-rme-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">CAN-SPAM Act</h3>
+                    </div>
+                    <p class="text-rme-text-light">Aligned with CAN-SPAM requirements for lawful email practices.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: rgba(12, 146, 225, 0.1);">
+                            <i class="fas fa-leaf text-rme-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">CASL</h3>
+                    </div>
+                    <p class="text-rme-text-light">Fully compliant with CASL requirements for Canadian senders.</p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border-l-4 border-rme-primary shadow-sm">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background-color: rgba(12, 146, 225, 0.1);">
+                            <i class="fas fa-award text-rme-primary"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Industry Best Practices</h3>
+                    </div>
+                    <p class="text-rme-text-light">Using industry security frameworks for data handling and privacy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Questions CTA - Full Width -->
+    <div class="bg-rme-primary py-12 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex justify-center mb-4">
+                <img src="assets/Customer Support.svg" alt="Support Octopus" class="h-32 w-auto">
+            </div>
+            <h2 class="text-3xl font-bold text-white mb-3">Still Have Questions About Your Data?</h2>
+            <p class="text-white/90 mb-8 max-w-xl mx-auto">If you want to review our security approach in detail, we're here to help anytime.</p>
+
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a
+                    href="mailto:support@reviewmyemails.com?subject=Security Question"
+                    class="inline-flex items-center justify-center gap-2 bg-white hover:bg-gray-100 text-rme-text-dark font-bold px-6 md:px-8 py-4 rounded-lg transition-all leading-tight"
+                >
+                    <i class="fas fa-envelope flex-shrink-0"></i>
+                    <span>Email Security Questions</span>
+                </a>
+
+                <a
+                    href="https://calendly.com/ahoy-reviewmyemails"
+                    target="_blank"
+                    class="inline-flex items-center justify-center gap-2 bg-rme-text-dark hover:bg-opacity-90 text-white font-bold px-6 md:px-8 py-4 rounded-lg transition-all leading-tight"
+                >
+                    <i class="fas fa-calendar flex-shrink-0"></i>
+                    <span>Schedule a Call</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer CTA - Full Width Dark -->
+    <div class="bg-rme-text-dark pt-20 pb-16 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex justify-center mb-4">
+                <img src="assets/Catching ButterEmails.svg" alt="Delphi catching emails" class="h-32 w-auto" style="filter: drop-shadow(0 0 15px rgba(255,255,255,0.6)) drop-shadow(0 0 30px rgba(255,255,255,0.4)) drop-shadow(0 0 45px rgba(255,255,255,0.2));">
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">Ready to Clean Your List Safely?</h2>
+            <p class="text-gray-400 mb-8 max-w-xl mx-auto">Your data is in safe hands with our secure, expert email list cleaning service.</p>
+            <a
+                href="/index.html"
+                class="inline-flex items-center justify-center gap-2 bg-rme-primary hover:bg-opacity-90 text-white font-bold px-6 md:px-10 py-4 md:py-5 rounded-xl text-lg md:text-xl transition-all shadow-lg hover:shadow-xl leading-tight text-center"
+            >
+                <i class="fas fa-shopping-cart flex-shrink-0"></i>
+                <span>Purchase Credits With Secure Checkout</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-rme-text-dark py-8 border-t border-gray-700">
+        <div class="max-w-6xl mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2025 Review My Emails. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

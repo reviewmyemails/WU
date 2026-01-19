@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails — Marine Biolab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Clinical/Lab Palette */
+            --color-lab-bg: #f0fdfa; /* Very light teal tint */
+            --color-glass: #ffffff;
+            --color-specimen: #0f766e;
+            --color-danger: #be123c;
+            --color-safe: #047857;
+            --font-ui: 'Inter', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            background-color: var(--color-lab-bg);
+            color: #1e293b;
+            font-family: var(--font-ui);
+            margin: 0; line-height: 1.6;
+            background-image: 
+                linear-gradient(#ccfbf1 1px, transparent 1px),
+                linear-gradient(90deg, #ccfbf1 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px; }
+        
+        /* --- Header --- */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 80px; }
+        .logo-img { height: 40px; }
+        .lab-badge {
+            font-family: var(--font-code); font-size: 12px; background: #fff; padding: 4px 8px; border: 1px solid #14b8a6; color: #0d9488;
+        }
+        .nav a { margin-left: 20px; text-decoration: none; color: #0f766e; font-size: 14px; }
+
+        /* --- Hero --- */
+        .hero { display: grid; grid-template-columns: 1.5fr 1fr; gap: 80px; align-items: center; margin-bottom: 120px; }
+        h1 { font-size: 56px; letter-spacing: -0.03em; line-height: 1.1; color: #134e4a; margin-bottom: 24px; }
+        
+        .hero-visual {
+            background: white; padding: 40px; border-radius: 2px;
+            box-shadow: 0 10px 30px rgba(13, 148, 136, 0.1); position: relative;
+        }
+        
+        .btn-lab {
+            background: #0f766e; color: white; padding: 14px 28px; text-decoration: none; font-weight: 500;
+            display: inline-block; margin-top: 24px; transition: background 0.3s;
+        }
+        .btn-lab:hover { background: #115e59; }
+
+        /* --- Symptoms --- */
+        .symptoms-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-bottom: 120px; }
+        .symptoms-list li { margin-bottom: 16px; list-style-type: square; color: #334155; }
+        
+        .alert-box {
+            border: 1px solid #fda4af; background: #fff1f2; padding: 24px; margin-top: 24px;
+        }
+        .alert-title { color: #be123c; font-weight: 600; font-family: var(--font-code); display: block; margin-bottom: 8px; }
+
+        /* --- Steps --- */
+        .protocol-section { margin-bottom: 120px; border-top: 2px solid #0d9488; padding-top: 60px; }
+        .protocol-steps { display: flex; gap: 40px; margin-top: 40px; }
+        .p-step { flex: 1; background: #fff; padding: 32px; border: 1px solid #e2e8f0; }
+        .p-num { font-family: var(--font-code); color: #0d9488; display: block; margin-bottom: 12px; }
+
+        /* --- Features Slides --- */
+        .slide-container { display: flex; gap: 24px; overflow-x: auto; padding-bottom: 40px; }
+        .specimen-slide {
+            flex: 1; min-width: 250px; background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(8px); border: 1px solid #cbd5e1; padding: 24px; position: relative;
+        }
+        .specimen-slide::before { content: ""; position: absolute; top: 0; left: 24px; right: 24px; height: 4px; background: #e2e8f0; }
+        .specimen-label { font-family: var(--font-code); font-size: 12px; color: #64748b; margin-top: 12px; display: block; }
+
+        /* --- Testimonials --- */
+        .clinical-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 60px 0; }
+        .result-card { background: #fff; padding: 24px; font-size: 14px; border-left: 3px solid #0d9488; }
+        
+        /* --- Footer --- */
+        .footer { margin-top: 100px; text-align: center; padding: 60px 0; border-top: 1px solid #cbd5e1; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <header class="header">
+            <img src="https://anchor.reviewmyemails.com/assets/logo.svg" alt="RME" class="logo-img">
+            <nav class="nav">
+                <a href="#">Pricing</a>
+                <a href="#">SOS Hotline</a>
+                <a href="#" class="btn-lab" style="margin-top: 0; padding: 8px 16px; font-size: 14px;">Get Answers</a>
+            </nav>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div>
+                <a href="#" style="font-family: var(--font-code); font-size: 12px; color: #0d9488; text-decoration: none;">BY YANNA-TORRY ASPRAKI</a>
+                <h1 style="margin-top: 16px;">Stop guessing what is <br>wrong with your list.</h1>
+                <p style="font-size: 18px; color: #475569;">
+                    Validation tools check syntax. I check safety. You get clear labels — Keep, Monitor, Suppress — and the reasoning behind each one.
+                </p>
+                <a href="#" class="btn-lab">Get Answers About Your List</a>
+                <a href="#" style="display: block; margin-top: 16px; font-size: 14px; color: #64748b;">Take diagnostic quiz &rarr;</a>
+            </div>
+            <div class="hero-visual">
+                <div style="font-family: var(--font-code); font-size: 13px; color: #64748b; line-height: 1.8;">
+                    > ANALYZING LIST HEALTH...<br>
+                    > SYNTAX: <span style="color: #047857">VALID</span><br>
+                    > MX RECORD: <span style="color: #047857">FOUND</span><br>
+                    > BEHAVIOR: <span style="color: #be123c">SUSPICIOUS BOT</span><br>
+                    > CONCLUSION: <span style="color: #be123c">TOXIC (SUPPRESS)</span>
+                </div>
+                <p style="font-size: 14px; margin-top: 24px; border-top: 1px solid #e2e8f0; padding-top: 16px;">
+                    <strong>Observation:</strong> Most email problems trace back to list quality.
+                </p>
+            </div>
+        </section>
+
+        <!-- SYMPTOMS -->
+        <section class="symptoms-section">
+            <div>
+                <h2>Observed Symptoms</h2>
+                <ul class="symptoms-list">
+                    <li>No idea where half this list came from.</li>
+                    <li>One tool says clean. Another says risky.</li>
+                    <li>Scared to remove subscribers.</li>
+                    <li>Haven't emailed this list in months.</li>
+                    <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    <li>Open rates dropped inexplicably.</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 14px; color: #64748b;">Validation tools check if addresses exist. We tell you why your emails aren't working.</p>
+            </div>
+            <div>
+                <div class="alert-box">
+                    <span class="alert-title">CRITICAL CONDITION?</span>
+                    <p style="font-size: 14px; margin-bottom: 16px;">ESP warning? Blocklisted? If you can't send right now, start here.</p>
+                    <a href="#" style="color: #be123c; font-weight: 600; font-size: 14px;">GO TO SOS HOTLINE &rarr;</a>
+                </div>
+                <div style="text-align: center; margin-top: 40px;">
+                     <a href="#" class="btn-lab" style="background: #fff; color: #0f766e; border: 1px solid #0f766e;">Check Your Risk Level</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEPS -->
+        <section class="protocol-section">
+            <h2>Analysis Protocol</h2>
+            <p>Simple process. Expert execution. Real results.</p>
+            <div class="protocol-steps">
+                <div class="p-step">
+                    <span class="p-num">STEP_01</span>
+                    <h3>Input Data</h3>
+                    <p>Send us your list (CSV/Excel). No judgment.</p>
+                </div>
+                <div class="p-step">
+                    <span class="p-num">STEP_02</span>
+                    <h3>Manual Review</h3>
+                    <p>We review every address looking for bounces and traps.</p>
+                </div>
+                <div class="p-step">
+                    <span class="p-num">STEP_03</span>
+                    <h3>Results</h3>
+                    <p>Get your clean list with clear labels.</p>
+                </div>
+            </div>
+            <p style="font-family: var(--font-code); font-size: 12px; text-align: center; margin-top: 24px; color: #64748b;">// NO AUTOMATION. NO AI GUESSWORK.</p>
+        </section>
+
+        <!-- MANIFESTO -->
+        <div style="background: #fff; padding: 60px; text-align: center; margin-bottom: 120px; border: 1px solid #e2e8f0;">
+            <p style="font-size: 20px; font-style: italic; color: #334155; margin-bottom: 24px;">
+                "I didn't realize how much of my list was dead weight until I saw the report. It was eye-opening."
+            </p>
+            <p style="font-family: var(--font-code); font-size: 12px; color: #64748b; margin-bottom: 40px;">— MARKETING DIRECTOR, E-COMMERCE</p>
+            <hr style="border: 0; border-top: 1px solid #e2e8f0; width: 50px; margin: 0 auto 40px auto;">
+            <p style="font-size: 18px; line-height: 1.8;">
+                You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened. <br>
+                <strong>That's the gap between validation and understanding.</strong>
+            </p>
+        </div>
+
+        <!-- FEATURES -->
+        <section>
+            <h2>Analysis Output</h2>
+            <div class="slide-container">
+                <div class="specimen-slide">
+                    <span class="specimen-label">OUTPUT A</span>
+                    <h3>Clear Action Labels</h3>
+                    <p style="font-size: 14px;">Every email marked Keep, Monitor, or Suppress.</p>
+                </div>
+                <div class="specimen-slide">
+                    <span class="specimen-label">OUTPUT B</span>
+                    <h3>Detailed Reasoning</h3>
+                    <p style="font-size: 14px;">Spam trap patterns, domain issues, behavioral signals.</p>
+                </div>
+                <div class="specimen-slide">
+                    <span class="specimen-label">OUTPUT C</span>
+                    <h3>Expert Interpretation</h3>
+                    <p style="font-size: 14px;">Context on what it means for your reputation.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOFT CTA -->
+        <div style="margin: 80px 0; background: #e0f2fe; padding: 40px; border-radius: 4px; text-align: center;">
+            <h3>Not sure if your list needs this?</h3>
+            <p>Take a 2-minute self-assessment.</p>
+            <a href="#" style="color: #0284c7; font-weight: 600;">Check Your List Risk &rarr;</a>
+        </div>
+
+        <!-- TESTIMONIALS -->
+        <section>
+            <h2>Clinical Results (Testimonials)</h2>
+            <div class="clinical-results">
+                <div class="result-card">
+                    <p>"The report was more detailed than anything I've seen. I finally understood why my open rates were tanking."</p>
+                    <p style="margin-top: 12px; font-weight: 600; font-size: 12px;">SARAH M.</p>
+                </div>
+                <div class="result-card">
+                    <p>"I used to guess which emails to keep. Now I know. Worth every penny."</p>
+                    <p style="margin-top: 12px; font-weight: 600; font-size: 12px;">JAMES T.</p>
+                </div>
+                <div class="result-card">
+                    <p>"I recommend RME to every client now. It's the only service I trust to not break things."</p>
+                    <p style="margin-top: 12px; font-weight: 600; font-size: 12px;">PRIYA K.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <div style="text-align: center; margin-bottom: 80px;">
+            <h2>Ready to know what's in your list?</h2>
+            <p>Send us your list. We'll tell you exactly what's safe to send.</p>
+            <a href="#" class="btn-lab">Get Answers About Your List</a>
+            <p style="font-size: 12px; color: #64748b; margin-top: 16px;">Most lists returned within 24 hours.</p>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <p style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Need a hand (or eight) in the lab?</p>
+            <a href="mailto:ahoy@reviewmyemails.com" style="color: #0f766e; font-weight: 500;">ahoy@reviewmyemails.com</a>
+            <div style="margin-top: 40px; font-size: 12px; color: #94a3b8;">
+                <a href="#" style="color: inherit; margin: 0 10px;">Pricing</a>
+                <a href="#" style="color: inherit; margin: 0 10px;">About</a>
+                <a href="#" style="color: inherit; margin: 0 10px;">Partner</a>
+                <span style="margin: 0 10px;">© 2026 Review My Emails</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails — Searchlight</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-abyss: #020617;
+            --color-light: #2dd4bf; /* Teal-400 */
+            --color-dim: #115e59;
+            --font-main: 'Inter', sans-serif;
+            --spotlight-size: 400px;
+        }
+
+        body {
+            margin: 0; background: var(--color-abyss); color: #e2e8f0; font-family: var(--font-main);
+            overflow-x: hidden; cursor: crosshair;
+        }
+
+        /* The Flashlight Layer */
+        .spotlight {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), transparent 10%, rgba(2, 6, 23, 0.85) 40%);
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 10; }
+
+        a { color: var(--color-light); text-decoration: none; transition: color 0.3s; }
+        a:hover { color: #fff; text-shadow: 0 0 10px var(--color-light); }
+
+        /* --- Header --- */
+        .header { display: flex; justify-content: space-between; padding: 40px 0; border-bottom: 1px solid rgba(45, 212, 191, 0.2); }
+        .logo { filter: brightness(0) invert(1); height: 40px; }
+        .nav a { margin-left: 24px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- Hero --- */
+        .hero { padding: 160px 0; max-width: 800px; }
+        h1 { font-size: 64px; margin: 0 0 32px 0; line-height: 1.1; color: white; }
+        .hero p { font-size: 24px; color: #94a3b8; line-height: 1.6; border-left: 2px solid var(--color-light); padding-left: 24px; }
+        
+        .btn-light {
+            display: inline-block; margin-top: 40px; padding: 16px 32px;
+            border: 1px solid var(--color-light); color: var(--color-light);
+            font-weight: 600; border-radius: 50px; transition: all 0.3s;
+        }
+        .btn-light:hover { background: var(--color-light); color: var(--color-abyss); box-shadow: 0 0 30px var(--color-light); }
+
+        /* --- Symptoms (Hidden Hazards) --- */
+        .hazards-section { padding: 120px 0; border-bottom: 1px solid rgba(45, 212, 191, 0.1); }
+        .hazard-list li {
+            font-size: 20px; padding: 20px 0; border-bottom: 1px dashed #1e293b; list-style: none; position: relative; padding-left: 30px;
+        }
+        .hazard-list li::before { content: "⚠️"; position: absolute; left: 0; filter: grayscale(1); opacity: 0.5; }
+        .hazard-list li:hover::before { filter: grayscale(0); opacity: 1; }
+
+        /* --- Steps --- */
+        .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; padding: 120px 0; }
+        .process-card {
+            background: rgba(255,255,255,0.03); padding: 32px; border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+        }
+        .process-card:hover { transform: translateY(-10px); border-color: var(--color-light); }
+        .step-num { font-size: 40px; font-weight: 700; color: rgba(45, 212, 191, 0.3); display: block; margin-bottom: 16px; }
+
+        /* --- Manifesto --- */
+        .manifesto { text-align: center; padding: 100px 0; font-size: 32px; font-weight: 300; line-height: 1.5; color: #fff; }
+
+        /* --- Features --- */
+        .feature-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; padding: 120px 0; }
+        .feature h3 { font-size: 28px; color: var(--color-light); margin-bottom: 16px; }
+
+        /* --- Footer --- */
+        .footer { padding: 100px 0 40px; text-align: center; border-top: 1px solid rgba(45, 212, 191, 0.2); }
+    </style>
+</head>
+<body>
+    
+    <!-- The Magic Flashlight -->
+    <div class="spotlight" id="spotlight"></div>
+
+    <div class="container">
+        <header class="header">
+            <img src="https://anchor.reviewmyemails.com/assets/logo.svg" class="logo">
+            <nav class="nav">
+                <a href="#">Pricing</a>
+                <a href="#">SOS Hotline</a>
+                <a href="#">Get Answers</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <span style="color: var(--color-light); letter-spacing: 2px; font-size: 12px; font-weight: 700;">// ILLUMINATING DATA</span>
+            <h1>Stop guessing what is<br>hidden in your list.</h1>
+            <p>Validation tools scan the surface. We shine a light on the depths. You get clear labels — Keep, Monitor, Suppress — and the reasoning behind each one.</p>
+            <a href="#" class="btn-light">Activate Searchlight</a>
+        </section>
+
+        <section class="hazards-section">
+            <h2 style="font-size: 40px; margin-bottom: 60px;">Submerged Hazards (Symptoms)</h2>
+            <ul class="hazard-list">
+                <li>No idea where half this list came from.</li>
+                <li>One tool says clean. Another says risky.</li>
+                <li>Scared to remove subscribers.</li>
+                <li>Paid for cleaning, yet bounces persist.</li>
+            </ul>
+            <div style="margin-top: 40px; padding: 24px; border: 1px solid #ef4444; color: #ef4444; display: inline-block;">
+                <strong>CRISIS ALERT:</strong> Blocklisted? ESP Warning? <a href="#" style="color: #ef4444; text-decoration: underline;">GO TO SOS HOTLINE</a>
+            </div>
+        </section>
+
+        <section class="process-grid">
+            <div class="process-card">
+                <span class="step-num">01</span>
+                <h3>Data Intake</h3>
+                <p>Send us your list. CSV or Excel. We accept all formats.</p>
+            </div>
+            <div class="process-card">
+                <span class="step-num">02</span>
+                <h3>Deep Scan</h3>
+                <p>Manual review for spam traps and reputation killers.</p>
+            </div>
+            <div class="process-card">
+                <span class="step-num">03</span>
+                <h3>Illumination</h3>
+                <p>Receive your clean list with a full explanation report.</p>
+            </div>
+        </section>
+
+        <div class="manifesto">
+            "You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened.<br>
+            <span style="color: var(--color-light);">That's the gap between validation and understanding."</span>
+        </div>
+
+        <section class="feature-grid">
+            <div>
+                <h2 style="font-size: 40px;">The Findings</h2>
+                <p>What you get back from the deep.</p>
+            </div>
+            <div>
+                <div class="feature">
+                    <h3>Clear Action Labels</h3>
+                    <p>Every email marked Keep, Monitor, or Suppress.</p>
+                </div>
+                <div class="feature" style="margin-top: 40px;">
+                    <h3>Expert Interpretation</h3>
+                    <p>Context on what it means for your reputation. Includes walkthrough.</p>
+                </div>
+            </div>
+        </section>
+
+        <section style="text-align: center; padding: 100px 0;">
+            <p style="font-style: italic; font-size: 24px;">"I didn't realize how much of my list was dead weight until I saw the report."</p>
+            <p style="margin-top: 16px; color: var(--color-light);">— Marketing Director</p>
+        </section>
+
+        <section style="text-align: center; padding: 80px 0;">
+            <h2>Ready to see clearly?</h2>
+            <a href="#" class="btn-light">Get Answers About Your List</a>
+        </section>
+
+        <footer class="footer">
+            <h3 style="color: var(--color-light);">Need a hand (or eight)?</h3>
+            <a href="mailto:ahoy@reviewmyemails.com" style="font-size: 24px;">ahoy@reviewmyemails.com</a>
+            <p style="margin-top: 40px; font-size: 12px; opacity: 0.5;">© 2026 Review My Emails</p>
+        </footer>
+    </div>
+
+    <script>
+        const spotlight = document.getElementById('spotlight');
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth * 100;
+            const y = e.clientY / window.innerHeight * 100;
+            spotlight.style.setProperty('--x', x + '%');
+            spotlight.style.setProperty('--y', y + '%');
+        });
+    </script>
+</body>
+</html>

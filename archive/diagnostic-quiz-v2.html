@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Is Your List Safe? — RME Diagnostic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-light: #f0fdfa;
+            --color-lighter: #f8fafc;
+            --color-white: #ffffff;
+            --color-border: #e2e8f0;
+            --color-muted: #64748b;
+            --color-crisis: #b91c1c;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--color-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
+            color: var(--color-dark);
+        }
+
+        .diagnostic-container {
+            width: 100%;
+            max-width: 680px;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .diag-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--color-border);
+            background: #fff;
+        }
+
+        .diag-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--color-dark);
+        }
+
+        .diag-step {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .diag-progress {
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .diag-bar {
+            height: 100%;
+            background: var(--color-accent);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Summary Strip */
+        .summary-strip {
+            display: none;
+            padding: 16px 32px;
+            background: var(--color-lighter);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .summary-strip.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 13px;
+            line-height: 1.4;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: var(--color-muted);
+            font-weight: 500;
+            flex-shrink: 0;
+            min-width: 70px;
+        }
+
+        .summary-answer {
+            color: var(--color-dark);
+            font-weight: 500;
+        }
+
+        .summary-context {
+            color: var(--color-muted);
+            font-style: italic;
+            margin-left: 4px;
+        }
+
+        /* Content Area */
+        .diag-content {
+            padding: 40px 32px;
+            min-height: 320px;
+        }
+
+        /* Question Styles */
+        .question-step {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .question-step.active {
+            display: block;
+        }
+
+        .q-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 28px;
+            line-height: 1.35;
+        }
+
+        /* Answer Buttons */
+        .answer-btn {
+            display: block;
+            width: 100%;
+            padding: 18px 20px;
+            margin-bottom: 10px;
+            background: #fff;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            text-align: left;
+            font-size: 16px;
+            font-family: var(--font);
+            color: var(--color-dark);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .answer-btn:hover {
+            border-color: var(--color-accent);
+            background: var(--color-light);
+        }
+
+        .answer-btn:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+        }
+
+        .answer-btn.selected {
+            border-color: var(--color-accent);
+            background: var(--color-light);
+        }
+
+        /* Loading View */
+        .loading-step {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .loading-step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid var(--color-light);
+            border-top: 3px solid var(--color-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 6px;
+        }
+
+        .loading-sub {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        /* Result Styles */
+        .result-step {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .result-step.active {
+            display: block;
+            animation: slideUp 0.4s ease;
+        }
+
+        .pattern-line {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .verdict-badge {
+            display: inline-block;
+            background: var(--color-dark);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 11px;
+            margin-bottom: 16px;
+        }
+
+        .verdict-critical { background: var(--color-crisis); }
+        .verdict-high { background: #c2410c; }
+        .verdict-medium { background: #b45309; }
+        .verdict-low { background: var(--color-dark); }
+        .verdict-notfit { background: var(--color-muted); }
+
+        .result-headline {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--color-dark);
+            line-height: 1.2;
+        }
+
+        .result-subhead {
+            font-size: 17px;
+            color: var(--color-muted);
+            margin-bottom: 24px;
+            line-height: 1.55;
+        }
+
+        .reality-check {
+            background: var(--color-lighter);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .reality-check h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .reality-check p {
+            font-size: 15px;
+            margin: 0;
+            color: var(--color-dark);
+            line-height: 1.55;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 15px;
+            transition: background 0.15s ease;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font);
+        }
+
+        .cta-btn:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+            margin-left: 12px;
+        }
+
+        .cta-btn-secondary:hover {
+            background: var(--color-light);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            body { padding: 16px; }
+            .diag-content { padding: 28px 20px; }
+            .summary-strip { padding: 12px 20px; }
+            .q-text { font-size: 19px; }
+            .answer-btn { font-size: 15px; padding: 16px; }
+            .result-headline { font-size: 24px; }
+            .cta-btn-secondary { margin-left: 0; margin-top: 12px; display: block; text-align: center; }
+            .summary-item { flex-wrap: wrap; }
+            .summary-context { margin-left: 0; display: block; margin-top: 2px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="diagnostic-container">
+
+    <div class="diag-header" id="diagHeader">
+        <h3>Is Your List Safe?</h3>
+        <div class="diag-step" id="stepIndicator">Question 1 of 4</div>
+        <div class="diag-progress"><div class="diag-bar" id="progressBar"></div></div>
+    </div>
+
+    <!-- Summary Strip: shows previous answers -->
+    <div class="summary-strip" id="summaryStrip"></div>
+
+    <div class="diag-content">
+
+        <!-- Q1: Source -->
+        <div class="question-step active" id="q1">
+            <p class="q-text">How did the majority of these emails get on your list?</p>
+            <button class="answer-btn" data-short="Organic" data-context="Organic lists decay too. About 22% go stale every year. Normal." onclick="handleAnswer(1, 'organic', this)">They filled out a form on my website or app</button>
+            <button class="answer-btn" data-short="Purchased" data-context="This is where traps live. Tools miss them. Seen it hundreds of times." onclick="handleAnswer(1, 'purchased', this)">I bought, rented, or scraped the list</button>
+            <button class="answer-btn" data-short="Cold outreach" data-context="Cold lists are the trickiest. Spam traps, stale data, complaint risk. Validation is just one piece - not the whole solution." onclick="handleAnswer(1, 'cold', this)">Cold outreach to business contacts</button>
+            <button class="answer-btn" data-short="Mixed" data-context="Mixed lists hide surprises. The risky part is always what you didn't build." onclick="handleAnswer(1, 'mixed', this)">Mixed sources / I inherited this list</button>
+        </div>
+
+        <!-- Q2: Authentication -->
+        <div class="question-step" id="q2">
+            <p class="q-text">Is your sending domain authenticated with DMARC?</p>
+            <button class="answer-btn" data-short="Yes" data-context="Good. Infrastructure isn't your problem." onclick="handleAnswer(2, 'dmarc_yes', this)">Yes, DMARC is set to Reject or Quarantine</button>
+            <button class="answer-btn" data-short="Partial" data-context="Partial setup confuses inboxes. Inconsistency signals risk." onclick="handleAnswer(2, 'dmarc_partial', this)">I think so, but I'm not sure of the settings</button>
+            <button class="answer-btn" data-short="No" data-context="Even a clean list won't save you without auth." onclick="handleAnswer(2, 'dmarc_no', this)">No / What is DMARC?</button>
+        </div>
+
+        <!-- Q3: Validation Experience -->
+        <div class="question-step" id="q3">
+            <p class="q-text">Have you run this list through a validation tool?</p>
+            <button class="answer-btn" data-short="Never" data-context="Six months is a long time. Lists go stale fast." onclick="handleAnswer(3, 'never', this)">No, never / Not in the last 6 months</button>
+            <button class="answer-btn" data-short="Valid but issues" data-context="Valid means deliverable, not safe. There's a gap between syntax and reputation." onclick="handleAnswer(3, 'valid_issues', this)">Yes, it said "Valid" but I'm still seeing issues</button>
+            <button class="answer-btn" data-short="Catch-all flagged" data-context="Catch-all domains accept everything, which is why tools mark them unknown." onclick="handleAnswer(3, 'catchall', this)">Yes, it flagged a lot as "Unknown" or "Catch-All"</button>
+            <button class="answer-btn" data-short="Clean" data-context="If everything looks fine, the problem isn't technical." onclick="handleAnswer(3, 'clean', this)">Yes, and everything seems fine</button>
+        </div>
+
+        <!-- Q4: Pain Point -->
+        <div class="question-step" id="q4">
+            <p class="q-text">What brought you here today?</p>
+            <button class="answer-btn" data-short="Declining rates" data-context="Slow decline. Hardest to spot." onclick="handleAnswer(4, 'declining', this)">Open rates are slowly dropping over time</button>
+            <button class="answer-btn" data-short="ESP warning" data-context="That's already affecting your reputation." onclick="handleAnswer(4, 'crisis', this)">ESP warning or suspension</button>
+            <button class="answer-btn" data-short="Preventive" data-context="You're early. Smart." onclick="handleAnswer(4, 'preventive', this)">I want to be safe before a big send</button>
+            <button class="answer-btn" data-short="Conflicting tools" data-context="Tools disagree when behaviour is the issue." onclick="handleAnswer(4, 'confused', this)">Tools give conflicting answers</button>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading-step" id="loadingStep">
+            <div class="spinner"></div>
+            <div class="loading-text" id="loadingMain">Analyzing your responses...</div>
+            <div class="loading-sub" id="loadingSub">Comparing against common patterns</div>
+        </div>
+
+        <!-- RESULTS -->
+
+        <!-- Critical: Purchased List -->
+        <div class="result-step" id="res-purchased">
+            <p class="pattern-line">This is one of the most common patterns I see.</p>
+            <span class="verdict-badge verdict-critical">Critical Risk</span>
+            <h2 class="result-headline">Your list needs triage before sending.</h2>
+            <p class="result-subhead">Purchased or scraped lists cannot be "validated" into safety. The addresses may exist, but they are full of recycled spam traps that tools miss.</p>
+
+            <div class="reality-check">
+                <h4>What this means</h4>
+                <p>Validation checks if an email exists. It does not check if they want to hear from you, or if the address has been converted into a trap. Sending to this list puts your domain at risk.</p>
+            </div>
+
+            <a href="decisions/prototypes/sos-hotline-v3.html" class="cta-btn">Talk to me first</a>
+        </div>
+
+        <!-- Not a Fit: Cold Email -->
+        <div class="result-step" id="res-cold">
+            <span class="verdict-badge verdict-notfit">Not a Fit</span>
+            <h2 class="result-headline">I am not the right fit for cold outreach.</h2>
+            <p class="result-subhead">Review My Emails specializes in protecting the reputation of permission-based senders. Cold email relies on different mechanics.</p>
+
+            <div class="reality-check">
+                <h4>Why</h4>
+                <p>My "Suppress" criteria are designed for newsletter and marketing lists. They would be too strict for cold outreach goals, where you expect low engagement by design.</p>
+            </div>
+        </div>
+
+        <!-- Critical: ESP Crisis -->
+        <div class="result-step" id="res-crisis">
+            <p class="pattern-line">This is one of the most common patterns I see.</p>
+            <span class="verdict-badge verdict-critical">Critical</span>
+            <h2 class="result-headline">You need triage, not just cleaning.</h2>
+            <p class="result-subhead">An ESP warning is the final straw. Your reputation is already damaged. Automated cleaning alone will not get you reinstated.</p>
+
+            <div class="reality-check">
+                <h4>What this means</h4>
+                <p>You need a remediation strategy, not just a clean list. I help identify the root cause and build a path back to good standing with your ESP.</p>
+            </div>
+
+            <a href="decisions/prototypes/sos-hotline-v3.html" class="cta-btn">Open Emergency Ticket</a>
+        </div>
+
+        <!-- High Risk: Tool Failure -->
+        <div class="result-step" id="res-tool-failure">
+            <p class="pattern-line">This is one of the most common patterns I see.</p>
+            <span class="verdict-badge verdict-high">High Risk</span>
+            <h2 class="result-headline">Your validation tool missed something.</h2>
+            <p class="result-subhead">You paid for syntax checking. You were punished for reputation. A "Valid" email can still be a spam trap or chronic complainer.</p>
+
+            <div class="reality-check">
+                <h4>What this means</h4>
+                <p>Automated tools cannot see behavioral history. They check code, not context. I find the "Valid but Dangerous" addresses they miss.</p>
+            </div>
+
+            <a href="decisions/prototypes/done-for-you-v3.html" class="cta-btn">Get a full review</a>
+        </div>
+
+        <!-- High Risk: Infrastructure Gap -->
+        <div class="result-step" id="res-infra">
+            <p class="pattern-line">This is one of the most common patterns I see.</p>
+            <span class="verdict-badge verdict-high">High Risk</span>
+            <h2 class="result-headline">Your infrastructure may be the problem.</h2>
+            <p class="result-subhead">Without proper DMARC authentication, even a clean list can land in spam. This is a fixable issue, but it needs attention before list cleaning matters.</p>
+
+            <div class="reality-check">
+                <h4>What this means</h4>
+                <p>Domain authentication tells inbox providers you are who you say you are. Without it, your emails look suspicious regardless of list quality.</p>
+            </div>
+
+            <a href="decisions/prototypes/sos-hotline-v3.html" class="cta-btn">Let's diagnose this</a>
+        </div>
+
+        <!-- Medium Risk: Catch-All Confusion -->
+        <div class="result-step" id="res-catchall">
+            <p class="pattern-line">This is one of the most common patterns I see.</p>
+            <span class="verdict-badge verdict-medium">Medium Risk</span>
+            <h2 class="result-headline">Those "Unknown" addresses are not unknown to me.</h2>
+            <p class="result-subhead">Catch-all domains accept everything. Validation tools cannot tell you which addresses are real. I can.</p>
+
+            <div class="reality-check">
+                <h4>What this means</h4>
+                <p>A large percentage of business domains are catch-all. Validation marks them "Unknown" because it cannot verify. Pattern recognition and engagement history tell a different story.</p>
+            </div>
+
+            <a href="decisions/prototypes/done-for-you-v3.html" class="cta-btn">Get clarity on your list</a>
+        </div>
+
+        <!-- Medium Risk: Reputation Decay -->
+        <div class="result-step" id="res-decay">
+            <p class="pattern-line">This is one of the most common patterns I see.</p>
+            <span class="verdict-badge verdict-medium">Medium Risk</span>
+            <h2 class="result-headline">Your list is slowly suffocating your delivery.</h2>
+            <p class="result-subhead">No bounce spike. No warning. Just a quiet decline as dead weight accumulates and inbox providers filter you to spam.</p>
+
+            <div class="reality-check">
+                <h4>What this means</h4>
+                <p>This is the hardest problem to diagnose because there is no event. Your list has accumulated decay, and it is dragging down your engaged subscribers.</p>
+            </div>
+
+            <a href="decisions/prototypes/done-for-you-v3.html" class="cta-btn">Get the diagnosis</a>
+        </div>
+
+        <!-- Low Risk: Preventive -->
+        <div class="result-step" id="res-preventive">
+            <p class="pattern-line">This is one of the most common patterns I see.</p>
+            <span class="verdict-badge verdict-low">Low Risk</span>
+            <h2 class="result-headline">You are in a good spot. Let's keep it that way.</h2>
+            <p class="result-subhead">Healthy lists still decay by about 22% every year. A preventative review before a big send catches recycled traps that formed since your last campaign.</p>
+
+            <div class="reality-check">
+                <h4>What this means</h4>
+                <p>You are doing the right things. A safety check ensures you do not accidentally hit a trap that did not exist last time you sent.</p>
+            </div>
+
+            <a href="https://anchor.reviewmyemails.com/buy-credits" class="cta-btn">Get a safety check</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // State
+    let answers = {};
+    let answerData = {};
+    let currentQuestion = 1;
+    const totalQuestions = 4;
+
+    // Question labels for summary
+    const questionLabels = {
+        1: 'Source',
+        2: 'DMARC',
+        3: 'Validation',
+        4: 'Pain point'
+    };
+
+    // Timing
+    const advanceDelay = 1200; // ms before advancing to next question
+
+    function handleAnswer(question, answer, btnElement) {
+        answers[question] = answer;
+
+        // Store data for summary
+        answerData[question] = {
+            short: btnElement.getAttribute('data-short'),
+            context: btnElement.getAttribute('data-context')
+        };
+
+        // Mark button as selected
+        const questionDiv = document.getElementById('q' + question);
+        questionDiv.querySelectorAll('.answer-btn').forEach(btn => btn.classList.remove('selected'));
+        btnElement.classList.add('selected');
+
+        // Update summary immediately
+        updateSummary();
+
+        // Immediate exits
+        if (question === 1 && answer === 'purchased') {
+            setTimeout(() => {
+                showLoading('res-purchased');
+            }, advanceDelay);
+            return;
+        }
+        if (question === 1 && answer === 'cold') {
+            setTimeout(() => {
+                showResult('res-cold');
+            }, advanceDelay);
+            return;
+        }
+
+        // Progress to next question
+        if (question < totalQuestions) {
+            setTimeout(() => {
+                currentQuestion = question + 1;
+                showQuestion(currentQuestion);
+            }, advanceDelay);
+        } else {
+            setTimeout(() => {
+                determineResult();
+            }, advanceDelay);
+        }
+    }
+
+    function updateSummary() {
+        const strip = document.getElementById('summaryStrip');
+        let html = '';
+
+        for (let q = 1; q <= totalQuestions; q++) {
+            if (answerData[q]) {
+                html += `
+                    <div class="summary-item">
+                        <span class="summary-label">${questionLabels[q]}:</span>
+                        <span class="summary-answer">${answerData[q].short}</span>
+                        <span class="summary-context">— "${answerData[q].context}"</span>
+                    </div>
+                `;
+            }
+        }
+
+        strip.innerHTML = html;
+        if (html) {
+            strip.classList.add('visible');
+        }
+    }
+
+    function showQuestion(num) {
+        // Hide all questions
+        document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
+        // Reset all selected states
+        document.querySelectorAll('.answer-btn').forEach(btn => btn.classList.remove('selected'));
+        // Show target
+        document.getElementById('q' + num).classList.add('active');
+        // Update progress
+        document.getElementById('stepIndicator').textContent = `Question ${num} of ${totalQuestions}`;
+        document.getElementById('progressBar').style.width = ((num - 1) / totalQuestions * 100) + '%';
+    }
+
+    function showLoading(resultId) {
+        // Hide questions
+        document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
+        // Show loading
+        document.getElementById('loadingStep').classList.add('active');
+        document.getElementById('progressBar').style.width = '100%';
+
+        // Staged loading messages
+        setTimeout(() => {
+            document.getElementById('loadingMain').textContent = 'Checking risk indicators...';
+            document.getElementById('loadingSub').textContent = 'Matching against known patterns';
+        }, 800);
+
+        setTimeout(() => {
+            document.getElementById('loadingMain').textContent = 'Preparing your diagnosis...';
+            document.getElementById('loadingSub').textContent = '';
+        }, 1600);
+
+        setTimeout(() => {
+            showResult(resultId);
+        }, 2400);
+    }
+
+    function showResult(resultId) {
+        // Hide everything
+        document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
+        document.getElementById('loadingStep').classList.remove('active');
+        // Hide header but keep summary visible
+        document.getElementById('diagHeader').style.display = 'none';
+        // Show result
+        document.getElementById(resultId).classList.add('active');
+    }
+
+    function determineResult() {
+        // Crisis path
+        if (answers[4] === 'crisis') {
+            showLoading('res-crisis');
+            return;
+        }
+
+        // Infrastructure issue
+        if (answers[2] === 'dmarc_no') {
+            showLoading('res-infra');
+            return;
+        }
+
+        // Tool failure (valid but issues)
+        if (answers[3] === 'valid_issues') {
+            showLoading('res-tool-failure');
+            return;
+        }
+
+        // Catch-all confusion
+        if (answers[3] === 'catchall') {
+            showLoading('res-catchall');
+            return;
+        }
+
+        // Slow decay
+        if (answers[4] === 'declining' || answers[4] === 'confused') {
+            showLoading('res-decay');
+            return;
+        }
+
+        // Preventive
+        if (answers[4] === 'preventive') {
+            showLoading('res-preventive');
+            return;
+        }
+
+        // Default to decay if nothing else matches
+        showLoading('res-decay');
+    }
+</script>
+
+</body>
+</html>
