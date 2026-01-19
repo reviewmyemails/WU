@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing | Review My Emails</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           DESIGN TOKENS (V3)
+           ======================================== */
+
+        :root {
+            /* Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #fafcfc;
+            --color-light: #f0fdfa;
+            --color-lighter: #f8fafa;
+            --color-muted: #64748b;
+            --color-border: #e2e8f0;
+
+            /* Typography */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+            --space-xxl: 100px;
+
+            /* Layout */
+            --container: 1140px;
+            --content: 680px;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background: var(--color-white);
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .container--narrow {
+            max-width: var(--content);
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+
+        h1 {
+            font-size: clamp(36px, 5vw, 52px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--color-dark);
+        }
+
+        h2 {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            color: var(--color-dark);
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--color-dark);
+        }
+
+        .text-muted {
+            color: var(--color-muted);
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        /* ========================================
+           BUTTON
+           ======================================== */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 180ms ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-light);
+        }
+
+        .btn-dark {
+            background: var(--color-dark);
+            color: var(--color-white);
+            border-color: var(--color-dark);
+        }
+
+        .btn-dark:hover {
+            opacity: 0.9;
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: var(--space-sm) var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .header__logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .header__link {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-muted);
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+
+        .header__link:hover {
+            color: var(--color-dark);
+        }
+
+        .header__link--active {
+            color: var(--color-dark);
+        }
+
+        .header__cta {
+            font-size: 15px;
+            padding: 10px 20px;
+        }
+
+        /* ========================================
+           HERO
+           ======================================== */
+
+        .hero {
+            padding: 160px 0 var(--space-xl);
+            text-align: center;
+        }
+
+        .hero__headline {
+            max-width: 720px;
+            margin: 0 auto var(--space-md);
+        }
+
+        .hero__subhead {
+            font-size: 20px;
+            color: var(--color-muted);
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           SECTION — Generic
+           ======================================== */
+
+        .section {
+            padding: var(--space-xxl) 0;
+        }
+
+        .section--light {
+            background: var(--color-light);
+        }
+
+        .section--lighter {
+            background: var(--color-lighter);
+        }
+
+        .section--dark {
+            background: var(--color-dark);
+            color: var(--color-white);
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section__header h2 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .section__header p {
+            color: var(--color-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .section--dark .section__header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ========================================
+           WHAT YOU GET — Output categories
+           ======================================== */
+
+        .output-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .output-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .output-card__label {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .output-card__label--keep {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .output-card__label--monitor {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .output-card__label--suppress {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .output-card h3 {
+            margin-bottom: var(--space-sm);
+            font-size: 18px;
+        }
+
+        .output-card p {
+            font-size: 15px;
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+
+        .output-note {
+            text-align: center;
+            margin-top: var(--space-lg);
+            font-size: 16px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           ALSO INCLUDED — Features list
+           ======================================== */
+
+        .included-list {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .included-item {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .included-item:last-child {
+            border-bottom: none;
+        }
+
+        .included-item__icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--color-accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+        }
+
+        .included-item__icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .included-item__content h3 {
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+
+        .included-item__content p {
+            font-size: 15px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           WHO THIS IS FOR
+           ======================================== */
+
+        .who-list {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .who-list ul {
+            list-style: none;
+        }
+
+        .who-list li {
+            font-size: 17px;
+            color: var(--color-dark);
+            padding: var(--space-sm) 0;
+            padding-left: 28px;
+            position: relative;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .who-list li:last-child {
+            border-bottom: none;
+        }
+
+        .who-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 22px;
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        /* ========================================
+           THE PROBLEM
+           ======================================== */
+
+        .problem-content {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem-content p {
+            font-size: 18px;
+            color: var(--color-dark);
+            margin-bottom: var(--space-md);
+            line-height: 1.7;
+        }
+
+        .problem-content .status-labels {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-muted);
+            margin: var(--space-lg) 0;
+        }
+
+        .problem-content ul {
+            list-style: none;
+            text-align: left;
+            max-width: 400px;
+            margin: var(--space-lg) auto;
+        }
+
+        .problem-content li {
+            font-size: 17px;
+            color: var(--color-muted);
+            padding: var(--space-xs) 0;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .problem-content li::before {
+            content: "?";
+            position: absolute;
+            left: 0;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        .problem-content .emphasis {
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-top: var(--space-lg);
+        }
+
+        /* ========================================
+           HOW IT WORKS
+           ======================================== */
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .option-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+        }
+
+        .option-card__badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--color-light);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: var(--space-md);
+        }
+
+        .option-card h3 {
+            font-size: 20px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .option-card p {
+            font-size: 15px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+            line-height: 1.6;
+        }
+
+        .option-card__status {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-dark);
+        }
+
+        .option-note {
+            text-align: center;
+            margin-top: var(--space-lg);
+            font-size: 16px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           PRICING CALCULATOR
+           ======================================== */
+
+        .pricing-calculator {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .calculator-card {
+            padding: var(--space-xl);
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .calculator-card h3 {
+            font-size: 22px;
+            margin-bottom: var(--space-md);
+        }
+
+        .calculator-intro {
+            font-size: 16px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .slider-container {
+            margin: var(--space-lg) 0;
+        }
+
+        .slider-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .slider-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: var(--space-md);
+        }
+
+        .slider-input {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--color-border);
+            outline: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        .slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            cursor: pointer;
+            border: 3px solid var(--color-white);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .slider-input::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            cursor: pointer;
+            border: 3px solid var(--color-white);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        .pricing-result {
+            margin-top: var(--space-lg);
+            padding: var(--space-md);
+            background: var(--color-light);
+            border-radius: 12px;
+        }
+
+        .pricing-result__row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) 0;
+        }
+
+        .pricing-result__label {
+            font-size: 15px;
+            color: var(--color-muted);
+        }
+
+        .pricing-result__value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+
+        .pricing-result__total {
+            margin-top: var(--space-sm);
+            padding-top: var(--space-sm);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .pricing-result__total .pricing-result__label {
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+
+        .pricing-result__total .pricing-result__value {
+            font-size: 24px;
+            color: var(--color-accent);
+        }
+
+        .calculator-cta {
+            margin-top: var(--space-lg);
+        }
+
+        .calculator-note {
+            margin-top: var(--space-sm);
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        /* Pricing Table */
+        .pricing-table {
+            margin-top: var(--space-xl);
+            text-align: left;
+        }
+
+        .pricing-table h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            text-align: center;
+        }
+
+        .pricing-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            padding: var(--space-sm);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .pricing-table th {
+            font-weight: 600;
+            color: var(--color-muted);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pricing-table td {
+            color: var(--color-dark);
+        }
+
+        .pricing-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table__highlight {
+            background: var(--color-light);
+        }
+
+        /* ========================================
+           DONE FOR YOU PRICING
+           ======================================== */
+
+        .dfy-pricing {
+            max-width: 560px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .dfy-pricing__intro {
+            font-size: 17px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .dfy-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            margin-bottom: var(--space-md);
+        }
+
+        .dfy-card h3 {
+            font-size: 18px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .dfy-card p {
+            font-size: 15px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        /* ========================================
+           SOS SECTION
+           ======================================== */
+
+        .sos-pricing {
+            max-width: 560px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .sos-pricing__intro {
+            font-size: 17px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .sos-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 2px solid var(--color-accent);
+            border-radius: 12px;
+        }
+
+        .sos-card h3 {
+            font-size: 20px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .sos-card p {
+            font-size: 15px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .sos-card__duration {
+            font-size: 15px;
+            color: var(--color-dark);
+            font-weight: 500;
+            margin-bottom: var(--space-md);
+        }
+
+        /* ========================================
+           CTA SECTION
+           ======================================== */
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .cta-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .cta-card h3 {
+            font-size: 18px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .cta-card p {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .cta-card .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* ========================================
+           QUESTIONS SECTION
+           ======================================== */
+
+        .questions-block {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .questions-block p {
+            font-size: 17px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .questions-block a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .questions-block a:hover {
+            text-decoration: underline;
+        }
+
+        .questions-block__response {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-top: var(--space-sm);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+
+        .footer {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: var(--space-xl) var(--space-md);
+        }
+
+        .footer__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .footer__brand p {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-top: var(--space-xs);
+            max-width: 240px;
+        }
+
+        .footer__column h4 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-sm);
+            opacity: 0.5;
+        }
+
+        .footer__column a {
+            display: block;
+            font-size: 15px;
+            color: var(--color-white);
+            text-decoration: none;
+            opacity: 0.8;
+            margin-bottom: var(--space-xs);
+            transition: opacity 180ms ease;
+        }
+
+        .footer__column a:hover {
+            opacity: 1;
+        }
+
+        .footer__bottom {
+            grid-column: 1 / -1;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+
+        @media (max-width: 900px) {
+            .output-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer__brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header__nav {
+                gap: var(--space-md);
+            }
+
+            .header__link {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .pricing-table {
+                overflow-x: auto;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         HEADER
+         ======================================== -->
+
+    <header class="header">
+        <div class="header__inner">
+            <a href="/" class="header__logo">
+                <img src="../svg/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <nav class="header__nav">
+                <a href="/pricing" class="header__link header__link--active">Pricing</a>
+                <a href="/sos-hotline" class="header__link">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com/buy-credits" class="btn btn-primary header__cta">Get Answers</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ========================================
+         HERO
+         ======================================== -->
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero__headline">Pricing</h1>
+            <p class="hero__subhead">Pay for what you need. Credits never expire. Bigger lists cost less per contact.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         WHAT YOU GET
+         ======================================== -->
+
+    <section class="section section--light">
+        <div class="container">
+            <div class="section__header">
+                <h2>What You Get</h2>
+                <p>A cleaned list with clear recommendations.</p>
+            </div>
+
+            <div class="output-grid">
+                <div class="output-card">
+                    <span class="output-card__label output-card__label--keep">Keep</span>
+                    <h3>Safe to Mail</h3>
+                    <p>No flags found. Domain checks out, validation passed, no risk signals.</p>
+                </div>
+
+                <div class="output-card">
+                    <span class="output-card__label output-card__label--monitor">Monitor</span>
+                    <h3>Watch Closely</h3>
+                    <p>Context matters here. Each address comes with labels explaining why.</p>
+                </div>
+
+                <div class="output-card">
+                    <span class="output-card__label output-card__label--suppress">Suppress</span>
+                    <h3>Do Not Mail</h3>
+                    <p>Invalid, trap-likely, disposable, or other risk signals. Don't send here.</p>
+                </div>
+            </div>
+
+            <p class="output-note">You also get risk flags on problem patterns, domain-level intelligence, and explanations for every recommendation. This is not a pass/fail list. It is a decision-making tool.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         WHO THIS IS FOR
+         ======================================== -->
+
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2>Who This Is For</h2>
+                <p>Marketers who already send email and want to protect their sender reputation.</p>
+            </div>
+
+            <div class="who-list">
+                <ul>
+                    <li>Running campaigns but seeing declining engagement</li>
+                    <li>Worried about bounces, complaints, or blocklists</li>
+                    <li>Inheriting a list you did not build</li>
+                    <li>Under pressure to "just send" but sensing risk</li>
+                    <li>Trying to explain deliverability to a boss who does not get it</li>
+                </ul>
+            </div>
+
+            <p class="output-note">If you care about long-term reputation, not just short-term volume, this is for you.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         THE PROBLEM
+         ======================================== -->
+
+    <section class="section section--lighter">
+        <div class="container">
+            <div class="section__header">
+                <h2>The Problem</h2>
+            </div>
+
+            <div class="problem-content">
+                <p>Most list cleaning tools give you a status and leave you guessing.</p>
+
+                <p class="status-labels">Valid. Invalid. Unknown.</p>
+
+                <p>That tells you what to remove. It does not tell you what is actually wrong.</p>
+
+                <ul>
+                    <li>Why is engagement dropping?</li>
+                    <li>Why are complaints rising?</li>
+                    <li>Is it the list, the sending, or both?</li>
+                </ul>
+
+                <p class="emphasis">We give you the context to answer those questions.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         HOW IT WORKS
+         ======================================== -->
+
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2>How It Works</h2>
+            </div>
+
+            <div class="options-grid">
+                <div class="option-card">
+                    <span class="option-card__badge">Available Now</span>
+                    <h3>Done-For-You</h3>
+                    <p>Send us your list. We clean it. We return results with clear recommendations.</p>
+                    <p>No platform access required. Optional SOS call before or after to review results and discuss strategy.</p>
+                </div>
+
+                <div class="option-card">
+                    <span class="option-card__badge">Coming Soon</span>
+                    <h3>Self-Serve</h3>
+                    <p>Upload your list in the platform. Download results. Interpret on your own or book a call.</p>
+                    <p class="option-card__status">Self-serve access is opening in stages. Join the waitlist to get notified.</p>
+                </div>
+            </div>
+
+            <p class="option-note">Both options use the same analysis. The difference is who clicks the buttons.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PRICING - SELF SERVE CALCULATOR
+         ======================================== -->
+
+    <section class="section section--light">
+        <div class="container">
+            <div class="section__header">
+                <h2>Self-Serve Credits</h2>
+                <p>Pay only for what you need. Credits never expire.</p>
+            </div>
+
+            <div class="pricing-calculator">
+                <div class="calculator-card">
+                    <h3>Calculate Your Price</h3>
+                    <p class="calculator-intro">Drag the slider to see pricing for your list size.</p>
+
+                    <div class="slider-container">
+                        <p class="slider-label">List Size</p>
+                        <p class="slider-value" id="listSize">50,000 emails</p>
+                        <input type="range" class="slider-input" id="sizeSlider" min="0" max="7" value="1">
+                    </div>
+
+                    <div class="pricing-result">
+                        <div class="pricing-result__row">
+                            <span class="pricing-result__label">Price per email</span>
+                            <span class="pricing-result__value" id="pricePerEmail">$0.0074</span>
+                        </div>
+                        <div class="pricing-result__row pricing-result__total">
+                            <span class="pricing-result__label">Total</span>
+                            <span class="pricing-result__value" id="totalPrice">$370</span>
+                        </div>
+                    </div>
+
+                    <div class="calculator-cta">
+                        <a href="https://anchor.reviewmyemails.com/buy-credits" class="btn btn-primary">Get Started</a>
+                    </div>
+                    <p class="calculator-note">Need more than 10 million? <a href="mailto:ahoy@reviewmyemails.com">Contact us</a> for custom pricing.</p>
+
+                    <div class="pricing-table">
+                        <h4>Full Pricing Breakdown</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>List Size</th>
+                                    <th>Price per Email</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1,000</td>
+                                    <td>$0.0080</td>
+                                    <td>$8</td>
+                                </tr>
+                                <tr>
+                                    <td>50,000</td>
+                                    <td>$0.0074</td>
+                                    <td>$370</td>
+                                </tr>
+                                <tr>
+                                    <td>100,000</td>
+                                    <td>$0.0071</td>
+                                    <td>$710</td>
+                                </tr>
+                                <tr>
+                                    <td>500,000</td>
+                                    <td>$0.0062</td>
+                                    <td>$3,100</td>
+                                </tr>
+                                <tr>
+                                    <td>1,000,000</td>
+                                    <td>$0.0052</td>
+                                    <td>$5,200</td>
+                                </tr>
+                                <tr>
+                                    <td>2,500,000</td>
+                                    <td>$0.0039</td>
+                                    <td>$9,750</td>
+                                </tr>
+                                <tr>
+                                    <td>5,000,000</td>
+                                    <td>$0.0032</td>
+                                    <td>$16,000</td>
+                                </tr>
+                                <tr>
+                                    <td>10,000,000</td>
+                                    <td>$0.0026</td>
+                                    <td>$26,000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         DONE-FOR-YOU PRICING
+         ======================================== -->
+
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2>Done-For-You Cleaning</h2>
+            </div>
+
+            <div class="dfy-pricing">
+                <p class="dfy-pricing__intro">Not on the platform yet? We also offer done-for-you list cleaning.</p>
+
+                <div class="dfy-card">
+                    <h3>Send Us Your List</h3>
+                    <p>We handle everything. You get results with clear recommendations. Pricing based on list size and complexity.</p>
+                    <a href="mailto:ahoy@reviewmyemails.com" class="btn btn-secondary">Contact Us for a Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SOS HOTLINE
+         ======================================== -->
+
+    <section class="section section--lighter">
+        <div class="container">
+            <div class="section__header">
+                <h2>SOS Deliverability Hotline</h2>
+            </div>
+
+            <div class="sos-pricing">
+                <p class="sos-pricing__intro">Talk to a real deliverability expert.</p>
+
+                <div class="sos-card">
+                    <h3>1:1 Strategy Call</h3>
+                    <p>Use it before cleaning to understand your situation. Use it after cleaning to interpret results and plan next steps.</p>
+                    <p class="sos-card__duration">30 minutes. Often runs longer.</p>
+                    <p>Available as standalone or bundled with cleaning.</p>
+                    <a href="/sos-hotline" class="btn btn-secondary" style="margin-top: var(--space-md);">Learn More About SOS Hotline</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CTA SECTION
+         ======================================== -->
+
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section__header">
+                <h2>Ready to Clean Your List?</h2>
+                <p>Choose what works for you.</p>
+            </div>
+
+            <div class="cta-grid">
+                <div class="cta-card">
+                    <h3>Get My List Cleaned</h3>
+                    <p>Done-for-you service. Send your list, get results.</p>
+                    <a href="https://anchor.reviewmyemails.com/buy-credits" class="btn btn-primary">Get Started</a>
+                </div>
+
+                <div class="cta-card">
+                    <h3>Join the Waitlist</h3>
+                    <p>Be first to access self-serve when it launches.</p>
+                    <a href="#" class="btn btn-secondary">Join Waitlist</a>
+                </div>
+
+                <div class="cta-card">
+                    <h3>Book an SOS Call</h3>
+                    <p>Talk through your situation first.</p>
+                    <a href="/sos-hotline" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         QUESTIONS
+         ======================================== -->
+
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2>Questions?</h2>
+            </div>
+
+            <div class="questions-block">
+                <p>Email us: <a href="mailto:ahoy@reviewmyemails.com">ahoy@reviewmyemails.com</a></p>
+                <p class="questions-block__response">We respond within 72 hours. Usually faster.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <img src="../svg/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
+                <p>Expert list interpretation, not just validation.</p>
+            </div>
+
+            <div class="footer__column">
+                <h4>Services</h4>
+                <a href="/pricing">Pricing</a>
+                <a href="/sos-hotline">SOS Hotline</a>
+            </div>
+
+            <div class="footer__column">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Partner</a>
+            </div>
+
+            <div class="footer__column">
+                <h4>Contact</h4>
+                <a href="mailto:ahoy@reviewmyemails.com">ahoy@reviewmyemails.com</a>
+            </div>
+
+            <div class="footer__bottom">
+                <span>© 2026 Review My Emails. All rights reserved.</span>
+                <span>Privacy Policy · Terms</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         JAVASCRIPT - Slider Calculator
+         ======================================== -->
+
+    <script>
+        const pricingTiers = [
+            { size: 1000, price: 0.0080, label: '1,000 emails' },
+            { size: 50000, price: 0.0074, label: '50,000 emails' },
+            { size: 100000, price: 0.0071, label: '100,000 emails' },
+            { size: 500000, price: 0.0062, label: '500,000 emails' },
+            { size: 1000000, price: 0.0052, label: '1,000,000 emails' },
+            { size: 2500000, price: 0.0039, label: '2,500,000 emails' },
+            { size: 5000000, price: 0.0032, label: '5,000,000 emails' },
+            { size: 10000000, price: 0.0026, label: '10,000,000 emails' }
+        ];
+
+        const slider = document.getElementById('sizeSlider');
+        const listSizeEl = document.getElementById('listSize');
+        const pricePerEmailEl = document.getElementById('pricePerEmail');
+        const totalPriceEl = document.getElementById('totalPrice');
+
+        function updatePricing(index) {
+            const tier = pricingTiers[index];
+            listSizeEl.textContent = tier.label;
+            pricePerEmailEl.textContent = '$' + tier.price.toFixed(4);
+
+            const total = tier.size * tier.price;
+            totalPriceEl.textContent = '$' + total.toLocaleString('en-US', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            });
+        }
+
+        slider.addEventListener('input', function() {
+            updatePricing(parseInt(this.value));
+        });
+
+        // Initialize
+        updatePricing(1);
+    </script>
+
+</body>
+</html>
