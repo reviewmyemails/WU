@@ -916,6 +916,10 @@
                 <h1>Inbox Placement Self-Audit</h1>
                 <p class="intro__subtitle">What most senders never check. Use this monthly. Be honest. This is how problems get caught before revenue drops.</p>
 
+                <div style="background: var(--color-light); border-radius: 12px; padding: var(--space-md); margin-bottom: var(--space-md); text-align: left;">
+                    <p style="font-size: 14px; color: var(--color-dark); margin: 0;"><strong>Important:</strong> This audit covers general best practices. Every business is different. A monthly newsletter has different needs than a daily SaaS notification. Some items here may not apply to you at all. The goal is awareness, not a perfect score.</p>
+                </div>
+
                 <div class="intro__meta">
                     <div class="intro__meta-item">
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -1878,8 +1882,9 @@
                 summary = 'Multiple issues detected that are likely hurting your inbox placement. Prioritize the recommendations below.';
             }
 
-            // Generate recommendations based on answers
-            const recommendations = generateRecommendations();
+            // Generate recommendations grouped by section
+            const recsBySection = generateRecommendationsBySection();
+            const hasIssues = Object.keys(recsBySection).length > 0;
 
             // Render results
             let html = `
@@ -1901,6 +1906,10 @@
                     <p class="results__summary">${summary}</p>
                 </div>
 
+                <div style="background: var(--color-light); border-radius: 12px; padding: var(--space-md); margin-bottom: var(--space-md);">
+                    <p style="font-size: 14px; color: var(--color-dark); margin: 0;"><strong>Remember:</strong> Not every item applies to every business. A score of 70 might be perfectly fine for your use case. These are guidelines, not mandates. Use your judgment about what matters for your specific situation.</p>
+                </div>
+
                 <div class="results__breakdown">
                     <div class="results__breakdown-title">Score by Section</div>
                     ${quizData.sections.map(section => {
@@ -1919,29 +1928,57 @@
                 </div>
             `;
 
-            if (recommendations.length > 0) {
-                html += `
-                    <div class="results__recommendations">
-                        <h3 class="results__recommendations-title">Your Personalized Action Items</h3>
-                        <p class="results__recommendations-subtitle">Based on your answers, here's what to focus on:</p>
-                        ${recommendations.map(rec => `
-                            <div class="recommendation-card">
-                                <div class="recommendation-card__header">
-                                    <div class="recommendation-card__icon recommendation-card__icon--${rec.severity}">
-                                        <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-                                    </div>
-                                    <div>
-                                        <div class="recommendation-card__title">${rec.title}</div>
-                                        <div class="recommendation-card__section">${rec.section}</div>
+            // Show ALL recommendations grouped by section
+            if (hasIssues) {
+                html += `<div class="results__recommendations">
+                    <h3 class="results__recommendations-title">Action Items by Section</h3>
+                    <p class="results__recommendations-subtitle">Everything flagged based on your answers. Review what applies to you:</p>
+                `;
+
+                Object.values(recsBySection).forEach(section => {
+                    const fillClass = section.score >= 80 ? 'good' : section.score >= 60 ? 'warning' : 'danger';
+                    html += `
+                        <div style="background: var(--color-white); border: 1px solid var(--color-border); border-radius: 12px; padding: var(--space-md); margin-bottom: var(--space-md);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-sm); padding-bottom: var(--space-sm); border-bottom: 1px solid var(--color-border);">
+                                <h4 style="font-size: 16px; font-weight: 600; margin: 0;">${section.title}</h4>
+                                <span style="font-size: 14px; font-weight: 600; color: var(--color-${fillClass});">${section.score}%</span>
+                            </div>
+                            ${section.recs.map(rec => `
+                                <div style="padding: var(--space-sm) 0; border-bottom: 1px solid var(--color-border);">
+                                    <div style="display: flex; align-items: flex-start; gap: 10px;">
+                                        <div style="width: 20px; height: 20px; border-radius: 50%; background: var(--color-${rec.severity === 'danger' ? 'danger' : 'warning'}-bg); color: var(--color-${rec.severity === 'danger' ? 'danger' : 'warning'}); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                        </div>
+                                        <div>
+                                            <div style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">${rec.title}</div>
+                                            <div style="font-size: 13px; color: var(--color-muted); line-height: 1.5;">${rec.body}</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="recommendation-card__body">${rec.body}</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
+                            `).join('')}
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
             }
 
+            // SOS Hotline plug
+            html += `
+                <div style="background: linear-gradient(135deg, var(--color-dark) 0%, #0f3d3a 100%); border-radius: 16px; padding: var(--space-lg); color: white; margin-bottom: var(--space-md);">
+                    <h3 style="font-size: 20px; font-weight: 700; margin-bottom: var(--space-xs);">Not Sure What Applies to You?</h3>
+                    <p style="font-size: 15px; opacity: 0.85; margin-bottom: var(--space-md);">Every business is different. What's critical for a daily sender might be irrelevant for a monthly newsletter. If you're unsure which items actually matter for your situation, talk to someone who's seen it all.</p>
+                    <div style="display: flex; align-items: center; gap: var(--space-md); padding: var(--space-md); background: rgba(255,255,255,0.1); border-radius: 12px; margin-bottom: var(--space-md);">
+                        <div style="flex: 1;">
+                            <div style="font-size: 14px; font-weight: 600; color: var(--color-accent); margin-bottom: 4px;">Free. No pitch. Just answers.</div>
+                            <div style="font-size: 14px; opacity: 0.8;">The SOS Hotline connects you with YT—a deliverability specialist who's cleaned thousands of lists and diagnosed hundreds of sending problems. Ask anything.</div>
+                        </div>
+                    </div>
+                    <a href="/sos-hotline" class="btn" style="background: var(--color-accent); color: white; width: 100%; justify-content: center;">Learn About the SOS Hotline</a>
+                </div>
+            `;
+
+            // Lead capture
             html += `
                 <div class="results__capture">
                     <h3>Save Your Results</h3>
@@ -1967,10 +2004,12 @@
             window.scrollTo(0, 0);
         }
 
-        function generateRecommendations() {
-            const recs = [];
+        function generateRecommendationsBySection() {
+            const bySection = {};
 
             quizData.sections.forEach(section => {
+                const sectionRecs = [];
+
                 section.questions.forEach(q => {
                     const answer = answers[q.id];
                     let shouldRecommend = false;
@@ -1996,28 +2035,24 @@
                     }
 
                     if (shouldRecommend && q.tip) {
-                        recs.push({
+                        sectionRecs.push({
                             title: q.tip.title,
                             body: q.tip.body,
-                            section: section.title,
-                            severity: severity,
-                            impact: q.badImpact || 'medium'
+                            severity: severity
                         });
                     }
                 });
-            });
 
-            // Sort by severity (danger first) then by impact
-            recs.sort((a, b) => {
-                if (a.severity !== b.severity) {
-                    return a.severity === 'danger' ? -1 : 1;
+                if (sectionRecs.length > 0) {
+                    bySection[section.id] = {
+                        title: section.title,
+                        score: sectionScores[section.id] || 0,
+                        recs: sectionRecs
+                    };
                 }
-                const impactOrder = { high: 0, medium: 1, low: 2 };
-                return impactOrder[a.impact] - impactOrder[b.impact];
             });
 
-            // Limit to top 8 recommendations
-            return recs.slice(0, 8);
+            return bySection;
         }
 
         function submitCapture(event) {
