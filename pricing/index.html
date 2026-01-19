@@ -606,9 +606,23 @@
             background: var(--color-white);
             border: 2px solid var(--color-border);
             border-radius: 16px;
-            text-align: center;
-            max-width: 560px;
+            max-width: 900px;
             margin: 0 auto;
+        }
+
+        .calculator-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .calculator-left {
+            text-align: center;
+        }
+
+        .calculator-right {
+            text-align: left;
         }
 
         .calculator-card h3 {
@@ -623,16 +637,16 @@
         }
 
         .pricing-tiers {
-            margin-top: var(--space-lg);
-            padding-top: var(--space-lg);
-            border-top: 1px solid var(--color-border);
             text-align: left;
         }
 
-        .pricing-tiers-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-md);
+        .pricing-tiers h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: var(--space-sm);
         }
 
         .pricing-tiers table {
@@ -666,9 +680,13 @@
             font-weight: 500;
         }
 
-        @media (max-width: 500px) {
-            .pricing-tiers-grid {
+        @media (max-width: 768px) {
+            .calculator-layout {
                 grid-template-columns: 1fr;
+            }
+            .calculator-right {
+                border-top: 1px solid var(--color-border);
+                padding-top: var(--space-lg);
             }
         }
 
@@ -838,6 +856,15 @@
             background: var(--color-white);
             border: 2px solid var(--color-accent);
             border-radius: 12px;
+        }
+
+        .sos-card__headshot {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: var(--space-md);
+            border: 3px solid var(--color-accent);
         }
 
         .sos-card h3 {
@@ -1230,92 +1257,87 @@
             </div>
 
             <div class="calculator-card">
-                <h3>Calculate Your Price</h3>
-                <p class="calculator-intro">Simple. More volume, lower rate.</p>
+                <div class="calculator-layout">
+                    <div class="calculator-left">
+                        <h3>Calculate Your Price</h3>
+                        <p class="calculator-intro">Simple. More volume, lower rate.</p>
 
-                <div class="slider-container">
-                    <p class="slider-label">List Size</p>
-                    <p class="slider-value" id="listSize">50,000 emails</p>
-                    <input type="range" class="slider-input" id="sizeSlider" min="0" max="7" value="1">
-                </div>
+                        <div class="slider-container">
+                            <p class="slider-label">List Size</p>
+                            <p class="slider-value" id="listSize">50,000 emails</p>
+                            <input type="range" class="slider-input" id="sizeSlider" min="0" max="7" value="1">
+                        </div>
 
-                <div class="pricing-result">
-                    <div class="pricing-result__row">
-                        <span class="pricing-result__label">Price per email</span>
-                        <span class="pricing-result__value" id="pricePerEmail">$0.0074</span>
+                        <div class="pricing-result">
+                            <div class="pricing-result__row">
+                                <span class="pricing-result__label">Price per email</span>
+                                <span class="pricing-result__value" id="pricePerEmail">$0.0074</span>
+                            </div>
+                            <div class="pricing-result__row pricing-result__total">
+                                <span class="pricing-result__label">Total</span>
+                                <span class="pricing-result__value" id="totalPrice">$370</span>
+                            </div>
+                        </div>
+
+                        <div class="calculator-cta">
+                            <a href="https://anchor.reviewmyemails.com/" class="btn btn-primary">Get Started</a>
+                        </div>
+
+                        <p class="calculator-note">Need more than 1 million? <a href="mailto:ahoy@reviewmyemails.com">Contact us</a> for custom pricing.</p>
                     </div>
-                    <div class="pricing-result__row pricing-result__total">
-                        <span class="pricing-result__label">Total</span>
-                        <span class="pricing-result__value" id="totalPrice">$370</span>
-                    </div>
-                </div>
 
-                <div class="calculator-cta">
-                    <a href="https://anchor.reviewmyemails.com/" class="btn btn-primary">Get Started</a>
-                </div>
-
-                <div class="pricing-tiers">
-                    <div class="pricing-tiers-grid">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>List Size</th>
-                                    <th>Per Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1 - 1,000</td>
-                                    <td>$0.0080</td>
-                                </tr>
-                                <tr>
-                                    <td>1,001 - 5,000</td>
-                                    <td>$0.0074</td>
-                                </tr>
-                                <tr>
-                                    <td>5,001 - 10,000</td>
-                                    <td>$0.0070</td>
-                                </tr>
-                                <tr>
-                                    <td>10,001 - 50,000</td>
-                                    <td>$0.0062</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>List Size</th>
-                                    <th>Per Email</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>50,001 - 100,000</td>
-                                    <td>$0.0052</td>
-                                </tr>
-                                <tr>
-                                    <td>100,001 - 250,000</td>
-                                    <td>$0.0039</td>
-                                </tr>
-                                <tr>
-                                    <td>250,001 - 500,000</td>
-                                    <td>$0.00325</td>
-                                </tr>
-                                <tr>
-                                    <td>500,001 - 1M</td>
-                                    <td>$0.0026</td>
-                                </tr>
-                                <tr class="contact-row">
-                                    <td>1,000,000+</td>
-                                    <td>Contact us</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="calculator-right">
+                        <div class="pricing-tiers">
+                            <h4>Volume Pricing</h4>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>List Size</th>
+                                        <th>Per Email</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1 - 1,000</td>
+                                        <td>$0.0080</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1,001 - 5,000</td>
+                                        <td>$0.0074</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5,001 - 10,000</td>
+                                        <td>$0.0070</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10,001 - 50,000</td>
+                                        <td>$0.0062</td>
+                                    </tr>
+                                    <tr>
+                                        <td>50,001 - 100,000</td>
+                                        <td>$0.0052</td>
+                                    </tr>
+                                    <tr>
+                                        <td>100,001 - 250,000</td>
+                                        <td>$0.0039</td>
+                                    </tr>
+                                    <tr>
+                                        <td>250,001 - 500,000</td>
+                                        <td>$0.00325</td>
+                                    </tr>
+                                    <tr>
+                                        <td>500,001 - 1M</td>
+                                        <td>$0.0026</td>
+                                    </tr>
+                                    <tr class="contact-row">
+                                        <td>1,000,000+</td>
+                                        <td>Contact us</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-
-                <p class="calculator-note">Need more than 1 million? <a href="mailto:ahoy@reviewmyemails.com">Contact us</a> for custom pricing.</p>
             </div>
         </div>
     </section>
@@ -1334,6 +1356,7 @@
                 <p class="sos-pricing__intro">Talk to a real deliverability expert.</p>
 
                 <div class="sos-card">
+                    <img src="../Yanna-Torry.jpg" alt="Yanna-Torry Aspraki" class="sos-card__headshot">
                     <h3>SOS Call</h3>
                     <p>Use it before cleaning to understand your situation. Use it after cleaning to interpret results and plan next steps.</p>
                     <p class="sos-card__duration">30 minutes. Often runs longer.</p>
@@ -1413,8 +1436,8 @@
 
             <div class="footer__column">
                 <h4>Company</h4>
-                <a href="#">About</a>
-                <a href="#">Partner</a>
+                <a href="/about">About</a>
+                <a href="/partner">Partner</a>
             </div>
 
             <div class="footer__column">
