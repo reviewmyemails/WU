@@ -597,21 +597,14 @@
            PRICING CALCULATOR
            ======================================== */
 
-        .pricing-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: var(--space-lg);
-            max-width: 900px;
-            margin: 0 auto;
-            align-items: start;
-        }
-
         .calculator-card {
             padding: var(--space-xl);
             background: var(--color-white);
             border: 2px solid var(--color-border);
             border-radius: 16px;
             text-align: center;
+            max-width: 560px;
+            margin: 0 auto;
         }
 
         .calculator-card h3 {
@@ -625,34 +618,27 @@
             margin-bottom: var(--space-lg);
         }
 
-        .pricing-table-card {
-            padding: var(--space-lg);
-            background: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
+        .pricing-tiers {
+            margin-top: var(--space-lg);
+            padding-top: var(--space-lg);
+            border-top: 1px solid var(--color-border);
+            text-align: left;
         }
 
-        .pricing-table-card h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            color: var(--color-dark);
-        }
-
-        .pricing-table-card table {
+        .pricing-tiers table {
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
         }
 
-        .pricing-table-card th,
-        .pricing-table-card td {
+        .pricing-tiers th,
+        .pricing-tiers td {
             padding: var(--space-sm) var(--space-xs);
             text-align: left;
             border-bottom: 1px solid var(--color-border);
         }
 
-        .pricing-table-card th {
+        .pricing-tiers th {
             font-weight: 600;
             color: var(--color-muted);
             font-size: 12px;
@@ -660,15 +646,15 @@
             letter-spacing: 0.03em;
         }
 
-        .pricing-table-card td {
+        .pricing-tiers td {
             color: var(--color-dark);
         }
 
-        .pricing-table-card tr:last-child td {
+        .pricing-tiers tr:last-child td {
             border-bottom: none;
         }
 
-        .pricing-table-card .contact-row td {
+        .pricing-tiers .contact-row td {
             color: var(--color-accent);
             font-weight: 500;
         }
@@ -993,15 +979,6 @@
                 grid-template-columns: 1fr;
             }
 
-            .pricing-layout {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .pricing-table-card {
-                order: -1;
-            }
-
             .cta-grid {
                 grid-template-columns: 1fr;
                 max-width: 400px;
@@ -1027,10 +1004,6 @@
 
             .hero {
                 padding-top: 120px;
-            }
-
-            .pricing-table {
-                overflow-x: auto;
             }
 
             .footer__inner {
@@ -1236,36 +1209,32 @@
                 <p>Pay only for what you need. Credits never expire.</p>
             </div>
 
-            <div class="pricing-layout">
-                <div class="calculator-card">
-                    <h3>Calculate Your Price</h3>
-                    <p class="calculator-intro">Drag the slider to see pricing for your list size.</p>
+            <div class="calculator-card">
+                <h3>Calculate Your Price</h3>
+                <p class="calculator-intro">Drag the slider to see pricing for your list size.</p>
 
-                    <div class="slider-container">
-                        <p class="slider-label">List Size</p>
-                        <p class="slider-value" id="listSize">50,000 emails</p>
-                        <input type="range" class="slider-input" id="sizeSlider" min="0" max="7" value="1">
-                    </div>
-
-                    <div class="pricing-result">
-                        <div class="pricing-result__row">
-                            <span class="pricing-result__label">Price per email</span>
-                            <span class="pricing-result__value" id="pricePerEmail">$0.0074</span>
-                        </div>
-                        <div class="pricing-result__row pricing-result__total">
-                            <span class="pricing-result__label">Total</span>
-                            <span class="pricing-result__value" id="totalPrice">$370</span>
-                        </div>
-                    </div>
-
-                    <div class="calculator-cta">
-                        <a href="https://anchor.reviewmyemails.com/buy-credits" class="btn btn-primary">Get Started</a>
-                    </div>
-                    <p class="calculator-note">Need more than 1 million? <a href="mailto:ahoy@reviewmyemails.com">Contact us</a> for custom pricing.</p>
+                <div class="slider-container">
+                    <p class="slider-label">List Size</p>
+                    <p class="slider-value" id="listSize">50,000 emails</p>
+                    <input type="range" class="slider-input" id="sizeSlider" min="0" max="7" value="1">
                 </div>
 
-                <div class="pricing-table-card">
-                    <h4>All Price Tiers</h4>
+                <div class="pricing-result">
+                    <div class="pricing-result__row">
+                        <span class="pricing-result__label">Price per email</span>
+                        <span class="pricing-result__value" id="pricePerEmail">$0.0074</span>
+                    </div>
+                    <div class="pricing-result__row pricing-result__total">
+                        <span class="pricing-result__label">Total</span>
+                        <span class="pricing-result__value" id="totalPrice">$370</span>
+                    </div>
+                </div>
+
+                <div class="calculator-cta">
+                    <a href="https://anchor.reviewmyemails.com/buy-credits" class="btn btn-primary">Get Started</a>
+                </div>
+
+                <div class="pricing-tiers">
                     <table>
                         <thead>
                             <tr>
@@ -1313,6 +1282,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                <p class="calculator-note">Need more than 1 million? <a href="mailto:ahoy@reviewmyemails.com">Contact us</a> for custom pricing.</p>
             </div>
         </div>
     </section>
