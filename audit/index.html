@@ -1,0 +1,2053 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox Placement Self-Audit — Review My Emails</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           DESIGN TOKENS
+           ======================================== */
+
+        :root {
+            /* Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #fafcfc;
+            --color-light: #f0fdfa;
+            --color-lighter: #f8fafa;
+            --color-muted: #64748b;
+            --color-border: #e2e8f0;
+
+            /* Status Colors */
+            --color-success: #16a34a;
+            --color-success-bg: #dcfce7;
+            --color-warning: #d97706;
+            --color-warning-bg: #fef3c7;
+            --color-danger: #dc2626;
+            --color-danger-bg: #fee2e2;
+
+            /* Typography */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+
+            /* Layout */
+            --container: 720px;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background: var(--color-lighter);
+            min-height: 100vh;
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+
+        .header {
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--space-sm) 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header__inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .header__progress {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .header__progress-bar {
+            width: 120px;
+            height: 6px;
+            background: var(--color-border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .header__progress-fill {
+            height: 100%;
+            background: var(--color-accent);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        /* ========================================
+           INTRO SCREEN
+           ======================================== */
+
+        .screen {
+            display: none;
+            padding: var(--space-xl) 0;
+            min-height: calc(100vh - 73px);
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        .intro {
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .intro__badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--color-light);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: var(--space-md);
+        }
+
+        .intro h1 {
+            font-size: clamp(28px, 5vw, 36px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: var(--space-sm);
+            color: var(--color-dark);
+        }
+
+        .intro__subtitle {
+            font-size: 18px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .intro__meta {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .intro__meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .intro__meta-item svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--color-accent);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .intro__sections {
+            text-align: left;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .intro__sections-title {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .intro__sections-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xs);
+            font-size: 14px;
+            color: var(--color-dark);
+        }
+
+        .intro__sections-list span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .intro__sections-list span::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ========================================
+           BUTTONS
+           ======================================== */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 180ms ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-light);
+        }
+
+        .btn-lg {
+            padding: 16px 36px;
+            font-size: 17px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ========================================
+           QUIZ SECTION
+           ======================================== */
+
+        .quiz-section {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .quiz-section__header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .quiz-section__number {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .quiz-section__info h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .quiz-section__info p {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .quiz-section__score {
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .quiz-section__score-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-dark);
+        }
+
+        .quiz-section__score-label {
+            font-size: 12px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           QUIZ QUESTIONS
+           ======================================== */
+
+        .quiz-question {
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .quiz-question:last-child {
+            border-bottom: none;
+        }
+
+        .quiz-question__text {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+            color: var(--color-dark);
+        }
+
+        .quiz-question__options {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+
+        .quiz-option {
+            padding: 8px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 150ms ease;
+            background: var(--color-white);
+        }
+
+        .quiz-option:hover {
+            border-color: var(--color-accent);
+            background: var(--color-light);
+        }
+
+        .quiz-option.selected {
+            border-color: var(--color-accent);
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .quiz-option.selected-bad {
+            border-color: var(--color-danger);
+            background: var(--color-danger);
+            color: var(--color-white);
+        }
+
+        .quiz-option.selected-warning {
+            border-color: var(--color-warning);
+            background: var(--color-warning);
+            color: var(--color-white);
+        }
+
+        .quiz-option.selected-good {
+            border-color: var(--color-success);
+            background: var(--color-success);
+            color: var(--color-white);
+        }
+
+        /* Multi-select checkboxes */
+        .quiz-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 150ms ease;
+            background: var(--color-white);
+            margin-bottom: 8px;
+        }
+
+        .quiz-checkbox:hover {
+            border-color: var(--color-accent);
+            background: var(--color-light);
+        }
+
+        .quiz-checkbox.checked {
+            border-color: var(--color-accent);
+            background: var(--color-light);
+        }
+
+        .quiz-checkbox__box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--color-border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 150ms ease;
+        }
+
+        .quiz-checkbox.checked .quiz-checkbox__box {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .quiz-checkbox__box svg {
+            width: 14px;
+            height: 14px;
+            stroke: white;
+            stroke-width: 3;
+            opacity: 0;
+            transition: opacity 150ms ease;
+        }
+
+        .quiz-checkbox.checked .quiz-checkbox__box svg {
+            opacity: 1;
+        }
+
+        /* ========================================
+           NAVIGATION
+           ======================================== */
+
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-md);
+        }
+
+        .quiz-nav__back {
+            font-size: 14px;
+            color: var(--color-muted);
+            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quiz-nav__back:hover {
+            color: var(--color-dark);
+        }
+
+        .quiz-nav__back svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* ========================================
+           RESULTS SCREEN
+           ======================================== */
+
+        .results {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .results__header {
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .results__score-ring {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto var(--space-md);
+            position: relative;
+        }
+
+        .results__score-ring svg {
+            transform: rotate(-90deg);
+        }
+
+        .results__score-ring circle {
+            fill: none;
+            stroke-width: 12;
+        }
+
+        .results__score-ring .bg {
+            stroke: var(--color-border);
+        }
+
+        .results__score-ring .progress {
+            stroke: var(--color-accent);
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1s ease;
+        }
+
+        .results__score-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .results__score-number {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--color-dark);
+            line-height: 1;
+        }
+
+        .results__score-label {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .results__grade {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .results__grade--good {
+            background: var(--color-success-bg);
+            color: var(--color-success);
+        }
+
+        .results__grade--warning {
+            background: var(--color-warning-bg);
+            color: var(--color-warning);
+        }
+
+        .results__grade--danger {
+            background: var(--color-danger-bg);
+            color: var(--color-danger);
+        }
+
+        .results__summary {
+            font-size: 17px;
+            color: var(--color-muted);
+        }
+
+        /* Section Breakdown */
+        .results__breakdown {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .results__breakdown-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .results__breakdown-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: 10px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .results__breakdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .results__breakdown-name {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .results__breakdown-bar {
+            width: 100px;
+            height: 8px;
+            background: var(--color-border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .results__breakdown-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .results__breakdown-fill--good { background: var(--color-success); }
+        .results__breakdown-fill--warning { background: var(--color-warning); }
+        .results__breakdown-fill--danger { background: var(--color-danger); }
+
+        .results__breakdown-score {
+            font-size: 14px;
+            font-weight: 600;
+            width: 40px;
+            text-align: right;
+        }
+
+        /* Recommendations */
+        .results__recommendations {
+            margin-bottom: var(--space-lg);
+        }
+
+        .results__recommendations-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .results__recommendations-subtitle {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .recommendation-card {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-sm);
+        }
+
+        .recommendation-card__header {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        .recommendation-card__icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .recommendation-card__icon--danger {
+            background: var(--color-danger-bg);
+            color: var(--color-danger);
+        }
+
+        .recommendation-card__icon--warning {
+            background: var(--color-warning-bg);
+            color: var(--color-warning);
+        }
+
+        .recommendation-card__icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+        .recommendation-card__title {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .recommendation-card__section {
+            font-size: 12px;
+            color: var(--color-muted);
+            margin-top: 2px;
+        }
+
+        .recommendation-card__body {
+            font-size: 14px;
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+
+        .recommendation-card__body ul {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+
+        .recommendation-card__body li {
+            margin-bottom: 4px;
+        }
+
+        /* Lead Capture */
+        .results__capture {
+            background: var(--color-dark);
+            border-radius: 16px;
+            padding: var(--space-lg);
+            color: var(--color-white);
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+
+        .results__capture h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .results__capture p {
+            font-size: 15px;
+            opacity: 0.8;
+            margin-bottom: var(--space-md);
+        }
+
+        .capture-form {
+            max-width: 360px;
+            margin: 0 auto;
+        }
+
+        .capture-form__input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.1);
+            color: var(--color-white);
+            font-family: var(--font);
+            font-size: 15px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .capture-form__input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .capture-form__input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .capture-form__checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            text-align: left;
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: var(--space-md);
+            cursor: pointer;
+        }
+
+        .capture-form__checkbox input {
+            margin-top: 2px;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--color-accent);
+        }
+
+        .capture-form .btn {
+            width: 100%;
+        }
+
+        .capture-form__skip {
+            margin-top: var(--space-sm);
+            font-size: 13px;
+            opacity: 0.6;
+            cursor: pointer;
+        }
+
+        .capture-form__skip:hover {
+            opacity: 1;
+        }
+
+        /* Actions */
+        .results__actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+
+        .footer {
+            text-align: center;
+            padding: var(--space-lg) 0;
+            font-size: 13px;
+            color: var(--color-muted);
+        }
+
+        .footer a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+
+        @media (max-width: 600px) {
+            .intro__sections-list {
+                grid-template-columns: 1fr;
+            }
+
+            .intro__meta {
+                flex-direction: column;
+                gap: var(--space-sm);
+            }
+
+            .quiz-section {
+                padding: var(--space-md);
+            }
+
+            .quiz-section__header {
+                flex-wrap: wrap;
+            }
+
+            .quiz-section__score {
+                width: 100%;
+                text-align: left;
+                margin-left: 0;
+                margin-top: var(--space-sm);
+            }
+
+            .results__breakdown-bar {
+                width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================
+         HEADER
+         ======================================== -->
+
+    <header class="header">
+        <div class="container header__inner">
+            <a href="/" class="header__logo">
+                <img src="../svg/Horizontal-Logo.svg" alt="Review My Emails">
+            </a>
+            <div class="header__progress" id="headerProgress" style="display: none;">
+                <div class="header__progress-bar">
+                    <div class="header__progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <span id="progressText">0 / 10</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ========================================
+         INTRO SCREEN
+         ======================================== -->
+
+    <div class="screen active" id="introScreen">
+        <div class="container">
+            <div class="intro">
+                <span class="intro__badge">Free Self-Assessment</span>
+                <h1>Inbox Placement Self-Audit</h1>
+                <p class="intro__subtitle">What most senders never check. Use this monthly. Be honest. This is how problems get caught before revenue drops.</p>
+
+                <div class="intro__meta">
+                    <div class="intro__meta-item">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>5-7 minutes</span>
+                    </div>
+                    <div class="intro__meta-item">
+                        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        <span>10 sections</span>
+                    </div>
+                    <div class="intro__meta-item">
+                        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <span>Personalized tips</span>
+                    </div>
+                </div>
+
+                <div class="intro__sections">
+                    <div class="intro__sections-title">What we'll cover</div>
+                    <div class="intro__sections-list">
+                        <span>Automation Timing</span>
+                        <span>Header & Footer Hygiene</span>
+                        <span>Tracking Domain Risk</span>
+                        <span>Engagement Logic</span>
+                        <span>Layout Pattern Risk</span>
+                        <span>Send Time Logic</span>
+                        <span>ESP Migration Risk</span>
+                        <span>Subject vs Preview Trust</span>
+                        <span>Spam Folder Rendering</span>
+                        <span>Validation Frequency</span>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-lg" onclick="startQuiz()">
+                    Start Audit
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         QUIZ SCREEN
+         ======================================== -->
+
+    <div class="screen" id="quizScreen">
+        <div class="container">
+            <div id="quizContent"></div>
+
+            <div class="quiz-nav">
+                <a class="quiz-nav__back" id="backBtn" onclick="previousSection()">
+                    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    Back
+                </a>
+                <button class="btn btn-primary" id="nextBtn" onclick="nextSection()">
+                    Next Section
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         RESULTS SCREEN
+         ======================================== -->
+
+    <div class="screen" id="resultsScreen">
+        <div class="container">
+            <div class="results" id="resultsContent"></div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+
+    <footer class="footer">
+        <div class="container">
+            <p>Built by <a href="/">Review My Emails</a> · <a href="/done-for-you">Get Your List Cleaned</a> · <a href="/sos-hotline">SOS Hotline</a></p>
+        </div>
+    </footer>
+
+    <!-- ========================================
+         QUIZ DATA & LOGIC
+         ======================================== -->
+
+    <script>
+        // ========================================
+        // QUIZ DATA
+        // ========================================
+
+        const quizData = {
+            sections: [
+                {
+                    id: 'automation',
+                    title: 'Automation Timing',
+                    description: 'How your automated emails behave',
+                    weight: 1.0,
+                    questions: [
+                        {
+                            id: 'auto_instant',
+                            text: 'Do any emails fire within 60 seconds of an open?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Instant triggers look automated',
+                                body: 'Gmail tracks interaction timing patterns. Human behavior is messy. Replace instant triggers with delay windows (5-15 min ranges).'
+                            }
+                        },
+                        {
+                            id: 'auto_stack',
+                            text: 'Do multiple automations stack back to back?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Stacked automations overwhelm recipients',
+                                body: 'Build cooldown periods between sequences. Add daily send caps per contact to prevent bombardment.'
+                            }
+                        },
+                        {
+                            id: 'auto_opens_only',
+                            text: 'Are follow-ups triggered by opens only?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Open-only triggers are unreliable',
+                                body: 'Apple MPP inflates opens. Mix trigger types: clicks + time + behavior. Use clicks as your primary signal.'
+                            }
+                        },
+                        {
+                            id: 'auto_fixed_delays',
+                            text: 'Do you use fixed delays instead of ranges?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'low',
+                            tip: {
+                                title: 'Fixed delays create patterns',
+                                body: 'Use ranges not exact numbers (e.g., 5-15 min instead of exactly 10 min). Randomization looks more human.'
+                            }
+                        },
+                        {
+                            id: 'auto_throttle',
+                            text: 'Do you throttle bulk sends?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Unthrottled sends spike suspiciously',
+                                body: 'Spread sends over time. ESPs and mailbox providers notice volume spikes and may throttle or filter you.'
+                            }
+                        },
+                        {
+                            id: 'auto_daily_cap',
+                            text: 'Do you cap daily sends per user?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'No daily cap = potential spam complaints',
+                                body: 'Add daily send caps per contact. Even engaged users can hit fatigue if they receive too many emails in one day.'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'header_footer',
+                    title: 'Header & Footer Hygiene',
+                    description: 'What filters see when they crawl your HTML',
+                    weight: 0.9,
+                    questions: [
+                        {
+                            id: 'hf_header_tall',
+                            text: 'Is your header taller than a phone screen?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Tall headers hide your message',
+                                body: 'Shrink header. Move primary CTA higher. Users should see value before scrolling.'
+                            }
+                        },
+                        {
+                            id: 'hf_cta_visible',
+                            text: 'Is your main CTA visible without scrolling?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Below-fold CTAs get missed',
+                                body: 'Move primary CTA above the fold. Test on mobile devices where screen real estate is limited.'
+                            }
+                        },
+                        {
+                            id: 'hf_links_working',
+                            text: 'Are all links in your emails working?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Broken links hurt deliverability',
+                                body: 'SpamAssassin rules explicitly scan for broken links. Test every email before sending. Kill dead social links.'
+                            }
+                        },
+                        {
+                            id: 'hf_address_real',
+                            text: 'Is your physical address real and current?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Fake addresses are a compliance red flag',
+                                body: 'CAN-SPAM requires a valid physical address. Filters check for this. Use a real address or registered agent.'
+                            }
+                        },
+                        {
+                            id: 'hf_unsub_oneclick',
+                            text: 'Is your unsubscribe one-click?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Difficult unsubscribe = spam complaints',
+                                body: 'Make unsubscribe obvious and one-click. Gmail and Yahoo now require list-unsubscribe headers. Hidden unsubscribes drive complaints.'
+                            }
+                        },
+                        {
+                            id: 'hf_domains_match',
+                            text: 'Do your brand domains match your sender domain?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Mismatched domains look phishy',
+                                body: 'Link domains should match sender domain. Filters flag mismatches as potential phishing.'
+                            }
+                        },
+                        {
+                            id: 'hf_shorteners',
+                            text: 'Do you use URL shorteners (bit.ly, etc)?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'URL shorteners are spam signals',
+                                body: 'Spammers use shorteners to hide destinations. Use your own branded tracking domain instead.'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'tracking_domain',
+                    title: 'Tracking Domain Risk',
+                    description: 'Domain reputation is shared and inherited',
+                    weight: 1.2,
+                    questions: [
+                        {
+                            id: 'td_shared_brands',
+                            text: 'Do multiple brands share the same tracking domain?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Shared domains share reputation damage',
+                                body: 'One brand = one domain. Cisco Talos and Proofpoint confirm domain-level reputation scoring. Bad sender poisons everyone.'
+                            }
+                        },
+                        {
+                            id: 'td_client_domain',
+                            text: 'Do clients or partners use your tracking domain?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Client behavior affects your domain',
+                                body: 'Never share tracking domains across clients. Their bad practices become your reputation problem.'
+                            }
+                        },
+                        {
+                            id: 'td_dns_locked',
+                            text: 'Is your DNS locked and secure?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Unsecured DNS is a hijacking risk',
+                                body: 'Lock your DNS registrar. Enable 2FA. DNS hijacking can destroy your sending reputation overnight.'
+                            }
+                        },
+                        {
+                            id: 'td_domain_warmed',
+                            text: 'Is your tracking domain properly warmed?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Cold domains get filtered',
+                                body: 'Warm links gradually with real engagement. New or dormant domains sending volume immediately look suspicious.'
+                            }
+                        },
+                        {
+                            id: 'td_domain_age',
+                            text: 'Is your domain older than 30 days?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'New domains are untrusted',
+                                body: 'Domain age matters. New domains have no reputation. Wait at least 30 days before high-volume sending.'
+                            }
+                        },
+                        {
+                            id: 'td_blocklist_monitoring',
+                            text: 'Do you monitor blocklists for your domain?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Blocklisting can happen silently',
+                                body: 'Monitor blocklists regularly. Use Google Postmaster, Microsoft SNDS, or third-party tools. Early detection = faster recovery.'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'engagement',
+                    title: 'Engagement Logic',
+                    description: 'How you define and track subscriber engagement',
+                    weight: 1.3,
+                    questions: [
+                        {
+                            id: 'eng_definition',
+                            text: 'What signals define "engaged" for you?',
+                            type: 'multi',
+                            options: ['Opens', 'Clicks', 'Replies', 'Purchases', 'Site visits'],
+                            minGood: 2,
+                            tip: {
+                                title: 'Single-signal engagement is unreliable',
+                                body: 'Use multiple signals. Opens are unreliable (Apple MPP). Clicks, replies, and purchases are stronger indicators of real engagement.'
+                            }
+                        },
+                        {
+                            id: 'eng_window',
+                            text: 'What engagement time window do you use?',
+                            type: 'choice',
+                            options: [
+                                { label: '14 days', value: 14 },
+                                { label: '30 days', value: 30 },
+                                { label: '60 days', value: 60 },
+                                { label: '90 days', value: 90 },
+                                { label: '180 days', value: 180 },
+                                { label: 'No window set', value: 0 }
+                            ],
+                            contextual: true,
+                            tip: {
+                                title: 'Engagement window should match your business',
+                                body: 'There is no universal "right" window. Daily newsletters need tighter windows (30 days). Monthly updates can use longer windows (90-180 days). The key is having one.'
+                            }
+                        },
+                        {
+                            id: 'eng_isp_segment',
+                            text: 'Do you segment engagement by ISP (Gmail vs Outlook vs Yahoo)?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'ISPs have different filtering logic',
+                                body: 'Gmail, Outlook, and Yahoo filter differently. Segment by ISP to identify which mailbox providers need attention. Problems often show up in one ISP first.'
+                            }
+                        },
+                        {
+                            id: 'eng_apple_opens',
+                            text: 'Do you track Apple opens differently?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Apple MPP inflates open rates',
+                                body: 'Apple Mail Privacy Protection pre-fetches images, making opens unreliable. Ignore Apple opens or weight them lower. Focus on clicks for Apple users.'
+                            }
+                        },
+                        {
+                            id: 'eng_decay',
+                            text: 'Do you decay engagement scores over time?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Old engagement is not current engagement',
+                                body: 'A click from 6 months ago is worth less than one from last week. Decay scores so recent activity matters more.'
+                            }
+                        },
+                        {
+                            id: 'eng_suppress_cold',
+                            text: 'Do you automatically suppress cold users?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Mailing cold users tanks your reputation',
+                                body: 'Auto-suppress inactive users. Build re-engagement flows first, then suppress non-responders. Stop mailing dead segments.'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'layout',
+                    title: 'Layout Pattern Risk',
+                    description: 'How predictable your emails look to filters',
+                    weight: 0.7,
+                    questions: [
+                        {
+                            id: 'lay_same_template',
+                            text: 'Do you use the same template for every send?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'low',
+                            tip: {
+                                title: 'Identical templates create patterns',
+                                body: 'Spam filters use Bayesian pattern matching. Uniform structure is a red flag. Rotate templates occasionally.'
+                            }
+                        },
+                        {
+                            id: 'lay_same_cta',
+                            text: 'Is your CTA always in the same location?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'low',
+                            tip: {
+                                title: 'Consistent CTA placement can look templated',
+                                body: 'Move CTA positions occasionally. Mix text links with buttons. Break predictable patterns.'
+                            }
+                        },
+                        {
+                            id: 'lay_ratio',
+                            text: 'Is your text-to-image ratio always the same?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'low',
+                            tip: {
+                                title: 'Over-optimized layouts look automated',
+                                body: 'Mix text-heavy emails with visual ones. Change structure monthly. Too-perfect ratios resemble bulk automation templates.'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'send_time',
+                    title: 'Send Time Logic',
+                    description: 'When and how you schedule sends',
+                    weight: 0.8,
+                    questions: [
+                        {
+                            id: 'st_same_hour',
+                            text: 'Do you send at the exact same hour every day?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Predictable timing = bot pattern',
+                                body: 'Return Path research showed varied send times improve placement vs rigid schedules. Use send windows, not exact times.'
+                            }
+                        },
+                        {
+                            id: 'st_same_minute',
+                            text: 'Do you send at the exact same minute?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'low',
+                            tip: {
+                                title: 'Exact timestamps look automated',
+                                body: 'Randomize minutes within your send window. 9:00 AM exactly every day is more suspicious than 9:03, 9:11, 9:07.'
+                            }
+                        },
+                        {
+                            id: 'st_timezone',
+                            text: 'Do you use timezone logic for sends?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'One-timezone sends miss engagement',
+                                body: 'Segment by timezone. Sending at 9 AM EST hits West Coast at 6 AM. Localized timing improves opens and engagement.'
+                            }
+                        },
+                        {
+                            id: 'st_engagement_based',
+                            text: 'Do you use engagement-based send time optimization?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'low',
+                            tip: {
+                                title: 'Past engagement predicts best send times',
+                                body: 'Use past engagement timing to personalize send times. Send when each user is most likely to engage.'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'migration',
+                    title: 'ESP Migration Risk',
+                    description: 'Risks when switching email service providers',
+                    weight: 1.0,
+                    questions: [
+                        {
+                            id: 'mig_imported_suppressions',
+                            text: 'Did you import old suppression lists during migration?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'high',
+                            contextual: true,
+                            tip: {
+                                title: 'Old suppressions hide spam traps',
+                                body: 'Spamhaus confirms recycled traps live inside old suppression files. Re-validate suppressions before importing. Better yet, start fresh.'
+                            }
+                        },
+                        {
+                            id: 'mig_imported_bounces',
+                            text: 'Did you import old hard bounce lists?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Old bounces should be discarded',
+                                body: 'Hard bounces from years ago are useless. Those addresses may be recycled as traps. Do not import them.'
+                            }
+                        },
+                        {
+                            id: 'mig_revalidated',
+                            text: 'Did you re-validate your list after migration?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Migration is validation opportunity',
+                                body: 'Validate before import to the new ESP. Migration is the perfect time to clean. Start fresh with a verified list.'
+                            }
+                        },
+                        {
+                            id: 'mig_warmup',
+                            text: 'Did you warm up as a new sender after migration?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'New IPs need warming',
+                                body: 'Changing ESPs often means new IPs. Warm as new sender. Throttle volumes. Your old reputation does not transfer automatically.'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'subject_preview',
+                    title: 'Subject vs Preview Trust',
+                    description: 'How your subject line and preview text work together',
+                    weight: 0.9,
+                    questions: [
+                        {
+                            id: 'sp_match',
+                            text: 'Do your subject and preview align with email content?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Misleading metadata kills trust',
+                                body: 'Google Postmaster flags misleading metadata as engagement killers. Subject, preview, and content should tell a consistent story.'
+                            }
+                        },
+                        {
+                            id: 'sp_clickbait',
+                            text: 'Do you use clickbait subject lines?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Clickbait drives complaints',
+                                body: 'Overpromising in subjects leads to disappointment and spam reports. Test curiosity vs clarity. Keep promises realistic.'
+                            }
+                        },
+                        {
+                            id: 'sp_caps',
+                            text: 'Do you use ALL CAPS in subject lines?',
+                            type: 'yesno',
+                            goodAnswer: 'no',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'ALL CAPS triggers spam filters',
+                                body: 'SpamAssassin and other filters penalize ALL CAPS. It looks like shouting. Use sentence case instead.'
+                            }
+                        },
+                        {
+                            id: 'sp_spam_words',
+                            text: 'Do you avoid spam trigger words (FREE, URGENT, etc)?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Spam trigger words add filter points',
+                                body: 'Words like FREE, URGENT, ACT NOW add points to spam scores. They are not automatic death, but they add up. Use sparingly.'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'spam_render',
+                    title: 'Spam Folder Rendering',
+                    description: 'How your emails look when they land in spam',
+                    weight: 0.8,
+                    questions: [
+                        {
+                            id: 'sr_tested',
+                            text: 'Have you tested how your emails render in spam folders?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Spam folders strip HTML and images',
+                                body: 'Litmus shows CTAs disappear in spam views on Outlook and Yahoo. Test what users see if they check spam.'
+                            }
+                        },
+                        {
+                            id: 'sr_images_load',
+                            text: 'Do your images load in spam view?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'low',
+                            tip: {
+                                title: 'Spam folders often block images',
+                                body: 'Use fallback text and ALT tags. Important content should not depend solely on images loading.'
+                            }
+                        },
+                        {
+                            id: 'sr_text_cta',
+                            text: 'Do you have plain text CTAs as fallbacks?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Image-only CTAs can disappear',
+                                body: 'Add plain text links as backups. If images are blocked, users should still be able to take action.'
+                            }
+                        },
+                        {
+                            id: 'sr_dark_mode',
+                            text: 'Have you tested dark mode rendering?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'low',
+                            tip: {
+                                title: 'Dark mode can break your design',
+                                body: 'Many users have dark mode enabled. Test that your emails are readable and buttons are visible in dark mode.'
+                            }
+                        }
+                    ]
+                },
+                {
+                    id: 'validation',
+                    title: 'Validation Frequency',
+                    description: 'How often you clean and validate your list',
+                    weight: 1.2,
+                    questions: [
+                        {
+                            id: 'val_frequency',
+                            text: 'How often do you validate/clean your list?',
+                            type: 'choice',
+                            options: [
+                                { label: 'Monthly', value: 'monthly', score: 100 },
+                                { label: 'Quarterly', value: 'quarterly', score: 75 },
+                                { label: 'Yearly', value: 'yearly', score: 40 },
+                                { label: 'Never', value: 'never', score: 0 }
+                            ],
+                            tip: {
+                                title: 'Lists decay constantly',
+                                body: 'Experian reports 22-30% data decay yearly across B2B lists. HubSpot reports ~28% decay from job changes and abandoned inboxes. Validate regularly.'
+                            }
+                        },
+                        {
+                            id: 'val_imports',
+                            text: 'Do you validate new imports before sending?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Unvalidated imports are risky',
+                                body: 'New lists can contain traps, invalid addresses, and competitors. Always validate before adding to your sending list.'
+                            }
+                        },
+                        {
+                            id: 'val_bounces',
+                            text: 'Do you automatically suppress hard bounces?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'high',
+                            tip: {
+                                title: 'Repeated hard bounces damage reputation',
+                                body: 'Auto-suppress hard bounces immediately. Continuing to mail invalid addresses signals you do not maintain your list.'
+                            }
+                        },
+                        {
+                            id: 'val_unknowns',
+                            text: 'Do you monitor and handle unknown/risky addresses?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Unknowns need monitoring',
+                                body: 'Addresses that validate but behave strangely (no engagement, catch-alls) need attention. Monitor risky domains and patterns.'
+                            }
+                        },
+                        {
+                            id: 'val_role',
+                            text: 'Do you suppress or segment role accounts (info@, sales@)?',
+                            type: 'yesno',
+                            goodAnswer: 'yes',
+                            badImpact: 'medium',
+                            tip: {
+                                title: 'Role accounts are shared inboxes',
+                                body: 'Role accounts (info@, support@, sales@) are read by multiple people and often generate complaints. Suppress or handle separately.'
+                            }
+                        }
+                    ]
+                }
+            ]
+        };
+
+        // ========================================
+        // STATE
+        // ========================================
+
+        let currentSection = 0;
+        let answers = {};
+        let sectionScores = {};
+
+        // ========================================
+        // FUNCTIONS
+        // ========================================
+
+        function startQuiz() {
+            document.getElementById('introScreen').classList.remove('active');
+            document.getElementById('quizScreen').classList.add('active');
+            document.getElementById('headerProgress').style.display = 'flex';
+            renderSection(0);
+        }
+
+        function renderSection(index) {
+            const section = quizData.sections[index];
+            currentSection = index;
+
+            // Update progress
+            const progress = ((index) / quizData.sections.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `${index + 1} / ${quizData.sections.length}`;
+
+            // Update nav buttons
+            document.getElementById('backBtn').style.visibility = index === 0 ? 'hidden' : 'visible';
+            document.getElementById('nextBtn').textContent = index === quizData.sections.length - 1 ? 'See Results' : 'Next Section';
+
+            // Render section
+            let html = `
+                <div class="quiz-section">
+                    <div class="quiz-section__header">
+                        <div class="quiz-section__number">${index + 1}</div>
+                        <div class="quiz-section__info">
+                            <h2>${section.title}</h2>
+                            <p>${section.description}</p>
+                        </div>
+                        <div class="quiz-section__score">
+                            <div class="quiz-section__score-value" id="sectionScore">--</div>
+                            <div class="quiz-section__score-label">Section Score</div>
+                        </div>
+                    </div>
+            `;
+
+            section.questions.forEach((q, qIndex) => {
+                html += `<div class="quiz-question" data-question="${q.id}">`;
+                html += `<div class="quiz-question__text">${q.text}</div>`;
+                html += `<div class="quiz-question__options">`;
+
+                if (q.type === 'yesno') {
+                    const currentAnswer = answers[q.id];
+                    const yesClass = currentAnswer === 'yes' ? getAnswerClass(q, 'yes') : '';
+                    const noClass = currentAnswer === 'no' ? getAnswerClass(q, 'no') : '';
+
+                    html += `<div class="quiz-option ${yesClass}" onclick="selectAnswer('${q.id}', 'yes', '${q.type}', this)">Yes</div>`;
+                    html += `<div class="quiz-option ${noClass}" onclick="selectAnswer('${q.id}', 'no', '${q.type}', this)">No</div>`;
+                } else if (q.type === 'choice') {
+                    q.options.forEach(opt => {
+                        const isSelected = answers[q.id] === opt.value;
+                        const selectedClass = isSelected ? 'selected' : '';
+                        html += `<div class="quiz-option ${selectedClass}" onclick="selectAnswer('${q.id}', '${opt.value}', '${q.type}', this)">${opt.label}</div>`;
+                    });
+                } else if (q.type === 'multi') {
+                    html += `</div><div class="quiz-question__checkboxes">`;
+                    q.options.forEach(opt => {
+                        const isChecked = answers[q.id] && answers[q.id].includes(opt);
+                        const checkedClass = isChecked ? 'checked' : '';
+                        html += `
+                            <div class="quiz-checkbox ${checkedClass}" onclick="toggleMulti('${q.id}', '${opt}', this)">
+                                <div class="quiz-checkbox__box">
+                                    <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <span>${opt}</span>
+                            </div>
+                        `;
+                    });
+                }
+
+                html += `</div></div>`;
+            });
+
+            html += `</div>`;
+
+            document.getElementById('quizContent').innerHTML = html;
+            updateSectionScore();
+        }
+
+        function getAnswerClass(question, answer) {
+            if (question.goodAnswer === answer) {
+                return 'selected-good';
+            } else if (question.badImpact === 'high') {
+                return 'selected-bad';
+            } else if (question.badImpact === 'medium') {
+                return 'selected-warning';
+            } else {
+                return 'selected';
+            }
+        }
+
+        function selectAnswer(questionId, value, type, element) {
+            answers[questionId] = value;
+
+            // Update UI
+            const container = element.parentElement;
+            container.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.className = 'quiz-option';
+            });
+
+            // Find the question to determine color
+            const section = quizData.sections[currentSection];
+            const question = section.questions.find(q => q.id === questionId);
+
+            if (type === 'yesno') {
+                element.className = 'quiz-option ' + getAnswerClass(question, value);
+            } else {
+                element.className = 'quiz-option selected';
+            }
+
+            updateSectionScore();
+        }
+
+        function toggleMulti(questionId, value, element) {
+            if (!answers[questionId]) {
+                answers[questionId] = [];
+            }
+
+            const index = answers[questionId].indexOf(value);
+            if (index > -1) {
+                answers[questionId].splice(index, 1);
+                element.classList.remove('checked');
+            } else {
+                answers[questionId].push(value);
+                element.classList.add('checked');
+            }
+
+            updateSectionScore();
+        }
+
+        function updateSectionScore() {
+            const section = quizData.sections[currentSection];
+            let earned = 0;
+            let possible = 0;
+
+            section.questions.forEach(q => {
+                if (q.type === 'yesno') {
+                    possible += 100;
+                    if (answers[q.id] === q.goodAnswer) {
+                        earned += 100;
+                    }
+                } else if (q.type === 'choice') {
+                    possible += 100;
+                    const answer = answers[q.id];
+                    if (answer) {
+                        const option = q.options.find(o => o.value === answer || o.value === parseInt(answer));
+                        if (option && option.score !== undefined) {
+                            earned += option.score;
+                        } else if (option) {
+                            // Non-zero answer is considered valid
+                            earned += answer !== 'never' && answer !== 0 ? 75 : 0;
+                        }
+                    }
+                } else if (q.type === 'multi') {
+                    possible += 100;
+                    if (answers[q.id] && answers[q.id].length >= (q.minGood || 2)) {
+                        earned += 100;
+                    } else if (answers[q.id] && answers[q.id].length > 0) {
+                        earned += 50;
+                    }
+                }
+            });
+
+            const score = possible > 0 ? Math.round((earned / possible) * 100) : 0;
+            sectionScores[section.id] = score;
+
+            const scoreEl = document.getElementById('sectionScore');
+            if (scoreEl) {
+                const answeredCount = section.questions.filter(q => answers[q.id] !== undefined).length;
+                if (answeredCount > 0) {
+                    scoreEl.textContent = score + '%';
+                    scoreEl.style.color = score >= 80 ? 'var(--color-success)' : score >= 60 ? 'var(--color-warning)' : 'var(--color-danger)';
+                }
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 0) {
+                renderSection(currentSection - 1);
+                window.scrollTo(0, 0);
+            }
+        }
+
+        function nextSection() {
+            if (currentSection < quizData.sections.length - 1) {
+                renderSection(currentSection + 1);
+                window.scrollTo(0, 0);
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quizScreen').classList.remove('active');
+            document.getElementById('resultsScreen').classList.add('active');
+            document.getElementById('headerProgress').style.display = 'none';
+
+            // Calculate overall score with weights
+            let totalWeightedScore = 0;
+            let totalWeight = 0;
+
+            quizData.sections.forEach(section => {
+                const score = sectionScores[section.id] || 0;
+                totalWeightedScore += score * section.weight;
+                totalWeight += section.weight;
+            });
+
+            const overallScore = Math.round(totalWeightedScore / totalWeight);
+
+            // Determine grade
+            let grade, gradeClass, summary;
+            if (overallScore >= 80) {
+                grade = 'Strong Foundation';
+                gradeClass = 'good';
+                summary = 'Your email practices are solid. Focus on the few areas flagged below to optimize further.';
+            } else if (overallScore >= 60) {
+                grade = 'Needs Attention';
+                gradeClass = 'warning';
+                summary = 'You have some good practices but several areas need work before they impact your deliverability.';
+            } else {
+                grade = 'High Risk';
+                gradeClass = 'danger';
+                summary = 'Multiple issues detected that are likely hurting your inbox placement. Prioritize the recommendations below.';
+            }
+
+            // Generate recommendations based on answers
+            const recommendations = generateRecommendations();
+
+            // Render results
+            let html = `
+                <div class="results__header">
+                    <div class="results__score-ring">
+                        <svg width="160" height="160" viewBox="0 0 160 160">
+                            <circle class="bg" cx="80" cy="80" r="70"/>
+                            <circle class="progress" cx="80" cy="80" r="70"
+                                stroke-dasharray="440"
+                                stroke-dashoffset="${440 - (440 * overallScore / 100)}"
+                                style="stroke: var(--color-${gradeClass === 'good' ? 'success' : gradeClass === 'warning' ? 'warning' : 'danger'})"/>
+                        </svg>
+                        <div class="results__score-value">
+                            <div class="results__score-number">${overallScore}</div>
+                            <div class="results__score-label">out of 100</div>
+                        </div>
+                    </div>
+                    <span class="results__grade results__grade--${gradeClass}">${grade}</span>
+                    <p class="results__summary">${summary}</p>
+                </div>
+
+                <div class="results__breakdown">
+                    <div class="results__breakdown-title">Score by Section</div>
+                    ${quizData.sections.map(section => {
+                        const score = sectionScores[section.id] || 0;
+                        const fillClass = score >= 80 ? 'good' : score >= 60 ? 'warning' : 'danger';
+                        return `
+                            <div class="results__breakdown-item">
+                                <span class="results__breakdown-name">${section.title}</span>
+                                <div class="results__breakdown-bar">
+                                    <div class="results__breakdown-fill results__breakdown-fill--${fillClass}" style="width: ${score}%"></div>
+                                </div>
+                                <span class="results__breakdown-score" style="color: var(--color-${fillClass})">${score}%</span>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+
+            if (recommendations.length > 0) {
+                html += `
+                    <div class="results__recommendations">
+                        <h3 class="results__recommendations-title">Your Personalized Action Items</h3>
+                        <p class="results__recommendations-subtitle">Based on your answers, here's what to focus on:</p>
+                        ${recommendations.map(rec => `
+                            <div class="recommendation-card">
+                                <div class="recommendation-card__header">
+                                    <div class="recommendation-card__icon recommendation-card__icon--${rec.severity}">
+                                        <svg viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                    </div>
+                                    <div>
+                                        <div class="recommendation-card__title">${rec.title}</div>
+                                        <div class="recommendation-card__section">${rec.section}</div>
+                                    </div>
+                                </div>
+                                <div class="recommendation-card__body">${rec.body}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            html += `
+                <div class="results__capture">
+                    <h3>Save Your Results</h3>
+                    <p>Get a detailed PDF report and optional monthly reminders to re-audit.</p>
+                    <form class="capture-form" onsubmit="submitCapture(event)">
+                        <input type="email" class="capture-form__input" placeholder="your@email.com" required id="captureEmail">
+                        <label class="capture-form__checkbox">
+                            <input type="checkbox" id="captureNewsletter">
+                            <span>Also send me deliverability tips (optional, you can unsubscribe anytime)</span>
+                        </label>
+                        <button type="submit" class="btn btn-primary">Send My Report</button>
+                        <div class="capture-form__skip" onclick="skipCapture()">Skip, I'll just review on screen</div>
+                    </form>
+                </div>
+
+                <div class="results__actions">
+                    <button class="btn btn-secondary" onclick="restartQuiz()">Retake Audit</button>
+                    <a href="/done-for-you" class="btn btn-primary">Get Expert List Cleaning</a>
+                </div>
+            `;
+
+            document.getElementById('resultsContent').innerHTML = html;
+            window.scrollTo(0, 0);
+        }
+
+        function generateRecommendations() {
+            const recs = [];
+
+            quizData.sections.forEach(section => {
+                section.questions.forEach(q => {
+                    const answer = answers[q.id];
+                    let shouldRecommend = false;
+                    let severity = 'warning';
+
+                    if (q.type === 'yesno' && answer !== undefined && answer !== q.goodAnswer) {
+                        shouldRecommend = true;
+                        severity = q.badImpact === 'high' ? 'danger' : 'warning';
+                    } else if (q.type === 'choice' && answer !== undefined) {
+                        const option = q.options.find(o => o.value === answer || o.value === parseInt(answer));
+                        if (option && option.score !== undefined && option.score < 60) {
+                            shouldRecommend = true;
+                            severity = option.score < 40 ? 'danger' : 'warning';
+                        } else if (answer === 'never' || answer === 0) {
+                            shouldRecommend = true;
+                            severity = 'danger';
+                        }
+                    } else if (q.type === 'multi') {
+                        if (!answer || answer.length < (q.minGood || 2)) {
+                            shouldRecommend = true;
+                            severity = 'warning';
+                        }
+                    }
+
+                    if (shouldRecommend && q.tip) {
+                        recs.push({
+                            title: q.tip.title,
+                            body: q.tip.body,
+                            section: section.title,
+                            severity: severity,
+                            impact: q.badImpact || 'medium'
+                        });
+                    }
+                });
+            });
+
+            // Sort by severity (danger first) then by impact
+            recs.sort((a, b) => {
+                if (a.severity !== b.severity) {
+                    return a.severity === 'danger' ? -1 : 1;
+                }
+                const impactOrder = { high: 0, medium: 1, low: 2 };
+                return impactOrder[a.impact] - impactOrder[b.impact];
+            });
+
+            // Limit to top 8 recommendations
+            return recs.slice(0, 8);
+        }
+
+        function submitCapture(event) {
+            event.preventDefault();
+            const email = document.getElementById('captureEmail').value;
+            const newsletter = document.getElementById('captureNewsletter').checked;
+
+            // In a real implementation, this would send to your backend
+            console.log('Capture:', { email, newsletter, score: sectionScores, answers });
+
+            // Show thank you message
+            document.querySelector('.results__capture').innerHTML = `
+                <h3>Report Sent!</h3>
+                <p>Check your inbox for your detailed audit report.${newsletter ? ' You\'ll also receive our deliverability tips.' : ''}</p>
+            `;
+        }
+
+        function skipCapture() {
+            document.querySelector('.results__capture').style.display = 'none';
+        }
+
+        function restartQuiz() {
+            answers = {};
+            sectionScores = {};
+            currentSection = 0;
+            document.getElementById('resultsScreen').classList.remove('active');
+            document.getElementById('introScreen').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>

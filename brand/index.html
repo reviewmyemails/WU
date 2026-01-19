@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RME Brand Style Guide — Confirmed</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           CSS CUSTOM PROPERTIES — Copy These
+           ======================================== */
+        :root {
+            /* Primary Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #ffffff;
+            --color-off-white: #fafcfc;
+
+            /* Light Backgrounds */
+            --color-light: #f0fdfa;
+            --color-light-alt: #ccfbf1;
+
+            /* Text Colors */
+            --color-muted: #6b7280;
+            --color-border: #e5e7eb;
+
+            /* Secondary Accent (use sparingly) */
+            --color-secondary: #fbbf24;
+
+            /* Status Colors */
+            --color-success: #1fa95c;
+            --color-warning: #f9943b;
+            --color-danger: #f33144;
+
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --space-2xl: 64px;
+
+            /* Border Radius */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-full: 100px;
+        }
+
+        /* ========================================
+           BASE STYLES
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: var(--color-off-white);
+            color: var(--color-dark);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .header {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: var(--space-xl) 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .badge-confirmed {
+            display: inline-block;
+            background: var(--color-accent);
+            color: var(--color-white);
+            padding: 4px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 12px;
+            vertical-align: middle;
+        }
+
+        section {
+            padding: var(--space-xl) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin-bottom: var(--space-md);
+        }
+
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* ========================================
+           COLOR SWATCHES
+           ======================================== */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .color-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .color-swatch {
+            height: 100px;
+            display: flex;
+            align-items: flex-end;
+            padding: var(--space-sm);
+        }
+
+        .color-swatch--dark .color-label {
+            color: var(--color-white);
+        }
+
+        .color-swatch--light .color-label {
+            color: var(--color-dark);
+        }
+
+        .color-label {
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .color-info {
+            padding: var(--space-sm);
+        }
+
+        .color-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 4px;
+        }
+
+        .color-hex {
+            font-size: 13px;
+            font-family: 'SF Mono', Monaco, monospace;
+            color: var(--color-muted);
+        }
+
+        .color-usage {
+            font-size: 12px;
+            color: var(--color-muted);
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+        .type-specimen {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .type-row {
+            display: flex;
+            align-items: baseline;
+            gap: var(--space-md);
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .type-row:last-child {
+            border-bottom: none;
+        }
+
+        .type-label {
+            width: 120px;
+            flex-shrink: 0;
+            font-size: 12px;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .type-specs {
+            width: 180px;
+            flex-shrink: 0;
+            font-size: 12px;
+            color: var(--color-muted);
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+
+        .type-sample {
+            flex: 1;
+        }
+
+        .type-h1 { font-size: 48px; font-weight: 700; line-height: 1.1; }
+        .type-h2 { font-size: 32px; font-weight: 700; line-height: 1.2; }
+        .type-h3 { font-size: 24px; font-weight: 600; line-height: 1.3; }
+        .type-h4 { font-size: 18px; font-weight: 600; line-height: 1.4; }
+        .type-body { font-size: 16px; font-weight: 400; line-height: 1.6; }
+        .type-body-lg { font-size: 18px; font-weight: 400; line-height: 1.6; }
+        .type-small { font-size: 14px; font-weight: 400; line-height: 1.5; color: var(--color-muted); }
+        .type-caption { font-size: 12px; font-weight: 500; line-height: 1.4; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        /* ========================================
+           BUTTONS
+           ======================================== */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .button-example {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+        }
+
+        .button-example h4 {
+            font-size: 12px;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 180ms ease;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-light);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-accent);
+            padding: 14px 16px;
+        }
+
+        .btn-ghost:hover {
+            background: var(--color-light);
+        }
+
+        /* Dark background variants */
+        .btn-primary-on-dark {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .btn-secondary-on-dark {
+            background: transparent;
+            border-color: var(--color-white);
+            color: var(--color-white);
+        }
+
+        .btn-ghost-on-dark {
+            background: transparent;
+            color: var(--color-white);
+        }
+
+        /* ========================================
+           LIGHT/DARK MODE EXAMPLES
+           ======================================== */
+        .mode-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        @media (max-width: 768px) {
+            .mode-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .mode-card {
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            overflow: hidden;
+        }
+
+        .mode-card--light {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+        }
+
+        .mode-card--dark {
+            background: var(--color-dark);
+            color: var(--color-white);
+        }
+
+        .mode-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-md);
+            opacity: 0.6;
+        }
+
+        .mode-card h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .mode-card p {
+            font-size: 16px;
+            margin-bottom: var(--space-md);
+            opacity: 0.85;
+        }
+
+        .mode-card--light p {
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           LOGO EXAMPLES
+           ======================================== */
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .logo-card {
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 180px;
+        }
+
+        .logo-card--white {
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+        }
+
+        .logo-card--light {
+            background: var(--color-light);
+        }
+
+        .logo-card--dark {
+            background: var(--color-dark);
+        }
+
+        .logo-card--accent {
+            background: var(--color-accent);
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text--dark {
+            color: var(--color-dark);
+        }
+
+        .logo-text--white {
+            color: var(--color-white);
+        }
+
+        .logo-text--accent {
+            color: var(--color-accent);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .logo-icon--filled {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .logo-icon--outline {
+            border: 2px solid currentColor;
+        }
+
+        .logo-usage {
+            font-size: 12px;
+            margin-top: var(--space-sm);
+            opacity: 0.6;
+            text-align: center;
+        }
+
+        /* ========================================
+           STATUS INDICATORS
+           ======================================== */
+        .status-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .status-example {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+
+        .status-example h4 {
+            font-size: 12px;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .status-pills {
+            display: flex;
+            gap: var(--space-xs);
+            flex-wrap: wrap;
+        }
+
+        .status-pill {
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .status-keep { background: var(--color-success); color: white; }
+        .status-monitor { background: var(--color-warning); color: white; }
+        .status-suppress { background: var(--color-danger); color: white; }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-success { background: #dcfce7; color: #166534; }
+        .badge-warning { background: #fef3c7; color: #92400e; }
+        .badge-danger { background: #fee2e2; color: #991b1b; }
+        .badge-info { background: var(--color-light); color: var(--color-dark); }
+        .badge-accent { background: var(--color-secondary); color: var(--color-dark); }
+
+        /* ========================================
+           CODE BLOCK
+           ======================================== */
+        .code-block {
+            background: #1e293b;
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            overflow-x: auto;
+            margin-bottom: var(--space-md);
+        }
+
+        .code-block pre {
+            font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #e2e8f0;
+            margin: 0;
+        }
+
+        .code-comment { color: #64748b; }
+        .code-property { color: #7dd3fc; }
+        .code-value { color: #a5f3fc; }
+
+        /* ========================================
+           COMPONENT EXAMPLES
+           ======================================== */
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .component-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid var(--color-border);
+        }
+
+        .component-card h4 {
+            font-size: 12px;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: var(--space-md);
+        }
+
+        /* Card Example */
+        .example-card {
+            background: var(--color-light);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+        }
+
+        .example-card h5 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: var(--space-xs);
+        }
+
+        .example-card p {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        /* Input Example */
+        .example-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 16px;
+            font-family: var(--font-family);
+            transition: border-color 180ms ease;
+        }
+
+        .example-input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .example-input::placeholder {
+            color: var(--color-muted);
+        }
+
+        /* Link Examples */
+        .link-examples {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .example-link {
+            color: var(--color-accent);
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .example-link:hover {
+            text-decoration: underline;
+        }
+
+        .example-link-muted {
+            color: var(--color-muted);
+            text-decoration: none;
+        }
+
+        .example-link-muted:hover {
+            color: var(--color-dark);
+        }
+
+        /* Topic Pills (from SOS page) */
+        .topic-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .topic-pill {
+            display: inline-block;
+            padding: 8px 14px;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            color: var(--color-dark);
+        }
+
+        .topic-pill--lg {
+            font-size: 14px;
+            padding: 10px 18px;
+        }
+
+        .topic-pill--sm {
+            font-size: 12px;
+            padding: 6px 12px;
+            opacity: 0.8;
+        }
+
+        /* ========================================
+           SPACING REFERENCE
+           ======================================== */
+        .spacing-grid {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-lg);
+        }
+
+        .spacing-item {
+            text-align: center;
+        }
+
+        .spacing-visual {
+            background: var(--color-accent);
+            opacity: 0.3;
+            border-radius: 4px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .spacing-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-dark);
+        }
+
+        .spacing-value {
+            font-size: 11px;
+            color: var(--color-muted);
+            font-family: 'SF Mono', Monaco, monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="container">
+            <h1>Review My Emails <span class="badge-confirmed">Confirmed</span></h1>
+            <p>Brand Style Guide — Bold Teal Palette</p>
+        </div>
+    </div>
+
+    <!-- Colors Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Color System</h2>
+            <p class="section-subtitle">Primary palette. Copy CSS custom properties to use across all pages.</p>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); color: var(--color-dark);">Primary Colors</h3>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--dark" style="background: #134e4a;">
+                        <span class="color-label">Dark Base</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Dark</div>
+                        <div class="color-hex">#134e4a</div>
+                        <div class="color-usage">Headers, footers, dark sections, primary text</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--dark" style="background: #0d9488;">
+                        <span class="color-label">Accent</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Accent</div>
+                        <div class="color-hex">#0d9488</div>
+                        <div class="color-usage">Buttons, links, interactive elements, emphasis</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--dark" style="background: #0f766e;">
+                        <span class="color-label">Accent Hover</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Accent Hover</div>
+                        <div class="color-hex">#0f766e</div>
+                        <div class="color-usage">Button hover states, active states</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--light" style="background: #ffffff; border: 1px solid #e5e7eb;">
+                        <span class="color-label">White</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">White</div>
+                        <div class="color-hex">#ffffff</div>
+                        <div class="color-usage">Cards, content backgrounds</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--light" style="background: #fafcfc;">
+                        <span class="color-label">Off-White</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Off-White</div>
+                        <div class="color-hex">#fafcfc</div>
+                        <div class="color-usage">Page backgrounds</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--light" style="background: #f0fdfa;">
+                        <span class="color-label">Light</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Light</div>
+                        <div class="color-hex">#f0fdfa</div>
+                        <div class="color-usage">Section backgrounds, subtle emphasis</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--light" style="background: #ccfbf1;">
+                        <span class="color-label">Light Alt</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Light Alt</div>
+                        <div class="color-hex">#ccfbf1</div>
+                        <div class="color-usage">Highlighted areas, callout backgrounds</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--light" style="background: #6b7280;">
+                        <span class="color-label" style="color: white;">Muted</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Muted</div>
+                        <div class="color-hex">#6b7280</div>
+                        <div class="color-usage">Secondary text, captions, placeholders</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Secondary & Status Colors</h3>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--light" style="background: #fbbf24;">
+                        <span class="color-label">Secondary</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Secondary (Gold)</div>
+                        <div class="color-hex">#fbbf24</div>
+                        <div class="color-usage">Use sparingly: featured badges, special highlights</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--dark" style="background: #1fa95c;">
+                        <span class="color-label">Success</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Success / Keep</div>
+                        <div class="color-hex">#1fa95c</div>
+                        <div class="color-usage">Positive status, "Keep" labels, confirmations</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--dark" style="background: #f9943b;">
+                        <span class="color-label">Warning</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Warning / Monitor</div>
+                        <div class="color-hex">#f9943b</div>
+                        <div class="color-usage">Caution status, "Monitor" labels, alerts</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-swatch color-swatch--dark" style="background: #f33144;">
+                        <span class="color-label">Danger</span>
+                    </div>
+                    <div class="color-info">
+                        <div class="color-name">Danger / Suppress</div>
+                        <div class="color-hex">#f33144</div>
+                        <div class="color-usage">Negative status, "Suppress" labels, errors</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">CSS Custom Properties</h3>
+            <div class="code-block">
+                <pre><span class="code-comment">/* Copy this to your CSS */</span>
+:root {
+    <span class="code-comment">/* Primary Colors */</span>
+    <span class="code-property">--color-dark:</span> <span class="code-value">#134e4a</span>;
+    <span class="code-property">--color-accent:</span> <span class="code-value">#0d9488</span>;
+    <span class="code-property">--color-accent-hover:</span> <span class="code-value">#0f766e</span>;
+    <span class="code-property">--color-white:</span> <span class="code-value">#ffffff</span>;
+    <span class="code-property">--color-off-white:</span> <span class="code-value">#fafcfc</span>;
+
+    <span class="code-comment">/* Light Backgrounds */</span>
+    <span class="code-property">--color-light:</span> <span class="code-value">#f0fdfa</span>;
+    <span class="code-property">--color-light-alt:</span> <span class="code-value">#ccfbf1</span>;
+
+    <span class="code-comment">/* Text & Borders */</span>
+    <span class="code-property">--color-muted:</span> <span class="code-value">#6b7280</span>;
+    <span class="code-property">--color-border:</span> <span class="code-value">#e5e7eb</span>;
+
+    <span class="code-comment">/* Secondary (use sparingly) */</span>
+    <span class="code-property">--color-secondary:</span> <span class="code-value">#fbbf24</span>;
+
+    <span class="code-comment">/* Status Colors */</span>
+    <span class="code-property">--color-success:</span> <span class="code-value">#1fa95c</span>;
+    <span class="code-property">--color-warning:</span> <span class="code-value">#f9943b</span>;
+    <span class="code-property">--color-danger:</span> <span class="code-value">#f33144</span>;
+}</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Typography</h2>
+            <p class="section-subtitle">Inter font family. Weights: 400 (regular), 500 (medium), 600 (semibold), 700 (bold).</p>
+
+            <div class="type-specimen">
+                <div class="type-row">
+                    <div class="type-label">H1 / Hero</div>
+                    <div class="type-specs">48px / 700 / 1.1</div>
+                    <div class="type-sample type-h1">Clean email lists</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-label">H2 / Section</div>
+                    <div class="type-specs">32px / 700 / 1.2</div>
+                    <div class="type-sample type-h2">Why This Matters</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-label">H3 / Card</div>
+                    <div class="type-specs">24px / 600 / 1.3</div>
+                    <div class="type-sample type-h3">Done-For-You Review</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-label">H4 / Subhead</div>
+                    <div class="type-specs">18px / 600 / 1.4</div>
+                    <div class="type-sample type-h4">What you get back</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-label">Body Large</div>
+                    <div class="type-specs">18px / 400 / 1.6</div>
+                    <div class="type-sample type-body-lg">Expert analysis. Clear explanations. Real results.</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-label">Body</div>
+                    <div class="type-specs">16px / 400 / 1.6</div>
+                    <div class="type-sample type-body">We review every address and return it labeled: Keep, Monitor, or Suppress.</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-label">Small</div>
+                    <div class="type-specs">14px / 400 / 1.5</div>
+                    <div class="type-sample type-small">Within 72 hours. Often sooner.</div>
+                </div>
+                <div class="type-row">
+                    <div class="type-label">Caption</div>
+                    <div class="type-specs">12px / 500 / 1.4</div>
+                    <div class="type-sample type-caption">Free Service</div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Font Import</h3>
+            <div class="code-block">
+                <pre><span class="code-comment">&lt;!-- Add to &lt;head&gt; --&gt;</span>
+&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet&gt;
+
+<span class="code-comment">/* CSS */</span>
+<span class="code-property">--font-family:</span> <span class="code-value">'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif</span>;</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Buttons Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Buttons</h2>
+            <p class="section-subtitle">Three button styles. Primary for main actions, secondary for alternatives, ghost for tertiary.</p>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); color: var(--color-dark);">On Light Backgrounds</h3>
+            <div class="button-grid">
+                <div class="button-example" style="flex: 1; min-width: 200px;">
+                    <h4>Primary</h4>
+                    <button class="btn btn-primary">Get My List Cleaned</button>
+                </div>
+                <div class="button-example" style="flex: 1; min-width: 200px;">
+                    <h4>Secondary</h4>
+                    <button class="btn btn-secondary">Learn More</button>
+                </div>
+                <div class="button-example" style="flex: 1; min-width: 200px;">
+                    <h4>Ghost / Link</h4>
+                    <button class="btn btn-ghost">See Pricing →</button>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">On Dark Backgrounds</h3>
+            <div class="button-grid">
+                <div class="button-example" style="flex: 1; min-width: 200px; background: var(--color-dark);">
+                    <h4 style="color: rgba(255,255,255,0.6);">Primary</h4>
+                    <button class="btn btn-primary-on-dark">Get My List Cleaned</button>
+                </div>
+                <div class="button-example" style="flex: 1; min-width: 200px; background: var(--color-dark);">
+                    <h4 style="color: rgba(255,255,255,0.6);">Secondary</h4>
+                    <button class="btn btn-secondary-on-dark">Learn More</button>
+                </div>
+                <div class="button-example" style="flex: 1; min-width: 200px; background: var(--color-dark);">
+                    <h4 style="color: rgba(255,255,255,0.6);">Ghost / Link</h4>
+                    <button class="btn btn-ghost-on-dark">See Pricing →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Light/Dark Mode Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Light & Dark Sections</h2>
+            <p class="section-subtitle">Alternate between light and dark sections for visual rhythm. Both need full component support.</p>
+
+            <div class="mode-grid">
+                <div class="mode-card mode-card--light">
+                    <div class="mode-label">Light Section</div>
+                    <h3 style="color: var(--color-dark);">Ready to clean your list?</h3>
+                    <p>Expert analysis. Clear explanations. Real results.</p>
+                    <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                        <button class="btn btn-primary">Start Now</button>
+                        <button class="btn btn-secondary">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="mode-card mode-card--dark">
+                    <div class="mode-label">Dark Section</div>
+                    <h3>Ready to clean your list?</h3>
+                    <p>Expert analysis. Clear explanations. Real results.</p>
+                    <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                        <button class="btn btn-primary-on-dark">Start Now</button>
+                        <button class="btn btn-secondary-on-dark">Learn More</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mode-grid">
+                <div class="mode-card" style="background: var(--color-light);">
+                    <div class="mode-label" style="color: var(--color-muted);">Light Alt (Tinted)</div>
+                    <h3 style="color: var(--color-dark);">Why Is This Free?</h3>
+                    <p style="color: var(--color-muted);">Trust beats tactics. We help without charging because it's the right thing to do.</p>
+                    <button class="btn btn-primary">Email the SOS Hotline</button>
+                </div>
+
+                <div class="mode-card" style="background: var(--color-accent);">
+                    <div class="mode-label" style="color: rgba(255,255,255,0.6);">Accent Section (Use Sparingly)</div>
+                    <h3 style="color: white;">Featured Highlight</h3>
+                    <p style="color: rgba(255,255,255,0.9);">For special callouts or important CTAs. Don't overuse.</p>
+                    <button class="btn" style="background: white; color: var(--color-dark);">Take Action</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logo Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Logo Usage</h2>
+            <p class="section-subtitle">Logo adapts to background. Use icon + wordmark or wordmark alone. Maintain clear space.</p>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); color: var(--color-dark);">Horizontal Logo</h3>
+            <div class="logo-grid">
+                <div class="logo-card logo-card--white">
+                    <img src="svg/Horizontal-Logo.svg" alt="RME Horizontal Logo" style="max-width: 280px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">On white / light backgrounds</div>
+                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Horizontal-Logo.svg</code>
+                </div>
+
+                <div class="logo-card logo-card--dark">
+                    <img src="svg/Dark-Horizontal-Logo.svg" alt="RME Dark Horizontal Logo" style="max-width: 280px; height: auto;">
+                    <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
+                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Horizontal-Logo.svg</code>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Square Logo</h3>
+            <div class="logo-grid">
+                <div class="logo-card logo-card--white">
+                    <img src="svg/Square-Logo.svg" alt="RME Square Logo" style="max-width: 200px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">On white / light backgrounds</div>
+                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Square-Logo.svg</code>
+                </div>
+
+                <div class="logo-card logo-card--dark">
+                    <img src="svg/Dark-Square-Logo.svg" alt="RME Dark Square Logo" style="max-width: 200px; height: auto;">
+                    <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
+                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Square-Logo.svg</code>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Social Media Icon</h3>
+            <div class="logo-grid">
+                <div class="logo-card logo-card--white" style="min-height: 160px;">
+                    <img src="svg/Social-Media-Icon.svg" alt="RME Social Media Icon" style="max-width: 100px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Profile pictures, favicons</div>
+                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Social-Media-Icon.svg</code>
+                </div>
+
+                <div class="logo-card logo-card--dark" style="min-height: 160px;">
+                    <img src="svg/Dark-Social-Media-Icon.svg" alt="RME Dark Social Media Icon" style="max-width: 100px; height: auto;">
+                    <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
+                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Social-Media-Icon.svg</code>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Icon Only (Octopus)</h3>
+            <div class="logo-grid">
+                <div class="logo-card logo-card--light" style="min-height: 160px;">
+                    <img src="svg/Icon.svg" alt="RME Icon" style="max-width: 100px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Standalone mark</div>
+                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Icon.svg</code>
+                </div>
+
+                <div class="logo-card logo-card--dark" style="min-height: 160px;">
+                    <img src="svg/Dark-Icon.svg" alt="RME Dark Icon" style="max-width: 100px; height: auto;">
+                    <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
+                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Icon.svg</code>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Vertical Logo</h3>
+            <div class="logo-grid">
+                <div class="logo-card logo-card--white" style="min-height: 220px;">
+                    <img src="svg/Vertical-Logo.svg" alt="RME Vertical Logo" style="max-width: 160px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">When horizontal space is limited</div>
+                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Vertical-Logo.svg</code>
+                </div>
+
+                <div class="logo-card logo-card--dark" style="min-height: 220px;">
+                    <img src="svg/Dark-Vertical-Logo.svg" alt="RME Dark Vertical Logo" style="max-width: 160px; height: auto;">
+                    <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
+                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Vertical-Logo.svg</code>
+                </div>
+            </div>
+
+            <!-- Logo File Reference -->
+            <div style="background: var(--color-light); border-radius: var(--radius-lg); padding: var(--space-lg); margin-top: var(--space-lg);">
+                <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); color: var(--color-dark);">All Logo Files</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-sm); font-size: 13px; font-family: 'SF Mono', Monaco, monospace; color: var(--color-muted);">
+                    <div>
+                        <strong style="color: var(--color-dark);">Light BG:</strong><br>
+                        svg/Horizontal-Logo.svg<br>
+                        svg/Vertical-Logo.svg<br>
+                        svg/Square-Logo.svg<br>
+                        svg/Social-Media-Icon.svg<br>
+                        svg/Icon.svg
+                    </div>
+                    <div>
+                        <strong style="color: var(--color-dark);">Dark BG:</strong><br>
+                        svg/Dark-Horizontal-Logo.svg<br>
+                        svg/Dark-Vertical-Logo.svg<br>
+                        svg/Dark-Square-Logo.svg<br>
+                        svg/Dark-Social-Media-Icon.svg<br>
+                        svg/Dark-Icon.svg
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Status Indicators Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Status Indicators</h2>
+            <p class="section-subtitle">Consistent status colors across all components. Pills for prominent status, badges for inline.</p>
+
+            <div class="status-grid">
+                <div class="status-example" style="flex: 1; min-width: 200px;">
+                    <h4>Status Pills (Large)</h4>
+                    <div class="status-pills">
+                        <span class="status-pill status-keep">Keep</span>
+                        <span class="status-pill status-monitor">Monitor</span>
+                        <span class="status-pill status-suppress">Suppress</span>
+                    </div>
+                </div>
+
+                <div class="status-example" style="flex: 1; min-width: 200px;">
+                    <h4>Inline Badges (Small)</h4>
+                    <div class="status-pills">
+                        <span class="badge badge-success">Valid</span>
+                        <span class="badge badge-warning">Unknown</span>
+                        <span class="badge badge-danger">Invalid</span>
+                        <span class="badge badge-info">Catch-All</span>
+                    </div>
+                </div>
+
+                <div class="status-example" style="flex: 1; min-width: 200px;">
+                    <h4>Special Badges</h4>
+                    <div class="status-pills">
+                        <span class="badge badge-accent">Featured</span>
+                        <span class="badge" style="background: var(--color-accent); color: white;">Free Service</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Components Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Component Examples</h2>
+            <p class="section-subtitle">Common UI patterns using the brand system.</p>
+
+            <div class="component-grid">
+                <div class="component-card">
+                    <h4>Card</h4>
+                    <div class="example-card">
+                        <h5>Done-For-You Review</h5>
+                        <p>Send us your list. We review every address and return it labeled.</p>
+                        <button class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <h4>Form Input</h4>
+                    <input type="email" class="example-input" placeholder="your@email.com">
+                    <p style="font-size: 12px; color: var(--color-muted); margin-top: 8px;">Focus to see accent border</p>
+                </div>
+
+                <div class="component-card">
+                    <h4>Links</h4>
+                    <div class="link-examples">
+                        <a href="#" class="example-link">Primary link style →</a>
+                        <a href="#" class="example-link-muted">Secondary muted link</a>
+                        <span style="font-size: 14px; color: var(--color-muted);">Inline text with <a href="#" class="example-link" style="font-size: inherit;">embedded link</a> example.</span>
+                    </div>
+                </div>
+
+                <div class="component-card">
+                    <h4>Topic Pills (Cloud)</h4>
+                    <div class="topic-pills">
+                        <span class="topic-pill topic-pill--lg">Deliverability</span>
+                        <span class="topic-pill">Bounces</span>
+                        <span class="topic-pill topic-pill--sm">SPF</span>
+                        <span class="topic-pill">DKIM</span>
+                        <span class="topic-pill topic-pill--sm">DMARC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spacing Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Spacing Scale</h2>
+            <p class="section-subtitle">Consistent spacing using CSS custom properties. 8px base unit.</p>
+
+            <div class="spacing-grid">
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="width: 8px; height: 40px;"></div>
+                    <div class="spacing-label">XS</div>
+                    <div class="spacing-value">8px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="width: 16px; height: 40px;"></div>
+                    <div class="spacing-label">SM</div>
+                    <div class="spacing-value">16px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="width: 24px; height: 40px;"></div>
+                    <div class="spacing-label">MD</div>
+                    <div class="spacing-value">24px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="width: 32px; height: 40px;"></div>
+                    <div class="spacing-label">LG</div>
+                    <div class="spacing-value">32px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="width: 48px; height: 40px;"></div>
+                    <div class="spacing-label">XL</div>
+                    <div class="spacing-value">48px</div>
+                </div>
+                <div class="spacing-item">
+                    <div class="spacing-visual" style="width: 64px; height: 40px;"></div>
+                    <div class="spacing-label">2XL</div>
+                    <div class="spacing-value">64px</div>
+                </div>
+            </div>
+
+            <div class="code-block">
+                <pre><span class="code-comment">/* Spacing variables */</span>
+<span class="code-property">--space-xs:</span> <span class="code-value">8px</span>;
+<span class="code-property">--space-sm:</span> <span class="code-value">16px</span>;
+<span class="code-property">--space-md:</span> <span class="code-value">24px</span>;
+<span class="code-property">--space-lg:</span> <span class="code-value">32px</span>;
+<span class="code-property">--space-xl:</span> <span class="code-value">48px</span>;
+<span class="code-property">--space-2xl:</span> <span class="code-value">64px</span>;
+
+<span class="code-comment">/* Border radius */</span>
+<span class="code-property">--radius-sm:</span> <span class="code-value">6px</span>;
+<span class="code-property">--radius-md:</span> <span class="code-value">8px</span>;
+<span class="code-property">--radius-lg:</span> <span class="code-value">12px</span>;
+<span class="code-property">--radius-full:</span> <span class="code-value">100px</span>;</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marketing Examples Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Marketing Examples</h2>
+            <p class="section-subtitle">Practical color and typography usage for ads, social media, emails, and promotional materials.</p>
+
+            <!-- Social Media Graphics -->
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--space-md); color: var(--color-dark);">Social Media Graphics</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl);">
+
+                <!-- Instagram/Facebook Post - Dark BG -->
+                <div style="background: var(--color-dark); border-radius: var(--radius-lg); padding: var(--space-lg); aspect-ratio: 1/1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <img src="svg/Dark-Icon.svg" alt="RME Icon" style="width: 48px; height: auto;">
+                    <div>
+                        <p style="color: var(--color-light-alt); font-size: 14px; font-weight: 500; margin-bottom: var(--space-xs);">EMAIL DELIVERABILITY TIP</p>
+                        <h4 style="color: white; font-size: 28px; font-weight: 700; line-height: 1.2; margin-bottom: var(--space-sm);">Your list isn't<br>the problem.<br><span style="color: var(--color-accent);">Your hygiene is.</span></h4>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 14px;">Free list review → reviewmyemails.com</p>
+                    </div>
+                </div>
+
+                <!-- Instagram/Facebook Post - Light BG -->
+                <div style="background: var(--color-light); border-radius: var(--radius-lg); padding: var(--space-lg); aspect-ratio: 1/1; display: flex; flex-direction: column; justify-content: space-between;">
+                    <img src="svg/Icon.svg" alt="RME Icon" style="width: 48px; height: auto;">
+                    <div>
+                        <p style="color: var(--color-accent); font-size: 14px; font-weight: 600; margin-bottom: var(--space-xs);">FREE SERVICE</p>
+                        <h4 style="color: var(--color-dark); font-size: 26px; font-weight: 700; line-height: 1.2; margin-bottom: var(--space-sm);">We'll review your entire email list.</h4>
+                        <p style="color: var(--color-muted); font-size: 14px;">No strings attached. Just expert help.</p>
+                    </div>
+                </div>
+
+                <!-- Story/Vertical Format -->
+                <div style="background: linear-gradient(180deg, var(--color-dark) 0%, #0f3d3a 100%); border-radius: var(--radius-lg); padding: var(--space-lg); aspect-ratio: 9/16; max-height: 400px; display: flex; flex-direction: column; justify-content: space-between; align-items: center; text-align: center;">
+                    <img src="svg/Dark-Vertical-Logo.svg" alt="RME Logo" style="width: 100px; height: auto; margin-top: var(--space-md);">
+                    <div>
+                        <h4 style="color: white; font-size: 22px; font-weight: 700; line-height: 1.3; margin-bottom: var(--space-sm);">Stop guessing.<br>Start knowing.</h4>
+                        <p style="color: var(--color-accent); font-size: 14px; font-weight: 600;">Swipe up for free review</p>
+                    </div>
+                    <div style="width: 40px; height: 40px; border: 2px solid var(--color-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: var(--space-md);">
+                        <span style="color: var(--color-accent); font-size: 18px;">↑</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Headers & Banners -->
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--space-md); color: var(--color-dark);">Email Headers & Banners</h3>
+            <div style="display: flex; flex-direction: column; gap: var(--space-md); margin-bottom: var(--space-xl);">
+
+                <!-- Email Header - Dark -->
+                <div style="background: var(--color-dark); border-radius: var(--radius-lg); padding: var(--space-lg) var(--space-xl); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-md);">
+                    <div style="display: flex; align-items: center; gap: var(--space-md);">
+                        <img src="svg/Dark-Horizontal-Logo.svg" alt="RME Logo" style="height: 36px; width: auto;">
+                    </div>
+                    <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                        <span style="color: rgba(255,255,255,0.7); font-size: 14px;">Your list review is ready</span>
+                        <span style="background: var(--color-accent); color: white; padding: 6px 14px; border-radius: var(--radius-full); font-size: 13px; font-weight: 600;">View Results</span>
+                    </div>
+                </div>
+
+                <!-- Email Header - Light -->
+                <div style="background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-lg) var(--space-xl); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-md);">
+                    <img src="svg/Horizontal-Logo.svg" alt="RME Logo" style="height: 36px; width: auto;">
+                    <div style="display: flex; align-items: center; gap: var(--space-md);">
+                        <span style="color: var(--color-muted); font-size: 14px;">Weekly Deliverability Tips</span>
+                    </div>
+                </div>
+
+                <!-- Promotional Banner -->
+                <div style="background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-dark) 100%); border-radius: var(--radius-lg); padding: var(--space-md) var(--space-xl); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-md);">
+                    <div>
+                        <p style="color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 500; margin-bottom: 4px;">LIMITED TIME</p>
+                        <p style="color: white; font-size: 18px; font-weight: 700;">Free Done-For-You List Review</p>
+                    </div>
+                    <button class="btn" style="background: white; color: var(--color-dark); padding: 10px 24px;">Claim Now →</button>
+                </div>
+            </div>
+
+            <!-- Ad Creatives -->
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--space-md); color: var(--color-dark);">Ad Creatives</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl);">
+
+                <!-- Display Ad - Rectangle -->
+                <div style="background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); overflow: hidden;">
+                    <div style="background: var(--color-dark); padding: var(--space-md);">
+                        <img src="svg/Dark-Horizontal-Logo.svg" alt="RME Logo" style="height: 28px; width: auto;">
+                    </div>
+                    <div style="padding: var(--space-lg);">
+                        <p style="color: var(--color-danger); font-size: 13px; font-weight: 600; margin-bottom: var(--space-xs);">BOUNCING EMAILS?</p>
+                        <h4 style="color: var(--color-dark); font-size: 20px; font-weight: 700; line-height: 1.3; margin-bottom: var(--space-sm);">We'll tell you exactly which ones to keep, monitor, or suppress.</h4>
+                        <p style="color: var(--color-muted); font-size: 14px; margin-bottom: var(--space-md);">Free expert review. No credit card.</p>
+                        <button class="btn btn-primary" style="width: 100%;">Get Free Review</button>
+                    </div>
+                </div>
+
+                <!-- Display Ad - Accent Background -->
+                <div style="background: var(--color-light); border-radius: var(--radius-lg); padding: var(--space-lg); display: flex; flex-direction: column; justify-content: space-between; min-height: 300px;">
+                    <div>
+                        <div style="display: flex; align-items: center; gap: var(--space-xs); margin-bottom: var(--space-md);">
+                            <img src="svg/Icon.svg" alt="RME Icon" style="width: 32px; height: auto;">
+                            <span style="font-size: 14px; font-weight: 600; color: var(--color-dark);">Review My Emails</span>
+                        </div>
+                        <h4 style="color: var(--color-dark); font-size: 24px; font-weight: 700; line-height: 1.2;">Your ESP says your list is "fine."<br><span style="color: var(--color-accent);">We'll show you the truth.</span></h4>
+                    </div>
+                    <div>
+                        <div style="display: flex; gap: var(--space-xs); margin-bottom: var(--space-sm);">
+                            <span class="status-pill status-keep" style="font-size: 11px; padding: 4px 10px;">Keep</span>
+                            <span class="status-pill status-monitor" style="font-size: 11px; padding: 4px 10px;">Monitor</span>
+                            <span class="status-pill status-suppress" style="font-size: 11px; padding: 4px 10px;">Suppress</span>
+                        </div>
+                        <button class="btn btn-primary" style="width: 100%;">Free List Review →</button>
+                    </div>
+                </div>
+
+                <!-- Testimonial Ad -->
+                <div style="background: var(--color-dark); border-radius: var(--radius-lg); padding: var(--space-lg); display: flex; flex-direction: column; justify-content: space-between; min-height: 300px;">
+                    <img src="svg/Dark-Icon.svg" alt="RME Icon" style="width: 40px; height: auto;">
+                    <div>
+                        <p style="color: white; font-size: 18px; font-weight: 500; line-height: 1.5; margin-bottom: var(--space-md);">"They found 12,000 addresses we should've suppressed <em>years</em> ago."</p>
+                        <p style="color: var(--color-accent); font-size: 14px; font-weight: 600;">— Marketing Director, SaaS Company</p>
+                    </div>
+                    <button class="btn" style="background: var(--color-accent); color: white; width: 100%;">Get Your Free Review</button>
+                </div>
+            </div>
+
+            <!-- Promotional Badges & Callouts -->
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--space-md); color: var(--color-dark);">Promotional Badges & Callouts</h3>
+            <div style="background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-lg); margin-bottom: var(--space-xl);">
+                <div style="display: flex; flex-wrap: wrap; gap: var(--space-md); margin-bottom: var(--space-lg);">
+                    <!-- Free Badge -->
+                    <div style="background: var(--color-success); color: white; padding: 8px 16px; border-radius: var(--radius-full); font-size: 14px; font-weight: 600;">
+                        100% Free
+                    </div>
+                    <!-- Limited Time -->
+                    <div style="background: var(--color-secondary); color: var(--color-dark); padding: 8px 16px; border-radius: var(--radius-full); font-size: 14px; font-weight: 600;">
+                        Limited Time Offer
+                    </div>
+                    <!-- New Badge -->
+                    <div style="background: var(--color-accent); color: white; padding: 8px 16px; border-radius: var(--radius-full); font-size: 14px; font-weight: 600;">
+                        New Service
+                    </div>
+                    <!-- Expert Badge -->
+                    <div style="background: var(--color-dark); color: white; padding: 8px 16px; border-radius: var(--radius-full); font-size: 14px; font-weight: 600;">
+                        Expert Review
+                    </div>
+                    <!-- Outline Style -->
+                    <div style="border: 2px solid var(--color-accent); color: var(--color-accent); padding: 6px 14px; border-radius: var(--radius-full); font-size: 14px; font-weight: 600;">
+                        No Credit Card Required
+                    </div>
+                </div>
+
+                <!-- Callout Boxes -->
+                <h4 style="font-size: 14px; font-weight: 600; color: var(--color-muted); margin-bottom: var(--space-sm);">Callout Boxes</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-md);">
+                    <!-- Success Callout -->
+                    <div style="background: #dcfce7; border-left: 4px solid var(--color-success); padding: var(--space-md); border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+                        <p style="color: #166534; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Your list is clean!</p>
+                        <p style="color: #166534; font-size: 13px; opacity: 0.8;">98% deliverability score</p>
+                    </div>
+                    <!-- Warning Callout -->
+                    <div style="background: #fef3c7; border-left: 4px solid var(--color-warning); padding: var(--space-md); border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+                        <p style="color: #92400e; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Review recommended</p>
+                        <p style="color: #92400e; font-size: 13px; opacity: 0.8;">Found 2,400 risky addresses</p>
+                    </div>
+                    <!-- Danger Callout -->
+                    <div style="background: #fee2e2; border-left: 4px solid var(--color-danger); padding: var(--space-md); border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+                        <p style="color: #991b1b; font-size: 14px; font-weight: 600; margin-bottom: 4px;">Urgent attention needed</p>
+                        <p style="color: #991b1b; font-size: 13px; opacity: 0.8;">High bounce risk detected</p>
+                    </div>
+                    <!-- Info Callout -->
+                    <div style="background: var(--color-light); border-left: 4px solid var(--color-accent); padding: var(--space-md); border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+                        <p style="color: var(--color-dark); font-size: 14px; font-weight: 600; margin-bottom: 4px;">Pro tip</p>
+                        <p style="color: var(--color-dark); font-size: 13px; opacity: 0.8;">Clean your list every 3 months</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Hierarchy -->
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--space-md); color: var(--color-dark);">CTA Button Hierarchy</h3>
+            <div style="background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-lg); margin-bottom: var(--space-xl);">
+                <p style="color: var(--color-muted); font-size: 14px; margin-bottom: var(--space-md);">Use primary for the main action, secondary for alternatives, ghost for low-priority options.</p>
+
+                <div style="display: flex; flex-direction: column; gap: var(--space-lg);">
+                    <!-- Example 1: Landing Page -->
+                    <div>
+                        <p style="font-size: 12px; font-weight: 600; color: var(--color-muted); text-transform: uppercase; margin-bottom: var(--space-sm);">Landing Page Hero</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center;">
+                            <button class="btn btn-primary">Get Free Review</button>
+                            <button class="btn btn-secondary">See How It Works</button>
+                        </div>
+                    </div>
+
+                    <!-- Example 2: Pricing Card -->
+                    <div>
+                        <p style="font-size: 12px; font-weight: 600; color: var(--color-muted); text-transform: uppercase; margin-bottom: var(--space-sm);">Pricing Card</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center;">
+                            <button class="btn btn-primary">Start Now</button>
+                            <button class="btn btn-ghost">Compare Plans →</button>
+                        </div>
+                    </div>
+
+                    <!-- Example 3: Email CTA -->
+                    <div>
+                        <p style="font-size: 12px; font-weight: 600; color: var(--color-muted); text-transform: uppercase; margin-bottom: var(--space-sm);">Email Footer</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center;">
+                            <button class="btn btn-primary" style="background: var(--color-dark);">View My Results</button>
+                            <span style="color: var(--color-muted); font-size: 14px;">or</span>
+                            <a href="#" style="color: var(--color-accent); font-size: 14px; font-weight: 500;">reply to this email</a>
+                        </div>
+                    </div>
+
+                    <!-- Example 4: Urgency -->
+                    <div>
+                        <p style="font-size: 12px; font-weight: 600; color: var(--color-muted); text-transform: uppercase; margin-bottom: var(--space-sm);">Urgency / Limited Offer</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center;">
+                            <button class="btn" style="background: var(--color-danger); color: white;">Claim Before Midnight</button>
+                            <span style="color: var(--color-danger); font-size: 14px; font-weight: 600;">Only 3 spots left</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trust Signals -->
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--space-md); color: var(--color-dark);">Trust Signals & Social Proof</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); margin-bottom: var(--space-xl);">
+
+                <!-- Testimonial Card - Light -->
+                <div style="background: var(--color-white); border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: var(--space-lg);">
+                    <div style="color: var(--color-secondary); font-size: 32px; line-height: 1; margin-bottom: var(--space-sm);">"</div>
+                    <p style="color: var(--color-dark); font-size: 16px; line-height: 1.6; margin-bottom: var(--space-md);">They didn't just clean our list — they explained exactly why each address was flagged. Game changer.</p>
+                    <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                        <div style="width: 40px; height: 40px; background: var(--color-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: var(--color-dark);">JM</div>
+                        <div>
+                            <p style="font-size: 14px; font-weight: 600; color: var(--color-dark);">Jessica M.</p>
+                            <p style="font-size: 13px; color: var(--color-muted);">Email Marketing Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial Card - Tinted -->
+                <div style="background: var(--color-light); border-radius: var(--radius-lg); padding: var(--space-lg);">
+                    <div style="color: var(--color-accent); font-size: 32px; line-height: 1; margin-bottom: var(--space-sm);">"</div>
+                    <p style="color: var(--color-dark); font-size: 16px; line-height: 1.6; margin-bottom: var(--space-md);">Our bounce rate dropped from 8% to under 1%. Best decision we made this quarter.</p>
+                    <div style="display: flex; align-items: center; gap: var(--space-sm);">
+                        <div style="width: 40px; height: 40px; background: var(--color-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; color: white;">DK</div>
+                        <div>
+                            <p style="font-size: 14px; font-weight: 600; color: var(--color-dark);">David K.</p>
+                            <p style="font-size: 13px; color: var(--color-muted);">Founder, SaaS Startup</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Card -->
+                <div style="background: var(--color-dark); border-radius: var(--radius-lg); padding: var(--space-lg); color: white;">
+                    <p style="font-size: 13px; font-weight: 500; color: var(--color-accent); margin-bottom: var(--space-md);">TRUSTED BY MARKETERS</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+                        <div>
+                            <p style="font-size: 32px; font-weight: 700; color: white;">50K+</p>
+                            <p style="font-size: 13px; color: rgba(255,255,255,0.7);">Lists reviewed</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 32px; font-weight: 700; color: white;">2M+</p>
+                            <p style="font-size: 13px; color: rgba(255,255,255,0.7);">Emails analyzed</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 32px; font-weight: 700; color: var(--color-success);">98%</p>
+                            <p style="font-size: 13px; color: rgba(255,255,255,0.7);">Satisfaction rate</p>
+                        </div>
+                        <div>
+                            <p style="font-size: 32px; font-weight: 700; color: var(--color-secondary);">Free</p>
+                            <p style="font-size: 13px; color: rgba(255,255,255,0.7);">Always</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Color Do's and Don'ts -->
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: var(--space-md); color: var(--color-dark);">Color Usage Guidelines</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-md);">
+
+                <!-- Do's -->
+                <div style="background: #dcfce7; border-radius: var(--radius-lg); padding: var(--space-lg);">
+                    <p style="color: var(--color-success); font-size: 14px; font-weight: 700; margin-bottom: var(--space-md);">✓ DO</p>
+                    <ul style="color: #166534; font-size: 14px; line-height: 1.8; padding-left: 20px;">
+                        <li>Use <strong>Dark (#134e4a)</strong> for headers and important text</li>
+                        <li>Use <strong>Accent (#0d9488)</strong> for CTAs and links</li>
+                        <li>Use <strong>Light (#f0fdfa)</strong> for section backgrounds</li>
+                        <li>Alternate dark/light sections for rhythm</li>
+                        <li>Use status colors only for their purpose</li>
+                        <li>Keep Gold (#fbbf24) for special highlights only</li>
+                        <li>Use white text on dark backgrounds</li>
+                        <li>Maintain high contrast for readability</li>
+                    </ul>
+                </div>
+
+                <!-- Don'ts -->
+                <div style="background: #fee2e2; border-radius: var(--radius-lg); padding: var(--space-lg);">
+                    <p style="color: var(--color-danger); font-size: 14px; font-weight: 700; margin-bottom: var(--space-md);">✗ DON'T</p>
+                    <ul style="color: #991b1b; font-size: 14px; line-height: 1.8; padding-left: 20px;">
+                        <li>Don't use red/danger for non-error elements</li>
+                        <li>Don't overuse the accent color</li>
+                        <li>Don't use gold as a primary color</li>
+                        <li>Don't put dark text on dark backgrounds</li>
+                        <li>Don't mix too many colors in one section</li>
+                        <li>Don't use status colors for decoration</li>
+                        <li>Don't create low-contrast text</li>
+                        <li>Don't stray from the defined palette</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Reference -->
+    <section style="background: var(--color-dark); color: var(--color-white);">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--color-white);">Quick Reference</h2>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--space-lg);">
+                <div>
+                    <h3 style="font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px;">Brand Colors</h3>
+                    <p style="font-family: monospace; font-size: 14px; line-height: 2;">
+                        Dark: #134e4a<br>
+                        Accent: #0d9488<br>
+                        Light: #f0fdfa<br>
+                        Muted: #6b7280
+                    </p>
+                </div>
+                <div>
+                    <h3 style="font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px;">Status Colors</h3>
+                    <p style="font-family: monospace; font-size: 14px; line-height: 2;">
+                        Keep: #1fa95c<br>
+                        Monitor: #f9943b<br>
+                        Suppress: #f33144<br>
+                        Featured: #fbbf24
+                    </p>
+                </div>
+                <div>
+                    <h3 style="font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px;">Typography</h3>
+                    <p style="font-size: 14px; line-height: 2;">
+                        Font: Inter<br>
+                        Weights: 400, 500, 600, 700<br>
+                        Body: 16px / 1.6<br>
+                        Headlines: 24-48px / 700
+                    </p>
+                </div>
+                <div>
+                    <h3 style="font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); opacity: 0.7; text-transform: uppercase; letter-spacing: 0.5px;">Key Principles</h3>
+                    <p style="font-size: 14px; line-height: 2;">
+                        Trust > Scale > Revenue<br>
+                        Professional, not corporate<br>
+                        Ocean expert identity<br>
+                        Generous, not small
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
