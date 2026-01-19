@@ -400,6 +400,45 @@
         }
 
         /* ========================================
+           COMPARISON LIST
+           ======================================== */
+
+        .comparison-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .comparison-list ul {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            font-size: 17px;
+            color: var(--color-dark);
+            padding: var(--space-md) 0;
+            padding-left: 32px;
+            position: relative;
+            border-bottom: 1px solid var(--color-border);
+            line-height: 1.6;
+        }
+
+        .comparison-list li:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        .comparison-list li strong {
+            color: var(--color-muted);
+        }
+
+        /* ========================================
            WHO THIS IS FOR
            ======================================== */
 
@@ -501,11 +540,21 @@
             margin: 0 auto;
         }
 
+        .options-grid--three {
+            grid-template-columns: repeat(3, 1fr);
+            max-width: 1000px;
+        }
+
         .option-card {
             padding: var(--space-lg);
             background: var(--color-white);
             border: 1px solid var(--color-border);
             border-radius: 12px;
+        }
+
+        .option-card--featured {
+            border: 2px solid var(--color-accent);
+            background: var(--color-light);
         }
 
         .option-card__badge {
@@ -548,9 +597,13 @@
            PRICING CALCULATOR
            ======================================== */
 
-        .pricing-calculator {
-            max-width: 700px;
+        .pricing-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: var(--space-lg);
+            max-width: 900px;
             margin: 0 auto;
+            align-items: start;
         }
 
         .calculator-card {
@@ -570,6 +623,54 @@
             font-size: 16px;
             color: var(--color-muted);
             margin-bottom: var(--space-lg);
+        }
+
+        .pricing-table-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+        }
+
+        .pricing-table-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--color-dark);
+        }
+
+        .pricing-table-card table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .pricing-table-card th,
+        .pricing-table-card td {
+            padding: var(--space-sm) var(--space-xs);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .pricing-table-card th {
+            font-weight: 600;
+            color: var(--color-muted);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .pricing-table-card td {
+            color: var(--color-dark);
+        }
+
+        .pricing-table-card tr:last-child td {
+            border-bottom: none;
+        }
+
+        .pricing-table-card .contact-row td {
+            color: var(--color-accent);
+            font-weight: 500;
         }
 
         .slider-container {
@@ -672,51 +773,6 @@
             color: var(--color-muted);
         }
 
-        /* Pricing Table */
-        .pricing-table {
-            margin-top: var(--space-xl);
-            text-align: left;
-        }
-
-        .pricing-table h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            text-align: center;
-        }
-
-        .pricing-table table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 15px;
-        }
-
-        .pricing-table th,
-        .pricing-table td {
-            padding: var(--space-sm);
-            text-align: left;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .pricing-table th {
-            font-weight: 600;
-            color: var(--color-muted);
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .pricing-table td {
-            color: var(--color-dark);
-        }
-
-        .pricing-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .pricing-table__highlight {
-            background: var(--color-light);
-        }
 
         /* ========================================
            DONE FOR YOU PRICING
@@ -932,8 +988,18 @@
                 max-width: 400px;
             }
 
-            .options-grid {
+            .options-grid,
+            .options-grid--three {
                 grid-template-columns: 1fr;
+            }
+
+            .pricing-layout {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .pricing-table-card {
+                order: -1;
             }
 
             .cta-grid {
@@ -1004,8 +1070,8 @@
 
     <section class="hero">
         <div class="container">
-            <h1 class="hero__headline">Pricing</h1>
-            <p class="hero__subhead">Pay for what you need. Credits never expire. Bigger lists cost less per contact.</p>
+            <h1 class="hero__headline">Pay for Answers,<br>Not Email Checks</h1>
+            <p class="hero__subhead">You are not paying for validation. You are paying for someone to tell you what to do with your list and why.</p>
         </div>
     </section>
 
@@ -1023,24 +1089,24 @@
             <div class="output-grid">
                 <div class="output-card">
                     <span class="output-card__label output-card__label--keep">Keep</span>
-                    <h3>Safe to Mail</h3>
-                    <p>No flags found. Domain checks out, validation passed, no risk signals.</p>
+                    <h3>Cleared After Full Review</h3>
+                    <p>Passed validation AND showed no concerning patterns at the domain or behavioral level. The absence of risk signals is the decision, not just a green light.</p>
                 </div>
 
                 <div class="output-card">
                     <span class="output-card__label output-card__label--monitor">Monitor</span>
-                    <h3>Watch Closely</h3>
-                    <p>Context matters here. Each address comes with labels explaining why.</p>
+                    <h3>Your Judgment, Armed With Ours</h3>
+                    <p>Each address includes specific flags and the reasoning behind them. You decide how to segment and whether the risk fits your tolerance.</p>
                 </div>
 
                 <div class="output-card">
                     <span class="output-card__label output-card__label--suppress">Suppress</span>
-                    <h3>Do Not Mail</h3>
-                    <p>Invalid, trap-likely, disposable, or other risk signals. Don't send here.</p>
+                    <h3>Clear Risk, Clear Reasoning</h3>
+                    <p>Invalid syntax, known traps, toxic domains, disposable patterns. Each address includes the specific flags that earned suppression. You will know exactly why.</p>
                 </div>
             </div>
 
-            <p class="output-note">You also get risk flags on problem patterns, domain-level intelligence, and explanations for every recommendation. This is not a pass/fail list. It is a decision-making tool.</p>
+            <p class="output-note">Every decision comes with the reasoning behind it. This is not a pass/fail list. It is a decision-making tool built on long-term domain intelligence and pattern-based risk analysis.</p>
         </div>
     </section>
 
@@ -1098,6 +1164,31 @@
     </section>
 
     <!-- ========================================
+         WHAT YOU ARE PAYING FOR
+         ======================================== -->
+
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2>What You Are Actually Paying For</h2>
+                <p>The difference between checking and interpreting.</p>
+            </div>
+
+            <div class="comparison-list">
+                <ul>
+                    <li><strong>Validators check if an inbox exists.</strong> We assess whether sending there is safe.</li>
+                    <li><strong>Validators give you a status.</strong> We give you the reasoning behind a decision.</li>
+                    <li><strong>Validators flag what bounces.</strong> We flag what damages your reputation without bouncing.</li>
+                    <li><strong>Validators process volume.</strong> We interpret patterns across your entire list.</li>
+                    <li><strong>Validators leave you guessing.</strong> We tell you what to do and why.</li>
+                </ul>
+            </div>
+
+            <p class="output-note">If you just need to know whether addresses are deliverable, use a $5 tool. If you need to know whether you should mail them, this is what that costs.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
          HOW IT WORKS
          ======================================== -->
 
@@ -1107,23 +1198,30 @@
                 <h2>How It Works</h2>
             </div>
 
-            <div class="options-grid">
+            <div class="options-grid options-grid--three">
                 <div class="option-card">
-                    <span class="option-card__badge">Available Now</span>
+                    <span class="option-card__badge">Guidance</span>
+                    <h3>SOS Hotline</h3>
+                    <p>Free expert support for deliverability questions. No data touched. No list processed. Just honest answers.</p>
+                    <p class="option-card__status">Use it before, during, or after cleaning to understand your situation.</p>
+                </div>
+
+                <div class="option-card option-card--featured">
+                    <span class="option-card__badge">Execution</span>
                     <h3>Done-For-You</h3>
-                    <p>Send us your list. We clean it. We return results with clear recommendations.</p>
-                    <p>No platform access required. Optional expert interpretation call before or after to review results and discuss strategy.</p>
+                    <p>Send us your list. We process it, label every address, and return results with clear reasoning.</p>
+                    <p class="option-card__status">You get the decisions made for you. Available now.</p>
                 </div>
 
                 <div class="option-card">
-                    <span class="option-card__badge">Coming Soon</span>
+                    <span class="option-card__badge">Automation</span>
                     <h3>Self-Serve</h3>
-                    <p>Upload your list in the platform. Download results. Interpret on your own or book a call.</p>
-                    <p class="option-card__status">Self-serve access is opening in stages. Join the waitlist to get notified.</p>
+                    <p>Upload your list. Download results. Same analysis as done-for-you, but you run it yourself.</p>
+                    <p class="option-card__status">Coming soon. Join the waitlist to get notified.</p>
                 </div>
             </div>
 
-            <p class="option-note">Both options use the same analysis. The difference is who clicks the buttons.</p>
+            <p class="option-note">SOS tells you what to think about. Done-for-you does the thinking for you. Self-serve lets you do the thinking yourself.</p>
         </div>
     </section>
 
@@ -1138,7 +1236,7 @@
                 <p>Pay only for what you need. Credits never expire.</p>
             </div>
 
-            <div class="pricing-calculator">
+            <div class="pricing-layout">
                 <div class="calculator-card">
                     <h3>Calculate Your Price</h3>
                     <p class="calculator-intro">Drag the slider to see pricing for your list size.</p>
@@ -1164,65 +1262,56 @@
                         <a href="https://anchor.reviewmyemails.com/buy-credits" class="btn btn-primary">Get Started</a>
                     </div>
                     <p class="calculator-note">Need more than 1 million? <a href="mailto:ahoy@reviewmyemails.com">Contact us</a> for custom pricing.</p>
+                </div>
 
-                    <div class="pricing-table">
-                        <h4>Full Pricing Breakdown</h4>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>List Size</th>
-                                    <th>Price per Email</th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1 - 1,000</td>
-                                    <td>$0.0080</td>
-                                    <td>$8</td>
-                                </tr>
-                                <tr>
-                                    <td>1,001 - 5,000</td>
-                                    <td>$0.0074</td>
-                                    <td>$37</td>
-                                </tr>
-                                <tr>
-                                    <td>5,001 - 10,000</td>
-                                    <td>$0.0070</td>
-                                    <td>$70</td>
-                                </tr>
-                                <tr>
-                                    <td>10,001 - 50,000</td>
-                                    <td>$0.0062</td>
-                                    <td>$310</td>
-                                </tr>
-                                <tr>
-                                    <td>50,001 - 100,000</td>
-                                    <td>$0.0052</td>
-                                    <td>$520</td>
-                                </tr>
-                                <tr>
-                                    <td>100,001 - 250,000</td>
-                                    <td>$0.0039</td>
-                                    <td>$975</td>
-                                </tr>
-                                <tr>
-                                    <td>250,001 - 500,000</td>
-                                    <td>$0.00325</td>
-                                    <td>$1,625</td>
-                                </tr>
-                                <tr>
-                                    <td>500,001 - 1,000,000</td>
-                                    <td>$0.0026</td>
-                                    <td>$2,600</td>
-                                </tr>
-                                <tr>
-                                    <td>1,000,000+</td>
-                                    <td colspan="2">Contact us</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="pricing-table-card">
+                    <h4>All Price Tiers</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>List Size</th>
+                                <th>Per Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1 - 1,000</td>
+                                <td>$0.0080</td>
+                            </tr>
+                            <tr>
+                                <td>1,001 - 5,000</td>
+                                <td>$0.0074</td>
+                            </tr>
+                            <tr>
+                                <td>5,001 - 10,000</td>
+                                <td>$0.0070</td>
+                            </tr>
+                            <tr>
+                                <td>10,001 - 50,000</td>
+                                <td>$0.0062</td>
+                            </tr>
+                            <tr>
+                                <td>50,001 - 100,000</td>
+                                <td>$0.0052</td>
+                            </tr>
+                            <tr>
+                                <td>100,001 - 250,000</td>
+                                <td>$0.0039</td>
+                            </tr>
+                            <tr>
+                                <td>250,001 - 500,000</td>
+                                <td>$0.00325</td>
+                            </tr>
+                            <tr>
+                                <td>500,001 - 1M</td>
+                                <td>$0.0026</td>
+                            </tr>
+                            <tr class="contact-row">
+                                <td>1,000,000+</td>
+                                <td>Contact us</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
