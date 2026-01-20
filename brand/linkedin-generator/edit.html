@@ -1927,16 +1927,11 @@
         // ========================================
         // INITIALIZATION
         // ========================================
-        document.addEventListener('DOMContentLoaded', async () => {
+        function initializeApp() {
             try {
                 // Load uploaded images from Vercel Blob (non-blocking)
-                try {
-                    await loadUploadedImages();
-                } catch (e) {
-                    console.log('Could not load uploaded images:', e);
-                }
+                loadUploadedImages().catch(e => console.log('Could not load uploaded images:', e));
 
-                console.log('Initializing grids...');
                 initLogoGrid();
                 initLogoToggle();
                 initCharacterGrid();
@@ -1951,16 +1946,21 @@
                 initFormatListeners();
                 initThemeListeners();
                 initLogoSliders();
-                console.log('Loading template from URL...');
                 loadTemplateFromURL();
-                console.log('Rendering preview...');
                 renderPreview();
-                console.log('Initialization complete!');
+                console.log('App initialized!');
             } catch (error) {
                 console.error('Initialization error:', error);
-                alert('Error initializing editor: ' + error.message);
             }
-        });
+        }
+
+        // Run init when DOM is ready - check if already loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            // DOM already ready, init immediately
+            initializeApp();
+        }
 
         async function loadUploadedImages() {
             try {
