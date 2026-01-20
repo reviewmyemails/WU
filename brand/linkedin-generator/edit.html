@@ -1927,28 +1927,37 @@
         // ========================================
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                // Load uploaded images from Vercel Blob first (non-blocking)
-                await loadUploadedImages();
-            } catch (e) {
-                console.log('Could not load uploaded images:', e);
-            }
+                // Load uploaded images from Vercel Blob (non-blocking)
+                try {
+                    await loadUploadedImages();
+                } catch (e) {
+                    console.log('Could not load uploaded images:', e);
+                }
 
-            initLogoGrid();
-            initLogoToggle();
-            initCharacterGrid();
-            initCharacterToggle();
-            initCharacterSliders();
-            initCharacterUpload();
-            initBackgroundGrid();
-            initBackgroundUpload();
-            initBackgroundFlip();
-            initGradientOpacitySlider();
-            initGradientPresets();
-            initFormatListeners();
-            initThemeListeners();
-            initLogoSliders();
-            loadTemplateFromURL();
-            renderPreview();
+                console.log('Initializing grids...');
+                initLogoGrid();
+                initLogoToggle();
+                initCharacterGrid();
+                initCharacterToggle();
+                initCharacterSliders();
+                initCharacterUpload();
+                initBackgroundGrid();
+                initBackgroundUpload();
+                initBackgroundFlip();
+                initGradientOpacitySlider();
+                initGradientPresets();
+                initFormatListeners();
+                initThemeListeners();
+                initLogoSliders();
+                console.log('Loading template from URL...');
+                loadTemplateFromURL();
+                console.log('Rendering preview...');
+                renderPreview();
+                console.log('Initialization complete!');
+            } catch (error) {
+                console.error('Initialization error:', error);
+                alert('Error initializing editor: ' + error.message);
+            }
         });
 
         async function loadUploadedImages() {
