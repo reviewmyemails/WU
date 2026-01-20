@@ -2252,7 +2252,7 @@
                 format: 'square',
                 theme: 'white',
                 elements: { logo: true, brand: false, tag: true, headline: true, body: false, checklist: true, delphi: false, cta: false, counter: false },
-                content: { tag: 'Alert', tagColor: 'danger', headline: 'Is your domain {red:blacklisted}?', checklist: '✗ Emails going to spam\n✗ Open rates dropping\n✗ Providers blocking you' }
+                content: { tag: 'Alert', tagColor: 'danger', headline: 'Is your domain [red:blacklisted]?', checklist: '✗ Emails going to spam\n✗ Open rates dropping\n✗ Providers blocking you' }
             },
             'minimal-tip-sq': {
                 format: 'square',
@@ -2407,7 +2407,7 @@
             }, 2000);
         }
 
-        // Parse rich text with color markers: {red:text}, {teal:text}, {green:text}, {yellow:text}, {orange:text}
+        // Parse rich text with color markers: [red:text], [teal:text], etc.
         function parseRichText(text) {
             if (!text) return '';
             // Escape HTML first to prevent XSS
@@ -2427,8 +2427,8 @@
                 'orange': 'var(--color-warning)',
                 'dark': 'var(--color-dark)'
             };
-            // Parse {color:text} syntax
-            return escaped.replace(/\{(\w+):([^}]+)\}/g, (match, color, content) => {
+            // Parse [color:text] syntax
+            return escaped.replace(/\[(\w+):([^\]]+)\]/g, (match, color, content) => {
                 const cssColor = colorMap[color.toLowerCase()];
                 if (cssColor) {
                     return `<span style="color: ${cssColor}; font-weight: inherit;">${content}</span>`;

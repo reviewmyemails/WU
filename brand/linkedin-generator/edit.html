@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Editor | LinkedIn Content Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* ========================================
+           RME BRAND VARIABLES
+           ======================================== */
+        :root {
+            /* Primary Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #ffffff;
+            --color-off-white: #fafcfc;
+            --color-light: #f0fdfa;
+            --color-light-alt: #ccfbf1;
+            --color-muted: #6b7280;
+            --color-border: #e5e7eb;
+
+            /* Status Colors */
+            --color-success: #1fa95c;
+            --color-warning: #f9943b;
+            --color-danger: #f33144;
+            --color-secondary: #fbbf24;
+
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            /* Radius */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        /* ========================================
+           BASE STYLES
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: #1a1a2e;
+            color: var(--color-white);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            background: #16162a;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-brand img {
+            height: 28px;
+        }
+
+        .nav-brand h1 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+        .app {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            height: calc(100vh - 53px);
+        }
+
+        /* Left Sidebar - Controls */
+        .sidebar {
+            background: #16162a;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-content {
+            padding: var(--space-md);
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-footer {
+            padding: var(--space-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            background: #16162a;
+        }
+
+        /* Center - Preview */
+        .preview-area {
+            background: #1a1a2e;
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+
+        /* ========================================
+           CONTROL COMPONENTS
+           ======================================== */
+        .control-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .control-section h3 {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-section h3 .toggle-section {
+            margin-left: auto;
+        }
+
+        .control-group {
+            margin-bottom: var(--space-md);
+        }
+
+        .control-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 6px;
+        }
+
+        /* Form Controls */
+        .input-text,
+        .input-textarea,
+        .input-select {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            font-size: 13px;
+            font-family: var(--font-family);
+            color: var(--color-white);
+            transition: border-color 0.2s;
+        }
+
+        .input-text:focus,
+        .input-textarea:focus,
+        .input-select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .input-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .input-select {
+            cursor: pointer;
+        }
+
+        .input-hint {
+            font-size: 10px;
+            color: var(--color-muted);
+            margin-top: 4px;
+        }
+
+        /* Toggle */
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .toggle {
+            width: 40px;
+            height: 22px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 11px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .toggle.active {
+            background: var(--color-accent);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.2s;
+        }
+
+        .toggle.active::after {
+            transform: translateX(18px);
+        }
+
+        /* Slider Controls */
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slider-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            width: 20px;
+            text-align: center;
+        }
+
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        .slider-value {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            width: 35px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Logo/Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .image-item {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            padding: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .image-item.selected {
+            border-color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.2);
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .image-item.none {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* Character Grid */
+        .character-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .character-item {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            padding: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+        }
+
+        .character-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .character-item.selected {
+            border-color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.2);
+        }
+
+        .character-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Color Grid */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+        }
+
+        .color-swatch {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch.selected {
+            border-color: var(--color-white);
+            box-shadow: 0 0 0 2px var(--color-accent);
+        }
+
+        /* Theme Selector */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .theme-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-item:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-item.selected {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3);
+        }
+
+        .theme-item span {
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 500;
+            color: inherit;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Format Selector */
+        .format-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .format-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            padding: 12px 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            text-align: center;
+        }
+
+        .format-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .format-item.selected {
+            border-color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.2);
+        }
+
+        .format-item .icon {
+            width: 32px;
+            height: 32px;
+            margin: 0 auto 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        .format-item .icon.square { aspect-ratio: 1; width: 28px; height: 28px; }
+        .format-item .icon.portrait { aspect-ratio: 4/5; width: 24px; height: 30px; }
+        .format-item .icon.landscape { aspect-ratio: 1.91/1; width: 36px; height: 19px; }
+
+        .format-item span {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Gradient Presets Grid */
+        .gradient-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .gradient-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            position: relative;
+        }
+
+        .gradient-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gradient-item.selected {
+            border-color: var(--color-white);
+            box-shadow: 0 0 0 2px var(--color-accent);
+        }
+
+        .gradient-item span {
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 8px;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Collapsible Sections */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 0;
+            margin-bottom: 8px;
+        }
+
+        .section-header h3 {
+            margin: 0;
+        }
+
+        .section-toggle {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.5);
+            transition: transform 0.2s;
+        }
+
+        .section-toggle.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .section-content.collapsed {
+            max-height: 0 !important;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            font-family: var(--font-family);
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-group .btn {
+            flex: 1;
+        }
+
+        /* ========================================
+           PREVIEW AREA
+           ======================================== */
+        .preview-container {
+            background: #0d0d1a;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .slide-preview {
+            position: relative;
+            overflow: hidden;
+            font-family: var(--font-family);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        /* Output Size Variants */
+        .slide-preview.size-portrait {
+            width: 400px;
+            height: 500px;
+        }
+
+        .slide-preview.size-square {
+            width: 400px;
+            height: 400px;
+        }
+
+        .slide-preview.size-landscape {
+            width: 500px;
+            height: 262px;
+        }
+
+        /* Preview Content Layer */
+        .preview-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 32px;
+        }
+
+        /* Theme Backgrounds */
+        .slide-preview.theme-dark {
+            background: linear-gradient(135deg, #134e4a 0%, #0f3d3a 50%, #1a5c57 100%);
+            color: white;
+        }
+
+        .slide-preview.theme-light {
+            background: linear-gradient(135deg, #f0fdfa 0%, #e6f9f6 50%, #f5fefe 100%);
+            color: #134e4a;
+        }
+
+        .slide-preview.theme-accent {
+            background: linear-gradient(135deg, #0d9488 0%, #0a7a70 50%, #10a89c 100%);
+            color: white;
+        }
+
+        .slide-preview.theme-white {
+            background: white;
+            color: #134e4a;
+        }
+
+        /* Logo Element */
+        .preview-logo {
+            position: absolute;
+            z-index: 10;
+        }
+
+        .preview-logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Character Element */
+        .preview-character {
+            position: absolute;
+            z-index: 5;
+        }
+
+        .preview-character img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Tag/Badge */
+        .preview-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        .preview-tag.tag-accent {
+            background: rgba(13, 148, 136, 0.2);
+            color: var(--color-accent);
+        }
+
+        .preview-tag.tag-danger {
+            background: rgba(243, 49, 68, 0.15);
+            color: var(--color-danger);
+        }
+
+        .preview-tag.tag-success {
+            background: rgba(31, 169, 92, 0.15);
+            color: var(--color-success);
+        }
+
+        .preview-tag.tag-warning {
+            background: rgba(251, 191, 36, 0.15);
+            color: var(--color-secondary);
+        }
+
+        .theme-dark .preview-tag.tag-accent,
+        .theme-accent .preview-tag.tag-accent {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        /* Headline */
+        .preview-headline {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            white-space: pre-line;
+        }
+
+        /* Body Text */
+        .preview-body {
+            font-size: 16px;
+            line-height: 1.5;
+            opacity: 0.9;
+            margin-bottom: 16px;
+        }
+
+        /* Checklist */
+        .preview-checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .preview-checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* CTA Button */
+        .preview-cta {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 24px;
+            font-size: 14px;
+            font-weight: 600;
+            width: fit-content;
+            margin-top: auto;
+        }
+
+        .theme-dark .preview-cta,
+        .theme-accent .preview-cta {
+            background: white;
+            color: var(--color-dark);
+        }
+
+        .theme-light .preview-cta,
+        .theme-white .preview-cta {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        /* Brand Text */
+        .preview-brand {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-brand">
+            <img src="../../svg/Horizontal-Logo.svg" alt="Review My Emails">
+            <h1>Template Editor</h1>
+        </div>
+        <div class="nav-links">
+            <a href="templates.html" class="nav-link">Template Library</a>
+            <a href="index.html" class="nav-link">Advanced Editor</a>
+        </div>
+    </nav>
+
+    <div class="app">
+        <!-- Left Sidebar - Controls -->
+        <div class="sidebar">
+            <div class="sidebar-content">
+                <!-- Format Section -->
+                <div class="control-section">
+                    <h3>Format</h3>
+                    <div class="format-grid">
+                        <div class="format-item selected" data-format="square">
+                            <div class="icon square"></div>
+                            <span>Square</span>
+                        </div>
+                        <div class="format-item" data-format="portrait">
+                            <div class="icon portrait"></div>
+                            <span>Portrait</span>
+                        </div>
+                        <div class="format-item" data-format="landscape">
+                            <div class="icon landscape"></div>
+                            <span>Landscape</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Section -->
+                <div class="control-section">
+                    <h3>Theme</h3>
+                    <div class="theme-grid">
+                        <div class="theme-item selected" data-theme="dark" style="background: linear-gradient(135deg, #134e4a, #0f3d3a); color: white;">
+                            <span>Dark</span>
+                        </div>
+                        <div class="theme-item" data-theme="light" style="background: linear-gradient(135deg, #f0fdfa, #e6f9f6); color: #134e4a;">
+                            <span>Light</span>
+                        </div>
+                        <div class="theme-item" data-theme="accent" style="background: linear-gradient(135deg, #0d9488, #0a7a70); color: white;">
+                            <span>Accent</span>
+                        </div>
+                        <div class="theme-item" data-theme="white" style="background: white; color: #134e4a; border: 1px solid #e5e5e5;">
+                            <span>White</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logo Section -->
+                <div class="control-section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>Logo</h3>
+                        <div class="section-toggle">&#9660;</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="toggle-row">
+                            <span class="toggle-label">Show Logo</span>
+                            <div class="toggle active" id="toggleLogo" onclick="toggleElement('logo')"></div>
+                        </div>
+                        <div id="logoControls">
+                            <div class="control-group">
+                                <label class="control-label">Select Logo</label>
+                                <div class="image-grid" id="logoGrid">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Position X</label>
+                                <div class="slider-group">
+                                    <span class="slider-label">L</span>
+                                    <input type="range" class="slider" id="logoX" min="0" max="100" value="8">
+                                    <span class="slider-label">R</span>
+                                    <span class="slider-value" id="logoXValue">8%</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Position Y</label>
+                                <div class="slider-group">
+                                    <span class="slider-label">T</span>
+                                    <input type="range" class="slider" id="logoY" min="0" max="100" value="8">
+                                    <span class="slider-label">B</span>
+                                    <span class="slider-value" id="logoYValue">8%</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Size</label>
+                                <div class="slider-group">
+                                    <span class="slider-label">S</span>
+                                    <input type="range" class="slider" id="logoZoom" min="10" max="100" value="32">
+                                    <span class="slider-label">L</span>
+                                    <span class="slider-value" id="logoZoomValue">32px</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Content Section -->
+                <div class="control-section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>Text Content</h3>
+                        <div class="section-toggle">&#9660;</div>
+                    </div>
+                    <div class="section-content">
+                        <!-- Tag -->
+                        <div class="control-group">
+                            <div class="toggle-row">
+                                <span class="toggle-label">Tag</span>
+                                <div class="toggle" id="toggleTag" onclick="toggleElement('tag')"></div>
+                            </div>
+                            <div id="tagControls" style="display: none; margin-top: 8px;">
+                                <input type="text" class="input-text" id="tagText" placeholder="e.g., Pro Tip, Alert">
+                                <div class="color-grid" style="margin-top: 8px;">
+                                    <div class="color-swatch selected" data-tag-color="accent" style="background: var(--color-accent);"></div>
+                                    <div class="color-swatch" data-tag-color="danger" style="background: var(--color-danger);"></div>
+                                    <div class="color-swatch" data-tag-color="success" style="background: var(--color-success);"></div>
+                                    <div class="color-swatch" data-tag-color="warning" style="background: var(--color-secondary);"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Headline -->
+                        <div class="control-group">
+                            <div class="toggle-row">
+                                <span class="toggle-label">Headline</span>
+                                <div class="toggle active" id="toggleHeadline" onclick="toggleElement('headline')"></div>
+                            </div>
+                            <div id="headlineControls" style="margin-top: 8px;">
+                                <textarea class="input-textarea" id="headlineText" placeholder="Your headline here..."></textarea>
+                                <div class="input-hint">Use [red:text] for colored text</div>
+                            </div>
+                        </div>
+
+                        <!-- Body -->
+                        <div class="control-group">
+                            <div class="toggle-row">
+                                <span class="toggle-label">Body Text</span>
+                                <div class="toggle" id="toggleBody" onclick="toggleElement('body')"></div>
+                            </div>
+                            <div id="bodyControls" style="display: none; margin-top: 8px;">
+                                <textarea class="input-textarea" id="bodyText" placeholder="Supporting text..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Checklist -->
+                        <div class="control-group">
+                            <div class="toggle-row">
+                                <span class="toggle-label">Checklist</span>
+                                <div class="toggle" id="toggleChecklist" onclick="toggleElement('checklist')"></div>
+                            </div>
+                            <div id="checklistControls" style="display: none; margin-top: 8px;">
+                                <textarea class="input-textarea" id="checklistText" placeholder="One item per line..."></textarea>
+                                <div class="input-hint">Lines starting with check will be green, x will be red</div>
+                            </div>
+                        </div>
+
+                        <!-- CTA -->
+                        <div class="control-group">
+                            <div class="toggle-row">
+                                <span class="toggle-label">CTA Button</span>
+                                <div class="toggle" id="toggleCta" onclick="toggleElement('cta')"></div>
+                            </div>
+                            <div id="ctaControls" style="display: none; margin-top: 8px;">
+                                <input type="text" class="input-text" id="ctaText" placeholder="e.g., Learn More">
+                            </div>
+                        </div>
+
+                        <!-- Brand -->
+                        <div class="control-group">
+                            <div class="toggle-row">
+                                <span class="toggle-label">Brand Text</span>
+                                <div class="toggle" id="toggleBrand" onclick="toggleElement('brand')"></div>
+                            </div>
+                            <div id="brandControls" style="display: none; margin-top: 8px;">
+                                <input type="text" class="input-text" id="brandText" value="REVIEW MY EMAILS" placeholder="Brand name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Character Section -->
+                <div class="control-section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>Character</h3>
+                        <div class="section-toggle">&#9660;</div>
+                    </div>
+                    <div class="section-content">
+                        <div class="toggle-row">
+                            <span class="toggle-label">Show Character</span>
+                            <div class="toggle" id="toggleCharacter" onclick="toggleElement('character')"></div>
+                        </div>
+                        <div id="characterControls" style="display: none;">
+                            <div class="control-group">
+                                <label class="control-label">Character Type</label>
+                                <select class="input-select" id="characterType">
+                                    <option value="delphi">Delphi</option>
+                                    <option value="mermaid">Mermaid</option>
+                                    <option value="captain">Captain</option>
+                                    <option value="pirate">Pirate</option>
+                                    <option value="engineer">Engineer</option>
+                                </select>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Select Pose</label>
+                                <div class="character-grid" id="characterGrid">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Position X</label>
+                                <div class="slider-group">
+                                    <span class="slider-label">L</span>
+                                    <input type="range" class="slider" id="characterX" min="0" max="100" value="70">
+                                    <span class="slider-label">R</span>
+                                    <span class="slider-value" id="characterXValue">70%</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Position Y</label>
+                                <div class="slider-group">
+                                    <span class="slider-label">T</span>
+                                    <input type="range" class="slider" id="characterY" min="0" max="100" value="50">
+                                    <span class="slider-label">B</span>
+                                    <span class="slider-value" id="characterYValue">50%</span>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Size</label>
+                                <div class="slider-group">
+                                    <span class="slider-label">S</span>
+                                    <input type="range" class="slider" id="characterZoom" min="20" max="200" value="80">
+                                    <span class="slider-label">L</span>
+                                    <span class="slider-value" id="characterZoomValue">80%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Background Section -->
+                <div class="control-section">
+                    <div class="section-header" onclick="toggleSection(this)">
+                        <h3>Background</h3>
+                        <div class="section-toggle collapsed">&#9660;</div>
+                    </div>
+                    <div class="section-content collapsed">
+                        <div class="control-group">
+                            <label class="control-label">Background Type</label>
+                            <select class="input-select" id="bgType">
+                                <option value="theme">Theme Default</option>
+                                <option value="solid">Solid Color</option>
+                                <option value="gradient">Custom Gradient</option>
+                                <option value="image">Image</option>
+                            </select>
+                        </div>
+                        <div id="bgColorControls" style="display: none;">
+                            <div class="control-group">
+                                <label class="control-label">Color</label>
+                                <input type="color" class="input-text" id="bgColor" value="#134e4a" style="height: 40px; padding: 4px;">
+                            </div>
+                        </div>
+                        <div id="bgGradientControls" style="display: none;">
+                            <div class="control-group">
+                                <label class="control-label">Preset Gradients</label>
+                                <div class="gradient-grid" id="gradientPresets">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Start Color</label>
+                                <input type="color" class="input-text" id="bgGradientStart" value="#134e4a" style="height: 40px; padding: 4px;">
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">End Color</label>
+                                <input type="color" class="input-text" id="bgGradientEnd" value="#0f3d3a" style="height: 40px; padding: 4px;">
+                            </div>
+                        </div>
+                        <div id="bgImageControls" style="display: none;">
+                            <div class="control-group">
+                                <label class="control-label">Image URL</label>
+                                <input type="text" class="input-text" id="bgImageUrl" placeholder="https://...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer with Export -->
+            <div class="sidebar-footer">
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="copyToClipboard()">Copy</button>
+                    <button class="btn btn-primary" onclick="downloadImage()">Download</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preview Area -->
+        <div class="preview-area">
+            <div class="preview-container">
+                <div class="slide-preview size-square theme-dark" id="slidePreview">
+                    <!-- Logo -->
+                    <div class="preview-logo" id="previewLogo" style="top: 8%; left: 8%; height: 32px;">
+                        <img src="../../svg/Horizontal-Logo.svg" alt="Logo">
+                    </div>
+
+                    <!-- Character -->
+                    <div class="preview-character" id="previewCharacter" style="display: none;">
+                        <img src="" alt="Character">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="preview-content" id="previewContent">
+                        <div class="preview-tag tag-accent" id="previewTag" style="display: none;">Pro Tip</div>
+                        <div class="preview-brand" id="previewBrand" style="display: none;">REVIEW MY EMAILS</div>
+                        <div class="preview-headline" id="previewHeadline">Your headline here</div>
+                        <div class="preview-body" id="previewBody" style="display: none;">Supporting text goes here</div>
+                        <div class="preview-checklist" id="previewChecklist" style="display: none;"></div>
+                        <div class="preview-cta" id="previewCta" style="display: none;">Learn More</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // LOGO DATA
+        // ========================================
+        const LOGOS = [
+            { file: 'Horizontal-Logo.svg', name: 'Horizontal' },
+            { file: 'Dark-Horizontal-Logo.svg', name: 'Dark Horizontal' },
+            { file: 'Vertical-Logo.svg', name: 'Vertical' },
+            { file: 'Dark-Vertical-Logo.svg', name: 'Dark Vertical' },
+            { file: 'Square-Logo.svg', name: 'Square' },
+            { file: 'Dark-Square-Logo.svg', name: 'Dark Square' },
+            { file: 'Icon.svg', name: 'Icon' },
+            { file: 'Dark-Icon.svg', name: 'Dark Icon' },
+            { file: 'Social-Media-Icon.svg', name: 'Social' },
+            { file: 'Dark-Social-Media-Icon.svg', name: 'Dark Social' }
+        ];
+
+        // ========================================
+        // GRADIENT PRESETS (Brand Guidelines)
+        // ========================================
+        const GRADIENT_PRESETS = [
+            // Primary Brand Gradients
+            { name: 'Teal Deep', start: '#134e4a', end: '#0f3d3a', category: 'brand' },
+            { name: 'Teal Accent', start: '#0d9488', end: '#0f766e', category: 'brand' },
+            { name: 'Teal Light', start: '#14b8a6', end: '#0d9488', category: 'brand' },
+            { name: 'Ocean', start: '#134e4a', end: '#0d9488', category: 'brand' },
+
+            // Dark/Professional
+            { name: 'Midnight', start: '#1a1a2e', end: '#16162a', category: 'dark' },
+            { name: 'Charcoal', start: '#374151', end: '#1f2937', category: 'dark' },
+            { name: 'Slate', start: '#475569', end: '#334155', category: 'dark' },
+            { name: 'Deep Sea', start: '#164e63', end: '#0c4a6e', category: 'dark' },
+
+            // Warm/Energy
+            { name: 'Sunset', start: '#f97316', end: '#ea580c', category: 'warm' },
+            { name: 'Coral', start: '#fb7185', end: '#f43f5e', category: 'warm' },
+            { name: 'Gold', start: '#fbbf24', end: '#f59e0b', category: 'warm' },
+            { name: 'Fire', start: '#ef4444', end: '#dc2626', category: 'warm' },
+
+            // Cool/Calm
+            { name: 'Sky', start: '#38bdf8', end: '#0ea5e9', category: 'cool' },
+            { name: 'Indigo', start: '#818cf8', end: '#6366f1', category: 'cool' },
+            { name: 'Mint', start: '#34d399', end: '#10b981', category: 'cool' },
+            { name: 'Lavender', start: '#a78bfa', end: '#8b5cf6', category: 'cool' }
+        ];
+
+        // ========================================
+        // CHARACTER DATA
+        // ========================================
+        const CHARACTER_IMAGES = {
+            delphi: [
+                { file: 'Delphi-Confident.png', name: 'Confident' },
+                { file: 'Delphi-Happy.png', name: 'Happy' },
+                { file: 'Delphi-Pointing.png', name: 'Pointing' },
+                { file: 'Delphi-Thinking.png', name: 'Thinking' },
+                { file: 'Delphi-Waving.png', name: 'Waving' }
+            ],
+            mermaid: [
+                { file: 'Mermaid-Happy.png', name: 'Happy' },
+                { file: 'Mermaid-Waving.png', name: 'Waving' }
+            ],
+            captain: [
+                { file: 'Captain-Confident.png', name: 'Confident' },
+                { file: 'Captain-Pointing.png', name: 'Pointing' }
+            ],
+            pirate: [
+                { file: 'Pirate-Angry.png', name: 'Angry' },
+                { file: 'Pirate-Happy.png', name: 'Happy' }
+            ],
+            engineer: [
+                { file: 'Engineer-Working.png', name: 'Working' },
+                { file: 'Engineer-Thinking.png', name: 'Thinking' }
+            ]
+        };
+
+        // ========================================
+        // STATE
+        // ========================================
+        let state = {
+            format: 'square',
+            theme: 'dark',
+            elements: {
+                logo: true,
+                tag: false,
+                headline: true,
+                body: false,
+                checklist: false,
+                cta: false,
+                brand: false,
+                character: false
+            },
+            logo: {
+                file: 'Horizontal-Logo.svg',
+                x: 8,
+                y: 8,
+                zoom: 32
+            },
+            character: {
+                type: 'delphi',
+                file: 'Delphi-Confident.png',
+                x: 70,
+                y: 50,
+                zoom: 80
+            },
+            content: {
+                tag: 'Pro Tip',
+                tagColor: 'accent',
+                headline: 'Your headline here',
+                body: 'Supporting text goes here',
+                checklist: '',
+                cta: 'Learn More',
+                brand: 'REVIEW MY EMAILS'
+            },
+            background: {
+                type: 'theme',
+                color: '#134e4a',
+                gradientStart: '#134e4a',
+                gradientEnd: '#0f3d3a',
+                imageUrl: ''
+            }
+        };
+
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            initLogoGrid();
+            initCharacterGrid();
+            initGradientPresets();
+            initEventListeners();
+            loadTemplateFromURL();
+            updatePreview();
+        });
+
+        function initGradientPresets() {
+            const grid = document.getElementById('gradientPresets');
+            grid.innerHTML = GRADIENT_PRESETS.map((grad, i) => `
+                <div class="gradient-item ${i === 0 ? 'selected' : ''}"
+                     data-start="${grad.start}"
+                     data-end="${grad.end}"
+                     data-category="${grad.category}"
+                     style="background: linear-gradient(135deg, ${grad.start}, ${grad.end});"
+                     title="${grad.name}">
+                    <span>${grad.name}</span>
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.gradient-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.gradient-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.background.gradientStart = item.dataset.start;
+                    state.background.gradientEnd = item.dataset.end;
+                    document.getElementById('bgGradientStart').value = item.dataset.start;
+                    document.getElementById('bgGradientEnd').value = item.dataset.end;
+                    updatePreview();
+                });
+            });
+        }
+
+        function initLogoGrid() {
+            const grid = document.getElementById('logoGrid');
+            grid.innerHTML = LOGOS.map((logo, i) => `
+                <div class="image-item ${i === 0 ? 'selected' : ''}" data-logo="${logo.file}" title="${logo.name}">
+                    <img src="../../svg/${logo.file}" alt="${logo.name}">
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.image-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.logo.file = item.dataset.logo;
+                    updatePreview();
+                });
+            });
+        }
+
+        function initCharacterGrid() {
+            const grid = document.getElementById('characterGrid');
+            const type = state.character.type;
+            const images = CHARACTER_IMAGES[type] || [];
+            const folderMap = {
+                delphi: '../../Delphi/',
+                mermaid: '../../Mermaid/',
+                captain: '../../Captain/',
+                pirate: '../../Pirate/',
+                engineer: '../../Engineer/'
+            };
+            const folder = folderMap[type];
+
+            grid.innerHTML = images.map((img, i) => `
+                <div class="character-item ${i === 0 ? 'selected' : ''}" data-file="${img.file}" title="${img.name}">
+                    <img src="${folder}${img.file}" alt="${img.name}">
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.character-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.character-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.character.file = item.dataset.file;
+                    updatePreview();
+                });
+            });
+        }
+
+        function initEventListeners() {
+            // Format
+            document.querySelectorAll('.format-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.format-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.format = item.dataset.format;
+                    updatePreview();
+                });
+            });
+
+            // Theme
+            document.querySelectorAll('.theme-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.theme-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.theme = item.dataset.theme;
+                    updatePreview();
+                });
+            });
+
+            // Tag color
+            document.querySelectorAll('[data-tag-color]').forEach(swatch => {
+                swatch.addEventListener('click', () => {
+                    document.querySelectorAll('[data-tag-color]').forEach(s => s.classList.remove('selected'));
+                    swatch.classList.add('selected');
+                    state.content.tagColor = swatch.dataset.tagColor;
+                    updatePreview();
+                });
+            });
+
+            // Text inputs
+            document.getElementById('tagText').addEventListener('input', (e) => {
+                state.content.tag = e.target.value;
+                updatePreview();
+            });
+
+            document.getElementById('headlineText').addEventListener('input', (e) => {
+                state.content.headline = e.target.value;
+                updatePreview();
+            });
+
+            document.getElementById('bodyText').addEventListener('input', (e) => {
+                state.content.body = e.target.value;
+                updatePreview();
+            });
+
+            document.getElementById('checklistText').addEventListener('input', (e) => {
+                state.content.checklist = e.target.value;
+                updatePreview();
+            });
+
+            document.getElementById('ctaText').addEventListener('input', (e) => {
+                state.content.cta = e.target.value;
+                updatePreview();
+            });
+
+            document.getElementById('brandText').addEventListener('input', (e) => {
+                state.content.brand = e.target.value;
+                updatePreview();
+            });
+
+            // Logo sliders
+            document.getElementById('logoX').addEventListener('input', (e) => {
+                state.logo.x = parseInt(e.target.value);
+                document.getElementById('logoXValue').textContent = state.logo.x + '%';
+                updatePreview();
+            });
+
+            document.getElementById('logoY').addEventListener('input', (e) => {
+                state.logo.y = parseInt(e.target.value);
+                document.getElementById('logoYValue').textContent = state.logo.y + '%';
+                updatePreview();
+            });
+
+            document.getElementById('logoZoom').addEventListener('input', (e) => {
+                state.logo.zoom = parseInt(e.target.value);
+                document.getElementById('logoZoomValue').textContent = state.logo.zoom + 'px';
+                updatePreview();
+            });
+
+            // Character type
+            document.getElementById('characterType').addEventListener('change', (e) => {
+                state.character.type = e.target.value;
+                initCharacterGrid();
+                // Reset to first character
+                const images = CHARACTER_IMAGES[state.character.type];
+                if (images && images.length > 0) {
+                    state.character.file = images[0].file;
+                }
+                updatePreview();
+            });
+
+            // Character sliders
+            document.getElementById('characterX').addEventListener('input', (e) => {
+                state.character.x = parseInt(e.target.value);
+                document.getElementById('characterXValue').textContent = state.character.x + '%';
+                updatePreview();
+            });
+
+            document.getElementById('characterY').addEventListener('input', (e) => {
+                state.character.y = parseInt(e.target.value);
+                document.getElementById('characterYValue').textContent = state.character.y + '%';
+                updatePreview();
+            });
+
+            document.getElementById('characterZoom').addEventListener('input', (e) => {
+                state.character.zoom = parseInt(e.target.value);
+                document.getElementById('characterZoomValue').textContent = state.character.zoom + '%';
+                updatePreview();
+            });
+
+            // Background type
+            document.getElementById('bgType').addEventListener('change', (e) => {
+                state.background.type = e.target.value;
+                document.getElementById('bgColorControls').style.display = e.target.value === 'solid' ? 'block' : 'none';
+                document.getElementById('bgGradientControls').style.display = e.target.value === 'gradient' ? 'block' : 'none';
+                document.getElementById('bgImageControls').style.display = e.target.value === 'image' ? 'block' : 'none';
+                updatePreview();
+            });
+
+            document.getElementById('bgColor').addEventListener('input', (e) => {
+                state.background.color = e.target.value;
+                updatePreview();
+            });
+
+            document.getElementById('bgGradientStart').addEventListener('input', (e) => {
+                state.background.gradientStart = e.target.value;
+                updatePreview();
+            });
+
+            document.getElementById('bgGradientEnd').addEventListener('input', (e) => {
+                state.background.gradientEnd = e.target.value;
+                updatePreview();
+            });
+
+            document.getElementById('bgImageUrl').addEventListener('input', (e) => {
+                state.background.imageUrl = e.target.value;
+                updatePreview();
+            });
+        }
+
+        // ========================================
+        // TOGGLE FUNCTIONS
+        // ========================================
+        function toggleElement(element) {
+            const toggle = document.getElementById('toggle' + element.charAt(0).toUpperCase() + element.slice(1));
+            const controls = document.getElementById(element + 'Controls');
+
+            state.elements[element] = !state.elements[element];
+            toggle.classList.toggle('active', state.elements[element]);
+
+            if (controls) {
+                controls.style.display = state.elements[element] ? 'block' : 'none';
+            }
+
+            updatePreview();
+        }
+
+        function toggleSection(header) {
+            const toggle = header.querySelector('.section-toggle');
+            const content = header.nextElementSibling;
+
+            toggle.classList.toggle('collapsed');
+            content.classList.toggle('collapsed');
+        }
+
+        // ========================================
+        // PREVIEW UPDATE
+        // ========================================
+        function updatePreview() {
+            const preview = document.getElementById('slidePreview');
+
+            // Update format
+            preview.className = 'slide-preview';
+            preview.classList.add('size-' + state.format);
+            preview.classList.add('theme-' + state.theme);
+
+            // Update background
+            if (state.background.type === 'solid') {
+                preview.style.background = state.background.color;
+            } else if (state.background.type === 'gradient') {
+                preview.style.background = `linear-gradient(135deg, ${state.background.gradientStart}, ${state.background.gradientEnd})`;
+            } else if (state.background.type === 'image') {
+                preview.style.background = `url(${state.background.imageUrl}) center/cover`;
+            } else {
+                preview.style.background = '';
+            }
+
+            // Update logo
+            const logoEl = document.getElementById('previewLogo');
+            logoEl.style.display = state.elements.logo ? 'block' : 'none';
+            logoEl.style.left = state.logo.x + '%';
+            logoEl.style.top = state.logo.y + '%';
+            logoEl.style.height = state.logo.zoom + 'px';
+            logoEl.querySelector('img').src = '../../svg/' + state.logo.file;
+
+            // Update character
+            const charEl = document.getElementById('previewCharacter');
+            charEl.style.display = state.elements.character ? 'block' : 'none';
+            if (state.elements.character) {
+                const folderMap = {
+                    delphi: '../../Delphi/',
+                    mermaid: '../../Mermaid/',
+                    captain: '../../Captain/',
+                    pirate: '../../Pirate/',
+                    engineer: '../../Engineer/'
+                };
+                charEl.style.left = state.character.x + '%';
+                charEl.style.top = state.character.y + '%';
+                charEl.style.height = state.character.zoom + '%';
+                charEl.style.transform = 'translate(-50%, -50%)';
+                charEl.querySelector('img').src = folderMap[state.character.type] + state.character.file;
+            }
+
+            // Update tag
+            const tagEl = document.getElementById('previewTag');
+            tagEl.style.display = state.elements.tag ? 'inline-block' : 'none';
+            tagEl.textContent = state.content.tag;
+            tagEl.className = 'preview-tag tag-' + state.content.tagColor;
+
+            // Update brand
+            const brandEl = document.getElementById('previewBrand');
+            brandEl.style.display = state.elements.brand ? 'block' : 'none';
+            brandEl.textContent = state.content.brand;
+
+            // Update headline
+            const headlineEl = document.getElementById('previewHeadline');
+            headlineEl.style.display = state.elements.headline ? 'block' : 'none';
+            headlineEl.innerHTML = parseRichText(state.content.headline);
+
+            // Update body
+            const bodyEl = document.getElementById('previewBody');
+            bodyEl.style.display = state.elements.body ? 'block' : 'none';
+            bodyEl.innerHTML = parseRichText(state.content.body);
+
+            // Update checklist
+            const checklistEl = document.getElementById('previewChecklist');
+            checklistEl.style.display = state.elements.checklist ? 'flex' : 'none';
+            if (state.elements.checklist && state.content.checklist) {
+                const items = state.content.checklist.split('\n').filter(line => line.trim());
+                checklistEl.innerHTML = items.map(item => {
+                    const isGood = item.trim().startsWith('check') || item.trim().startsWith('yes');
+                    const isBad = item.trim().startsWith('x') || item.trim().startsWith('no');
+                    const color = isGood ? 'var(--color-success)' : (isBad ? 'var(--color-danger)' : 'inherit');
+                    return `<div class="preview-checklist-item" style="color: ${color}">${item}</div>`;
+                }).join('');
+            }
+
+            // Update CTA
+            const ctaEl = document.getElementById('previewCta');
+            ctaEl.style.display = state.elements.cta ? 'inline-block' : 'none';
+            ctaEl.textContent = state.content.cta;
+        }
+
+        // ========================================
+        // RICH TEXT PARSER
+        // ========================================
+        function parseRichText(text) {
+            if (!text) return '';
+            let escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            escaped = escaped.replace(/\n/g, '<br>');
+            const colorMap = {
+                'red': 'var(--color-danger)',
+                'danger': 'var(--color-danger)',
+                'teal': 'var(--color-accent)',
+                'accent': 'var(--color-accent)',
+                'green': 'var(--color-success)',
+                'success': 'var(--color-success)',
+                'yellow': 'var(--color-secondary)',
+                'warning': 'var(--color-secondary)',
+                'orange': 'var(--color-warning)',
+                'dark': 'var(--color-dark)'
+            };
+            return escaped.replace(/\[(\w+):([^\]]+)\]/g, (match, color, content) => {
+                const cssColor = colorMap[color.toLowerCase()];
+                if (cssColor) {
+                    return `<span style="color: ${cssColor}; font-weight: inherit;">${content}</span>`;
+                }
+                return content;
+            });
+        }
+
+        // ========================================
+        // TEMPLATE LOADING
+        // ========================================
+        function loadTemplateFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const templateId = urlParams.get('template');
+
+            // Template definitions (same as index.html)
+            const TEMPLATE_DATA = {
+                'dark-statement-sq': {
+                    format: 'square',
+                    theme: 'dark',
+                    elements: { logo: true, brand: true, tag: false, headline: true, body: true, checklist: false, cta: true, character: false },
+                    content: { headline: 'Stop guessing.\nStart knowing.', body: 'Your bounce rate is telling a story. Are you listening?', cta: 'Get Free Audit' }
+                },
+                'risk-alert-sq': {
+                    format: 'square',
+                    theme: 'white',
+                    elements: { logo: true, brand: false, tag: true, headline: true, body: false, checklist: true, cta: false, character: false },
+                    content: { tag: 'Alert', tagColor: 'danger', headline: 'Is your domain [red:blacklisted]?', checklist: 'x Emails going to spam\nx Open rates dropping\nx Providers blocking you' }
+                },
+                'minimal-tip-sq': {
+                    format: 'square',
+                    theme: 'light',
+                    elements: { logo: true, brand: false, tag: true, headline: true, body: true, checklist: false, cta: true, character: false },
+                    content: { tag: 'Pro Tip', headline: 'Clean your list every 90 days.', body: 'Stale data is the #1 killer of sender reputation.', cta: 'Learn More' }
+                },
+                'stat-focus-sq': {
+                    format: 'square',
+                    theme: 'accent',
+                    elements: { logo: true, brand: true, tag: false, headline: true, body: true, checklist: false, cta: false, character: false },
+                    content: { headline: '22.5%', body: 'Average database decay per year. If you haven\'t cleaned your list in a year, nearly a quarter of it is risky.' }
+                },
+                'checklist-pt': {
+                    format: 'portrait',
+                    theme: 'light',
+                    elements: { logo: true, brand: true, tag: false, headline: true, body: false, checklist: true, cta: true, character: false },
+                    content: { headline: 'The Safe Sender Checklist', checklist: 'check SPF Record Configured\ncheck DKIM Signature Valid\ncheck DMARC Policy Active\ncheck Hard Bounces Removed', cta: 'Download Guide' }
+                },
+                'quote-pt': {
+                    format: 'portrait',
+                    theme: 'dark',
+                    elements: { logo: true, brand: true, tag: false, headline: true, body: true, checklist: false, cta: false, character: false },
+                    content: { headline: '"Trust is the currency of the inbox."', body: 'Without it, your offers are invisible.' }
+                },
+                'do-dont-pt': {
+                    format: 'portrait',
+                    theme: 'white',
+                    elements: { logo: true, brand: false, tag: false, headline: true, body: false, checklist: true, cta: false, character: false },
+                    content: { headline: 'Email Warm-up', checklist: 'check Start with engaged subscribers\ncheck Gradually increase volume\ncheck Monitor metrics daily\nx Blast your entire list\nx Ignore bounce rates\nx Skip authentication' }
+                },
+                'value-prop-wd': {
+                    format: 'landscape',
+                    theme: 'dark',
+                    elements: { logo: true, brand: false, tag: false, headline: true, body: true, checklist: false, cta: true, character: false },
+                    content: { headline: 'Protect Your Sender Reputation', body: 'Real-time monitoring. Instant alerts. Expert guidance.', cta: 'Start Free Trial' }
+                },
+                'social-proof-wd': {
+                    format: 'landscape',
+                    theme: 'light',
+                    elements: { logo: true, brand: false, tag: false, headline: true, body: false, checklist: false, cta: true, character: false },
+                    content: { headline: '10K+ Domains Monitored | 99.2% Inbox Placement | 24/7 Alerts', cta: 'Join Them' }
+                },
+                'blog-header-wd': {
+                    format: 'landscape',
+                    theme: 'accent',
+                    elements: { logo: true, brand: false, tag: true, headline: true, body: true, checklist: false, cta: false, character: false },
+                    content: { tag: 'Guide', headline: 'The Complete Email Deliverability Playbook', body: 'Everything you need to reach the inbox' }
+                }
+            };
+
+            if (templateId && TEMPLATE_DATA[templateId]) {
+                const template = TEMPLATE_DATA[templateId];
+
+                // Apply template to state
+                state.format = template.format;
+                state.theme = template.theme;
+
+                // Apply elements
+                Object.keys(template.elements).forEach(key => {
+                    state.elements[key] = template.elements[key];
+                    const toggle = document.getElementById('toggle' + key.charAt(0).toUpperCase() + key.slice(1));
+                    const controls = document.getElementById(key + 'Controls');
+                    if (toggle) toggle.classList.toggle('active', template.elements[key]);
+                    if (controls) controls.style.display = template.elements[key] ? 'block' : 'none';
+                });
+
+                // Apply content
+                if (template.content) {
+                    Object.keys(template.content).forEach(key => {
+                        state.content[key] = template.content[key];
+                        const input = document.getElementById(key + 'Text');
+                        if (input) input.value = template.content[key];
+                    });
+                }
+
+                // Update format selection UI
+                document.querySelectorAll('.format-item').forEach(item => {
+                    item.classList.toggle('selected', item.dataset.format === state.format);
+                });
+
+                // Update theme selection UI
+                document.querySelectorAll('.theme-item').forEach(item => {
+                    item.classList.toggle('selected', item.dataset.theme === state.theme);
+                });
+
+                // Update tag color selection
+                if (template.content?.tagColor) {
+                    document.querySelectorAll('[data-tag-color]').forEach(s => {
+                        s.classList.toggle('selected', s.dataset.tagColor === template.content.tagColor);
+                    });
+                }
+            }
+        }
+
+        // ========================================
+        // EXPORT FUNCTIONS
+        // ========================================
+        async function downloadImage() {
+            const preview = document.getElementById('slidePreview');
+
+            // Get actual export dimensions
+            const dimensions = {
+                square: { width: 1080, height: 1080 },
+                portrait: { width: 1080, height: 1350 },
+                landscape: { width: 1200, height: 628 }
+            };
+            const dim = dimensions[state.format];
+
+            const canvas = await html2canvas(preview, {
+                scale: dim.width / preview.offsetWidth,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            });
+
+            const link = document.createElement('a');
+            link.download = `rme-${state.format}-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        async function copyToClipboard() {
+            const preview = document.getElementById('slidePreview');
+
+            const dimensions = {
+                square: { width: 1080, height: 1080 },
+                portrait: { width: 1080, height: 1350 },
+                landscape: { width: 1200, height: 628 }
+            };
+            const dim = dimensions[state.format];
+
+            const canvas = await html2canvas(preview, {
+                scale: dim.width / preview.offsetWidth,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            });
+
+            canvas.toBlob(async (blob) => {
+                try {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({ 'image/png': blob })
+                    ]);
+                    alert('Copied to clipboard!');
+                } catch (err) {
+                    console.error('Failed to copy:', err);
+                    alert('Failed to copy to clipboard');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
