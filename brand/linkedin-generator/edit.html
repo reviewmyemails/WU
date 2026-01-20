@@ -2803,12 +2803,25 @@
                 landscape: { width: 1200, height: 628 }
             };
             const dim = dimensions[state.format];
+            const scale = dim.width / preview.offsetWidth;
 
             const canvas = await html2canvas(preview, {
-                scale: dim.width / preview.offsetWidth,
+                scale: scale,
                 useCORS: true,
                 allowTaint: true,
-                backgroundColor: null
+                backgroundColor: null,
+                onclone: (clonedDoc) => {
+                    // Fix logo sizing - convert percentage to fixed pixels for accurate scaling
+                    const logoImg = clonedDoc.querySelector('.logo-img');
+                    if (logoImg) {
+                        const originalLogo = document.querySelector('.logo-img');
+                        if (originalLogo) {
+                            const rect = originalLogo.getBoundingClientRect();
+                            logoImg.style.height = rect.height + 'px';
+                            logoImg.style.width = rect.width + 'px';
+                        }
+                    }
+                }
             });
 
             const link = document.createElement('a');
@@ -2825,12 +2838,25 @@
                 landscape: { width: 1200, height: 628 }
             };
             const dim = dimensions[state.format];
+            const scale = dim.width / preview.offsetWidth;
 
             const canvas = await html2canvas(preview, {
-                scale: dim.width / preview.offsetWidth,
+                scale: scale,
                 useCORS: true,
                 allowTaint: true,
-                backgroundColor: null
+                backgroundColor: null,
+                onclone: (clonedDoc) => {
+                    // Fix logo sizing - convert percentage to fixed pixels for accurate scaling
+                    const logoImg = clonedDoc.querySelector('.logo-img');
+                    if (logoImg) {
+                        const originalLogo = document.querySelector('.logo-img');
+                        if (originalLogo) {
+                            const rect = originalLogo.getBoundingClientRect();
+                            logoImg.style.height = rect.height + 'px';
+                            logoImg.style.width = rect.width + 'px';
+                        }
+                    }
+                }
             });
 
             canvas.toBlob(async (blob) => {
