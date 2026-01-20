@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Library | LinkedIn Content Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #ffffff;
+            --color-light: #f0fdfa;
+            --color-light-alt: #ccfbf1;
+            --color-muted: #6b7280;
+            --color-border: #e5e7eb;
+            --color-success: #1fa95c;
+            --color-warning: #f9943b;
+            --color-danger: #f33144;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: #1a1a2e;
+            color: var(--color-white);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 32px;
+            background: #16162a;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-brand img {
+            height: 32px;
+        }
+
+        .nav-brand h1 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-link.active {
+            color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.15);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 48px 32px;
+        }
+
+        .header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: rgba(255,255,255,0.6);
+            font-size: 16px;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 0 32px 32px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .filter-btn.active {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: white;
+        }
+
+        /* Template Grid */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+            padding: 0 32px 64px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Template Card */
+        .template-card {
+            background: #16162a;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.2s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-accent);
+            box-shadow: 0 12px 40px rgba(13, 148, 136, 0.2);
+        }
+
+        .template-preview {
+            position: relative;
+            background: #111;
+            overflow: hidden;
+        }
+
+        /* Aspect Ratios */
+        .template-preview.ratio-square { padding-top: 100%; }
+        .template-preview.ratio-portrait { padding-top: 125%; }
+        .template-preview.ratio-wide { padding-top: 52.3%; }
+
+        .template-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8%;
+        }
+
+        .template-meta {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .template-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .template-info span {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .template-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        /* Template Themes */
+        .bg-dark {
+            background: linear-gradient(135deg, #134e4a 0%, #0f3d3a 50%, #1a5c57 100%);
+            color: white;
+        }
+        .bg-light {
+            background: linear-gradient(135deg, #f0fdfa 0%, #e6f9f6 50%, #f5fefe 100%);
+            color: #134e4a;
+        }
+        .bg-accent {
+            background: linear-gradient(135deg, #0d9488 0%, #0a7a70 50%, #10a89c 100%);
+            color: white;
+        }
+        .bg-white {
+            background: white;
+            color: #134e4a;
+            border: 1px solid #e5e5e5;
+        }
+
+        /* Typography */
+        .t-brand {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        .t-h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+
+        .t-h1-stat {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .t-p {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .t-p-small {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        /* Components */
+        .c-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .c-btn-preview {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .c-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .c-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .c-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        .c-stat-box {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .text-accent { color: var(--color-accent); }
+        .text-danger { color: var(--color-danger); }
+        .text-success { color: var(--color-success); }
+
+        /* Format badges */
+        .format-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 8px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            z-index: 10;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 64px 32px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-brand">
+            <img src="../../svg/Horizontal-Logo.svg" alt="Review My Emails">
+            <h1>Content Generator</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Build from Scratch</a>
+            <a href="templates.html" class="nav-link active">Template Library</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <h2>Template Library</h2>
+        <p>Browse pre-designed templates and customize them for your brand</p>
+    </header>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Templates</button>
+        <button class="filter-btn" data-filter="square">Square (1:1)</button>
+        <button class="filter-btn" data-filter="portrait">Portrait (4:5)</button>
+        <button class="filter-btn" data-filter="wide">Wide (1.91:1)</button>
+        <button class="filter-btn" data-filter="statement">Statements</button>
+        <button class="filter-btn" data-filter="stat">Stats</button>
+        <button class="filter-btn" data-filter="checklist">Checklists</button>
+        <button class="filter-btn" data-filter="quote">Quotes</button>
+    </div>
+
+    <!-- Template Grid -->
+    <div class="template-grid" id="templateGrid">
+        <!-- Templates populated by JS -->
+    </div>
+
+    <script>
+        // Template data
+        const TEMPLATES = [
+            // SQUARE (1:1) Templates
+            {
+                id: 'dark-statement-sq',
+                name: 'Dark Statement',
+                category: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    headline: 'Stop guessing.\nStart knowing.',
+                    subheadline: 'Your bounce rate is telling a story. Are you listening?',
+                    cta: 'Get Free Audit',
+                    badge: null
+                }
+            },
+            {
+                id: 'risk-alert-sq',
+                name: 'Risk Alert',
+                category: 'statement',
+                format: 'square',
+                theme: 'white',
+                accent: 'danger',
+                data: {
+                    badge: 'Alert',
+                    headline: 'Is your domain blacklisted?',
+                    checklist: [
+                        { text: 'Emails going to spam', status: 'bad' },
+                        { text: 'Open rates dropping', status: 'bad' },
+                        { text: 'Providers blocking you', status: 'bad' }
+                    ],
+                    footer: 'Check your status instantly at reviewmyemails.com'
+                }
+            },
+            {
+                id: 'minimal-tip-sq',
+                name: 'Pro Tip',
+                category: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Pro Tip',
+                    headline: 'Clean your list every 90 days.',
+                    subheadline: 'Stale data is the #1 killer of sender reputation.',
+                    cta: 'Learn More'
+                }
+            },
+            {
+                id: 'stat-focus-sq',
+                name: 'Stat Focus',
+                category: 'stat',
+                format: 'square',
+                theme: 'accent',
+                data: {
+                    label: 'Did you know?',
+                    stat: '22.5%',
+                    statLabel: 'Average database decay per year',
+                    subheadline: 'If you haven\'t cleaned your list in a year, nearly a quarter of it is risky.',
+                    footer: 'Source: Industry Benchmarks'
+                }
+            },
+
+            // PORTRAIT (4:5) Templates
+            {
+                id: 'checklist-pt',
+                name: 'Safe Sender Checklist',
+                category: 'checklist',
+                format: 'portrait',
+                theme: 'light',
+                data: {
+                    label: 'Deliverability 101',
+                    headline: 'The Safe Sender Checklist',
+                    checklist: [
+                        { text: 'SPF Record Configured', status: 'good' },
+                        { text: 'DKIM Signature Valid', status: 'good' },
+                        { text: 'DMARC Policy Active', status: 'good' },
+                        { text: 'Hard Bounces Removed', status: 'good' }
+                    ],
+                    cta: 'Download Guide'
+                }
+            },
+            {
+                id: 'quote-pt',
+                name: 'Quote Card',
+                category: 'quote',
+                format: 'portrait',
+                theme: 'dark',
+                data: {
+                    quote: 'Trust is the currency of the inbox.',
+                    attribution: 'Without it, your offers are invisible.',
+                    author: 'Review My Emails',
+                    authorTitle: 'Deliverability Experts'
+                }
+            },
+            {
+                id: 'do-dont-pt',
+                name: 'Do\'s & Don\'ts',
+                category: 'checklist',
+                format: 'portrait',
+                theme: 'white',
+                data: {
+                    headline: 'Email Warm-up',
+                    dosAndDonts: {
+                        do: ['Start with engaged subscribers', 'Gradually increase volume', 'Monitor metrics daily'],
+                        dont: ['Blast your entire list', 'Ignore bounce rates', 'Skip authentication']
+                    }
+                }
+            },
+            {
+                id: 'step-process-pt',
+                name: 'Step Process',
+                category: 'statement',
+                format: 'portrait',
+                theme: 'dark',
+                data: {
+                    badge: 'How To',
+                    headline: '3 Steps to Better Deliverability',
+                    steps: [
+                        { num: '01', title: 'Audit', desc: 'Check your current reputation' },
+                        { num: '02', title: 'Clean', desc: 'Remove invalid addresses' },
+                        { num: '03', title: 'Monitor', desc: 'Track ongoing metrics' }
+                    ]
+                }
+            },
+
+            // WIDE (1.91:1) Templates
+            {
+                id: 'value-prop-wd',
+                name: 'Value Proposition',
+                category: 'statement',
+                format: 'wide',
+                theme: 'dark',
+                data: {
+                    headline: 'Protect Your Sender Reputation',
+                    subheadline: 'Real-time monitoring. Instant alerts. Expert guidance.',
+                    cta: 'Start Free Trial'
+                }
+            },
+            {
+                id: 'social-proof-wd',
+                name: 'Social Proof',
+                category: 'stat',
+                format: 'wide',
+                theme: 'light',
+                data: {
+                    stats: [
+                        { value: '10K+', label: 'Domains Monitored' },
+                        { value: '99.2%', label: 'Inbox Placement' },
+                        { value: '24/7', label: 'Real-time Alerts' }
+                    ],
+                    cta: 'Join Them'
+                }
+            },
+            {
+                id: 'blog-header-wd',
+                name: 'Blog Header',
+                category: 'statement',
+                format: 'wide',
+                theme: 'accent',
+                data: {
+                    badge: 'Guide',
+                    headline: 'The Complete Email Deliverability Playbook',
+                    subheadline: 'Everything you need to reach the inbox'
+                }
+            },
+            {
+                id: 'result-highlight-wd',
+                name: 'Result Highlight',
+                category: 'stat',
+                format: 'wide',
+                theme: 'white',
+                data: {
+                    badge: 'Case Study',
+                    beforeAfter: {
+                        before: { value: '45%', label: 'Before' },
+                        after: { value: '98%', label: 'After' }
+                    },
+                    metric: 'Inbox Placement Rate',
+                    cta: 'See How'
+                }
+            }
+        ];
+
+        // Current filter
+        let currentFilter = 'all';
+
+        // Render templates
+        function renderTemplates() {
+            const grid = document.getElementById('templateGrid');
+            const filtered = TEMPLATES.filter(t => {
+                if (currentFilter === 'all') return true;
+                return t.format === currentFilter || t.category === currentFilter;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <h3>No templates found</h3>
+                        <p>Try a different filter</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(template => renderTemplateCard(template)).join('');
+        }
+
+        function renderTemplateCard(template) {
+            const ratioClass = template.format === 'square' ? 'ratio-square' :
+                              template.format === 'portrait' ? 'ratio-portrait' : 'ratio-wide';
+            const formatLabel = template.format === 'square' ? '1:1' :
+                               template.format === 'portrait' ? '4:5' : '1.91:1';
+
+            return `
+                <div class="template-card" data-template-id="${template.id}">
+                    <div class="template-preview ${ratioClass}">
+                        <span class="format-badge">${formatLabel}</span>
+                        ${renderTemplatePreview(template)}
+                    </div>
+                    <div class="template-meta">
+                        <div class="template-info">
+                            <h3>${template.name}</h3>
+                            <span>${capitalizeFirst(template.category)} / ${capitalizeFirst(template.format)}</span>
+                        </div>
+                        <div class="template-actions">
+                            <a href="index.html?template=${template.id}" class="btn btn-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderTemplatePreview(template) {
+            const bgClass = `bg-${template.theme}`;
+            const d = template.data;
+
+            switch (template.id) {
+                case 'dark-statement-sq':
+                    return `
+                        <div class="template-content ${bgClass}">
+                            <div class="t-brand">Review My Emails</div>
+                            <div style="margin-top:auto; margin-bottom:auto;">
+                                <div class="t-h1">${d.headline.replace('\n', '<br>')}</div>
+                                <div class="t-p">${d.subheadline}</div>
+                            </div>
+                            <div class="c-btn-preview" style="background:var(--color-accent); color:white;">${d.cta}</div>
+                        </div>
+                    `;
+
+                case 'risk-alert-sq':
+                    return `
+                        <div class="template-content ${bgClass}" style="border-top: 4px solid var(--color-danger);">
+                            <div class="c-badge" style="background:#fee2e2; color:var(--color-danger);">${d.badge}</div>
+                            <div style="margin-top:auto; margin-bottom:auto;">
+                                <div class="t-h1">Is your domain <span class="text-danger">blacklisted?</span></div>
+                                <div class="c-list">
+                                    ${d.checklist.map(item => `
+                                        <div class="c-item"><span class="text-danger">✖</span> ${item.text}</div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <div class="t-p-small" style="color:var(--color-muted);">${d.footer}</div>
+                        </div>
+                    `;
+
+                case 'minimal-tip-sq':
+                    return `
+                        <div class="template-content ${bgClass}" style="text-align:center;">
+                            <div class="c-badge" style="background:var(--color-accent); color:white;">${d.badge}</div>
+                            <div style="margin-top:auto; margin-bottom:auto;">
+                                <div class="t-h1">${d.headline}</div>
+                                <div class="t-p">${d.subheadline}</div>
+                            </div>
+                            <div class="c-btn-preview" style="background:var(--color-dark); color:white; margin:0 auto;">${d.cta}</div>
+                        </div>
+                    `;
+
+                case 'stat-focus-sq':
+                    return `
+                        <div class="template-content ${bgClass}">
+                            <div class="t-brand" style="color:white;">${d.label}</div>
+                            <div style="margin-top:auto; margin-bottom:auto;">
+                                <div class="c-stat-box">
+                                    <div class="t-h1-stat">${d.stat}</div>
+                                    <div class="t-p-small" style="margin-top:8px;">${d.statLabel}</div>
+                                </div>
+                                <div class="t-p" style="text-align:center; margin-top:16px;">${d.subheadline}</div>
+                            </div>
+                            <div class="t-p-small" style="text-align:center;">${d.footer}</div>
+                        </div>
+                    `;
+
+                case 'checklist-pt':
+                    return `
+                        <div class="template-content ${bgClass}">
+                            <div class="t-brand" style="color:var(--color-muted);">${d.label}</div>
+                            <div style="margin-top:16px;">
+                                <div class="t-h1">${d.headline}</div>
+                                <div class="c-list">
+                                    ${d.checklist.map(item => `
+                                        <div class="c-item">
+                                            <div class="c-check" style="background:var(--color-success); color:white;">✓</div>
+                                            <span>${item.text}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            <div class="c-btn-preview" style="background:var(--color-dark); color:white; width:100%; text-align:center;">${d.cta}</div>
+                        </div>
+                    `;
+
+                case 'quote-pt':
+                    return `
+                        <div class="template-content ${bgClass}" style="text-align:center;">
+                            <div style="color:var(--color-accent); font-size:2.5rem; line-height:1; margin-top:12px;">"</div>
+                            <div class="t-h1" style="font-weight:500; font-style:italic; margin-top:-8px;">${d.quote}</div>
+                            <div style="width:30px; height:2px; background:var(--color-accent); margin:16px auto;"></div>
+                            <div class="t-p-small">${d.attribution}</div>
+                            <div style="margin-top:auto; background:rgba(255,255,255,0.1); padding:8px; border-radius:6px;">
+                                <div style="font-weight:700; font-size:0.75rem;">${d.author}</div>
+                                <div style="font-size:0.65rem; opacity:0.7;">${d.authorTitle}</div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'do-dont-pt':
+                    return `
+                        <div class="template-content ${bgClass}">
+                            <div class="t-h1" style="text-align:center; margin-bottom:16px;">${d.headline}</div>
+                            <div style="display:flex; gap:12px; flex:1;">
+                                <div style="flex:1; background:#e8f5e9; border-radius:8px; padding:12px;">
+                                    <div style="font-weight:700; color:#2e7d32; font-size:0.7rem; margin-bottom:8px;">DO</div>
+                                    ${d.dosAndDonts.do.map(item => `
+                                        <div class="c-item" style="margin-bottom:6px;"><span class="text-success">✓</span> ${item}</div>
+                                    `).join('')}
+                                </div>
+                                <div style="flex:1; background:#ffebee; border-radius:8px; padding:12px;">
+                                    <div style="font-weight:700; color:#c62828; font-size:0.7rem; margin-bottom:8px;">DON'T</div>
+                                    ${d.dosAndDonts.dont.map(item => `
+                                        <div class="c-item" style="margin-bottom:6px;"><span class="text-danger">✖</span> ${item}</div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'step-process-pt':
+                    return `
+                        <div class="template-content ${bgClass}">
+                            <div class="c-badge" style="background:var(--color-accent); color:white;">${d.badge}</div>
+                            <div class="t-h1">${d.headline}</div>
+                            <div style="margin-top:auto;">
+                                ${d.steps.map(step => `
+                                    <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:12px;">
+                                        <div style="background:var(--color-accent); color:white; padding:4px 8px; border-radius:4px; font-weight:700; font-size:0.7rem;">${step.num}</div>
+                                        <div>
+                                            <div style="font-weight:700; font-size:0.85rem;">${step.title}</div>
+                                            <div class="t-p-small">${step.desc}</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+
+                case 'value-prop-wd':
+                    return `
+                        <div class="template-content ${bgClass}" style="flex-direction:row; align-items:center;">
+                            <div style="flex:1;">
+                                <div class="t-h1">${d.headline}</div>
+                                <div class="t-p">${d.subheadline}</div>
+                            </div>
+                            <div class="c-btn-preview" style="background:var(--color-accent); color:white;">${d.cta}</div>
+                        </div>
+                    `;
+
+                case 'social-proof-wd':
+                    return `
+                        <div class="template-content ${bgClass}" style="flex-direction:row; align-items:center; justify-content:space-between;">
+                            ${d.stats.map(stat => `
+                                <div style="text-align:center;">
+                                    <div style="font-size:1.5rem; font-weight:800; color:var(--color-accent);">${stat.value}</div>
+                                    <div class="t-p-small">${stat.label}</div>
+                                </div>
+                            `).join('')}
+                            <div class="c-btn-preview" style="background:var(--color-accent); color:white;">${d.cta}</div>
+                        </div>
+                    `;
+
+                case 'blog-header-wd':
+                    return `
+                        <div class="template-content ${bgClass}" style="text-align:center; justify-content:center;">
+                            <div class="c-badge" style="background:rgba(255,255,255,0.2); color:white;">${d.badge}</div>
+                            <div class="t-h1">${d.headline}</div>
+                            <div class="t-p">${d.subheadline}</div>
+                        </div>
+                    `;
+
+                case 'result-highlight-wd':
+                    return `
+                        <div class="template-content ${bgClass}" style="flex-direction:row; align-items:center;">
+                            <div class="c-badge" style="background:var(--color-accent); color:white; position:absolute; top:8%; left:8%;">${d.badge}</div>
+                            <div style="flex:1; display:flex; align-items:center; gap:24px; justify-content:center;">
+                                <div style="text-align:center;">
+                                    <div style="font-size:1.8rem; font-weight:800; color:var(--color-muted);">${d.beforeAfter.before.value}</div>
+                                    <div class="t-p-small">${d.beforeAfter.before.label}</div>
+                                </div>
+                                <div style="font-size:1.5rem; color:var(--color-muted);">→</div>
+                                <div style="text-align:center;">
+                                    <div style="font-size:1.8rem; font-weight:800; color:var(--color-success);">${d.beforeAfter.after.value}</div>
+                                    <div class="t-p-small">${d.beforeAfter.after.label}</div>
+                                </div>
+                            </div>
+                            <div style="text-align:right;">
+                                <div class="t-p-small" style="margin-bottom:8px;">${d.metric}</div>
+                                <div class="c-btn-preview" style="background:var(--color-accent); color:white;">${d.cta}</div>
+                            </div>
+                        </div>
+                    `;
+
+                default:
+                    return `<div class="template-content ${bgClass}"><div class="t-h1">Template Preview</div></div>`;
+            }
+        }
+
+        function capitalizeFirst(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // Event listeners
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                renderTemplates();
+            });
+        });
+
+        // Initialize
+        renderTemplates();
+    </script>
+</body>
+</html>

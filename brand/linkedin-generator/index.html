@@ -697,31 +697,51 @@
             cursor: pointer;
         }
 
-        /* Slide Themes */
+        /* Slide Themes - Enhanced with subtle gradients */
         .slide-preview.theme-dark {
-            background: var(--color-dark);
+            background: linear-gradient(135deg, #134e4a 0%, #0f3d3a 50%, #1a5c57 100%);
             color: var(--color-white);
         }
 
         .slide-preview.theme-light {
-            background: var(--color-light);
+            background: linear-gradient(135deg, #f0fdfa 0%, #e6f9f6 50%, #f5fefe 100%);
             color: var(--color-dark);
         }
 
         .slide-preview.theme-accent {
-            background: var(--color-accent);
+            background: linear-gradient(135deg, #0d9488 0%, #0a7a70 50%, #10a89c 100%);
             color: var(--color-white);
         }
 
         .slide-preview.theme-white {
-            background: var(--color-white);
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #ffffff 100%);
             color: var(--color-dark);
         }
 
         /* Background Image Support */
         .slide-preview.has-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide-preview.has-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
             background-size: cover;
-            background-position: center;
+            background-position: var(--bg-position, center);
+            background-image: var(--bg-image);
+            transform: scale(var(--bg-zoom, 1)) rotate(var(--bg-rotation, 0deg));
+            transform-origin: center;
+            z-index: 0;
+        }
+
+        .slide-preview.has-bg > * {
+            position: relative;
+            z-index: 1;
         }
 
         .slide-preview.has-bg .slide-content {
@@ -730,6 +750,29 @@
 
         .slide-preview.has-bg.theme-light .slide-content {
             background: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Decorative Pattern Overlay */
+        .slide-preview .pattern-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .slide-preview .pattern-overlay svg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide-preview.has-pattern > .slide-content {
+            position: relative;
+            z-index: 1;
         }
 
         /* Slide Content Layout */
@@ -1218,6 +1261,12 @@
                 <h1>LinkedIn Generator</h1>
             </div>
 
+            <!-- Mode Tabs -->
+            <div class="mode-tabs" style="display: flex; gap: 8px; margin-bottom: 24px;">
+                <a href="index.html" class="mode-tab active" style="flex: 1; padding: 10px; background: var(--color-accent); color: white; text-decoration: none; border-radius: 6px; text-align: center; font-size: 12px; font-weight: 600;">Build from Scratch</a>
+                <a href="templates.html" class="mode-tab" style="flex: 1; padding: 10px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 6px; text-align: center; font-size: 12px; font-weight: 500;">Template Library</a>
+            </div>
+
             <!-- Format Selection -->
             <div class="control-section">
                 <h3>Format</h3>
@@ -1304,12 +1353,59 @@
                         <input type="range" class="position-slider" id="bgPositionX" min="0" max="100" value="50" style="flex: 1;">
                         <span style="font-size: 11px; color: rgba(255,255,255,0.7); width: 30px;" id="bgPositionXValue">50%</span>
                     </div>
-                    <div style="display: flex; gap: 12px; align-items: center;">
+                    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
                         <span style="font-size: 11px; color: rgba(255,255,255,0.5); width: 20px;">Y</span>
                         <input type="range" class="position-slider" id="bgPositionY" min="0" max="100" value="50" style="flex: 1;">
                         <span style="font-size: 11px; color: rgba(255,255,255,0.7); width: 30px;" id="bgPositionYValue">50%</span>
                     </div>
-                    <button class="btn btn-secondary" onclick="resetBgPosition()" style="margin-top: 8px; padding: 6px 12px; font-size: 11px;">Reset to Center</button>
+                    <label class="control-label" style="margin-top: 12px;">Zoom</label>
+                    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
+                        <input type="range" class="position-slider" id="bgZoom" min="100" max="300" value="100" style="flex: 1;">
+                        <span style="font-size: 11px; color: rgba(255,255,255,0.7); width: 40px;" id="bgZoomValue">100%</span>
+                    </div>
+                    <label class="control-label" style="margin-top: 8px;">Rotation</label>
+                    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
+                        <input type="range" class="position-slider" id="bgRotation" min="-180" max="180" value="0" style="flex: 1;">
+                        <span style="font-size: 11px; color: rgba(255,255,255,0.7); width: 40px;" id="bgRotationValue">0°</span>
+                    </div>
+                    <button class="btn btn-secondary" onclick="resetBgTransforms()" style="margin-top: 8px; padding: 6px 12px; font-size: 11px;">Reset All</button>
+                </div>
+
+                <!-- Generated Pattern Section -->
+                <div class="control-group" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <label class="control-label">Decorative Pattern</label>
+                    <select class="input-select" id="patternType" style="margin-bottom: 8px;">
+                        <option value="none">None</option>
+                        <option value="bubbles">Bubbles / Circles</option>
+                        <option value="flourish">Corner Flourishes</option>
+                        <option value="waves">Soft Waves</option>
+                        <option value="tentacles">Flowing Tentacles</option>
+                        <option value="dots">Dot Grid</option>
+                        <option value="geometric">Geometric Shapes</option>
+                    </select>
+                    <div id="patternControls" class="hidden">
+                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 11px; color: rgba(255,255,255,0.5); width: 55px;">Opacity</span>
+                            <input type="range" class="position-slider" id="patternOpacity" min="5" max="50" value="15" style="flex: 1;">
+                            <span style="font-size: 11px; color: rgba(255,255,255,0.7); width: 35px;" id="patternOpacityValue">15%</span>
+                        </div>
+                        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
+                            <span style="font-size: 11px; color: rgba(255,255,255,0.5); width: 55px;">Scale</span>
+                            <input type="range" class="position-slider" id="patternScale" min="50" max="200" value="100" style="flex: 1;">
+                            <span style="font-size: 11px; color: rgba(255,255,255,0.7); width: 35px;" id="patternScaleValue">100%</span>
+                        </div>
+                        <div style="display: flex; gap: 12px; align-items: center;">
+                            <span style="font-size: 11px; color: rgba(255,255,255,0.5); width: 55px;">Position</span>
+                            <select class="input-select" id="patternPosition" style="flex: 1; padding: 6px 10px; font-size: 12px;">
+                                <option value="all">All Corners</option>
+                                <option value="top-left">Top Left</option>
+                                <option value="top-right">Top Right</option>
+                                <option value="bottom-left">Bottom Left</option>
+                                <option value="bottom-right">Bottom Right</option>
+                                <option value="center">Center</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1480,6 +1576,9 @@
             <div class="slide-preview-container">
                 <div class="slide-preview-wrapper">
                     <div class="slide-preview theme-dark size-portrait" id="slidePreview">
+                        <!-- Pattern Overlay (generated SVG) -->
+                        <div class="pattern-overlay" id="patternOverlay"></div>
+
                         <!-- Logo (absolute positioned) -->
                         <div class="slide-logo" id="slideLogo">
                             <img id="slideLogoImg" src="../../svg/Horizontal-Logo.svg" alt="Logo">
@@ -1676,6 +1775,336 @@
         // Get background categories for filtering
         const BACKGROUND_CATEGORIES = ['all', 'pattern', 'gradient', 'abstract', 'scene', 'character'];
 
+        // Generated Pattern Functions
+        function generatePatternSVG(type, opacity, scale, position, theme) {
+            const isLightTheme = theme === 'light' || theme === 'white';
+            const color = isLightTheme ? '#134e4a' : '#ffffff';
+            const scaleFactor = scale / 100;
+            const opacityValue = opacity / 100;
+
+            let svg = '';
+            switch (type) {
+                case 'bubbles':
+                    svg = generateBubblesPattern(color, opacityValue, scaleFactor, position);
+                    break;
+                case 'flourish':
+                    svg = generateFlourishPattern(color, opacityValue, scaleFactor, position);
+                    break;
+                case 'waves':
+                    svg = generateWavesPattern(color, opacityValue, scaleFactor, position);
+                    break;
+                case 'tentacles':
+                    svg = generateTentaclesPattern(color, opacityValue, scaleFactor, position);
+                    break;
+                case 'dots':
+                    svg = generateDotsPattern(color, opacityValue, scaleFactor, position);
+                    break;
+                case 'geometric':
+                    svg = generateGeometricPattern(color, opacityValue, scaleFactor, position);
+                    break;
+                default:
+                    svg = '';
+            }
+            return svg;
+        }
+
+        function generateBubblesPattern(color, opacity, scale, position) {
+            const circles = [];
+            const baseSize = 60 * scale;
+
+            // Generate different circle configurations based on position
+            const configs = {
+                'all': [
+                    { cx: '10%', cy: '10%', r: baseSize * 0.8 },
+                    { cx: '5%', cy: '25%', r: baseSize * 0.5 },
+                    { cx: '90%', cy: '15%', r: baseSize * 0.7 },
+                    { cx: '95%', cy: '80%', r: baseSize * 0.9 },
+                    { cx: '85%', cy: '90%', r: baseSize * 0.4 },
+                    { cx: '8%', cy: '85%', r: baseSize * 0.6 },
+                    { cx: '15%', cy: '95%', r: baseSize * 0.3 }
+                ],
+                'top-left': [
+                    { cx: '5%', cy: '5%', r: baseSize },
+                    { cx: '15%', cy: '20%', r: baseSize * 0.6 },
+                    { cx: '25%', cy: '8%', r: baseSize * 0.4 },
+                    { cx: '8%', cy: '35%', r: baseSize * 0.5 }
+                ],
+                'top-right': [
+                    { cx: '95%', cy: '5%', r: baseSize },
+                    { cx: '85%', cy: '20%', r: baseSize * 0.6 },
+                    { cx: '75%', cy: '8%', r: baseSize * 0.4 },
+                    { cx: '92%', cy: '35%', r: baseSize * 0.5 }
+                ],
+                'bottom-left': [
+                    { cx: '5%', cy: '95%', r: baseSize },
+                    { cx: '15%', cy: '80%', r: baseSize * 0.6 },
+                    { cx: '25%', cy: '92%', r: baseSize * 0.4 },
+                    { cx: '8%', cy: '65%', r: baseSize * 0.5 }
+                ],
+                'bottom-right': [
+                    { cx: '95%', cy: '95%', r: baseSize },
+                    { cx: '85%', cy: '80%', r: baseSize * 0.6 },
+                    { cx: '75%', cy: '92%', r: baseSize * 0.4 },
+                    { cx: '92%', cy: '65%', r: baseSize * 0.5 }
+                ],
+                'center': [
+                    { cx: '50%', cy: '50%', r: baseSize * 1.5 },
+                    { cx: '35%', cy: '40%', r: baseSize * 0.5 },
+                    { cx: '65%', cy: '60%', r: baseSize * 0.6 },
+                    { cx: '45%', cy: '65%', r: baseSize * 0.4 }
+                ]
+            };
+
+            const selectedConfig = configs[position] || configs['all'];
+            selectedConfig.forEach(c => {
+                circles.push(`<circle cx="${c.cx}" cy="${c.cy}" r="${c.r}" fill="${color}" opacity="${opacity}"/>`);
+            });
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${circles.join('')}</svg>`;
+        }
+
+        function generateFlourishPattern(color, opacity, scale, position) {
+            const paths = [];
+            const strokeWidth = 2 * scale;
+
+            const flourishPath = `M0,50 Q25,30 50,50 T100,50`;
+            const flourishPath2 = `M0,60 Q30,20 60,60 T100,40`;
+
+            const configs = {
+                'all': [
+                    { d: flourishPath, transform: 'translate(0, -45) scale(0.4)', opacity: opacity * 0.8 },
+                    { d: flourishPath2, transform: 'translate(60, -45) scale(0.35) rotate(10)', opacity: opacity * 0.6 },
+                    { d: flourishPath, transform: 'translate(0, 90) scale(0.4) rotate(180)', opacity: opacity * 0.8 },
+                    { d: flourishPath2, transform: 'translate(60, 95) scale(0.35) rotate(170)', opacity: opacity * 0.6 }
+                ],
+                'top-left': [
+                    { d: flourishPath, transform: 'translate(-10, -5) scale(0.5)', opacity },
+                    { d: flourishPath2, transform: 'translate(-5, 10) scale(0.4) rotate(-20)', opacity: opacity * 0.7 }
+                ],
+                'top-right': [
+                    { d: flourishPath, transform: 'translate(55, -5) scale(0.5) scaleX(-1)', opacity },
+                    { d: flourishPath2, transform: 'translate(60, 10) scale(0.4) rotate(20) scaleX(-1)', opacity: opacity * 0.7 }
+                ],
+                'bottom-left': [
+                    { d: flourishPath, transform: 'translate(-10, 90) scale(0.5) rotate(180)', opacity },
+                    { d: flourishPath2, transform: 'translate(-5, 80) scale(0.4) rotate(200)', opacity: opacity * 0.7 }
+                ],
+                'bottom-right': [
+                    { d: flourishPath, transform: 'translate(55, 90) scale(0.5) rotate(180) scaleX(-1)', opacity },
+                    { d: flourishPath2, transform: 'translate(60, 80) scale(0.4) rotate(160) scaleX(-1)', opacity: opacity * 0.7 }
+                ],
+                'center': [
+                    { d: flourishPath, transform: 'translate(25, 35) scale(0.5)', opacity },
+                    { d: flourishPath, transform: 'translate(25, 55) scale(0.5) rotate(180)', opacity: opacity * 0.7 }
+                ]
+            };
+
+            const selectedConfig = configs[position] || configs['all'];
+            selectedConfig.forEach(p => {
+                paths.push(`<path d="${p.d}" stroke="${color}" stroke-width="${strokeWidth}" fill="none" opacity="${p.opacity}" transform="${p.transform}"/>`);
+            });
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${paths.join('')}</svg>`;
+        }
+
+        function generateWavesPattern(color, opacity, scale, position) {
+            const paths = [];
+            const strokeWidth = 1.5 * scale;
+
+            const wavePaths = {
+                'all': [
+                    { d: 'M-10,90 Q10,85 30,90 T70,90 T110,90', y: 0 },
+                    { d: 'M-10,93 Q15,88 35,93 T75,93 T115,93', y: 0 },
+                    { d: 'M-10,96 Q20,91 40,96 T80,96 T120,96', y: 0 },
+                    { d: 'M-10,10 Q10,5 30,10 T70,10 T110,10', y: 0 },
+                    { d: 'M-10,7 Q15,2 35,7 T75,7 T115,7', y: 0 }
+                ],
+                'bottom-left': [
+                    { d: 'M-10,85 Q10,75 30,85 T60,80', y: 0 },
+                    { d: 'M-10,90 Q15,82 35,90 T55,87', y: 0 },
+                    { d: 'M-10,95 Q10,88 25,95 T50,92', y: 0 }
+                ],
+                'bottom-right': [
+                    { d: 'M40,80 Q60,75 80,85 T110,85', y: 0 },
+                    { d: 'M45,87 Q65,82 85,90 T110,90', y: 0 },
+                    { d: 'M50,92 Q70,88 90,95 T110,95', y: 0 }
+                ],
+                'top-left': [
+                    { d: 'M-10,15 Q10,5 30,15 T60,10', y: 0 },
+                    { d: 'M-10,10 Q15,2 35,10 T55,7', y: 0 },
+                    { d: 'M-10,5 Q10,-2 25,5 T50,3', y: 0 }
+                ],
+                'top-right': [
+                    { d: 'M40,10 Q60,5 80,15 T110,15', y: 0 },
+                    { d: 'M45,7 Q65,2 85,10 T110,10', y: 0 },
+                    { d: 'M50,3 Q70,-2 90,5 T110,5', y: 0 }
+                ],
+                'center': [
+                    { d: 'M10,45 Q30,40 50,45 T90,45', y: 0 },
+                    { d: 'M10,50 Q35,45 55,50 T90,50', y: 0 },
+                    { d: 'M10,55 Q30,60 50,55 T90,55', y: 0 }
+                ]
+            };
+
+            const selectedConfig = wavePaths[position] || wavePaths['all'];
+            selectedConfig.forEach((w, i) => {
+                const op = opacity * (1 - i * 0.15);
+                paths.push(`<path d="${w.d}" stroke="${color}" stroke-width="${strokeWidth}" fill="none" opacity="${op}"/>`);
+            });
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${paths.join('')}</svg>`;
+        }
+
+        function generateTentaclesPattern(color, opacity, scale, position) {
+            const paths = [];
+            const strokeWidth = 3 * scale;
+
+            const tentaclePaths = {
+                'all': [
+                    { d: 'M-5,100 Q10,70 5,40 Q0,20 15,5', pos: 'bl' },
+                    { d: 'M105,100 Q90,70 95,40 Q100,20 85,5', pos: 'br' },
+                    { d: 'M-5,0 Q15,30 10,60 Q5,80 20,100', pos: 'tl' },
+                    { d: 'M105,0 Q85,30 90,60 Q95,80 80,100', pos: 'tr' }
+                ],
+                'bottom-left': [
+                    { d: 'M-5,105 Q15,75 10,50 Q5,30 25,15', pos: 'bl' },
+                    { d: 'M10,105 Q25,80 20,60 Q15,45 30,35', pos: 'bl' }
+                ],
+                'bottom-right': [
+                    { d: 'M105,105 Q85,75 90,50 Q95,30 75,15', pos: 'br' },
+                    { d: 'M90,105 Q75,80 80,60 Q85,45 70,35', pos: 'br' }
+                ],
+                'top-left': [
+                    { d: 'M-5,-5 Q15,25 10,50 Q5,70 25,85', pos: 'tl' },
+                    { d: 'M10,-5 Q25,20 20,40 Q15,55 30,65', pos: 'tl' }
+                ],
+                'top-right': [
+                    { d: 'M105,-5 Q85,25 90,50 Q95,70 75,85', pos: 'tr' },
+                    { d: 'M90,-5 Q75,20 80,40 Q85,55 70,65', pos: 'tr' }
+                ],
+                'center': [
+                    { d: 'M30,50 Q45,35 60,50 Q75,65 70,50', pos: 'c' },
+                    { d: 'M70,50 Q55,65 40,50 Q25,35 30,50', pos: 'c' }
+                ]
+            };
+
+            const selectedConfig = tentaclePaths[position] || tentaclePaths['all'];
+            selectedConfig.forEach((t, i) => {
+                const op = opacity * (1 - i * 0.2);
+                paths.push(`<path d="${t.d}" stroke="${color}" stroke-width="${strokeWidth}" fill="none" opacity="${op}" stroke-linecap="round"/>`);
+            });
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${paths.join('')}</svg>`;
+        }
+
+        function generateDotsPattern(color, opacity, scale, position) {
+            const dots = [];
+            const dotSize = 1.5 * scale;
+            const spacing = 8;
+
+            // Define grid boundaries based on position
+            const bounds = {
+                'all': { x1: 5, x2: 95, y1: 5, y2: 95 },
+                'top-left': { x1: 5, x2: 40, y1: 5, y2: 35 },
+                'top-right': { x1: 60, x2: 95, y1: 5, y2: 35 },
+                'bottom-left': { x1: 5, x2: 40, y1: 65, y2: 95 },
+                'bottom-right': { x1: 60, x2: 95, y1: 65, y2: 95 },
+                'center': { x1: 30, x2: 70, y1: 35, y2: 65 }
+            };
+
+            const b = bounds[position] || bounds['all'];
+            for (let x = b.x1; x <= b.x2; x += spacing) {
+                for (let y = b.y1; y <= b.y2; y += spacing) {
+                    // Fade opacity towards edges
+                    const distFromCenter = Math.sqrt(Math.pow((x - 50) / 50, 2) + Math.pow((y - 50) / 50, 2));
+                    const fadeOpacity = opacity * (1 - distFromCenter * 0.3);
+                    dots.push(`<circle cx="${x}" cy="${y}" r="${dotSize}" fill="${color}" opacity="${fadeOpacity}"/>`);
+                }
+            }
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${dots.join('')}</svg>`;
+        }
+
+        function generateGeometricPattern(color, opacity, scale, position) {
+            const shapes = [];
+            const size = 15 * scale;
+
+            const configs = {
+                'all': [
+                    { type: 'triangle', x: 5, y: 5, size: size, rotation: 0 },
+                    { type: 'square', x: 90, y: 10, size: size * 0.6, rotation: 45 },
+                    { type: 'triangle', x: 95, y: 90, size: size * 0.8, rotation: 180 },
+                    { type: 'square', x: 8, y: 85, size: size * 0.5, rotation: 15 },
+                    { type: 'circle', x: 88, y: 50, size: size * 0.4 },
+                    { type: 'circle', x: 12, y: 50, size: size * 0.3 }
+                ],
+                'top-left': [
+                    { type: 'triangle', x: 8, y: 8, size: size * 1.2, rotation: 0 },
+                    { type: 'square', x: 25, y: 15, size: size * 0.5, rotation: 30 },
+                    { type: 'circle', x: 12, y: 28, size: size * 0.3 }
+                ],
+                'top-right': [
+                    { type: 'triangle', x: 92, y: 8, size: size * 1.2, rotation: 90 },
+                    { type: 'square', x: 75, y: 15, size: size * 0.5, rotation: -30 },
+                    { type: 'circle', x: 88, y: 28, size: size * 0.3 }
+                ],
+                'bottom-left': [
+                    { type: 'triangle', x: 8, y: 92, size: size * 1.2, rotation: -90 },
+                    { type: 'square', x: 25, y: 85, size: size * 0.5, rotation: 30 },
+                    { type: 'circle', x: 12, y: 72, size: size * 0.3 }
+                ],
+                'bottom-right': [
+                    { type: 'triangle', x: 92, y: 92, size: size * 1.2, rotation: 180 },
+                    { type: 'square', x: 75, y: 85, size: size * 0.5, rotation: -30 },
+                    { type: 'circle', x: 88, y: 72, size: size * 0.3 }
+                ],
+                'center': [
+                    { type: 'triangle', x: 50, y: 40, size: size, rotation: 0 },
+                    { type: 'square', x: 40, y: 55, size: size * 0.5, rotation: 45 },
+                    { type: 'circle', x: 60, y: 55, size: size * 0.4 }
+                ]
+            };
+
+            const selectedConfig = configs[position] || configs['all'];
+            selectedConfig.forEach((s, i) => {
+                const op = opacity * (1 - i * 0.1);
+                if (s.type === 'triangle') {
+                    const h = s.size * 0.866;
+                    const points = `${s.x},${s.y - h/2} ${s.x - s.size/2},${s.y + h/2} ${s.x + s.size/2},${s.y + h/2}`;
+                    shapes.push(`<polygon points="${points}" fill="none" stroke="${color}" stroke-width="1.5" opacity="${op}" transform="rotate(${s.rotation || 0}, ${s.x}, ${s.y})"/>`);
+                } else if (s.type === 'square') {
+                    shapes.push(`<rect x="${s.x - s.size/2}" y="${s.y - s.size/2}" width="${s.size}" height="${s.size}" fill="none" stroke="${color}" stroke-width="1.5" opacity="${op}" transform="rotate(${s.rotation || 0}, ${s.x}, ${s.y})"/>`);
+                } else if (s.type === 'circle') {
+                    shapes.push(`<circle cx="${s.x}" cy="${s.y}" r="${s.size}" fill="none" stroke="${color}" stroke-width="1.5" opacity="${op}"/>`);
+                }
+            });
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${shapes.join('')}</svg>`;
+        }
+
+        function updatePatternOverlay() {
+            const slide = slides[currentSlide];
+            const overlay = document.getElementById('patternOverlay');
+            const preview = document.getElementById('slidePreview');
+            const pattern = slide.content.pattern || { type: 'none' };
+
+            if (pattern.type === 'none') {
+                overlay.innerHTML = '';
+                preview.classList.remove('has-pattern');
+                return;
+            }
+
+            preview.classList.add('has-pattern');
+            const svg = generatePatternSVG(
+                pattern.type,
+                pattern.opacity || 15,
+                pattern.scale || 100,
+                pattern.position || 'all',
+                slide.theme
+            );
+            overlay.innerHTML = svg;
+        }
+
         const SLIDE_PURPOSES = [
             { name: 'Hook', description: 'Grab attention with bold statement' },
             { name: 'Problem', description: 'Identify the pain point' },
@@ -1751,7 +2180,15 @@
                     delphi: 'Delphi Sword Looking Sideways.svg',
                     background: null, // null = no background image, use theme color
                     bgPositionX: 50,
-                    bgPositionY: 50
+                    bgPositionY: 50,
+                    bgZoom: 100,
+                    bgRotation: 0,
+                    pattern: {
+                        type: 'none',
+                        opacity: 15,
+                        scale: 100,
+                        position: 'all'
+                    }
                 },
                 layout: {
                     logoType: 'rme', // 'rme' or 'custom'
@@ -1884,16 +2321,22 @@
             positionGroup.classList.toggle('hidden', !hasBackground);
 
             if (hasBackground) {
-                document.getElementById('bgPositionX').value = slides[currentSlide].content.bgPositionX;
-                document.getElementById('bgPositionY').value = slides[currentSlide].content.bgPositionY;
-                document.getElementById('bgPositionXValue').textContent = slides[currentSlide].content.bgPositionX + '%';
-                document.getElementById('bgPositionYValue').textContent = slides[currentSlide].content.bgPositionY + '%';
+                document.getElementById('bgPositionX').value = slides[currentSlide].content.bgPositionX ?? 50;
+                document.getElementById('bgPositionY').value = slides[currentSlide].content.bgPositionY ?? 50;
+                document.getElementById('bgZoom').value = slides[currentSlide].content.bgZoom ?? 100;
+                document.getElementById('bgRotation').value = slides[currentSlide].content.bgRotation ?? 0;
+                document.getElementById('bgPositionXValue').textContent = (slides[currentSlide].content.bgPositionX ?? 50) + '%';
+                document.getElementById('bgPositionYValue').textContent = (slides[currentSlide].content.bgPositionY ?? 50) + '%';
+                document.getElementById('bgZoomValue').textContent = (slides[currentSlide].content.bgZoom ?? 100) + '%';
+                document.getElementById('bgRotationValue').textContent = (slides[currentSlide].content.bgRotation ?? 0) + '°';
             }
         }
 
-        function resetBgPosition() {
+        function resetBgTransforms() {
             slides[currentSlide].content.bgPositionX = 50;
             slides[currentSlide].content.bgPositionY = 50;
+            slides[currentSlide].content.bgZoom = 100;
+            slides[currentSlide].content.bgRotation = 0;
             updateBgPositionControls();
             updatePreview();
         }
@@ -2021,6 +2464,20 @@
                 updatePreview();
             });
 
+            // Background zoom slider
+            document.getElementById('bgZoom').addEventListener('input', (e) => {
+                slides[currentSlide].content.bgZoom = parseInt(e.target.value);
+                document.getElementById('bgZoomValue').textContent = e.target.value + '%';
+                updatePreview();
+            });
+
+            // Background rotation slider
+            document.getElementById('bgRotation').addEventListener('input', (e) => {
+                slides[currentSlide].content.bgRotation = parseInt(e.target.value);
+                document.getElementById('bgRotationValue').textContent = e.target.value + '°';
+                updatePreview();
+            });
+
             // Character type selector
             document.getElementById('characterType').addEventListener('change', (e) => {
                 currentCharacterType = e.target.value;
@@ -2070,6 +2527,45 @@
             document.getElementById('characterSize').addEventListener('input', (e) => {
                 slides[currentSlide].layout.characterSize = parseInt(e.target.value);
                 document.getElementById('characterSizeValue').textContent = e.target.value + 'px';
+                updatePreview();
+            });
+
+            // Pattern type selector
+            document.getElementById('patternType').addEventListener('change', (e) => {
+                if (!slides[currentSlide].content.pattern) {
+                    slides[currentSlide].content.pattern = { type: 'none', opacity: 15, scale: 100, position: 'all' };
+                }
+                slides[currentSlide].content.pattern.type = e.target.value;
+                document.getElementById('patternControls').classList.toggle('hidden', e.target.value === 'none');
+                updatePreview();
+            });
+
+            // Pattern opacity
+            document.getElementById('patternOpacity').addEventListener('input', (e) => {
+                if (!slides[currentSlide].content.pattern) {
+                    slides[currentSlide].content.pattern = { type: 'none', opacity: 15, scale: 100, position: 'all' };
+                }
+                slides[currentSlide].content.pattern.opacity = parseInt(e.target.value);
+                document.getElementById('patternOpacityValue').textContent = e.target.value + '%';
+                updatePreview();
+            });
+
+            // Pattern scale
+            document.getElementById('patternScale').addEventListener('input', (e) => {
+                if (!slides[currentSlide].content.pattern) {
+                    slides[currentSlide].content.pattern = { type: 'none', opacity: 15, scale: 100, position: 'all' };
+                }
+                slides[currentSlide].content.pattern.scale = parseInt(e.target.value);
+                document.getElementById('patternScaleValue').textContent = e.target.value + '%';
+                updatePreview();
+            });
+
+            // Pattern position
+            document.getElementById('patternPosition').addEventListener('change', (e) => {
+                if (!slides[currentSlide].content.pattern) {
+                    slides[currentSlide].content.pattern = { type: 'none', opacity: 15, scale: 100, position: 'all' };
+                }
+                slides[currentSlide].content.pattern.position = e.target.value;
                 updatePreview();
             });
 
@@ -2196,6 +2692,16 @@
             document.getElementById('characterPosition').value = layout.characterPosition || 'bottom-right';
             document.getElementById('characterSize').value = layout.characterSize || 140;
             document.getElementById('characterSizeValue').textContent = (layout.characterSize || 140) + 'px';
+
+            // Pattern controls
+            const pattern = slide.content.pattern || { type: 'none', opacity: 15, scale: 100, position: 'all' };
+            document.getElementById('patternType').value = pattern.type || 'none';
+            document.getElementById('patternControls').classList.toggle('hidden', pattern.type === 'none');
+            document.getElementById('patternOpacity').value = pattern.opacity || 15;
+            document.getElementById('patternOpacityValue').textContent = (pattern.opacity || 15) + '%';
+            document.getElementById('patternScale').value = pattern.scale || 100;
+            document.getElementById('patternScaleValue').textContent = (pattern.scale || 100) + '%';
+            document.getElementById('patternPosition').value = pattern.position || 'all';
         }
 
         // ========================================
@@ -2567,14 +3073,20 @@
                 className += ' has-bg';
                 // Use URL for uploaded backgrounds, local path for built-in ones
                 const bgUrl = slide.content.backgroundUrl || `/brand/Background/${encodeURIComponent(slide.content.background)}`;
-                preview.style.backgroundImage = `url('${bgUrl}')`;
-                // Apply background position
+                // Apply background via CSS variables for zoom/rotation support
+                preview.style.setProperty('--bg-image', `url('${bgUrl}')`);
                 const bgX = slide.content.bgPositionX ?? 50;
                 const bgY = slide.content.bgPositionY ?? 50;
-                preview.style.backgroundPosition = `${bgX}% ${bgY}%`;
+                const bgZoom = (slide.content.bgZoom ?? 100) / 100;
+                const bgRotation = slide.content.bgRotation ?? 0;
+                preview.style.setProperty('--bg-zoom', bgZoom);
+                preview.style.setProperty('--bg-rotation', `${bgRotation}deg`);
+                // Position via pseudo-element
+                preview.style.setProperty('--bg-position', `${bgX}% ${bgY}%`);
             } else {
-                preview.style.backgroundImage = 'none';
-                preview.style.backgroundPosition = 'center';
+                preview.style.setProperty('--bg-image', 'none');
+                preview.style.setProperty('--bg-zoom', '1');
+                preview.style.setProperty('--bg-rotation', '0deg');
             }
             preview.className = className;
 
@@ -2606,8 +3118,9 @@
 
             // Character position and size
             const delphiEl = document.getElementById('slideDelphi');
+            const delphiHidden = !slide.elements.delphi || layout.characterPosition === 'hidden';
             delphiEl.className = 'slide-delphi pos-' + (layout.characterPosition || 'bottom-right');
-            if (layout.characterPosition === 'hidden') {
+            if (delphiHidden) {
                 delphiEl.classList.add('hidden');
             }
             delphiEl.style.width = (layout.characterSize || 140) + 'px';
@@ -2645,6 +3158,9 @@
 
             // Counter
             document.getElementById('slideCounter').textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+
+            // Update pattern overlay
+            updatePatternOverlay();
         }
 
         function updateSlidesList() {

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RME Design Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* RME Brand Palette */
+            --brand-dark: #134e4a;
+            --brand-accent: #0d9488;
+            --brand-accent-hover: #0f766e;
+            --brand-light: #f0fdfa;
+            --brand-light-alt: #ccfbf1;
+            --brand-white: #ffffff;
+            --brand-muted: #6b7280;
+            --brand-border: #e5e7eb;
+            --brand-danger: #f33144;
+            --brand-warning: #f9943b;
+            --brand-secondary: #fbbf24;
+            --brand-success: #1fa95c;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 40px;
+            color: #1f2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--brand-dark);
+            margin: 0 0 8px 0;
+        }
+        .header p {
+            color: var(--brand-muted);
+            margin: 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-tag {
+            font-size: 12px;
+            font-weight: 500;
+            background: #e5e7eb;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #4b5563;
+        }
+
+        .grid {
+            display: grid;
+            gap: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        }
+
+        /* CARD CONTAINER LOGIC */
+        .creative-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .creative-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-meta {
+            padding: 12px 16px;
+            border-top: 1px solid #f3f4f6;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .style-name { font-size: 11px; font-weight: 700; color: var(--brand-dark); text-transform: uppercase; }
+        .use-case { font-size: 11px; color: var(--brand-muted); }
+
+        /* SCALED PREVIEW CONTAINER */
+        /* These aspect ratios simulate the social media sizes */
+        .preview-container {
+            width: 100%;
+            position: relative;
+            background: #e5e5e5;
+        }
+        .ratio-square { padding-top: 100%; } /* 1:1 */
+        .ratio-portrait { padding-top: 125%; } /* 4:5 */
+        .ratio-wide { padding-top: 52.3%; } /* 1.91:1 */
+
+        /* The canvas inside the container */
+        .creative-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10%; /* Ample padding */
+            box-sizing: border-box;
+        }
+
+        /* --- TYPOGRAPHY (Relative Units for Scale) --- */
+        .t-brand { 
+            font-size: 0.7rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            font-weight: 700; 
+            opacity: 0.8; 
+            margin-bottom: 8px;
+        }
+        .t-h1 { 
+            font-size: 2rem; 
+            font-weight: 800; 
+            line-height: 1.1; 
+            margin-bottom: 0.5rem; 
+        }
+        .t-h2 { 
+            font-size: 1.5rem; 
+            font-weight: 700; 
+            line-height: 1.2; 
+            margin-bottom: 0.5rem; 
+        }
+        .t-p { 
+            font-size: 0.9rem; 
+            line-height: 1.5; 
+            opacity: 0.9; 
+            margin-bottom: 1rem; 
+        }
+        .t-stat {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .t-small {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        /* --- COMPONENTS --- */
+        .c-badge { 
+            display: inline-block; 
+            padding: 6px 12px; 
+            border-radius: 6px; 
+            font-size: 0.7rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            width: fit-content; 
+            margin-bottom: 16px;
+        }
+        
+        .c-btn { 
+            display: inline-block; 
+            padding: 12px 24px; 
+            border-radius: 50px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            text-align: center; 
+            width: fit-content; 
+        }
+
+        /* Mock UI Elements */
+        .c-card {
+            background: white;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .c-line { width: 100%; height: 1px; background: currentColor; opacity: 0.2; margin: 16px 0; }
+        
+        .c-pill-row { display: flex; gap: 8px; margin-bottom: 8px; }
+        .c-pill { height: 8px; border-radius: 4px; background: #e5e5e5; }
+        
+        /* List Items */
+        .c-list { display: flex; flex-direction: column; gap: 12px; }
+        .c-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; font-weight: 500; }
+        .c-check { color: var(--brand-success); font-weight: 800; }
+        .c-x { color: var(--brand-danger); font-weight: 800; }
+
+        /* THEMES */
+        .bg-dark { background: var(--brand-dark); color: white; }
+        .bg-light { background: var(--brand-light); color: var(--brand-dark); }
+        .bg-white { background: white; color: var(--brand-dark); border: 1px solid #e5e5e5; }
+        .bg-accent { background: var(--brand-accent); color: white; }
+        
+        /* Theme Logic */
+        .bg-dark .c-btn { background: var(--brand-accent); color: white; }
+        .bg-light .c-btn { background: var(--brand-dark); color: white; }
+        
+        /* Color Text Helpers */
+        .text-accent { color: var(--brand-accent); }
+        .text-danger { color: var(--brand-danger); }
+        .text-muted { color: var(--brand-muted); }
+        .text-dark { color: var(--brand-dark); }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>RME Design Library v2</h1>
+        <p>Strict Brand Adherence. Clean. Professional.</p>
+    </div>
+
+    <!-- ==============================================
+         SQUARE (1:1) - FEED POSTS
+         ============================================== -->
+    <div class="section">
+        <div class="section-title">Square (1:1) <span class="section-tag">Feed Posts</span></div>
+        <div class="grid">
+            
+            <!-- 1. Dark Statement -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-dark">
+                        <div class="t-brand">Review My Emails</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h1">The "Restraint" Strategy.</div>
+                            <div class="t-p" style="opacity: 0.8;">When inbox placement weakens, pushing harder rarely fixes it.</div>
+                        </div>
+                        <div class="c-btn">Read the Guide</div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Dark Statement</span></div>
+            </div>
+
+            <!-- 2. Minimal Light Tip -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-light">
+                        <div class="c-badge" style="background:var(--brand-accent); color:white;">Quick Tip</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h2">Clean your list every 90 days.</div>
+                            <div class="c-line"></div>
+                            <div class="t-p" style="font-size:0.85rem; color:var(--brand-muted);">Stale data is the #1 silent killer of sender reputation.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Light Minimal</span></div>
+            </div>
+
+            <!-- 3. The Stat Box -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-white" style="text-align:center; justify-content:center;">
+                        <div class="t-brand" style="color:var(--brand-muted);">Did You Know?</div>
+                        <div class="t-stat text-accent" style="margin: 16px 0;">22%</div>
+                        <div class="t-p" style="font-weight:600;">Average annual email list decay.</div>
+                        <div class="t-small text-muted">Source: Industry Benchmarks</div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Stat Focus</span></div>
+            </div>
+
+            <!-- 4. Danger/Risk Alert -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-white" style="border: 4px solid var(--brand-danger);">
+                        <div class="c-badge" style="background:var(--brand-danger); color:white; align-self:center;">Warning Sign</div>
+                        <div style="text-align:center; margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h2" style="color:var(--brand-dark);">Are you hitting<br>Spam Traps?</div>
+                            <div class="t-p" style="color:var(--brand-muted);">One bad address can block your entire domain.</div>
+                        </div>
+                        <div style="text-align:center; font-weight:700; font-size:0.8rem; color:var(--brand-danger);">Check Free Now →</div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Risk Alert</span></div>
+            </div>
+
+            <!-- 5. List Hygiene Checklist -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-dark">
+                        <div class="t-h2">Hygiene Checklist</div>
+                        <div class="c-list" style="margin-top:20px;">
+                            <div class="c-item"><span class="c-check">✓</span> Remove hard bounces</div>
+                            <div class="c-item"><span class="c-check">✓</span> Identify spam traps</div>
+                            <div class="c-item"><span class="c-check">✓</span> Segment inactives</div>
+                            <div class="c-item"><span class="c-check">✓</span> Check blocklists</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Dark Checklist</span></div>
+            </div>
+
+            <!-- 6. Quote Card -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-light-alt" style="text-align:center;">
+                        <div style="font-size:4rem; line-height:1; color:var(--brand-accent); font-family:serif;">“</div>
+                        <div class="t-h2" style="margin-top:-20px; font-weight:500;">Trust beats tactics. Always.</div>
+                        <div class="t-small" style="margin-top:20px; font-weight:700; color:var(--brand-dark);">REVIEW MY EMAILS</div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Quote Card</span></div>
+            </div>
+
+            <!-- 7. Split Screen (Problem/Solution) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content" style="padding:0; flex-direction:row;">
+                        <div style="flex:1; background:var(--brand-light); padding:8%; display:flex; align-items:center; justify-content:center;">
+                            <div style="text-align:center;">
+                                <div style="font-size:2rem;">📉</div>
+                                <div style="font-weight:700; color:var(--brand-muted);">Bouncing</div>
+                            </div>
+                        </div>
+                        <div style="flex:1; background:var(--brand-accent); padding:8%; display:flex; align-items:center; justify-content:center;">
+                            <div style="text-align:center;">
+                                <div style="font-size:2rem;">📈</div>
+                                <div style="font-weight:700; color:white;">Converting</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Split Compare</span></div>
+            </div>
+
+            <!-- 8. Feature Highlight -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-white">
+                        <div class="c-badge" style="background:var(--brand-secondary); color:var(--brand-dark);">New Feature</div>
+                        <div style="margin-top:auto;">
+                            <div class="t-h2">Real-time Verification API</div>
+                            <div class="t-p">Stop bad emails at the signup form.</div>
+                            <div class="c-line"></div>
+                            <div class="t-small text-accent" style="font-weight:700;">View Documentation →</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Feature Highlight</span></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==============================================
+         PORTRAIT (4:5) - CAROUSEL SLIDES
+         ============================================== -->
+    <div class="section">
+        <div class="section-title">Portrait (4:5) <span class="section-tag">Carousel / Mobile</span></div>
+        <div class="grid">
+            
+            <!-- 9. Carousel Cover -->
+            <div class="creative-card">
+                <div class="preview-container ratio-portrait">
+                    <div class="creative-content bg-dark">
+                        <div class="t-brand">Deliverability Strategy</div>
+                        <div style="margin-top:20px;">
+                            <div class="t-h1" style="font-size:2.5rem;">Why your<br>emails are<br><span class="text-accent">missing the<br>inbox.</span></div>
+                        </div>
+                        <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:center;">
+                            <span class="t-small">Swipe to read</span>
+                            <span style="font-size:1.5rem;">→</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Carousel Cover</span></div>
+            </div>
+
+            <!-- 10. Step 1-2-3 -->
+            <div class="creative-card">
+                <div class="preview-container ratio-portrait">
+                    <div class="creative-content bg-white">
+                        <div class="t-h2">The Process</div>
+                        <div class="c-list" style="margin-top:20px;">
+                            <div class="c-card" style="display:flex; gap:12px;">
+                                <div style="font-weight:800; color:var(--brand-accent); font-size:1.2rem;">01</div>
+                                <div>
+                                    <div style="font-weight:700;">Scan</div>
+                                    <div class="t-small">Identify risky contacts.</div>
+                                </div>
+                            </div>
+                            <div class="c-card" style="display:flex; gap:12px;">
+                                <div style="font-weight:800; color:var(--brand-accent); font-size:1.2rem;">02</div>
+                                <div>
+                                    <div style="font-weight:700;">Clean</div>
+                                    <div class="t-small">Remove traps & bounces.</div>
+                                </div>
+                            </div>
+                            <div class="c-card" style="display:flex; gap:12px;">
+                                <div style="font-weight:800; color:var(--brand-accent); font-size:1.2rem;">03</div>
+                                <div>
+                                    <div style="font-weight:700;">Send</div>
+                                    <div class="t-small">Recover your reputation.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Step Process</span></div>
+            </div>
+
+            <!-- 11. Dos and Donts -->
+            <div class="creative-card">
+                <div class="preview-container ratio-portrait">
+                    <div class="creative-content bg-light">
+                        <div class="t-h2 text-center">Rule of Thumb</div>
+                        <div style="margin-top:20px;">
+                            <div class="c-badge" style="background:var(--brand-danger); color:white; margin-bottom:8px;">STOP</div>
+                            <div class="c-list">
+                                <div class="c-item"><span class="c-x">✕</span> Buying lists</div>
+                                <div class="c-item"><span class="c-x">✕</span> Scraping LinkedIn</div>
+                            </div>
+                            
+                            <div class="c-line"></div>
+                            
+                            <div class="c-badge" style="background:var(--brand-success); color:white; margin-bottom:8px;">START</div>
+                            <div class="c-list">
+                                <div class="c-item"><span class="c-check">✓</span> Double Opt-in</div>
+                                <div class="c-item"><span class="c-check">✓</span> Cleaning quarterly</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Do's & Don'ts</span></div>
+            </div>
+
+            <!-- 12. Vertical Chart -->
+            <div class="creative-card">
+                <div class="preview-container ratio-portrait">
+                    <div class="creative-content bg-dark" style="text-align:center;">
+                        <div class="t-h2">Placement</div>
+                        <div style="flex:1; display:flex; align-items:flex-end; justify-content:center; gap:20px; padding-bottom:20px;">
+                            <div style="width:40px; height:40%; background:white; opacity:0.3; border-radius:4px 4px 0 0;"></div>
+                            <div style="width:40px; height:90%; background:var(--brand-accent); border-radius:4px 4px 0 0;"></div>
+                        </div>
+                        <div class="t-p">Cleaning your list improves inboxing by 2x.</div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Vertical Chart</span></div>
+            </div>
+
+            <!-- 13. Mobile UI Mockup -->
+            <div class="creative-card">
+                <div class="preview-container ratio-portrait">
+                    <div class="creative-content bg-light-alt" style="align-items:center; justify-content:center;">
+                        <div style="width:80%; height:90%; background:white; border-radius:16px; border:1px solid var(--brand-border); padding:20px; box-shadow:0 10px 20px rgba(0,0,0,0.05);">
+                            <div class="c-pill-row">
+                                <div class="c-pill" style="width:40px; background:var(--brand-dark);"></div>
+                            </div>
+                            <div class="t-h2" style="font-size:1.2rem; margin-top:20px;">Your Report</div>
+                            <div style="margin-top:16px; display:flex; justify-content:space-between;">
+                                <span class="t-small">Valid</span>
+                                <span style="font-weight:700; color:var(--brand-success);">8,420</span>
+                            </div>
+                            <div style="margin-top:8px; display:flex; justify-content:space-between;">
+                                <span class="t-small">Risky</span>
+                                <span style="font-weight:700; color:var(--brand-warning);">1,203</span>
+                            </div>
+                            <div style="margin-top:8px; display:flex; justify-content:space-between;">
+                                <span class="t-small">Invalid</span>
+                                <span style="font-weight:700; color:var(--brand-danger);">405</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">UI Mockup</span></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==============================================
+         WIDE (1.91:1) - ADS / PREVIEWS
+         ============================================== -->
+    <div class="section">
+        <div class="section-title">Wide (1.91:1) <span class="section-tag">Ads / Links</span></div>
+        <div class="grid">
+
+            <!-- 14. Value Prop Ad -->
+            <div class="creative-card">
+                <div class="preview-container ratio-wide">
+                    <div class="creative-content bg-dark" style="flex-direction:row; align-items:center;">
+                        <div style="flex:1;">
+                            <div class="t-brand text-accent">Free Tool</div>
+                            <div class="t-h2">Is your list healthy?</div>
+                            <div class="t-p" style="opacity:0.8;">Get a free audit in 5 minutes.</div>
+                        </div>
+                        <div>
+                            <div class="c-btn">Start Scan</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Value Prop Ad</span></div>
+            </div>
+
+            <!-- 15. Partner Proof -->
+            <div class="creative-card">
+                <div class="preview-container ratio-wide">
+                    <div class="creative-content bg-white" style="text-align:center; justify-content:center;">
+                        <div class="t-small text-muted" style="text-transform:uppercase; letter-spacing:1px; margin-bottom:16px;">Trusted by 5,000+ Marketers</div>
+                        <div style="display:flex; justify-content:center; gap:20px;">
+                            <div style="width:80px; height:24px; background:var(--brand-border); border-radius:4px;"></div>
+                            <div style="width:80px; height:24px; background:var(--brand-border); border-radius:4px;"></div>
+                            <div style="width:80px; height:24px; background:var(--brand-border); border-radius:4px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Social Proof</span></div>
+            </div>
+
+            <!-- 16. Ebook Magnet -->
+            <div class="creative-card">
+                <div class="preview-container ratio-wide">
+                    <div class="creative-content bg-light" style="flex-direction:row; align-items:center;">
+                        <div style="width:80px; height:100px; background:white; border:1px solid var(--brand-border); margin-right:20px; box-shadow:0 4px 8px rgba(0,0,0,0.05);"></div>
+                        <div>
+                            <div class="t-h2" style="font-size:1.2rem;">The Deliverability Guide</div>
+                            <div class="t-small">PDF • 20 Pages • Free</div>
+                            <div class="c-btn" style="background:var(--brand-dark); padding:8px 16px; font-size:0.75rem; margin-top:8px;">Download</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Magnet Promo</span></div>
+            </div>
+
+            <!-- 17. The "Result" Highlight -->
+            <div class="creative-card">
+                <div class="preview-container ratio-wide">
+                    <div class="creative-content bg-accent" style="flex-direction:row; align-items:center; justify-content:space-between;">
+                        <div style="color:white;">
+                            <div style="font-size:3rem; font-weight:800; line-height:1;">99.8%</div>
+                            <div class="t-small" style="opacity:0.9;">Inbox Placement Rate</div>
+                        </div>
+                        <div class="c-btn" style="background:white; color:var(--brand-accent);">See How</div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Result Highlight</span></div>
+            </div>
+
+             <!-- 18. Blog Header -->
+             <div class="creative-card">
+                <div class="preview-container ratio-wide">
+                    <div class="creative-content bg-white" style="border-left: 8px solid var(--brand-dark);">
+                        <div style="justify-content:center; display:flex; flex-direction:column; height:100%;">
+                            <div class="c-badge" style="background:var(--brand-light); color:var(--brand-dark);">Blog</div>
+                            <div class="t-h2">How to remove spam traps safely.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta"><span class="style-name">Blog Header</span></div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

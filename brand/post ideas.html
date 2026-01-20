@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RME Design Library</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* RME Brand Palette */
+            --brand-dark: #134e4a;
+            --brand-accent: #0d9488;
+            --brand-accent-hover: #0f766e;
+            --brand-light: #f0fdfa;
+            --brand-light-alt: #ccfbf1;
+            --brand-white: #ffffff;
+            --brand-muted: #6b7280;
+            --brand-border: #e5e7eb;
+            --brand-danger: #f33144;
+            --brand-secondary: #fbbf24;
+            --brand-success: #1fa95c;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 40px;
+            color: #1f2937;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--brand-dark);
+            margin: 0 0 8px 0;
+        }
+        .header p {
+            color: var(--brand-muted);
+            margin: 0;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--brand-dark);
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .section-tag {
+            font-size: 12px;
+            font-weight: 500;
+            background: #e5e7eb;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: #4b5563;
+        }
+
+        .grid {
+            display: grid;
+            gap: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        }
+
+        /* CARD CONTAINER LOGIC */
+        .creative-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .creative-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-meta {
+            padding: 16px;
+            border-top: 1px solid #f3f4f6;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .style-name { font-size: 12px; font-weight: 600; color: #4b5563; }
+        .use-case { font-size: 11px; color: #9ca3af; }
+
+        /* SCALED PREVIEW CONTAINER */
+        /* This container forces the aspect ratio */
+        .preview-container {
+            width: 100%;
+            position: relative;
+            background: #e5e5e5;
+        }
+        
+        /* Aspect Ratios */
+        .ratio-square { padding-top: 100%; } /* 1:1 */
+        .ratio-portrait { padding-top: 125%; } /* 4:5 */
+        .ratio-wide { padding-top: 52.3%; } /* 1.91:1 */
+
+        /* The Content Scaler 
+           Simulates a 1080px canvas shrunk down to the preview width.
+           We use absolute positioning to fill the ratio box.
+        */
+        .creative-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8%; /* Relative padding */
+            box-sizing: border-box;
+        }
+
+        /* --- DESIGN ELEMENTS (Relative Units) --- */
+        
+        /* Typography */
+        .t-brand {
+            font-size: 0.8rem; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            opacity: 0.8;
+            margin-bottom: auto;
+        }
+        
+        /* Responsive sizing based on container width approximation */
+        /* Since we can't easily use CQ units without support polyfills in all contexts, 
+           we'll use relative fonts. */
+           
+        .t-h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+        .t-h1-large {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        .t-p {
+            font-size: 1rem;
+            line-height: 1.4;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        .t-p-small {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Components */
+        .c-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        
+        .c-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+            width: fit-content;
+        }
+
+        .c-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        .c-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .c-stat-box {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .c-stat-val { font-size: 3rem; font-weight: 800; line-height: 1; }
+        .c-stat-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 8px; }
+
+        /* Icons */
+        .icon-lg { width: 48px; height: 48px; margin-bottom: 16px; }
+        .icon-sm { width: 24px; height: 24px; }
+
+        /* --- THEMES --- */
+        .bg-dark { background: var(--brand-dark); color: white; }
+        .bg-light { background: var(--brand-light); color: var(--brand-dark); }
+        .bg-accent { background: var(--brand-accent); color: white; }
+        .bg-white { background: white; color: var(--brand-dark); border: 1px solid #e5e5e5; }
+        .bg-danger { background: #fee2e2; color: #991b1b; } /* Subtle danger theme */
+
+        /* Theme Overrides */
+        .bg-dark .c-btn { background: var(--brand-accent); color: white; }
+        .bg-light .c-btn { background: var(--brand-dark); color: white; }
+        .bg-accent .c-btn { background: white; color: var(--brand-accent); }
+        .bg-white .c-btn { background: var(--brand-accent); color: white; }
+
+        .text-accent { color: var(--brand-accent); }
+        .text-danger { color: var(--brand-danger); }
+        .text-muted { color: var(--brand-muted); }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>RME Design Library</h1>
+        <p>Inspiration for Square, Portrait, and Wide formats.</p>
+    </div>
+
+    <!-- ==============================================
+         SECTION: SQUARE (1:1)
+         ============================================== -->
+    <div class="section">
+        <div class="section-title">
+            Square (1:1)
+            <span class="section-tag">LinkedIn Feed / Instagram</span>
+        </div>
+        <div class="grid">
+            
+            <!-- 1. The "Big Statement" (Dark) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-dark">
+                        <div class="t-brand">Review My Emails</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h1">Stop guessing.<br><span class="text-accent">Start knowing.</span></div>
+                            <div class="t-p">Your bounce rate is telling a story. Are you listening?</div>
+                        </div>
+                        <div class="c-btn">Get Free Audit</div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Dark Impact</span>
+                    <span class="use-case">Brand Awareness</span>
+                </div>
+            </div>
+
+            <!-- 2. The "Warning/Risk" (White/Red) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-white" style="border-top: 6px solid var(--brand-danger);">
+                        <div style="display:flex; justify-content:space-between;">
+                            <span class="c-badge" style="background:#fee2e2; color:var(--brand-danger); margin:0;">Alert</span>
+                        </div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h1" style="color:var(--brand-dark);">Is your domain <span class="text-danger">blacklisted?</span></div>
+                            <div class="c-list">
+                                <div class="c-item"><span class="text-danger">✖</span> Emails going to spam</div>
+                                <div class="c-item"><span class="text-danger">✖</span> Open rates dropping</div>
+                                <div class="c-item"><span class="text-danger">✖</span> Providers blocking you</div>
+                            </div>
+                        </div>
+                        <div class="t-p-small text-muted">Check your status instantly at reviewmyemails.com</div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Urgency / Risk</span>
+                    <span class="use-case">Problem Agitation</span>
+                </div>
+            </div>
+
+            <!-- 3. The "Minimalist Tip" (Light) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-light">
+                        <div class="c-badge" style="background:var(--brand-accent); color:white;">Pro Tip</div>
+                        <div style="text-align:center; margin-top:auto; margin-bottom:auto;">
+                            <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="var(--brand-dark)" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            <div class="t-h1">Clean your list every 90 days.</div>
+                            <div class="t-p">Stale data is the #1 killer of sender reputation.</div>
+                        </div>
+                        <div class="c-btn" style="margin:0 auto;">Learn More</div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Centered Minimal</span>
+                    <span class="use-case">Educational Tip</span>
+                </div>
+            </div>
+
+            <!-- 4. The "Data/Stat" (Accent) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-square">
+                    <div class="creative-content bg-accent">
+                        <div class="t-brand" style="color:white;">Did you know?</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="c-stat-box">
+                                <div class="c-stat-val">22.5%</div>
+                                <div class="c-stat-label">Average database decay per year</div>
+                            </div>
+                            <div class="t-p" style="text-align:center; margin-top:24px; color:rgba(255,255,255,0.9);">If you haven't cleaned your list in a year, nearly a quarter of it is risky.</div>
+                        </div>
+                        <div style="text-align:center; font-size:0.8rem; opacity:0.7;">Source: Industry Benchmarks</div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Stat Focus</span>
+                    <span class="use-case">Thought Leadership</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==============================================
+         SECTION: PORTRAIT (4:5)
+         ============================================== -->
+    <div class="section">
+        <div class="section-title">
+            Portrait (4:5)
+            <span class="section-tag">Carousels / Mobile</span>
+        </div>
+        <div class="grid">
+            
+            <!-- 1. The "Listicle/Checklist" (Light) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-portrait">
+                    <div class="creative-content bg-light">
+                        <div class="t-brand" style="color:var(--brand-muted);">Deliverability 101</div>
+                        <div style="margin-top:20px;">
+                            <div class="t-h1">The Safe Sender Checklist</div>
+                            <div class="c-list">
+                                <div class="c-item">
+                                    <div style="background:var(--brand-success); color:white; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:12px;">✓</div>
+                                    <span>SPF Record Configured</span>
+                                </div>
+                                <div class="c-item">
+                                    <div style="background:var(--brand-success); color:white; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:12px;">✓</div>
+                                    <span>DKIM Signature Valid</span>
+                                </div>
+                                <div class="c-item">
+                                    <div style="background:var(--brand-success); color:white; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:12px;">✓</div>
+                                    <span>DMARC Policy Active</span>
+                                </div>
+                                <div class="c-item">
+                                    <div style="background:var(--brand-success); color:white; border-radius:50%; width:24px; height:24px; display:flex; align-items:center; justify-content:center; font-size:12px;">✓</div>
+                                    <span>Hard Bounces Removed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="c-btn" style="width:100%;">Download Guide</div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Checklist</span>
+                    <span class="use-case">Carousel Slide</span>
+                </div>
+            </div>
+
+            <!-- 2. The "Quote" (Dark) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-portrait">
+                    <div class="creative-content bg-dark" style="text-align:center;">
+                        <div style="color:var(--brand-accent); font-size:4rem; line-height:1; margin-top:20px;">“</div>
+                        <div class="t-h1" style="font-weight:500; font-style:italic; margin-top:-20px;">Trust is the currency of the inbox.</div>
+                        <div style="width:40px; height:2px; background:var(--brand-accent); margin:20px auto;"></div>
+                        <div class="t-p-small">Without it, your offers are invisible.</div>
+                        <div style="margin-top:auto;">
+                            <div style="background:rgba(255,255,255,0.1); padding:10px; border-radius:8px;">
+                                <div style="font-weight:700;">Review My Emails</div>
+                                <div style="font-size:0.75rem; opacity:0.7;">Deliverability Experts</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Inspirational Quote</span>
+                    <span class="use-case">Brand Philosophy</span>
+                </div>
+            </div>
+
+            <!-- 3. The "Process/Steps" (White) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-portrait">
+                    <div class="creative-content bg-white">
+                        <div class="c-badge" style="background:var(--brand-secondary); color:var(--brand-dark);">How it works</div>
+                        <div class="t-h1">3 Steps to Clean Data</div>
+                        
+                        <div style="display:flex; flex-direction:column; gap:20px; margin-top:20px;">
+                            <div style="display:flex; gap:16px;">
+                                <div style="font-size:2rem; font-weight:800; color:var(--brand-accent); line-height:1;">1</div>
+                                <div>
+                                    <div style="font-weight:700; margin-bottom:4px;">Upload</div>
+                                    <div style="font-size:0.85rem; color:#6b7280;">Securely upload your CSV list.</div>
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:16px;">
+                                <div style="font-size:2rem; font-weight:800; color:var(--brand-accent); line-height:1;">2</div>
+                                <div>
+                                    <div style="font-weight:700; margin-bottom:4px;">Analyze</div>
+                                    <div style="font-size:0.85rem; color:#6b7280;">We scan for spam traps & bounces.</div>
+                                </div>
+                            </div>
+                            <div style="display:flex; gap:16px;">
+                                <div style="font-size:2rem; font-weight:800; color:var(--brand-accent); line-height:1;">3</div>
+                                <div>
+                                    <div style="font-weight:700; margin-bottom:4px;">Download</div>
+                                    <div style="font-size:0.85rem; color:#6b7280;">Get your clean list instantly.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Step-by-Step</span>
+                    <span class="use-case">Explainer</span>
+                </div>
+            </div>
+            
+            <!-- 4. The "Question" (Accent) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-portrait">
+                    <div class="creative-content bg-accent">
+                        <div class="t-brand" style="color:white; opacity:0.6;">Q&A Tuesday</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h1">"How often should I clean my list?"</div>
+                            <div style="background:rgba(0,0,0,0.2); padding:20px; border-radius:8px; margin-top:20px;">
+                                <div class="t-p" style="margin:0; font-weight:600;">Ideally, every quarter. Or immediately if your bounce rate hits 2%.</div>
+                            </div>
+                        </div>
+                        <div style="text-align:center; font-size:0.8rem;">Have a question? DM us.</div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Q&A Format</span>
+                    <span class="use-case">Engagement</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==============================================
+         SECTION: WIDE (1.91:1)
+         ============================================== -->
+    <div class="section">
+        <div class="section-title">
+            Wide (1.91:1)
+            <span class="section-tag">Ads / Link Previews</span>
+        </div>
+        <div class="grid">
+            
+            <!-- 1. The "Promo/Ad" (Dark with Gold) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-wide">
+                    <div class="creative-content bg-dark" style="display:flex; flex-direction:row; align-items:center; padding:0;">
+                        <!-- Left Side -->
+                        <div style="flex:1; padding:8%; display:flex; flex-direction:column; justify-content:center; height:100%;">
+                            <div class="c-badge" style="background:var(--brand-secondary); color:var(--brand-dark); width:fit-content;">Limited Offer</div>
+                            <div class="t-h1" style="font-size:1.8rem;">Free 10k Credit Scan</div>
+                            <div class="t-p-small">For new accounts created this week.</div>
+                            <div class="c-btn" style="margin-top:16px; font-size:0.8rem; padding:8px 16px;">Claim Offer</div>
+                        </div>
+                        <!-- Right Side (Visual) -->
+                        <div style="flex:1; height:100%; background:var(--brand-accent); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+                            <div style="font-size:8rem; opacity:0.2; font-weight:800; position:absolute; right:-20px; bottom:-40px; color:white;">%</div>
+                            <div style="font-size:2rem; font-weight:800; color:white; z-index:2;">$0.00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Split Promo</span>
+                    <span class="use-case">Conversion Ad</span>
+                </div>
+            </div>
+
+            <!-- 2. The "Problem/Solution" (Light) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-wide">
+                    <div class="creative-content bg-light" style="flex-direction:row; align-items:center; gap:20px;">
+                        <div style="flex:2;">
+                            <div class="t-h1" style="font-size:1.6rem; color:var(--brand-dark);">Emails going to spam?</div>
+                            <div class="t-p" style="font-size:0.9rem;">We identify the bad apples spoiling your sender reputation so you can hit the inbox again.</div>
+                        </div>
+                        <div style="flex:1; text-align:right;">
+                             <div class="c-btn">Fix It Now</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Horizontal Banner</span>
+                    <span class="use-case">Blog Header / Footer</span>
+                </div>
+            </div>
+
+            <!-- 3. The "Testimonial" (White) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-wide">
+                    <div class="creative-content bg-white" style="justify-content:center; text-align:center;">
+                         <div style="color:var(--brand-accent); font-size:2rem; margin-bottom:8px;">★★★★★</div>
+                         <div class="t-h1" style="font-size:1.4rem; font-weight:600;">"We recovered our domain reputation in 48 hours."</div>
+                         <div style="margin-top:12px; font-size:0.85rem; font-weight:600; color:var(--brand-muted);">— Marketing Director, SaaS Co.</div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Social Proof</span>
+                    <span class="use-case">Retargeting Ad</span>
+                </div>
+            </div>
+
+            <!-- 4. The "Feature Highlight" (Dark) -->
+            <div class="creative-card">
+                <div class="preview-container ratio-wide">
+                    <div class="creative-content bg-dark" style="border:1px solid var(--brand-accent);">
+                        <div style="position:absolute; top:0; right:0; background:var(--brand-accent); color:white; padding:4px 12px; font-size:0.7rem; font-weight:700; border-bottom-left-radius:8px;">NEW</div>
+                        <div style="display:flex; align-items:center; height:100%; gap:24px;">
+                            <div style="background:rgba(255,255,255,0.1); width:64px; height:64px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem;">⚡</div>
+                            <div>
+                                <div class="t-h1" style="font-size:1.5rem; margin-bottom:4px;">Real-time API</div>
+                                <div class="t-p-small" style="opacity:0.8;">Verify emails at the point of entry.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">
+                    <span class="style-name">Feature Box</span>
+                    <span class="use-case">Product Announcement</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
