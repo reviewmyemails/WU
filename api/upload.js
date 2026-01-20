@@ -20,17 +20,11 @@ export default async function handler(req, res) {
     const folderPath = type === 'background' ? 'backgrounds' : 'characters';
     const fullPath = `${folderPath}/${filename}`;
 
-    // Get the raw body as buffer
-    const chunks = [];
-    for await (const chunk of req) {
-      chunks.push(chunk);
-    }
-    const buffer = Buffer.concat(chunks);
-
-    // Upload to Vercel Blob
-    const blob = await put(fullPath, buffer, {
+    // Upload directly from request stream
+    const blob = await put(fullPath, req, {
       access: 'public',
       addRandomSuffix: false,
+      contentType: req.headers['content-type'],
     });
 
     return res.status(200).json({
