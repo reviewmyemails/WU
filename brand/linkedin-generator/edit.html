@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v2.2 - Logo direct img tag -->
+<!-- v2.4 - Dynamic content padding based on logo/badge -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -951,13 +951,7 @@
             object-fit: cover;
         }
 
-        /* Smart spacing - content area adjusts when logo is at top */
-        .tpl-statement.has-logo-top,
-        .tpl-stat.has-logo-top,
-        .tpl-checklist.has-logo-top,
-        .tpl-quote.has-logo-top {
-            padding-top: 15%;
-        }
+        /* Smart spacing is now handled dynamically via inline styles */
     </style>
 </head>
 <body>
@@ -2636,15 +2630,42 @@
             preview.innerHTML = html;
         }
 
+        // Calculate dynamic top padding based on logo and badge positions
+        function getContentTopPadding(hasBadge, badgeY) {
+            let topPadding = 8; // Base padding (matches CSS 8%)
+
+            // If logo is visible and in top area, account for it
+            if (state.logo.visible && state.logo.y < 30) {
+                const logoHeightPercent = Math.ceil(state.logo.zoom / 4);
+                const logoBottom = state.logo.y + logoHeightPercent;
+                topPadding = Math.max(topPadding, logoBottom + 3);
+            }
+
+            // If badge is visible and in top area, account for it
+            if (hasBadge && badgeY < 30) {
+                const badgeBottom = badgeY + 6; // Badge is roughly 6% tall
+                topPadding = Math.max(topPadding, badgeBottom + 2);
+            }
+
+            return topPadding;
+        }
+
         function renderStatementTemplate() {
             const d = state.data;
             const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
-            const hasLogoTop = state.logo.visible && state.logo.y < 20;
             const badgeX = d.badgeX ?? 8;
-            const badgeY = d.badgeY ?? 8;
+            let badgeY = d.badgeY ?? 8;
+
+            // Prevent badge/logo overlap: if both are in upper-left area, push badge down
+            if (d.badge && state.logo.visible && state.logo.x < 30 && state.logo.y < 25 && badgeX < 30 && badgeY < 25) {
+                const logoHeightPercent = Math.ceil(state.logo.zoom / 4);
+                badgeY = Math.max(badgeY, state.logo.y + logoHeightPercent + 2);
+            }
+
+            const contentPadding = getContentTopPadding(!!d.badge, badgeY);
 
             return `
-                <div class="tpl-statement ${hasLogoTop ? 'has-logo-top' : ''}">
+                <div class="tpl-statement" style="padding-top: ${contentPadding}%;">
                     ${d.badge ? `<div class="badge" style="${badgeStyle} position: absolute; left: ${badgeX}%; top: ${badgeY}%;">${d.badge}</div>` : ''}
                     <div class="content-area">
                         ${d.brand ? `<div class="brand">${d.brand}</div>` : ''}
@@ -2658,9 +2679,9 @@
 
         function renderStatTemplate() {
             const d = state.data;
-            const hasLogoTop = state.logo.visible && state.logo.y < 20;
+            const contentPadding = getContentTopPadding(false, 0);
             return `
-                <div class="tpl-stat ${hasLogoTop ? 'has-logo-top' : ''}">
+                <div class="tpl-stat" style="padding-top: ${contentPadding}%;">
                     ${d.label ? `<div class="label">${d.label}</div>` : ''}
                     <div class="stat-box">
                         <div class="stat-value">${d.stat || ''}</div>
@@ -2676,12 +2697,19 @@
             const d = state.data;
             const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
             const items = d.items || [];
-            const hasLogoTop = state.logo.visible && state.logo.y < 20;
             const badgeX = d.badgeX ?? 8;
-            const badgeY = d.badgeY ?? 8;
+            let badgeY = d.badgeY ?? 8;
+
+            // Prevent badge/logo overlap: if both are in upper-left area, push badge down
+            if (d.badge && state.logo.visible && state.logo.x < 30 && state.logo.y < 25 && badgeX < 30 && badgeY < 25) {
+                const logoHeightPercent = Math.ceil(state.logo.zoom / 4);
+                badgeY = Math.max(badgeY, state.logo.y + logoHeightPercent + 2);
+            }
+
+            const contentPadding = getContentTopPadding(!!d.badge, badgeY);
 
             return `
-                <div class="tpl-checklist ${hasLogoTop ? 'has-logo-top' : ''}">
+                <div class="tpl-checklist" style="padding-top: ${contentPadding}%;">
                     ${d.badge ? `<div class="badge" style="${badgeStyle} position: absolute; left: ${badgeX}%; top: ${badgeY}%;">${d.badge}</div>` : ''}
                     ${d.label ? `<div class="label">${d.label}</div>` : ''}
                     ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
@@ -2700,9 +2728,9 @@
 
         function renderQuoteTemplate() {
             const d = state.data;
-            const hasLogoTop = state.logo.visible && state.logo.y < 20;
+            const contentPadding = getContentTopPadding(false, 0);
             return `
-                <div class="tpl-quote ${hasLogoTop ? 'has-logo-top' : ''}">
+                <div class="tpl-quote" style="padding-top: ${contentPadding}%;">
                     <div class="quote-mark">"</div>
                     <div class="quote-text">${d.quote || ''}</div>
                     <div class="divider"></div>
