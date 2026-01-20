@@ -1175,29 +1175,29 @@
         // GRADIENT PRESETS (Brand Guidelines)
         // ========================================
         const GRADIENT_PRESETS = [
-            // Primary Brand Gradients
-            { name: 'Teal Deep', start: '#134e4a', end: '#0f3d3a', category: 'brand' },
-            { name: 'Teal Accent', start: '#0d9488', end: '#0f766e', category: 'brand' },
-            { name: 'Teal Light', start: '#14b8a6', end: '#0d9488', category: 'brand' },
-            { name: 'Ocean', start: '#134e4a', end: '#0d9488', category: 'brand' },
+            // Primary Brand Gradients - Use for most content
+            { name: 'Teal Deep', start: '#134e4a', end: '#0f3d3a', category: 'brand', usage: 'Hero sections, primary backgrounds, authority posts' },
+            { name: 'Teal Accent', start: '#0d9488', end: '#0f766e', category: 'brand', usage: 'CTAs, feature highlights, engagement posts' },
+            { name: 'Teal Light', start: '#14b8a6', end: '#0d9488', category: 'brand', usage: 'Vibrant accents, tips, positive announcements' },
+            { name: 'Ocean', start: '#134e4a', end: '#0d9488', category: 'brand', usage: 'Transitions, educational content, guides' },
 
-            // Dark/Professional
-            { name: 'Midnight', start: '#1a1a2e', end: '#16162a', category: 'dark' },
-            { name: 'Charcoal', start: '#374151', end: '#1f2937', category: 'dark' },
-            { name: 'Slate', start: '#475569', end: '#334155', category: 'dark' },
-            { name: 'Deep Sea', start: '#164e63', end: '#0c4a6e', category: 'dark' },
+            // Dark/Professional - Use for serious/technical content
+            { name: 'Midnight', start: '#1a1a2e', end: '#16162a', category: 'dark', usage: 'Dark mode, tech content, developer focus' },
+            { name: 'Charcoal', start: '#374151', end: '#1f2937', category: 'dark', usage: 'Professional posts, B2B content, reports' },
+            { name: 'Slate', start: '#475569', end: '#334155', category: 'dark', usage: 'Neutral backgrounds, data visualization' },
+            { name: 'Deep Sea', start: '#164e63', end: '#0c4a6e', category: 'dark', usage: 'Alternative brand dark, trust signals' },
 
-            // Warm/Energy
-            { name: 'Sunset', start: '#f97316', end: '#ea580c', category: 'warm' },
-            { name: 'Coral', start: '#fb7185', end: '#f43f5e', category: 'warm' },
-            { name: 'Gold', start: '#fbbf24', end: '#f59e0b', category: 'warm' },
-            { name: 'Fire', start: '#ef4444', end: '#dc2626', category: 'warm' },
+            // Warm/Energy - Use sparingly for alerts/urgency
+            { name: 'Sunset', start: '#f97316', end: '#ea580c', category: 'warm', usage: 'Warnings, deadlines, limited offers' },
+            { name: 'Coral', start: '#fb7185', end: '#f43f5e', category: 'warm', usage: 'Soft alerts, community posts, engagement' },
+            { name: 'Gold', start: '#fbbf24', end: '#f59e0b', category: 'warm', usage: 'Premium features, achievements, highlights' },
+            { name: 'Fire', start: '#ef4444', end: '#dc2626', category: 'warm', usage: 'Critical alerts, danger warnings, blacklist' },
 
-            // Cool/Calm
-            { name: 'Sky', start: '#38bdf8', end: '#0ea5e9', category: 'cool' },
-            { name: 'Indigo', start: '#818cf8', end: '#6366f1', category: 'cool' },
-            { name: 'Mint', start: '#34d399', end: '#10b981', category: 'cool' },
-            { name: 'Lavender', start: '#a78bfa', end: '#8b5cf6', category: 'cool' }
+            // Cool/Calm - Use for trust/info content
+            { name: 'Sky', start: '#38bdf8', end: '#0ea5e9', category: 'cool', usage: 'Info posts, trust signals, tutorials' },
+            { name: 'Indigo', start: '#818cf8', end: '#6366f1', category: 'cool', usage: 'Creative content, premium features, AI' },
+            { name: 'Mint', start: '#34d399', end: '#10b981', category: 'cool', usage: 'Success stories, positive results, verified' },
+            { name: 'Lavender', start: '#a78bfa', end: '#8b5cf6', category: 'cool', usage: 'Creative accents, unique content, standout' }
         ];
 
         // ========================================
@@ -1296,7 +1296,7 @@
                      data-end="${grad.end}"
                      data-category="${grad.category}"
                      style="background: linear-gradient(135deg, ${grad.start}, ${grad.end});"
-                     title="${grad.name}">
+                     title="${grad.name}: ${grad.usage}">
                     <span>${grad.name}</span>
                 </div>
             `).join('');
