@@ -760,7 +760,7 @@
             right: 0;
             bottom: 0;
             pointer-events: none;
-            z-index: 0;
+            z-index: 2;
             overflow: hidden;
         }
 
@@ -770,9 +770,17 @@
             height: 100%;
         }
 
-        .slide-preview.has-pattern > .slide-content {
+        .slide-preview .slide-content {
             position: relative;
-            z-index: 1;
+            z-index: 3;
+        }
+
+        .slide-preview .slide-delphi {
+            z-index: 5;
+        }
+
+        .slide-preview .slide-logo {
+            z-index: 4;
         }
 
         /* Slide Content Layout */
@@ -2216,7 +2224,148 @@
             updatePreviewSize();
             // Load any previously uploaded images from Vercel Blob
             await loadUploadedImages();
+            // Check for template parameter in URL
+            loadTemplateFromURL();
         });
+
+        // Template definitions (matching templates.html)
+        const TEMPLATE_DATA = {
+            'dark-statement-sq': {
+                format: 'square',
+                theme: 'dark',
+                elements: { logo: true, brand: true, tag: false, headline: true, body: true, checklist: false, delphi: false, cta: true, counter: false },
+                content: { headline: 'Stop guessing.\nStart knowing.', body: 'Your bounce rate is telling a story. Are you listening?', cta: 'Get Free Audit' }
+            },
+            'risk-alert-sq': {
+                format: 'square',
+                theme: 'white',
+                elements: { logo: true, brand: false, tag: true, headline: true, body: false, checklist: true, delphi: false, cta: false, counter: false },
+                content: { tag: 'Alert', headline: 'Is your domain blacklisted?', checklist: '✗ Emails going to spam\n✗ Open rates dropping\n✗ Providers blocking you' }
+            },
+            'minimal-tip-sq': {
+                format: 'square',
+                theme: 'light',
+                elements: { logo: true, brand: false, tag: true, headline: true, body: true, checklist: false, delphi: false, cta: true, counter: false },
+                content: { tag: 'Pro Tip', headline: 'Clean your list every 90 days.', body: 'Stale data is the #1 killer of sender reputation.', cta: 'Learn More' },
+                layout: { contentPlacement: 'center' }
+            },
+            'stat-focus-sq': {
+                format: 'square',
+                theme: 'accent',
+                elements: { logo: true, brand: true, tag: false, headline: true, body: true, checklist: false, delphi: false, cta: false, counter: false },
+                content: { headline: '22.5%', body: 'Average database decay per year. If you haven\'t cleaned your list in a year, nearly a quarter of it is risky.' }
+            },
+            'checklist-pt': {
+                format: 'portrait',
+                theme: 'light',
+                elements: { logo: true, brand: true, tag: false, headline: true, body: false, checklist: true, delphi: false, cta: true, counter: false },
+                content: { headline: 'The Safe Sender Checklist', checklist: '✓ SPF Record Configured\n✓ DKIM Signature Valid\n✓ DMARC Policy Active\n✓ Hard Bounces Removed', cta: 'Download Guide' }
+            },
+            'quote-pt': {
+                format: 'portrait',
+                theme: 'dark',
+                elements: { logo: true, brand: true, tag: false, headline: true, body: true, checklist: false, delphi: false, cta: false, counter: false },
+                content: { headline: '"Trust is the currency of the inbox."', body: 'Without it, your offers are invisible.' },
+                layout: { contentPlacement: 'center' }
+            },
+            'do-dont-pt': {
+                format: 'portrait',
+                theme: 'white',
+                elements: { logo: true, brand: false, tag: false, headline: true, body: false, checklist: true, delphi: false, cta: false, counter: false },
+                content: { headline: 'Email Warm-up', checklist: '✓ Start with engaged subscribers\n✓ Gradually increase volume\n✓ Monitor metrics daily\n✗ Blast your entire list\n✗ Ignore bounce rates\n✗ Skip authentication' }
+            },
+            'step-process-pt': {
+                format: 'portrait',
+                theme: 'dark',
+                elements: { logo: true, brand: false, tag: true, headline: true, body: true, checklist: false, delphi: false, cta: false, counter: false },
+                content: { tag: 'How To', headline: '3 Steps to Better Deliverability', body: '01. Audit - Check your current reputation\n02. Clean - Remove invalid addresses\n03. Monitor - Track ongoing metrics' }
+            },
+            'value-prop-wd': {
+                format: 'landscape',
+                theme: 'dark',
+                elements: { logo: true, brand: false, tag: false, headline: true, body: true, checklist: false, delphi: false, cta: true, counter: false },
+                content: { headline: 'Protect Your Sender Reputation', body: 'Real-time monitoring. Instant alerts. Expert guidance.', cta: 'Start Free Trial' }
+            },
+            'social-proof-wd': {
+                format: 'landscape',
+                theme: 'light',
+                elements: { logo: true, brand: false, tag: false, headline: true, body: false, checklist: false, delphi: false, cta: true, counter: false },
+                content: { headline: '10K+ Domains Monitored | 99.2% Inbox Placement | 24/7 Alerts', cta: 'Join Them' }
+            },
+            'blog-header-wd': {
+                format: 'landscape',
+                theme: 'accent',
+                elements: { logo: true, brand: false, tag: true, headline: true, body: true, checklist: false, delphi: false, cta: false, counter: false },
+                content: { tag: 'Guide', headline: 'The Complete Email Deliverability Playbook', body: 'Everything you need to reach the inbox' },
+                layout: { contentPlacement: 'center' }
+            },
+            'result-highlight-wd': {
+                format: 'landscape',
+                theme: 'white',
+                elements: { logo: true, brand: false, tag: true, headline: true, body: true, checklist: false, delphi: false, cta: true, counter: false },
+                content: { tag: 'Case Study', headline: '45% → 98%', body: 'Inbox Placement Rate improvement', cta: 'See How' }
+            }
+        };
+
+        function loadTemplateFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const templateId = urlParams.get('template');
+
+            if (templateId && TEMPLATE_DATA[templateId]) {
+                const template = TEMPLATE_DATA[templateId];
+
+                // Set output size based on template format
+                const formatMap = { square: 'square', portrait: 'portrait', landscape: 'landscape' };
+                if (template.format && formatMap[template.format]) {
+                    currentOutputSize = formatMap[template.format];
+                    document.getElementById('outputSize').value = currentOutputSize;
+                    updatePreviewSize();
+                }
+
+                // Apply template to current slide
+                const slide = slides[currentSlide];
+                slide.theme = template.theme || 'dark';
+
+                // Apply elements
+                if (template.elements) {
+                    Object.keys(template.elements).forEach(key => {
+                        slide.elements[key] = template.elements[key];
+                    });
+                }
+
+                // Apply content
+                if (template.content) {
+                    Object.keys(template.content).forEach(key => {
+                        slide.content[key] = template.content[key];
+                    });
+                }
+
+                // Apply layout
+                if (template.layout) {
+                    slide.layout = { ...slide.layout, ...template.layout };
+                }
+
+                // Update UI
+                loadSlideToControls(slide);
+                updatePreview();
+                updateSlidesList();
+
+                // Show notification
+                showNotification(`Template "${templateId.replace(/-/g, ' ')}" loaded!`);
+            }
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = 'position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--color-accent); color: white; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500; z-index: 1000; animation: fadeIn 0.3s ease;';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.3s';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
 
         function initDelphiGrid() {
             initCharacterGrid();
