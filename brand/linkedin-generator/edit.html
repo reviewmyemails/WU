@@ -899,8 +899,7 @@
             z-index: 10;
         }
         .logo-wrapper img {
-            height: 100%;
-            width: auto;
+            display: block;
         }
 
         /* Character positioning */
@@ -2534,8 +2533,8 @@
             // Logo (only if visible) - smart positioning
             if (state.logo.visible) {
                 html += `
-                    <div class="logo-wrapper" style="left: ${state.logo.x}%; top: ${state.logo.y}%; height: ${state.logo.zoom}px;">
-                        <img src="../../svg/${state.logo.file}" alt="Logo">
+                    <div class="logo-wrapper" style="left: ${state.logo.x}%; top: ${state.logo.y}%;">
+                        <img src="../../svg/${state.logo.file}" alt="Logo" style="height: ${state.logo.zoom}px; width: auto;">
                     </div>
                 `;
             }
