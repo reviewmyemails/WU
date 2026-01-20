@@ -876,17 +876,95 @@
             opacity: 0.8;
         }
 
-        /* Delphi in slide */
+        /* Character/Delphi in slide - now absolutely positioned */
         .slide-delphi {
-            max-width: 160px;
-            max-height: 160px;
-            margin: 16px auto;
+            position: absolute;
+            z-index: 5;
+            transition: all 0.2s ease;
         }
 
         .slide-delphi img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+        }
+
+        /* Character position variants */
+        .slide-delphi.pos-bottom-right {
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .slide-delphi.pos-bottom-left {
+            bottom: 20px;
+            left: 20px;
+        }
+
+        .slide-delphi.pos-bottom-center {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .slide-delphi.pos-right-center {
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .slide-delphi.pos-left-center {
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Content placement variants */
+        .slide-content.place-top-left {
+            justify-content: flex-start;
+        }
+
+        .slide-content.place-top-left .slide-main {
+            justify-content: flex-start;
+            padding-top: 20px;
+        }
+
+        .slide-content.place-top-center {
+            justify-content: flex-start;
+            text-align: center;
+        }
+
+        .slide-content.place-top-center .slide-main {
+            justify-content: flex-start;
+            padding-top: 20px;
+            align-items: center;
+        }
+
+        .slide-content.place-center {
+            justify-content: center;
+        }
+
+        .slide-content.place-center .slide-main {
+            justify-content: center;
+        }
+
+        .slide-content.place-bottom-left {
+            justify-content: flex-end;
+        }
+
+        .slide-content.place-bottom-left .slide-main {
+            justify-content: flex-end;
+            padding-bottom: 60px;
+        }
+
+        .slide-content.place-bottom-center {
+            justify-content: flex-end;
+            text-align: center;
+        }
+
+        .slide-content.place-bottom-center .slide-main {
+            justify-content: flex-end;
+            padding-bottom: 60px;
+            align-items: center;
         }
 
         /* CTA Button in slide */
@@ -932,13 +1010,20 @@
 
         /* Logo in slide */
         .slide-logo {
-            height: 40px;
-            margin-bottom: 8px;
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            height: 32px;
+            z-index: 5;
         }
 
         .slide-logo img {
             height: 100%;
             width: auto;
+        }
+
+        .slide-logo.hidden {
+            display: none;
         }
 
         /* ========================================
@@ -1232,6 +1317,23 @@
             <div class="control-section">
                 <h3>Elements</h3>
                 <div class="toggle-row">
+                    <span class="toggle-label">Logo</span>
+                    <div class="toggle active" data-element="logo"></div>
+                </div>
+                <div class="control-group" id="logoGroup" style="margin-top: 8px; margin-bottom: 12px;">
+                    <select class="input-select" id="logoType" style="padding: 6px 10px; font-size: 12px;">
+                        <option value="rme">Review My Emails</option>
+                        <option value="custom">Custom Logo</option>
+                    </select>
+                    <div id="customLogoUpload" class="hidden" style="margin-top: 8px;">
+                        <input type="file" id="customLogoInput" accept="image/*" style="display: none;">
+                        <button class="btn btn-secondary" onclick="document.getElementById('customLogoInput').click()" style="padding: 6px 12px; font-size: 11px; width: 100%;">Upload Logo</button>
+                        <div id="customLogoPreview" style="margin-top: 8px; display: none;">
+                            <img id="customLogoImg" style="max-height: 30px; max-width: 100%;">
+                        </div>
+                    </div>
+                </div>
+                <div class="toggle-row">
                     <span class="toggle-label">Brand Header</span>
                     <div class="toggle active" data-element="brand"></div>
                 </div>
@@ -1262,6 +1364,34 @@
                 <div class="toggle-row">
                     <span class="toggle-label">Slide Counter</span>
                     <div class="toggle active" data-element="counter"></div>
+                </div>
+
+                <!-- Content Placement -->
+                <div class="control-group" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <label class="control-label">Content Placement</label>
+                    <select class="input-select" id="contentPlacement">
+                        <option value="top-left">Top Left</option>
+                        <option value="top-center">Top Center</option>
+                        <option value="center" selected>Center</option>
+                        <option value="bottom-left">Bottom Left</option>
+                        <option value="bottom-center">Bottom Center</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Character Position</label>
+                    <select class="input-select" id="characterPosition">
+                        <option value="bottom-right" selected>Bottom Right</option>
+                        <option value="bottom-left">Bottom Left</option>
+                        <option value="bottom-center">Bottom Center</option>
+                        <option value="right-center">Right Center</option>
+                        <option value="left-center">Left Center</option>
+                        <option value="hidden">Hidden (use toggle above)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Character Size</label>
+                    <input type="range" class="position-slider" id="characterSize" min="80" max="250" value="140" style="width: 100%;">
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.5);" id="characterSizeValue">140px</span>
                 </div>
             </div>
 
@@ -1350,6 +1480,11 @@
             <div class="slide-preview-container">
                 <div class="slide-preview-wrapper">
                     <div class="slide-preview theme-dark size-portrait" id="slidePreview">
+                        <!-- Logo (absolute positioned) -->
+                        <div class="slide-logo" id="slideLogo">
+                            <img id="slideLogoImg" src="../../svg/Horizontal-Logo.svg" alt="Logo">
+                        </div>
+
                         <div class="slide-content">
                             <div class="slide-brand" id="slideBrand">Review My Emails</div>
 
@@ -1360,9 +1495,6 @@
                                 <div class="slide-checklist hidden" id="slideChecklist">
                                     <!-- Populated by JS -->
                                 </div>
-                                <div class="slide-delphi" id="slideDelphi">
-                                    <img src="../../Delphi/Delphi Sword Looking Sideways.svg" alt="Delphi">
-                                </div>
                                 <div class="slide-cta hidden" id="slideCta">Get Free Review</div>
                             </div>
 
@@ -1370,6 +1502,11 @@
                                 <span class="slide-counter" id="slideCounter">01 / 08</span>
                                 <span>reviewmyemails.com</span>
                             </div>
+                        </div>
+
+                        <!-- Character (absolute positioned) -->
+                        <div class="slide-delphi pos-bottom-right" id="slideDelphi">
+                            <img src="../../Delphi/Delphi Sword Looking Sideways.svg" alt="Character">
                         </div>
                     </div>
                     <!-- Safe Zone Overlay -->
@@ -1595,6 +1732,7 @@
             return {
                 theme: 'dark',
                 elements: {
+                    logo: true,
                     brand: true,
                     tag: true,
                     headline: true,
@@ -1614,6 +1752,13 @@
                     background: null, // null = no background image, use theme color
                     bgPositionX: 50,
                     bgPositionY: 50
+                },
+                layout: {
+                    logoType: 'rme', // 'rme' or 'custom'
+                    customLogoUrl: null,
+                    contentPlacement: 'center', // top-left, top-center, center, bottom-left, bottom-center
+                    characterPosition: 'bottom-right', // bottom-right, bottom-left, bottom-center, right-center, left-center
+                    characterSize: 140
                 },
                 purpose: purpose.name
             };
@@ -1814,6 +1959,7 @@
 
                     // Show/hide related control groups
                     const groupMap = {
+                        logo: 'logoGroup',
                         tag: 'tagGroup',
                         headline: 'headlineGroup',
                         body: 'bodyGroup',
@@ -1884,6 +2030,47 @@
             // Background category filter
             document.getElementById('backgroundCategory').addEventListener('change', (e) => {
                 initBackgroundGrid(e.target.value);
+            });
+
+            // Logo type selector
+            document.getElementById('logoType').addEventListener('change', (e) => {
+                slides[currentSlide].layout.logoType = e.target.value;
+                document.getElementById('customLogoUpload').classList.toggle('hidden', e.target.value !== 'custom');
+                updatePreview();
+            });
+
+            // Custom logo upload
+            document.getElementById('customLogoInput').addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        slides[currentSlide].layout.customLogoUrl = event.target.result;
+                        document.getElementById('customLogoImg').src = event.target.result;
+                        document.getElementById('customLogoPreview').style.display = 'block';
+                        updatePreview();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Content placement
+            document.getElementById('contentPlacement').addEventListener('change', (e) => {
+                slides[currentSlide].layout.contentPlacement = e.target.value;
+                updatePreview();
+            });
+
+            // Character position
+            document.getElementById('characterPosition').addEventListener('change', (e) => {
+                slides[currentSlide].layout.characterPosition = e.target.value;
+                updatePreview();
+            });
+
+            // Character size
+            document.getElementById('characterSize').addEventListener('input', (e) => {
+                slides[currentSlide].layout.characterSize = parseInt(e.target.value);
+                document.getElementById('characterSizeValue').textContent = e.target.value + 'px';
+                updatePreview();
             });
 
             // Download buttons
@@ -1994,6 +2181,21 @@
 
             // Background position controls
             updateBgPositionControls();
+
+            // Layout controls
+            const layout = slide.layout || { logoType: 'rme', contentPlacement: 'center', characterPosition: 'bottom-right', characterSize: 140 };
+            document.getElementById('logoType').value = layout.logoType || 'rme';
+            document.getElementById('customLogoUpload').classList.toggle('hidden', layout.logoType !== 'custom');
+            if (layout.customLogoUrl) {
+                document.getElementById('customLogoImg').src = layout.customLogoUrl;
+                document.getElementById('customLogoPreview').style.display = 'block';
+            } else {
+                document.getElementById('customLogoPreview').style.display = 'none';
+            }
+            document.getElementById('contentPlacement').value = layout.contentPlacement || 'center';
+            document.getElementById('characterPosition').value = layout.characterPosition || 'bottom-right';
+            document.getElementById('characterSize').value = layout.characterSize || 140;
+            document.getElementById('characterSizeValue').textContent = (layout.characterSize || 140) + 'px';
         }
 
         // ========================================
@@ -2377,6 +2579,7 @@
             preview.className = className;
 
             // Elements visibility
+            document.getElementById('slideLogo').classList.toggle('hidden', !slide.elements.logo);
             document.getElementById('slideBrand').classList.toggle('hidden', !slide.elements.brand);
             document.getElementById('slideTag').classList.toggle('hidden', !slide.elements.tag);
             document.getElementById('slideHeadline').classList.toggle('hidden', !slide.elements.headline);
@@ -2385,6 +2588,30 @@
             document.getElementById('slideDelphi').classList.toggle('hidden', !slide.elements.delphi);
             document.getElementById('slideCta').classList.toggle('hidden', !slide.elements.cta);
             document.getElementById('slideCounter').classList.toggle('hidden', !slide.elements.counter);
+
+            // Logo
+            const layout = slide.layout || { logoType: 'rme', contentPlacement: 'center', characterPosition: 'bottom-right', characterSize: 140 };
+            const logoImg = document.getElementById('slideLogoImg');
+            if (layout.logoType === 'custom' && layout.customLogoUrl) {
+                logoImg.src = layout.customLogoUrl;
+            } else {
+                // Use appropriate logo based on theme
+                const isDarkBg = slide.theme === 'dark' || slide.theme === 'accent' || slide.content.background;
+                logoImg.src = isDarkBg ? '../../svg/Horizontal-Logo.svg' : '../../svg/Dark-Horizontal-Logo.svg';
+            }
+
+            // Content placement
+            const slideContent = document.querySelector('#slidePreview .slide-content');
+            slideContent.className = 'slide-content place-' + (layout.contentPlacement || 'center');
+
+            // Character position and size
+            const delphiEl = document.getElementById('slideDelphi');
+            delphiEl.className = 'slide-delphi pos-' + (layout.characterPosition || 'bottom-right');
+            if (layout.characterPosition === 'hidden') {
+                delphiEl.classList.add('hidden');
+            }
+            delphiEl.style.width = (layout.characterSize || 140) + 'px';
+            delphiEl.style.height = (layout.characterSize || 140) + 'px';
 
             // Content
             document.getElementById('slideTag').textContent = slide.content.tag;
