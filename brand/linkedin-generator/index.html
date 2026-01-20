@@ -841,9 +841,9 @@
         /* Tag color variants */
         .slide-tag.tag-accent { background: var(--color-accent); color: white; }
         .slide-tag.tag-danger { background: var(--color-danger); color: white; }
-        .slide-tag.tag-warning { background: #fbbf24; color: #1a1a1a; }
+        .slide-tag.tag-warning { background: var(--color-secondary); color: #1a1a1a; }
         .slide-tag.tag-success { background: var(--color-success); color: white; }
-        .slide-tag.tag-purple { background: #6366f1; color: white; }
+        .slide-tag.tag-orange { background: var(--color-warning); color: white; }
         .slide-tag.tag-dark { background: var(--color-dark); color: white; }
 
         /* Default tag colors per theme (if no specific color set) */
@@ -1300,7 +1300,7 @@
             <!-- Mode Tabs -->
             <div class="mode-tabs" style="display: flex; gap: 8px; margin-bottom: 24px;">
                 <a href="index.html" class="mode-tab active" style="flex: 1; padding: 10px; background: var(--color-accent); color: white; text-decoration: none; border-radius: 6px; text-align: center; font-size: 12px; font-weight: 600;">Build from Scratch</a>
-                <a href="templates.html" class="mode-tab" style="flex: 1; padding: 10px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 6px; text-align: center; font-size: 12px; font-weight: 500;">Template Library</a>
+                <a href="/brand/linkedin-generator/templates" class="mode-tab" style="flex: 1; padding: 10px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); text-decoration: none; border-radius: 6px; text-align: center; font-size: 12px; font-weight: 500;">Template Library</a>
             </div>
 
             <!-- Format Selection -->
@@ -1530,7 +1530,7 @@
                         <div class="color-swatch" style="background: #f33144; width: 28px; height: 28px;" data-tag-color="danger" title="Red"></div>
                         <div class="color-swatch" style="background: #fbbf24; width: 28px; height: 28px;" data-tag-color="warning" title="Yellow"></div>
                         <div class="color-swatch" style="background: #1fa95c; width: 28px; height: 28px;" data-tag-color="success" title="Green"></div>
-                        <div class="color-swatch" style="background: #6366f1; width: 28px; height: 28px;" data-tag-color="purple" title="Purple"></div>
+                        <div class="color-swatch" style="background: #f9943b; width: 28px; height: 28px;" data-tag-color="orange" title="Orange"></div>
                         <div class="color-swatch" style="background: #134e4a; width: 28px; height: 28px;" data-tag-color="dark" title="Dark"></div>
                     </div>
                 </div>
@@ -2252,7 +2252,7 @@
                 format: 'square',
                 theme: 'white',
                 elements: { logo: true, brand: false, tag: true, headline: true, body: false, checklist: true, delphi: false, cta: false, counter: false },
-                content: { tag: 'Alert', headline: 'Is your domain blacklisted?', checklist: '✗ Emails going to spam\n✗ Open rates dropping\n✗ Providers blocking you' }
+                content: { tag: 'Alert', tagColor: 'danger', headline: 'Is your domain {red:blacklisted}?', checklist: '✗ Emails going to spam\n✗ Open rates dropping\n✗ Providers blocking you' }
             },
             'minimal-tip-sq': {
                 format: 'square',
@@ -2405,6 +2405,36 @@
                 notification.style.transition = 'opacity 0.3s';
                 setTimeout(() => notification.remove(), 300);
             }, 2000);
+        }
+
+        // Parse rich text with color markers: {red:text}, {teal:text}, {green:text}, {yellow:text}, {orange:text}
+        function parseRichText(text) {
+            if (!text) return '';
+            // Escape HTML first to prevent XSS
+            let escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            // Convert newlines to <br>
+            escaped = escaped.replace(/\n/g, '<br>');
+            // Color mapping to CSS variables
+            const colorMap = {
+                'red': 'var(--color-danger)',
+                'danger': 'var(--color-danger)',
+                'teal': 'var(--color-accent)',
+                'accent': 'var(--color-accent)',
+                'green': 'var(--color-success)',
+                'success': 'var(--color-success)',
+                'yellow': 'var(--color-secondary)',
+                'warning': 'var(--color-secondary)',
+                'orange': 'var(--color-warning)',
+                'dark': 'var(--color-dark)'
+            };
+            // Parse {color:text} syntax
+            return escaped.replace(/\{(\w+):([^}]+)\}/g, (match, color, content) => {
+                const cssColor = colorMap[color.toLowerCase()];
+                if (cssColor) {
+                    return `<span style="color: ${cssColor}; font-weight: inherit;">${content}</span>`;
+                }
+                return content;
+            });
         }
 
         function initDelphiGrid() {
@@ -3331,8 +3361,8 @@
             tagEl.className = 'slide-tag tag-' + (slide.content.tagColor || 'accent');
             if (!slide.elements.tag) tagEl.classList.add('hidden');
 
-            document.getElementById('slideHeadline').textContent = slide.content.headline;
-            document.getElementById('slideBody').textContent = slide.content.body;
+            document.getElementById('slideHeadline').innerHTML = parseRichText(slide.content.headline);
+            document.getElementById('slideBody').innerHTML = parseRichText(slide.content.body);
             document.getElementById('slideCta').textContent = slide.content.cta;
 
             // Checklist
