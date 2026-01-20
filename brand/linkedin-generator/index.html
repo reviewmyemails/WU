@@ -797,7 +797,26 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             opacity: 0.7;
-            margin-bottom: auto;
+            margin-bottom: 8px;
+        }
+
+        /* When logo is shown, add padding to content to avoid overlap */
+        .slide-preview.has-logo .slide-content {
+            padding-top: 72px;
+        }
+
+        /* When character is bottom-right, add padding to footer */
+        .slide-preview.char-bottom-right .slide-footer {
+            padding-right: 100px;
+        }
+
+        .slide-preview.char-bottom-left .slide-footer {
+            padding-left: 100px;
+        }
+
+        .slide-preview.char-bottom-center .slide-footer {
+            text-align: center;
+            padding-bottom: 60px;
         }
 
         .slide-main {
@@ -819,18 +838,27 @@
             width: fit-content;
         }
 
-        .slide-preview.theme-dark .slide-tag {
+        /* Tag color variants */
+        .slide-tag.tag-accent { background: var(--color-accent); color: white; }
+        .slide-tag.tag-danger { background: var(--color-danger); color: white; }
+        .slide-tag.tag-warning { background: #fbbf24; color: #1a1a1a; }
+        .slide-tag.tag-success { background: var(--color-success); color: white; }
+        .slide-tag.tag-purple { background: #6366f1; color: white; }
+        .slide-tag.tag-dark { background: var(--color-dark); color: white; }
+
+        /* Default tag colors per theme (if no specific color set) */
+        .slide-preview.theme-dark .slide-tag:not([class*="tag-"]) {
             background: var(--color-accent);
             color: white;
         }
 
-        .slide-preview.theme-light .slide-tag,
-        .slide-preview.theme-white .slide-tag {
+        .slide-preview.theme-light .slide-tag:not([class*="tag-"]),
+        .slide-preview.theme-white .slide-tag:not([class*="tag-"]) {
             background: var(--color-accent);
             color: white;
         }
 
-        .slide-preview.theme-accent .slide-tag {
+        .slide-preview.theme-accent .slide-tag:not([class*="tag-"]) {
             background: rgba(255,255,255,0.25);
             color: white;
         }
@@ -1506,6 +1534,15 @@
                     <label class="control-label">Tag</label>
                     <input type="text" class="input-text" id="tagInput" value="Email Strategy" maxlength="20">
                     <div class="char-count"><span id="tagCount">14</span>/20</div>
+                    <label class="control-label" style="margin-top: 8px;">Tag Color</label>
+                    <div class="tag-color-grid" style="display: flex; gap: 6px; flex-wrap: wrap;">
+                        <div class="color-swatch selected" style="background: #0d9488; width: 28px; height: 28px;" data-tag-color="accent" title="Teal"></div>
+                        <div class="color-swatch" style="background: #f33144; width: 28px; height: 28px;" data-tag-color="danger" title="Red"></div>
+                        <div class="color-swatch" style="background: #fbbf24; width: 28px; height: 28px;" data-tag-color="warning" title="Yellow"></div>
+                        <div class="color-swatch" style="background: #1fa95c; width: 28px; height: 28px;" data-tag-color="success" title="Green"></div>
+                        <div class="color-swatch" style="background: #6366f1; width: 28px; height: 28px;" data-tag-color="purple" title="Purple"></div>
+                        <div class="color-swatch" style="background: #134e4a; width: 28px; height: 28px;" data-tag-color="dark" title="Dark"></div>
+                    </div>
                 </div>
 
                 <div class="control-group" id="headlineGroup">
@@ -2180,6 +2217,7 @@
                 },
                 content: {
                     tag: 'Email Strategy',
+                    tagColor: 'accent', // accent, danger, warning, success, purple, dark
                     headline: 'When inbox placement weakens, pushing harder rarely fixes it.',
                     body: 'The "Restraint" Strategy.',
                     checklist: '✗ Send more.\n✗ More urgency.\n✗ More offers.',
@@ -2321,18 +2359,34 @@
                     updatePreviewSize();
                 }
 
-                // Apply template to current slide
+                // FULLY RESET the slide to default, then apply template
                 const slide = slides[currentSlide];
+
+                // Reset all elements to false first
+                Object.keys(slide.elements).forEach(key => {
+                    slide.elements[key] = false;
+                });
+
+                // Reset content to empty
+                slide.content.tag = '';
+                slide.content.headline = '';
+                slide.content.body = '';
+                slide.content.checklist = '';
+                slide.content.cta = '';
+                slide.content.background = null;
+                slide.content.backgroundUrl = null;
+
+                // Apply template theme
                 slide.theme = template.theme || 'dark';
 
-                // Apply elements
+                // Apply template elements (only enable what template specifies)
                 if (template.elements) {
                     Object.keys(template.elements).forEach(key => {
                         slide.elements[key] = template.elements[key];
                     });
                 }
 
-                // Apply content
+                // Apply template content
                 if (template.content) {
                     Object.keys(template.content).forEach(key => {
                         slide.content[key] = template.content[key];
@@ -2344,8 +2398,20 @@
                     slide.layout = { ...slide.layout, ...template.layout };
                 }
 
+                // Update theme swatch selection
+                document.querySelectorAll('.color-swatch').forEach(swatch => {
+                    swatch.classList.toggle('selected', swatch.dataset.theme === slide.theme);
+                });
+
+                // Update all UI toggles
+                document.querySelectorAll('.toggle').forEach(toggle => {
+                    const element = toggle.dataset.element;
+                    toggle.classList.toggle('active', slide.elements[element]);
+                });
+
                 // Update UI
                 loadSlideToControls(slide);
+                updateBgPositionControls();
                 updatePreview();
                 updateSlidesList();
 
@@ -2530,14 +2596,24 @@
                 updateSlidesList();
             });
 
-            // Theme selection
-            document.querySelectorAll('.color-swatch').forEach(swatch => {
+            // Theme selection (only theme swatches, not tag color swatches)
+            document.querySelectorAll('.color-grid .color-swatch').forEach(swatch => {
                 swatch.addEventListener('click', () => {
-                    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                    document.querySelectorAll('.color-grid .color-swatch').forEach(s => s.classList.remove('selected'));
                     swatch.classList.add('selected');
                     slides[currentSlide].theme = swatch.dataset.theme;
                     updatePreview();
                     updateSlidesList();
+                });
+            });
+
+            // Tag color selection
+            document.querySelectorAll('.tag-color-grid .color-swatch').forEach(swatch => {
+                swatch.addEventListener('click', () => {
+                    document.querySelectorAll('.tag-color-grid .color-swatch').forEach(s => s.classList.remove('selected'));
+                    swatch.classList.add('selected');
+                    slides[currentSlide].content.tagColor = swatch.dataset.tagColor;
+                    updatePreview();
                 });
             });
 
@@ -2772,8 +2848,13 @@
 
         function loadSlideToControls(slide) {
             // Theme
-            document.querySelectorAll('.color-swatch').forEach(s => {
+            document.querySelectorAll('.color-grid .color-swatch').forEach(s => {
                 s.classList.toggle('selected', s.dataset.theme === slide.theme);
+            });
+
+            // Tag color
+            document.querySelectorAll('.tag-color-grid .color-swatch').forEach(s => {
+                s.classList.toggle('selected', s.dataset.tagColor === (slide.content.tagColor || 'accent'));
             });
 
             // Elements
@@ -3217,6 +3298,16 @@
 
             // Theme and background
             let className = `slide-preview theme-${slide.theme} size-${currentOutputSize}`;
+
+            // Add helper classes for smart layout collision avoidance
+            if (slide.elements.logo) {
+                className += ' has-logo';
+            }
+            const charPos = slide.layout?.characterPosition || 'bottom-right';
+            if (slide.elements.delphi && charPos !== 'hidden') {
+                className += ` char-${charPos}`;
+            }
+
             if (slide.content.background) {
                 className += ' has-bg';
                 // Use URL for uploaded backgrounds, local path for built-in ones
@@ -3275,7 +3366,11 @@
             delphiEl.style.height = (layout.characterSize || 140) + 'px';
 
             // Content
-            document.getElementById('slideTag').textContent = slide.content.tag;
+            const tagEl = document.getElementById('slideTag');
+            tagEl.textContent = slide.content.tag;
+            tagEl.className = 'slide-tag tag-' + (slide.content.tagColor || 'accent');
+            if (!slide.elements.tag) tagEl.classList.add('hidden');
+
             document.getElementById('slideHeadline').textContent = slide.content.headline;
             document.getElementById('slideBody').textContent = slide.content.body;
             document.getElementById('slideCta').textContent = slide.content.cta;
