@@ -586,6 +586,7 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            position: relative;
         }
 
         .tpl-statement .logo {
@@ -606,8 +607,8 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 20px;
             width: fit-content;
+            z-index: 15;
         }
 
         .tpl-statement .badge.badge-accent {
@@ -745,6 +746,19 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            position: relative;
+        }
+
+        .tpl-checklist .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: fit-content;
+            z-index: 15;
         }
 
         .tpl-checklist .label {
@@ -2310,6 +2324,18 @@
                             <label class="control-label">Badge (optional)</label>
                             <input type="text" class="input-text" id="inputBadge" value="${state.data.badge || ''}" placeholder="e.g., Pro Tip">
                             <div class="badge-color-grid" id="badgeColorGrid"></div>
+                            <div class="slider-row" style="margin-top: 10px;">
+                                <span class="slider-label">L</span>
+                                <input type="range" class="slider" id="badgeX" min="0" max="100" value="${state.data.badgeX ?? 8}">
+                                <span class="slider-label">R</span>
+                                <span class="slider-value" id="badgeXValue">${state.data.badgeX ?? 8}%</span>
+                            </div>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="badgeY" min="0" max="100" value="${state.data.badgeY ?? 8}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="badgeYValue">${state.data.badgeY ?? 8}%</span>
+                            </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Brand Text</label>
@@ -2369,6 +2395,18 @@
                             <label class="control-label">Badge (optional)</label>
                             <input type="text" class="input-text" id="inputBadge" value="${state.data.badge || ''}" placeholder="e.g., Alert">
                             <div class="badge-color-grid" id="badgeColorGrid"></div>
+                            <div class="slider-row" style="margin-top: 10px;">
+                                <span class="slider-label">L</span>
+                                <input type="range" class="slider" id="badgeX" min="0" max="100" value="${state.data.badgeX ?? 8}">
+                                <span class="slider-label">R</span>
+                                <span class="slider-value" id="badgeXValue">${state.data.badgeX ?? 8}%</span>
+                            </div>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="badgeY" min="0" max="100" value="${state.data.badgeY ?? 8}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="badgeYValue">${state.data.badgeY ?? 8}%</span>
+                            </div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Label (optional)</label>
@@ -2419,6 +2457,9 @@
             // Initialize badge color grid if present
             initBadgeColorGrid();
 
+            // Initialize badge position sliders
+            initBadgeSliders();
+
             // Initialize text color pickers
             initTextColorPickers();
 
@@ -2451,6 +2492,24 @@
                     state.data.badgeColor = item.dataset.color;
                     renderPreview();
                 });
+            });
+        }
+
+        function initBadgeSliders() {
+            const badgeX = document.getElementById('badgeX');
+            const badgeY = document.getElementById('badgeY');
+            if (!badgeX || !badgeY) return;
+
+            badgeX.addEventListener('input', (e) => {
+                state.data.badgeX = parseInt(e.target.value);
+                document.getElementById('badgeXValue').textContent = e.target.value + '%';
+                renderPreview();
+            });
+
+            badgeY.addEventListener('input', (e) => {
+                state.data.badgeY = parseInt(e.target.value);
+                document.getElementById('badgeYValue').textContent = e.target.value + '%';
+                renderPreview();
             });
         }
 
@@ -2574,10 +2633,12 @@
             const d = state.data;
             const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
             const hasLogoTop = state.logo.visible && state.logo.y < 20;
+            const badgeX = d.badgeX ?? 8;
+            const badgeY = d.badgeY ?? 8;
 
             return `
                 <div class="tpl-statement ${hasLogoTop ? 'has-logo-top' : ''}">
-                    ${d.badge ? `<div class="badge" style="${badgeStyle}">${d.badge}</div>` : ''}
+                    ${d.badge ? `<div class="badge" style="${badgeStyle} position: absolute; left: ${badgeX}%; top: ${badgeY}%;">${d.badge}</div>` : ''}
                     <div class="content-area">
                         ${d.brand ? `<div class="brand">${d.brand}</div>` : ''}
                         ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
@@ -2609,10 +2670,12 @@
             const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
             const items = d.items || [];
             const hasLogoTop = state.logo.visible && state.logo.y < 20;
+            const badgeX = d.badgeX ?? 8;
+            const badgeY = d.badgeY ?? 8;
 
             return `
                 <div class="tpl-checklist ${hasLogoTop ? 'has-logo-top' : ''}">
-                    ${d.badge ? `<div class="badge" style="${badgeStyle}">${d.badge}</div>` : ''}
+                    ${d.badge ? `<div class="badge" style="${badgeStyle} position: absolute; left: ${badgeX}%; top: ${badgeY}%;">${d.badge}</div>` : ''}
                     ${d.label ? `<div class="label">${d.label}</div>` : ''}
                     ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
                     <div class="items">
