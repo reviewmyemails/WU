@@ -2590,11 +2590,13 @@
             }
 
             // Logo (only if visible) - smart positioning
+            // Use percentage-based height relative to slide container for consistent export scaling
             if (state.logo.visible) {
+                // Convert pixel zoom to percentage (base: 400px preview = 9% for 36px default)
+                const logoHeightPercent = (state.logo.zoom / 400) * 100;
                 html += `
-                    <div class="logo-wrapper" style="left: ${state.logo.x}%; top: ${state.logo.y}%;">
-                        <img src="../../svg/${state.logo.file}" alt="Logo" style="height: ${state.logo.zoom}px; width: auto;">
-                    </div>
+                    <img class="logo-img" src="../../svg/${state.logo.file}" alt="Logo"
+                         style="position: absolute; left: ${state.logo.x}%; top: ${state.logo.y}%; height: ${logoHeightPercent}%; width: auto; z-index: 10;">
                 `;
             }
 
