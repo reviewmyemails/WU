@@ -2318,11 +2318,12 @@
                         </div>
                         <div class="control-group">
                             <label class="control-label">Headline</label>
+                            ${getTextColorPickerHTML('inputHeadline')}
                             <textarea class="input-textarea" id="inputHeadline" placeholder="Main headline">${state.data.headline || ''}</textarea>
-                            <div class="input-hint">Use [red:text] for colored text</div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Body Text</label>
+                            ${getTextColorPickerHTML('inputBody')}
                             <textarea class="input-textarea" id="inputBody" placeholder="Supporting text">${state.data.body || ''}</textarea>
                         </div>
                         <div class="control-group">
@@ -2340,14 +2341,17 @@
                         </div>
                         <div class="control-group">
                             <label class="control-label">Stat Value</label>
+                            ${getTextColorPickerHTML('inputStat')}
                             <input type="text" class="input-text" id="inputStat" value="${state.data.stat || ''}" placeholder="22.5%">
                         </div>
                         <div class="control-group">
                             <label class="control-label">Stat Label</label>
+                            ${getTextColorPickerHTML('inputStatLabel')}
                             <input type="text" class="input-text" id="inputStatLabel" value="${state.data.statLabel || ''}" placeholder="Average database decay">
                         </div>
                         <div class="control-group">
                             <label class="control-label">Description</label>
+                            ${getTextColorPickerHTML('inputDescription')}
                             <textarea class="input-textarea" id="inputDescription">${state.data.description || ''}</textarea>
                         </div>
                         <div class="control-group">
@@ -2373,6 +2377,7 @@
                         </div>
                         <div class="control-group">
                             <label class="control-label">Headline</label>
+                            ${getTextColorPickerHTML('inputHeadline')}
                             <input type="text" class="input-text" id="inputHeadline" value="${state.data.headline || ''}" placeholder="The Safe Sender Checklist">
                         </div>
                         <div class="control-group">
@@ -2391,6 +2396,7 @@
                     html += `
                         <div class="control-group">
                             <label class="control-label">Quote</label>
+                            ${getTextColorPickerHTML('inputQuote')}
                             <textarea class="input-textarea" id="inputQuote">${state.data.quote || ''}</textarea>
                         </div>
                         <div class="control-group">
@@ -2413,6 +2419,9 @@
 
             // Initialize badge color grid if present
             initBadgeColorGrid();
+
+            // Initialize text color pickers
+            initTextColorPickers();
 
             // Add event listeners to all inputs
             container.querySelectorAll('input, textarea').forEach(input => {
