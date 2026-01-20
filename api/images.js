@@ -1,5 +1,9 @@
 import { list } from '@vercel/blob';
 
+export const config = {
+  runtime: 'edge',
+};
+
 export default async function handler(request) {
   if (request.method !== 'GET') {
     return new Response(JSON.stringify({ error: 'Method not allowed' }), {

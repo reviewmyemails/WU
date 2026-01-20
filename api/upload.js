@@ -1,9 +1,7 @@
-import { put, list } from '@vercel/blob';
+import { put } from '@vercel/blob';
 
 export const config = {
-  api: {
-    bodyParser: false, // Disable body parsing, we'll handle the stream
-  },
+  runtime: 'edge',
 };
 
 export default async function handler(request) {
@@ -42,7 +40,7 @@ export default async function handler(request) {
     // Upload to Vercel Blob
     const blob = await put(fullPath, request.body, {
       access: 'public',
-      addRandomSuffix: false, // Keep the exact filename
+      addRandomSuffix: false,
     });
 
     return new Response(JSON.stringify({
@@ -58,7 +56,10 @@ export default async function handler(request) {
 
   } catch (error) {
     console.error('Upload error:', error);
-    return new Response(JSON.stringify({ error: 'Upload failed', details: error.message }), {
+    return new Response(JSON.stringify({
+      error: 'Upload failed',
+      details: error.message
+    }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
