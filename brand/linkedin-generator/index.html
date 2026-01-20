@@ -1639,7 +1639,7 @@
 
                         <!-- Character (absolute positioned) -->
                         <div class="slide-delphi pos-bottom-right" id="slideDelphi">
-                            <img src="../../Delphi/Delphi Sword Looking Sideways.svg" alt="Character">
+                            <img src="../Delphi/Delphi Sword Looking Sideways.svg" alt="Character">
                         </div>
                     </div>
                     <!-- Safe Zone Overlay -->
@@ -2448,13 +2448,13 @@
 
             // Get folder path based on character type
             const folderMap = {
-                delphi: '../../Delphi/',
-                mermaid: '../../Mermaid/',
-                captain: '../../Captain/',
-                pirate: '../../Pirate/',
-                engineer: '../../Engineer/'
+                delphi: '../Delphi/',
+                mermaid: '../Mermaid/',
+                captain: '../Captain/',
+                pirate: '../Pirate/',
+                engineer: '../Engineer/'
             };
-            const folderPath = folderMap[currentCharacterType] || '../../Delphi/';
+            const folderPath = folderMap[currentCharacterType] || '../Delphi/';
 
             if (images.length === 0) {
                 grid.innerHTML = '<div style="color: rgba(255,255,255,0.5); font-size: 12px; padding: 20px; text-align: center;">No images yet for this character type</div>';
@@ -3380,13 +3380,13 @@
 
             // Character image (Delphi or other character types)
             const folderMap = {
-                delphi: '../../Delphi/',
-                mermaid: '../../Mermaid/',
-                captain: '../../Captain/',
-                pirate: '../../Pirate/',
-                engineer: '../../Engineer/'
+                delphi: '../Delphi/',
+                mermaid: '../Mermaid/',
+                captain: '../Captain/',
+                pirate: '../Pirate/',
+                engineer: '../Engineer/'
             };
-            const charFolder = folderMap[currentCharacterType] || '../../Delphi/';
+            const charFolder = folderMap[currentCharacterType] || '../Delphi/';
             document.querySelector('#slideDelphi img').src = `${charFolder}${slide.content.delphi}`;
 
             // Counter

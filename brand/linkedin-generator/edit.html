@@ -177,6 +177,36 @@
             margin-top: 4px;
         }
 
+        /* Flip Buttons */
+        .flip-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .flip-btn {
+            flex: 1;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            font-family: var(--font-family);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .flip-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .flip-btn.active {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: white;
+        }
+
         /* Toggle Switch */
         .toggle-control {
             display: flex;
@@ -333,6 +363,53 @@
             white-space: nowrap;
             z-index: 100;
             margin-bottom: 4px;
+        }
+
+        /* Text Color Picker */
+        .text-color-picker {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            align-items: center;
+        }
+        .text-color-picker-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+            margin-right: 4px;
+        }
+        .text-color-btn {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.15s;
+            position: relative;
+        }
+        .text-color-btn:hover {
+            transform: scale(1.15);
+            border-color: rgba(255,255,255,0.5);
+        }
+        .text-color-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .text-color-btn:hover::after {
+            opacity: 1;
         }
 
         /* Gradient Grid */
@@ -837,6 +914,22 @@
             object-fit: contain;
         }
 
+        /* Background image positioning */
+        .background-image-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .background-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         /* Smart spacing - content area adjusts when logo is at top */
         .tpl-statement.has-logo-top,
         .tpl-stat.has-logo-top,
@@ -990,6 +1083,22 @@
                                 <span class="slider-value" id="charZoomValue">150px</span>
                             </div>
                         </div>
+                        <div class="control-group">
+                            <label class="control-label">Rotation</label>
+                            <div class="slider-group">
+                                <span class="slider-label">-180</span>
+                                <input type="range" class="slider" id="charRotation" min="-180" max="180" value="0">
+                                <span class="slider-label">180</span>
+                                <span class="slider-value" id="charRotationValue">0°</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Flip</label>
+                            <div class="flip-buttons">
+                                <button class="flip-btn" id="charFlipH" title="Flip Horizontal">↔ Horizontal</button>
+                                <button class="flip-btn" id="charFlipV" title="Flip Vertical">↕ Vertical</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -1011,6 +1120,15 @@
                                 <span id="bgUploadText">+ Upload</span>
                             </button>
                             <button class="btn btn-secondary" style="flex: 1; padding: 6px 12px; font-size: 11px;" onclick="clearBackgroundImage()">Clear</button>
+                        </div>
+                    </div>
+                    <div id="bgImageControls" style="display: none;">
+                        <div class="control-group">
+                            <label class="control-label">Flip Background</label>
+                            <div class="flip-buttons">
+                                <button class="flip-btn" id="bgFlipH" title="Flip Horizontal">↔ Horizontal</button>
+                                <button class="flip-btn" id="bgFlipV" title="Flip Vertical">↕ Vertical</button>
+                            </div>
                         </div>
                     </div>
                     <div class="control-group" id="gradientOpacityGroup" style="display: none;">
@@ -1073,7 +1191,38 @@
             { file: 'Pirate/ChatGPT Image Jan 5, 2026, 01_15_50 AM.png', name: 'Pirate 1', category: 'Pirate' },
             { file: 'Pirate/ChatGPT Image Jan 5, 2026, 01_17_32 AM.png', name: 'Pirate 2', category: 'Pirate' },
             { file: 'Pirate/Generated Image January 05, 2026 - 1_40AM.jpeg', name: 'Pirate 3', category: 'Pirate' },
-            { file: 'Pirate/Generated Image January 05, 2026 - 1_44AM.jpeg', name: 'Pirate 4', category: 'Pirate' }
+            { file: 'Pirate/Generated Image January 05, 2026 - 1_44AM.jpeg', name: 'Pirate 4', category: 'Pirate' },
+            { file: 'Delphi/Delphi Approved.svg', name: 'Delphi Approved', category: 'Delphi' },
+            { file: 'Delphi/Delphi Climbing Ladder.svg', name: 'Delphi Climbing', category: 'Delphi' },
+            { file: 'Delphi/Delphi Flashlight.svg', name: 'Delphi Flashlight', category: 'Delphi' },
+            { file: 'Delphi/Delphi Mission Control Room.svg', name: 'Delphi Mission Control', category: 'Delphi' },
+            { file: 'Delphi/Delphi Sword Looking Sideways.svg', name: 'Delphi Sword', category: 'Delphi' },
+            { file: 'Delphi/Delphi and closed treasure chest.svg', name: 'Delphi Treasure', category: 'Delphi' },
+            { file: 'Delphi/Delphi 12 Poses-12.svg', name: 'Delphi Poses', category: 'Delphi' },
+            { file: 'Delphi/Catching ButterEmails.svg', name: 'Catching Emails', category: 'Delphi' },
+            { file: 'Delphi/Sorting Emails.svg', name: 'Sorting Emails', category: 'Delphi' },
+            { file: 'Delphi/Analyzing Risky Emails.svg', name: 'Analyzing Emails', category: 'Delphi' },
+            { file: 'Delphi/List Cleaning.svg', name: 'List Cleaning', category: 'Delphi' },
+            { file: 'Delphi/Identifying Spam Traps.svg', name: 'Spam Traps', category: 'Delphi' },
+            { file: 'Delphi/Inbox Placement Testing.svg', name: 'Inbox Testing', category: 'Delphi' },
+            { file: 'Delphi/Protecting Sender Reputation.svg', name: 'Sender Reputation', category: 'Delphi' },
+            { file: 'Delphi/Custom Warmup Scheduling.svg', name: 'Warmup Scheduling', category: 'Delphi' },
+            { file: 'Delphi/Customer Support.svg', name: 'Customer Support', category: 'Delphi' },
+            { file: 'Delphi/SPF DKIM DMARC Checklist.svg', name: 'SPF DKIM DMARC', category: 'Delphi' },
+            { file: 'Delphi/PLPO Scanner.svg', name: 'PLPO Scanner', category: 'Delphi' },
+            { file: 'Delphi/Emaill Trapped In Seaweed.svg', name: 'Email Seaweed', category: 'Delphi' },
+            { file: 'Delphi/Lock Suppressed Contacts.svg', name: 'Lock Suppressed', category: 'Delphi' },
+            { file: 'Delphi/Unlocking Blocklist.svg', name: 'Unlocking Blocklist', category: 'Delphi' },
+            { file: 'Delphi/Gems Open Treasure Chest.svg', name: 'Gems Treasure', category: 'Delphi' }
+        ];
+
+        // Text colors for rich text syntax [color:text]
+        const TEXT_COLORS = [
+            { id: 'teal', color: '#0d9488', usage: 'Emphasis, key terms, positive highlights' },
+            { id: 'red', color: '#f33144', usage: 'Warnings, errors, critical points' },
+            { id: 'green', color: '#1fa95c', usage: 'Success, verified, safe actions' },
+            { id: 'yellow', color: '#fbbf24', usage: 'Caution, highlights, premium' },
+            { id: 'orange', color: '#f9943b', usage: 'Warnings, attention, monitoring' }
         ];
 
         const BACKGROUNDS = [
@@ -1751,12 +1900,17 @@
                 isBlob: false,
                 x: 70,
                 y: 50,
-                zoom: 150
+                zoom: 150,
+                rotation: 0,
+                flipH: false,
+                flipV: false
             },
             background: {
                 image: null,
                 isBlob: false,
-                gradientOpacity: 80
+                gradientOpacity: 80,
+                flipH: false,
+                flipV: false
             },
             gradient: null,
             data: {}
@@ -1772,8 +1926,12 @@
         // INITIALIZATION
         // ========================================
         document.addEventListener('DOMContentLoaded', async () => {
-            // Load uploaded images from Vercel Blob first
-            await loadUploadedImages();
+            try {
+                // Load uploaded images from Vercel Blob first (non-blocking)
+                await loadUploadedImages();
+            } catch (e) {
+                console.log('Could not load uploaded images:', e);
+            }
 
             initLogoGrid();
             initLogoToggle();
@@ -1783,6 +1941,7 @@
             initCharacterUpload();
             initBackgroundGrid();
             initBackgroundUpload();
+            initBackgroundFlip();
             initGradientOpacitySlider();
             initGradientPresets();
             initFormatListeners();
@@ -1927,15 +2086,33 @@
         }
 
         function initCharacterSliders() {
-            ['charX', 'charY', 'charZoom'].forEach(id => {
+            ['charX', 'charY', 'charZoom', 'charRotation'].forEach(id => {
                 const slider = document.getElementById(id);
                 slider.addEventListener('input', (e) => {
                     const key = id.replace('char', '').toLowerCase();
-                    state.character[key === 'zoom' ? 'zoom' : key] = parseInt(e.target.value);
-                    document.getElementById(id + 'Value').textContent =
-                        key === 'zoom' ? e.target.value + 'px' : e.target.value + '%';
+                    state.character[key] = parseInt(e.target.value);
+                    if (key === 'rotation') {
+                        document.getElementById(id + 'Value').textContent = e.target.value + '°';
+                    } else if (key === 'zoom') {
+                        document.getElementById(id + 'Value').textContent = e.target.value + 'px';
+                    } else {
+                        document.getElementById(id + 'Value').textContent = e.target.value + '%';
+                    }
                     renderPreview();
                 });
+            });
+
+            // Flip buttons
+            document.getElementById('charFlipH').addEventListener('click', () => {
+                state.character.flipH = !state.character.flipH;
+                document.getElementById('charFlipH').classList.toggle('active', state.character.flipH);
+                renderPreview();
+            });
+
+            document.getElementById('charFlipV').addEventListener('click', () => {
+                state.character.flipV = !state.character.flipV;
+                document.getElementById('charFlipV').classList.toggle('active', state.character.flipV);
+                renderPreview();
             });
         }
 
@@ -1958,15 +2135,35 @@
                     state.background.image = item.dataset.background;
                     state.background.isBlob = item.dataset.isBlob === 'true';
                     document.getElementById('gradientOpacityGroup').style.display = 'block';
+                    document.getElementById('bgImageControls').style.display = 'block';
                     renderPreview();
                 });
             });
         }
 
+        function initBackgroundFlip() {
+            document.getElementById('bgFlipH').addEventListener('click', () => {
+                state.background.flipH = !state.background.flipH;
+                document.getElementById('bgFlipH').classList.toggle('active', state.background.flipH);
+                renderPreview();
+            });
+
+            document.getElementById('bgFlipV').addEventListener('click', () => {
+                state.background.flipV = !state.background.flipV;
+                document.getElementById('bgFlipV').classList.toggle('active', state.background.flipV);
+                renderPreview();
+            });
+        }
+
         function clearBackgroundImage() {
             state.background.image = null;
+            state.background.flipH = false;
+            state.background.flipV = false;
             document.getElementById('backgroundGrid').querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
             document.getElementById('gradientOpacityGroup').style.display = 'none';
+            document.getElementById('bgImageControls').style.display = 'none';
+            document.getElementById('bgFlipH').classList.remove('active');
+            document.getElementById('bgFlipV').classList.remove('active');
             renderPreview();
         }
 
@@ -2287,24 +2484,32 @@
             // Update classes
             preview.className = `slide-preview size-${state.format} theme-${state.theme}`;
 
-            // Build background style
+            // Build background style (gradient only, bg image handled separately for flip support)
             let bgStyle = '';
-            const bgImageUrl = state.background.isBlob ? state.background.image : `../${state.background.image}`;
-            if (state.background.image && state.gradient) {
-                // Background image with gradient overlay
-                const opacity = state.background.gradientOpacity / 100;
-                bgStyle = `background: linear-gradient(135deg, rgba(${hexToRgb(state.gradient.start)}, ${opacity}), rgba(${hexToRgb(state.gradient.end)}, ${opacity})), url('${bgImageUrl}') center/cover no-repeat;`;
-            } else if (state.background.image) {
-                // Just background image
-                bgStyle = `background: url('${bgImageUrl}') center/cover no-repeat;`;
-            } else if (state.gradient) {
-                // Just gradient
+            if (state.gradient && !state.background.image) {
+                // Just gradient (no background image)
                 bgStyle = `background: linear-gradient(135deg, ${state.gradient.start}, ${state.gradient.end});`;
             }
             preview.style.cssText = bgStyle;
 
             // Render template based on type
             let html = '';
+
+            // Background image (as element for flip support)
+            if (state.background.image) {
+                const bgImageUrl = state.background.isBlob ? state.background.image : `../${state.background.image}`;
+                const bgScaleX = state.background.flipH ? -1 : 1;
+                const bgScaleY = state.background.flipV ? -1 : 1;
+                const gradientOverlay = state.gradient
+                    ? `linear-gradient(135deg, rgba(${hexToRgb(state.gradient.start)}, ${state.background.gradientOpacity / 100}), rgba(${hexToRgb(state.gradient.end)}, ${state.background.gradientOpacity / 100}))`
+                    : 'none';
+                html += `
+                    <div class="background-image-wrapper">
+                        <img src="${bgImageUrl}" alt="" style="transform: scaleX(${bgScaleX}) scaleY(${bgScaleY});">
+                        ${state.gradient ? `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: ${gradientOverlay};"></div>` : ''}
+                    </div>
+                `;
+            }
 
             // Logo (only if visible) - smart positioning
             if (state.logo.visible) {
@@ -2318,8 +2523,11 @@
             // Character (only if visible and file selected)
             if (state.character.visible && state.character.file) {
                 const charImageUrl = state.character.isBlob ? state.character.file : `../${state.character.file}`;
+                const charScaleX = state.character.flipH ? -1 : 1;
+                const charScaleY = state.character.flipV ? -1 : 1;
+                const charRotation = state.character.rotation || 0;
                 html += `
-                    <div class="character-wrapper" style="left: ${state.character.x}%; top: ${state.character.y}%; transform: translate(-50%, -50%); height: ${state.character.zoom}px;">
+                    <div class="character-wrapper" style="left: ${state.character.x}%; top: ${state.character.y}%; transform: translate(-50%, -50%) rotate(${charRotation}deg) scaleX(${charScaleX}) scaleY(${charScaleY}); height: ${state.character.zoom}px;">
                         <img src="${charImageUrl}" alt="Character">
                     </div>
                 `;
@@ -2421,6 +2629,58 @@
         function getBadgeStyle(colorId) {
             const bc = BADGE_COLORS.find(b => b.id === colorId) || BADGE_COLORS[0];
             return `display:inline-block;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;background:${bc.bg};color:${bc.color};`;
+        }
+
+        function getTextColorPickerHTML(targetInputId) {
+            return `
+                <div class="text-color-picker" data-target="${targetInputId}">
+                    <span class="text-color-picker-label">Colors:</span>
+                    ${TEXT_COLORS.map(tc => `
+                        <button type="button" class="text-color-btn"
+                                style="background: ${tc.color};"
+                                data-color="${tc.id}"
+                                data-tooltip="[${tc.id}:] ${tc.usage}">
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function initTextColorPickers() {
+            document.querySelectorAll('.text-color-picker').forEach(picker => {
+                const targetId = picker.dataset.target;
+                const targetInput = document.getElementById(targetId);
+                if (!targetInput) return;
+
+                picker.querySelectorAll('.text-color-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const colorId = btn.dataset.color;
+                        const selStart = targetInput.selectionStart;
+                        const selEnd = targetInput.selectionEnd;
+                        const text = targetInput.value;
+                        const selectedText = text.substring(selStart, selEnd);
+
+                        let newText;
+                        if (selectedText) {
+                            // Wrap selected text with color syntax
+                            newText = text.substring(0, selStart) + `[${colorId}:${selectedText}]` + text.substring(selEnd);
+                        } else {
+                            // Insert color syntax at cursor
+                            newText = text.substring(0, selStart) + `[${colorId}:]` + text.substring(selEnd);
+                        }
+
+                        targetInput.value = newText;
+                        targetInput.focus();
+
+                        // Position cursor inside the brackets
+                        const newPos = selectedText ? selStart + colorId.length + 2 + selectedText.length + 1 : selStart + colorId.length + 2;
+                        targetInput.setSelectionRange(newPos, newPos);
+
+                        // Trigger input event to update preview
+                        targetInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    });
+                });
+            });
         }
 
         function hexToRgb(hex) {
