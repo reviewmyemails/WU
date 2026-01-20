@@ -1,2 +1,11 @@
 .vercel
 .env*.local
+
+# Local reference folders
+archive/
+site current/
+site concepts/
+must read/
+
+# OS files
+.DS_Store

@@ -468,6 +468,43 @@
             text-align: center;
         }
 
+        /* Download Button */
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: var(--space-sm);
+            padding: 6px 12px;
+            background: var(--color-accent);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+            font-family: var(--font-family);
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 180ms ease;
+        }
+
+        .download-btn:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .download-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .logo-card--dark .download-btn {
+            background: var(--color-white);
+            color: var(--color-dark);
+        }
+
+        .logo-card--dark .download-btn:hover {
+            background: var(--color-light);
+        }
+
         /* ========================================
            STATUS INDICATORS
            ======================================== */
@@ -705,6 +742,7 @@
         <div class="container">
             <h1>Review My Emails <span class="badge-confirmed">Confirmed</span></h1>
             <p>Brand Style Guide | Bold Teal Palette</p>
+            <a href="linkedin-generator/" style="display: inline-block; margin-top: 16px; padding: 10px 20px; background: var(--color-accent); color: white; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 500;">Open LinkedIn Generator →</a>
         </div>
     </div>
 
@@ -1042,13 +1080,19 @@
                 <div class="logo-card logo-card--white">
                     <img src="svg/Horizontal-Logo.svg" alt="RME Horizontal Logo" style="max-width: 280px; height: auto;">
                     <div class="logo-usage" style="color: var(--color-muted);">On white / light backgrounds</div>
-                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Horizontal-Logo.svg</code>
+                    <a href="svg/Horizontal-Logo.svg" download="Horizontal-Logo.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
 
                 <div class="logo-card logo-card--dark">
                     <img src="svg/Dark-Horizontal-Logo.svg" alt="RME Dark Horizontal Logo" style="max-width: 280px; height: auto;">
                     <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
-                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Horizontal-Logo.svg</code>
+                    <a href="svg/Dark-Horizontal-Logo.svg" download="Dark-Horizontal-Logo.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
             </div>
 
@@ -1057,13 +1101,19 @@
                 <div class="logo-card logo-card--white">
                     <img src="svg/Square-Logo.svg" alt="RME Square Logo" style="max-width: 200px; height: auto;">
                     <div class="logo-usage" style="color: var(--color-muted);">On white / light backgrounds</div>
-                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Square-Logo.svg</code>
+                    <a href="svg/Square-Logo.svg" download="Square-Logo.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
 
                 <div class="logo-card logo-card--dark">
                     <img src="svg/Dark-Square-Logo.svg" alt="RME Dark Square Logo" style="max-width: 200px; height: auto;">
                     <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
-                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Square-Logo.svg</code>
+                    <a href="svg/Dark-Square-Logo.svg" download="Dark-Square-Logo.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
             </div>
 
@@ -1072,13 +1122,19 @@
                 <div class="logo-card logo-card--white" style="min-height: 160px;">
                     <img src="svg/Social-Media-Icon.svg" alt="RME Social Media Icon" style="max-width: 100px; height: auto;">
                     <div class="logo-usage" style="color: var(--color-muted);">Profile pictures, favicons</div>
-                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Social-Media-Icon.svg</code>
+                    <a href="svg/Social-Media-Icon.svg" download="Social-Media-Icon.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
 
                 <div class="logo-card logo-card--dark" style="min-height: 160px;">
                     <img src="svg/Dark-Social-Media-Icon.svg" alt="RME Dark Social Media Icon" style="max-width: 100px; height: auto;">
                     <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
-                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Social-Media-Icon.svg</code>
+                    <a href="svg/Dark-Social-Media-Icon.svg" download="Dark-Social-Media-Icon.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
             </div>
 
@@ -1087,13 +1143,19 @@
                 <div class="logo-card logo-card--light" style="min-height: 160px;">
                     <img src="svg/Icon.svg" alt="RME Icon" style="max-width: 100px; height: auto;">
                     <div class="logo-usage" style="color: var(--color-muted);">Standalone mark</div>
-                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Icon.svg</code>
+                    <a href="svg/Icon.svg" download="Icon.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
 
                 <div class="logo-card logo-card--dark" style="min-height: 160px;">
                     <img src="svg/Dark-Icon.svg" alt="RME Dark Icon" style="max-width: 100px; height: auto;">
                     <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
-                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Icon.svg</code>
+                    <a href="svg/Dark-Icon.svg" download="Dark-Icon.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
             </div>
 
@@ -1102,13 +1164,19 @@
                 <div class="logo-card logo-card--white" style="min-height: 220px;">
                     <img src="svg/Vertical-Logo.svg" alt="RME Vertical Logo" style="max-width: 160px; height: auto;">
                     <div class="logo-usage" style="color: var(--color-muted);">When horizontal space is limited</div>
-                    <code style="font-size: 11px; color: var(--color-muted); margin-top: 8px;">svg/Vertical-Logo.svg</code>
+                    <a href="svg/Vertical-Logo.svg" download="Vertical-Logo.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
 
                 <div class="logo-card logo-card--dark" style="min-height: 220px;">
                     <img src="svg/Dark-Vertical-Logo.svg" alt="RME Dark Vertical Logo" style="max-width: 160px; height: auto;">
                     <div class="logo-usage" style="color: rgba(255,255,255,0.6);">On dark backgrounds</div>
-                    <code style="font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 8px;">svg/Dark-Vertical-Logo.svg</code>
+                    <a href="svg/Dark-Vertical-Logo.svg" download="Dark-Vertical-Logo.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
                 </div>
             </div>
 
@@ -1131,6 +1199,268 @@
                         svg/Dark-Square-Logo.svg<br>
                         svg/Dark-Social-Media-Icon.svg<br>
                         svg/Dark-Icon.svg
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Delphi Illustrations Section -->
+    <section>
+        <div class="container">
+            <h2 class="section-title">Delphi Illustrations</h2>
+            <p class="section-subtitle">Our octopus mascot in various poses for different contexts. Use to add personality to pages, emails, and marketing.</p>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); color: var(--color-dark);">Action & Task Illustrations</h3>
+            <div class="logo-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: var(--space-lg);">
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/List Cleaning.svg" alt="Delphi List Cleaning" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">List Cleaning</div>
+                    <a href="../Delphi/List Cleaning.svg" download="List-Cleaning.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Sorting Emails.svg" alt="Delphi Sorting Emails" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Sorting Emails</div>
+                    <a href="../Delphi/Sorting Emails.svg" download="Sorting-Emails.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Analyzing Risky Emails.svg" alt="Delphi Analyzing Risky Emails" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Analyzing Risky Emails</div>
+                    <a href="../Delphi/Analyzing Risky Emails.svg" download="Analyzing-Risky-Emails.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Identifying Spam Traps.svg" alt="Delphi Identifying Spam Traps" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Identifying Spam Traps</div>
+                    <a href="../Delphi/Identifying Spam Traps.svg" download="Identifying-Spam-Traps.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Catching ButterEmails.svg" alt="Delphi Catching ButterEmails" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Catching ButterEmails</div>
+                    <a href="../Delphi/Catching ButterEmails.svg" download="Catching-ButterEmails.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Emaill Trapped In Seaweed.svg" alt="Delphi Email Trapped In Seaweed" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Email Trapped In Seaweed</div>
+                    <a href="../Delphi/Emaill Trapped In Seaweed.svg" download="Email-Trapped-In-Seaweed.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Security & Protection</h3>
+            <div class="logo-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: var(--space-lg);">
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Protecting Sender Reputation.svg" alt="Delphi Protecting Sender Reputation" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Protecting Sender Reputation</div>
+                    <a href="../Delphi/Protecting Sender Reputation.svg" download="Protecting-Sender-Reputation.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Lock Suppressed Contacts.svg" alt="Delphi Lock Suppressed Contacts" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Lock Suppressed Contacts</div>
+                    <a href="../Delphi/Lock Suppressed Contacts.svg" download="Lock-Suppressed-Contacts.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Unlocking Blocklist.svg" alt="Delphi Unlocking Blocklist" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Unlocking Blocklist</div>
+                    <a href="../Delphi/Unlocking Blocklist.svg" download="Unlocking-Blocklist.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/SPF DKIM DMARC Checklist.svg" alt="Delphi SPF DKIM DMARC Checklist" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">SPF DKIM DMARC Checklist</div>
+                    <a href="../Delphi/SPF DKIM DMARC Checklist.svg" download="SPF-DKIM-DMARC-Checklist.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Tools & Testing</h3>
+            <div class="logo-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: var(--space-lg);">
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Delphi Flashlight.svg" alt="Delphi Flashlight" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Delphi Flashlight</div>
+                    <a href="../Delphi/Delphi Flashlight.svg" download="Delphi-Flashlight.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/PLPO Scanner.svg" alt="Delphi PLPO Scanner" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">PLPO Scanner</div>
+                    <a href="../Delphi/PLPO Scanner.svg" download="PLPO-Scanner.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Inbox Placement Testing.svg" alt="Delphi Inbox Placement Testing" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Inbox Placement Testing</div>
+                    <a href="../Delphi/Inbox Placement Testing.svg" download="Inbox-Placement-Testing.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Custom Warmup Scheduling.svg" alt="Delphi Custom Warmup Scheduling" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Custom Warmup Scheduling</div>
+                    <a href="../Delphi/Custom Warmup Scheduling.svg" download="Custom-Warmup-Scheduling.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Character Poses & Expressions</h3>
+            <div class="logo-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: var(--space-lg);">
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Delphi Approved.svg" alt="Delphi Approved" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Delphi Approved</div>
+                    <a href="../Delphi/Delphi Approved.svg" download="Delphi-Approved.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Delphi Climbing Ladder.svg" alt="Delphi Climbing Ladder" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Delphi Climbing Ladder</div>
+                    <a href="../Delphi/Delphi Climbing Ladder.svg" download="Delphi-Climbing-Ladder.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Delphi Sword Looking Sideways.svg" alt="Delphi Sword Looking Sideways" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Delphi Sword Looking Sideways</div>
+                    <a href="../Delphi/Delphi Sword Looking Sideways.svg" download="Delphi-Sword-Looking-Sideways.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Customer Support.svg" alt="Delphi Customer Support" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Customer Support</div>
+                    <a href="../Delphi/Customer Support.svg" download="Customer-Support.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 180px;">
+                    <img src="../Delphi/Delphi 12 Poses-12.svg" alt="Delphi 12 Poses" style="max-width: 140px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Delphi 12 Poses</div>
+                    <a href="../Delphi/Delphi 12 Poses-12.svg" download="Delphi-12-Poses.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">Scenes & Special</h3>
+            <div class="logo-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: var(--space-lg);">
+                <div class="logo-card logo-card--light" style="min-height: 200px;">
+                    <img src="../Delphi/Delphi Mission Control Room.svg" alt="Delphi Mission Control Room" style="max-width: 220px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Delphi Mission Control Room</div>
+                    <a href="../Delphi/Delphi Mission Control Room.svg" download="Delphi-Mission-Control-Room.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 200px;">
+                    <img src="../Delphi/Delphi and closed treasure chest.svg" alt="Delphi and Closed Treasure Chest" style="max-width: 180px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Delphi and Closed Treasure Chest</div>
+                    <a href="../Delphi/Delphi and closed treasure chest.svg" download="Delphi-Closed-Treasure-Chest.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+
+                <div class="logo-card logo-card--light" style="min-height: 200px;">
+                    <img src="../Delphi/Gems Open Treasure Chest.svg" alt="Gems Open Treasure Chest" style="max-width: 180px; height: auto;">
+                    <div class="logo-usage" style="color: var(--color-muted);">Gems Open Treasure Chest</div>
+                    <a href="../Delphi/Gems Open Treasure Chest.svg" download="Gems-Open-Treasure-Chest.svg" class="download-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download
+                    </a>
+                </div>
+            </div>
+
+            <!-- Delphi File Reference -->
+            <div style="background: var(--color-light); border-radius: var(--radius-lg); padding: var(--space-lg); margin-top: var(--space-lg);">
+                <h4 style="font-size: 14px; font-weight: 600; margin-bottom: var(--space-sm); color: var(--color-dark);">All Delphi Illustration Files</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); font-size: 12px; font-family: 'SF Mono', Monaco, monospace; color: var(--color-muted);">
+                    <div>
+                        <strong style="color: var(--color-dark);">Action & Tasks:</strong><br>
+                        Delphi/List Cleaning.svg<br>
+                        Delphi/Sorting Emails.svg<br>
+                        Delphi/Analyzing Risky Emails.svg<br>
+                        Delphi/Identifying Spam Traps.svg<br>
+                        Delphi/Catching ButterEmails.svg<br>
+                        Delphi/Emaill Trapped In Seaweed.svg
+                    </div>
+                    <div>
+                        <strong style="color: var(--color-dark);">Security & Protection:</strong><br>
+                        Delphi/Protecting Sender Reputation.svg<br>
+                        Delphi/Lock Suppressed Contacts.svg<br>
+                        Delphi/Unlocking Blocklist.svg<br>
+                        Delphi/SPF DKIM DMARC Checklist.svg
+                    </div>
+                    <div>
+                        <strong style="color: var(--color-dark);">Tools & Testing:</strong><br>
+                        Delphi/Delphi Flashlight.svg<br>
+                        Delphi/PLPO Scanner.svg<br>
+                        Delphi/Inbox Placement Testing.svg<br>
+                        Delphi/Custom Warmup Scheduling.svg
+                    </div>
+                    <div>
+                        <strong style="color: var(--color-dark);">Character & Scenes:</strong><br>
+                        Delphi/Delphi Approved.svg<br>
+                        Delphi/Delphi Climbing Ladder.svg<br>
+                        Delphi/Customer Support.svg<br>
+                        Delphi/Delphi Sword Looking Sideways.svg<br>
+                        Delphi/Delphi 12 Poses-12.svg<br>
+                        Delphi/Delphi Mission Control Room.svg<br>
+                        Delphi/Delphi and closed treasure chest.svg<br>
+                        Delphi/Gems Open Treasure Chest.svg
                     </div>
                 </div>
             </div>

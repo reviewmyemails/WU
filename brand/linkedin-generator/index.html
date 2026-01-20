@@ -1,0 +1,2447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Content Generator | Review My Emails</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* ========================================
+           RME BRAND VARIABLES
+           ======================================== */
+        :root {
+            /* Primary Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #ffffff;
+            --color-off-white: #fafcfc;
+            --color-light: #f0fdfa;
+            --color-light-alt: #ccfbf1;
+            --color-muted: #6b7280;
+            --color-border: #e5e7eb;
+
+            /* Status Colors */
+            --color-success: #1fa95c;
+            --color-warning: #f9943b;
+            --color-danger: #f33144;
+            --color-secondary: #fbbf24;
+
+            /* Typography */
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+
+            /* Radius */
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        /* ========================================
+           BASE STYLES
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: #1a1a2e;
+            color: var(--color-white);
+            min-height: 100vh;
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+        .app {
+            display: grid;
+            grid-template-columns: 320px 1fr 320px;
+            min-height: 100vh;
+        }
+
+        /* Left Sidebar - Controls */
+        .sidebar-left {
+            background: #16162a;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            padding: var(--space-md);
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        /* Center - Preview */
+        .preview-area {
+            background: #1a1a2e;
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        /* Right Sidebar - Slide List */
+        .sidebar-right {
+            background: #16162a;
+            border-left: 1px solid rgba(255,255,255,0.1);
+            padding: var(--space-md);
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        /* ========================================
+           SIDEBAR COMPONENTS
+           ======================================== */
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-header img {
+            height: 32px;
+        }
+
+        .sidebar-header h1 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-white);
+        }
+
+        .control-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .control-section h3 {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .control-group {
+            margin-bottom: var(--space-md);
+        }
+
+        .control-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 6px;
+        }
+
+        /* Form Controls */
+        .input-text,
+        .input-textarea,
+        .input-select {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            font-size: 13px;
+            font-family: var(--font-family);
+            color: var(--color-white);
+            transition: border-color 0.2s;
+        }
+
+        .input-text:focus,
+        .input-textarea:focus,
+        .input-select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .input-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .input-select {
+            cursor: pointer;
+        }
+
+        .char-count {
+            font-size: 10px;
+            color: var(--color-muted);
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        .char-count.warning {
+            color: var(--color-warning);
+        }
+
+        .char-count.danger {
+            color: var(--color-danger);
+        }
+
+        /* Color Picker Grid */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 6px;
+        }
+
+        .color-swatch {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+        }
+
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+
+        .color-swatch.selected {
+            border-color: var(--color-white);
+            box-shadow: 0 0 0 2px var(--color-accent);
+        }
+
+        /* Toggle */
+        .toggle-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .toggle-row:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .toggle {
+            width: 40px;
+            height: 22px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 11px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.2s;
+        }
+
+        .toggle.active {
+            background: var(--color-accent);
+        }
+
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.2s;
+        }
+
+        .toggle.active::after {
+            transform: translateX(18px);
+        }
+
+        /* Delphi Picker */
+        .delphi-grid,
+        .background-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .delphi-item,
+        .background-item {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            padding: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+        }
+
+        .delphi-item:hover,
+        .background-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .delphi-item.selected,
+        .background-item.selected {
+            border-color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.2);
+        }
+
+        .delphi-item img,
+        .background-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .background-item img {
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .background-item.none {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Upload Section */
+        .upload-section {
+            margin-top: var(--space-sm);
+            padding-top: var(--space-sm);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .upload-btn {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px dashed rgba(255,255,255,0.2);
+            border-radius: var(--radius-sm);
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .upload-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .upload-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Upload Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: #1e1e3a;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .modal-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-white);
+        }
+
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            border-radius: 6px;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .modal-body {
+            margin-bottom: var(--space-md);
+        }
+
+        .upload-dropzone {
+            border: 2px dashed rgba(255,255,255,0.2);
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: var(--space-md);
+        }
+
+        .upload-dropzone:hover,
+        .upload-dropzone.dragover {
+            border-color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.1);
+        }
+
+        .upload-dropzone-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-sm);
+            opacity: 0.5;
+        }
+
+        .upload-dropzone-text {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 4px;
+        }
+
+        .upload-dropzone-hint {
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        .upload-preview {
+            display: none;
+            margin-bottom: var(--space-md);
+        }
+
+        .upload-preview.active {
+            display: block;
+        }
+
+        .upload-preview-img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+            border-radius: var(--radius-sm);
+            background: rgba(0,0,0,0.3);
+            margin-bottom: var(--space-sm);
+        }
+
+        .upload-rename {
+            margin-bottom: var(--space-md);
+        }
+
+        .upload-rename label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 6px;
+        }
+
+        .upload-rename-hint {
+            font-size: 11px;
+            color: var(--color-warning);
+            margin-top: 6px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: var(--space-sm);
+            justify-content: flex-end;
+        }
+
+        .modal-actions .btn {
+            min-width: 100px;
+        }
+
+        /* Position Sliders */
+        .position-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .position-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .position-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .position-slider::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* ========================================
+           PREVIEW AREA
+           ======================================== */
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: var(--space-md);
+        }
+
+        .preview-title {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            font-family: var(--font-family);
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* The Slide Preview */
+        .slide-preview-container {
+            background: #0d0d1a;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .slide-preview-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .slide-preview {
+            width: 400px;
+            height: 500px; /* 4:5 aspect ratio - default portrait */
+            position: relative;
+            overflow: hidden;
+            font-family: var(--font-family);
+            transition: width 0.3s, height 0.3s;
+        }
+
+        /* Output Size Variants */
+        .slide-preview.size-portrait {
+            width: 400px;
+            height: 500px; /* 4:5 ratio */
+        }
+
+        .slide-preview.size-square {
+            width: 400px;
+            height: 400px; /* 1:1 ratio */
+        }
+
+        .slide-preview.size-landscape {
+            width: 480px;
+            height: 252px; /* ~1.91:1 ratio */
+        }
+
+        /* Safe Zone Overlay */
+        .safe-zone-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .safe-zone-overlay.active {
+            opacity: 1;
+        }
+
+        .safe-zone-80 {
+            position: absolute;
+            border: 2px dashed rgba(255, 193, 7, 0.8);
+            background: transparent;
+        }
+
+        .safe-zone-70 {
+            position: absolute;
+            border: 2px dashed rgba(76, 175, 80, 0.8);
+            background: transparent;
+        }
+
+        .safe-zone-label {
+            position: absolute;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 3px;
+            white-space: nowrap;
+        }
+
+        .safe-zone-80 .safe-zone-label {
+            background: rgba(255, 193, 7, 0.9);
+            color: #000;
+            top: -18px;
+            left: 0;
+        }
+
+        .safe-zone-70 .safe-zone-label {
+            background: rgba(76, 175, 80, 0.9);
+            color: #fff;
+            bottom: -18px;
+            right: 0;
+        }
+
+        /* Safe zone toggle in preview header */
+        .safe-zone-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+        }
+
+        .safe-zone-toggle input {
+            cursor: pointer;
+        }
+
+        /* Slide Themes */
+        .slide-preview.theme-dark {
+            background: var(--color-dark);
+            color: var(--color-white);
+        }
+
+        .slide-preview.theme-light {
+            background: var(--color-light);
+            color: var(--color-dark);
+        }
+
+        .slide-preview.theme-accent {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .slide-preview.theme-white {
+            background: var(--color-white);
+            color: var(--color-dark);
+        }
+
+        /* Background Image Support */
+        .slide-preview.has-bg {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide-preview.has-bg .slide-content {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .slide-preview.has-bg.theme-light .slide-content {
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        /* Slide Content Layout */
+        .slide-content {
+            height: 100%;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-brand {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            opacity: 0.7;
+            margin-bottom: auto;
+        }
+
+        .slide-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        .slide-preview.theme-dark .slide-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--color-light-alt);
+        }
+
+        .slide-preview.theme-light .slide-tag,
+        .slide-preview.theme-white .slide-tag {
+            background: rgba(13, 148, 136, 0.1);
+            color: var(--color-accent);
+        }
+
+        .slide-preview.theme-accent .slide-tag {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .slide-headline {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .slide-body {
+            font-size: 16px;
+            line-height: 1.5;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        /* Checklist */
+        .slide-checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .slide-preview.theme-dark .checklist-item {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .slide-preview.theme-light .checklist-item,
+        .slide-preview.theme-white .checklist-item {
+            background: white;
+            border: 1px solid var(--color-border);
+        }
+
+        .slide-preview.theme-accent .checklist-item {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .checklist-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .checklist-icon.check { color: var(--color-success); }
+        .checklist-icon.x { color: var(--color-danger); }
+
+        /* Quote */
+        .slide-quote {
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.4;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .slide-quote::before {
+            content: '"';
+            font-size: 48px;
+            line-height: 0;
+            vertical-align: -0.4em;
+            opacity: 0.3;
+        }
+
+        /* Stat */
+        .slide-stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 72px;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            opacity: 0.8;
+        }
+
+        /* Delphi in slide */
+        .slide-delphi {
+            max-width: 160px;
+            max-height: 160px;
+            margin: 16px auto;
+        }
+
+        .slide-delphi img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* CTA Button in slide */
+        .slide-cta {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            width: fit-content;
+        }
+
+        .slide-preview.theme-dark .slide-cta {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .slide-preview.theme-light .slide-cta,
+        .slide-preview.theme-white .slide-cta {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .slide-preview.theme-accent .slide-cta {
+            background: white;
+            color: var(--color-dark);
+        }
+
+        /* Slide Footer */
+        .slide-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+            font-size: 10px;
+            opacity: 0.5;
+        }
+
+        .slide-counter {
+            font-weight: 500;
+        }
+
+        /* Logo in slide */
+        .slide-logo {
+            height: 40px;
+            margin-bottom: 8px;
+        }
+
+        .slide-logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        /* ========================================
+           RIGHT SIDEBAR - SLIDE LIST
+           ======================================== */
+        .slides-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+
+        .slides-header h2 {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .add-slide-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: var(--color-accent);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background 0.15s;
+        }
+
+        .add-slide-btn:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .slides-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .slide-thumb {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-md);
+            padding: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+        }
+
+        .slide-thumb:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        .slide-thumb.active {
+            border-color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.1);
+        }
+
+        .slide-thumb-preview {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 8px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-thumb-preview.theme-dark { background: var(--color-dark); color: white; }
+        .slide-thumb-preview.theme-light { background: var(--color-light); color: var(--color-dark); }
+        .slide-thumb-preview.theme-accent { background: var(--color-accent); color: white; }
+        .slide-thumb-preview.theme-white { background: var(--color-white); color: var(--color-dark); }
+
+        .slide-thumb-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-thumb-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .slide-thumb-purpose {
+            font-size: 10px;
+            color: var(--color-accent);
+            font-weight: 500;
+        }
+
+        .slide-thumb-actions {
+            display: flex;
+            gap: 4px;
+        }
+
+        .slide-thumb-btn {
+            width: 24px;
+            height: 24px;
+            border: none;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            color: rgba(255,255,255,0.6);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.15s;
+        }
+
+        .slide-thumb-btn:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .slide-thumb-btn.delete:hover {
+            background: var(--color-danger);
+        }
+
+        /* Download All Section */
+        .download-section {
+            margin-top: var(--space-lg);
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .download-all-btn {
+            width: 100%;
+            padding: 14px;
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background 0.15s;
+        }
+
+        .download-all-btn:hover {
+            background: var(--color-accent-hover);
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+        @media (max-width: 1200px) {
+            .app {
+                grid-template-columns: 280px 1fr;
+            }
+            .sidebar-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .app {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-left {
+                max-height: none;
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            .slide-preview {
+                width: 100%;
+                max-width: 400px;
+                height: auto;
+                aspect-ratio: 4/5;
+            }
+        }
+
+        /* Hidden elements */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- Left Sidebar - Controls -->
+        <aside class="sidebar-left">
+            <div class="sidebar-header">
+                <img src="../../svg/Dark-Horizontal-Logo.svg" alt="RME">
+                <h1>LinkedIn Generator</h1>
+            </div>
+
+            <!-- Format Selection -->
+            <div class="control-section">
+                <h3>Format</h3>
+                <div class="control-group">
+                    <label class="control-label">Post Type</label>
+                    <select class="input-select" id="postType">
+                        <option value="single">Single Image</option>
+                        <option value="carousel">Carousel (Multiple Slides)</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Output Size</label>
+                    <select class="input-select" id="outputSize">
+                        <option value="portrait" selected>1080 × 1350 Portrait (4:5)</option>
+                        <option value="square">1080 × 1080 Square (1:1)</option>
+                        <option value="landscape">1200 × 627 Landscape (~1.9:1)</option>
+                    </select>
+                </div>
+                <div class="control-group" id="slideCountGroup" style="display: none;">
+                    <label class="control-label">Number of Slides</label>
+                    <select class="input-select" id="slideCount">
+                        <option value="3">3 Slides</option>
+                        <option value="4">4 Slides</option>
+                        <option value="5">5 Slides</option>
+                        <option value="6">6 Slides</option>
+                        <option value="7">7 Slides</option>
+                        <option value="8" selected>8 Slides</option>
+                        <option value="9">9 Slides</option>
+                        <option value="10">10 Slides</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Layout Preset</label>
+                    <select class="input-select" id="layoutPreset">
+                        <option value="custom">Custom (Manual)</option>
+                        <option value="hook">Hook - Bold Statement</option>
+                        <option value="checklist">Checklist - Do/Don't</option>
+                        <option value="stat">Stat - Big Number</option>
+                        <option value="quote">Quote - Testimonial</option>
+                        <option value="cta">CTA - Call to Action</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Background -->
+            <div class="control-section">
+                <h3>Background</h3>
+                <div class="control-group">
+                    <label class="control-label">Theme Color</label>
+                    <div class="color-grid">
+                        <div class="color-swatch selected" style="background: #134e4a;" data-theme="dark" title="Dark"></div>
+                        <div class="color-swatch" style="background: #f0fdfa;" data-theme="light" title="Light"></div>
+                        <div class="color-swatch" style="background: #0d9488;" data-theme="accent" title="Accent"></div>
+                        <div class="color-swatch" style="background: #ffffff; border: 1px solid #e5e7eb;" data-theme="white" title="White"></div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Background Image (optional)</label>
+                    <div class="background-grid" id="backgroundGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div class="upload-section">
+                        <button class="upload-btn" onclick="openUploadModal('background')">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                            Upload New Background
+                        </button>
+                    </div>
+                </div>
+                <div class="control-group hidden" id="bgPositionGroup">
+                    <label class="control-label">Background Position</label>
+                    <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 8px;">
+                        <span style="font-size: 11px; color: rgba(255,255,255,0.5); width: 20px;">X</span>
+                        <input type="range" class="position-slider" id="bgPositionX" min="0" max="100" value="50" style="flex: 1;">
+                        <span style="font-size: 11px; color: rgba(255,255,255,0.7); width: 30px;" id="bgPositionXValue">50%</span>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <span style="font-size: 11px; color: rgba(255,255,255,0.5); width: 20px;">Y</span>
+                        <input type="range" class="position-slider" id="bgPositionY" min="0" max="100" value="50" style="flex: 1;">
+                        <span style="font-size: 11px; color: rgba(255,255,255,0.7); width: 30px;" id="bgPositionYValue">50%</span>
+                    </div>
+                    <button class="btn btn-secondary" onclick="resetBgPosition()" style="margin-top: 8px; padding: 6px 12px; font-size: 11px;">Reset to Center</button>
+                </div>
+            </div>
+
+            <!-- Elements Toggle -->
+            <div class="control-section">
+                <h3>Elements</h3>
+                <div class="toggle-row">
+                    <span class="toggle-label">Brand Header</span>
+                    <div class="toggle active" data-element="brand"></div>
+                </div>
+                <div class="toggle-row">
+                    <span class="toggle-label">Tag/Label</span>
+                    <div class="toggle active" data-element="tag"></div>
+                </div>
+                <div class="toggle-row">
+                    <span class="toggle-label">Headline</span>
+                    <div class="toggle active" data-element="headline"></div>
+                </div>
+                <div class="toggle-row">
+                    <span class="toggle-label">Body Text</span>
+                    <div class="toggle" data-element="body"></div>
+                </div>
+                <div class="toggle-row">
+                    <span class="toggle-label">Checklist</span>
+                    <div class="toggle" data-element="checklist"></div>
+                </div>
+                <div class="toggle-row">
+                    <span class="toggle-label">Delphi Illustration</span>
+                    <div class="toggle active" data-element="delphi"></div>
+                </div>
+                <div class="toggle-row">
+                    <span class="toggle-label">CTA Button</span>
+                    <div class="toggle" data-element="cta"></div>
+                </div>
+                <div class="toggle-row">
+                    <span class="toggle-label">Slide Counter</span>
+                    <div class="toggle active" data-element="counter"></div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="control-section">
+                <h3>Content</h3>
+
+                <div class="control-group" id="tagGroup">
+                    <label class="control-label">Tag</label>
+                    <input type="text" class="input-text" id="tagInput" value="Email Strategy" maxlength="20">
+                    <div class="char-count"><span id="tagCount">14</span>/20</div>
+                </div>
+
+                <div class="control-group" id="headlineGroup">
+                    <label class="control-label">Headline</label>
+                    <textarea class="input-textarea" id="headlineInput" maxlength="80">When inbox placement weakens, pushing harder rarely fixes it.</textarea>
+                    <div class="char-count"><span id="headlineCount">62</span>/80</div>
+                </div>
+
+                <div class="control-group hidden" id="bodyGroup">
+                    <label class="control-label">Body Text</label>
+                    <textarea class="input-textarea" id="bodyInput" maxlength="150">The "Restraint" Strategy.</textarea>
+                    <div class="char-count"><span id="bodyCount">25</span>/150</div>
+                </div>
+
+                <div class="control-group hidden" id="checklistGroup">
+                    <label class="control-label">Checklist Items (one per line)</label>
+                    <textarea class="input-textarea" id="checklistInput" style="min-height: 100px;">✗ Send more.
+✗ More urgency.
+✗ More offers.</textarea>
+                    <div class="char-count">Use ✓ or ✗ at start</div>
+                </div>
+
+                <div class="control-group hidden" id="ctaGroup">
+                    <label class="control-label">CTA Text</label>
+                    <input type="text" class="input-text" id="ctaInput" value="Get Free Review" maxlength="25">
+                    <div class="char-count"><span id="ctaCount">15</span>/25</div>
+                </div>
+            </div>
+
+            <!-- Character Selection -->
+            <div class="control-section" id="delphiSection">
+                <h3>Character Illustration</h3>
+                <div class="control-group">
+                    <label class="control-label">Character Type</label>
+                    <select class="input-select" id="characterType">
+                        <option value="delphi" selected>Delphi (Owl)</option>
+                        <option value="mermaid">Mermaid</option>
+                        <option value="captain">Captain</option>
+                        <option value="pirate">Pirate</option>
+                        <option value="engineer">Engineer</option>
+                    </select>
+                </div>
+                <div class="delphi-grid" id="delphiGrid">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="upload-section">
+                    <button class="upload-btn" onclick="openUploadModal('character')">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                        Upload New Character
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Center - Preview -->
+        <main class="preview-area">
+            <div class="preview-header">
+                <span class="preview-title" id="previewTitle">Preview (1080 × 1350px)</span>
+                <label class="safe-zone-toggle">
+                    <input type="checkbox" id="safeZoneToggle">
+                    Show Safe Zones
+                </label>
+                <div class="preview-actions">
+                    <button class="btn btn-secondary" id="copyTextBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        Copy Text
+                    </button>
+                    <button class="btn btn-primary" id="downloadBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download PNG
+                    </button>
+                </div>
+            </div>
+
+            <div class="slide-preview-container">
+                <div class="slide-preview-wrapper">
+                    <div class="slide-preview theme-dark size-portrait" id="slidePreview">
+                        <div class="slide-content">
+                            <div class="slide-brand" id="slideBrand">Review My Emails</div>
+
+                            <div class="slide-main">
+                                <div class="slide-tag" id="slideTag">Email Strategy</div>
+                                <div class="slide-headline" id="slideHeadline">When inbox placement weakens, pushing harder rarely fixes it.</div>
+                                <div class="slide-body hidden" id="slideBody">The "Restraint" Strategy.</div>
+                                <div class="slide-checklist hidden" id="slideChecklist">
+                                    <!-- Populated by JS -->
+                                </div>
+                                <div class="slide-delphi" id="slideDelphi">
+                                    <img src="../../Delphi/Delphi Sword Looking Sideways.svg" alt="Delphi">
+                                </div>
+                                <div class="slide-cta hidden" id="slideCta">Get Free Review</div>
+                            </div>
+
+                            <div class="slide-footer">
+                                <span class="slide-counter" id="slideCounter">01 / 08</span>
+                                <span>reviewmyemails.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Safe Zone Overlay -->
+                    <div class="safe-zone-overlay" id="safeZoneOverlay">
+                        <div class="safe-zone-80" id="safeZone80">
+                            <span class="safe-zone-label">80% Safe (Mobile Feed)</span>
+                        </div>
+                        <div class="safe-zone-70" id="safeZone70">
+                            <span class="safe-zone-label">70% Extra Safe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Sidebar - Slide List -->
+        <aside class="sidebar-right">
+            <div class="slides-header">
+                <h2>Slides</h2>
+                <button class="add-slide-btn" id="addSlideBtn" title="Add Slide">+</button>
+            </div>
+
+            <div class="slides-list" id="slidesList">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="download-section">
+                <button class="download-all-btn" id="downloadAllBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Download All Slides
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Upload Modal -->
+    <div class="modal-overlay" id="uploadModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="uploadModalTitle">Upload New Asset</h3>
+                <button class="modal-close" onclick="closeUploadModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-dropzone" id="uploadDropzone">
+                    <div class="upload-dropzone-icon">📁</div>
+                    <div class="upload-dropzone-text">Drag & drop file here or click to browse</div>
+                    <div class="upload-dropzone-hint">PNG, JPG, SVG up to 5MB</div>
+                    <input type="file" id="uploadFileInput" accept=".png,.jpg,.jpeg,.svg" style="display: none;">
+                </div>
+
+                <div class="upload-preview" id="uploadPreview">
+                    <img class="upload-preview-img" id="uploadPreviewImg" src="" alt="Preview">
+                </div>
+
+                <div class="upload-rename">
+                    <label for="uploadFileName">File Name (required)</label>
+                    <input type="text" class="input-text" id="uploadFileName" placeholder="e.g., email-dashboard-hero">
+                    <div class="upload-rename-hint">⚠️ Give it a descriptive name. No spaces - use hyphens instead.</div>
+                    <div id="uploadFilePreview" style="margin-top: 8px; padding: 8px 12px; background: rgba(13, 148, 136, 0.1); border-radius: 6px; font-size: 12px; color: var(--color-accent); display: none;">
+                        Will save as: <strong id="uploadFilePreviewName"></strong>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeUploadModal()">Cancel</button>
+                <button class="btn btn-primary" id="uploadSaveBtn" onclick="saveUploadedAsset()" disabled>Save Asset</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // DATA
+        // ========================================
+
+        // Character images organized by type
+        // You can add images as you get them - just add to the appropriate array
+        const CHARACTER_IMAGES = {
+            delphi: [
+                { name: 'Delphi Sword Looking Sideways', file: 'Delphi Sword Looking Sideways.svg' },
+                { name: 'Delphi Approved', file: 'Delphi Approved.svg' },
+                { name: 'Delphi Flashlight', file: 'Delphi Flashlight.svg' },
+                { name: 'List Cleaning', file: 'List Cleaning.svg' },
+                { name: 'Sorting Emails', file: 'Sorting Emails.svg' },
+                { name: 'Analyzing Risky Emails', file: 'Analyzing Risky Emails.svg' },
+                { name: 'Identifying Spam Traps', file: 'Identifying Spam Traps.svg' },
+                { name: 'Protecting Sender Reputation', file: 'Protecting Sender Reputation.svg' },
+                { name: 'Customer Support', file: 'Customer Support.svg' },
+                { name: 'Delphi Climbing Ladder', file: 'Delphi Climbing Ladder.svg' },
+                { name: 'Lock Suppressed Contacts', file: 'Lock Suppressed Contacts.svg' },
+                { name: 'Unlocking Blocklist', file: 'Unlocking Blocklist.svg' },
+                { name: 'SPF DKIM DMARC Checklist', file: 'SPF DKIM DMARC Checklist.svg' },
+                { name: 'PLPO Scanner', file: 'PLPO Scanner.svg' },
+                { name: 'Inbox Placement Testing', file: 'Inbox Placement Testing.svg' },
+                { name: 'Delphi Mission Control Room', file: 'Delphi Mission Control Room.svg' },
+                { name: 'Catching ButterEmails', file: 'Catching ButterEmails.svg' },
+                { name: 'Custom Warmup Scheduling', file: 'Custom Warmup Scheduling.svg' }
+            ],
+            mermaid: [
+                // Add mermaid images here as you get them
+                // { name: 'Mermaid Wave', file: 'Mermaid Wave.svg' },
+            ],
+            captain: [
+                // Add captain images here as you get them
+                // { name: 'Captain Helm', file: 'Captain Helm.svg' },
+            ],
+            pirate: [
+                // Add pirate images here as you get them
+                // { name: 'Pirate Flag', file: 'Pirate Flag.svg' },
+            ],
+            engineer: [
+                // Add engineer images here as you get them
+                // { name: 'Engineer Tools', file: 'Engineer Tools.svg' },
+            ]
+        };
+
+        // For backwards compatibility
+        const DELPHI_IMAGES = CHARACTER_IMAGES.delphi;
+        let currentCharacterType = 'delphi';
+
+        const BACKGROUND_IMAGES = [
+            // Selected diverse backgrounds from the collection
+            { name: 'Email Expert', file: 'Email Expert iMAGES.png' },
+            { name: 'Teal Pattern 1', file: 'Gemini_Generated_Image_f448y9f448y9f448.png' },
+            { name: 'Teal Pattern 2', file: 'Gemini_Generated_Image_eys68leys68leys6.png' },
+            { name: 'Abstract Teal 1', file: 'Gemini_Generated_Image_vdo9nbvdo9nbvdo9.png' },
+            { name: 'Abstract Teal 2', file: 'Gemini_Generated_Image_w2vrmdw2vrmdw2vr.png' },
+            { name: 'Network Pattern', file: 'Gemini_Generated_Image_oxwfzxoxwfzxoxwf.png' },
+            { name: 'Email Flow', file: 'Gemini_Generated_Image_ph7ompph7ompph7o.png' },
+            { name: 'Digital Wave', file: 'Gemini_Generated_Image_s0vbwjs0vbwjs0vb.png' },
+            { name: 'Gradient Mesh', file: 'Gemini_Generated_Image_oaxk8woaxk8woaxk.png' },
+            { name: 'Tech Scene 1', file: 'ChatGPT Image Sep 29, 2025, 06_38_01 PM.png' },
+            { name: 'Tech Scene 2', file: 'ChatGPT Image Sep 29, 2025, 06_48_37 PM.png' },
+            { name: 'Tech Scene 3', file: 'ChatGPT Image Sep 29, 2025, 06_54_47 PM.png' },
+            { name: 'Abstract 1', file: 'ChatGPT Image Sep 29, 2025, 07_02_37 PM.png' },
+            { name: 'Abstract 2', file: 'ChatGPT Image Sep 29, 2025, 07_07_54 PM.png' },
+            { name: 'Abstract 3', file: 'ChatGPT Image Sep 29, 2025, 07_12_36 PM.png' },
+            { name: 'Gradient 1', file: 'ChatGPT Image Sep 29, 2025, 07_26_34 PM.png' },
+            { name: 'Gradient 2', file: 'ChatGPT Image Sep 29, 2025, 07_29_51 PM.png' },
+            { name: 'Gradient 3', file: 'ChatGPT Image Sep 29, 2025, 07_33_54 PM.png' },
+            { name: 'Office Scene 1', file: 'ChatGPT Image Sep 29, 2025, 08_00_38 PM.png' },
+            { name: 'Office Scene 2', file: 'ChatGPT Image Sep 29, 2025, 08_50_38 PM.png' },
+            { name: 'Dashboard View', file: 'ChatGPT Image Sep 29, 2025, 09_14_26 PM.png' },
+            { name: 'Email UI', file: 'ChatGPT Image Sep 29, 2025, 09_16_51 PM.png' },
+            { name: 'Tech Workspace', file: 'ChatGPT Image Sep 29, 2025, 09_22_10 PM.png' },
+            { name: 'Modern Office', file: 'ChatGPT Image Sep 30, 2025, 10_18_04 AM.png' },
+            { name: 'Clean Desk', file: 'ChatGPT Image Sep 30, 2025, 10_23_38 AM.png' },
+            { name: 'Workspace 1', file: 'ChatGPT Image Oct 20, 2025, 02_21_24 PM.png' },
+            { name: 'Generated Scene 1', file: 'Generated Image October 20, 2025 - 2_37PM.png' },
+            { name: 'Generated Scene 2', file: 'Generated Image October 20, 2025 - 2_39PM.png' },
+            { name: 'Character Scene', file: 'ChatGPT Image Nov 17, 2025, 12_52_31 PM.png' },
+            { name: 'Team Scene', file: 'ChatGPT Image Nov 17, 2025, 01_02_55 PM.png' }
+        ];
+
+        const SLIDE_PURPOSES = [
+            { name: 'Hook', description: 'Grab attention with bold statement' },
+            { name: 'Problem', description: 'Identify the pain point' },
+            { name: 'Insight', description: 'Share the key realization' },
+            { name: 'Solution', description: 'Present the answer' },
+            { name: 'How-To', description: 'Show the steps' },
+            { name: 'Example', description: 'Illustrate with specifics' },
+            { name: 'Proof', description: 'Provide evidence or stats' },
+            { name: 'CTA', description: 'Call to action / outro' }
+        ];
+
+        // Output size configurations
+        const OUTPUT_SIZES = {
+            portrait: { width: 1080, height: 1350, previewWidth: 400, previewHeight: 500, label: '1080 × 1350' },
+            square: { width: 1080, height: 1080, previewWidth: 400, previewHeight: 400, label: '1080 × 1080' },
+            landscape: { width: 1200, height: 627, previewWidth: 480, previewHeight: 251, label: '1200 × 627' }
+        };
+
+        // Layout presets
+        const LAYOUT_PRESETS = {
+            custom: null, // Manual mode
+            hook: {
+                elements: { brand: true, tag: true, headline: true, body: false, checklist: false, delphi: false, cta: false, counter: true },
+                content: { tag: 'Hot Take', headline: 'Your bold statement goes here. Make it punchy.' }
+            },
+            checklist: {
+                elements: { brand: true, tag: false, headline: true, body: false, checklist: true, delphi: false, cta: false, counter: true },
+                content: { headline: 'Stop doing this:', checklist: '✗ Bad practice one\n✗ Bad practice two\n✗ Bad practice three' }
+            },
+            stat: {
+                elements: { brand: true, tag: true, headline: true, body: true, checklist: false, delphi: false, cta: false, counter: true },
+                content: { tag: 'Data Point', headline: '73%', body: 'of emails never reach the inbox' }
+            },
+            quote: {
+                elements: { brand: true, tag: false, headline: true, body: true, checklist: false, delphi: false, cta: false, counter: true },
+                content: { headline: '"Your testimonial or quote goes here."', body: '— Customer Name, Company' }
+            },
+            cta: {
+                elements: { brand: true, tag: false, headline: true, body: true, checklist: false, delphi: true, cta: true, counter: true },
+                content: { headline: 'Ready to fix your inbox placement?', body: 'Get expert list analysis today.', cta: 'Get Started' }
+            }
+        };
+
+        // State
+        let currentSlide = 0;
+        let slides = [createDefaultSlide(0)];
+        let isCarousel = false;
+        let currentOutputSize = 'portrait';
+        let uploadType = null; // 'background' or 'character'
+        let uploadedFile = null;
+
+        function createDefaultSlide(index) {
+            const purpose = SLIDE_PURPOSES[index % SLIDE_PURPOSES.length];
+            return {
+                theme: 'dark',
+                elements: {
+                    brand: true,
+                    tag: true,
+                    headline: true,
+                    body: false,
+                    checklist: false,
+                    delphi: true,
+                    cta: false,
+                    counter: true
+                },
+                content: {
+                    tag: 'Email Strategy',
+                    headline: 'When inbox placement weakens, pushing harder rarely fixes it.',
+                    body: 'The "Restraint" Strategy.',
+                    checklist: '✗ Send more.\n✗ More urgency.\n✗ More offers.',
+                    cta: 'Get Free Review',
+                    delphi: 'Delphi Sword Looking Sideways.svg',
+                    background: null, // null = no background image, use theme color
+                    bgPositionX: 50,
+                    bgPositionY: 50
+                },
+                purpose: purpose.name
+            };
+        }
+
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initDelphiGrid();
+            initBackgroundGrid();
+            initEventListeners();
+            initUploadListeners();
+            initSafeZones();
+            updatePreview();
+            updateSlidesList();
+            updatePreviewSize();
+        });
+
+        function initDelphiGrid() {
+            initCharacterGrid();
+        }
+
+        function initCharacterGrid() {
+            const grid = document.getElementById('delphiGrid');
+            const images = CHARACTER_IMAGES[currentCharacterType] || [];
+            const currentFile = slides[currentSlide]?.content?.delphi;
+
+            // Get folder path based on character type
+            const folderMap = {
+                delphi: '../../Delphi/',
+                mermaid: '../../Mermaid/',
+                captain: '../../Captain/',
+                pirate: '../../Pirate/',
+                engineer: '../../Engineer/'
+            };
+            const folderPath = folderMap[currentCharacterType] || '../../Delphi/';
+
+            if (images.length === 0) {
+                grid.innerHTML = '<div style="color: rgba(255,255,255,0.5); font-size: 12px; padding: 20px; text-align: center;">No images yet for this character type</div>';
+                return;
+            }
+
+            grid.innerHTML = images.map((img, i) => {
+                const isSelected = currentFile === img.file || (!currentFile && i === 0);
+                return `
+                <div class="delphi-item ${isSelected ? 'selected' : ''}" data-file="${img.file}" title="${img.name}">
+                    <img src="${folderPath}${img.file}" alt="${img.name}">
+                </div>
+            `}).join('');
+
+            grid.querySelectorAll('.delphi-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.delphi-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    slides[currentSlide].content.delphi = item.dataset.file;
+                    updatePreview();
+                });
+            });
+        }
+
+        function initBackgroundGrid() {
+            const grid = document.getElementById('backgroundGrid');
+            // Add "None" option first
+            let html = `<div class="background-item none selected" data-file="" title="No Background">None</div>`;
+
+            // Add background images
+            html += BACKGROUND_IMAGES.map((img) => `
+                <div class="background-item" data-file="${img.file}" title="${img.name}">
+                    <img src="../Background/${encodeURIComponent(img.file)}" alt="${img.name}">
+                </div>
+            `).join('');
+
+            grid.innerHTML = html;
+
+            grid.querySelectorAll('.background-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.background-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    const file = item.dataset.file;
+                    slides[currentSlide].content.background = file || null;
+                    // Reset position when changing background
+                    slides[currentSlide].content.bgPositionX = 50;
+                    slides[currentSlide].content.bgPositionY = 50;
+                    updateBgPositionControls();
+                    updatePreview();
+                });
+            });
+        }
+
+        function updateBgPositionControls() {
+            const hasBackground = slides[currentSlide].content.background;
+            const positionGroup = document.getElementById('bgPositionGroup');
+            positionGroup.classList.toggle('hidden', !hasBackground);
+
+            if (hasBackground) {
+                document.getElementById('bgPositionX').value = slides[currentSlide].content.bgPositionX;
+                document.getElementById('bgPositionY').value = slides[currentSlide].content.bgPositionY;
+                document.getElementById('bgPositionXValue').textContent = slides[currentSlide].content.bgPositionX + '%';
+                document.getElementById('bgPositionYValue').textContent = slides[currentSlide].content.bgPositionY + '%';
+            }
+        }
+
+        function resetBgPosition() {
+            slides[currentSlide].content.bgPositionX = 50;
+            slides[currentSlide].content.bgPositionY = 50;
+            updateBgPositionControls();
+            updatePreview();
+        }
+
+        function initEventListeners() {
+            // Post type change
+            document.getElementById('postType').addEventListener('change', (e) => {
+                isCarousel = e.target.value === 'carousel';
+                document.getElementById('slideCountGroup').style.display = isCarousel ? 'block' : 'none';
+                document.querySelector('.sidebar-right').style.display = isCarousel ? 'block' : 'none';
+
+                if (isCarousel) {
+                    const count = parseInt(document.getElementById('slideCount').value);
+                    initCarouselSlides(count);
+                } else {
+                    slides = [slides[0] || createDefaultSlide(0)];
+                    currentSlide = 0;
+                }
+                updateSlidesList();
+                updatePreview();
+            });
+
+            // Output size change
+            document.getElementById('outputSize').addEventListener('change', (e) => {
+                currentOutputSize = e.target.value;
+                updatePreviewSize();
+                updateSafeZones();
+            });
+
+            // Layout preset change
+            document.getElementById('layoutPreset').addEventListener('change', (e) => {
+                applyLayoutPreset(e.target.value);
+            });
+
+            // Safe zone toggle
+            document.getElementById('safeZoneToggle').addEventListener('change', (e) => {
+                document.getElementById('safeZoneOverlay').classList.toggle('active', e.target.checked);
+            });
+
+            // Slide count change
+            document.getElementById('slideCount').addEventListener('change', (e) => {
+                initCarouselSlides(parseInt(e.target.value));
+                updateSlidesList();
+            });
+
+            // Theme selection
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.addEventListener('click', () => {
+                    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                    swatch.classList.add('selected');
+                    slides[currentSlide].theme = swatch.dataset.theme;
+                    updatePreview();
+                    updateSlidesList();
+                });
+            });
+
+            // Element toggles
+            document.querySelectorAll('.toggle').forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    toggle.classList.toggle('active');
+                    const element = toggle.dataset.element;
+                    slides[currentSlide].elements[element] = toggle.classList.contains('active');
+
+                    // Show/hide related control groups
+                    const groupMap = {
+                        tag: 'tagGroup',
+                        headline: 'headlineGroup',
+                        body: 'bodyGroup',
+                        checklist: 'checklistGroup',
+                        cta: 'ctaGroup',
+                        delphi: 'delphiSection'
+                    };
+
+                    if (groupMap[element]) {
+                        const group = document.getElementById(groupMap[element]);
+                        if (group) {
+                            group.classList.toggle('hidden', !toggle.classList.contains('active'));
+                        }
+                    }
+
+                    updatePreview();
+                });
+            });
+
+            // Text inputs
+            const textInputs = [
+                { input: 'tagInput', count: 'tagCount', content: 'tag' },
+                { input: 'headlineInput', count: 'headlineCount', content: 'headline' },
+                { input: 'bodyInput', count: 'bodyCount', content: 'body' },
+                { input: 'ctaInput', count: 'ctaCount', content: 'cta' },
+                { input: 'checklistInput', count: null, content: 'checklist' }
+            ];
+
+            textInputs.forEach(({ input, count, content }) => {
+                const el = document.getElementById(input);
+                if (el) {
+                    el.addEventListener('input', () => {
+                        slides[currentSlide].content[content] = el.value;
+                        if (count) {
+                            const countEl = document.getElementById(count);
+                            countEl.textContent = el.value.length;
+
+                            const max = parseInt(el.maxLength);
+                            const parent = countEl.parentElement;
+                            parent.classList.remove('warning', 'danger');
+                            if (el.value.length > max * 0.9) parent.classList.add('danger');
+                            else if (el.value.length > max * 0.75) parent.classList.add('warning');
+                        }
+                        updatePreview();
+                    });
+                }
+            });
+
+            // Background position sliders
+            document.getElementById('bgPositionX').addEventListener('input', (e) => {
+                slides[currentSlide].content.bgPositionX = parseInt(e.target.value);
+                document.getElementById('bgPositionXValue').textContent = e.target.value + '%';
+                updatePreview();
+            });
+
+            document.getElementById('bgPositionY').addEventListener('input', (e) => {
+                slides[currentSlide].content.bgPositionY = parseInt(e.target.value);
+                document.getElementById('bgPositionYValue').textContent = e.target.value + '%';
+                updatePreview();
+            });
+
+            // Character type selector
+            document.getElementById('characterType').addEventListener('change', (e) => {
+                currentCharacterType = e.target.value;
+                initCharacterGrid();
+            });
+
+            // Download buttons
+            document.getElementById('downloadBtn').addEventListener('click', downloadCurrentSlide);
+            document.getElementById('downloadAllBtn').addEventListener('click', downloadAllSlides);
+            document.getElementById('copyTextBtn').addEventListener('click', copySlideText);
+            document.getElementById('addSlideBtn').addEventListener('click', addSlide);
+        }
+
+        // ========================================
+        // CAROUSEL FUNCTIONS
+        // ========================================
+
+        function initCarouselSlides(count) {
+            // Keep existing slides if possible
+            while (slides.length < count) {
+                slides.push(createDefaultSlide(slides.length));
+            }
+            while (slides.length > count) {
+                slides.pop();
+            }
+            if (currentSlide >= count) {
+                currentSlide = count - 1;
+            }
+        }
+
+        function addSlide() {
+            if (slides.length < 10) {
+                slides.push(createDefaultSlide(slides.length));
+                document.getElementById('slideCount').value = slides.length;
+                updateSlidesList();
+            }
+        }
+
+        function selectSlide(index) {
+            currentSlide = index;
+            loadSlideToControls(slides[index]);
+            updateBgPositionControls();
+            updatePreview();
+            updateSlidesList();
+        }
+
+        function deleteSlide(index) {
+            if (slides.length > 1) {
+                slides.splice(index, 1);
+                if (currentSlide >= slides.length) {
+                    currentSlide = slides.length - 1;
+                }
+                document.getElementById('slideCount').value = slides.length;
+                loadSlideToControls(slides[currentSlide]);
+                updatePreview();
+                updateSlidesList();
+            }
+        }
+
+        function loadSlideToControls(slide) {
+            // Theme
+            document.querySelectorAll('.color-swatch').forEach(s => {
+                s.classList.toggle('selected', s.dataset.theme === slide.theme);
+            });
+
+            // Elements
+            document.querySelectorAll('.toggle').forEach(toggle => {
+                const element = toggle.dataset.element;
+                toggle.classList.toggle('active', slide.elements[element]);
+
+                const groupMap = {
+                    tag: 'tagGroup',
+                    headline: 'headlineGroup',
+                    body: 'bodyGroup',
+                    checklist: 'checklistGroup',
+                    cta: 'ctaGroup',
+                    delphi: 'delphiSection'
+                };
+
+                if (groupMap[element]) {
+                    const group = document.getElementById(groupMap[element]);
+                    if (group) {
+                        group.classList.toggle('hidden', !slide.elements[element]);
+                    }
+                }
+            });
+
+            // Content
+            document.getElementById('tagInput').value = slide.content.tag;
+            document.getElementById('headlineInput').value = slide.content.headline;
+            document.getElementById('bodyInput').value = slide.content.body;
+            document.getElementById('checklistInput').value = slide.content.checklist;
+            document.getElementById('ctaInput').value = slide.content.cta;
+
+            // Update char counts
+            document.getElementById('tagCount').textContent = slide.content.tag.length;
+            document.getElementById('headlineCount').textContent = slide.content.headline.length;
+            document.getElementById('bodyCount').textContent = slide.content.body.length;
+            document.getElementById('ctaCount').textContent = slide.content.cta.length;
+
+            // Delphi
+            document.querySelectorAll('.delphi-item').forEach(item => {
+                item.classList.toggle('selected', item.dataset.file === slide.content.delphi);
+            });
+
+            // Background
+            document.querySelectorAll('.background-item').forEach(item => {
+                const isSelected = (item.dataset.file === slide.content.background) ||
+                                   (!slide.content.background && item.dataset.file === '');
+                item.classList.toggle('selected', isSelected);
+            });
+
+            // Background position controls
+            updateBgPositionControls();
+        }
+
+        // ========================================
+        // UPLOAD FUNCTIONS
+        // ========================================
+
+        function initUploadListeners() {
+            const dropzone = document.getElementById('uploadDropzone');
+            const fileInput = document.getElementById('uploadFileInput');
+            const fileNameInput = document.getElementById('uploadFileName');
+
+            // Click to browse
+            dropzone.addEventListener('click', () => fileInput.click());
+
+            // File selected
+            fileInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleFileSelect(e.target.files[0]);
+                }
+            });
+
+            // Drag and drop
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.classList.add('dragover');
+            });
+
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.classList.remove('dragover');
+            });
+
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('dragover');
+                if (e.dataTransfer.files.length > 0) {
+                    handleFileSelect(e.dataTransfer.files[0]);
+                }
+            });
+
+            // File name validation
+            fileNameInput.addEventListener('input', () => {
+                validateFileName();
+            });
+        }
+
+        function handleFileSelect(file) {
+            // Validate file type
+            const validTypes = ['image/png', 'image/jpeg', 'image/svg+xml'];
+            if (!validTypes.includes(file.type)) {
+                alert('Please select a PNG, JPG, or SVG file.');
+                return;
+            }
+
+            // Validate file size (5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB.');
+                return;
+            }
+
+            uploadedFile = file;
+
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('uploadPreviewImg').src = e.target.result;
+                document.getElementById('uploadPreview').classList.add('active');
+                document.getElementById('uploadDropzone').style.display = 'none';
+            };
+            reader.readAsDataURL(file);
+
+            // Clear and focus file name
+            document.getElementById('uploadFileName').value = '';
+            document.getElementById('uploadFileName').focus();
+            validateFileName();
+        }
+
+        function validateFileName() {
+            const input = document.getElementById('uploadFileName');
+            const saveBtn = document.getElementById('uploadSaveBtn');
+            const previewDiv = document.getElementById('uploadFilePreview');
+            const previewName = document.getElementById('uploadFilePreviewName');
+            let value = input.value.trim();
+
+            // Replace spaces with hyphens
+            value = value.replace(/\s+/g, '-');
+
+            // Remove invalid characters
+            value = value.replace(/[^a-zA-Z0-9\-_]/g, '');
+
+            input.value = value;
+
+            // Enable save button only if we have a file and valid name
+            const isValid = uploadedFile && value.length >= 3;
+            saveBtn.disabled = !isValid;
+
+            // Show filename preview
+            if (isValid && uploadedFile) {
+                const ext = uploadedFile.name.split('.').pop().toLowerCase();
+                const fullFileName = `${value}.${ext}`;
+                const targetFolder = uploadType === 'background' ? 'brand/Background/' : 'Delphi/';
+                previewName.textContent = targetFolder + fullFileName;
+                previewDiv.style.display = 'block';
+            } else {
+                previewDiv.style.display = 'none';
+            }
+        }
+
+        function openUploadModal(type) {
+            uploadType = type;
+            uploadedFile = null;
+
+            // Update modal title
+            const title = type === 'background' ? 'Upload New Background' : 'Upload New Character';
+            document.getElementById('uploadModalTitle').textContent = title;
+
+            // Reset modal state
+            document.getElementById('uploadPreview').classList.remove('active');
+            document.getElementById('uploadDropzone').style.display = 'block';
+            document.getElementById('uploadPreviewImg').src = '';
+            document.getElementById('uploadFileName').value = '';
+            document.getElementById('uploadFileInput').value = '';
+            document.getElementById('uploadSaveBtn').disabled = true;
+            document.getElementById('uploadFilePreview').style.display = 'none';
+
+            // Show modal
+            document.getElementById('uploadModal').classList.add('active');
+        }
+
+        function closeUploadModal() {
+            document.getElementById('uploadModal').classList.remove('active');
+            uploadType = null;
+            uploadedFile = null;
+        }
+
+        function saveUploadedAsset() {
+            if (!uploadedFile || !uploadType) return;
+
+            const fileName = document.getElementById('uploadFileName').value.trim();
+            if (fileName.length < 3) {
+                alert('Please enter a valid file name (at least 3 characters).');
+                return;
+            }
+
+            // Get file extension
+            const ext = uploadedFile.name.split('.').pop().toLowerCase();
+            const fullFileName = `${fileName}.${ext}`;
+
+            // Create download link for the renamed file
+            // Note: This creates a client-side download. For actual server storage,
+            // you would need a backend API endpoint.
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                // For backgrounds
+                if (uploadType === 'background') {
+                    // Add to the grid temporarily (won't persist without server)
+                    const grid = document.getElementById('backgroundGrid');
+                    const newItem = document.createElement('div');
+                    newItem.className = 'background-item';
+                    newItem.dataset.file = fullFileName;
+                    newItem.title = fileName;
+                    newItem.innerHTML = `<img src="${e.target.result}" alt="${fileName}">`;
+                    newItem.addEventListener('click', () => {
+                        grid.querySelectorAll('.background-item').forEach(i => i.classList.remove('selected'));
+                        newItem.classList.add('selected');
+                        slides[currentSlide].content.background = fullFileName;
+                        updatePreview();
+                    });
+                    grid.appendChild(newItem);
+
+                    // Download the file with the new name so user can save it
+                    downloadRenamedFile(e.target.result, fullFileName);
+
+                    alert(`Background "${fullFileName}" added!\n\nThe file has been downloaded to your computer. Please save it to:\nbrand/Background/${fullFileName}`);
+                }
+                // For characters
+                else if (uploadType === 'character') {
+                    // Add to Delphi grid
+                    const grid = document.getElementById('delphiGrid');
+                    const newItem = document.createElement('div');
+                    newItem.className = 'delphi-item';
+                    newItem.dataset.file = fullFileName;
+                    newItem.title = fileName;
+                    newItem.innerHTML = `<img src="${e.target.result}" alt="${fileName}">`;
+                    newItem.addEventListener('click', () => {
+                        grid.querySelectorAll('.delphi-item').forEach(i => i.classList.remove('selected'));
+                        newItem.classList.add('selected');
+                        slides[currentSlide].content.delphi = fullFileName;
+                        updatePreview();
+                    });
+                    grid.appendChild(newItem);
+
+                    // Download the file with the new name
+                    downloadRenamedFile(e.target.result, fullFileName);
+
+                    alert(`Character "${fullFileName}" added!\n\nThe file has been downloaded to your computer. Please save it to:\nDelphi/${fullFileName}`);
+                }
+
+                closeUploadModal();
+            };
+            reader.readAsDataURL(uploadedFile);
+        }
+
+        function downloadRenamedFile(dataUrl, fileName) {
+            const link = document.createElement('a');
+            link.href = dataUrl;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // ========================================
+        // SAFE ZONES & OUTPUT SIZE
+        // ========================================
+
+        function initSafeZones() {
+            updateSafeZones();
+        }
+
+        function updateSafeZones() {
+            const config = OUTPUT_SIZES[currentOutputSize];
+            const zone80 = document.getElementById('safeZone80');
+            const zone70 = document.getElementById('safeZone70');
+
+            // 80% safe zone (10% margin each side)
+            const margin80 = 0.10;
+            zone80.style.left = `${margin80 * 100}%`;
+            zone80.style.right = `${margin80 * 100}%`;
+            zone80.style.top = `${margin80 * 100}%`;
+            zone80.style.bottom = `${margin80 * 100}%`;
+
+            // 70% safe zone (15% margin each side)
+            const margin70 = 0.15;
+            zone70.style.left = `${margin70 * 100}%`;
+            zone70.style.right = `${margin70 * 100}%`;
+            zone70.style.top = `${margin70 * 100}%`;
+            zone70.style.bottom = `${margin70 * 100}%`;
+        }
+
+        function updatePreviewSize() {
+            const config = OUTPUT_SIZES[currentOutputSize];
+            const preview = document.getElementById('slidePreview');
+
+            // Update preview size class
+            preview.classList.remove('size-portrait', 'size-square', 'size-landscape');
+            preview.classList.add(`size-${currentOutputSize}`);
+
+            // Update preview title
+            document.getElementById('previewTitle').textContent = `Preview (${config.label})`;
+
+            // Update safe zones for new size
+            updateSafeZones();
+        }
+
+        function applyLayoutPreset(presetName) {
+            if (presetName === 'custom') return;
+
+            const preset = LAYOUT_PRESETS[presetName];
+            if (!preset) return;
+
+            const slide = slides[currentSlide];
+
+            // Apply element toggles
+            Object.keys(preset.elements).forEach(key => {
+                slide.elements[key] = preset.elements[key];
+            });
+
+            // Apply content
+            Object.keys(preset.content).forEach(key => {
+                slide.content[key] = preset.content[key];
+            });
+
+            // Update UI toggles
+            document.querySelectorAll('.toggle').forEach(toggle => {
+                const element = toggle.dataset.element;
+                toggle.classList.toggle('active', slide.elements[element]);
+
+                const groupMap = {
+                    tag: 'tagGroup',
+                    headline: 'headlineGroup',
+                    body: 'bodyGroup',
+                    checklist: 'checklistGroup',
+                    cta: 'ctaGroup',
+                    delphi: 'delphiSection'
+                };
+
+                if (groupMap[element]) {
+                    const group = document.getElementById(groupMap[element]);
+                    if (group) {
+                        group.classList.toggle('hidden', !slide.elements[element]);
+                    }
+                }
+            });
+
+            // Update input fields
+            if (preset.content.tag) document.getElementById('tagInput').value = preset.content.tag;
+            if (preset.content.headline) document.getElementById('headlineInput').value = preset.content.headline;
+            if (preset.content.body) document.getElementById('bodyInput').value = preset.content.body;
+            if (preset.content.checklist) document.getElementById('checklistInput').value = preset.content.checklist;
+            if (preset.content.cta) document.getElementById('ctaInput').value = preset.content.cta;
+
+            // Update char counts
+            document.getElementById('tagCount').textContent = (slide.content.tag || '').length;
+            document.getElementById('headlineCount').textContent = (slide.content.headline || '').length;
+            document.getElementById('bodyCount').textContent = (slide.content.body || '').length;
+            document.getElementById('ctaCount').textContent = (slide.content.cta || '').length;
+
+            // Reset dropdown to custom after applying
+            setTimeout(() => {
+                document.getElementById('layoutPreset').value = 'custom';
+            }, 100);
+
+            updatePreview();
+            updateSlidesList();
+        }
+
+        // ========================================
+        // PREVIEW UPDATE
+        // ========================================
+
+        function updatePreview() {
+            const slide = slides[currentSlide];
+            const preview = document.getElementById('slidePreview');
+
+            // Theme and background
+            let className = `slide-preview theme-${slide.theme} size-${currentOutputSize}`;
+            if (slide.content.background) {
+                className += ' has-bg';
+                preview.style.backgroundImage = `url('../Background/${encodeURIComponent(slide.content.background)}')`;
+                // Apply background position
+                const bgX = slide.content.bgPositionX ?? 50;
+                const bgY = slide.content.bgPositionY ?? 50;
+                preview.style.backgroundPosition = `${bgX}% ${bgY}%`;
+            } else {
+                preview.style.backgroundImage = 'none';
+                preview.style.backgroundPosition = 'center';
+            }
+            preview.className = className;
+
+            // Elements visibility
+            document.getElementById('slideBrand').classList.toggle('hidden', !slide.elements.brand);
+            document.getElementById('slideTag').classList.toggle('hidden', !slide.elements.tag);
+            document.getElementById('slideHeadline').classList.toggle('hidden', !slide.elements.headline);
+            document.getElementById('slideBody').classList.toggle('hidden', !slide.elements.body);
+            document.getElementById('slideChecklist').classList.toggle('hidden', !slide.elements.checklist);
+            document.getElementById('slideDelphi').classList.toggle('hidden', !slide.elements.delphi);
+            document.getElementById('slideCta').classList.toggle('hidden', !slide.elements.cta);
+            document.getElementById('slideCounter').classList.toggle('hidden', !slide.elements.counter);
+
+            // Content
+            document.getElementById('slideTag').textContent = slide.content.tag;
+            document.getElementById('slideHeadline').textContent = slide.content.headline;
+            document.getElementById('slideBody').textContent = slide.content.body;
+            document.getElementById('slideCta').textContent = slide.content.cta;
+
+            // Checklist
+            if (slide.elements.checklist) {
+                const items = slide.content.checklist.split('\n').filter(item => item.trim());
+                document.getElementById('slideChecklist').innerHTML = items.map(item => {
+                    const isCheck = item.startsWith('✓');
+                    const isX = item.startsWith('✗');
+                    const text = item.replace(/^[✓✗]\s*/, '');
+                    const iconClass = isCheck ? 'check' : (isX ? 'x' : '');
+                    const icon = isCheck ? '✓' : (isX ? '✗' : '•');
+                    return `<div class="checklist-item"><span class="checklist-icon ${iconClass}">${icon}</span>${text}</div>`;
+                }).join('');
+            }
+
+            // Character image (Delphi or other character types)
+            const folderMap = {
+                delphi: '../../Delphi/',
+                mermaid: '../../Mermaid/',
+                captain: '../../Captain/',
+                pirate: '../../Pirate/',
+                engineer: '../../Engineer/'
+            };
+            const charFolder = folderMap[currentCharacterType] || '../../Delphi/';
+            document.querySelector('#slideDelphi img').src = `${charFolder}${slide.content.delphi}`;
+
+            // Counter
+            document.getElementById('slideCounter').textContent = `${String(currentSlide + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+        }
+
+        function updateSlidesList() {
+            const list = document.getElementById('slidesList');
+            list.innerHTML = slides.map((slide, i) => `
+                <div class="slide-thumb ${i === currentSlide ? 'active' : ''}" onclick="selectSlide(${i})">
+                    <div class="slide-thumb-preview theme-${slide.theme}">
+                        <div style="font-weight: 600; margin-bottom: 4px;">${slide.content.headline.substring(0, 30)}...</div>
+                    </div>
+                    <div class="slide-thumb-info">
+                        <span class="slide-thumb-label">Slide ${i + 1}</span>
+                        <span class="slide-thumb-purpose">${slide.purpose}</span>
+                    </div>
+                    <div class="slide-thumb-actions" style="margin-top: 6px;">
+                        <button class="slide-thumb-btn" onclick="event.stopPropagation(); duplicateSlide(${i})" title="Duplicate">⎘</button>
+                        <button class="slide-thumb-btn delete" onclick="event.stopPropagation(); deleteSlide(${i})" title="Delete">×</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function duplicateSlide(index) {
+            if (slides.length < 10) {
+                const copy = JSON.parse(JSON.stringify(slides[index]));
+                slides.splice(index + 1, 0, copy);
+                document.getElementById('slideCount').value = slides.length;
+                updateSlidesList();
+            }
+        }
+
+        // ========================================
+        // DOWNLOAD FUNCTIONS
+        // ========================================
+
+        function getExportScale() {
+            // Dynamically calculate scale based on output size
+            const config = OUTPUT_SIZES[currentOutputSize];
+            const preview = document.getElementById('slidePreview');
+            const previewWidth = preview.getBoundingClientRect().width;
+            return config.width / previewWidth;
+        }
+
+        async function downloadCurrentSlide() {
+            const preview = document.getElementById('slidePreview');
+            const config = OUTPUT_SIZES[currentOutputSize];
+            const scale = getExportScale();
+
+            try {
+                const canvas = await html2canvas(preview, {
+                    scale: scale,
+                    backgroundColor: null,
+                    useCORS: true
+                });
+
+                const link = document.createElement('a');
+                const sizeSuffix = `${config.width}x${config.height}`;
+                link.download = `linkedin-slide-${currentSlide + 1}-${sizeSuffix}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } catch (err) {
+                console.error('Download failed:', err);
+                alert('Download failed. Please try again.');
+            }
+        }
+
+        async function downloadAllSlides() {
+            const btn = document.getElementById('downloadAllBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = 'Downloading...';
+            btn.disabled = true;
+
+            const config = OUTPUT_SIZES[currentOutputSize];
+            const sizeSuffix = `${config.width}x${config.height}`;
+
+            try {
+                for (let i = 0; i < slides.length; i++) {
+                    currentSlide = i;
+                    loadSlideToControls(slides[i]);
+                    updatePreview();
+                    updateSlidesList();
+
+                    // Wait for render
+                    await new Promise(resolve => setTimeout(resolve, 100));
+
+                    const preview = document.getElementById('slidePreview');
+                    const scale = getExportScale();
+                    const canvas = await html2canvas(preview, {
+                        scale: scale,
+                        backgroundColor: null,
+                        useCORS: true
+                    });
+
+                    const link = document.createElement('a');
+                    link.download = `linkedin-slide-${i + 1}-${sizeSuffix}.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+
+                    // Small delay between downloads
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                }
+            } catch (err) {
+                console.error('Download failed:', err);
+                alert('Download failed. Please try again.');
+            }
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+
+        function copySlideText() {
+            const slide = slides[currentSlide];
+            let text = '';
+
+            if (slide.elements.tag) text += slide.content.tag + '\n\n';
+            if (slide.elements.headline) text += slide.content.headline + '\n\n';
+            if (slide.elements.body) text += slide.content.body + '\n\n';
+            if (slide.elements.checklist) text += slide.content.checklist + '\n\n';
+            if (slide.elements.cta) text += slide.content.cta;
+
+            navigator.clipboard.writeText(text.trim()).then(() => {
+                const btn = document.getElementById('copyTextBtn');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '✓ Copied!';
+                setTimeout(() => btn.innerHTML = originalHTML, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
