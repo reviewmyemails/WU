@@ -193,6 +193,75 @@
             line-height: 1.4;
         }
 
+        /* Gradient Swatches */
+        .gradient-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .gradient-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .gradient-swatch {
+            height: 80px;
+            display: flex;
+            align-items: flex-end;
+            padding: var(--space-sm);
+        }
+
+        .gradient-swatch .gradient-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .gradient-info {
+            padding: var(--space-sm);
+        }
+
+        .gradient-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 4px;
+        }
+
+        .gradient-values {
+            font-size: 12px;
+            font-family: 'SF Mono', Monaco, monospace;
+            color: var(--color-muted);
+        }
+
+        .gradient-usage {
+            font-size: 12px;
+            color: var(--color-muted);
+            margin-top: 6px;
+            line-height: 1.4;
+        }
+
+        .gradient-category {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-top: var(--space-lg);
+            margin-bottom: var(--space-sm);
+            padding-bottom: var(--space-xs);
+            border-bottom: 2px solid var(--color-light-alt);
+        }
+
+        .gradient-category:first-of-type {
+            margin-top: 0;
+        }
+
         /* ========================================
            TYPOGRAPHY
            ======================================== */
@@ -917,6 +986,199 @@
     <span class="code-property">--color-warning:</span> <span class="code-value">#f9943b</span>;
     <span class="code-property">--color-danger:</span> <span class="code-value">#f33144</span>;
 }</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gradients Section -->
+    <section style="background: var(--color-white);">
+        <div class="container">
+            <h2 class="section-title">Gradients</h2>
+            <p class="section-subtitle">Approved gradient combinations for backgrounds, cards, and hero sections. Use 135deg angle.</p>
+
+            <h3 class="gradient-category">Primary Brand Gradients (Recommended)</h3>
+            <div class="gradient-grid">
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #134e4a, #0f3d3a);">
+                        <span class="gradient-label">Teal Deep</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Teal Deep</div>
+                        <div class="gradient-values">#134e4a → #0f3d3a</div>
+                        <div class="gradient-usage">Primary dark backgrounds, hero sections</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #0d9488, #0f766e);">
+                        <span class="gradient-label">Teal Accent</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Teal Accent</div>
+                        <div class="gradient-values">#0d9488 → #0f766e</div>
+                        <div class="gradient-usage">CTA sections, feature highlights</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #14b8a6, #0d9488);">
+                        <span class="gradient-label">Teal Light</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Teal Light</div>
+                        <div class="gradient-values">#14b8a6 → #0d9488</div>
+                        <div class="gradient-usage">Vibrant accents, buttons</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #134e4a, #0d9488);">
+                        <span class="gradient-label">Ocean</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Ocean</div>
+                        <div class="gradient-values">#134e4a → #0d9488</div>
+                        <div class="gradient-usage">Dark to light transitions</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="gradient-category">Dark / Professional</h3>
+            <div class="gradient-grid">
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #1a1a2e, #16162a);">
+                        <span class="gradient-label">Midnight</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Midnight</div>
+                        <div class="gradient-values">#1a1a2e → #16162a</div>
+                        <div class="gradient-usage">Dark mode backgrounds</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #374151, #1f2937);">
+                        <span class="gradient-label">Charcoal</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Charcoal</div>
+                        <div class="gradient-values">#374151 → #1f2937</div>
+                        <div class="gradient-usage">Professional dark sections</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #475569, #334155);">
+                        <span class="gradient-label">Slate</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Slate</div>
+                        <div class="gradient-values">#475569 → #334155</div>
+                        <div class="gradient-usage">Neutral dark backgrounds</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #164e63, #0c4a6e);">
+                        <span class="gradient-label">Deep Sea</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Deep Sea</div>
+                        <div class="gradient-values">#164e63 → #0c4a6e</div>
+                        <div class="gradient-usage">Alternative brand dark</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="gradient-category">Warm / Energy (Use Sparingly)</h3>
+            <div class="gradient-grid">
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #f97316, #ea580c);">
+                        <span class="gradient-label">Sunset</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Sunset</div>
+                        <div class="gradient-values">#f97316 → #ea580c</div>
+                        <div class="gradient-usage">Warning states, attention</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #fb7185, #f43f5e);">
+                        <span class="gradient-label">Coral</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Coral</div>
+                        <div class="gradient-values">#fb7185 → #f43f5e</div>
+                        <div class="gradient-usage">Soft alerts, feminine touches</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #fbbf24, #f59e0b);">
+                        <span class="gradient-label">Gold</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Gold</div>
+                        <div class="gradient-values">#fbbf24 → #f59e0b</div>
+                        <div class="gradient-usage">Premium, highlights</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                        <span class="gradient-label">Fire</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Fire</div>
+                        <div class="gradient-values">#ef4444 → #dc2626</div>
+                        <div class="gradient-usage">Critical alerts, danger</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="gradient-category">Cool / Calm</h3>
+            <div class="gradient-grid">
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #38bdf8, #0ea5e9);">
+                        <span class="gradient-label">Sky</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Sky</div>
+                        <div class="gradient-values">#38bdf8 → #0ea5e9</div>
+                        <div class="gradient-usage">Info sections, trust</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #818cf8, #6366f1);">
+                        <span class="gradient-label">Indigo</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Indigo</div>
+                        <div class="gradient-values">#818cf8 → #6366f1</div>
+                        <div class="gradient-usage">Creative, premium features</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #34d399, #10b981);">
+                        <span class="gradient-label">Mint</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Mint</div>
+                        <div class="gradient-values">#34d399 → #10b981</div>
+                        <div class="gradient-usage">Success, positive states</div>
+                    </div>
+                </div>
+                <div class="gradient-card">
+                    <div class="gradient-swatch" style="background: linear-gradient(135deg, #a78bfa, #8b5cf6);">
+                        <span class="gradient-label">Lavender</span>
+                    </div>
+                    <div class="gradient-info">
+                        <div class="gradient-name">Lavender</div>
+                        <div class="gradient-values">#a78bfa → #8b5cf6</div>
+                        <div class="gradient-usage">Creative accents</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); margin-top: var(--space-lg); color: var(--color-dark);">CSS Gradient Examples</h3>
+            <div class="code-block">
+                <pre><span class="code-comment">/* Primary Brand Gradients */</span>
+<span class="code-property">background:</span> <span class="code-value">linear-gradient(135deg, #134e4a, #0f3d3a)</span>; <span class="code-comment">/* Teal Deep */</span>
+<span class="code-property">background:</span> <span class="code-value">linear-gradient(135deg, #0d9488, #0f766e)</span>; <span class="code-comment">/* Teal Accent */</span>
+<span class="code-property">background:</span> <span class="code-value">linear-gradient(135deg, #14b8a6, #0d9488)</span>; <span class="code-comment">/* Teal Light */</span>
+<span class="code-property">background:</span> <span class="code-value">linear-gradient(135deg, #134e4a, #0d9488)</span>; <span class="code-comment">/* Ocean */</span></pre>
             </div>
         </div>
     </section>
