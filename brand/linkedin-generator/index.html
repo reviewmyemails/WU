@@ -727,10 +727,10 @@
         .slide-preview.has-bg::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-size: cover;
             background-position: var(--bg-position, center);
             background-image: var(--bg-image);
@@ -820,18 +820,18 @@
         }
 
         .slide-preview.theme-dark .slide-tag {
-            background: rgba(255,255,255,0.1);
-            color: var(--color-light-alt);
+            background: var(--color-accent);
+            color: white;
         }
 
         .slide-preview.theme-light .slide-tag,
         .slide-preview.theme-white .slide-tag {
-            background: rgba(13, 148, 136, 0.1);
-            color: var(--color-accent);
+            background: var(--color-accent);
+            color: white;
         }
 
         .slide-preview.theme-accent .slide-tag {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
             color: white;
         }
 
@@ -1335,13 +1335,12 @@
                     <label class="control-label">Background Image (optional)</label>
                     <div class="background-filter" style="margin-bottom: 8px;">
                         <select class="input-select" id="backgroundCategory" style="padding: 6px 10px; font-size: 12px;">
-                            <option value="all">All Backgrounds</option>
-                            <option value="pattern">Patterns</option>
-                            <option value="gradient">Gradients</option>
+                            <option value="all">All Images</option>
                             <option value="abstract">Abstract</option>
+                            <option value="gradient">Gradients</option>
                             <option value="scene">Scenes</option>
-                            <option value="character">Characters</option>
-                            <option value="uploaded">Uploaded</option>
+                            <option value="character">Character Scenes</option>
+                            <option value="uploaded">My Uploads</option>
                         </select>
                     </div>
                     <div class="background-grid" id="backgroundGrid">
@@ -1734,18 +1733,18 @@
         const DELPHI_IMAGES = CHARACTER_IMAGES.delphi;
         let currentCharacterType = 'delphi';
 
-        // Background categories: pattern (repeatable), scene (focal point matters), gradient (flexible)
+        // Background categories: abstract, gradient, scene, character
         // Best sizes: portrait, landscape, square, all
         const BACKGROUND_IMAGES = [
-            // Patterns - work well at any position, good for all sizes
-            { name: 'Email Expert', file: 'Email Expert iMAGES.png', category: 'pattern', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Teal Pattern 1', file: 'Gemini_Generated_Image_f448y9f448y9f448.png', category: 'pattern', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Teal Pattern 2', file: 'Gemini_Generated_Image_eys68leys68leys6.png', category: 'pattern', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Abstract Teal 1', file: 'Gemini_Generated_Image_vdo9nbvdo9nbvdo9.png', category: 'pattern', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Abstract Teal 2', file: 'Gemini_Generated_Image_w2vrmdw2vrmdw2vr.png', category: 'pattern', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Network Pattern', file: 'Gemini_Generated_Image_oxwfzxoxwfzxoxwf.png', category: 'pattern', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Email Flow', file: 'Gemini_Generated_Image_ph7ompph7ompph7o.png', category: 'pattern', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Digital Wave', file: 'Gemini_Generated_Image_s0vbwjs0vbwjs0vb.png', category: 'pattern', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
+            // Abstract backgrounds - work well at any position
+            { name: 'Email Expert', file: 'Email Expert iMAGES.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
+            { name: 'Teal Abstract 1', file: 'Gemini_Generated_Image_f448y9f448y9f448.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
+            { name: 'Teal Abstract 2', file: 'Gemini_Generated_Image_eys68leys68leys6.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
+            { name: 'Abstract Teal 1', file: 'Gemini_Generated_Image_vdo9nbvdo9nbvdo9.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
+            { name: 'Abstract Teal 2', file: 'Gemini_Generated_Image_w2vrmdw2vrmdw2vr.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
+            { name: 'Network Abstract', file: 'Gemini_Generated_Image_oxwfzxoxwfzxoxwf.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
+            { name: 'Email Flow', file: 'Gemini_Generated_Image_ph7ompph7ompph7o.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
+            { name: 'Digital Wave', file: 'Gemini_Generated_Image_s0vbwjs0vbwjs0vb.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
             { name: 'Gradient Mesh', file: 'Gemini_Generated_Image_oaxk8woaxk8woaxk.png', category: 'gradient', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
 
             // Scenes - position matters, better for specific sizes
@@ -1781,7 +1780,7 @@
         ];
 
         // Get background categories for filtering
-        const BACKGROUND_CATEGORIES = ['all', 'pattern', 'gradient', 'abstract', 'scene', 'character'];
+        const BACKGROUND_CATEGORIES = ['all', 'abstract', 'gradient', 'scene', 'character'];
 
         // Generated Pattern Functions
         function generatePatternSVG(type, opacity, scale, position, theme) {
