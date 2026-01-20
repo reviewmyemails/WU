@@ -916,6 +916,13 @@
             display: block;
         }
 
+        /* Direct logo image styling */
+        img.logo-img {
+            display: block;
+            max-width: none;
+            object-fit: contain;
+        }
+
         /* Character positioning */
         .character-wrapper {
             position: absolute;
@@ -2592,9 +2599,8 @@
             // Logo (only if visible) - smart positioning
             if (state.logo.visible) {
                 html += `
-                    <div class="logo-img" style="position: absolute; left: ${state.logo.x}%; top: ${state.logo.y}%; z-index: 10; height: ${state.logo.zoom}px;">
-                        <img src="../../svg/${state.logo.file}" alt="Logo" style="height: 100%; width: auto; display: block;">
-                    </div>
+                    <img class="logo-img" src="../../svg/${state.logo.file}" alt="Logo"
+                         style="position: absolute; left: ${state.logo.x}%; top: ${state.logo.y}%; z-index: 10; height: ${state.logo.zoom}px; width: auto;">
                 `;
             }
 
