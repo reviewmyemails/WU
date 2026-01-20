@@ -177,6 +177,52 @@
             margin-top: 4px;
         }
 
+        /* Toggle Switch */
+        .toggle-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .toggle-control input {
+            display: none;
+        }
+
+        .toggle-slider {
+            width: 40px;
+            height: 22px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 11px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .toggle-slider::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.2s;
+        }
+
+        .toggle-control input:checked + .toggle-slider {
+            background: var(--color-accent);
+        }
+
+        .toggle-control input:checked + .toggle-slider::after {
+            left: 20px;
+        }
+
+        .toggle-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+        }
+
         /* Slider */
         .slider-group {
             display: flex;
@@ -245,6 +291,49 @@
             background: rgba(13, 148, 136, 0.2);
         }
         .image-item img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Badge Color Grid */
+        .badge-color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .badge-color-item {
+            padding: 8px 4px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-color-item:hover { transform: scale(1.05); }
+        .badge-color-item.selected {
+            border-color: var(--color-white);
+            box-shadow: 0 0 0 2px var(--color-accent);
+        }
+
+        .badge-color-item[title]:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+            z-index: 100;
+            margin-bottom: 4px;
+        }
 
         /* Gradient Grid */
         .gradient-grid {
@@ -736,6 +825,25 @@
             height: 100%;
             width: auto;
         }
+
+        /* Character positioning */
+        .character-wrapper {
+            position: absolute;
+            z-index: 5;
+        }
+        .character-wrapper img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Smart spacing - content area adjusts when logo is at top */
+        .tpl-statement.has-logo-top,
+        .tpl-stat.has-logo-top,
+        .tpl-checklist.has-logo-top,
+        .tpl-quote.has-logo-top {
+            padding-top: 15%;
+        }
     </style>
 </head>
 <body>
@@ -795,11 +903,19 @@
                 <div class="control-section">
                     <h3>Logo</h3>
                     <div class="control-group">
-                        <label class="control-label">Select Logo</label>
-                        <div class="image-grid" id="logoGrid"></div>
+                        <label class="toggle-control">
+                            <input type="checkbox" id="logoVisible" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Show Logo</span>
+                        </label>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label">Position X</label>
+                    <div id="logoControls">
+                        <div class="control-group">
+                            <label class="control-label">Select Logo</label>
+                            <div class="image-grid" id="logoGrid"></div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Position X</label>
                         <div class="slider-group">
                             <span class="slider-label">L</span>
                             <input type="range" class="slider" id="logoX" min="0" max="100" value="8">
@@ -825,6 +941,52 @@
                             <span class="slider-value" id="logoZoomValue">36px</span>
                         </div>
                     </div>
+                    </div>
+                </div>
+
+                <!-- Character -->
+                <div class="control-section">
+                    <h3>Character</h3>
+                    <div class="control-group">
+                        <label class="toggle-control">
+                            <input type="checkbox" id="characterVisible">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Show Character</span>
+                        </label>
+                    </div>
+                    <div id="characterControls" style="display: none;">
+                        <div class="control-group">
+                            <label class="control-label">Select Character</label>
+                            <div class="image-grid" id="characterGrid" style="grid-template-columns: repeat(3, 1fr);"></div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Position X</label>
+                            <div class="slider-group">
+                                <span class="slider-label">L</span>
+                                <input type="range" class="slider" id="charX" min="0" max="100" value="70">
+                                <span class="slider-label">R</span>
+                                <span class="slider-value" id="charXValue">70%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Position Y</label>
+                            <div class="slider-group">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="charY" min="0" max="100" value="50">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="charYValue">50%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Size</label>
+                            <div class="slider-group">
+                                <span class="slider-label">S</span>
+                                <input type="range" class="slider" id="charZoom" min="50" max="400" value="150">
+                                <span class="slider-label">L</span>
+                                <span class="slider-value" id="charZoomValue">150px</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Content (dynamic based on template type) -->
@@ -836,6 +998,20 @@
                 <!-- Background -->
                 <div class="control-section">
                     <h3>Background</h3>
+                    <div class="control-group">
+                        <label class="control-label">Background Image</label>
+                        <div class="image-grid" id="backgroundGrid" style="grid-template-columns: repeat(3, 1fr); max-height: 120px;"></div>
+                        <button class="btn btn-secondary" style="margin-top: 8px; padding: 6px 12px; font-size: 11px;" onclick="clearBackgroundImage()">Clear Image</button>
+                    </div>
+                    <div class="control-group" id="gradientOpacityGroup" style="display: none;">
+                        <label class="control-label">Gradient Overlay Opacity</label>
+                        <div class="slider-group">
+                            <span class="slider-label">0</span>
+                            <input type="range" class="slider" id="gradientOpacity" min="0" max="100" value="80">
+                            <span class="slider-label">100</span>
+                            <span class="slider-value" id="gradientOpacityValue">80%</span>
+                        </div>
+                    </div>
                     <div class="control-group">
                         <label class="control-label">Gradient Presets</label>
                         <div class="gradient-grid" id="gradientPresets"></div>
@@ -875,6 +1051,41 @@
             { file: 'Dark-Icon.svg', name: 'Dark Icon' }
         ];
 
+        const CHARACTERS = [
+            { file: 'Captain/Captain - Hand to the left.jpeg', name: 'Captain - Hand Left', category: 'Captain' },
+            { file: 'Captain/Captain - Looking right.jpeg', name: 'Captain - Looking Right', category: 'Captain' },
+            { file: 'Captain/Captain - Standing left.jpeg', name: 'Captain - Standing', category: 'Captain' },
+            { file: 'Captain/Captain - Walking left.jpeg', name: 'Captain - Walking', category: 'Captain' },
+            { file: 'Mermaid/Generated Image January 05, 2026 - 1_47AM (1).jpeg', name: 'Mermaid 1', category: 'Mermaid' },
+            { file: 'Mermaid/Generated Image January 05, 2026 - 1_57AM.jpeg', name: 'Mermaid 2', category: 'Mermaid' },
+            { file: 'Mermaid/Generated Image January 05, 2026 - 2_11AM.jpeg', name: 'Mermaid 3', category: 'Mermaid' },
+            { file: 'Mermaid/Generated_Image_January_05__2026_-_3_56PM-removebg-preview.png', name: 'Mermaid (No BG)', category: 'Mermaid' },
+            { file: 'Pirate/ChatGPT Image Jan 5, 2026, 01_15_50 AM.png', name: 'Pirate 1', category: 'Pirate' },
+            { file: 'Pirate/ChatGPT Image Jan 5, 2026, 01_17_32 AM.png', name: 'Pirate 2', category: 'Pirate' },
+            { file: 'Pirate/Generated Image January 05, 2026 - 1_40AM.jpeg', name: 'Pirate 3', category: 'Pirate' },
+            { file: 'Pirate/Generated Image January 05, 2026 - 1_44AM.jpeg', name: 'Pirate 4', category: 'Pirate' }
+        ];
+
+        const BACKGROUNDS = [
+            { file: 'Background/Gemini_Generated_Image_f448y9f448y9f448.png', name: 'Ocean 1' },
+            { file: 'Background/Gemini_Generated_Image_vdo9nbvdo9nbvdo9.png', name: 'Ocean 2' },
+            { file: 'Background/Gemini_Generated_Image_oxwfzxoxwfzxoxwf.png', name: 'Ocean 3' },
+            { file: 'Background/ChatGPT Image Sep 29, 2025, 07_02_37 PM.png', name: 'Abstract 1' },
+            { file: 'Background/ChatGPT Image Sep 29, 2025, 07_26_34 PM.png', name: 'Abstract 2' },
+            { file: 'Background/ChatGPT Image Sep 29, 2025, 08_50_38 PM.png', name: 'Abstract 3' },
+            { file: 'Background/ChatGPT Image Nov 17, 2025, 12_52_31 PM.png', name: 'Digital 1' },
+            { file: 'Background/ChatGPT Image Nov 17, 2025, 01_02_55 PM.png', name: 'Digital 2' }
+        ];
+
+        const BADGE_COLORS = [
+            { id: 'accent', name: 'Teal', bg: 'rgba(13, 148, 136, 0.15)', color: '#0d9488', usage: 'Tips, features, general info' },
+            { id: 'secondary', name: 'Gold', bg: 'rgba(251, 191, 36, 0.2)', color: '#fbbf24', usage: 'Strategy, highlights, premium' },
+            { id: 'danger', name: 'Red', bg: 'rgba(243, 49, 68, 0.15)', color: '#f33144', usage: 'Alerts, warnings, critical errors' },
+            { id: 'dark', name: 'Dark', bg: '#134e4a', color: '#ffffff', usage: 'Institutional, authority posts' },
+            { id: 'warning', name: 'Orange', bg: 'rgba(249, 148, 59, 0.2)', color: '#f9943b', usage: 'Caution, monitoring, watch' },
+            { id: 'success', name: 'Green', bg: 'rgba(31, 169, 92, 0.15)', color: '#1fa95c', usage: 'Success, verified, safe' }
+        ];
+
         const GRADIENT_PRESETS = [
             { name: 'Teal Deep', start: '#134e4a', end: '#0f3d3a', usage: 'Hero sections, authority posts' },
             { name: 'Teal Accent', start: '#0d9488', end: '#0f766e', usage: 'CTAs, engagement posts' },
@@ -896,6 +1107,9 @@
 
         // Template definitions
         const TEMPLATES = {
+            // ========================================
+            // EXISTING TEMPLATES
+            // ========================================
             'dark-statement-sq': {
                 type: 'statement',
                 format: 'square',
@@ -974,6 +1188,535 @@
                     author: 'Review My Emails',
                     authorTitle: 'Deliverability Experts'
                 }
+            },
+
+            // ========================================
+            // WEEK 1: Q4 DAMAGE & BASELINES
+            // ========================================
+            'w1-brand-bold': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Strategy',
+                    badgeColor: 'secondary',
+                    headline: 'January is not\na reset.',
+                    body: 'Your baseline is being set right now.',
+                    cta: null
+                }
+            },
+            'w1-brand-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    headline: 'The calendar changes.\n[teal:The tide does not.]',
+                    body: 'Q4 debt follows you.',
+                    cta: null
+                }
+            },
+            'w1-brand-minimal': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'REMINDER',
+                    headline: 'Q4 debt follows you.',
+                    cta: 'Read the Guide'
+                }
+            },
+            'w1-yanna-danger': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Critical Error',
+                    badgeColor: 'danger',
+                    headline: '"Mostly fine"\n[teal:is the danger.]',
+                    body: 'January hides problems best.',
+                    cta: null
+                }
+            },
+            'w1-yanna-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'sea',
+                data: {
+                    headline: 'Most senders do not crash in the storm.\n[teal:They drift afterward.]',
+                    body: null,
+                    cta: null,
+                    borderLeft: true
+                }
+            },
+            'w1-yanna-alert': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    headline: 'Baselines slip\nquietly.',
+                    body: null,
+                    cta: null,
+                    borderDanger: true
+                }
+            },
+            'w1-norris-checklist': {
+                type: 'checklist',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: "It's okay",
+                    badgeColor: 'accent',
+                    headline: 'Confusion in January is normal.',
+                    items: [
+                        { text: 'Signals first', status: 'good' },
+                        { text: 'Answers second', status: 'good' }
+                    ],
+                    cta: null
+                }
+            },
+            'w1-norris-quote': {
+                type: 'quote',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    emoji: '🗺️',
+                    quote: 'It can feel like you are reading the water without a map.',
+                    author: 'Norris Errie',
+                    authorTitle: null
+                }
+            },
+            'w1-norris-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    pills: ['Keep', 'Monitor'],
+                    headline: '[teal:Clarity starts with questions.]',
+                    cta: 'Ask us anything'
+                }
+            },
+            'w1-daniel-chart': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'Forecast Risk',
+                    badgeColor: 'dark',
+                    showChart: true,
+                    headline: 'Small drops\ncompound fast.',
+                    body: 'Baselines shift without alarms.',
+                    cta: null,
+                    borderDark: true
+                }
+            },
+            'w1-daniel-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    pills: ['Drifting', 'Collapse'],
+                    pillColors: ['warning', 'danger'],
+                    headline: 'Baselines do not collapse.\n[teal:They drift.]',
+                    cta: null
+                }
+            },
+            'w1-daniel-icon': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    headline: 'January sets\nthe year.',
+                    emoji: '🪜',
+                    cta: null
+                }
+            },
+
+            // ========================================
+            // WEEK 2: FALSE RECOVERY SIGNALS
+            // ========================================
+            'w2-brand-main': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Metric Analysis',
+                    badgeColor: 'accent',
+                    headline: 'Numbers move\n[teal:before trust.]',
+                    body: 'The surface can look calm while the current shifts.',
+                    cta: null
+                }
+            },
+            'w2-brand-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    pills: ['Incomplete Data'],
+                    pillColors: ['warning'],
+                    headline: 'Metrics are\nincomplete.',
+                    cta: 'Read Why'
+                }
+            },
+            'w2-yanna-blunt': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    emoji: '📉',
+                    headline: 'Dashboards can lie in January.',
+                    body: '[teal:Do not call it recovery.]',
+                    cta: null
+                }
+            },
+            'w2-yanna-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'sea',
+                data: {
+                    headline: 'Calm metrics can feel like calm seas.',
+                    body: 'That is not the same as safety.',
+                    borderLeft: true,
+                    cta: null
+                }
+            },
+            'w2-yanna-alert': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'False Signal',
+                    badgeColor: 'danger',
+                    headline: 'Uncertainty is\nnot improvement.',
+                    borderDanger: true,
+                    cta: null
+                }
+            },
+            'w2-norris-gentle': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Perspective',
+                    badgeColor: 'secondary',
+                    headline: 'Sometimes the calm is real.',
+                    body: 'Sometimes you are simply closer to shore.',
+                    cta: null
+                }
+            },
+            'w2-norris-button': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'PRO TIP',
+                    headline: 'Ask what really changed.',
+                    cta: 'See Checklist'
+                }
+            },
+            'w2-norris-pill': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    pills: ['Keep Visible'],
+                    pillColors: ['success'],
+                    headline: 'The safest audience stays visible.',
+                    cta: null
+                }
+            },
+            'w2-daniel-commercial': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'INVENTORY RISK',
+                    headline: 'Lost inboxes are\n[teal:lost inventory.]',
+                    borderDark: true,
+                    cta: null
+                }
+            },
+            'w2-daniel-contrast': {
+                type: 'statement',
+                format: 'square',
+                theme: 'accent',
+                data: {
+                    headline: 'Measure reach,\nnot relief.',
+                    cta: null
+                }
+            },
+
+            // ========================================
+            // WEEK 3: WHAT SHOULD STOP FIRST
+            // ========================================
+            'w3-brand-bold': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Strategy',
+                    badgeColor: 'secondary',
+                    headline: 'Restraint is\ncontainment.',
+                    body: 'Stop what you cannot defend.',
+                    cta: null
+                }
+            },
+            'w3-brand-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    headline: 'In rough water,\n[teal:you reduce sail.]',
+                    body: 'Pressure increases risk.',
+                    cta: null
+                }
+            },
+            'w3-brand-hook': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'RULE',
+                    headline: 'Stop what you\ncannot defend.',
+                    cta: 'The Pause List'
+                }
+            },
+            'w3-yanna-stop': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Stop',
+                    badgeColor: 'danger',
+                    headline: 'Pause anything\n[teal:based on hope.]',
+                    body: 'Stop adding fuel.',
+                    cta: null
+                }
+            },
+            'w3-yanna-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'sea',
+                data: {
+                    headline: 'Reef the sails before you add speed.\n[teal:Protect what still works.]',
+                    borderLeft: true,
+                    cta: null
+                }
+            },
+            'w3-yanna-alert': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    headline: 'Stop adding\nfuel.',
+                    borderDanger: true,
+                    cta: null
+                }
+            },
+            'w3-norris-checklist': {
+                type: 'checklist',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Strategy',
+                    badgeColor: 'accent',
+                    headline: 'Sending less can be smart.',
+                    items: [
+                        { text: 'Mail people who notice', status: 'good' },
+                        { text: 'Narrow now, expand later', status: 'good' }
+                    ],
+                    cta: null
+                }
+            },
+            'w3-norris-quote': {
+                type: 'quote',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    emoji: '⛵',
+                    quote: 'Staying in safer waters for a moment can protect the voyage.',
+                    author: 'Norris Errie',
+                    authorTitle: null
+                }
+            },
+            'w3-norris-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    pills: ['Safer Waters'],
+                    pillColors: ['success'],
+                    headline: '[teal:Narrow now,]\nexpand later.',
+                    cta: 'Safe Segments Guide'
+                }
+            },
+            'w3-daniel-chart': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'Revenue Risk',
+                    badgeColor: 'dark',
+                    showChart: true,
+                    headline: 'Risky segments\ntax winners.',
+                    body: 'Restraint protects revenue.',
+                    borderDark: true,
+                    cta: null
+                }
+            },
+            'w3-daniel-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    pills: ['Route', 'Retreat'],
+                    pillColors: ['success', 'warning'],
+                    headline: 'A controlled retreat protects the route that converts.',
+                    cta: null
+                }
+            },
+            'w3-daniel-icon': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    headline: 'Protect the list\nthat pays.',
+                    emoji: '💰',
+                    cta: null
+                }
+            },
+
+            // ========================================
+            // WEEK 4: STICKY DECISIONS
+            // ========================================
+            'w4-brand-main': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Long Term Impact',
+                    badgeColor: 'accent',
+                    headline: 'January decisions\n[teal:are sticky.]',
+                    body: 'Temporary becomes normal.',
+                    cta: null
+                }
+            },
+            'w4-brand-drift': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Drift Warning',
+                    badgeColor: 'dark',
+                    headline: 'Drift becomes the new course if you do not correct it.',
+                    cta: null
+                }
+            },
+            'w4-brand-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    pills: ['Ceiling Set'],
+                    pillColors: ['warning'],
+                    headline: 'Baselines become\nceilings.',
+                    cta: 'Review Now'
+                }
+            },
+            'w4-yanna-blunt': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    emoji: '🌫️',
+                    headline: 'Do not pretend nothing moved.',
+                    body: '[teal:Panic changes hide causes.]',
+                    cta: null
+                }
+            },
+            'w4-yanna-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'sea',
+                data: {
+                    headline: 'Do not change course in fog.',
+                    body: 'Stabilise before you change.',
+                    borderLeft: true,
+                    cta: null
+                }
+            },
+            'w4-yanna-stop': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'Stop',
+                    badgeColor: 'danger',
+                    headline: 'Panic changes\nhide causes.',
+                    borderDanger: true,
+                    cta: null
+                }
+            },
+            'w4-norris-gentle': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Perspective',
+                    badgeColor: 'secondary',
+                    headline: 'Waiting feels safe but is risky.',
+                    body: 'Small check ins prevent drift.',
+                    cta: null
+                }
+            },
+            'w4-norris-button': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'PRO TIP',
+                    headline: 'Questions are most useful now.',
+                    cta: 'Ask Here'
+                }
+            },
+            'w4-norris-pill': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    pills: ['Drift is Quiet'],
+                    pillColors: ['warning'],
+                    headline: 'Drift is quiet. That is why it wins.',
+                    cta: null
+                }
+            },
+            'w4-daniel-planning': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'PLANNING',
+                    headline: 'Baselines rewrite\n[teal:forecasts.]',
+                    borderDark: true,
+                    cta: null
+                }
+            },
+            'w4-daniel-org': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    headline: 'Once the course is accepted, the organisation plans around it.',
+                    cta: null
+                }
+            },
+            'w4-daniel-contrast': {
+                type: 'statement',
+                format: 'square',
+                theme: 'accent',
+                data: {
+                    headline: 'A weak January\nshapes the year.',
+                    cta: null
+                }
             }
         };
 
@@ -986,10 +1729,22 @@
             format: 'square',
             theme: 'dark',
             logo: {
+                visible: true,
                 file: 'Horizontal-Logo.svg',
                 x: 8,
                 y: 8,
                 zoom: 36
+            },
+            character: {
+                visible: false,
+                file: null,
+                x: 70,
+                y: 50,
+                zoom: 150
+            },
+            background: {
+                image: null,
+                gradientOpacity: 80
             },
             gradient: null,
             data: {}
@@ -1000,6 +1755,12 @@
         // ========================================
         document.addEventListener('DOMContentLoaded', () => {
             initLogoGrid();
+            initLogoToggle();
+            initCharacterGrid();
+            initCharacterToggle();
+            initCharacterSliders();
+            initBackgroundGrid();
+            initGradientOpacitySlider();
             initGradientPresets();
             initFormatListeners();
             initThemeListeners();
@@ -1007,6 +1768,94 @@
             loadTemplateFromURL();
             renderPreview();
         });
+
+        function initLogoToggle() {
+            const toggle = document.getElementById('logoVisible');
+            const controls = document.getElementById('logoControls');
+
+            toggle.addEventListener('change', () => {
+                state.logo.visible = toggle.checked;
+                controls.style.display = toggle.checked ? 'block' : 'none';
+                renderPreview();
+            });
+        }
+
+        function initCharacterGrid() {
+            const grid = document.getElementById('characterGrid');
+            grid.innerHTML = CHARACTERS.map((char, i) => `
+                <div class="image-item" data-character="${char.file}" title="${char.name}">
+                    <img src="../${char.file}" alt="${char.name}" style="object-fit: cover;">
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.image-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.character.file = item.dataset.character;
+                    renderPreview();
+                });
+            });
+        }
+
+        function initCharacterToggle() {
+            const toggle = document.getElementById('characterVisible');
+            const controls = document.getElementById('characterControls');
+
+            toggle.addEventListener('change', () => {
+                state.character.visible = toggle.checked;
+                controls.style.display = toggle.checked ? 'block' : 'none';
+                renderPreview();
+            });
+        }
+
+        function initCharacterSliders() {
+            ['charX', 'charY', 'charZoom'].forEach(id => {
+                const slider = document.getElementById(id);
+                slider.addEventListener('input', (e) => {
+                    const key = id.replace('char', '').toLowerCase();
+                    state.character[key === 'zoom' ? 'zoom' : key] = parseInt(e.target.value);
+                    document.getElementById(id + 'Value').textContent =
+                        key === 'zoom' ? e.target.value + 'px' : e.target.value + '%';
+                    renderPreview();
+                });
+            });
+        }
+
+        function initBackgroundGrid() {
+            const grid = document.getElementById('backgroundGrid');
+            grid.innerHTML = BACKGROUNDS.map((bg, i) => `
+                <div class="image-item" data-background="${bg.file}" title="${bg.name}">
+                    <img src="../${bg.file}" alt="${bg.name}" style="object-fit: cover;">
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.image-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.background.image = item.dataset.background;
+                    document.getElementById('gradientOpacityGroup').style.display = 'block';
+                    renderPreview();
+                });
+            });
+        }
+
+        function clearBackgroundImage() {
+            state.background.image = null;
+            document.getElementById('backgroundGrid').querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
+            document.getElementById('gradientOpacityGroup').style.display = 'none';
+            renderPreview();
+        }
+
+        function initGradientOpacitySlider() {
+            const slider = document.getElementById('gradientOpacity');
+            slider.addEventListener('input', (e) => {
+                state.background.gradientOpacity = parseInt(e.target.value);
+                document.getElementById('gradientOpacityValue').textContent = e.target.value + '%';
+                renderPreview();
+            });
+        }
 
         function loadTemplateFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -1131,6 +1980,7 @@
                         <div class="control-group">
                             <label class="control-label">Badge (optional)</label>
                             <input type="text" class="input-text" id="inputBadge" value="${state.data.badge || ''}" placeholder="e.g., Pro Tip">
+                            <div class="badge-color-grid" id="badgeColorGrid"></div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Brand Text</label>
@@ -1185,6 +2035,7 @@
                         <div class="control-group">
                             <label class="control-label">Badge (optional)</label>
                             <input type="text" class="input-text" id="inputBadge" value="${state.data.badge || ''}" placeholder="e.g., Alert">
+                            <div class="badge-color-grid" id="badgeColorGrid"></div>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Label (optional)</label>
@@ -1230,10 +2081,36 @@
 
             container.innerHTML = html;
 
+            // Initialize badge color grid if present
+            initBadgeColorGrid();
+
             // Add event listeners to all inputs
             container.querySelectorAll('input, textarea').forEach(input => {
                 input.addEventListener('input', () => {
                     updateStateFromInputs();
+                    renderPreview();
+                });
+            });
+        }
+
+        function initBadgeColorGrid() {
+            const grid = document.getElementById('badgeColorGrid');
+            if (!grid) return;
+
+            grid.innerHTML = BADGE_COLORS.map(bc => `
+                <div class="badge-color-item ${state.data.badgeColor === bc.id ? 'selected' : ''}"
+                     data-color="${bc.id}"
+                     style="background: ${bc.bg}; color: ${bc.color};"
+                     title="${bc.usage}">
+                    ${bc.name}
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.badge-color-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.badge-color-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.data.badgeColor = item.dataset.color;
                     renderPreview();
                 });
             });
@@ -1288,22 +2165,41 @@
             // Update classes
             preview.className = `slide-preview size-${state.format} theme-${state.theme}`;
 
-            // Custom gradient
-            if (state.gradient) {
-                preview.style.background = `linear-gradient(135deg, ${state.gradient.start}, ${state.gradient.end})`;
-            } else {
-                preview.style.background = '';
+            // Build background style
+            let bgStyle = '';
+            if (state.background.image && state.gradient) {
+                // Background image with gradient overlay
+                const opacity = state.background.gradientOpacity / 100;
+                bgStyle = `background: linear-gradient(135deg, rgba(${hexToRgb(state.gradient.start)}, ${opacity}), rgba(${hexToRgb(state.gradient.end)}, ${opacity})), url('../${state.background.image}') center/cover no-repeat;`;
+            } else if (state.background.image) {
+                // Just background image
+                bgStyle = `background: url('../${state.background.image}') center/cover no-repeat;`;
+            } else if (state.gradient) {
+                // Just gradient
+                bgStyle = `background: linear-gradient(135deg, ${state.gradient.start}, ${state.gradient.end});`;
             }
+            preview.style.cssText = bgStyle;
 
             // Render template based on type
             let html = '';
 
-            // Logo
-            html += `
-                <div class="logo-wrapper" style="left: ${state.logo.x}%; top: ${state.logo.y}%; height: ${state.logo.zoom}px;">
-                    <img src="../../svg/${state.logo.file}" alt="Logo">
-                </div>
-            `;
+            // Logo (only if visible) - smart positioning
+            if (state.logo.visible) {
+                html += `
+                    <div class="logo-wrapper" style="left: ${state.logo.x}%; top: ${state.logo.y}%; height: ${state.logo.zoom}px;">
+                        <img src="../../svg/${state.logo.file}" alt="Logo">
+                    </div>
+                `;
+            }
+
+            // Character (only if visible and file selected)
+            if (state.character.visible && state.character.file) {
+                html += `
+                    <div class="character-wrapper" style="left: ${state.character.x}%; top: ${state.character.y}%; transform: translate(-50%, -50%); height: ${state.character.zoom}px;">
+                        <img src="../${state.character.file}" alt="Character">
+                    </div>
+                `;
+            }
 
             switch (state.templateType) {
                 case 'statement':
@@ -1325,11 +2221,12 @@
 
         function renderStatementTemplate() {
             const d = state.data;
-            const badgeClass = d.badgeColor === 'danger' ? 'badge-danger' : 'badge-accent';
+            const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
+            const hasLogoTop = state.logo.visible && state.logo.y < 20;
 
             return `
-                <div class="tpl-statement">
-                    ${d.badge ? `<div class="badge ${badgeClass}">${d.badge}</div>` : ''}
+                <div class="tpl-statement ${hasLogoTop ? 'has-logo-top' : ''}">
+                    ${d.badge ? `<div class="badge" style="${badgeStyle}">${d.badge}</div>` : ''}
                     <div class="content-area">
                         ${d.brand ? `<div class="brand">${d.brand}</div>` : ''}
                         ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
@@ -1342,8 +2239,9 @@
 
         function renderStatTemplate() {
             const d = state.data;
+            const hasLogoTop = state.logo.visible && state.logo.y < 20;
             return `
-                <div class="tpl-stat">
+                <div class="tpl-stat ${hasLogoTop ? 'has-logo-top' : ''}">
                     ${d.label ? `<div class="label">${d.label}</div>` : ''}
                     <div class="stat-box">
                         <div class="stat-value">${d.stat || ''}</div>
@@ -1357,12 +2255,13 @@
 
         function renderChecklistTemplate() {
             const d = state.data;
-            const badgeClass = d.badgeColor === 'danger' ? 'badge-danger' : 'badge-accent';
+            const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
             const items = d.items || [];
+            const hasLogoTop = state.logo.visible && state.logo.y < 20;
 
             return `
-                <div class="tpl-checklist">
-                    ${d.badge ? `<div class="badge ${badgeClass}" style="display:inline-block;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;background:${d.badgeColor === 'danger' ? 'rgba(243,49,68,0.15)' : 'rgba(13,148,136,0.15)'};color:${d.badgeColor === 'danger' ? 'var(--color-danger)' : 'var(--color-accent)'};">${d.badge}</div>` : ''}
+                <div class="tpl-checklist ${hasLogoTop ? 'has-logo-top' : ''}">
+                    ${d.badge ? `<div class="badge" style="${badgeStyle}">${d.badge}</div>` : ''}
                     ${d.label ? `<div class="label">${d.label}</div>` : ''}
                     ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
                     <div class="items">
@@ -1380,8 +2279,9 @@
 
         function renderQuoteTemplate() {
             const d = state.data;
+            const hasLogoTop = state.logo.visible && state.logo.y < 20;
             return `
-                <div class="tpl-quote">
+                <div class="tpl-quote ${hasLogoTop ? 'has-logo-top' : ''}">
                     <div class="quote-mark">"</div>
                     <div class="quote-text">${d.quote || ''}</div>
                     <div class="divider"></div>
@@ -1392,6 +2292,18 @@
                     </div>
                 </div>
             `;
+        }
+
+        function getBadgeStyle(colorId) {
+            const bc = BADGE_COLORS.find(b => b.id === colorId) || BADGE_COLORS[0];
+            return `display:inline-block;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;background:${bc.bg};color:${bc.color};`;
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ?
+                `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` :
+                '0, 0, 0';
         }
 
         function parseRichText(text) {

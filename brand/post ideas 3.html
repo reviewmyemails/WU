@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>January 2026 | RME Creative Board (Visual)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* RME Brand Palette */
+            --brand-dark: #134e4a;
+            --brand-accent: #0d9488;
+            --brand-accent-hover: #0f766e;
+            --brand-light: #f0fdfa;
+            --brand-light-alt: #ccfbf1;
+            --brand-white: #ffffff;
+            --brand-muted: #6b7280;
+            --brand-border: #e5e7eb;
+            --brand-danger: #f33144;
+            --brand-warning: #f9943b;
+            --brand-secondary: #fbbf24;
+            --brand-success: #1fa95c;
+            --brand-off-white: #fafcfc;
+
+            /* Spacing & Radius */
+            --radius-lg: 12px;
+            --radius-md: 8px;
+            --radius-sm: 6px;
+            --radius-full: 100px;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 40px;
+            color: #1f2937;
+        }
+
+        /* --- CONTROLS --- */
+        .controls {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: white;
+            padding: 16px 24px;
+            border-radius: var(--radius-lg);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid var(--brand-border);
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 4px;
+            background: #f3f4f6;
+            padding: 4px;
+            border-radius: var(--radius-md);
+        }
+
+        .toggle-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            color: var(--brand-muted);
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn:hover { color: var(--brand-dark); }
+
+        .toggle-btn.active {
+            background: white;
+            color: var(--brand-dark);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* --- LAYOUT --- */
+        .section-header {
+            max-width: 1200px;
+            margin: 0 auto 40px auto;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--brand-border);
+        }
+        
+        .week-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--brand-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .week-subtitle {
+            font-size: 15px;
+            color: var(--brand-muted);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .persona-row {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 80px auto;
+            align-items: start;
+        }
+
+        .persona-info {
+            position: sticky;
+            top: 100px;
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--brand-border);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .persona-name { font-size: 18px; font-weight: 700; color: var(--brand-dark); margin-bottom: 4px; }
+        .persona-role { font-size: 13px; color: var(--brand-muted); margin-bottom: 12px; font-weight: 500; }
+        .persona-badge { 
+            display: inline-block; 
+            padding: 6px 10px; 
+            border-radius: var(--radius-sm); 
+            font-size: 11px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+
+        .grid {
+            display: grid;
+            gap: 32px;
+            grid-template-columns: repeat(3, 1fr); 
+            align-items: start; /* Prevents stretching */
+        }
+
+        /* --- CARD CONTAINER --- */
+        .creative-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--brand-border);
+            display: flex;
+            flex-direction: column;
+        }
+        .creative-card:hover { 
+            transform: translateY(-4px); 
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1); 
+            border-color: var(--brand-accent);
+        }
+
+        .card-meta {
+            padding: 12px 16px;
+            background: white;
+            border-top: 1px solid var(--brand-border);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--brand-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- ASPECT RATIO HANDLING --- */
+        .preview-wrapper {
+            width: 100%;
+            position: relative;
+            background: #e5e5e5;
+        }
+        
+        /* Using 'padding-bottom' trick for aspect ratio 
+           Square: 1/1 = 100%
+           Portrait: 5/4 = 125%
+           Wide: 1/1.91 = ~52.36%
+        */
+        .ratio-square { padding-bottom: 100%; }
+        .ratio-portrait { padding-bottom: 125%; }
+        .ratio-wide { padding-bottom: 52.36%; }
+
+        .creative-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 8%; /* Safe zone padding */
+            box-sizing: border-box;
+            overflow: hidden; /* Prevent spillover */
+        }
+
+        /* --- TYPOGRAPHY UTILS --- */
+        .t-brand { 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            font-weight: 700; 
+            opacity: 0.9; 
+            margin-bottom: auto; /* Pushes content down if needed */
+        }
+        
+        /* Font sizes use 'clamp' or relative units to scale slightly */
+        .t-h1 { 
+            font-size: 1.75rem; 
+            font-weight: 800; 
+            line-height: 1.1; 
+            margin-bottom: 0.75rem; 
+            letter-spacing: -0.02em;
+        }
+        .t-h2 { 
+            font-size: 1.35rem; 
+            font-weight: 700; 
+            line-height: 1.25; 
+            margin-bottom: 0.5rem; 
+            letter-spacing: -0.01em;
+        }
+        .t-p { 
+            font-size: 0.9rem; 
+            line-height: 1.5; 
+            opacity: 0.9; 
+            margin-bottom: 0; 
+            font-weight: 400;
+        }
+        
+        .c-btn { 
+            display: inline-block; 
+            padding: 10px 20px; 
+            border-radius: var(--radius-full); 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            text-align: center; 
+            width: fit-content; 
+            text-decoration: none;
+        }
+        
+        .c-line { 
+            width: 48px; 
+            height: 3px; 
+            background: currentColor; 
+            margin: 20px 0; 
+            opacity: 0.3; 
+            border-radius: 2px;
+        }
+
+        /* --- COMPONENTS --- */
+        /* Status Pills */
+        .status-group { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+        .status-pill { 
+            padding: 6px 12px; 
+            border-radius: var(--radius-full); 
+            font-size: 0.7rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+        }
+        .status-keep { background: var(--brand-success); color: white; }
+        .status-monitor { background: var(--brand-warning); color: white; }
+        .status-suppress { background: var(--brand-danger); color: white; }
+        
+        /* Badges */
+        .c-badge { 
+            display: inline-block; 
+            padding: 6px 12px; 
+            border-radius: var(--radius-sm); 
+            font-size: 0.7rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            width: fit-content; 
+            margin-bottom: 16px; 
+            letter-spacing: 0.5px;
+        }
+        .badge-accent { background: var(--brand-accent); color: white; }
+        .badge-secondary { background: var(--brand-secondary); color: var(--brand-dark); }
+        .badge-dark { background: var(--brand-dark); color: white; }
+        .badge-danger { background: var(--brand-danger); color: white; }
+
+        /* Image Placeholder */
+        .img-placeholder {
+            width: 100%;
+            height: 140px; /* Fixed height for visual consistency */
+            border: 1px dashed rgba(0,0,0,0.15);
+            border-radius: var(--radius-md);
+            background: rgba(0,0,0,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-muted);
+            font-size: 0.75rem;
+            text-align: center;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .bg-dark .img-placeholder { 
+            border-color: rgba(255,255,255,0.2); 
+            background: rgba(255,255,255,0.05); 
+            color: rgba(255,255,255,0.7); 
+        }
+
+        /* Fake UI Chart */
+        .ui-chart-bar { display: flex; align-items: flex-end; gap: 6px; height: 60px; margin-bottom: 20px; width: 100%; }
+        .ui-bar { flex: 1; background: currentColor; opacity: 0.15; border-radius: 4px 4px 0 0; height: 30%; transition: height 0.3s; }
+        .ui-bar:nth-child(2) { height: 60%; }
+        .ui-bar.active { opacity: 1; height: 90%; background: var(--brand-danger); }
+
+        /* --- THEMES --- */
+        .bg-dark { background: var(--brand-dark); color: white; }
+        .bg-light { background: var(--brand-light); color: var(--brand-dark); }
+        .bg-white { background: white; color: var(--brand-dark); }
+        .bg-accent { background: var(--brand-accent); color: white; }
+        
+        .bg-sea {
+            background-color: var(--brand-light);
+            background-image: radial-gradient(var(--brand-accent) 0.5px, transparent 0.5px);
+            background-size: 12px 12px;
+        }
+
+        .bg-dark .c-btn { background: var(--brand-accent); color: white; }
+        .bg-dark .c-btn:hover { background: var(--brand-accent-hover); }
+        
+        .bg-white .c-btn, .bg-light .c-btn { background: var(--brand-dark); color: white; }
+        
+        .text-accent { color: var(--brand-accent); }
+        .text-muted { opacity: 0.7; }
+
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <div style="font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+            <span style="width: 10px; height: 10px; background: var(--brand-accent); border-radius: 50%;"></span>
+            JAN 2026 Creative Board
+        </div>
+        <div class="toggle-group">
+            <button class="toggle-btn active" onclick="setRatio('ratio-square', 3)">Square (1:1)</button>
+            <button class="toggle-btn" onclick="setRatio('ratio-portrait', 4)">Portrait (4:5)</button>
+            <button class="toggle-btn" onclick="setRatio('ratio-wide', 2)">Wide (Link)</button>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         WEEK 1: Q4 Damage & Baselines (Jan 5-8)
+         ============================================================ -->
+    
+    <div class="section-header">
+        <div class="week-title">Week 1</div>
+        <div class="week-subtitle">Theme: Q4 Damage & Baselines</div>
+    </div>
+
+    <!-- BRAND PAGE (Jan 5) -->
+    <div class="persona-row">
+        <div class="persona-info">
+            <div class="persona-name">Brand Page</div>
+            <div class="persona-role">The Lighthouse</div>
+            <div class="persona-badge bg-dark">Institutional</div>
+        </div>
+        <div class="grid">
+            
+            <!-- Option 1: Bold Statement + Badge -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-dark">
+                        <div class="c-badge badge-secondary">Strategy</div>
+                        <div style="margin-top: auto; margin-bottom: auto;">
+                            <div class="t-h1">January is not<br>a reset.</div>
+                            <div class="c-line"></div>
+                            <div class="t-p">Your baseline is being set right now.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 1: Bold + Badge</div>
+            </div>
+
+            <!-- Option 2: Sea Theme + Illustration Placeholder -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-light">
+                        <div class="img-placeholder" style="color: var(--brand-dark); border-color: var(--brand-dark);">
+                            [Delphi: Sword<br>Looking Sideways]
+                        </div>
+                        <div style="margin-top: auto;">
+                            <div class="t-h2">The calendar changes.<br><span class="text-accent">The tide does not.</span></div>
+                            <div class="t-p" style="margin-top:8px;">Q4 debt follows you.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 2: Sea Theme + Image</div>
+            </div>
+
+            <!-- Option 3: Minimal + Button -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-white" style="text-align:center; align-items:center; justify-content:center;">
+                        <div class="t-brand" style="color:var(--brand-muted);">Reminder</div>
+                        <div class="t-h1" style="color:var(--brand-dark); margin-top:16px;">Q4 debt follows you.</div>
+                        <a href="#" class="c-btn" style="margin-top:24px;">Read the Guide</a>
+                    </div>
+                </div>
+                <div class="card-meta">Option 3: Minimal + Button</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- YANNA (Jan 6) -->
+    <div class="persona-row">
+        <div class="persona-info">
+            <div class="persona-name">Yanna Torry</div>
+            <div class="persona-role">The Captain</div>
+            <div class="persona-badge bg-accent">Authority</div>
+        </div>
+        <div class="grid">
+            
+            <!-- Option 1: Hard Truth + Danger Badge -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-dark">
+                        <div class="c-badge badge-danger">Critical Error</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h1">"Mostly fine"<br><span class="text-accent">is the danger.</span></div>
+                            <div class="t-p">January hides problems best.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 1: Danger Badge</div>
+            </div>
+
+            <!-- Option 2: Sea Analogy + Wave Pattern -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-sea" style="border-left: 6px solid var(--brand-dark);">
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h2">Most senders do not crash in the storm.</div>
+                            <div class="t-h2 text-accent">They drift afterward.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 2: Wave Pattern</div>
+            </div>
+
+             <!-- Option 3: Warning + Delphi Image -->
+             <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-white" style="border: 4px solid var(--brand-danger);">
+                        <div class="img-placeholder" style="height:100px; background:rgba(243, 49, 68, 0.05); color:var(--brand-danger); border:none;">
+                            [Delphi: Identifying Trap]
+                        </div>
+                        <div style="margin-top:auto; margin-bottom:auto; text-align:center;">
+                            <div class="t-h1" style="color:var(--brand-dark);">Baselines slip<br>quietly.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 3: Image + Alert</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- NORRIS (Jan 7) -->
+    <div class="persona-row">
+        <div class="persona-info">
+            <div class="persona-name">Norris Errie</div>
+            <div class="persona-role">The Mermaid</div>
+            <div class="persona-badge" style="background:var(--brand-light); color:var(--brand-dark);">Educator</div>
+        </div>
+        <div class="grid">
+            
+            <!-- Option 1: Empathy + Checkmark UI -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-light">
+                        <div class="c-badge badge-accent">It's okay</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h2">Confusion in January is normal.</div>
+                            <div style="margin-top:16px;">
+                                <div style="display:flex; gap:8px; font-size:0.85rem; margin-bottom:8px; font-weight:500;"><span style="color:var(--brand-success); font-weight:800;">✓</span> Signals first</div>
+                                <div style="display:flex; gap:8px; font-size:0.85rem; font-weight:500;"><span style="color:var(--brand-success); font-weight:800;">✓</span> Answers second</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 1: Checklist UI</div>
+            </div>
+
+            <!-- Option 2: Sea Theme + Quote -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-white">
+                         <div style="font-size:3rem; margin-bottom:16px;">🗺️</div>
+                         <div class="t-h2">"It can feel like you are reading the water without a map."</div>
+                         <div class="t-small text-muted" style="margin-top:auto; font-weight:600;">- Norris Errie</div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 2: Quote Style</div>
+            </div>
+
+             <!-- Option 3: Action + Pills -->
+             <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-light" style="text-align:center; align-items:center; justify-content:center;">
+                         <div class="status-group" style="justify-content:center; margin-bottom:20px;">
+                             <span class="status-pill status-keep">Keep</span>
+                             <span class="status-pill status-monitor">Monitor</span>
+                         </div>
+                         <div class="t-h1 text-accent">Clarity starts with questions.</div>
+                         <a href="#" class="c-btn" style="margin-top:20px;">Ask us anything</a>
+                    </div>
+                </div>
+                <div class="card-meta">Option 3: Pills + Button</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- DANIEL (Jan 8) -->
+    <div class="persona-row">
+        <div class="persona-info">
+            <div class="persona-name">Daniel</div>
+            <div class="persona-role">The Fisherman</div>
+            <div class="persona-badge" style="background:var(--brand-secondary); color:var(--brand-dark);">Growth</div>
+        </div>
+        <div class="grid">
+            
+            <!-- Option 1: Financial Risk + Fake Chart -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-white" style="border: 1px solid var(--brand-dark);">
+                        <div class="c-badge badge-dark">Forecast Risk</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="ui-chart-bar">
+                                <div class="ui-bar"></div>
+                                <div class="ui-bar"></div>
+                                <div class="ui-bar active"></div>
+                            </div>
+                            <div class="t-h2">Small drops<br>compound fast.</div>
+                            <div class="t-p">Baselines shift without alarms.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 1: Chart UI</div>
+            </div>
+
+            <!-- Option 2: Sea Theme + Status Pills -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-dark">
+                         <div class="status-group">
+                             <span class="status-pill status-monitor">Drifting</span>
+                             <span class="status-pill status-suppress">Collapse</span>
+                         </div>
+                         <div style="margin-top:auto; margin-bottom:auto;">
+                             <div class="t-h1">Baselines do not collapse.</div>
+                             <div class="t-h1 text-accent">They drift.</div>
+                         </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 2: Status Pills</div>
+            </div>
+
+            <!-- Option 3: Statement -->
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-light-alt" style="justify-content:center; align-items:center; text-align:center;">
+                        <div class="t-h1" style="color:var(--brand-dark);">January sets<br>the year.</div>
+                        <div class="img-placeholder" style="height:60px; width:60px; margin-top:20px; border:none; background:rgba(19, 78, 74, 0.1); border-radius:50%; padding:0;">
+                            🪜
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 3: Statement + Icon</div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ============================================================
+         WEEK 2: False Recovery Signals (Jan 12-15)
+         ============================================================ -->
+
+    <div class="section-header">
+        <div class="week-title">Week 2</div>
+        <div class="week-subtitle">Theme: False Recovery Signals</div>
+    </div>
+
+    <!-- BRAND PAGE -->
+    <div class="persona-row">
+        <div class="persona-info">
+            <div class="persona-name">Brand Page</div>
+            <div class="persona-role">The Lighthouse</div>
+        </div>
+        <div class="grid">
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-dark">
+                        <div class="c-badge badge-accent">Metric Analysis</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h1">Numbers move<br><span class="text-accent">before trust.</span></div>
+                            <div class="t-p">The surface can look calm while the current shifts.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 1: Main Concept</div>
+            </div>
+
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-light">
+                        <div class="c-badge badge-dark">Data Warning</div>
+                        <div class="img-placeholder">
+                            [Delphi: Flashlight]
+                        </div>
+                        <div style="margin-top:auto;">
+                            <div class="t-h2">Metrics can look healthier than they are.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 2: Image Focus</div>
+            </div>
+            
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-white" style="align-items:center; justify-content:center; text-align:center;">
+                        <div class="status-group">
+                            <span class="status-pill status-monitor">Incomplete Data</span>
+                        </div>
+                        <div class="t-h1" style="margin-top:16px;">Metrics are<br>incomplete.</div>
+                        <a href="#" class="c-btn" style="margin-top:20px;">Read Why</a>
+                    </div>
+                </div>
+                <div class="card-meta">Option 3: Pills + Hook</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YANNA -->
+    <div class="persona-row">
+        <div class="persona-info">
+            <div class="persona-name">Yanna Torry</div>
+            <div class="persona-role">The Captain</div>
+        </div>
+        <div class="grid">
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-dark">
+                         <div style="font-size:3rem; margin-bottom:10px;">📉</div>
+                         <div class="t-h1">Dashboards can lie in January.</div>
+                         <div class="t-p text-accent">Do not call it recovery.</div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 1: Blunt Truth</div>
+            </div>
+
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-sea" style="border-left:8px solid var(--brand-accent);">
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h2">Calm metrics can feel like calm seas.</div>
+                            <div class="t-p">That is not the same as safety.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 2: Sea Metaphor</div>
+            </div>
+            
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-white" style="border: 4px solid var(--brand-danger);">
+                        <div class="c-badge badge-danger">False Signal</div>
+                        <div class="img-placeholder" style="background:rgba(243, 49, 68, 0.05); color:var(--brand-danger); border:none;">
+                            [Delphi: Identifying Trap]
+                        </div>
+                        <div class="t-h1" style="text-align:center; margin-top:auto; color:var(--brand-dark);">Uncertainty is<br>not improvement.</div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 3: Image Alert</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NORRIS -->
+    <div class="persona-row">
+        <div class="persona-info">
+            <div class="persona-name">Norris Errie</div>
+            <div class="persona-role">The Mermaid</div>
+        </div>
+        <div class="grid">
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-light">
+                        <div class="c-badge badge-secondary">Perspective</div>
+                        <div class="t-h2">Sometimes the calm is real.</div>
+                        <div class="t-p text-muted">Sometimes you are simply closer to shore.</div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 1: Gentle Explanation</div>
+            </div>
+
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-white" style="text-align:center; align-items:center; justify-content:center;">
+                        <div class="t-brand text-accent">Pro Tip</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h1">Ask what really changed.</div>
+                            <a href="#" class="c-btn" style="margin-top:16px;">See Checklist</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 2: Button Focus</div>
+            </div>
+            
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-light-alt">
+                        <div class="status-group">
+                            <span class="status-pill status-keep">Keep Visible</span>
+                        </div>
+                        <div class="t-h2">The safest audience stays visible.</div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 3: Status Pill</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- DANIEL -->
+    <div class="persona-row">
+        <div class="persona-info">
+            <div class="persona-name">Daniel</div>
+            <div class="persona-role">The Fisherman</div>
+        </div>
+        <div class="grid">
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-white" style="border:1px solid var(--brand-dark);">
+                        <div class="t-brand">Inventory Risk</div>
+                        <div style="margin-top:auto; margin-bottom:auto;">
+                            <div class="t-h1">Lost inboxes are<br><span class="text-accent">lost inventory.</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 1: Commercial Frame</div>
+            </div>
+
+            <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-dark">
+                         <div class="img-placeholder" style="height:100px;">
+                             [Delphi: Trapped in Seaweed]
+                         </div>
+                         <div style="margin-top:auto;">
+                             <div class="t-h2">You do not see the leak.</div>
+                             <div class="t-h2 text-accent">You just feel the drag.</div>
+                         </div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 2: Image Metaphor</div>
+            </div>
+            
+             <div class="creative-card">
+                <div class="preview-wrapper ratio-square">
+                    <div class="creative-content bg-accent" style="text-align:center; align-items:center; justify-content:center;">
+                         <div class="t-h1">Measure reach,<br>not relief.</div>
+                    </div>
+                </div>
+                <div class="card-meta">Option 3: Contrast</div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function setRatio(ratioClass, cols) {
+            // Update buttons
+            document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Update Grids
+            document.querySelectorAll('.grid').forEach(grid => {
+                grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            });
+
+            // Update Ratios
+            document.querySelectorAll('.preview-wrapper').forEach(container => {
+                container.classList.remove('ratio-square', 'ratio-portrait', 'ratio-wide');
+                container.classList.add(ratioClass);
+            });
+        }
+    </script>
+</body>
+</html>
