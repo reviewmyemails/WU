@@ -1361,16 +1361,6 @@
                 </div>
                 <div class="control-group">
                     <label class="control-label">Background Image (optional)</label>
-                    <div class="background-filter" style="margin-bottom: 8px;">
-                        <select class="input-select" id="backgroundCategory" style="padding: 6px 10px; font-size: 12px;">
-                            <option value="all">All Images</option>
-                            <option value="abstract">Abstract</option>
-                            <option value="gradient">Gradients</option>
-                            <option value="scene">Scenes</option>
-                            <option value="character">Character Scenes</option>
-                            <option value="uploaded">My Uploads</option>
-                        </select>
-                    </div>
                     <div class="background-grid" id="backgroundGrid">
                         <!-- Populated by JS -->
                     </div>
@@ -1770,54 +1760,39 @@
         const DELPHI_IMAGES = CHARACTER_IMAGES.delphi;
         let currentCharacterType = 'delphi';
 
-        // Background categories: abstract, gradient, scene, character
-        // Best sizes: portrait, landscape, square, all
+        // Background images - all are scene/character images
         const BACKGROUND_IMAGES = [
-            // Abstract backgrounds - work well at any position
-            { name: 'Email Expert', file: 'Email Expert iMAGES.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Teal Abstract 1', file: 'Gemini_Generated_Image_f448y9f448y9f448.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Teal Abstract 2', file: 'Gemini_Generated_Image_eys68leys68leys6.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Abstract Teal 1', file: 'Gemini_Generated_Image_vdo9nbvdo9nbvdo9.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Abstract Teal 2', file: 'Gemini_Generated_Image_w2vrmdw2vrmdw2vr.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Network Abstract', file: 'Gemini_Generated_Image_oxwfzxoxwfzxoxwf.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Email Flow', file: 'Gemini_Generated_Image_ph7ompph7ompph7o.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Digital Wave', file: 'Gemini_Generated_Image_s0vbwjs0vbwjs0vb.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Gradient Mesh', file: 'Gemini_Generated_Image_oaxk8woaxk8woaxk.png', category: 'gradient', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-
-            // Scenes - position matters, better for specific sizes
-            { name: 'Tech Scene 1', file: 'ChatGPT Image Sep 29, 2025, 06_38_01 PM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 30 } },
-            { name: 'Tech Scene 2', file: 'ChatGPT Image Sep 29, 2025, 06_48_37 PM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 30 } },
-            { name: 'Tech Scene 3', file: 'ChatGPT Image Sep 29, 2025, 06_54_47 PM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 30 } },
-
-            // Abstract - flexible positioning
-            { name: 'Abstract 1', file: 'ChatGPT Image Sep 29, 2025, 07_02_37 PM.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Abstract 2', file: 'ChatGPT Image Sep 29, 2025, 07_07_54 PM.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Abstract 3', file: 'ChatGPT Image Sep 29, 2025, 07_12_36 PM.png', category: 'abstract', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-
-            // Gradients - very flexible
-            { name: 'Gradient 1', file: 'ChatGPT Image Sep 29, 2025, 07_26_34 PM.png', category: 'gradient', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Gradient 2', file: 'ChatGPT Image Sep 29, 2025, 07_29_51 PM.png', category: 'gradient', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Gradient 3', file: 'ChatGPT Image Sep 29, 2025, 07_33_54 PM.png', category: 'gradient', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-
-            // Office/Workspace scenes - focal point usually in center
-            { name: 'Office Scene 1', file: 'ChatGPT Image Sep 29, 2025, 08_00_38 PM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 40 } },
-            { name: 'Office Scene 2', file: 'ChatGPT Image Sep 29, 2025, 08_50_38 PM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 40 } },
-            { name: 'Dashboard View', file: 'ChatGPT Image Sep 29, 2025, 09_14_26 PM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 30 } },
-            { name: 'Email UI', file: 'ChatGPT Image Sep 29, 2025, 09_16_51 PM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 30 } },
-            { name: 'Tech Workspace', file: 'ChatGPT Image Sep 29, 2025, 09_22_10 PM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 40 } },
-            { name: 'Modern Office', file: 'ChatGPT Image Sep 30, 2025, 10_18_04 AM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 40 } },
-            { name: 'Clean Desk', file: 'ChatGPT Image Sep 30, 2025, 10_23_38 AM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 50 } },
-            { name: 'Workspace 1', file: 'ChatGPT Image Oct 20, 2025, 02_21_24 PM.png', category: 'scene', bestFor: 'landscape', defaultPos: { x: 50, y: 40 } },
-            { name: 'Generated Scene 1', file: 'Generated Image October 20, 2025 - 2_37PM.png', category: 'scene', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-            { name: 'Generated Scene 2', file: 'Generated Image October 20, 2025 - 2_39PM.png', category: 'scene', bestFor: 'all', defaultPos: { x: 50, y: 50 } },
-
-            // Character scenes - character usually bottom/center
-            { name: 'Character Scene', file: 'ChatGPT Image Nov 17, 2025, 12_52_31 PM.png', category: 'character', bestFor: 'portrait', defaultPos: { x: 50, y: 70 } },
-            { name: 'Team Scene', file: 'ChatGPT Image Nov 17, 2025, 01_02_55 PM.png', category: 'character', bestFor: 'portrait', defaultPos: { x: 50, y: 60 } }
+            { name: 'Email Expert', file: 'Email Expert iMAGES.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Teal Abstract 1', file: 'Gemini_Generated_Image_f448y9f448y9f448.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Teal Abstract 2', file: 'Gemini_Generated_Image_eys68leys68leys6.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Abstract Teal 1', file: 'Gemini_Generated_Image_vdo9nbvdo9nbvdo9.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Abstract Teal 2', file: 'Gemini_Generated_Image_w2vrmdw2vrmdw2vr.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Network Abstract', file: 'Gemini_Generated_Image_oxwfzxoxwfzxoxwf.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Email Flow', file: 'Gemini_Generated_Image_ph7ompph7ompph7o.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Digital Wave', file: 'Gemini_Generated_Image_s0vbwjs0vbwjs0vb.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Gradient Mesh', file: 'Gemini_Generated_Image_oaxk8woaxk8woaxk.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Tech Scene 1', file: 'ChatGPT Image Sep 29, 2025, 06_38_01 PM.png', defaultPos: { x: 50, y: 30 } },
+            { name: 'Tech Scene 2', file: 'ChatGPT Image Sep 29, 2025, 06_48_37 PM.png', defaultPos: { x: 50, y: 30 } },
+            { name: 'Tech Scene 3', file: 'ChatGPT Image Sep 29, 2025, 06_54_47 PM.png', defaultPos: { x: 50, y: 30 } },
+            { name: 'Abstract 1', file: 'ChatGPT Image Sep 29, 2025, 07_02_37 PM.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Abstract 2', file: 'ChatGPT Image Sep 29, 2025, 07_07_54 PM.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Abstract 3', file: 'ChatGPT Image Sep 29, 2025, 07_12_36 PM.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Gradient 1', file: 'ChatGPT Image Sep 29, 2025, 07_26_34 PM.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Gradient 2', file: 'ChatGPT Image Sep 29, 2025, 07_29_51 PM.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Gradient 3', file: 'ChatGPT Image Sep 29, 2025, 07_33_54 PM.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Office Scene 1', file: 'ChatGPT Image Sep 29, 2025, 08_00_38 PM.png', defaultPos: { x: 50, y: 40 } },
+            { name: 'Office Scene 2', file: 'ChatGPT Image Sep 29, 2025, 08_50_38 PM.png', defaultPos: { x: 50, y: 40 } },
+            { name: 'Dashboard View', file: 'ChatGPT Image Sep 29, 2025, 09_14_26 PM.png', defaultPos: { x: 50, y: 30 } },
+            { name: 'Email UI', file: 'ChatGPT Image Sep 29, 2025, 09_16_51 PM.png', defaultPos: { x: 50, y: 30 } },
+            { name: 'Tech Workspace', file: 'ChatGPT Image Sep 29, 2025, 09_22_10 PM.png', defaultPos: { x: 50, y: 40 } },
+            { name: 'Modern Office', file: 'ChatGPT Image Sep 30, 2025, 10_18_04 AM.png', defaultPos: { x: 50, y: 40 } },
+            { name: 'Clean Desk', file: 'ChatGPT Image Sep 30, 2025, 10_23_38 AM.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Workspace 1', file: 'ChatGPT Image Oct 20, 2025, 02_21_24 PM.png', defaultPos: { x: 50, y: 40 } },
+            { name: 'Generated Scene 1', file: 'Generated Image October 20, 2025 - 2_37PM.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Generated Scene 2', file: 'Generated Image October 20, 2025 - 2_39PM.png', defaultPos: { x: 50, y: 50 } },
+            { name: 'Character Scene', file: 'ChatGPT Image Nov 17, 2025, 12_52_31 PM.png', bestFor: 'portrait', defaultPos: { x: 50, y: 70 } },
+            { name: 'Team Scene', file: 'ChatGPT Image Nov 17, 2025, 01_02_55 PM.png', bestFor: 'portrait', defaultPos: { x: 50, y: 60 } }
         ];
-
-        // Get background categories for filtering
-        const BACKGROUND_CATEGORIES = ['all', 'abstract', 'gradient', 'scene', 'character'];
 
         // Generated Pattern Functions
         function generatePatternSVG(type, opacity, scale, position, theme) {
@@ -2474,10 +2449,7 @@
             });
         }
 
-        let currentBgCategory = 'all';
-
-        function initBackgroundGrid(category = 'all') {
-            currentBgCategory = category;
+        function initBackgroundGrid() {
             const grid = document.getElementById('backgroundGrid');
             const currentBg = slides[currentSlide]?.content?.background;
 
@@ -2487,16 +2459,11 @@
             // Combine built-in and uploaded backgrounds
             const allBackgrounds = [...BACKGROUND_IMAGES, ...uploadedBackgrounds];
 
-            // Filter by category
-            const filteredImages = category === 'all'
-                ? allBackgrounds
-                : allBackgrounds.filter(img => img.category === category);
-
             // Add background images (use url if available, otherwise use local path)
-            html += filteredImages.map((img) => {
+            html += allBackgrounds.map((img) => {
                 const imgSrc = img.url || `/brand/Background/${encodeURIComponent(img.file)}`;
                 return `
-                <div class="background-item ${currentBg === img.file ? 'selected' : ''}" data-file="${img.file}" data-url="${img.url || ''}" title="${img.name} (${img.category})">
+                <div class="background-item ${currentBg === img.file ? 'selected' : ''}" data-file="${img.file}" data-url="${img.url || ''}" title="${img.name}">
                     <img src="${imgSrc}" alt="${img.name}">
                 </div>
             `}).join('');
@@ -2706,11 +2673,6 @@
             document.getElementById('characterType').addEventListener('change', (e) => {
                 currentCharacterType = e.target.value;
                 initCharacterGrid();
-            });
-
-            // Background category filter
-            document.getElementById('backgroundCategory').addEventListener('change', (e) => {
-                initBackgroundGrid(e.target.value);
             });
 
             // Logo type selector
@@ -3104,13 +3066,12 @@
                         name: fileName,
                         file: fullFileName,
                         url: result.url,
-                        category: 'uploaded',
                         bestFor: 'all',
                         defaultPos: { x: 50, y: 50 }
                     });
 
                     // Refresh background grid
-                    initBackgroundGrid(currentBgCategory);
+                    initBackgroundGrid();
 
                     alert(`Background "${fullFileName}" uploaded successfully!`);
                 }
@@ -3157,7 +3118,6 @@
                             name: img.filename.replace(/\.[^/.]+$/, ''),
                             file: img.filename,
                             url: img.url,
-                            category: 'uploaded',
                             bestFor: 'all',
                             defaultPos: { x: 50, y: 50 }
                         });
@@ -3172,7 +3132,7 @@
 
                 // Refresh grids if images were loaded
                 if (uploadedBackgrounds.length > 0) {
-                    initBackgroundGrid(currentBgCategory);
+                    initBackgroundGrid();
                 }
                 if (uploadedCharacters.length > 0) {
                     initCharacterGrid();
