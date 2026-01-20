@@ -958,6 +958,10 @@
                         <div class="control-group">
                             <label class="control-label">Select Character</label>
                             <div class="image-grid" id="characterGrid" style="grid-template-columns: repeat(3, 1fr);"></div>
+                            <input type="file" id="characterUpload" accept="image/*" style="display: none;">
+                            <button class="btn btn-secondary" style="margin-top: 8px; padding: 6px 12px; font-size: 11px;" onclick="document.getElementById('characterUpload').click()">
+                                <span id="charUploadText">+ Upload Character</span>
+                            </button>
                         </div>
                         <div class="control-group">
                             <label class="control-label">Position X</label>
@@ -1001,7 +1005,13 @@
                     <div class="control-group">
                         <label class="control-label">Background Image</label>
                         <div class="image-grid" id="backgroundGrid" style="grid-template-columns: repeat(3, 1fr); max-height: 120px;"></div>
-                        <button class="btn btn-secondary" style="margin-top: 8px; padding: 6px 12px; font-size: 11px;" onclick="clearBackgroundImage()">Clear Image</button>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <input type="file" id="backgroundUpload" accept="image/*" style="display: none;">
+                            <button class="btn btn-secondary" style="flex: 1; padding: 6px 12px; font-size: 11px;" onclick="document.getElementById('backgroundUpload').click()">
+                                <span id="bgUploadText">+ Upload</span>
+                            </button>
+                            <button class="btn btn-secondary" style="flex: 1; padding: 6px 12px; font-size: 11px;" onclick="clearBackgroundImage()">Clear</button>
+                        </div>
                     </div>
                     <div class="control-group" id="gradientOpacityGroup" style="display: none;">
                         <label class="control-label">Gradient Overlay Opacity</label>
@@ -1738,12 +1748,14 @@
             character: {
                 visible: false,
                 file: null,
+                isBlob: false,
                 x: 70,
                 y: 50,
                 zoom: 150
             },
             background: {
                 image: null,
+                isBlob: false,
                 gradientOpacity: 80
             },
             gradient: null,
@@ -1751,15 +1763,26 @@
         };
 
         // ========================================
+        // DYNAMIC IMAGE STORAGE (loaded from Vercel Blob)
+        // ========================================
+        let uploadedCharacters = [];
+        let uploadedBackgrounds = [];
+
+        // ========================================
         // INITIALIZATION
         // ========================================
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Load uploaded images from Vercel Blob first
+            await loadUploadedImages();
+
             initLogoGrid();
             initLogoToggle();
             initCharacterGrid();
             initCharacterToggle();
             initCharacterSliders();
+            initCharacterUpload();
             initBackgroundGrid();
+            initBackgroundUpload();
             initGradientOpacitySlider();
             initGradientPresets();
             initFormatListeners();
@@ -1768,6 +1791,95 @@
             loadTemplateFromURL();
             renderPreview();
         });
+
+        async function loadUploadedImages() {
+            try {
+                const response = await fetch('/api/images?type=all');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.images) {
+                        uploadedCharacters = data.images
+                            .filter(img => img.type === 'character')
+                            .map(img => ({ file: img.url, name: img.filename, category: 'Uploaded', isBlob: true }));
+                        uploadedBackgrounds = data.images
+                            .filter(img => img.type === 'background')
+                            .map(img => ({ file: img.url, name: img.filename, isBlob: true }));
+                    }
+                }
+            } catch (error) {
+                console.log('Could not load uploaded images:', error);
+            }
+        }
+
+        function initCharacterUpload() {
+            const input = document.getElementById('characterUpload');
+            input.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const uploadText = document.getElementById('charUploadText');
+                uploadText.textContent = 'Uploading...';
+
+                try {
+                    const response = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}&type=character`, {
+                        method: 'POST',
+                        body: file
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        // Add to uploaded characters
+                        uploadedCharacters.push({ file: data.url, name: data.filename, category: 'Uploaded', isBlob: true });
+                        // Refresh the grid
+                        initCharacterGrid();
+                        uploadText.textContent = '+ Upload Character';
+                    } else {
+                        throw new Error('Upload failed');
+                    }
+                } catch (error) {
+                    console.error('Character upload error:', error);
+                    uploadText.textContent = 'Upload Failed';
+                    setTimeout(() => { uploadText.textContent = '+ Upload Character'; }, 2000);
+                }
+
+                input.value = ''; // Reset input
+            });
+        }
+
+        function initBackgroundUpload() {
+            const input = document.getElementById('backgroundUpload');
+            input.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const uploadText = document.getElementById('bgUploadText');
+                uploadText.textContent = 'Uploading...';
+
+                try {
+                    const response = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}&type=background`, {
+                        method: 'POST',
+                        body: file
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        // Add to uploaded backgrounds
+                        uploadedBackgrounds.push({ file: data.url, name: data.filename, isBlob: true });
+                        // Refresh the grid
+                        initBackgroundGrid();
+                        uploadText.textContent = '+ Upload';
+                    } else {
+                        throw new Error('Upload failed');
+                    }
+                } catch (error) {
+                    console.error('Background upload error:', error);
+                    uploadText.textContent = 'Failed';
+                    setTimeout(() => { uploadText.textContent = '+ Upload'; }, 2000);
+                }
+
+                input.value = ''; // Reset input
+            });
+        }
 
         function initLogoToggle() {
             const toggle = document.getElementById('logoVisible');
@@ -1782,9 +1894,13 @@
 
         function initCharacterGrid() {
             const grid = document.getElementById('characterGrid');
-            grid.innerHTML = CHARACTERS.map((char, i) => `
-                <div class="image-item" data-character="${char.file}" title="${char.name}">
-                    <img src="../${char.file}" alt="${char.name}" style="object-fit: cover;">
+
+            // Combine local characters with uploaded ones
+            const allCharacters = [...CHARACTERS, ...uploadedCharacters];
+
+            grid.innerHTML = allCharacters.map((char, i) => `
+                <div class="image-item" data-character="${char.file}" data-is-blob="${char.isBlob || false}" title="${char.name}">
+                    <img src="${char.isBlob ? char.file : '../' + char.file}" alt="${char.name}" style="object-fit: cover;">
                 </div>
             `).join('');
 
@@ -1793,6 +1909,7 @@
                     grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
                     state.character.file = item.dataset.character;
+                    state.character.isBlob = item.dataset.isBlob === 'true';
                     renderPreview();
                 });
             });
@@ -1824,9 +1941,13 @@
 
         function initBackgroundGrid() {
             const grid = document.getElementById('backgroundGrid');
-            grid.innerHTML = BACKGROUNDS.map((bg, i) => `
-                <div class="image-item" data-background="${bg.file}" title="${bg.name}">
-                    <img src="../${bg.file}" alt="${bg.name}" style="object-fit: cover;">
+
+            // Combine local backgrounds with uploaded ones
+            const allBackgrounds = [...BACKGROUNDS, ...uploadedBackgrounds];
+
+            grid.innerHTML = allBackgrounds.map((bg, i) => `
+                <div class="image-item" data-background="${bg.file}" data-is-blob="${bg.isBlob || false}" title="${bg.name}">
+                    <img src="${bg.isBlob ? bg.file : '../' + bg.file}" alt="${bg.name}" style="object-fit: cover;">
                 </div>
             `).join('');
 
@@ -1835,6 +1956,7 @@
                     grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
                     state.background.image = item.dataset.background;
+                    state.background.isBlob = item.dataset.isBlob === 'true';
                     document.getElementById('gradientOpacityGroup').style.display = 'block';
                     renderPreview();
                 });
@@ -2167,13 +2289,14 @@
 
             // Build background style
             let bgStyle = '';
+            const bgImageUrl = state.background.isBlob ? state.background.image : `../${state.background.image}`;
             if (state.background.image && state.gradient) {
                 // Background image with gradient overlay
                 const opacity = state.background.gradientOpacity / 100;
-                bgStyle = `background: linear-gradient(135deg, rgba(${hexToRgb(state.gradient.start)}, ${opacity}), rgba(${hexToRgb(state.gradient.end)}, ${opacity})), url('../${state.background.image}') center/cover no-repeat;`;
+                bgStyle = `background: linear-gradient(135deg, rgba(${hexToRgb(state.gradient.start)}, ${opacity}), rgba(${hexToRgb(state.gradient.end)}, ${opacity})), url('${bgImageUrl}') center/cover no-repeat;`;
             } else if (state.background.image) {
                 // Just background image
-                bgStyle = `background: url('../${state.background.image}') center/cover no-repeat;`;
+                bgStyle = `background: url('${bgImageUrl}') center/cover no-repeat;`;
             } else if (state.gradient) {
                 // Just gradient
                 bgStyle = `background: linear-gradient(135deg, ${state.gradient.start}, ${state.gradient.end});`;
@@ -2194,9 +2317,10 @@
 
             // Character (only if visible and file selected)
             if (state.character.visible && state.character.file) {
+                const charImageUrl = state.character.isBlob ? state.character.file : `../${state.character.file}`;
                 html += `
                     <div class="character-wrapper" style="left: ${state.character.x}%; top: ${state.character.y}%; transform: translate(-50%, -50%); height: ${state.character.zoom}px;">
-                        <img src="../${state.character.file}" alt="Character">
+                        <img src="${charImageUrl}" alt="Character">
                     </div>
                 `;
             }
