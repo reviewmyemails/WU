@@ -2590,13 +2590,11 @@
             }
 
             // Logo (only if visible) - smart positioning
-            // Use percentage-based height relative to slide container for consistent export scaling
             if (state.logo.visible) {
-                // Convert pixel zoom to percentage (base: 400px preview = 9% for 36px default)
-                const logoHeightPercent = (state.logo.zoom / 400) * 100;
                 html += `
-                    <img class="logo-img" src="../../svg/${state.logo.file}" alt="Logo"
-                         style="position: absolute; left: ${state.logo.x}%; top: ${state.logo.y}%; height: ${logoHeightPercent}%; width: auto; z-index: 10;">
+                    <div class="logo-img" style="position: absolute; left: ${state.logo.x}%; top: ${state.logo.y}%; z-index: 10; height: ${state.logo.zoom}px;">
+                        <img src="../../svg/${state.logo.file}" alt="Logo" style="height: 100%; width: auto; display: block;">
+                    </div>
                 `;
             }
 
@@ -2811,14 +2809,14 @@
                 allowTaint: true,
                 backgroundColor: null,
                 onclone: (clonedDoc) => {
-                    // Fix logo sizing - convert percentage to fixed pixels for accurate scaling
-                    const logoImg = clonedDoc.querySelector('.logo-img');
-                    if (logoImg) {
-                        const originalLogo = document.querySelector('.logo-img');
-                        if (originalLogo) {
-                            const rect = originalLogo.getBoundingClientRect();
-                            logoImg.style.height = rect.height + 'px';
-                            logoImg.style.width = rect.width + 'px';
+                    // Fix logo sizing - capture actual rendered size for accurate scaling
+                    const logoWrapper = clonedDoc.querySelector('.logo-img');
+                    if (logoWrapper) {
+                        const originalWrapper = document.querySelector('.logo-img');
+                        if (originalWrapper) {
+                            const rect = originalWrapper.getBoundingClientRect();
+                            logoWrapper.style.height = rect.height + 'px';
+                            logoWrapper.style.width = rect.width + 'px';
                         }
                     }
                 }
@@ -2846,14 +2844,14 @@
                 allowTaint: true,
                 backgroundColor: null,
                 onclone: (clonedDoc) => {
-                    // Fix logo sizing - convert percentage to fixed pixels for accurate scaling
-                    const logoImg = clonedDoc.querySelector('.logo-img');
-                    if (logoImg) {
-                        const originalLogo = document.querySelector('.logo-img');
-                        if (originalLogo) {
-                            const rect = originalLogo.getBoundingClientRect();
-                            logoImg.style.height = rect.height + 'px';
-                            logoImg.style.width = rect.width + 'px';
+                    // Fix logo sizing - capture actual rendered size for accurate scaling
+                    const logoWrapper = clonedDoc.querySelector('.logo-img');
+                    if (logoWrapper) {
+                        const originalWrapper = document.querySelector('.logo-img');
+                        if (originalWrapper) {
+                            const rect = originalWrapper.getBoundingClientRect();
+                            logoWrapper.style.height = rect.height + 'px';
+                            logoWrapper.style.width = rect.width + 'px';
                         }
                     }
                 }
