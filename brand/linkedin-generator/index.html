@@ -1199,6 +1199,7 @@
                             <option value="abstract">Abstract</option>
                             <option value="scene">Scenes</option>
                             <option value="character">Characters</option>
+                            <option value="uploaded">Uploaded</option>
                         </select>
                     </div>
                     <div class="background-grid" id="backgroundGrid">
@@ -1622,7 +1623,7 @@
         // INITIALIZATION
         // ========================================
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', async () => {
             initDelphiGrid();
             initBackgroundGrid();
             initEventListeners();
@@ -1631,6 +1632,8 @@
             updatePreview();
             updateSlidesList();
             updatePreviewSize();
+            // Load any previously uploaded images from Vercel Blob
+            await loadUploadedImages();
         });
 
         function initDelphiGrid() {
@@ -1685,16 +1688,22 @@
             // Add "None" option first
             let html = `<div class="background-item none ${!currentBg ? 'selected' : ''}" data-file="" title="No Background">None</div>`;
 
-            // Filter and add background images
-            const filteredImages = category === 'all'
-                ? BACKGROUND_IMAGES
-                : BACKGROUND_IMAGES.filter(img => img.category === category);
+            // Combine built-in and uploaded backgrounds
+            const allBackgrounds = [...BACKGROUND_IMAGES, ...uploadedBackgrounds];
 
-            html += filteredImages.map((img) => `
-                <div class="background-item ${currentBg === img.file ? 'selected' : ''}" data-file="${img.file}" title="${img.name} (${img.category})">
-                    <img src="/brand/Background/${encodeURIComponent(img.file)}" alt="${img.name}">
+            // Filter by category
+            const filteredImages = category === 'all'
+                ? allBackgrounds
+                : allBackgrounds.filter(img => img.category === category);
+
+            // Add background images (use url if available, otherwise use local path)
+            html += filteredImages.map((img) => {
+                const imgSrc = img.url || `/brand/Background/${encodeURIComponent(img.file)}`;
+                return `
+                <div class="background-item ${currentBg === img.file ? 'selected' : ''}" data-file="${img.file}" data-url="${img.url || ''}" title="${img.name} (${img.category})">
+                    <img src="${imgSrc}" alt="${img.name}">
                 </div>
-            `).join('');
+            `}).join('');
 
             grid.innerHTML = html;
 
@@ -1703,10 +1712,13 @@
                     grid.querySelectorAll('.background-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
                     const file = item.dataset.file;
+                    const url = item.dataset.url;
                     slides[currentSlide].content.background = file || null;
+                    slides[currentSlide].content.backgroundUrl = url || null; // Store URL for uploaded images
 
                     // Set position based on background's default (or center if none)
-                    const bgImage = BACKGROUND_IMAGES.find(img => img.file === file);
+                    const allBackgrounds = [...BACKGROUND_IMAGES, ...uploadedBackgrounds];
+                    const bgImage = allBackgrounds.find(img => img.file === file);
                     if (bgImage && bgImage.defaultPos) {
                         slides[currentSlide].content.bgPositionX = bgImage.defaultPos.x;
                         slides[currentSlide].content.bgPositionY = bgImage.defaultPos.y;
@@ -2116,7 +2128,7 @@
             uploadedFile = null;
         }
 
-        function saveUploadedAsset() {
+        async function saveUploadedAsset() {
             if (!uploadedFile || !uploadType) return;
 
             const fileName = document.getElementById('uploadFileName').value.trim();
@@ -2129,68 +2141,109 @@
             const ext = uploadedFile.name.split('.').pop().toLowerCase();
             const fullFileName = `${fileName}.${ext}`;
 
-            // Create download link for the renamed file
-            // Note: This creates a client-side download. For actual server storage,
-            // you would need a backend API endpoint.
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                // For backgrounds
-                if (uploadType === 'background') {
-                    // Add to the grid temporarily (won't persist without server)
-                    const grid = document.getElementById('backgroundGrid');
-                    const newItem = document.createElement('div');
-                    newItem.className = 'background-item';
-                    newItem.dataset.file = fullFileName;
-                    newItem.title = fileName;
-                    newItem.innerHTML = `<img src="${e.target.result}" alt="${fileName}">`;
-                    newItem.addEventListener('click', () => {
-                        grid.querySelectorAll('.background-item').forEach(i => i.classList.remove('selected'));
-                        newItem.classList.add('selected');
-                        slides[currentSlide].content.background = fullFileName;
-                        updatePreview();
-                    });
-                    grid.appendChild(newItem);
+            // Show uploading state
+            const saveBtn = document.querySelector('.modal-actions .btn-primary');
+            const originalText = saveBtn.textContent;
+            saveBtn.textContent = 'Uploading...';
+            saveBtn.disabled = true;
 
-                    // Download the file with the new name so user can save it
-                    downloadRenamedFile(e.target.result, fullFileName);
+            try {
+                // Upload to Vercel Blob
+                const response = await fetch(`/api/upload?filename=${encodeURIComponent(fullFileName)}&type=${uploadType}`, {
+                    method: 'POST',
+                    body: uploadedFile,
+                });
 
-                    alert(`Background "${fullFileName}" added!\n\nThe file has been downloaded to your computer. Please save it to:\nbrand/Background/${fullFileName}`);
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Upload failed');
                 }
-                // For characters
-                else if (uploadType === 'character') {
-                    // Add to Delphi grid
-                    const grid = document.getElementById('delphiGrid');
-                    const newItem = document.createElement('div');
-                    newItem.className = 'delphi-item';
-                    newItem.dataset.file = fullFileName;
-                    newItem.title = fileName;
-                    newItem.innerHTML = `<img src="${e.target.result}" alt="${fileName}">`;
-                    newItem.addEventListener('click', () => {
-                        grid.querySelectorAll('.delphi-item').forEach(i => i.classList.remove('selected'));
-                        newItem.classList.add('selected');
-                        slides[currentSlide].content.delphi = fullFileName;
-                        updatePreview();
+
+                // Add to the appropriate grid with the blob URL
+                if (uploadType === 'background') {
+                    // Add to uploaded backgrounds list
+                    uploadedBackgrounds.push({
+                        name: fileName,
+                        file: fullFileName,
+                        url: result.url,
+                        category: 'uploaded',
+                        bestFor: 'all',
+                        defaultPos: { x: 50, y: 50 }
                     });
-                    grid.appendChild(newItem);
 
-                    // Download the file with the new name
-                    downloadRenamedFile(e.target.result, fullFileName);
+                    // Refresh background grid
+                    initBackgroundGrid(currentBgCategory);
 
-                    alert(`Character "${fullFileName}" added!\n\nThe file has been downloaded to your computer. Please save it to:\nDelphi/${fullFileName}`);
+                    alert(`Background "${fullFileName}" uploaded successfully!`);
+                }
+                else if (uploadType === 'character') {
+                    // Add to uploaded characters list
+                    uploadedCharacters.push({
+                        name: fileName,
+                        file: fullFileName,
+                        url: result.url
+                    });
+
+                    // Refresh character grid
+                    initCharacterGrid();
+
+                    alert(`Character "${fullFileName}" uploaded successfully!`);
                 }
 
                 closeUploadModal();
-            };
-            reader.readAsDataURL(uploadedFile);
+
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert(`Upload failed: ${error.message}\n\nTip: Make sure Vercel Blob is configured in your project.`);
+            } finally {
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+            }
         }
 
-        function downloadRenamedFile(dataUrl, fileName) {
-            const link = document.createElement('a');
-            link.href = dataUrl;
-            link.download = fileName;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+        // Store uploaded images (from Vercel Blob)
+        let uploadedBackgrounds = [];
+        let uploadedCharacters = [];
+
+        // Load uploaded images on page load
+        async function loadUploadedImages() {
+            try {
+                const response = await fetch('/api/images?type=all');
+                if (!response.ok) return;
+
+                const result = await response.json();
+
+                result.images.forEach(img => {
+                    if (img.type === 'background') {
+                        uploadedBackgrounds.push({
+                            name: img.filename.replace(/\.[^/.]+$/, ''),
+                            file: img.filename,
+                            url: img.url,
+                            category: 'uploaded',
+                            bestFor: 'all',
+                            defaultPos: { x: 50, y: 50 }
+                        });
+                    } else {
+                        uploadedCharacters.push({
+                            name: img.filename.replace(/\.[^/.]+$/, ''),
+                            file: img.filename,
+                            url: img.url
+                        });
+                    }
+                });
+
+                // Refresh grids if images were loaded
+                if (uploadedBackgrounds.length > 0) {
+                    initBackgroundGrid(currentBgCategory);
+                }
+                if (uploadedCharacters.length > 0) {
+                    initCharacterGrid();
+                }
+            } catch (error) {
+                // Silently fail - API might not be available in dev
+                console.log('Could not load uploaded images:', error.message);
+            }
         }
 
         // ========================================
@@ -2310,7 +2363,9 @@
             let className = `slide-preview theme-${slide.theme} size-${currentOutputSize}`;
             if (slide.content.background) {
                 className += ' has-bg';
-                preview.style.backgroundImage = `url('/brand/Background/${encodeURIComponent(slide.content.background)}')`;
+                // Use URL for uploaded backgrounds, local path for built-in ones
+                const bgUrl = slide.content.backgroundUrl || `/brand/Background/${encodeURIComponent(slide.content.background)}`;
+                preview.style.backgroundImage = `url('${bgUrl}')`;
                 // Apply background position
                 const bgX = slide.content.bgPositionX ?? 50;
                 const bgY = slide.content.bgPositionY ?? 50;
