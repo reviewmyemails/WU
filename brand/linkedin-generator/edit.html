@@ -2814,19 +2814,7 @@
                 scale: scale,
                 useCORS: true,
                 allowTaint: true,
-                backgroundColor: null,
-                onclone: (clonedDoc) => {
-                    // Fix logo sizing - capture actual rendered size for accurate scaling
-                    const logoWrapper = clonedDoc.querySelector('.logo-img');
-                    if (logoWrapper) {
-                        const originalWrapper = document.querySelector('.logo-img');
-                        if (originalWrapper) {
-                            const rect = originalWrapper.getBoundingClientRect();
-                            logoWrapper.style.height = rect.height + 'px';
-                            logoWrapper.style.width = rect.width + 'px';
-                        }
-                    }
-                }
+                backgroundColor: null
             });
 
             const link = document.createElement('a');
@@ -2849,19 +2837,7 @@
                 scale: scale,
                 useCORS: true,
                 allowTaint: true,
-                backgroundColor: null,
-                onclone: (clonedDoc) => {
-                    // Fix logo sizing - capture actual rendered size for accurate scaling
-                    const logoWrapper = clonedDoc.querySelector('.logo-img');
-                    if (logoWrapper) {
-                        const originalWrapper = document.querySelector('.logo-img');
-                        if (originalWrapper) {
-                            const rect = originalWrapper.getBoundingClientRect();
-                            logoWrapper.style.height = rect.height + 'px';
-                            logoWrapper.style.width = rect.width + 'px';
-                        }
-                    }
-                }
+                backgroundColor: null
             });
 
             canvas.toBlob(async (blob) => {
