@@ -13,7 +13,6 @@
            RME BRAND VARIABLES
            ======================================== */
         :root {
-            /* Primary Colors */
             --color-dark: #134e4a;
             --color-accent: #0d9488;
             --color-accent-hover: #0f766e;
@@ -23,37 +22,22 @@
             --color-light-alt: #ccfbf1;
             --color-muted: #6b7280;
             --color-border: #e5e7eb;
-
-            /* Status Colors */
             --color-success: #1fa95c;
             --color-warning: #f9943b;
             --color-danger: #f33144;
             --color-secondary: #fbbf24;
-
-            /* Typography */
             --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-
-            /* Spacing */
             --space-xs: 8px;
             --space-sm: 16px;
             --space-md: 24px;
             --space-lg: 32px;
             --space-xl: 48px;
-
-            /* Radius */
             --radius-sm: 6px;
             --radius-md: 8px;
             --radius-lg: 12px;
         }
 
-        /* ========================================
-           BASE STYLES
-           ======================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-family);
@@ -78,19 +62,10 @@
             gap: 12px;
         }
 
-        .nav-brand img {
-            height: 28px;
-        }
+        .nav-brand img { height: 28px; }
+        .nav-brand h1 { font-size: 14px; font-weight: 600; }
 
-        .nav-brand h1 {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 16px;
-        }
+        .nav-links { display: flex; gap: 16px; }
 
         .nav-link {
             color: rgba(255,255,255,0.7);
@@ -107,16 +82,13 @@
             background: rgba(255,255,255,0.1);
         }
 
-        /* ========================================
-           LAYOUT
-           ======================================== */
+        /* Layout */
         .app {
             display: grid;
             grid-template-columns: 340px 1fr;
             height: calc(100vh - 53px);
         }
 
-        /* Left Sidebar - Controls */
         .sidebar {
             background: #16162a;
             border-right: 1px solid rgba(255,255,255,0.1);
@@ -137,7 +109,6 @@
             background: #16162a;
         }
 
-        /* Center - Preview */
         .preview-area {
             background: #1a1a2e;
             padding: var(--space-lg);
@@ -148,9 +119,7 @@
             overflow: auto;
         }
 
-        /* ========================================
-           CONTROL COMPONENTS
-           ======================================== */
+        /* Control Components */
         .control-section {
             margin-bottom: var(--space-lg);
         }
@@ -162,13 +131,6 @@
             letter-spacing: 0.5px;
             color: var(--color-muted);
             margin-bottom: var(--space-sm);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .control-section h3 .toggle-section {
-            margin-left: auto;
         }
 
         .control-group {
@@ -183,7 +145,6 @@
             margin-bottom: 6px;
         }
 
-        /* Form Controls */
         .input-text,
         .input-textarea,
         .input-select {
@@ -210,66 +171,13 @@
             resize: vertical;
         }
 
-        .input-select {
-            cursor: pointer;
-        }
-
         .input-hint {
             font-size: 10px;
             color: var(--color-muted);
             margin-top: 4px;
         }
 
-        /* Toggle */
-        .toggle-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .toggle-row:last-child {
-            border-bottom: none;
-        }
-
-        .toggle-label {
-            font-size: 13px;
-            color: rgba(255,255,255,0.8);
-        }
-
-        .toggle {
-            width: 40px;
-            height: 22px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 11px;
-            cursor: pointer;
-            position: relative;
-            transition: background 0.2s;
-            flex-shrink: 0;
-        }
-
-        .toggle.active {
-            background: var(--color-accent);
-        }
-
-        .toggle::after {
-            content: '';
-            position: absolute;
-            width: 18px;
-            height: 18px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.2s;
-        }
-
-        .toggle.active::after {
-            transform: translateX(18px);
-        }
-
-        /* Slider Controls */
+        /* Slider */
         .slider-group {
             display: flex;
             align-items: center;
@@ -286,7 +194,6 @@
         .slider {
             flex: 1;
             -webkit-appearance: none;
-            appearance: none;
             height: 4px;
             background: rgba(255,255,255,0.1);
             border-radius: 2px;
@@ -295,26 +202,11 @@
 
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
             width: 14px;
             height: 14px;
             background: var(--color-accent);
             border-radius: 50%;
             cursor: pointer;
-            transition: transform 0.1s;
-        }
-
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-        }
-
-        .slider::-moz-range-thumb {
-            width: 14px;
-            height: 14px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            cursor: pointer;
-            border: none;
         }
 
         .slider-value {
@@ -322,10 +214,9 @@
             color: rgba(255,255,255,0.6);
             width: 35px;
             text-align: right;
-            font-variant-numeric: tabular-nums;
         }
 
-        /* Logo/Image Grid */
+        /* Image Grid */
         .image-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -348,168 +239,14 @@
             justify-content: center;
         }
 
-        .image-item:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
+        .image-item:hover { background: rgba(255,255,255,0.1); }
         .image-item.selected {
             border-color: var(--color-accent);
             background: rgba(13, 148, 136, 0.2);
         }
+        .image-item img { width: 100%; height: 100%; object-fit: contain; }
 
-        .image-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .image-item.none {
-            font-size: 10px;
-            color: rgba(255,255,255,0.4);
-        }
-
-        /* Character Grid */
-        .character-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            max-height: 200px;
-            overflow-y: auto;
-            padding: 4px;
-        }
-
-        .character-item {
-            aspect-ratio: 1;
-            background: rgba(255,255,255,0.05);
-            border-radius: var(--radius-sm);
-            padding: 4px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.15s;
-        }
-
-        .character-item:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        .character-item.selected {
-            border-color: var(--color-accent);
-            background: rgba(13, 148, 136, 0.2);
-        }
-
-        .character-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        /* Color Grid */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 6px;
-        }
-
-        .color-swatch {
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 6px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.15s;
-        }
-
-        .color-swatch:hover {
-            transform: scale(1.1);
-        }
-
-        .color-swatch.selected {
-            border-color: var(--color-white);
-            box-shadow: 0 0 0 2px var(--color-accent);
-        }
-
-        /* Theme Selector */
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-
-        .theme-item {
-            aspect-ratio: 1;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.15s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .theme-item:hover {
-            transform: scale(1.05);
-        }
-
-        .theme-item.selected {
-            border-color: var(--color-accent);
-            box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3);
-        }
-
-        .theme-item span {
-            position: absolute;
-            bottom: 4px;
-            left: 0;
-            right: 0;
-            text-align: center;
-            font-size: 9px;
-            font-weight: 500;
-            color: inherit;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-        }
-
-        /* Format Selector */
-        .format-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .format-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: var(--radius-sm);
-            padding: 12px 8px;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.15s;
-            text-align: center;
-        }
-
-        .format-item:hover {
-            background: rgba(255,255,255,0.1);
-        }
-
-        .format-item.selected {
-            border-color: var(--color-accent);
-            background: rgba(13, 148, 136, 0.2);
-        }
-
-        .format-item .icon {
-            width: 32px;
-            height: 32px;
-            margin: 0 auto 6px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-        }
-
-        .format-item .icon.square { aspect-ratio: 1; width: 28px; height: 28px; }
-        .format-item .icon.portrait { aspect-ratio: 4/5; width: 24px; height: 30px; }
-        .format-item .icon.landscape { aspect-ratio: 1.91/1; width: 36px; height: 19px; }
-
-        .format-item span {
-            font-size: 11px;
-            color: rgba(255,255,255,0.7);
-        }
-
-        /* Gradient Presets Grid */
+        /* Gradient Grid */
         .gradient-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -526,10 +263,7 @@
             position: relative;
         }
 
-        .gradient-item:hover {
-            transform: scale(1.05);
-        }
-
+        .gradient-item:hover { transform: scale(1.05); }
         .gradient-item.selected {
             border-color: var(--color-white);
             box-shadow: 0 0 0 2px var(--color-accent);
@@ -547,42 +281,73 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
-        /* Collapsible Sections */
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Theme Grid */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .theme-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
             cursor: pointer;
-            padding: 8px 0;
-            margin-bottom: 8px;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            position: relative;
         }
 
-        .section-header h3 {
-            margin: 0;
+        .theme-item:hover { transform: scale(1.05); }
+        .theme-item.selected {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3);
         }
 
-        .section-toggle {
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255,255,255,0.5);
-            transition: transform 0.2s;
+        .theme-item span {
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
-        .section-toggle.collapsed {
-            transform: rotate(-90deg);
+        /* Format Grid */
+        .format-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
         }
 
-        .section-content {
-            overflow: hidden;
-            transition: max-height 0.3s ease;
+        .format-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            padding: 12px 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            text-align: center;
         }
 
-        .section-content.collapsed {
-            max-height: 0 !important;
+        .format-item:hover { background: rgba(255,255,255,0.1); }
+        .format-item.selected {
+            border-color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.2);
         }
+
+        .format-item .icon {
+            margin: 0 auto 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        .format-item .icon.square { width: 28px; height: 28px; }
+        .format-item .icon.portrait { width: 24px; height: 30px; }
+        .format-item .icon.landscape { width: 36px; height: 19px; }
+
+        .format-item span { font-size: 11px; color: rgba(255,255,255,0.7); }
 
         /* Buttons */
         .btn {
@@ -601,35 +366,16 @@
             width: 100%;
         }
 
-        .btn-primary {
-            background: var(--color-accent);
-            color: white;
-        }
+        .btn-primary { background: var(--color-accent); color: white; }
+        .btn-primary:hover { background: var(--color-accent-hover); }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: white; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.15); }
 
-        .btn-primary:hover {
-            background: var(--color-accent-hover);
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.15);
-        }
-
-        .btn-group {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-group .btn {
-            flex: 1;
-        }
+        .btn-group { display: flex; gap: 8px; }
+        .btn-group .btn { flex: 1; }
 
         /* ========================================
-           PREVIEW AREA
+           PREVIEW - SLIDE CONTAINER
            ======================================== */
         .preview-container {
             background: #0d0d1a;
@@ -642,189 +388,357 @@
             position: relative;
             overflow: hidden;
             font-family: var(--font-family);
-            transition: width 0.3s, height 0.3s;
         }
 
-        /* Output Size Variants */
-        .slide-preview.size-portrait {
-            width: 400px;
-            height: 500px;
-        }
-
-        .slide-preview.size-square {
-            width: 400px;
-            height: 400px;
-        }
-
-        .slide-preview.size-landscape {
-            width: 500px;
-            height: 262px;
-        }
-
-        /* Preview Content Layer */
-        .preview-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            padding: 32px;
-        }
+        .slide-preview.size-square { width: 400px; height: 400px; }
+        .slide-preview.size-portrait { width: 400px; height: 500px; }
+        .slide-preview.size-landscape { width: 500px; height: 262px; }
 
         /* Theme Backgrounds */
         .slide-preview.theme-dark {
-            background: linear-gradient(135deg, #134e4a 0%, #0f3d3a 50%, #1a5c57 100%);
+            background: linear-gradient(135deg, #134e4a 0%, #0f3d3a 100%);
             color: white;
         }
-
         .slide-preview.theme-light {
-            background: linear-gradient(135deg, #f0fdfa 0%, #e6f9f6 50%, #f5fefe 100%);
+            background: linear-gradient(135deg, #f0fdfa 0%, #e6f9f6 100%);
             color: #134e4a;
         }
-
         .slide-preview.theme-accent {
-            background: linear-gradient(135deg, #0d9488 0%, #0a7a70 50%, #10a89c 100%);
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
             color: white;
         }
-
         .slide-preview.theme-white {
             background: white;
             color: #134e4a;
         }
 
-        /* Logo Element */
-        .preview-logo {
+        /* ========================================
+           TEMPLATE TYPE: STATEMENT
+           ======================================== */
+        .tpl-statement {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tpl-statement .logo {
             position: absolute;
             z-index: 10;
         }
 
-        .preview-logo img {
+        .tpl-statement .logo img {
             height: 100%;
             width: auto;
-            object-fit: contain;
         }
 
-        /* Character Element */
-        .preview-character {
-            position: absolute;
-            z-index: 5;
-        }
-
-        .preview-character img {
-            height: 100%;
-            width: auto;
-            object-fit: contain;
-        }
-
-        /* Tag/Badge */
-        .preview-tag {
+        .tpl-statement .badge {
             display: inline-block;
-            padding: 6px 14px;
-            border-radius: 4px;
-            font-size: 11px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             width: fit-content;
         }
 
-        .preview-tag.tag-accent {
-            background: rgba(13, 148, 136, 0.2);
+        .tpl-statement .badge.badge-accent {
+            background: rgba(13, 148, 136, 0.15);
             color: var(--color-accent);
         }
-
-        .preview-tag.tag-danger {
+        .tpl-statement .badge.badge-danger {
             background: rgba(243, 49, 68, 0.15);
             color: var(--color-danger);
         }
-
-        .preview-tag.tag-success {
-            background: rgba(31, 169, 92, 0.15);
-            color: var(--color-success);
-        }
-
-        .preview-tag.tag-warning {
-            background: rgba(251, 191, 36, 0.15);
-            color: var(--color-secondary);
-        }
-
-        .theme-dark .preview-tag.tag-accent,
-        .theme-accent .preview-tag.tag-accent {
+        .theme-dark .tpl-statement .badge.badge-accent,
+        .theme-accent .tpl-statement .badge.badge-accent {
             background: rgba(255, 255, 255, 0.15);
             color: white;
         }
 
-        /* Headline */
-        .preview-headline {
-            font-size: 32px;
+        .tpl-statement .brand {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            opacity: 0.8;
+            margin-bottom: 12px;
+        }
+
+        .tpl-statement .headline {
+            font-size: 36px;
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 16px;
             white-space: pre-line;
         }
 
-        /* Body Text */
-        .preview-body {
-            font-size: 16px;
+        .tpl-statement .body {
+            font-size: 18px;
             line-height: 1.5;
             opacity: 0.9;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
         }
 
-        /* Checklist */
-        .preview-checklist {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .preview-checklist-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        /* CTA Button */
-        .preview-cta {
+        .tpl-statement .cta {
             display: inline-block;
-            padding: 12px 24px;
-            border-radius: 24px;
-            font-size: 14px;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 15px;
             font-weight: 600;
             width: fit-content;
             margin-top: auto;
         }
 
-        .theme-dark .preview-cta,
-        .theme-accent .preview-cta {
+        .theme-dark .tpl-statement .cta,
+        .theme-accent .tpl-statement .cta {
             background: white;
             color: var(--color-dark);
         }
-
-        .theme-light .preview-cta,
-        .theme-white .preview-cta {
+        .theme-light .tpl-statement .cta,
+        .theme-white .tpl-statement .cta {
             background: var(--color-accent);
             color: white;
         }
 
-        /* Brand Text */
-        .preview-brand {
-            font-size: 11px;
+        .tpl-statement .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* ========================================
+           TEMPLATE TYPE: STAT FOCUS
+           ======================================== */
+        .tpl-stat {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tpl-stat .label {
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 700;
             opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .tpl-stat .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .theme-light .tpl-stat .stat-box,
+        .theme-white .tpl-stat .stat-box {
+            background: rgba(13, 148, 136, 0.08);
+            border-color: rgba(13, 148, 136, 0.2);
+        }
+
+        .tpl-stat .stat-value {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .tpl-stat .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .tpl-stat .description {
+            font-size: 18px;
+            line-height: 1.5;
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .tpl-stat .source {
+            font-size: 13px;
+            opacity: 0.6;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        /* ========================================
+           TEMPLATE TYPE: CHECKLIST
+           ======================================== */
+        .tpl-checklist {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tpl-checklist .label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+
+        .tpl-checklist .headline {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .tpl-checklist .items {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .tpl-checklist .item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .tpl-checklist .item-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .tpl-checklist .item-icon.good {
+            background: var(--color-success);
+            color: white;
+        }
+        .tpl-checklist .item-icon.bad {
+            background: var(--color-danger);
+            color: white;
+        }
+
+        .tpl-checklist .cta {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            width: fit-content;
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .theme-dark .tpl-checklist .cta,
+        .theme-accent .tpl-checklist .cta {
+            background: white;
+            color: var(--color-dark);
+        }
+        .theme-light .tpl-checklist .cta,
+        .theme-white .tpl-checklist .cta {
+            background: var(--color-dark);
+            color: white;
+        }
+
+        /* ========================================
+           TEMPLATE TYPE: QUOTE
+           ======================================== */
+        .tpl-quote {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .tpl-quote .quote-mark {
+            font-size: 72px;
+            line-height: 1;
+            color: var(--color-accent);
+            margin-bottom: -10px;
+        }
+
+        .theme-dark .tpl-quote .quote-mark,
+        .theme-accent .tpl-quote .quote-mark {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .tpl-quote .quote-text {
+            font-size: 28px;
+            font-weight: 600;
+            font-style: italic;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .tpl-quote .divider {
+            width: 40px;
+            height: 3px;
+            background: var(--color-accent);
+            margin: 0 auto 20px;
+        }
+
+        .theme-dark .tpl-quote .divider,
+        .theme-accent .tpl-quote .divider {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .tpl-quote .attribution {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .tpl-quote .author-box {
+            background: rgba(255,255,255,0.1);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: auto;
+        }
+
+        .theme-light .tpl-quote .author-box,
+        .theme-white .tpl-quote .author-box {
+            background: rgba(13, 148, 136, 0.08);
+        }
+
+        .tpl-quote .author-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .tpl-quote .author-title {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* Logo positioning */
+        .logo-wrapper {
+            position: absolute;
+            z-index: 10;
+        }
+        .logo-wrapper img {
+            height: 100%;
+            width: auto;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="nav">
         <div class="nav-brand">
             <img src="../../svg/Horizontal-Logo.svg" alt="Review My Emails">
@@ -837,10 +751,9 @@
     </nav>
 
     <div class="app">
-        <!-- Left Sidebar - Controls -->
         <div class="sidebar">
             <div class="sidebar-content">
-                <!-- Format Section -->
+                <!-- Format -->
                 <div class="control-section">
                     <h3>Format</h3>
                     <div class="format-grid">
@@ -859,7 +772,7 @@
                     </div>
                 </div>
 
-                <!-- Theme Section -->
+                <!-- Theme -->
                 <div class="control-section">
                     <h3>Theme</h3>
                     <div class="theme-grid">
@@ -869,7 +782,7 @@
                         <div class="theme-item" data-theme="light" style="background: linear-gradient(135deg, #f0fdfa, #e6f9f6); color: #134e4a;">
                             <span>Light</span>
                         </div>
-                        <div class="theme-item" data-theme="accent" style="background: linear-gradient(135deg, #0d9488, #0a7a70); color: white;">
+                        <div class="theme-item" data-theme="accent" style="background: linear-gradient(135deg, #0d9488, #0f766e); color: white;">
                             <span>Accent</span>
                         </div>
                         <div class="theme-item" data-theme="white" style="background: white; color: #134e4a; border: 1px solid #e5e5e5;">
@@ -878,246 +791,58 @@
                     </div>
                 </div>
 
-                <!-- Logo Section -->
+                <!-- Logo -->
                 <div class="control-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h3>Logo</h3>
-                        <div class="section-toggle">&#9660;</div>
+                    <h3>Logo</h3>
+                    <div class="control-group">
+                        <label class="control-label">Select Logo</label>
+                        <div class="image-grid" id="logoGrid"></div>
                     </div>
-                    <div class="section-content">
-                        <div class="toggle-row">
-                            <span class="toggle-label">Show Logo</span>
-                            <div class="toggle active" id="toggleLogo" onclick="toggleElement('logo')"></div>
+                    <div class="control-group">
+                        <label class="control-label">Position X</label>
+                        <div class="slider-group">
+                            <span class="slider-label">L</span>
+                            <input type="range" class="slider" id="logoX" min="0" max="100" value="8">
+                            <span class="slider-label">R</span>
+                            <span class="slider-value" id="logoXValue">8%</span>
                         </div>
-                        <div id="logoControls">
-                            <div class="control-group">
-                                <label class="control-label">Select Logo</label>
-                                <div class="image-grid" id="logoGrid">
-                                    <!-- Populated by JS -->
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Position X</label>
-                                <div class="slider-group">
-                                    <span class="slider-label">L</span>
-                                    <input type="range" class="slider" id="logoX" min="0" max="100" value="8">
-                                    <span class="slider-label">R</span>
-                                    <span class="slider-value" id="logoXValue">8%</span>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Position Y</label>
-                                <div class="slider-group">
-                                    <span class="slider-label">T</span>
-                                    <input type="range" class="slider" id="logoY" min="0" max="100" value="8">
-                                    <span class="slider-label">B</span>
-                                    <span class="slider-value" id="logoYValue">8%</span>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Size</label>
-                                <div class="slider-group">
-                                    <span class="slider-label">S</span>
-                                    <input type="range" class="slider" id="logoZoom" min="10" max="100" value="32">
-                                    <span class="slider-label">L</span>
-                                    <span class="slider-value" id="logoZoomValue">32px</span>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Position Y</label>
+                        <div class="slider-group">
+                            <span class="slider-label">T</span>
+                            <input type="range" class="slider" id="logoY" min="0" max="100" value="8">
+                            <span class="slider-label">B</span>
+                            <span class="slider-value" id="logoYValue">8%</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Size</label>
+                        <div class="slider-group">
+                            <span class="slider-label">S</span>
+                            <input type="range" class="slider" id="logoZoom" min="20" max="80" value="36">
+                            <span class="slider-label">L</span>
+                            <span class="slider-value" id="logoZoomValue">36px</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Text Content Section -->
-                <div class="control-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h3>Text Content</h3>
-                        <div class="section-toggle">&#9660;</div>
-                    </div>
-                    <div class="section-content">
-                        <!-- Tag -->
-                        <div class="control-group">
-                            <div class="toggle-row">
-                                <span class="toggle-label">Tag</span>
-                                <div class="toggle" id="toggleTag" onclick="toggleElement('tag')"></div>
-                            </div>
-                            <div id="tagControls" style="display: none; margin-top: 8px;">
-                                <input type="text" class="input-text" id="tagText" placeholder="e.g., Pro Tip, Alert">
-                                <div class="color-grid" style="margin-top: 8px;">
-                                    <div class="color-swatch selected" data-tag-color="accent" style="background: var(--color-accent);"></div>
-                                    <div class="color-swatch" data-tag-color="danger" style="background: var(--color-danger);"></div>
-                                    <div class="color-swatch" data-tag-color="success" style="background: var(--color-success);"></div>
-                                    <div class="color-swatch" data-tag-color="warning" style="background: var(--color-secondary);"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Headline -->
-                        <div class="control-group">
-                            <div class="toggle-row">
-                                <span class="toggle-label">Headline</span>
-                                <div class="toggle active" id="toggleHeadline" onclick="toggleElement('headline')"></div>
-                            </div>
-                            <div id="headlineControls" style="margin-top: 8px;">
-                                <textarea class="input-textarea" id="headlineText" placeholder="Your headline here..."></textarea>
-                                <div class="input-hint">Use [red:text] for colored text</div>
-                            </div>
-                        </div>
-
-                        <!-- Body -->
-                        <div class="control-group">
-                            <div class="toggle-row">
-                                <span class="toggle-label">Body Text</span>
-                                <div class="toggle" id="toggleBody" onclick="toggleElement('body')"></div>
-                            </div>
-                            <div id="bodyControls" style="display: none; margin-top: 8px;">
-                                <textarea class="input-textarea" id="bodyText" placeholder="Supporting text..."></textarea>
-                            </div>
-                        </div>
-
-                        <!-- Checklist -->
-                        <div class="control-group">
-                            <div class="toggle-row">
-                                <span class="toggle-label">Checklist</span>
-                                <div class="toggle" id="toggleChecklist" onclick="toggleElement('checklist')"></div>
-                            </div>
-                            <div id="checklistControls" style="display: none; margin-top: 8px;">
-                                <textarea class="input-textarea" id="checklistText" placeholder="One item per line..."></textarea>
-                                <div class="input-hint">Lines starting with check will be green, x will be red</div>
-                            </div>
-                        </div>
-
-                        <!-- CTA -->
-                        <div class="control-group">
-                            <div class="toggle-row">
-                                <span class="toggle-label">CTA Button</span>
-                                <div class="toggle" id="toggleCta" onclick="toggleElement('cta')"></div>
-                            </div>
-                            <div id="ctaControls" style="display: none; margin-top: 8px;">
-                                <input type="text" class="input-text" id="ctaText" placeholder="e.g., Learn More">
-                            </div>
-                        </div>
-
-                        <!-- Brand -->
-                        <div class="control-group">
-                            <div class="toggle-row">
-                                <span class="toggle-label">Brand Text</span>
-                                <div class="toggle" id="toggleBrand" onclick="toggleElement('brand')"></div>
-                            </div>
-                            <div id="brandControls" style="display: none; margin-top: 8px;">
-                                <input type="text" class="input-text" id="brandText" value="REVIEW MY EMAILS" placeholder="Brand name">
-                            </div>
-                        </div>
-                    </div>
+                <!-- Content (dynamic based on template type) -->
+                <div class="control-section" id="contentControls">
+                    <h3>Content</h3>
+                    <!-- Populated by JS based on template type -->
                 </div>
 
-                <!-- Character Section -->
+                <!-- Background -->
                 <div class="control-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h3>Character</h3>
-                        <div class="section-toggle">&#9660;</div>
-                    </div>
-                    <div class="section-content">
-                        <div class="toggle-row">
-                            <span class="toggle-label">Show Character</span>
-                            <div class="toggle" id="toggleCharacter" onclick="toggleElement('character')"></div>
-                        </div>
-                        <div id="characterControls" style="display: none;">
-                            <div class="control-group">
-                                <label class="control-label">Character Type</label>
-                                <select class="input-select" id="characterType">
-                                    <option value="delphi">Delphi</option>
-                                    <option value="mermaid">Mermaid</option>
-                                    <option value="captain">Captain</option>
-                                    <option value="pirate">Pirate</option>
-                                    <option value="engineer">Engineer</option>
-                                </select>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Select Pose</label>
-                                <div class="character-grid" id="characterGrid">
-                                    <!-- Populated by JS -->
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Position X</label>
-                                <div class="slider-group">
-                                    <span class="slider-label">L</span>
-                                    <input type="range" class="slider" id="characterX" min="0" max="100" value="70">
-                                    <span class="slider-label">R</span>
-                                    <span class="slider-value" id="characterXValue">70%</span>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Position Y</label>
-                                <div class="slider-group">
-                                    <span class="slider-label">T</span>
-                                    <input type="range" class="slider" id="characterY" min="0" max="100" value="50">
-                                    <span class="slider-label">B</span>
-                                    <span class="slider-value" id="characterYValue">50%</span>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Size</label>
-                                <div class="slider-group">
-                                    <span class="slider-label">S</span>
-                                    <input type="range" class="slider" id="characterZoom" min="20" max="200" value="80">
-                                    <span class="slider-label">L</span>
-                                    <span class="slider-value" id="characterZoomValue">80%</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Background Section -->
-                <div class="control-section">
-                    <div class="section-header" onclick="toggleSection(this)">
-                        <h3>Background</h3>
-                        <div class="section-toggle collapsed">&#9660;</div>
-                    </div>
-                    <div class="section-content collapsed">
-                        <div class="control-group">
-                            <label class="control-label">Background Type</label>
-                            <select class="input-select" id="bgType">
-                                <option value="theme">Theme Default</option>
-                                <option value="solid">Solid Color</option>
-                                <option value="gradient">Custom Gradient</option>
-                                <option value="image">Image</option>
-                            </select>
-                        </div>
-                        <div id="bgColorControls" style="display: none;">
-                            <div class="control-group">
-                                <label class="control-label">Color</label>
-                                <input type="color" class="input-text" id="bgColor" value="#134e4a" style="height: 40px; padding: 4px;">
-                            </div>
-                        </div>
-                        <div id="bgGradientControls" style="display: none;">
-                            <div class="control-group">
-                                <label class="control-label">Preset Gradients</label>
-                                <div class="gradient-grid" id="gradientPresets">
-                                    <!-- Populated by JS -->
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">Start Color</label>
-                                <input type="color" class="input-text" id="bgGradientStart" value="#134e4a" style="height: 40px; padding: 4px;">
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label">End Color</label>
-                                <input type="color" class="input-text" id="bgGradientEnd" value="#0f3d3a" style="height: 40px; padding: 4px;">
-                            </div>
-                        </div>
-                        <div id="bgImageControls" style="display: none;">
-                            <div class="control-group">
-                                <label class="control-label">Image URL</label>
-                                <input type="text" class="input-text" id="bgImageUrl" placeholder="https://...">
-                            </div>
-                        </div>
+                    <h3>Background</h3>
+                    <div class="control-group">
+                        <label class="control-label">Gradient Presets</label>
+                        <div class="gradient-grid" id="gradientPresets"></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Footer with Export -->
             <div class="sidebar-footer">
                 <div class="btn-group">
                     <button class="btn btn-secondary" onclick="copyToClipboard()">Copy</button>
@@ -1126,29 +851,10 @@
             </div>
         </div>
 
-        <!-- Preview Area -->
         <div class="preview-area">
             <div class="preview-container">
                 <div class="slide-preview size-square theme-dark" id="slidePreview">
-                    <!-- Logo -->
-                    <div class="preview-logo" id="previewLogo" style="top: 8%; left: 8%; height: 32px;">
-                        <img src="../../svg/Horizontal-Logo.svg" alt="Logo">
-                    </div>
-
-                    <!-- Character -->
-                    <div class="preview-character" id="previewCharacter" style="display: none;">
-                        <img src="" alt="Character">
-                    </div>
-
-                    <!-- Content -->
-                    <div class="preview-content" id="previewContent">
-                        <div class="preview-tag tag-accent" id="previewTag" style="display: none;">Pro Tip</div>
-                        <div class="preview-brand" id="previewBrand" style="display: none;">REVIEW MY EMAILS</div>
-                        <div class="preview-headline" id="previewHeadline">Your headline here</div>
-                        <div class="preview-body" id="previewBody" style="display: none;">Supporting text goes here</div>
-                        <div class="preview-checklist" id="previewChecklist" style="display: none;"></div>
-                        <div class="preview-cta" id="previewCta" style="display: none;">Learn More</div>
-                    </div>
+                    <!-- Template content rendered here -->
                 </div>
             </div>
         </div>
@@ -1156,7 +862,7 @@
 
     <script>
         // ========================================
-        // LOGO DATA
+        // CONSTANTS
         // ========================================
         const LOGOS = [
             { file: 'Horizontal-Logo.svg', name: 'Horizontal' },
@@ -1166,114 +872,127 @@
             { file: 'Square-Logo.svg', name: 'Square' },
             { file: 'Dark-Square-Logo.svg', name: 'Dark Square' },
             { file: 'Icon.svg', name: 'Icon' },
-            { file: 'Dark-Icon.svg', name: 'Dark Icon' },
-            { file: 'Social-Media-Icon.svg', name: 'Social' },
-            { file: 'Dark-Social-Media-Icon.svg', name: 'Dark Social' }
+            { file: 'Dark-Icon.svg', name: 'Dark Icon' }
         ];
 
-        // ========================================
-        // GRADIENT PRESETS (Brand Guidelines)
-        // ========================================
         const GRADIENT_PRESETS = [
-            // Primary Brand Gradients - Use for most content
-            { name: 'Teal Deep', start: '#134e4a', end: '#0f3d3a', category: 'brand', usage: 'Hero sections, primary backgrounds, authority posts' },
-            { name: 'Teal Accent', start: '#0d9488', end: '#0f766e', category: 'brand', usage: 'CTAs, feature highlights, engagement posts' },
-            { name: 'Teal Light', start: '#14b8a6', end: '#0d9488', category: 'brand', usage: 'Vibrant accents, tips, positive announcements' },
-            { name: 'Ocean', start: '#134e4a', end: '#0d9488', category: 'brand', usage: 'Transitions, educational content, guides' },
-
-            // Dark/Professional - Use for serious/technical content
-            { name: 'Midnight', start: '#1a1a2e', end: '#16162a', category: 'dark', usage: 'Dark mode, tech content, developer focus' },
-            { name: 'Charcoal', start: '#374151', end: '#1f2937', category: 'dark', usage: 'Professional posts, B2B content, reports' },
-            { name: 'Slate', start: '#475569', end: '#334155', category: 'dark', usage: 'Neutral backgrounds, data visualization' },
-            { name: 'Deep Sea', start: '#164e63', end: '#0c4a6e', category: 'dark', usage: 'Alternative brand dark, trust signals' },
-
-            // Warm/Energy - Use sparingly for alerts/urgency
-            { name: 'Sunset', start: '#f97316', end: '#ea580c', category: 'warm', usage: 'Warnings, deadlines, limited offers' },
-            { name: 'Coral', start: '#fb7185', end: '#f43f5e', category: 'warm', usage: 'Soft alerts, community posts, engagement' },
-            { name: 'Gold', start: '#fbbf24', end: '#f59e0b', category: 'warm', usage: 'Premium features, achievements, highlights' },
-            { name: 'Fire', start: '#ef4444', end: '#dc2626', category: 'warm', usage: 'Critical alerts, danger warnings, blacklist' },
-
-            // Cool/Calm - Use for trust/info content
-            { name: 'Sky', start: '#38bdf8', end: '#0ea5e9', category: 'cool', usage: 'Info posts, trust signals, tutorials' },
-            { name: 'Indigo', start: '#818cf8', end: '#6366f1', category: 'cool', usage: 'Creative content, premium features, AI' },
-            { name: 'Mint', start: '#34d399', end: '#10b981', category: 'cool', usage: 'Success stories, positive results, verified' },
-            { name: 'Lavender', start: '#a78bfa', end: '#8b5cf6', category: 'cool', usage: 'Creative accents, unique content, standout' }
+            { name: 'Teal Deep', start: '#134e4a', end: '#0f3d3a', usage: 'Hero sections, authority posts' },
+            { name: 'Teal Accent', start: '#0d9488', end: '#0f766e', usage: 'CTAs, engagement posts' },
+            { name: 'Teal Light', start: '#14b8a6', end: '#0d9488', usage: 'Tips, announcements' },
+            { name: 'Ocean', start: '#134e4a', end: '#0d9488', usage: 'Educational content' },
+            { name: 'Midnight', start: '#1a1a2e', end: '#16162a', usage: 'Dark mode, tech' },
+            { name: 'Charcoal', start: '#374151', end: '#1f2937', usage: 'Professional, B2B' },
+            { name: 'Slate', start: '#475569', end: '#334155', usage: 'Neutral, data' },
+            { name: 'Deep Sea', start: '#164e63', end: '#0c4a6e', usage: 'Trust signals' },
+            { name: 'Sunset', start: '#f97316', end: '#ea580c', usage: 'Warnings, urgency' },
+            { name: 'Gold', start: '#fbbf24', end: '#f59e0b', usage: 'Premium, highlights' },
+            { name: 'Fire', start: '#ef4444', end: '#dc2626', usage: 'Danger, blacklist' },
+            { name: 'Sky', start: '#38bdf8', end: '#0ea5e9', usage: 'Info, tutorials' },
+            { name: 'Mint', start: '#34d399', end: '#10b981', usage: 'Success, verified' },
+            { name: 'Indigo', start: '#818cf8', end: '#6366f1', usage: 'Creative, AI' },
+            { name: 'Lavender', start: '#a78bfa', end: '#8b5cf6', usage: 'Unique content' },
+            { name: 'Coral', start: '#fb7185', end: '#f43f5e', usage: 'Soft alerts' }
         ];
 
-        // ========================================
-        // CHARACTER DATA
-        // ========================================
-        const CHARACTER_IMAGES = {
-            delphi: [
-                { file: 'Delphi-Confident.png', name: 'Confident' },
-                { file: 'Delphi-Happy.png', name: 'Happy' },
-                { file: 'Delphi-Pointing.png', name: 'Pointing' },
-                { file: 'Delphi-Thinking.png', name: 'Thinking' },
-                { file: 'Delphi-Waving.png', name: 'Waving' }
-            ],
-            mermaid: [
-                { file: 'Mermaid-Happy.png', name: 'Happy' },
-                { file: 'Mermaid-Waving.png', name: 'Waving' }
-            ],
-            captain: [
-                { file: 'Captain-Confident.png', name: 'Confident' },
-                { file: 'Captain-Pointing.png', name: 'Pointing' }
-            ],
-            pirate: [
-                { file: 'Pirate-Angry.png', name: 'Angry' },
-                { file: 'Pirate-Happy.png', name: 'Happy' }
-            ],
-            engineer: [
-                { file: 'Engineer-Working.png', name: 'Working' },
-                { file: 'Engineer-Thinking.png', name: 'Thinking' }
-            ]
+        // Template definitions
+        const TEMPLATES = {
+            'dark-statement-sq': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    brand: 'REVIEW MY EMAILS',
+                    headline: 'Stop guessing.\nStart knowing.',
+                    body: 'Your bounce rate is telling a story. Are you listening?',
+                    cta: 'Get Free Audit'
+                }
+            },
+            'minimal-tip-sq': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Pro Tip',
+                    badgeColor: 'accent',
+                    brand: 'REVIEW MY EMAILS',
+                    headline: 'The "Restraint"\nStrategy.',
+                    body: 'When inbox placement weakens, pushing harder rarely fixes it.',
+                    cta: null
+                }
+            },
+            'stat-focus-sq': {
+                type: 'stat',
+                format: 'square',
+                theme: 'accent',
+                data: {
+                    label: 'DID YOU KNOW?',
+                    stat: '22.5%',
+                    statLabel: 'Average database decay per year',
+                    description: 'If you haven\'t cleaned your list in a year, nearly a quarter of it is risky.',
+                    source: 'Source: Industry Benchmarks'
+                }
+            },
+            'risk-alert-sq': {
+                type: 'checklist',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'Alert',
+                    badgeColor: 'danger',
+                    headline: 'Is your domain blacklisted?',
+                    items: [
+                        { text: 'Emails going to spam', status: 'bad' },
+                        { text: 'Open rates dropping', status: 'bad' },
+                        { text: 'Providers blocking you', status: 'bad' }
+                    ],
+                    cta: null
+                }
+            },
+            'checklist-pt': {
+                type: 'checklist',
+                format: 'portrait',
+                theme: 'light',
+                data: {
+                    label: 'DELIVERABILITY 101',
+                    headline: 'The Safe Sender Checklist',
+                    items: [
+                        { text: 'SPF Record Configured', status: 'good' },
+                        { text: 'DKIM Signature Valid', status: 'good' },
+                        { text: 'DMARC Policy Active', status: 'good' },
+                        { text: 'Hard Bounces Removed', status: 'good' }
+                    ],
+                    cta: 'Download Guide'
+                }
+            },
+            'quote-pt': {
+                type: 'quote',
+                format: 'portrait',
+                theme: 'dark',
+                data: {
+                    quote: 'Trust is the currency of the inbox.',
+                    attribution: 'Without it, your offers are invisible.',
+                    author: 'Review My Emails',
+                    authorTitle: 'Deliverability Experts'
+                }
+            }
         };
 
         // ========================================
         // STATE
         // ========================================
         let state = {
+            templateId: null,
+            templateType: 'statement',
             format: 'square',
             theme: 'dark',
-            elements: {
-                logo: true,
-                tag: false,
-                headline: true,
-                body: false,
-                checklist: false,
-                cta: false,
-                brand: false,
-                character: false
-            },
             logo: {
                 file: 'Horizontal-Logo.svg',
                 x: 8,
                 y: 8,
-                zoom: 32
+                zoom: 36
             },
-            character: {
-                type: 'delphi',
-                file: 'Delphi-Confident.png',
-                x: 70,
-                y: 50,
-                zoom: 80
-            },
-            content: {
-                tag: 'Pro Tip',
-                tagColor: 'accent',
-                headline: 'Your headline here',
-                body: 'Supporting text goes here',
-                checklist: '',
-                cta: 'Learn More',
-                brand: 'REVIEW MY EMAILS'
-            },
-            background: {
-                type: 'theme',
-                color: '#134e4a',
-                gradientStart: '#134e4a',
-                gradientEnd: '#0f3d3a',
-                imageUrl: ''
-            }
+            gradient: null,
+            data: {}
         };
 
         // ========================================
@@ -1281,37 +1000,44 @@
         // ========================================
         document.addEventListener('DOMContentLoaded', () => {
             initLogoGrid();
-            initCharacterGrid();
             initGradientPresets();
-            initEventListeners();
+            initFormatListeners();
+            initThemeListeners();
+            initLogoSliders();
             loadTemplateFromURL();
-            updatePreview();
+            renderPreview();
         });
 
-        function initGradientPresets() {
-            const grid = document.getElementById('gradientPresets');
-            grid.innerHTML = GRADIENT_PRESETS.map((grad, i) => `
-                <div class="gradient-item ${i === 0 ? 'selected' : ''}"
-                     data-start="${grad.start}"
-                     data-end="${grad.end}"
-                     data-category="${grad.category}"
-                     style="background: linear-gradient(135deg, ${grad.start}, ${grad.end});"
-                     title="${grad.name}: ${grad.usage}">
-                    <span>${grad.name}</span>
-                </div>
-            `).join('');
+        function loadTemplateFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const templateId = urlParams.get('template');
 
-            grid.querySelectorAll('.gradient-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    grid.querySelectorAll('.gradient-item').forEach(i => i.classList.remove('selected'));
-                    item.classList.add('selected');
-                    state.background.gradientStart = item.dataset.start;
-                    state.background.gradientEnd = item.dataset.end;
-                    document.getElementById('bgGradientStart').value = item.dataset.start;
-                    document.getElementById('bgGradientEnd').value = item.dataset.end;
-                    updatePreview();
-                });
-            });
+            if (templateId && TEMPLATES[templateId]) {
+                const template = TEMPLATES[templateId];
+                state.templateId = templateId;
+                state.templateType = template.type;
+                state.format = template.format;
+                state.theme = template.theme;
+                state.data = { ...template.data };
+
+                // Update UI
+                document.querySelectorAll('.format-item').forEach(i =>
+                    i.classList.toggle('selected', i.dataset.format === state.format));
+                document.querySelectorAll('.theme-item').forEach(i =>
+                    i.classList.toggle('selected', i.dataset.theme === state.theme));
+            } else {
+                // Default template
+                state.templateType = 'statement';
+                state.data = {
+                    brand: 'REVIEW MY EMAILS',
+                    headline: 'Your headline here',
+                    body: 'Supporting text goes here',
+                    cta: 'Learn More'
+                };
+            }
+
+            renderContentControls();
+            renderPreview();
         }
 
         function initLogoGrid() {
@@ -1327,445 +1053,370 @@
                     grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
                     state.logo.file = item.dataset.logo;
-                    updatePreview();
+                    renderPreview();
                 });
             });
         }
 
-        function initCharacterGrid() {
-            const grid = document.getElementById('characterGrid');
-            const type = state.character.type;
-            const images = CHARACTER_IMAGES[type] || [];
-            const folderMap = {
-                delphi: '../../Delphi/',
-                mermaid: '../../Mermaid/',
-                captain: '../../Captain/',
-                pirate: '../../Pirate/',
-                engineer: '../../Engineer/'
-            };
-            const folder = folderMap[type];
-
-            grid.innerHTML = images.map((img, i) => `
-                <div class="character-item ${i === 0 ? 'selected' : ''}" data-file="${img.file}" title="${img.name}">
-                    <img src="${folder}${img.file}" alt="${img.name}">
+        function initGradientPresets() {
+            const grid = document.getElementById('gradientPresets');
+            grid.innerHTML = GRADIENT_PRESETS.map((grad, i) => `
+                <div class="gradient-item" data-start="${grad.start}" data-end="${grad.end}"
+                     style="background: linear-gradient(135deg, ${grad.start}, ${grad.end});"
+                     title="${grad.name}: ${grad.usage}">
+                    <span>${grad.name}</span>
                 </div>
             `).join('');
 
-            grid.querySelectorAll('.character-item').forEach(item => {
+            grid.querySelectorAll('.gradient-item').forEach(item => {
                 item.addEventListener('click', () => {
-                    grid.querySelectorAll('.character-item').forEach(i => i.classList.remove('selected'));
+                    grid.querySelectorAll('.gradient-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
-                    state.character.file = item.dataset.file;
-                    updatePreview();
+                    state.gradient = {
+                        start: item.dataset.start,
+                        end: item.dataset.end
+                    };
+                    renderPreview();
                 });
             });
         }
 
-        function initEventListeners() {
-            // Format
+        function initFormatListeners() {
             document.querySelectorAll('.format-item').forEach(item => {
                 item.addEventListener('click', () => {
                     document.querySelectorAll('.format-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
                     state.format = item.dataset.format;
-                    updatePreview();
+                    renderPreview();
                 });
             });
+        }
 
-            // Theme
+        function initThemeListeners() {
             document.querySelectorAll('.theme-item').forEach(item => {
                 item.addEventListener('click', () => {
                     document.querySelectorAll('.theme-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
                     state.theme = item.dataset.theme;
-                    updatePreview();
+                    state.gradient = null; // Reset gradient when theme changes
+                    document.querySelectorAll('.gradient-item').forEach(i => i.classList.remove('selected'));
+                    renderPreview();
                 });
             });
+        }
 
-            // Tag color
-            document.querySelectorAll('[data-tag-color]').forEach(swatch => {
-                swatch.addEventListener('click', () => {
-                    document.querySelectorAll('[data-tag-color]').forEach(s => s.classList.remove('selected'));
-                    swatch.classList.add('selected');
-                    state.content.tagColor = swatch.dataset.tagColor;
-                    updatePreview();
+        function initLogoSliders() {
+            ['logoX', 'logoY', 'logoZoom'].forEach(id => {
+                const slider = document.getElementById(id);
+                slider.addEventListener('input', (e) => {
+                    const key = id.replace('logo', '').toLowerCase();
+                    state.logo[key === 'zoom' ? 'zoom' : key] = parseInt(e.target.value);
+                    document.getElementById(id + 'Value').textContent =
+                        key === 'zoom' ? e.target.value + 'px' : e.target.value + '%';
+                    renderPreview();
                 });
-            });
-
-            // Text inputs
-            document.getElementById('tagText').addEventListener('input', (e) => {
-                state.content.tag = e.target.value;
-                updatePreview();
-            });
-
-            document.getElementById('headlineText').addEventListener('input', (e) => {
-                state.content.headline = e.target.value;
-                updatePreview();
-            });
-
-            document.getElementById('bodyText').addEventListener('input', (e) => {
-                state.content.body = e.target.value;
-                updatePreview();
-            });
-
-            document.getElementById('checklistText').addEventListener('input', (e) => {
-                state.content.checklist = e.target.value;
-                updatePreview();
-            });
-
-            document.getElementById('ctaText').addEventListener('input', (e) => {
-                state.content.cta = e.target.value;
-                updatePreview();
-            });
-
-            document.getElementById('brandText').addEventListener('input', (e) => {
-                state.content.brand = e.target.value;
-                updatePreview();
-            });
-
-            // Logo sliders
-            document.getElementById('logoX').addEventListener('input', (e) => {
-                state.logo.x = parseInt(e.target.value);
-                document.getElementById('logoXValue').textContent = state.logo.x + '%';
-                updatePreview();
-            });
-
-            document.getElementById('logoY').addEventListener('input', (e) => {
-                state.logo.y = parseInt(e.target.value);
-                document.getElementById('logoYValue').textContent = state.logo.y + '%';
-                updatePreview();
-            });
-
-            document.getElementById('logoZoom').addEventListener('input', (e) => {
-                state.logo.zoom = parseInt(e.target.value);
-                document.getElementById('logoZoomValue').textContent = state.logo.zoom + 'px';
-                updatePreview();
-            });
-
-            // Character type
-            document.getElementById('characterType').addEventListener('change', (e) => {
-                state.character.type = e.target.value;
-                initCharacterGrid();
-                // Reset to first character
-                const images = CHARACTER_IMAGES[state.character.type];
-                if (images && images.length > 0) {
-                    state.character.file = images[0].file;
-                }
-                updatePreview();
-            });
-
-            // Character sliders
-            document.getElementById('characterX').addEventListener('input', (e) => {
-                state.character.x = parseInt(e.target.value);
-                document.getElementById('characterXValue').textContent = state.character.x + '%';
-                updatePreview();
-            });
-
-            document.getElementById('characterY').addEventListener('input', (e) => {
-                state.character.y = parseInt(e.target.value);
-                document.getElementById('characterYValue').textContent = state.character.y + '%';
-                updatePreview();
-            });
-
-            document.getElementById('characterZoom').addEventListener('input', (e) => {
-                state.character.zoom = parseInt(e.target.value);
-                document.getElementById('characterZoomValue').textContent = state.character.zoom + '%';
-                updatePreview();
-            });
-
-            // Background type
-            document.getElementById('bgType').addEventListener('change', (e) => {
-                state.background.type = e.target.value;
-                document.getElementById('bgColorControls').style.display = e.target.value === 'solid' ? 'block' : 'none';
-                document.getElementById('bgGradientControls').style.display = e.target.value === 'gradient' ? 'block' : 'none';
-                document.getElementById('bgImageControls').style.display = e.target.value === 'image' ? 'block' : 'none';
-                updatePreview();
-            });
-
-            document.getElementById('bgColor').addEventListener('input', (e) => {
-                state.background.color = e.target.value;
-                updatePreview();
-            });
-
-            document.getElementById('bgGradientStart').addEventListener('input', (e) => {
-                state.background.gradientStart = e.target.value;
-                updatePreview();
-            });
-
-            document.getElementById('bgGradientEnd').addEventListener('input', (e) => {
-                state.background.gradientEnd = e.target.value;
-                updatePreview();
-            });
-
-            document.getElementById('bgImageUrl').addEventListener('input', (e) => {
-                state.background.imageUrl = e.target.value;
-                updatePreview();
             });
         }
 
         // ========================================
-        // TOGGLE FUNCTIONS
+        // CONTENT CONTROLS (Type-specific)
         // ========================================
-        function toggleElement(element) {
-            const toggle = document.getElementById('toggle' + element.charAt(0).toUpperCase() + element.slice(1));
-            const controls = document.getElementById(element + 'Controls');
+        function renderContentControls() {
+            const container = document.getElementById('contentControls');
+            let html = '<h3>Content</h3>';
 
-            state.elements[element] = !state.elements[element];
-            toggle.classList.toggle('active', state.elements[element]);
+            switch (state.templateType) {
+                case 'statement':
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Badge (optional)</label>
+                            <input type="text" class="input-text" id="inputBadge" value="${state.data.badge || ''}" placeholder="e.g., Pro Tip">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Brand Text</label>
+                            <input type="text" class="input-text" id="inputBrand" value="${state.data.brand || ''}" placeholder="REVIEW MY EMAILS">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Headline</label>
+                            <textarea class="input-textarea" id="inputHeadline" placeholder="Main headline">${state.data.headline || ''}</textarea>
+                            <div class="input-hint">Use [red:text] for colored text</div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Body Text</label>
+                            <textarea class="input-textarea" id="inputBody" placeholder="Supporting text">${state.data.body || ''}</textarea>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">CTA Button (optional)</label>
+                            <input type="text" class="input-text" id="inputCta" value="${state.data.cta || ''}" placeholder="e.g., Learn More">
+                        </div>
+                    `;
+                    break;
 
-            if (controls) {
-                controls.style.display = state.elements[element] ? 'block' : 'none';
+                case 'stat':
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Top Label</label>
+                            <input type="text" class="input-text" id="inputLabel" value="${state.data.label || ''}" placeholder="DID YOU KNOW?">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Stat Value</label>
+                            <input type="text" class="input-text" id="inputStat" value="${state.data.stat || ''}" placeholder="22.5%">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Stat Label</label>
+                            <input type="text" class="input-text" id="inputStatLabel" value="${state.data.statLabel || ''}" placeholder="Average database decay">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Description</label>
+                            <textarea class="input-textarea" id="inputDescription">${state.data.description || ''}</textarea>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Source</label>
+                            <input type="text" class="input-text" id="inputSource" value="${state.data.source || ''}" placeholder="Source: ...">
+                        </div>
+                    `;
+                    break;
+
+                case 'checklist':
+                    const itemsText = (state.data.items || []).map(i =>
+                        (i.status === 'good' ? '+ ' : '- ') + i.text
+                    ).join('\n');
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Badge (optional)</label>
+                            <input type="text" class="input-text" id="inputBadge" value="${state.data.badge || ''}" placeholder="e.g., Alert">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Label (optional)</label>
+                            <input type="text" class="input-text" id="inputLabel" value="${state.data.label || ''}" placeholder="DELIVERABILITY 101">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Headline</label>
+                            <input type="text" class="input-text" id="inputHeadline" value="${state.data.headline || ''}" placeholder="The Safe Sender Checklist">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Checklist Items</label>
+                            <textarea class="input-textarea" id="inputItems" placeholder="+ Good item\n- Bad item">${itemsText}</textarea>
+                            <div class="input-hint">Start with + for green check, - for red X</div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">CTA Button (optional)</label>
+                            <input type="text" class="input-text" id="inputCta" value="${state.data.cta || ''}" placeholder="e.g., Download Guide">
+                        </div>
+                    `;
+                    break;
+
+                case 'quote':
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Quote</label>
+                            <textarea class="input-textarea" id="inputQuote">${state.data.quote || ''}</textarea>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Attribution</label>
+                            <input type="text" class="input-text" id="inputAttribution" value="${state.data.attribution || ''}" placeholder="Supporting context">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Author Name</label>
+                            <input type="text" class="input-text" id="inputAuthor" value="${state.data.author || ''}" placeholder="Review My Emails">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Author Title</label>
+                            <input type="text" class="input-text" id="inputAuthorTitle" value="${state.data.authorTitle || ''}" placeholder="Deliverability Experts">
+                        </div>
+                    `;
+                    break;
             }
 
-            updatePreview();
+            container.innerHTML = html;
+
+            // Add event listeners to all inputs
+            container.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', () => {
+                    updateStateFromInputs();
+                    renderPreview();
+                });
+            });
         }
 
-        function toggleSection(header) {
-            const toggle = header.querySelector('.section-toggle');
-            const content = header.nextElementSibling;
+        function updateStateFromInputs() {
+            switch (state.templateType) {
+                case 'statement':
+                    state.data.badge = document.getElementById('inputBadge')?.value || null;
+                    state.data.brand = document.getElementById('inputBrand')?.value || '';
+                    state.data.headline = document.getElementById('inputHeadline')?.value || '';
+                    state.data.body = document.getElementById('inputBody')?.value || '';
+                    state.data.cta = document.getElementById('inputCta')?.value || null;
+                    break;
 
-            toggle.classList.toggle('collapsed');
-            content.classList.toggle('collapsed');
+                case 'stat':
+                    state.data.label = document.getElementById('inputLabel')?.value || '';
+                    state.data.stat = document.getElementById('inputStat')?.value || '';
+                    state.data.statLabel = document.getElementById('inputStatLabel')?.value || '';
+                    state.data.description = document.getElementById('inputDescription')?.value || '';
+                    state.data.source = document.getElementById('inputSource')?.value || '';
+                    break;
+
+                case 'checklist':
+                    state.data.badge = document.getElementById('inputBadge')?.value || null;
+                    state.data.label = document.getElementById('inputLabel')?.value || '';
+                    state.data.headline = document.getElementById('inputHeadline')?.value || '';
+                    state.data.cta = document.getElementById('inputCta')?.value || null;
+
+                    const itemsText = document.getElementById('inputItems')?.value || '';
+                    state.data.items = itemsText.split('\n').filter(l => l.trim()).map(line => ({
+                        text: line.replace(/^[+-]\s*/, ''),
+                        status: line.trim().startsWith('+') ? 'good' : 'bad'
+                    }));
+                    break;
+
+                case 'quote':
+                    state.data.quote = document.getElementById('inputQuote')?.value || '';
+                    state.data.attribution = document.getElementById('inputAttribution')?.value || '';
+                    state.data.author = document.getElementById('inputAuthor')?.value || '';
+                    state.data.authorTitle = document.getElementById('inputAuthorTitle')?.value || '';
+                    break;
+            }
         }
 
         // ========================================
-        // PREVIEW UPDATE
+        // PREVIEW RENDERING
         // ========================================
-        function updatePreview() {
+        function renderPreview() {
             const preview = document.getElementById('slidePreview');
 
-            // Update format
-            preview.className = 'slide-preview';
-            preview.classList.add('size-' + state.format);
-            preview.classList.add('theme-' + state.theme);
+            // Update classes
+            preview.className = `slide-preview size-${state.format} theme-${state.theme}`;
 
-            // Update background
-            if (state.background.type === 'solid') {
-                preview.style.background = state.background.color;
-            } else if (state.background.type === 'gradient') {
-                preview.style.background = `linear-gradient(135deg, ${state.background.gradientStart}, ${state.background.gradientEnd})`;
-            } else if (state.background.type === 'image') {
-                preview.style.background = `url(${state.background.imageUrl}) center/cover`;
+            // Custom gradient
+            if (state.gradient) {
+                preview.style.background = `linear-gradient(135deg, ${state.gradient.start}, ${state.gradient.end})`;
             } else {
                 preview.style.background = '';
             }
 
-            // Update logo
-            const logoEl = document.getElementById('previewLogo');
-            logoEl.style.display = state.elements.logo ? 'block' : 'none';
-            logoEl.style.left = state.logo.x + '%';
-            logoEl.style.top = state.logo.y + '%';
-            logoEl.style.height = state.logo.zoom + 'px';
-            logoEl.querySelector('img').src = '../../svg/' + state.logo.file;
+            // Render template based on type
+            let html = '';
 
-            // Update character
-            const charEl = document.getElementById('previewCharacter');
-            charEl.style.display = state.elements.character ? 'block' : 'none';
-            if (state.elements.character) {
-                const folderMap = {
-                    delphi: '../../Delphi/',
-                    mermaid: '../../Mermaid/',
-                    captain: '../../Captain/',
-                    pirate: '../../Pirate/',
-                    engineer: '../../Engineer/'
-                };
-                charEl.style.left = state.character.x + '%';
-                charEl.style.top = state.character.y + '%';
-                charEl.style.height = state.character.zoom + '%';
-                charEl.style.transform = 'translate(-50%, -50%)';
-                charEl.querySelector('img').src = folderMap[state.character.type] + state.character.file;
+            // Logo
+            html += `
+                <div class="logo-wrapper" style="left: ${state.logo.x}%; top: ${state.logo.y}%; height: ${state.logo.zoom}px;">
+                    <img src="../../svg/${state.logo.file}" alt="Logo">
+                </div>
+            `;
+
+            switch (state.templateType) {
+                case 'statement':
+                    html += renderStatementTemplate();
+                    break;
+                case 'stat':
+                    html += renderStatTemplate();
+                    break;
+                case 'checklist':
+                    html += renderChecklistTemplate();
+                    break;
+                case 'quote':
+                    html += renderQuoteTemplate();
+                    break;
             }
 
-            // Update tag
-            const tagEl = document.getElementById('previewTag');
-            tagEl.style.display = state.elements.tag ? 'inline-block' : 'none';
-            tagEl.textContent = state.content.tag;
-            tagEl.className = 'preview-tag tag-' + state.content.tagColor;
-
-            // Update brand
-            const brandEl = document.getElementById('previewBrand');
-            brandEl.style.display = state.elements.brand ? 'block' : 'none';
-            brandEl.textContent = state.content.brand;
-
-            // Update headline
-            const headlineEl = document.getElementById('previewHeadline');
-            headlineEl.style.display = state.elements.headline ? 'block' : 'none';
-            headlineEl.innerHTML = parseRichText(state.content.headline);
-
-            // Update body
-            const bodyEl = document.getElementById('previewBody');
-            bodyEl.style.display = state.elements.body ? 'block' : 'none';
-            bodyEl.innerHTML = parseRichText(state.content.body);
-
-            // Update checklist
-            const checklistEl = document.getElementById('previewChecklist');
-            checklistEl.style.display = state.elements.checklist ? 'flex' : 'none';
-            if (state.elements.checklist && state.content.checklist) {
-                const items = state.content.checklist.split('\n').filter(line => line.trim());
-                checklistEl.innerHTML = items.map(item => {
-                    const isGood = item.trim().startsWith('check') || item.trim().startsWith('yes');
-                    const isBad = item.trim().startsWith('x') || item.trim().startsWith('no');
-                    const color = isGood ? 'var(--color-success)' : (isBad ? 'var(--color-danger)' : 'inherit');
-                    return `<div class="preview-checklist-item" style="color: ${color}">${item}</div>`;
-                }).join('');
-            }
-
-            // Update CTA
-            const ctaEl = document.getElementById('previewCta');
-            ctaEl.style.display = state.elements.cta ? 'inline-block' : 'none';
-            ctaEl.textContent = state.content.cta;
+            preview.innerHTML = html;
         }
 
-        // ========================================
-        // RICH TEXT PARSER
-        // ========================================
+        function renderStatementTemplate() {
+            const d = state.data;
+            const badgeClass = d.badgeColor === 'danger' ? 'badge-danger' : 'badge-accent';
+
+            return `
+                <div class="tpl-statement">
+                    ${d.badge ? `<div class="badge ${badgeClass}">${d.badge}</div>` : ''}
+                    <div class="content-area">
+                        ${d.brand ? `<div class="brand">${d.brand}</div>` : ''}
+                        ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
+                        ${d.body ? `<div class="body">${parseRichText(d.body)}</div>` : ''}
+                    </div>
+                    ${d.cta ? `<div class="cta">${d.cta}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderStatTemplate() {
+            const d = state.data;
+            return `
+                <div class="tpl-stat">
+                    ${d.label ? `<div class="label">${d.label}</div>` : ''}
+                    <div class="stat-box">
+                        <div class="stat-value">${d.stat || ''}</div>
+                        <div class="stat-label">${d.statLabel || ''}</div>
+                    </div>
+                    ${d.description ? `<div class="description">${d.description}</div>` : ''}
+                    ${d.source ? `<div class="source">${d.source}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderChecklistTemplate() {
+            const d = state.data;
+            const badgeClass = d.badgeColor === 'danger' ? 'badge-danger' : 'badge-accent';
+            const items = d.items || [];
+
+            return `
+                <div class="tpl-checklist">
+                    ${d.badge ? `<div class="badge ${badgeClass}" style="display:inline-block;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;background:${d.badgeColor === 'danger' ? 'rgba(243,49,68,0.15)' : 'rgba(13,148,136,0.15)'};color:${d.badgeColor === 'danger' ? 'var(--color-danger)' : 'var(--color-accent)'};">${d.badge}</div>` : ''}
+                    ${d.label ? `<div class="label">${d.label}</div>` : ''}
+                    ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
+                    <div class="items">
+                        ${items.map(item => `
+                            <div class="item">
+                                <div class="item-icon ${item.status}">${item.status === 'good' ? '✓' : '✕'}</div>
+                                <span>${item.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${d.cta ? `<div class="cta">${d.cta}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderQuoteTemplate() {
+            const d = state.data;
+            return `
+                <div class="tpl-quote">
+                    <div class="quote-mark">"</div>
+                    <div class="quote-text">${d.quote || ''}</div>
+                    <div class="divider"></div>
+                    ${d.attribution ? `<div class="attribution">${d.attribution}</div>` : ''}
+                    <div class="author-box">
+                        <div class="author-name">${d.author || ''}</div>
+                        <div class="author-title">${d.authorTitle || ''}</div>
+                    </div>
+                </div>
+            `;
+        }
+
         function parseRichText(text) {
             if (!text) return '';
             let escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
             escaped = escaped.replace(/\n/g, '<br>');
             const colorMap = {
                 'red': 'var(--color-danger)',
-                'danger': 'var(--color-danger)',
                 'teal': 'var(--color-accent)',
-                'accent': 'var(--color-accent)',
                 'green': 'var(--color-success)',
-                'success': 'var(--color-success)',
                 'yellow': 'var(--color-secondary)',
-                'warning': 'var(--color-secondary)',
-                'orange': 'var(--color-warning)',
-                'dark': 'var(--color-dark)'
+                'orange': 'var(--color-warning)'
             };
             return escaped.replace(/\[(\w+):([^\]]+)\]/g, (match, color, content) => {
                 const cssColor = colorMap[color.toLowerCase()];
-                if (cssColor) {
-                    return `<span style="color: ${cssColor}; font-weight: inherit;">${content}</span>`;
-                }
+                if (cssColor) return `<span style="color: ${cssColor};">${content}</span>`;
                 return content;
             });
         }
 
         // ========================================
-        // TEMPLATE LOADING
-        // ========================================
-        function loadTemplateFromURL() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const templateId = urlParams.get('template');
-
-            // Template definitions (same as index.html)
-            const TEMPLATE_DATA = {
-                'dark-statement-sq': {
-                    format: 'square',
-                    theme: 'dark',
-                    elements: { logo: true, brand: true, tag: false, headline: true, body: true, checklist: false, cta: true, character: false },
-                    content: { headline: 'Stop guessing.\nStart knowing.', body: 'Your bounce rate is telling a story. Are you listening?', cta: 'Get Free Audit' }
-                },
-                'risk-alert-sq': {
-                    format: 'square',
-                    theme: 'white',
-                    elements: { logo: true, brand: false, tag: true, headline: true, body: false, checklist: true, cta: false, character: false },
-                    content: { tag: 'Alert', tagColor: 'danger', headline: 'Is your domain [red:blacklisted]?', checklist: 'x Emails going to spam\nx Open rates dropping\nx Providers blocking you' }
-                },
-                'minimal-tip-sq': {
-                    format: 'square',
-                    theme: 'light',
-                    elements: { logo: true, brand: false, tag: true, headline: true, body: true, checklist: false, cta: true, character: false },
-                    content: { tag: 'Pro Tip', headline: 'Clean your list every 90 days.', body: 'Stale data is the #1 killer of sender reputation.', cta: 'Learn More' }
-                },
-                'stat-focus-sq': {
-                    format: 'square',
-                    theme: 'accent',
-                    elements: { logo: true, brand: true, tag: false, headline: true, body: true, checklist: false, cta: false, character: false },
-                    content: { headline: '22.5%', body: 'Average database decay per year. If you haven\'t cleaned your list in a year, nearly a quarter of it is risky.' }
-                },
-                'checklist-pt': {
-                    format: 'portrait',
-                    theme: 'light',
-                    elements: { logo: true, brand: true, tag: false, headline: true, body: false, checklist: true, cta: true, character: false },
-                    content: { headline: 'The Safe Sender Checklist', checklist: 'check SPF Record Configured\ncheck DKIM Signature Valid\ncheck DMARC Policy Active\ncheck Hard Bounces Removed', cta: 'Download Guide' }
-                },
-                'quote-pt': {
-                    format: 'portrait',
-                    theme: 'dark',
-                    elements: { logo: true, brand: true, tag: false, headline: true, body: true, checklist: false, cta: false, character: false },
-                    content: { headline: '"Trust is the currency of the inbox."', body: 'Without it, your offers are invisible.' }
-                },
-                'do-dont-pt': {
-                    format: 'portrait',
-                    theme: 'white',
-                    elements: { logo: true, brand: false, tag: false, headline: true, body: false, checklist: true, cta: false, character: false },
-                    content: { headline: 'Email Warm-up', checklist: 'check Start with engaged subscribers\ncheck Gradually increase volume\ncheck Monitor metrics daily\nx Blast your entire list\nx Ignore bounce rates\nx Skip authentication' }
-                },
-                'value-prop-wd': {
-                    format: 'landscape',
-                    theme: 'dark',
-                    elements: { logo: true, brand: false, tag: false, headline: true, body: true, checklist: false, cta: true, character: false },
-                    content: { headline: 'Protect Your Sender Reputation', body: 'Real-time monitoring. Instant alerts. Expert guidance.', cta: 'Start Free Trial' }
-                },
-                'social-proof-wd': {
-                    format: 'landscape',
-                    theme: 'light',
-                    elements: { logo: true, brand: false, tag: false, headline: true, body: false, checklist: false, cta: true, character: false },
-                    content: { headline: '10K+ Domains Monitored | 99.2% Inbox Placement | 24/7 Alerts', cta: 'Join Them' }
-                },
-                'blog-header-wd': {
-                    format: 'landscape',
-                    theme: 'accent',
-                    elements: { logo: true, brand: false, tag: true, headline: true, body: true, checklist: false, cta: false, character: false },
-                    content: { tag: 'Guide', headline: 'The Complete Email Deliverability Playbook', body: 'Everything you need to reach the inbox' }
-                }
-            };
-
-            if (templateId && TEMPLATE_DATA[templateId]) {
-                const template = TEMPLATE_DATA[templateId];
-
-                // Apply template to state
-                state.format = template.format;
-                state.theme = template.theme;
-
-                // Apply elements
-                Object.keys(template.elements).forEach(key => {
-                    state.elements[key] = template.elements[key];
-                    const toggle = document.getElementById('toggle' + key.charAt(0).toUpperCase() + key.slice(1));
-                    const controls = document.getElementById(key + 'Controls');
-                    if (toggle) toggle.classList.toggle('active', template.elements[key]);
-                    if (controls) controls.style.display = template.elements[key] ? 'block' : 'none';
-                });
-
-                // Apply content
-                if (template.content) {
-                    Object.keys(template.content).forEach(key => {
-                        state.content[key] = template.content[key];
-                        const input = document.getElementById(key + 'Text');
-                        if (input) input.value = template.content[key];
-                    });
-                }
-
-                // Update format selection UI
-                document.querySelectorAll('.format-item').forEach(item => {
-                    item.classList.toggle('selected', item.dataset.format === state.format);
-                });
-
-                // Update theme selection UI
-                document.querySelectorAll('.theme-item').forEach(item => {
-                    item.classList.toggle('selected', item.dataset.theme === state.theme);
-                });
-
-                // Update tag color selection
-                if (template.content?.tagColor) {
-                    document.querySelectorAll('[data-tag-color]').forEach(s => {
-                        s.classList.toggle('selected', s.dataset.tagColor === template.content.tagColor);
-                    });
-                }
-            }
-        }
-
-        // ========================================
-        // EXPORT FUNCTIONS
+        // EXPORT
         // ========================================
         async function downloadImage() {
             const preview = document.getElementById('slidePreview');
-
-            // Get actual export dimensions
             const dimensions = {
                 square: { width: 1080, height: 1080 },
                 portrait: { width: 1080, height: 1350 },
@@ -1781,14 +1432,13 @@
             });
 
             const link = document.createElement('a');
-            link.download = `rme-${state.format}-${Date.now()}.png`;
+            link.download = `rme-${state.templateType}-${Date.now()}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
         }
 
         async function copyToClipboard() {
             const preview = document.getElementById('slidePreview');
-
             const dimensions = {
                 square: { width: 1080, height: 1080 },
                 portrait: { width: 1080, height: 1350 },
@@ -1810,7 +1460,6 @@
                     ]);
                     alert('Copied to clipboard!');
                 } catch (err) {
-                    console.error('Failed to copy:', err);
                     alert('Failed to copy to clipboard');
                 }
             });
