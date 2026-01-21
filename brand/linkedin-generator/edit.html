@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- v2.5 - Position sliders for all components -->
+<!-- v2.6 - Layer ordering, None options, uploaded images persist -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -446,6 +446,47 @@
             font-weight: 600;
             color: white;
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Layer List */
+        .layer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .layer-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            cursor: grab;
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+            transition: all 0.15s;
+        }
+        .layer-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .layer-item.dragging {
+            opacity: 0.5;
+            background: rgba(13, 148, 136, 0.2);
+        }
+        .layer-item .drag-handle {
+            color: rgba(255,255,255,0.3);
+            font-size: 10px;
+        }
+        .layer-item .layer-name {
+            flex: 1;
+            text-transform: capitalize;
+        }
+        .layer-item .layer-index {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            width: 16px;
+            text-align: center;
         }
 
         /* Theme Grid */
@@ -1158,6 +1199,17 @@
                     <div class="control-group">
                         <label class="control-label">Gradient Presets</label>
                         <div class="gradient-grid" id="gradientPresets"></div>
+                    </div>
+                </div>
+
+                <!-- Layers -->
+                <div class="control-section">
+                    <h3>Layer Order</h3>
+                    <div class="control-group">
+                        <div class="layer-list" id="layerList">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="input-hint" style="margin-top: 8px;">Drag to reorder. Top = front, Bottom = back</div>
                     </div>
                 </div>
             </div>
@@ -1930,7 +1982,9 @@
                 flipV: false
             },
             gradient: null,
-            data: {}
+            data: {},
+            // Layer order (bottom to top): lower index = rendered first (behind)
+            layers: ['background', 'gradient', 'content', 'character', 'logo']
         };
 
         // ========================================
@@ -1961,6 +2015,7 @@
                 initFormatListeners();
                 initThemeListeners();
                 initLogoSliders();
+                initLayerList();
                 loadTemplateFromURL();
                 renderPreview();
                 console.log('App initialized!');
@@ -1989,6 +2044,9 @@
                         uploadedBackgrounds = data.images
                             .filter(img => img.type === 'background')
                             .map(img => ({ file: img.url, name: img.filename, isBlob: true }));
+                        // Refresh grids after loading uploaded images
+                        initCharacterGrid();
+                        initBackgroundGrid();
                     }
                 }
             } catch (error) {
@@ -2083,8 +2141,13 @@
             // Combine local characters with uploaded ones
             const allCharacters = [...CHARACTERS, ...uploadedCharacters];
 
-            grid.innerHTML = allCharacters.map((char, i) => `
-                <div class="image-item" data-character="${char.file}" data-is-blob="${char.isBlob || false}" title="${char.name}">
+            // Add "None" option first
+            grid.innerHTML = `
+                <div class="image-item none-option ${!state.character.file ? 'selected' : ''}" data-character="" title="No Character">
+                    <span style="font-size: 10px; color: rgba(255,255,255,0.5);">None</span>
+                </div>
+            ` + allCharacters.map((char, i) => `
+                <div class="image-item ${state.character.file === char.file ? 'selected' : ''}" data-character="${char.file}" data-is-blob="${char.isBlob || false}" title="${char.name}">
                     <img src="${char.isBlob ? char.file : '../' + char.file}" alt="${char.name}" style="object-fit: cover;">
                 </div>
             `).join('');
@@ -2093,7 +2156,7 @@
                 item.addEventListener('click', () => {
                     grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
-                    state.character.file = item.dataset.character;
+                    state.character.file = item.dataset.character || null;
                     state.character.isBlob = item.dataset.isBlob === 'true';
                     renderPreview();
                 });
@@ -2148,8 +2211,13 @@
             // Combine local backgrounds with uploaded ones
             const allBackgrounds = [...BACKGROUNDS, ...uploadedBackgrounds];
 
-            grid.innerHTML = allBackgrounds.map((bg, i) => `
-                <div class="image-item" data-background="${bg.file}" data-is-blob="${bg.isBlob || false}" title="${bg.name}">
+            // Add "None" option first
+            grid.innerHTML = `
+                <div class="image-item none-option ${!state.background.image ? 'selected' : ''}" data-background="" title="No Background Image">
+                    <span style="font-size: 10px; color: rgba(255,255,255,0.5);">None</span>
+                </div>
+            ` + allBackgrounds.map((bg, i) => `
+                <div class="image-item ${state.background.image === bg.file ? 'selected' : ''}" data-background="${bg.file}" data-is-blob="${bg.isBlob || false}" title="${bg.name}">
                     <img src="${bg.isBlob ? bg.file : '../' + bg.file}" alt="${bg.name}" style="object-fit: cover;">
                 </div>
             `).join('');
@@ -2158,10 +2226,15 @@
                 item.addEventListener('click', () => {
                     grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
-                    state.background.image = item.dataset.background;
-                    state.background.isBlob = item.dataset.isBlob === 'true';
-                    document.getElementById('gradientOpacityGroup').style.display = 'block';
-                    document.getElementById('bgImageControls').style.display = 'block';
+                    const bgFile = item.dataset.background;
+                    if (bgFile) {
+                        state.background.image = bgFile;
+                        state.background.isBlob = item.dataset.isBlob === 'true';
+                        document.getElementById('gradientOpacityGroup').style.display = 'block';
+                        document.getElementById('bgImageControls').style.display = 'block';
+                    } else {
+                        clearBackgroundImage();
+                    }
                     renderPreview();
                 });
             });
@@ -2254,8 +2327,15 @@
 
         function initGradientPresets() {
             const grid = document.getElementById('gradientPresets');
-            grid.innerHTML = GRADIENT_PRESETS.map((grad, i) => `
-                <div class="gradient-item" data-start="${grad.start}" data-end="${grad.end}"
+            // Add "None" option first
+            grid.innerHTML = `
+                <div class="gradient-item none-option ${!state.gradient ? 'selected' : ''}" data-start="" data-end=""
+                     style="background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;"
+                     title="No Gradient - Use Theme Color">
+                    <span>None</span>
+                </div>
+            ` + GRADIENT_PRESETS.map((grad, i) => `
+                <div class="gradient-item ${state.gradient?.start === grad.start ? 'selected' : ''}" data-start="${grad.start}" data-end="${grad.end}"
                      style="background: linear-gradient(135deg, ${grad.start}, ${grad.end});"
                      title="${grad.name}: ${grad.usage}">
                     <span>${grad.name}</span>
@@ -2266,10 +2346,14 @@
                 item.addEventListener('click', () => {
                     grid.querySelectorAll('.gradient-item').forEach(i => i.classList.remove('selected'));
                     item.classList.add('selected');
-                    state.gradient = {
-                        start: item.dataset.start,
-                        end: item.dataset.end
-                    };
+                    if (item.dataset.start) {
+                        state.gradient = {
+                            start: item.dataset.start,
+                            end: item.dataset.end
+                        };
+                    } else {
+                        state.gradient = null;
+                    }
                     renderPreview();
                 });
             });
@@ -2297,6 +2381,78 @@
                     renderPreview();
                 });
             });
+        }
+
+        function initLayerList() {
+            renderLayerList();
+        }
+
+        function renderLayerList() {
+            const list = document.getElementById('layerList');
+            const layerNames = {
+                'background': 'Background Image',
+                'gradient': 'Gradient/Color',
+                'content': 'Text Content',
+                'character': 'Character',
+                'logo': 'Logo'
+            };
+
+            // Reverse for display (top of list = front)
+            const displayLayers = [...state.layers].reverse();
+
+            list.innerHTML = displayLayers.map((layer, i) => `
+                <div class="layer-item" draggable="true" data-layer="${layer}">
+                    <span class="drag-handle">☰</span>
+                    <span class="layer-name">${layerNames[layer] || layer}</span>
+                    <span class="layer-index">${displayLayers.length - i}</span>
+                </div>
+            `).join('');
+
+            // Add drag and drop handlers
+            const items = list.querySelectorAll('.layer-item');
+            items.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('drop', handleDrop);
+                item.addEventListener('dragend', handleDragEnd);
+            });
+        }
+
+        let draggedLayer = null;
+
+        function handleDragStart(e) {
+            draggedLayer = e.target.dataset.layer;
+            e.target.classList.add('dragging');
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const targetLayer = e.target.closest('.layer-item')?.dataset.layer;
+            if (!targetLayer || targetLayer === draggedLayer) return;
+
+            // Get current indices (in display order, which is reversed)
+            const displayLayers = [...state.layers].reverse();
+            const fromIndex = displayLayers.indexOf(draggedLayer);
+            const toIndex = displayLayers.indexOf(targetLayer);
+
+            // Reorder in display order
+            displayLayers.splice(fromIndex, 1);
+            displayLayers.splice(toIndex, 0, draggedLayer);
+
+            // Save back (reverse again for storage order)
+            state.layers = displayLayers.reverse();
+
+            renderLayerList();
+            renderPreview();
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            draggedLayer = null;
         }
 
         function initLogoSliders() {
@@ -2642,70 +2798,90 @@
             // Update classes
             preview.className = `slide-preview size-${state.format} theme-${state.theme}`;
 
-            // Build background style (gradient only, bg image handled separately for flip support)
+            // Build background style (gradient only if no bg image and gradient is first layer)
             let bgStyle = '';
             if (state.gradient && !state.background.image) {
-                // Just gradient (no background image)
                 bgStyle = `background: linear-gradient(135deg, ${state.gradient.start}, ${state.gradient.end});`;
             }
             preview.style.cssText = bgStyle;
 
-            // Render template based on type
+            // Build layers in order (lower index = behind)
             let html = '';
-
-            // Background image (as element for flip support)
-            if (state.background.image) {
-                const bgImageUrl = state.background.isBlob ? state.background.image : `../${state.background.image}`;
-                const bgScaleX = state.background.flipH ? -1 : 1;
-                const bgScaleY = state.background.flipV ? -1 : 1;
-                const gradientOverlay = state.gradient
-                    ? `linear-gradient(135deg, rgba(${hexToRgb(state.gradient.start)}, ${state.background.gradientOpacity / 100}), rgba(${hexToRgb(state.gradient.end)}, ${state.background.gradientOpacity / 100}))`
-                    : 'none';
-                html += `
-                    <div class="background-image-wrapper">
-                        <img src="${bgImageUrl}" alt="" style="transform: scaleX(${bgScaleX}) scaleY(${bgScaleY});">
-                        ${state.gradient ? `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: ${gradientOverlay};"></div>` : ''}
-                    </div>
-                `;
-            }
-
-            // Logo (only if visible) - smart positioning
-            if (state.logo.visible) {
-                html += `
-                    <img class="logo-img" src="../../svg/${state.logo.file}" alt="Logo"
-                         style="position: absolute; left: ${state.logo.x}%; top: ${state.logo.y}%; z-index: 10; height: ${state.logo.zoom}px; width: auto;">
-                `;
-            }
-
-            // Character (only if visible and file selected)
-            if (state.character.visible && state.character.file) {
-                const charImageUrl = state.character.isBlob ? state.character.file : `../${state.character.file}`;
-                const charScaleX = state.character.flipH ? -1 : 1;
-                const charScaleY = state.character.flipV ? -1 : 1;
-                const charRotation = state.character.rotation || 0;
-                html += `
-                    <div class="character-wrapper" style="left: ${state.character.x}%; top: ${state.character.y}%; transform: translate(-50%, -50%) rotate(${charRotation}deg) scaleX(${charScaleX}) scaleY(${charScaleY}); height: ${state.character.zoom}px;">
-                        <img src="${charImageUrl}" alt="Character">
-                    </div>
-                `;
-            }
-
-            switch (state.templateType) {
-                case 'statement':
-                    html += renderStatementTemplate();
-                    break;
-                case 'stat':
-                    html += renderStatTemplate();
-                    break;
-                case 'checklist':
-                    html += renderChecklistTemplate();
-                    break;
-                case 'quote':
-                    html += renderQuoteTemplate();
-                    break;
-            }
+            state.layers.forEach((layer, index) => {
+                const zIndex = index + 1;
+                html += renderLayer(layer, zIndex);
+            });
 
             preview.innerHTML = html;
+        }
+
+        function renderLayer(layerType, zIndex) {
+            switch (layerType) {
+                case 'background':
+                    if (state.background.image) {
+                        const bgImageUrl = state.background.isBlob ? state.background.image : `../${state.background.image}`;
+                        const bgScaleX = state.background.flipH ? -1 : 1;
+                        const bgScaleY = state.background.flipV ? -1 : 1;
+                        return `
+                            <div class="background-image-wrapper" style="z-index: ${zIndex};">
+                                <img src="${bgImageUrl}" alt="" style="transform: scaleX(${bgScaleX}) scaleY(${bgScaleY});">
+                            </div>
+                        `;
+                    }
+                    return '';
+
+                case 'gradient':
+                    if (state.gradient && state.background.image) {
+                        const gradientOverlay = `linear-gradient(135deg, rgba(${hexToRgb(state.gradient.start)}, ${state.background.gradientOpacity / 100}), rgba(${hexToRgb(state.gradient.end)}, ${state.background.gradientOpacity / 100}))`;
+                        return `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: ${gradientOverlay}; z-index: ${zIndex};"></div>`;
+                    }
+                    return '';
+
+                case 'logo':
+                    if (state.logo.visible) {
+                        return `
+                            <img class="logo-img" src="../../svg/${state.logo.file}" alt="Logo"
+                                 style="position: absolute; left: ${state.logo.x}%; top: ${state.logo.y}%; z-index: ${zIndex}; height: ${state.logo.zoom}px; width: auto;">
+                        `;
+                    }
+                    return '';
+
+                case 'character':
+                    if (state.character.visible && state.character.file) {
+                        const charImageUrl = state.character.isBlob ? state.character.file : `../${state.character.file}`;
+                        const charScaleX = state.character.flipH ? -1 : 1;
+                        const charScaleY = state.character.flipV ? -1 : 1;
+                        const charRotation = state.character.rotation || 0;
+                        return `
+                            <div class="character-wrapper" style="left: ${state.character.x}%; top: ${state.character.y}%; transform: translate(-50%, -50%) rotate(${charRotation}deg) scaleX(${charScaleX}) scaleY(${charScaleY}); height: ${state.character.zoom}px; z-index: ${zIndex};">
+                                <img src="${charImageUrl}" alt="Character">
+                            </div>
+                        `;
+                    }
+                    return '';
+
+                case 'content':
+                    let contentHtml = '';
+                    switch (state.templateType) {
+                        case 'statement':
+                            contentHtml = renderStatementTemplate();
+                            break;
+                        case 'stat':
+                            contentHtml = renderStatTemplate();
+                            break;
+                        case 'checklist':
+                            contentHtml = renderChecklistTemplate();
+                            break;
+                        case 'quote':
+                            contentHtml = renderQuoteTemplate();
+                            break;
+                    }
+                    // Wrap content with z-index
+                    return `<div class="content-layer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${zIndex};">${contentHtml}</div>`;
+
+                default:
+                    return '';
+            }
         }
 
         function renderStatementTemplate() {
