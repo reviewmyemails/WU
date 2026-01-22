@@ -428,7 +428,7 @@
            ======================================== */
 
         .comparison-list {
-            max-width: 700px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -437,29 +437,40 @@
         }
 
         .comparison-list li {
-            font-size: 17px;
-            color: var(--color-dark);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
             padding: var(--space-md) 0;
-            padding-left: 32px;
-            position: relative;
             border-bottom: 1px solid var(--color-border);
             line-height: 1.6;
+            align-items: start;
         }
 
         .comparison-list li:last-child {
             border-bottom: none;
         }
 
-        .comparison-list li::before {
-            content: "→";
-            position: absolute;
-            left: 0;
-            color: var(--color-accent);
+        .comparison-list__them {
+            font-size: 16px;
             font-weight: 600;
+            color: var(--color-muted);
         }
 
-        .comparison-list li strong {
-            color: var(--color-muted);
+        .comparison-list__us {
+            font-size: 16px;
+            color: var(--color-dark);
+        }
+
+        @media (max-width: 700px) {
+            .comparison-list li {
+                grid-template-columns: 1fr;
+                gap: var(--space-xs);
+            }
+            .comparison-list__us::before {
+                content: "→ ";
+                color: var(--color-accent);
+                font-weight: 600;
+            }
         }
 
         /* ========================================
@@ -504,7 +515,7 @@
            ======================================== */
 
         .problem-content {
-            max-width: 640px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
@@ -523,26 +534,30 @@
             margin: var(--space-lg) 0;
         }
 
-        .problem-content ul {
-            list-style: none;
+        .problem-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-sm) var(--space-xl);
             text-align: left;
-            max-width: 400px;
             margin: var(--space-lg) auto;
         }
 
-        .problem-content li {
+        .problem-questions li {
+            list-style: none;
             font-size: 17px;
             color: var(--color-muted);
             padding: var(--space-xs) 0;
-            padding-left: 24px;
+            padding-left: 28px;
             position: relative;
         }
 
-        .problem-content li::before {
-            content: "?";
+        .problem-questions li::before {
+            content: "•";
             position: absolute;
             left: 0;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 1;
             color: var(--color-accent);
         }
 
@@ -550,6 +565,12 @@
             font-weight: 600;
             color: var(--color-dark);
             margin-top: var(--space-lg);
+        }
+
+        @media (max-width: 600px) {
+            .problem-questions {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ========================================
@@ -574,11 +595,25 @@
             background: var(--color-white);
             border: 1px solid var(--color-border);
             border-radius: 12px;
+            text-decoration: none;
+            display: block;
+            transition: all 200ms ease;
+            cursor: pointer;
+        }
+
+        .option-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 4px 20px rgba(13, 148, 136, 0.15);
+            transform: translateY(-2px);
         }
 
         .option-card--featured {
             border: 2px solid var(--color-accent);
             background: var(--color-light);
+        }
+
+        .option-card--featured:hover {
+            box-shadow: 0 6px 24px rgba(13, 148, 136, 0.25);
         }
 
         .option-card__badge {
@@ -595,6 +630,7 @@
         .option-card h3 {
             font-size: 20px;
             margin-bottom: var(--space-sm);
+            color: var(--color-dark);
         }
 
         .option-card p {
@@ -608,6 +644,107 @@
             font-size: 14px;
             font-weight: 500;
             color: var(--color-dark);
+        }
+
+        .option-card__cta {
+            display: inline-block;
+            margin-top: var(--space-sm);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-accent);
+        }
+
+        .option-card:hover .option-card__cta {
+            text-decoration: underline;
+        }
+
+        /* Waitlist form */
+        .option-card--waitlist {
+            cursor: default;
+        }
+
+        .option-card--waitlist:hover {
+            transform: none;
+        }
+
+        .waitlist-form {
+            display: flex;
+            gap: var(--space-xs);
+            margin-top: var(--space-md);
+        }
+
+        .waitlist-input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-family: var(--font);
+            font-size: 14px;
+            color: var(--color-dark);
+        }
+
+        .waitlist-input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .waitlist-btn {
+            padding: 10px 16px;
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 180ms ease;
+            white-space: nowrap;
+        }
+
+        .waitlist-btn:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .waitlist-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .waitlist-success {
+            margin-top: var(--space-sm);
+            font-size: 14px;
+            color: #16a34a;
+            font-weight: 500;
+        }
+
+        .waitlist-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: var(--space-sm);
+            font-size: 13px;
+            color: var(--color-muted);
+            cursor: pointer;
+        }
+
+        .waitlist-checkbox input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-top: 2px;
+            accent-color: var(--color-accent);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .waitlist-checkbox span {
+            line-height: 1.4;
+        }
+
+        @media (max-width: 500px) {
+            .waitlist-form {
+                flex-direction: column;
+            }
         }
 
         .option-note {
@@ -1217,10 +1354,13 @@
 
                 <p>That tells you what to remove. It does not tell you what is actually wrong.</p>
 
-                <ul>
+                <ul class="problem-questions">
                     <li>Why is engagement dropping?</li>
                     <li>Why are complaints rising?</li>
                     <li>Is it the list, the sending, or both?</li>
+                    <li>Which addresses are actually hurting me?</li>
+                    <li>What patterns should I watch for?</li>
+                    <li>What should I do about the "risky" ones?</li>
                 </ul>
 
                 <p class="emphasis">We give you the context to answer those questions.</p>
@@ -1241,11 +1381,26 @@
 
             <div class="comparison-list">
                 <ul>
-                    <li><strong>Validators check if an inbox exists.</strong> We assess whether sending there is safe.</li>
-                    <li><strong>Validators give you a status.</strong> We give you the reasoning behind a decision.</li>
-                    <li><strong>Validators flag what bounces.</strong> We flag what damages your reputation without bouncing.</li>
-                    <li><strong>Validators process volume.</strong> We interpret patterns across your entire list.</li>
-                    <li><strong>Validators leave you guessing.</strong> We tell you what to do and why.</li>
+                    <li>
+                        <span class="comparison-list__them">Validators check if an inbox exists.</span>
+                        <span class="comparison-list__us">We assess whether sending there is safe.</span>
+                    </li>
+                    <li>
+                        <span class="comparison-list__them">Validators give you a status.</span>
+                        <span class="comparison-list__us">We give you the reasoning behind a decision.</span>
+                    </li>
+                    <li>
+                        <span class="comparison-list__them">Validators flag what bounces.</span>
+                        <span class="comparison-list__us">We flag what damages your reputation without bouncing.</span>
+                    </li>
+                    <li>
+                        <span class="comparison-list__them">Validators process volume.</span>
+                        <span class="comparison-list__us">We interpret patterns across your entire list.</span>
+                    </li>
+                    <li>
+                        <span class="comparison-list__them">Validators leave you guessing.</span>
+                        <span class="comparison-list__us">We tell you what to do and why.</span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -1262,25 +1417,36 @@
             </div>
 
             <div class="options-grid options-grid--three">
-                <div class="option-card">
+                <a href="/sos-hotline" class="option-card">
                     <span class="option-card__badge">Guidance</span>
                     <h3>SOS Hotline</h3>
                     <p>Free expert support for deliverability questions. No data touched. No list processed. Just honest answers.</p>
                     <p class="option-card__status">Use it before, during, or after cleaning to understand your situation.</p>
-                </div>
+                    <span class="option-card__cta">Learn more →</span>
+                </a>
 
-                <div class="option-card option-card--featured">
+                <a href="https://anchor.reviewmyemails.com/" class="option-card option-card--featured">
                     <span class="option-card__badge">Execution</span>
                     <h3>Done-For-You</h3>
                     <p>Send us your list. We process it, label every address, and return results with clear reasoning.</p>
                     <p class="option-card__status">You get the decisions made for you. Available now.</p>
-                </div>
+                    <span class="option-card__cta">Get started →</span>
+                </a>
 
-                <div class="option-card">
+                <div class="option-card option-card--waitlist" id="selfServeCard">
                     <span class="option-card__badge">Automation</span>
                     <h3>Self-Serve <span style="font-size: 12px; font-weight: 500; color: var(--color-muted);">(Coming Soon)</span></h3>
                     <p>Upload your list. Download results. Same methodology as done-for-you, but you run it yourself.</p>
                     <p class="option-card__status">Coming soon. Join the waitlist to get notified.</p>
+                    <div class="waitlist-form" id="waitlistForm">
+                        <input type="email" class="waitlist-input" id="waitlistEmail" placeholder="your@email.com">
+                        <button type="button" class="waitlist-btn" id="waitlistBtn">Join Waitlist</button>
+                    </div>
+                    <label class="waitlist-checkbox" id="waitlistCheckboxLabel">
+                        <input type="checkbox" id="waitlistNewsletter" checked>
+                        <span>Send me occasional updates and tips for navigating the email seas</span>
+                    </label>
+                    <p class="waitlist-success" id="waitlistSuccess" style="display: none;">You're on the list! We'll notify you when self-serve launches.</p>
                 </div>
             </div>
 
@@ -1557,6 +1723,74 @@
             var tier = pricingTiers[parseInt(this.value)];
             va('event', { name: 'Pricing_Calculated', data: { size: tier.label, price: tier.contact ? 'custom' : tier.price } });
         });
+
+        // Waitlist form submission
+        const waitlistBtn = document.getElementById('waitlistBtn');
+        const waitlistEmail = document.getElementById('waitlistEmail');
+        const waitlistForm = document.getElementById('waitlistForm');
+        const waitlistSuccess = document.getElementById('waitlistSuccess');
+        const waitlistNewsletter = document.getElementById('waitlistNewsletter');
+        const waitlistCheckboxLabel = document.getElementById('waitlistCheckboxLabel');
+
+        if (waitlistBtn) {
+            waitlistBtn.addEventListener('click', async function() {
+                const email = waitlistEmail.value.trim();
+                const subscribeNewsletter = waitlistNewsletter.checked;
+
+                if (!email || !email.includes('@')) {
+                    waitlistEmail.style.borderColor = '#dc2626';
+                    return;
+                }
+
+                waitlistBtn.disabled = true;
+                waitlistBtn.textContent = 'Joining...';
+                waitlistEmail.style.borderColor = '';
+
+                try {
+                    // Call our Vercel API which handles both MongoDB and Brevo
+                    const response = await fetch('/api/waitlist', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            subscribeNewsletter: subscribeNewsletter,
+                            source: 'pricing_waitlist'
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        // Success - show message
+                        waitlistForm.style.display = 'none';
+                        waitlistCheckboxLabel.style.display = 'none';
+                        if (data.alreadyExists) {
+                            waitlistSuccess.textContent = "You're already on the list! We'll notify you when self-serve launches.";
+                        }
+                        waitlistSuccess.style.display = 'block';
+
+                        // Track event
+                        va('event', { name: 'Waitlist_Joined', data: { source: 'pricing_page', newsletter: subscribeNewsletter } });
+                    } else {
+                        throw new Error(data.error || 'Failed to join');
+                    }
+                } catch (error) {
+                    console.error('Waitlist error:', error);
+                    waitlistBtn.disabled = false;
+                    waitlistBtn.textContent = 'Try Again';
+                    waitlistEmail.style.borderColor = '#dc2626';
+                }
+            });
+
+            // Allow Enter key to submit
+            waitlistEmail.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    waitlistBtn.click();
+                }
+            });
+        }
     </script>
 
 </body>
