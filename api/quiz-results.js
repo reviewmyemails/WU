@@ -165,7 +165,7 @@ async function sendResultsEmail(userEmail, quizType, result, answers, answerData
   <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
     <!-- Header -->
     <div style="text-align: center; margin-bottom: 32px;">
-      <div style="font-size: 24px; font-weight: 700; color: #134e4a;">Review My Emails</div>
+      <img src="https://reviewmyemails.com/email-logo.png" alt="Review My Emails" width="200" style="width: 200px; max-width: 100%; height: auto;">
     </div>
 
     <!-- Main Card -->
@@ -188,7 +188,7 @@ async function sendResultsEmail(userEmail, quizType, result, answers, answerData
 
       <!-- CTA -->
       <div style="text-align: center; margin-top: 24px;">
-        <a href="https://reviewmyemails.com/sos-hotline" style="display: inline-block; background: #0d9488; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 15px;">Talk to a Specialist</a>
+        <a href="mailto:sos@reviewmyemails.com" style="display: inline-block; background: #0d9488; color: white; padding: 14px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 15px;">Talk to a Specialist</a>
       </div>
     </div>
 
