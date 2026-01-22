@@ -165,7 +165,7 @@ async function sendResultsEmail(userEmail, quizType, result, answers, answerData
   <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
     <!-- Header -->
     <div style="text-align: center; margin-bottom: 32px;">
-      <img src="https://reviewmyemails.com/svg/Horizontal-Logo.svg" alt="Review My Emails" height="50" style="height: 50px;">
+      <div style="font-size: 24px; font-weight: 700; color: #134e4a;">Review My Emails</div>
     </div>
 
     <!-- Main Card -->
@@ -210,7 +210,7 @@ async function sendResultsEmail(userEmail, quizType, result, answers, answerData
       'api-key': BREVO_API_KEY
     },
     body: JSON.stringify({
-      sender: { email: 'results@reviewmyemails.com', name: 'Review My Emails' },
+      sender: { email: 'sos@reviewmyemails.com', name: 'Review My Emails' },
       to: [{ email: userEmail }],
       replyTo: { email: 'sos@reviewmyemails.com' },
       subject: `Your ${isAudit ? 'Audit' : 'Quiz'} Results from Review My Emails`,
