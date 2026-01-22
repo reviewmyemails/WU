@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Credits - Review My Emails</title>
+
+    <!-- Favicon - Multiple formats for better compatibility -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            background-color: #fafcfc;
+            color: #134e4a;
+        }
+
+        /* Minimum 18px for all text except trust strip */
+        p, span, li {
+            font-size: 18px;
+        }
+
+        /* Links inherit size from parent */
+        a {
+            font-size: inherit;
+        }
+
+        /* Headings use Inter with heavier weight */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 700;
+        }
+
+        :root {
+            --rme-primary: #0d9488;
+            --rme-primary-hover: #0f766e;
+            --rme-text-dark: #134e4a;
+            --rme-bg-light: #f0fdfa;
+            --rme-bg-white: #fafcfc;
+            --rme-green: #10b981;
+            --rme-red: #ef4444;
+            --rme-orange: #f59e0b;
+        }
+
+        .bg-rme-primary { background-color: var(--rme-primary); }
+        .bg-rme-bg-light { background-color: var(--rme-bg-light); }
+        .bg-rme-text-dark { background-color: var(--rme-text-dark); }
+        .text-rme-primary { color: var(--rme-primary); }
+        .text-rme-text-dark { color: var(--rme-text-dark); }
+        .text-rme-text-light { color: #64748b; }
+        .border-rme-primary { border-color: var(--rme-primary); }
+
+        .plan-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .plan-button.active {
+            background-color: var(--rme-bg-light);
+            border-color: var(--rme-primary);
+            color: var(--rme-text-dark);
+        }
+
+        .promo-success {
+            background-color: #d1fae5;
+            border: 2px solid var(--rme-green);
+            color: #065f46;
+        }
+
+        .promo-error {
+            background-color: #fee2e2;
+            border: 2px solid var(--rme-red);
+            color: #991b1b;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in {
+            animation: slideIn 0.3s ease;
+        }
+
+        .copied-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--rme-green);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .floating-card {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+        }
+
+        /* Trust strip exception - can be smaller */
+        .trust-strip, .trust-strip span {
+            font-size: 14px;
+        }
+
+        /* Floating button jiggle animation */
+        @keyframes jiggle {
+            0%, 100% { transform: rotate(0deg); }
+            20% { transform: rotate(-5deg); }
+            40% { transform: rotate(5deg); }
+            60% { transform: rotate(-5deg); }
+            80% { transform: rotate(5deg); }
+        }
+        .jiggle {
+            animation: jiggle 0.5s ease-in-out;
+        }
+    </style>
+    <!-- Analytics -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5PYH0SJWEW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5PYH0SJWEW');
+    </script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "rfdccvjnjx");
+    </script>
+    <!-- Vercel Analytics -->
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+    <!-- NEW HEADER DESIGN -->
+    <div class="mb-8">
+        <!-- Dark header with logo and trust badges -->
+        <div class="bg-rme-text-dark pt-8 pb-28 px-6">
+            <!-- Logo -->
+            <div class="text-center mb-4">
+                <a href="https://reviewmyemails.com">
+                    <img src="assets/logo.svg" alt="Review My Emails Logo" class="h-16 w-auto mx-auto" onerror="this.style.display='none';">
+                </a>
+            </div>
+
+            <!-- Gradient divider -->
+            <div class="h-0.5 bg-gradient-to-r from-transparent via-rme-primary to-transparent mb-4"></div>
+
+            <!-- Trust badges inline -->
+            <div class="trust-strip flex flex-wrap justify-center gap-x-6 gap-y-2 md:gap-6 text-white/80">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-lock text-rme-primary"></i>
+                    <span class="font-medium">256-Bit Encryption & Protected Transfer</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-user-check text-rme-primary"></i>
+                    <span class="font-medium">Human Reviewed by a Deliverability Expert</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-file-shield text-rme-primary"></i>
+                    <span class="font-medium">GDPR Compliant & Privacy First</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-desktop text-rme-primary"></i>
+                    <span class="font-medium">Local Processing, Zero Outsourcing</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating white card -->
+        <div class="max-w-4xl mx-auto -mt-20 px-4 relative z-10">
+            <div class="bg-white rounded-xl floating-card pt-12 pb-8 px-8 md:pt-14 md:pb-10 md:px-10 border-t-4 border-rme-primary">
+                <h2 class="text-4xl md:text-5xl font-bold text-center mb-6 text-rme-text-dark leading-tight">
+                    Human Reviewed. <span class="text-rme-primary text-4xl md:text-5xl">No Automated Guessing.</span> Deliverability Done Right.
+                </h2>
+                <p class="text-center mb-6 max-w-3xl mx-auto leading-relaxed text-lg">
+                    Every email on your list is reviewed directly by <a href="https://linkedin.com/in/yannatorry" target="_blank" class="text-rme-primary font-semibold inline-flex items-center gap-1">Yanna-Torry Aspraki <i class="fas fa-arrow-up-right-from-square text-xs"></i></a>, one of the world's leading deliverability specialists. No automated guessing, just <strong>expert decisions that safeguard your domain</strong> and support stronger inbox placement. You get <strong>clear action labels tailored to your business</strong>, so you always know who to keep, monitor, or suppress.
+                </p>
+                <!-- CTA -->
+                <div class="flex items-center justify-center mt-8">
+                    <a href="/security-page.html" class="inline-flex items-center gap-2 text-rme-primary font-semibold hover:underline">
+                        <i class="fas fa-shield-alt"></i>
+                        See how we protect your data
+                        <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- How It Works - Dark theme -->
+        <div class="bg-rme-text-dark px-6 md:px-12 pb-8 md:pb-12 -mt-16 pt-32">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-10 text-white">How It Works</h2>
+
+            <!-- Steps with connected line -->
+            <div class="relative max-w-4xl mx-auto mb-10">
+                <!-- Connecting line (hidden on mobile) -->
+                <div class="hidden md:block absolute top-8 left-1/6 right-1/6 h-0.5 bg-rme-primary/50"></div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center relative">
+                        <div class="w-12 h-12 bg-rme-primary rounded-full mx-auto mb-4 flex items-center justify-center relative z-10">
+                            <span class="text-white font-semibold text-xl">1</span>
+                        </div>
+                        <h3 class="font-semibold text-2xl mb-3 text-white">Buy Your Credits</h3>
+                        <p class="text-gray-300 leading-relaxed">Choose how many emails you want manually reviewed. <span class="font-semibold">One credit always equals one email.</span></p>
+                    </div>
+                    <div class="text-center relative">
+                        <div class="w-12 h-12 bg-rme-primary rounded-full mx-auto mb-4 flex items-center justify-center relative z-10">
+                            <span class="text-white font-semibold text-xl">2</span>
+                        </div>
+                        <h3 class="font-semibold text-2xl mb-3 text-white">Securely Send Your List</h3>
+                        <p class="text-gray-300 leading-relaxed">Send your list through secure email or Dropbox. <span class="font-semibold">Everything stays encrypted from start to finish.</span></p>
+                    </div>
+                    <div class="text-center relative">
+                        <div class="w-12 h-12 bg-rme-primary rounded-full mx-auto mb-4 flex items-center justify-center relative z-10">
+                            <span class="text-white font-semibold text-xl">3</span>
+                        </div>
+                        <h3 class="font-semibold text-2xl mb-3 text-white">Receive Your Cleaned List</h3>
+                        <p class="text-gray-300 leading-relaxed"><span class="font-semibold">You get your cleaned and fully labeled list back within 2 to 24 hours</span> ready to use safely.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teal consultation strip -->
+        <div class="bg-rme-primary py-8">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                    <div class="lg:col-span-2 text-center lg:text-left lg:pl-6">
+                        <div class="flex items-start justify-center lg:justify-start gap-3 mb-2">
+                            <i class="fas fa-calendar-check text-rme-text-dark text-xl flex-shrink-0 mt-1" style="filter: drop-shadow(0 0 4px rgba(255,255,255,0.3));"></i>
+                            <h3 class="font-semibold text-2xl text-rme-text-dark" style="text-shadow: 0 0 6px rgba(255,255,255,0.3);">Need clarity before you buy? Speak directly with a deliverability expert.</h3>
+                        </div>
+                        <p class="text-white leading-relaxed">Get expert guidance on your list, your inbox placement, or the safest next steps for your strategy. <strong>No pressure. Real answers.</strong></p>
+                    </div>
+                    <div class="flex justify-center lg:justify-end">
+                        <a href="https://calendly.com/ahoy-reviewmyemails" target="_blank" class="bg-white hover:bg-gray-100 text-rme-text-dark font-semibold px-6 md:px-8 py-4 rounded-lg transition-all inline-flex items-center justify-center gap-2 leading-tight text-center">
+                            <i class="fas fa-calendar flex-shrink-0"></i>
+                            <span>Schedule Free Strategy Call</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pricing-section" class="max-w-7xl mx-auto px-6 py-12 scroll-mt-4">
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+            <!-- LEFT COLUMN: Credit Selection -->
+            <div class="lg:col-span-2 space-y-6">
+
+                <!-- Credit Input Card -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-2 border-gray-100">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-calculator text-rme-primary"></i>
+                        How many emails would you like reviewed?
+                    </h2>
+
+                    <div class="flex items-center border-2 border-gray-300 rounded-lg p-2 mb-4">
+                        <button id="decrement-btn" class="px-3 md:px-4 text-xl md:text-2xl text-rme-primary hover:bg-gray-100 rounded flex-shrink-0">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input
+                            id="email-count-input"
+                            type="number"
+                            value="5000"
+                            min="1000"
+                            class="flex-grow text-center font-bold text-xl md:text-2xl border-none focus:ring-0 focus:outline-none min-w-0"
+                        >
+                        <button id="increment-btn" class="px-3 md:px-4 text-xl md:text-2xl text-rme-primary hover:bg-gray-100 rounded flex-shrink-0">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <p class="text-rme-text-light mb-4">...or, select a quick amount:</p>
+
+                    <div id="plan-buttons" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <!-- Buttons generated by JS -->
+                    </div>
+                </div>
+
+                <!-- Email Input Card -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-2 border-gray-100">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-at text-rme-primary"></i>
+                        Your Email Address
+                    </h2>
+                    <p class="text-rme-text-light mb-3">This is where we send your receipt, credit confirmation, and any questions we may have while reviewing your list.</p>
+
+                    <input
+                        id="email-input"
+                        type="email"
+                        placeholder="kraken@inbox-from-the-deep.sea"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-rme-primary focus:ring-0 focus:outline-none text-lg"
+                    >
+                </div>
+
+                <!-- Promo Code Card -->
+                <div class="bg-rme-bg-light p-6 rounded-xl border-2 border-dashed border-rme-primary">
+                    <h2 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fas fa-ticket text-rme-primary"></i>
+                        Have a promo code to apply?
+                    </h2>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <input
+                            id="promo-code-input"
+                            type="text"
+                            placeholder="Enter promo code (press Enter)"
+                            class="flex-grow px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-rme-primary focus:ring-0 focus:outline-none text-lg uppercase w-full"
+                        >
+                        <div class="flex gap-3">
+                            <button
+                                id="apply-promo-btn"
+                                class="flex-grow sm:flex-grow-0 bg-rme-primary hover:bg-opacity-90 text-white font-bold px-6 py-3 rounded-lg transition-all"
+                            >
+                                Apply
+                            </button>
+                            <button
+                                id="remove-promo-btn"
+                                class="hidden bg-red-500 hover:bg-red-600 text-white font-bold px-4 py-3 rounded-lg transition-all flex-shrink-0"
+                                title="Remove promo code"
+                            >
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="promo-message" class="mt-4 p-4 rounded-lg font-semibold hidden"></div>
+                </div>
+
+                <!-- Pricing Tiers Table -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border-2 border-gray-100">
+                    <h2 class="text-2xl font-bold mb-3 flex items-center gap-2">
+                        <i class="fas fa-chart-line text-rme-primary"></i>
+                        Volume Pricing
+                    </h2>
+                    <p class="text-rme-text-light mb-4">Get discounted pricing when you clean large lists. Ideal for agencies, brands, and teams managing multiple sends.</p>
+
+                    <!-- Desktop Table View -->
+                    <div class="hidden md:block space-y-2">
+                        <div class="grid grid-cols-3 gap-4 p-3 bg-gray-50 rounded-lg font-semibold text-sm">
+                            <div>Credits</div>
+                            <div class="text-center">Price/Credit</div>
+                            <div class="text-right">Tier Max Total</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 p-3 hover:bg-rme-bg-light rounded-lg transition-all">
+                            <div class="font-medium">1,000</div>
+                            <div class="text-center text-rme-primary font-bold">$0.0080</div>
+                            <div class="text-right text-rme-text-light">$8.00</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 p-3 hover:bg-rme-bg-light rounded-lg transition-all">
+                            <div class="font-medium">1,001 - 5,000</div>
+                            <div class="text-center text-rme-primary font-bold">$0.0074</div>
+                            <div class="text-right text-rme-text-light">$37.00</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 p-3 hover:bg-rme-bg-light rounded-lg transition-all">
+                            <div class="font-medium">5,001 - 10,000</div>
+                            <div class="text-center text-rme-primary font-bold">$0.0070</div>
+                            <div class="text-right text-rme-text-light">$70.00</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 p-3 hover:bg-rme-bg-light rounded-lg transition-all">
+                            <div class="font-medium">10,001 - 50,000</div>
+                            <div class="text-center text-rme-primary font-bold">$0.0062</div>
+                            <div class="text-right text-rme-text-light">$310.00</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 p-3 hover:bg-rme-bg-light rounded-lg transition-all">
+                            <div class="font-medium">50,001 - 100,000</div>
+                            <div class="text-center text-rme-primary font-bold">$0.0052</div>
+                            <div class="text-right text-rme-text-light">$520.00</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 p-3 hover:bg-rme-bg-light rounded-lg transition-all">
+                            <div class="font-medium">100,001 - 250,000</div>
+                            <div class="text-center text-rme-primary font-bold">$0.0039</div>
+                            <div class="text-right text-rme-text-light">$975.00</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 p-3 hover:bg-rme-bg-light rounded-lg transition-all">
+                            <div class="font-medium">250,001 - 500,000</div>
+                            <div class="text-center text-rme-primary font-bold">$0.00325</div>
+                            <div class="text-right text-rme-text-light">$1,257</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 p-3 hover:bg-rme-bg-light rounded-lg transition-all">
+                            <div class="font-medium">500,001 - 1M</div>
+                            <div class="text-center text-rme-primary font-bold">$0.0026</div>
+                            <div class="text-right text-rme-text-light">$2,600</div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 p-3 bg-rme-primary text-white rounded-lg font-bold">
+                            <div>1,000,000+</div>
+                            <div class="text-center">
+                                <button onclick="copyBillingEmail()" class="cursor-pointer inline-flex items-center gap-1">Contact Us <i class="fas fa-arrow-up-right-from-square text-xs"></i></button>
+                            </div>
+                            <div class="text-right">Custom</div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Card View -->
+                    <div class="md:hidden space-y-3">
+                        <!-- Tier 1 -->
+                        <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-rme-primary transition-all">
+                            <div class="text-lg font-bold mb-2">1,000 credits</div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-rme-text-light">Price per credit:</span>
+                                <span class="text-rme-primary font-bold text-lg">$0.0080</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-rme-text-light">Tier Max Total:</span>
+                                <span class="font-semibold">$8.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Tier 2 -->
+                        <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-rme-primary transition-all">
+                            <div class="text-lg font-bold mb-2">1,001 - 5,000 credits</div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-rme-text-light">Price per credit:</span>
+                                <span class="text-rme-primary font-bold text-lg">$0.0074</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-rme-text-light">Tier Max Total:</span>
+                                <span class="font-semibold">$37.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Tier 3 -->
+                        <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-rme-primary transition-all">
+                            <div class="text-lg font-bold mb-2">5,001 - 10,000 credits</div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-rme-text-light">Price per credit:</span>
+                                <span class="text-rme-primary font-bold text-lg">$0.0070</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-rme-text-light">Tier Max Total:</span>
+                                <span class="font-semibold">$70.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Tier 4 -->
+                        <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-rme-primary transition-all">
+                            <div class="text-lg font-bold mb-2">10,001 - 50,000 credits</div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-rme-text-light">Price per credit:</span>
+                                <span class="text-rme-primary font-bold text-lg">$0.0062</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-rme-text-light">Tier Max Total:</span>
+                                <span class="font-semibold">$310.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Tier 5 -->
+                        <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-rme-primary transition-all">
+                            <div class="text-lg font-bold mb-2">50,001 - 100,000 credits</div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-rme-text-light">Price per credit:</span>
+                                <span class="text-rme-primary font-bold text-lg">$0.0052</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-rme-text-light">Tier Max Total:</span>
+                                <span class="font-semibold">$520.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Tier 6 -->
+                        <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-rme-primary transition-all">
+                            <div class="text-lg font-bold mb-2">100,001 - 250,000 credits</div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-rme-text-light">Price per credit:</span>
+                                <span class="text-rme-primary font-bold text-lg">$0.0039</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-rme-text-light">Tier Max Total:</span>
+                                <span class="font-semibold">$975.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Tier 7 -->
+                        <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-rme-primary transition-all">
+                            <div class="text-lg font-bold mb-2">250,001 - 500,000 credits</div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-rme-text-light">Price per credit:</span>
+                                <span class="text-rme-primary font-bold text-lg">$0.00325</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-rme-text-light">Tier Max Total:</span>
+                                <span class="font-semibold">$1,257</span>
+                            </div>
+                        </div>
+
+                        <!-- Tier 8 -->
+                        <div class="border-2 border-gray-200 rounded-lg p-4 hover:border-rme-primary transition-all">
+                            <div class="text-lg font-bold mb-2">500,001 - 1M credits</div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-rme-text-light">Price per credit:</span>
+                                <span class="text-rme-primary font-bold text-lg">$0.0026</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-rme-text-light">Tier Max Total:</span>
+                                <span class="font-semibold">$2,600</span>
+                            </div>
+                        </div>
+
+                        <!-- Tier 9 - Custom -->
+                        <div class="border-2 border-rme-primary bg-rme-primary text-white rounded-lg p-4">
+                            <div class="text-lg font-bold mb-2">1,000,000+ credits</div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span>Custom pricing</span>
+                                <button onclick="copyBillingEmail()" class="font-bold cursor-pointer inline-flex items-center gap-1">Contact Us <i class="fas fa-arrow-up-right-from-square text-xs"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Order Summary (Sticky) -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-lg p-6 sticky top-6 border-2 border-rme-primary">
+                    <h3 class="text-2xl font-bold text-center mb-6 flex items-center justify-center gap-2">
+                        <i class="fas fa-shopping-cart text-rme-primary"></i>
+                        Order Summary
+                    </h3>
+
+                    <div class="space-y-4 mb-6">
+                        <!-- Base Credits Info -->
+                        <div class="flex justify-between items-center">
+                            <span class="text-rme-text-light">Credits Purchased:</span>
+                            <span id="summary-credits" class="font-bold text-lg">5,000</span>
+                        </div>
+
+                        <!-- Bonus Credits Row (for bonus promos) -->
+                        <div id="bonus-credits-row" class="hidden">
+                            <div class="flex justify-between items-center bg-green-50 p-3 rounded-lg border-2 border-green-500 mb-2">
+                                <span class="text-green-700 font-semibold">Bonus Credits:</span>
+                                <span id="summary-bonus" class="font-bold text-green-700 text-lg">+0</span>
+                            </div>
+                            <div class="flex justify-between items-center pb-3 border-b-2 border-gray-200">
+                                <span class="text-rme-text-light font-semibold">Total Credits:</span>
+                                <span id="summary-total-credits" class="font-bold text-lg text-rme-primary">0</span>
+                            </div>
+                            <div class="flex justify-between items-center text-xs text-gray-500 pt-2 italic">
+                                <span>Worth if purchased separately:</span>
+                                <span id="summary-credits-worth" class="font-semibold">$0.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Price per email -->
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-rme-text-light">Price per email:</span>
+                            <span id="summary-price-per" class="font-bold text-lg">$0.0074</span>
+                        </div>
+
+                        <!-- Subtotal -->
+                        <div class="flex justify-between items-center">
+                            <span class="text-rme-text-light">Subtotal:</span>
+                            <span id="summary-subtotal" class="font-bold text-lg text-gray-500">$37.00</span>
+                        </div>
+
+                        <!-- Discount Row (for discount promos) -->
+                        <div id="discount-row" class="hidden">
+                            <div class="flex justify-between items-center bg-orange-50 p-3 rounded-lg border-2 border-orange-500">
+                                <span class="text-orange-700 font-semibold">Discount <span id="discount-percentage">(15% OFF)</span>:</span>
+                                <span id="summary-discount" class="font-bold text-orange-700 text-lg">-$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-6 border-gray-200"/>
+
+                    <!-- You Pay -->
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="font-bold text-xl">You Pay:</span>
+                        <span id="summary-total" class="font-extrabold text-4xl text-rme-primary">$37.00</span>
+                    </div>
+
+                    <!-- Savings Highlight (shown when promo applied) -->
+                    <div id="savings-highlight" class="hidden bg-gradient-to-r from-green-50 to-green-100 border-2 border-green-500 rounded-lg p-4 mb-6">
+                        <div class="flex items-center justify-between">
+                            <span class="text-green-800 font-bold text-lg">You Save:</span>
+                            <span id="savings-amount" class="text-green-800 font-extrabold text-2xl">$35.00</span>
+                        </div>
+                        <p id="savings-description" class="text-green-700 text-xs mt-1 text-center font-semibold"></p>
+                    </div>
+
+                    <button
+                        id="purchase-btn"
+                        class="w-full bg-rme-primary hover:bg-opacity-90 text-white font-bold py-4 px-4 rounded-lg transition-all flex items-center justify-center gap-2 text-lg shadow-lg"
+                    >
+                        <i class="fas fa-shopping-cart"></i>
+                        Purchase Credits
+                    </button>
+
+                    <ul class="text-rme-text-light mt-6 space-y-2">
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-rme-green"></i>
+                            Credits never expire
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-rme-green"></i>
+                            2-24 hour turnaround
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-rme-green"></i>
+                            Secure checkout via Stripe
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fas fa-check-circle text-rme-green" ></i>
+                            Need help? <button onclick="copyContactEmail()" class="text-rme-primary font-semibold cursor-pointer inline-flex items-center gap-1">Contact us <i class="fas fa-arrow-up-right-from-square text-xs"></i></button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- What's Included Section -->
+        <div class="mt-12 bg-white p-8 rounded-xl shadow-sm border-2 border-gray-100">
+            <h2 class="text-3xl font-bold text-center mb-12 flex items-center justify-center gap-3">
+                <i class="fas fa-star text-rme-primary text-4xl"></i>
+                What's Included
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-rme-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-user-check text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl leading-tight">Expert Human Review</h4>
+                        <p class="text-rme-text-light">Each email personally reviewed by <a href="https://linkedin.com/in/yannatorry" target="_blank" class="text-rme-primary font-semibold inline-flex items-center gap-1">Yanna-Torry Aspraki <i class="fas fa-arrow-up-right-from-square text-xs"></i></a>, world-renowned deliverability specialist</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-rme-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-tags text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl leading-tight">Clear Action Labels</h4>
+                        <p class="text-rme-text-light">Every email labeled with precise next steps in dedicated columns</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-rme-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-clock text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl leading-tight">2-24 Hour Turnaround</h4>
+                        <p class="text-rme-text-light">Fast processing without sacrificing quality</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-rme-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl leading-tight">Spam Trap Detection</h4>
+                        <p class="text-rme-text-light">Identify harmful addresses before they damage your reputation</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-rme-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-chart-bar text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl leading-tight">Detailed List Reports</h4>
+                        <p class="text-rme-text-light">Comprehensive analysis of your list health with actionable insights</p>
+                    </div>
+                </div>
+
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 bg-rme-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-calendar-check text-white text-2xl"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-xl leading-tight">Free Strategy Call</h4>
+                        <p class="text-rme-text-light">
+                            <a href="https://calendly.com/ahoy-reviewmyemails" target="_blank" class="text-rme-primary font-semibold inline-flex items-center gap-1">Book a free consultation <i class="fas fa-arrow-up-right-from-square text-xs"></i></a> about your list, deliverability, or any email marketing questions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Need Help CTA - Full Width Dark -->
+    <div class="bg-rme-text-dark pt-20 pb-16 px-6">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="flex items-center justify-center mb-6">
+                <img src="assets/Analyzing Risky Emails.svg" alt="Email Help" class="h-32 md:h-40 w-auto" style="filter: drop-shadow(0 0 15px rgba(255,255,255,0.6)) drop-shadow(0 0 30px rgba(255,255,255,0.4)) drop-shadow(0 0 45px rgba(255,255,255,0.2));">
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Need Help with Email?</h2>
+            <p class="text-white text-xl mb-8">Talk to <a href="https://linkedin.com/in/yannatorry" target="_blank" class="text-rme-primary font-semibold inline-flex items-center gap-1">Yanna-Torry <i class="fas fa-arrow-up-right-from-square text-xs"></i></a> about your list, your deliverability, or <strong>any email marketing questions</strong>.</p>
+            <a
+                href="https://calendly.com/ahoy-reviewmyemails"
+                target="_blank"
+                class="inline-flex items-center justify-center gap-2 bg-rme-primary hover:bg-opacity-90 text-white font-bold px-6 md:px-10 py-4 md:py-5 rounded-xl text-lg md:text-xl transition-all shadow-lg hover:shadow-xl leading-tight text-center"
+            >
+                <i class="fas fa-calendar flex-shrink-0"></i>
+                <span>Schedule Free Consultation</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Floating Buy Credits Button -->
+    <a href="#pricing-section" id="floating-cta" class="fixed bottom-6 right-6 inline-flex items-center gap-2 text-white font-semibold px-6 py-4 rounded-full shadow-lg transition-all z-50" style="background-color: var(--rme-green);">
+        <i class="fas fa-shopping-cart"></i>
+        Buy Credits
+        <i class="fas fa-arrow-down text-sm"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-rme-text-dark py-8 border-t border-gray-700">
+        <div class="max-w-7xl mx-auto px-6 text-center text-gray-400">
+            <p>&copy; 2026 Review My Emails. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // PRODUCTION API CONFIGURATION
+        // Change these URLs to your production Vercel deployment:
+        const API_URL = 'https://anchor.reviewmyemails.com/api/create-checkout';
+        const VALIDATE_PROMO_URL = 'https://anchor.reviewmyemails.com/api/validate-promo';
+
+        // For testing locally, use:
+        // const API_URL = 'http://localhost:3000/api/create-checkout';
+        // const VALIDATE_PROMO_URL = 'http://localhost:3000/api/validate-promo';
+
+        let currentPromo = null;
+        let promoResult = null;
+
+        const emailCountInput = document.getElementById('email-count-input');
+        const emailInput = document.getElementById('email-input');
+        const promoCodeInput = document.getElementById('promo-code-input');
+        const applyPromoBtn = document.getElementById('apply-promo-btn');
+        const removePromoBtn = document.getElementById('remove-promo-btn');
+        const promoMessage = document.getElementById('promo-message');
+        const purchaseBtn = document.getElementById('purchase-btn');
+        const decrementBtn = document.getElementById('decrement-btn');
+        const incrementBtn = document.getElementById('increment-btn');
+        const planButtonsContainer = document.getElementById('plan-buttons');
+
+        const summaryCredits = document.getElementById('summary-credits');
+        const summaryPricePer = document.getElementById('summary-price-per');
+        const summaryTotal = document.getElementById('summary-total');
+        const summaryBonus = document.getElementById('summary-bonus');
+        const bonusCreditsRow = document.getElementById('bonus-credits-row');
+
+        const pricingTiers = [
+            { min: 1, max: 1000, price: 0.0080 },
+            { min: 1001, max: 5000, price: 0.0074 },
+            { min: 5001, max: 10000, price: 0.0070 },
+            { min: 10001, max: 50000, price: 0.0062 },
+            { min: 50001, max: 100000, price: 0.0052 },
+            { min: 100001, max: 250000, price: 0.0039 },
+            { min: 250001, max: 500000, price: 0.00325 },
+            { min: 500001, max: 1000000, price: 0.0026 }
+        ];
+
+        const quickSelectPlans = [
+            { amount: 1000, label: '1k' },
+            { amount: 5000, label: '5k', popular: true },
+            { amount: 10000, label: '10k' },
+            { amount: 25000, label: '25k' },
+            { amount: 50000, label: '50k' },
+            { amount: 100000, label: '100k' },
+            { amount: 250000, label: '250k' },
+            { amount: 500000, label: '500k' }
+        ];
+
+        function getPricePerEmail(count) {
+            const tier = pricingTiers.find(t => count >= t.min && count <= t.max);
+            return tier ? tier.price : pricingTiers[pricingTiers.length - 1].price;
+        }
+
+        function updateSummary() {
+            const count = parseInt(emailCountInput.value, 10) || 0;
+
+            if (count < 1000) {
+                summaryCredits.textContent = 'Min 1,000';
+                summaryPricePer.textContent = '-';
+                document.getElementById('summary-subtotal').textContent = '-';
+                summaryTotal.textContent = '-';
+                purchaseBtn.disabled = true;
+                bonusCreditsRow.classList.add('hidden');
+                document.getElementById('discount-row')?.classList.add('hidden');
+                document.getElementById('savings-highlight')?.classList.add('hidden');
+                return;
+            }
+
+            if (count > 1000000) {
+                summaryCredits.textContent = count.toLocaleString();
+                summaryPricePer.textContent = 'Custom';
+                document.getElementById('summary-subtotal').textContent = 'Contact Us';
+                summaryTotal.textContent = 'Contact Us';
+                purchaseBtn.disabled = true;
+                bonusCreditsRow.classList.add('hidden');
+                document.getElementById('discount-row')?.classList.add('hidden');
+                document.getElementById('savings-highlight')?.classList.add('hidden');
+                return;
+            }
+
+            const price = getPricePerEmail(count);
+            const subtotal = count * price;
+            let total = subtotal;
+            let savingsAmount = 0;
+            let savingsDescription = '';
+
+            // Update base info
+            summaryCredits.textContent = count.toLocaleString();
+            summaryPricePer.textContent = `$${price.toFixed(4)}`;
+            const subtotalEl = document.getElementById('summary-subtotal');
+            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+            // Apply promo if exists
+            if (promoResult) {
+                const isDiscountType = promoResult.promo.type === 'discount' || promoResult.promo.type === 'fixed_discount';
+
+                // Style subtotal: strikethrough for discounts to show original price
+                if (isDiscountType) {
+                    subtotalEl.classList.add('line-through', 'text-gray-400');
+                    subtotalEl.classList.remove('text-gray-500');
+                } else {
+                    subtotalEl.classList.remove('line-through', 'text-gray-400');
+                    subtotalEl.classList.add('text-gray-500');
+                }
+
+                if (promoResult.promo.type === 'discount') {
+                    // Discount promo
+                    total = promoResult.result.finalPrice;
+                    savingsAmount = promoResult.result.discount;
+                    savingsDescription = `${(promoResult.promo.value * 100).toFixed(0)}% discount applied`;
+
+                    // Show discount row
+                    const discountRow = document.getElementById('discount-row');
+                    if (discountRow) {
+                        discountRow.classList.remove('hidden');
+                        document.getElementById('discount-percentage').textContent = `(${(promoResult.promo.value * 100).toFixed(0)}% OFF)`;
+                        document.getElementById('summary-discount').textContent = `-$${promoResult.result.discount.toFixed(2)}`;
+                    }
+
+                    bonusCreditsRow.classList.add('hidden');
+
+                } else if (promoResult.promo.type === 'bonus') {
+                    // Bonus promo - calculate the value of bonus credits
+                    const bonusCreditsValue = promoResult.result.bonusCredits * price;
+                    savingsAmount = bonusCreditsValue;
+                    savingsDescription = `${promoResult.result.bonusCredits.toLocaleString()} bonus credits (${(promoResult.promo.value * 100).toFixed(0)}% bonus)`;
+
+                    // Show bonus credits section
+                    summaryBonus.textContent = `+${promoResult.result.bonusCredits.toLocaleString()}`;
+                    document.getElementById('summary-total-credits').textContent = promoResult.result.totalCredits.toLocaleString();
+                    document.getElementById('summary-credits-worth').textContent = `$${(promoResult.result.totalCredits * price).toFixed(2)}`;
+                    bonusCreditsRow.classList.remove('hidden');
+
+                    document.getElementById('discount-row')?.classList.add('hidden');
+                } else if (promoResult.promo.type === 'fixed_discount') {
+                    // Fixed dollar discount (e.g., $5 off)
+                    total = promoResult.result.finalPrice;
+                    savingsAmount = promoResult.result.discount;
+                    savingsDescription = `$${promoResult.promo.value.toFixed(2)} discount applied`;
+
+                    // Show discount row
+                    const discountRow = document.getElementById('discount-row');
+                    if (discountRow) {
+                        discountRow.classList.remove('hidden');
+                        document.getElementById('discount-percentage').textContent = `($${promoResult.promo.value.toFixed(2)} OFF)`;
+                        document.getElementById('summary-discount').textContent = `-$${promoResult.result.discount.toFixed(2)}`;
+                    }
+
+                    bonusCreditsRow.classList.add('hidden');
+                } else if (promoResult.promo.type === 'fixed_bonus') {
+                    // Fixed bonus credits (e.g., +500 credits)
+                    const bonusCreditsValue = promoResult.result.bonusCredits * price;
+                    savingsAmount = bonusCreditsValue;
+                    savingsDescription = `${promoResult.result.bonusCredits.toLocaleString()} bonus credits added`;
+
+                    // Show bonus credits section
+                    summaryBonus.textContent = `+${promoResult.result.bonusCredits.toLocaleString()}`;
+                    document.getElementById('summary-total-credits').textContent = promoResult.result.totalCredits.toLocaleString();
+                    document.getElementById('summary-credits-worth').textContent = `$${(promoResult.result.totalCredits * price).toFixed(2)}`;
+                    bonusCreditsRow.classList.remove('hidden');
+
+                    document.getElementById('discount-row')?.classList.add('hidden');
+                }
+
+                // Show savings highlight
+                const savingsHighlight = document.getElementById('savings-highlight');
+                if (savingsHighlight) {
+                    savingsHighlight.classList.remove('hidden');
+                    document.getElementById('savings-amount').textContent = `$${savingsAmount.toFixed(2)}`;
+                    document.getElementById('savings-description').textContent = savingsDescription;
+                }
+            } else {
+                // No promo applied
+                bonusCreditsRow.classList.add('hidden');
+                document.getElementById('discount-row')?.classList.add('hidden');
+                document.getElementById('savings-highlight')?.classList.add('hidden');
+                // Reset subtotal styling
+                subtotalEl.classList.remove('line-through', 'text-gray-400');
+                subtotalEl.classList.add('text-gray-500');
+            }
+
+            summaryTotal.textContent = `$${total.toFixed(2)}`;
+            purchaseBtn.disabled = false;
+
+            // Update active plan button
+            document.querySelectorAll('.plan-button').forEach(btn => {
+                btn.classList.toggle('active', parseInt(btn.dataset.amount) === count);
+            });
+        }
+
+        function renderPlanButtons() {
+            planButtonsContainer.innerHTML = quickSelectPlans.map(plan => `
+                <button
+                    class="plan-button border-2 border-gray-200 rounded-lg py-3 font-semibold relative hover:border-rme-primary transition-all ${plan.popular ? 'active' : ''}"
+                    data-amount="${plan.amount}"
+                >
+                    ${plan.label}
+                    ${plan.popular ? '<span class="absolute -top-2 left-1/2 -translate-x-1/2 bg-rme-primary text-white text-[10px] px-2 py-0.5 rounded-full">POPULAR</span>' : ''}
+                </button>
+            `).join('');
+        }
+
+        planButtonsContainer.addEventListener('click', async e => {
+            const button = e.target.closest('.plan-button');
+            if (button) {
+                emailCountInput.value = button.dataset.amount;
+                updateSummary();
+                // Re-validate promo with new credit amount
+                if (currentPromo) {
+                    await revalidatePromo();
+                }
+            }
+        });
+
+        decrementBtn.addEventListener('click', async () => {
+            const current = parseInt(emailCountInput.value) || 5000;
+            emailCountInput.value = Math.max(1000, current - 1000);
+            updateSummary();
+            // Re-validate promo with new credit amount
+            if (currentPromo) {
+                await revalidatePromo();
+            }
+        });
+
+        incrementBtn.addEventListener('click', async () => {
+            const current = parseInt(emailCountInput.value) || 5000;
+            emailCountInput.value = current + 1000;
+            updateSummary();
+            // Re-validate promo with new credit amount
+            if (currentPromo) {
+                await revalidatePromo();
+            }
+        });
+
+        // Debounce timer for revalidation when typing
+        let revalidateTimer = null;
+
+        emailCountInput.addEventListener('input', () => {
+            updateSummary();
+            // Re-validate promo with debounce (wait 500ms after user stops typing)
+            if (currentPromo) {
+                clearTimeout(revalidateTimer);
+                revalidateTimer = setTimeout(() => {
+                    revalidatePromo();
+                }, 500);
+            }
+        });
+
+        // Apply promo when Enter key is pressed in promo input
+        promoCodeInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                applyPromoBtn.click();
+            }
+        });
+
+        applyPromoBtn.addEventListener('click', async () => {
+            const promoCode = promoCodeInput.value.trim().toUpperCase();
+            const credits = parseInt(emailCountInput.value);
+
+            if (!promoCode) {
+                showPromoError('Please enter a promo code');
+                return;
+            }
+
+            if (!credits || credits < 1000) {
+                showPromoError('Enter valid credit amount first');
+                return;
+            }
+
+            applyPromoBtn.textContent = 'Checking...';
+            applyPromoBtn.disabled = true;
+
+            try {
+                const response = await fetch(VALIDATE_PROMO_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ promoCode, credits })
+                });
+
+                const data = await response.json();
+
+                if (data.valid) {
+                    promoResult = data;
+                    currentPromo = promoCode;
+                    showPromoSuccess(data.result.savingsMessage);
+                    updateSummary();
+                } else {
+                    promoResult = null;
+                    currentPromo = null;
+                    showPromoError(data.error || 'Invalid promo code');
+                    updateSummary();
+                }
+            } catch (error) {
+                showPromoError('Error validating promo');
+                console.error(error);
+            } finally {
+                applyPromoBtn.textContent = 'Apply';
+                applyPromoBtn.disabled = false;
+            }
+        });
+
+        function showPromoSuccess(message) {
+            promoMessage.textContent = `${message}`;
+            promoMessage.className = 'mt-4 p-4 rounded-lg font-semibold promo-success slide-in';
+            promoMessage.classList.remove('hidden');
+            removePromoBtn.classList.remove('hidden');
+        }
+
+        function showPromoError(message) {
+            promoMessage.textContent = `${message}`;
+            promoMessage.className = 'mt-4 p-4 rounded-lg font-semibold promo-error slide-in';
+            promoMessage.classList.remove('hidden');
+            removePromoBtn.classList.add('hidden');
+        }
+
+        function removePromo() {
+            promoResult = null;
+            currentPromo = null;
+            promoCodeInput.value = '';
+            promoMessage.classList.add('hidden');
+            removePromoBtn.classList.add('hidden');
+            updateSummary();
+        }
+
+        // Re-validate promo when credits change (to recalculate discount/bonus)
+        async function revalidatePromo() {
+            if (!currentPromo) return;
+
+            const credits = parseInt(emailCountInput.value);
+            if (!credits || credits < 1000) {
+                removePromo();
+                return;
+            }
+
+            try {
+                const response = await fetch(VALIDATE_PROMO_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ promoCode: currentPromo, credits })
+                });
+
+                const data = await response.json();
+
+                if (data.valid) {
+                    promoResult = data;
+                    showPromoSuccess(data.result.savingsMessage);
+                    updateSummary();
+                } else {
+                    // Promo no longer valid for this amount
+                    removePromo();
+                    showPromoError(data.error || 'Promo code not valid for this amount');
+                }
+            } catch (error) {
+                console.error('Error revalidating promo:', error);
+                // Keep existing promo on error
+            }
+        }
+
+        // Remove promo button click handler
+        removePromoBtn.addEventListener('click', () => {
+            removePromo();
+        });
+
+        purchaseBtn.addEventListener('click', async () => {
+            const credits = parseInt(emailCountInput.value);
+            const email = emailInput.value.trim();
+
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                emailInput.focus();
+                return;
+            }
+
+            if (!credits || credits < 1000) {
+                alert('Minimum 1,000 credits required');
+                emailCountInput.focus();
+                return;
+            }
+
+            if (credits > 1000000) {
+                window.location.href = 'https://www.reviewmyemails.com/support?subject=Custom Pricing Request for ' + credits.toLocaleString() + ' credits';
+                return;
+            }
+
+            purchaseBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            purchaseBtn.disabled = true;
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        credits: credits,
+                        userEmail: email,
+                        source: 'pricing-page',
+                        promoCode: currentPromo
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Handle free orders (no Stripe checkout needed)
+                    if (data.freeOrder) {
+                        window.location.href = data.redirectUrl;
+                    } else {
+                        window.location.href = data.checkoutUrl;
+                    }
+                } else {
+                    alert(`Error: ${data.error}`);
+                    purchaseBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Purchase Credits';
+                    purchaseBtn.disabled = false;
+                }
+            } catch (error) {
+                console.error(error);
+                alert('Error creating checkout. Please try again or visit reviewmyemails.com/support');
+                purchaseBtn.innerHTML = '<i class="fas fa-shopping-cart"></i> Purchase Credits';
+                purchaseBtn.disabled = false;
+            }
+        });
+
+        // Initialize
+        renderPlanButtons();
+        updateSummary();
+
+        // Floating CTA button - hide when pricing visible, jiggle animation
+        const floatingCta = document.getElementById('floating-cta');
+        const pricingSection = document.getElementById('pricing-section');
+
+        function checkScroll() {
+            const pricingRect = pricingSection.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (pricingRect.top < windowHeight - 100) {
+                floatingCta.style.opacity = '0';
+                floatingCta.style.pointerEvents = 'none';
+            } else {
+                floatingCta.style.opacity = '1';
+                floatingCta.style.pointerEvents = 'auto';
+            }
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        function jiggleBtn() {
+            floatingCta.classList.add('jiggle');
+            setTimeout(() => floatingCta.classList.remove('jiggle'), 500);
+        }
+        setTimeout(jiggleBtn, 1500);
+        setInterval(jiggleBtn, 8000);
+
+        // Copy support email function
+        function copyContactEmail() {
+            const contactEmail = 'support@reviewmyemails.com';
+
+            navigator.clipboard.writeText(contactEmail).then(() => {
+                const notification = document.createElement('div');
+                notification.className = 'copied-notification';
+                notification.innerHTML = '<i class="fas fa-life-ring mr-2"></i>Call from the coast! Email copied: support@reviewmyemails.com';
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transition = 'opacity 0.3s ease-out';
+                    setTimeout(() => notification.remove(), 300);
+                }, 2500);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Email: support@reviewmyemails.com');
+            });
+        }
+
+        // Copy billing email function (for 1M+ pricing inquiries)
+        function copyBillingEmail() {
+            const billingEmail = 'billing@reviewmyemails.com';
+
+            navigator.clipboard.writeText(billingEmail).then(() => {
+                const notification = document.createElement('div');
+                notification.className = 'copied-notification';
+                notification.innerHTML = '<i class="fas fa-ship mr-2"></i>Big ship channel opened! Email copied: <span style="color: #134e4a; font-weight: 700;">billing@reviewmyemails.com</span>';
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    notification.style.transition = 'opacity 0.3s ease-out';
+                    setTimeout(() => notification.remove(), 300);
+                }, 2500);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                alert('Email: billing@reviewmyemails.com');
+            });
+        }
+    </script>
+</body>
+</html>
