@@ -63,6 +63,20 @@
             overflow: hidden;
         }
 
+        .back-to-site {
+            display: block;
+            padding: 16px 24px;
+            font-size: 13px;
+            color: var(--color-muted);
+            text-decoration: none;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--color-lighter);
+        }
+
+        .back-to-site:hover {
+            color: var(--color-accent);
+        }
+
         /* Header */
         .diag-header {
             padding: 24px 32px;
@@ -328,6 +342,7 @@
             border: none;
             cursor: pointer;
             font-family: var(--font);
+            margin-bottom: 24px;
         }
 
         .cta-btn:hover {
@@ -490,6 +505,155 @@
             }
         }
 
+        /* Contact Modal */
+        .contact-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .contact-modal.active {
+            display: flex;
+        }
+
+        .contact-modal__content {
+            background: white;
+            border-radius: 12px;
+            max-width: 480px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .contact-modal__header {
+            padding: 24px 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .contact-modal__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin: 0;
+        }
+
+        .contact-modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-muted);
+            padding: 0;
+            line-height: 1;
+        }
+
+        .contact-modal__close:hover {
+            color: var(--color-dark);
+        }
+
+        .contact-modal__body {
+            padding: 20px 24px 24px;
+        }
+
+        .contact-modal__subtitle {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin: 0 0 20px;
+        }
+
+        .contact-modal__field {
+            margin-bottom: 16px;
+        }
+
+        .contact-modal__label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-dark);
+            margin-bottom: 6px;
+        }
+
+        .contact-modal__input,
+        .contact-modal__textarea,
+        .contact-modal__select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: var(--font);
+            background: white;
+        }
+
+        .contact-modal__input:focus,
+        .contact-modal__textarea:focus,
+        .contact-modal__select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .contact-modal__textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-modal__submit {
+            width: 100%;
+            background: var(--color-accent);
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font);
+            margin-top: 8px;
+        }
+
+        .contact-modal__submit:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .contact-modal__submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .contact-modal__success {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .contact-modal__success-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .contact-modal__success-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 8px;
+        }
+
+        .contact-modal__success-text {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
         /* Additional Issues Section */
         .additional-issues {
             background: var(--color-lighter);
@@ -550,6 +714,8 @@
 <body>
 
 <div class="diagnostic-container">
+
+    <a href="/" class="back-to-site">&larr; Back to Review My Emails</a>
 
     <div class="diag-header" id="diagHeader">
         <h3>Is Your List Safe?</h3>
@@ -658,7 +824,7 @@
 
             <div id="crisis-issues" class="additional-issues" style="display:none;"></div>
 
-            <a href="/sos-hotline" class="cta-btn">Open Emergency Ticket</a>
+            <button type="button" class="cta-btn" onclick="openContactModal()">Talk to a Specialist</button>
 
             <div class="result-capture" data-result="crisis">
                 <div class="result-capture__title">Save your diagnosis</div>
@@ -1219,6 +1385,124 @@
 
         // Track skip
         va('event', { name: 'Quiz_Capture_Skipped', data: { result: captureDiv.getAttribute('data-result') } });
+    }
+</script>
+
+<!-- Contact Modal -->
+<div class="contact-modal" id="contactModal">
+    <div class="contact-modal__content">
+        <div class="contact-modal__header">
+            <h3 class="contact-modal__title">Talk to a Specialist</h3>
+            <button class="contact-modal__close" onclick="closeContactModal()">&times;</button>
+        </div>
+        <div class="contact-modal__body">
+            <p class="contact-modal__subtitle">Tell us about your situation and we'll get back to you within 24 hours.</p>
+            <form id="contactForm" onsubmit="submitContactForm(event)">
+                <div class="contact-modal__field">
+                    <label class="contact-modal__label">Name *</label>
+                    <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name">
+                </div>
+                <div class="contact-modal__field">
+                    <label class="contact-modal__label">Email *</label>
+                    <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com">
+                </div>
+                <div class="contact-modal__field">
+                    <label class="contact-modal__label">Timezone (optional)</label>
+                    <select class="contact-modal__select" id="contactTimezone">
+                        <option value="">Select your timezone</option>
+                        <option value="America/New_York">Eastern Time (ET)</option>
+                        <option value="America/Chicago">Central Time (CT)</option>
+                        <option value="America/Denver">Mountain Time (MT)</option>
+                        <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                        <option value="America/Anchorage">Alaska Time</option>
+                        <option value="Pacific/Honolulu">Hawaii Time</option>
+                        <option value="Europe/London">London (GMT/BST)</option>
+                        <option value="Europe/Paris">Central European Time</option>
+                        <option value="Europe/Athens">Eastern European Time</option>
+                        <option value="Asia/Dubai">Gulf Standard Time</option>
+                        <option value="Asia/Kolkata">India Standard Time</option>
+                        <option value="Asia/Singapore">Singapore Time</option>
+                        <option value="Asia/Tokyo">Japan Standard Time</option>
+                        <option value="Australia/Sydney">Australian Eastern Time</option>
+                        <option value="Pacific/Auckland">New Zealand Time</option>
+                    </select>
+                </div>
+                <div class="contact-modal__field">
+                    <label class="contact-modal__label">Message (optional)</label>
+                    <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..."></textarea>
+                </div>
+                <button type="submit" class="contact-modal__submit" id="contactSubmitBtn">Send Request</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openContactModal() {
+        document.getElementById('contactModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        va('event', { name: 'Contact_Modal_Opened', data: { source: 'quiz' } });
+    }
+
+    function closeContactModal() {
+        document.getElementById('contactModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close on backdrop click
+    document.getElementById('contactModal').addEventListener('click', function(e) {
+        if (e.target === this) closeContactModal();
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeContactModal();
+    });
+
+    async function submitContactForm(e) {
+        e.preventDefault();
+        const btn = document.getElementById('contactSubmitBtn');
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const timezone = document.getElementById('contactTimezone').value;
+        const message = document.getElementById('contactMessage').value.trim();
+
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+
+        try {
+            const response = await fetch('/api/contact-request', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    timezone,
+                    message,
+                    source: 'quiz',
+                    quizResult: window.quizFinalResult || null,
+                    quizAnswers: window.quizAnswers || null
+                })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                document.querySelector('.contact-modal__body').innerHTML = `
+                    <div class="contact-modal__success">
+                        <div class="contact-modal__success-icon">✓</div>
+                        <div class="contact-modal__success-title">Request Received</div>
+                        <p class="contact-modal__success-text">We'll get back to you within 24 hours.</p>
+                    </div>
+                `;
+                va('event', { name: 'Contact_Form_Submitted', data: { source: 'quiz' } });
+            } else {
+                throw new Error(data.error || 'Failed to submit');
+            }
+        } catch (error) {
+            console.error('Contact form error:', error);
+            btn.disabled = false;
+            btn.textContent = 'Try Again';
+        }
     }
 </script>
 
