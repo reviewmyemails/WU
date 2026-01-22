@@ -964,6 +964,47 @@
             margin-bottom: var(--space-md);
         }
 
+        .slider-input-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .slider-number-input {
+            width: 160px;
+            padding: 12px 14px;
+            font-family: var(--font);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-dark);
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            text-align: right;
+            transition: border-color 180ms ease;
+        }
+
+        .slider-number-input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .slider-number-input::-webkit-inner-spin-button,
+        .slider-number-input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .slider-number-input {
+            -moz-appearance: textfield;
+        }
+
+        .slider-unit {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--color-muted);
+        }
+
         .slider-input {
             width: 100%;
             height: 8px;
@@ -1709,9 +1750,12 @@
                         <p class="calculator-intro">Simple. More volume, lower rate.</p>
 
                         <div class="slider-container">
-                            <p class="slider-label">List Size</p>
-                            <p class="slider-value" id="listSize">50,000 emails</p>
-                            <input type="range" class="slider-input" id="sizeSlider" min="0" max="7" value="1">
+                            <p class="slider-label">How many emails?</p>
+                            <div class="slider-input-group">
+                                <input type="text" class="slider-number-input" id="sizeInput" value="50,000" inputmode="numeric">
+                                <span class="slider-unit">emails</span>
+                            </div>
+                            <input type="range" class="slider-input" id="sizeSlider" min="1000" max="1000000" value="50000" step="100">
                         </div>
 
                         <div class="pricing-result">
@@ -1799,14 +1843,13 @@
             </div>
 
             <div class="sos-pricing">
-                <p class="sos-pricing__intro">Talk to a real deliverability expert.</p>
+                <p class="sos-pricing__intro">Free email support for any deliverability question.</p>
 
                 <div class="sos-card">
                     <img src="../Yanna-Torry.jpg" alt="Yanna-Torry Aspraki" class="sos-card__headshot">
-                    <h3>SOS Call</h3>
-                    <p>Use it before cleaning to understand your situation. Use it after cleaning to interpret results and plan next steps.</p>
-                    <p class="sos-card__duration">30 minutes. Often runs longer.</p>
-                    <p>Available as standalone or bundled with cleaning.</p>
+                    <h3>Free Email Help</h3>
+                    <p>Ask any deliverability question. Get a real answer from a real expert. No sales pitch, no strings attached.</p>
+                    <p class="sos-card__duration">Response within 72 hours. Usually faster.</p>
                     <a href="/sos-hotline" class="btn btn-secondary" style="margin-top: var(--space-md);">Learn More About SOS Hotline</a>
                 </div>
             </div>
@@ -1911,34 +1954,57 @@
          ======================================== -->
 
     <script>
+        // Pricing tiers with thresholds
         const pricingTiers = [
-            { size: 1000, price: 0.008, label: '1,000 emails' },
-            { size: 5000, price: 0.0074, label: '5,000 emails' },
-            { size: 10000, price: 0.007, label: '10,000 emails' },
-            { size: 50000, price: 0.0062, label: '50,000 emails' },
-            { size: 100000, price: 0.0052, label: '100,000 emails' },
-            { size: 250000, price: 0.0039, label: '250,000 emails' },
-            { size: 500000, price: 0.00325, label: '500,000 emails' },
-            { size: 1000000, price: 0.0026, label: '1,000,000 emails', contact: true }
+            { maxSize: 1000, price: 0.008 },
+            { maxSize: 5000, price: 0.0074 },
+            { maxSize: 10000, price: 0.007 },
+            { maxSize: 50000, price: 0.0062 },
+            { maxSize: 100000, price: 0.0052 },
+            { maxSize: 250000, price: 0.0039 },
+            { maxSize: 500000, price: 0.00325 },
+            { maxSize: 1000000, price: 0.0026 }
         ];
 
         const slider = document.getElementById('sizeSlider');
-        const listSizeEl = document.getElementById('listSize');
+        const sizeInput = document.getElementById('sizeInput');
         const pricePerEmailEl = document.getElementById('pricePerEmail');
         const totalPriceEl = document.getElementById('totalPrice');
         const ctaContainer = document.querySelector('.calculator-cta');
 
-        function updatePricing(index) {
-            const tier = pricingTiers[index];
-            listSizeEl.textContent = tier.label;
+        function getPriceForSize(size) {
+            // Find the appropriate tier
+            for (const tier of pricingTiers) {
+                if (size <= tier.maxSize) {
+                    return tier.price;
+                }
+            }
+            // Over 1M = custom pricing
+            return null;
+        }
 
-            if (tier.contact) {
+        function formatNumber(num) {
+            return num.toLocaleString('en-US');
+        }
+
+        function parseFormattedNumber(str) {
+            return parseInt(str.replace(/,/g, ''), 10) || 0;
+        }
+
+        function updatePricing(size) {
+            // Ensure minimum of 1000
+            size = Math.max(1000, size);
+
+            const price = getPriceForSize(size);
+
+            if (price === null) {
+                // Over 1 million
                 pricePerEmailEl.textContent = 'Custom';
                 totalPriceEl.textContent = 'Contact Us';
                 ctaContainer.innerHTML = '<button type="button" class="btn btn-primary" onclick="openContactModal(\'calculator-contact\')">Contact Us</button>';
             } else {
-                pricePerEmailEl.textContent = '$' + tier.price.toFixed(4);
-                const total = tier.size * tier.price;
+                pricePerEmailEl.textContent = '$' + price.toFixed(4);
+                const total = size * price;
                 totalPriceEl.textContent = '$' + total.toLocaleString('en-US', {
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 0
@@ -1947,12 +2013,39 @@
             }
         }
 
+        // Slider input handler
         slider.addEventListener('input', function() {
-            updatePricing(parseInt(this.value));
+            const size = parseInt(this.value);
+            sizeInput.value = formatNumber(size);
+            updatePricing(size);
         });
 
-        // Initialize
-        updatePricing(1);
+        // Text input handler - format on blur
+        sizeInput.addEventListener('blur', function() {
+            let size = parseFormattedNumber(this.value);
+            if (size < 1000) size = 1000;
+            if (size > 1000000) size = 1000000;
+
+            this.value = formatNumber(size);
+            slider.value = size;
+            updatePricing(size);
+        });
+
+        // Text input handler - update on enter
+        sizeInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                this.blur();
+            }
+        });
+
+        // Allow typing numbers and formatting characters
+        sizeInput.addEventListener('input', function() {
+            // Remove non-numeric characters except commas
+            this.value = this.value.replace(/[^0-9,]/g, '');
+        });
+
+        // Initialize with 50,000
+        updatePricing(50000);
 
         // Track CTA button clicks
         document.querySelectorAll('.btn').forEach(function(btn) {
@@ -1965,8 +2058,9 @@
 
         // Track pricing calculator interaction
         slider.addEventListener('change', function() {
-            var tier = pricingTiers[parseInt(this.value)];
-            va('event', { name: 'Pricing_Calculated', data: { size: tier.label, price: tier.contact ? 'custom' : tier.price } });
+            var size = parseInt(this.value);
+            var price = getPriceForSize(size);
+            va('event', { name: 'Pricing_Calculated', data: { size: size, price: price === null ? 'custom' : price } });
         });
 
         // Waitlist form submission
