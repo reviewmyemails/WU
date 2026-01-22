@@ -840,6 +840,29 @@
                 gap: var(--space-xs);
             }
         }
+
+        /* Contact Modal */
+        .contact-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .contact-modal.active { display: flex; }
+        .contact-modal__content { background: white; border-radius: 12px; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        .contact-modal__header { padding: 24px 24px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+        .contact-modal__title { font-size: 20px; font-weight: 700; color: var(--color-dark); margin: 0; }
+        .contact-modal__close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--color-muted); padding: 0; line-height: 1; }
+        .contact-modal__close:hover { color: var(--color-dark); }
+        .contact-modal__body { padding: 20px 24px 24px; }
+        .contact-modal__subtitle { font-size: 14px; color: var(--color-muted); margin: 0 0 20px; }
+        .contact-modal__field { margin-bottom: 16px; }
+        .contact-modal__label { display: block; font-size: 13px; font-weight: 500; color: var(--color-dark); margin-bottom: 6px; }
+        .contact-modal__input, .contact-modal__textarea, .contact-modal__select { width: 100%; padding: 12px 14px; border: 1px solid var(--color-border); border-radius: 6px; font-size: 14px; font-family: var(--font); background: white; }
+        .contact-modal__input:focus, .contact-modal__textarea:focus, .contact-modal__select:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1); }
+        .contact-modal__textarea { resize: vertical; min-height: 100px; }
+        .contact-modal__submit { width: 100%; background: var(--color-accent); color: white; padding: 14px 24px; border: none; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: var(--font); margin-top: 8px; }
+        .contact-modal__submit:hover { background: var(--color-accent-hover); }
+        .contact-modal__submit:disabled { background: #ccc; cursor: not-allowed; }
+        .contact-modal__success { text-align: center; padding: 20px 0; }
+        .contact-modal__success-icon { font-size: 48px; margin-bottom: 16px; }
+        .contact-modal__success-title { font-size: 18px; font-weight: 600; color: var(--color-dark); margin-bottom: 8px; }
+        .contact-modal__success-text { font-size: 14px; color: var(--color-muted); }
     </style>
 
     <!-- Analytics -->
@@ -920,7 +943,7 @@
             <h1 class="hero__headline">Email SOS Hotline</h1>
             <p class="hero__subhead">Free expert guidance for anyone with an email question. No sales pitch. No catch. Just honest answers from a deliverability specialist who gets emails into inboxes for a living.</p>
             <div class="hero__actions">
-                <a href="mailto:sos@reviewmyemails.com" class="btn btn-primary">Email the SOS Hotline</a>
+                <button type="button" class="btn btn-primary" onclick="openContactModal('sos-hero')">Contact the SOS Hotline</button>
             </div>
             <p class="hero__note">Within 72 hours. Often sooner.</p>
         </div>
@@ -995,8 +1018,8 @@
             </div>
 
             <div class="how-email">
-                <p class="how-email__label">That is it. No forms. No booking system. Just email.</p>
-                <p class="how-email__address"><a href="mailto:sos@reviewmyemails.com">sos&#64;reviewmyemails.com</a></p>
+                <p class="how-email__label">That is it. No booking system. Just reach out.</p>
+                <p class="how-email__address"><a href="#" onclick="openContactModal('how-email'); return false;">Send a message</a></p>
             </div>
         </div>
     </section>
@@ -1086,8 +1109,8 @@
         <div class="cta-block__inner">
             <h2>Ready to Ask Your Question?</h2>
             <p class="cta-block__subtext">Email us. Within 72 hours. Often sooner.</p>
-            <a href="mailto:sos@reviewmyemails.com" class="btn btn-primary">Email the SOS Hotline</a>
-            <p class="cta-block__email"><a href="mailto:sos@reviewmyemails.com">sos&#64;reviewmyemails.com</a></p>
+            <button type="button" class="btn btn-primary" onclick="openContactModal('sos-hero')">Contact the SOS Hotline</button>
+            <p class="cta-block__email"><a href="#" onclick="openContactModal('cta-block'); return false;">or click here to send a message</a></p>
         </div>
     </section>
 
@@ -1116,7 +1139,7 @@
 
             <div class="footer__column">
                 <h4>Contact</h4>
-                <a href="mailto:sos@reviewmyemails.com">sos&#64;reviewmyemails.com</a>
+                <a href="#" onclick="openContactModal('footer-contact'); return false;">Get in touch</a>
             </div>
 
             <div class="footer__bottom">
@@ -1149,6 +1172,85 @@
         function closeMobileNav() {
             document.getElementById('mobileNav').classList.remove('active');
             document.body.style.overflow = '';
+        }
+    </script>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contactModal">
+        <div class="contact-modal__content">
+            <div class="contact-modal__header">
+                <h3 class="contact-modal__title">SOS Hotline</h3>
+                <button class="contact-modal__close" onclick="closeContactModal()">&times;</button>
+            </div>
+            <div class="contact-modal__body">
+                <p class="contact-modal__subtitle">Describe your deliverability issue and we'll get back to you within 24-72 hours.</p>
+                <form id="contactForm" onsubmit="submitContactForm(event)">
+                    <input type="hidden" id="contactSource" value="">
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label">Name *</label>
+                        <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name">
+                    </div>
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label">Email *</label>
+                        <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com">
+                    </div>
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label">Timezone (optional)</label>
+                        <select class="contact-modal__select" id="contactTimezone">
+                            <option value="">Select your timezone</option>
+                            <option value="America/New_York">Eastern Time (ET)</option>
+                            <option value="America/Chicago">Central Time (CT)</option>
+                            <option value="America/Denver">Mountain Time (MT)</option>
+                            <option value="America/Los_Angeles">Pacific Time (PT)</option>
+                            <option value="Europe/London">London (GMT/BST)</option>
+                            <option value="Europe/Paris">Central European Time</option>
+                            <option value="Asia/Singapore">Singapore Time</option>
+                            <option value="Australia/Sydney">Australian Eastern Time</option>
+                        </select>
+                    </div>
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label">What's going on? *</label>
+                        <textarea class="contact-modal__textarea" id="contactMessage" required placeholder="Describe your deliverability issue..."></textarea>
+                    </div>
+                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn">Send to SOS Hotline</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openContactModal(source) {
+            document.getElementById('contactSource').value = source || 'sos-hotline';
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            va('event', { name: 'Contact_Modal_Opened', data: { source: source || 'sos-hotline', page: 'sos-hotline' } });
+        }
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('contactModal').addEventListener('click', function(e) { if (e.target === this) closeContactModal(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeContactModal(); });
+        async function submitContactForm(e) {
+            e.preventDefault();
+            const btn = document.getElementById('contactSubmitBtn');
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const timezone = document.getElementById('contactTimezone').value;
+            const message = document.getElementById('contactMessage').value.trim();
+            const source = document.getElementById('contactSource').value;
+            btn.disabled = true; btn.textContent = 'Sending...';
+            try {
+                const response = await fetch('/api/contact-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, timezone, message, source, page: 'sos-hotline' })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    document.querySelector('.contact-modal__body').innerHTML = '<div class="contact-modal__success"><div class="contact-modal__success-icon">✓</div><div class="contact-modal__success-title">Message Received</div><p class="contact-modal__success-text">We\'ll get back to you within 24-72 hours.</p></div>';
+                    va('event', { name: 'Contact_Form_Submitted', data: { source, page: 'sos-hotline' } });
+                } else { throw new Error(data.error || 'Failed to submit'); }
+            } catch (error) { console.error('Contact form error:', error); btn.disabled = false; btn.textContent = 'Try Again'; }
         }
     </script>
 
