@@ -367,6 +367,128 @@
             .summary-item { flex-wrap: wrap; }
             .summary-context { margin-left: 0; display: block; margin-top: 2px; }
         }
+
+        /* Email Capture */
+        .result-capture {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .result-capture__title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 8px;
+        }
+
+        .result-capture__subtitle {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-bottom: 16px;
+        }
+
+        .result-capture__form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .result-capture__input {
+            padding: 12px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-family: var(--font);
+            font-size: 15px;
+            color: var(--color-dark);
+        }
+
+        .result-capture__input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .result-capture__checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--color-muted);
+            cursor: pointer;
+        }
+
+        .result-capture__checkbox input {
+            width: 16px;
+            height: 16px;
+            margin-top: 2px;
+            accent-color: var(--color-accent);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .result-capture__checkbox span {
+            line-height: 1.4;
+        }
+
+        .result-capture__bonus {
+            display: inline-block;
+            background: var(--color-light);
+            color: var(--color-accent);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 4px;
+        }
+
+        .result-capture__btn {
+            padding: 12px 20px;
+            background: var(--color-dark);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 180ms ease;
+        }
+
+        .result-capture__btn:hover {
+            opacity: 0.9;
+        }
+
+        .result-capture__btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .result-capture__success {
+            padding: 16px;
+            background: var(--color-light);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--color-dark);
+            text-align: center;
+        }
+
+        .result-capture__skip {
+            font-size: 12px;
+            color: var(--color-muted);
+            text-align: center;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        .result-capture__skip:hover {
+            color: var(--color-dark);
+        }
+
+        @media (max-width: 600px) {
+            .result-capture__checkbox {
+                font-size: 12px;
+            }
+        }
     </style>
 
     <!-- Analytics -->
@@ -464,6 +586,24 @@
             </div>
 
             <a href="/sos-hotline" class="cta-btn">Talk to me first</a>
+
+            <div class="result-capture" data-result="purchased">
+                <div class="result-capture__title">Save your diagnosis</div>
+                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter" checked>
+                        <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist" checked>
+                        <span>Notify me when self-serve launches</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                </div>
+            </div>
         </div>
 
         <!-- Not a Fit: Cold Email -->
@@ -475,6 +615,24 @@
             <div class="reality-check">
                 <h4>Why</h4>
                 <p>My "Suppress" criteria are designed for newsletter and marketing lists. They would be too strict for cold outreach goals, where you expect low engagement by design.</p>
+            </div>
+
+            <div class="result-capture" data-result="cold">
+                <div class="result-capture__title">Want deliverability tips anyway?</div>
+                <div class="result-capture__subtitle">Even if we're not the right fit, you can still get our insights.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter" checked>
+                        <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist">
+                        <span>Notify me when self-serve launches</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                </div>
             </div>
         </div>
 
@@ -491,6 +649,24 @@
             </div>
 
             <a href="/sos-hotline" class="cta-btn">Open Emergency Ticket</a>
+
+            <div class="result-capture" data-result="crisis">
+                <div class="result-capture__title">Save your diagnosis</div>
+                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter" checked>
+                        <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist" checked>
+                        <span>Notify me when self-serve launches</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                </div>
+            </div>
         </div>
 
         <!-- High Risk: Tool Failure -->
@@ -506,6 +682,24 @@
             </div>
 
             <a href="/done-for-you" class="cta-btn">Get a full review</a>
+
+            <div class="result-capture" data-result="tool-failure">
+                <div class="result-capture__title">Save your diagnosis</div>
+                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter" checked>
+                        <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist" checked>
+                        <span>Notify me when self-serve launches</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                </div>
+            </div>
         </div>
 
         <!-- High Risk: Infrastructure Gap -->
@@ -521,6 +715,24 @@
             </div>
 
             <a href="/sos-hotline" class="cta-btn">Let's diagnose this</a>
+
+            <div class="result-capture" data-result="infra">
+                <div class="result-capture__title">Save your diagnosis</div>
+                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter" checked>
+                        <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist" checked>
+                        <span>Notify me when self-serve launches</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                </div>
+            </div>
         </div>
 
         <!-- Medium Risk: Catch-All Confusion -->
@@ -536,6 +748,24 @@
             </div>
 
             <a href="/done-for-you" class="cta-btn">Get clarity on your list</a>
+
+            <div class="result-capture" data-result="catchall">
+                <div class="result-capture__title">Save your diagnosis</div>
+                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter" checked>
+                        <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist" checked>
+                        <span>Notify me when self-serve launches</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                </div>
+            </div>
         </div>
 
         <!-- Medium Risk: Reputation Decay -->
@@ -551,6 +781,24 @@
             </div>
 
             <a href="/done-for-you" class="cta-btn">Get the diagnosis</a>
+
+            <div class="result-capture" data-result="decay">
+                <div class="result-capture__title">Save your diagnosis</div>
+                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter" checked>
+                        <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist" checked>
+                        <span>Notify me when self-serve launches</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                </div>
+            </div>
         </div>
 
         <!-- Low Risk: Preventive -->
@@ -566,6 +814,24 @@
             </div>
 
             <a href="https://anchor.reviewmyemails.com" class="cta-btn">Get a safety check</a>
+
+            <div class="result-capture" data-result="preventive">
+                <div class="result-capture__title">Save your diagnosis</div>
+                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter" checked>
+                        <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist" checked>
+                        <span>Notify me when self-serve launches</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -577,11 +843,28 @@
     let answerData = {};
     let currentQuestion = 1;
     const totalQuestions = 4;
+    const sessionId = 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
     // Track quiz started on page load
     document.addEventListener('DOMContentLoaded', function() {
         va('event', { name: 'Quiz_Started' });
+        trackQuizEvent('started');
     });
+
+    // Track quiz events to MongoDB
+    function trackQuizEvent(event, data = {}) {
+        fetch('/api/quiz-track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sessionId: sessionId,
+                quizType: 'risk-assessment',
+                event: event,
+                timestamp: new Date().toISOString(),
+                ...data
+            })
+        }).catch(err => console.log('Tracking error:', err));
+    }
 
     // Question labels for summary
     const questionLabels = {
@@ -603,8 +886,16 @@
             context: btnElement.getAttribute('data-context')
         };
 
-        // Track question answered
+        // Track question answered (Vercel Analytics)
         va('event', { name: 'Question_Answered', data: { question: question, answer: answer } });
+
+        // Track to MongoDB for detailed analysis
+        trackQuizEvent('answer', {
+            question: question,
+            answer: answer,
+            answerLabel: answerData[question].short,
+            answerContext: answerData[question].context
+        });
 
         // Mark button as selected
         const questionDiv = document.getElementById('q' + question);
@@ -707,8 +998,15 @@
         // Show result
         document.getElementById(resultId).classList.add('active');
 
-        // Track quiz completed with result type
+        // Track quiz completed with result type (Vercel Analytics)
         va('event', { name: 'Quiz_Completed', data: { result: resultId } });
+
+        // Track to MongoDB with full answer history
+        trackQuizEvent('completed', {
+            result: resultId,
+            answers: answers,
+            answerData: answerData
+        });
 
         // Add click tracking to CTA buttons in this result
         const resultEl = document.getElementById(resultId);
@@ -758,6 +1056,78 @@
 
         // Default to decay if nothing else matches
         showLoading('res-decay');
+    }
+
+    // Email capture submission
+    async function submitQuizCapture(btnElement) {
+        const captureDiv = btnElement.closest('.result-capture');
+        const emailInput = captureDiv.querySelector('.result-capture__input');
+        const newsletterCheckbox = captureDiv.querySelector('.capture-newsletter');
+        const waitlistCheckbox = captureDiv.querySelector('.capture-waitlist');
+        const resultType = captureDiv.getAttribute('data-result');
+
+        const email = emailInput.value.trim();
+
+        if (!email || !email.includes('@')) {
+            emailInput.style.borderColor = '#dc2626';
+            return;
+        }
+
+        btnElement.disabled = true;
+        btnElement.textContent = 'Sending...';
+        emailInput.style.borderColor = '';
+
+        const subscribeNewsletter = newsletterCheckbox.checked;
+        const joinWaitlist = waitlistCheckbox.checked;
+
+        try {
+            const response = await fetch('/api/quiz-results', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    quizType: 'risk-assessment',
+                    result: resultType,
+                    answers: answers,
+                    answerData: answerData,
+                    subscribeNewsletter: subscribeNewsletter,
+                    joinWaitlist: joinWaitlist,
+                    source: 'quiz_results'
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Track capture
+                va('event', { name: 'Quiz_Capture', data: { result: resultType, newsletter: subscribeNewsletter, waitlist: joinWaitlist } });
+
+                // Show success
+                const formDiv = captureDiv.querySelector('.result-capture__form');
+                let message = 'Your results have been sent!';
+                if (subscribeNewsletter) {
+                    message += ' You\'ve also earned 5,000 free credits.';
+                }
+                formDiv.innerHTML = `<div class="result-capture__success">${message}</div>`;
+            } else {
+                throw new Error(data.error || 'Failed to submit');
+            }
+        } catch (error) {
+            console.error('Quiz capture error:', error);
+            btnElement.disabled = false;
+            btnElement.textContent = 'Try Again';
+            emailInput.style.borderColor = '#dc2626';
+        }
+    }
+
+    function skipCapture(skipElement) {
+        const captureDiv = skipElement.closest('.result-capture');
+        captureDiv.style.display = 'none';
+
+        // Track skip
+        va('event', { name: 'Quiz_Capture_Skipped', data: { result: captureDiv.getAttribute('data-result') } });
     }
 </script>
 

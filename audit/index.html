@@ -815,8 +815,8 @@
             gap: 10px;
             text-align: left;
             font-size: 13px;
-            opacity: 0.8;
-            margin-bottom: var(--space-md);
+            opacity: 0.9;
+            margin-bottom: var(--space-sm);
             cursor: pointer;
         }
 
@@ -825,10 +825,23 @@
             width: 16px;
             height: 16px;
             accent-color: var(--color-accent);
+            flex-shrink: 0;
+        }
+
+        .capture-form__bonus {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 4px;
         }
 
         .capture-form .btn {
             width: 100%;
+            margin-top: var(--space-sm);
         }
 
         .capture-form__skip {
@@ -1695,6 +1708,22 @@
         let currentSection = 0;
         let answers = {};
         let sectionScores = {};
+        const sessionId = 'audit_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+        // Track audit events to MongoDB
+        function trackAuditEvent(event, data = {}) {
+            fetch('/api/quiz-track', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    sessionId: sessionId,
+                    quizType: 'self-audit',
+                    event: event,
+                    timestamp: new Date().toISOString(),
+                    ...data
+                })
+            }).catch(err => console.log('Tracking error:', err));
+        }
 
         // ========================================
         // FUNCTIONS
@@ -1705,6 +1734,7 @@
             document.getElementById('quizScreen').classList.add('active');
             document.getElementById('headerProgress').style.display = 'flex';
             renderSection(0);
+            trackAuditEvent('started');
         }
 
         function renderSection(index) {
@@ -1810,6 +1840,14 @@
                 element.className = 'quiz-option selected';
             }
 
+            // Track answer to MongoDB
+            trackAuditEvent('answer', {
+                question: questionId,
+                answer: value,
+                section: section.id,
+                sectionTitle: section.title
+            });
+
             updateSectionScore();
         }
 
@@ -1826,6 +1864,15 @@
                 answers[questionId].push(value);
                 element.classList.add('checked');
             }
+
+            // Track multi-select to MongoDB
+            const section = quizData.sections[currentSection];
+            trackAuditEvent('answer', {
+                question: questionId,
+                answer: answers[questionId],
+                section: section.id,
+                sectionTitle: section.title
+            });
 
             updateSectionScore();
         }
@@ -1908,6 +1955,14 @@
             });
 
             const overallScore = Math.round(totalWeightedScore / totalWeight);
+
+            // Track audit completion to MongoDB
+            trackAuditEvent('completed', {
+                result: overallScore >= 80 ? 'good' : overallScore >= 60 ? 'warning' : 'danger',
+                overallScore: overallScore,
+                sectionScores: sectionScores,
+                answers: answers
+            });
 
             // Determine grade
             let grade, gradeClass, summary;
@@ -2025,12 +2080,16 @@
             html += `
                 <div class="results__capture">
                     <h3>Save Your Results</h3>
-                    <p>Get a detailed PDF report and optional monthly reminders to re-audit.</p>
+                    <p>Get a detailed report emailed and optionally join our waitlist.</p>
                     <form class="capture-form" onsubmit="submitCapture(event)">
                         <input type="email" class="capture-form__input" placeholder="your@email.com" required id="captureEmail">
                         <label class="capture-form__checkbox">
-                            <input type="checkbox" id="captureNewsletter">
-                            <span>Also send me deliverability tips (optional, you can unsubscribe anytime)</span>
+                            <input type="checkbox" id="captureNewsletter" checked>
+                            <span>Send me deliverability tips <span class="capture-form__bonus">+5,000 free credits</span></span>
+                        </label>
+                        <label class="capture-form__checkbox">
+                            <input type="checkbox" id="captureWaitlist" checked>
+                            <span>Notify me when self-serve launches</span>
                         </label>
                         <button type="submit" class="btn btn-primary">Send My Report</button>
                         <div class="capture-form__skip" onclick="skipCapture()">Skip, I'll just review on screen</div>
@@ -2098,19 +2157,60 @@
             return bySection;
         }
 
-        function submitCapture(event) {
+        async function submitCapture(event) {
             event.preventDefault();
             const email = document.getElementById('captureEmail').value;
             const newsletter = document.getElementById('captureNewsletter').checked;
+            const waitlist = document.getElementById('captureWaitlist').checked;
+            const btn = event.target.querySelector('button');
 
-            // In a real implementation, this would send to your backend
-            console.log('Capture:', { email, newsletter, score: sectionScores, answers });
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
 
-            // Show thank you message
-            document.querySelector('.results__capture').innerHTML = `
-                <h3>Report Sent!</h3>
-                <p>Check your inbox for your detailed audit report.${newsletter ? ' You\'ll also receive our deliverability tips.' : ''}</p>
-            `;
+            try {
+                const response = await fetch('/api/quiz-results', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        quizType: 'self-audit',
+                        result: Object.keys(sectionScores).reduce((worst, key) => {
+                            return sectionScores[key] < (sectionScores[worst] || 100) ? key : worst;
+                        }, ''),
+                        overallScore: Math.round(Object.values(sectionScores).reduce((a, b) => a + b, 0) / Object.keys(sectionScores).length),
+                        sectionScores: sectionScores,
+                        answers: answers,
+                        subscribeNewsletter: newsletter,
+                        joinWaitlist: waitlist,
+                        source: 'audit_results'
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Track capture
+                    va('event', { name: 'Audit_Capture', data: { newsletter: newsletter, waitlist: waitlist } });
+
+                    // Show thank you message
+                    let message = 'Check your inbox for your detailed audit report.';
+                    if (newsletter) {
+                        message += ' You\'ve also earned 5,000 free credits.';
+                    }
+                    document.querySelector('.results__capture').innerHTML = `
+                        <h3>Report Sent!</h3>
+                        <p>${message}</p>
+                    `;
+                } else {
+                    throw new Error(data.error || 'Failed to submit');
+                }
+            } catch (error) {
+                console.error('Audit capture error:', error);
+                btn.disabled = false;
+                btn.textContent = 'Try Again';
+            }
         }
 
         function skipCapture() {
