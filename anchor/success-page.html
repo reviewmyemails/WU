@@ -104,6 +104,9 @@
         })(window, document, "clarity", "script", "rfdccvjnjx");
     </script>
     <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -377,6 +380,9 @@
                     document.getElementById('credits-amount').textContent = session.totalCredits.toLocaleString() + ' credits';
                     document.getElementById('customer-email').textContent = session.email;
                     cachedCustomerEmail = session.email;
+
+                    // Track purchase completed
+                    va('event', { name: 'Purchase_Completed', data: { credits: session.totalCredits } });
 
                     // If we already have upload email, cache it
                     if (session.uploadEmail) {

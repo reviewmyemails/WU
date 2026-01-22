@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Is Your List Safe? — RME Diagnostic</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -366,6 +372,9 @@
         })(window, document, "clarity", "script", "rfdccvjnjx");
     </script>
     <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -554,6 +563,11 @@
     let currentQuestion = 1;
     const totalQuestions = 4;
 
+    // Track quiz started on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        va('event', { name: 'Quiz_Started' });
+    });
+
     // Question labels for summary
     const questionLabels = {
         1: 'Source',
@@ -573,6 +587,9 @@
             short: btnElement.getAttribute('data-short'),
             context: btnElement.getAttribute('data-context')
         };
+
+        // Track question answered
+        va('event', { name: 'Question_Answered', data: { question: question, answer: answer } });
 
         // Mark button as selected
         const questionDiv = document.getElementById('q' + question);
@@ -674,6 +691,17 @@
         document.getElementById('diagHeader').style.display = 'none';
         // Show result
         document.getElementById(resultId).classList.add('active');
+
+        // Track quiz completed with result type
+        va('event', { name: 'Quiz_Completed', data: { result: resultId } });
+
+        // Add click tracking to CTA buttons in this result
+        const resultEl = document.getElementById(resultId);
+        resultEl.querySelectorAll('.cta-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                va('event', { name: 'CTA_Clicked', data: { result: resultId, destination: this.href } });
+            });
+        });
     }
 
     function determineResult() {

@@ -149,6 +149,9 @@
         })(window, document, "clarity", "script", "rfdccvjnjx");
     </script>
     <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
     <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -959,8 +962,11 @@
         planButtonsContainer.addEventListener('click', async e => {
             const button = e.target.closest('.plan-button');
             if (button) {
-                emailCountInput.value = button.dataset.amount;
+                const credits = parseInt(button.dataset.amount);
+                emailCountInput.value = credits;
                 updateSummary();
+                // Track package selection
+                va('event', { name: 'Package_Selected', data: { credits: credits, price: getPricePerEmail(credits) } });
                 // Re-validate promo with new credit amount
                 if (currentPromo) {
                     await revalidatePromo();
@@ -1041,6 +1047,8 @@
                     currentPromo = promoCode;
                     showPromoSuccess(data.result.savingsMessage);
                     updateSummary();
+                    // Track promo applied
+                    va('event', { name: 'Promo_Applied', data: { code: promoCode, type: data.result.promoType } });
                 } else {
                     promoResult = null;
                     currentPromo = null;
@@ -1141,6 +1149,9 @@
 
             purchaseBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             purchaseBtn.disabled = true;
+
+            // Track checkout started
+            va('event', { name: 'Checkout_Started', data: { credits: credits, hasPromo: !!currentPromo } });
 
             try {
                 const response = await fetch(API_URL, {
