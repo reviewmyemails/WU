@@ -685,13 +685,14 @@
 
         .tpl-statement .badge {
             display: inline-block;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             width: fit-content;
+            margin-bottom: 12px;
             z-index: 15;
         }
 
@@ -710,34 +711,32 @@
         }
 
         .tpl-statement .brand {
-            font-size: 12px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 700;
             opacity: 0.8;
-            margin-bottom: 12px;
         }
 
         .tpl-statement .headline {
-            font-size: 36px;
+            font-size: 28px;
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             white-space: pre-line;
         }
 
         .tpl-statement .body {
-            font-size: 18px;
-            line-height: 1.5;
+            font-size: 14px;
+            line-height: 1.4;
             opacity: 0.9;
-            margin-bottom: 24px;
         }
 
         .tpl-statement .cta {
             display: inline-block;
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-size: 15px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 600;
             width: fit-content;
             margin-top: auto;
@@ -846,44 +845,43 @@
         }
 
         .tpl-checklist .label {
-            font-size: 12px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
             font-weight: 600;
             opacity: 0.7;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
         }
 
         .tpl-checklist .headline {
-            font-size: 32px;
+            font-size: 26px;
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
 
         .tpl-checklist .items {
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            margin-bottom: 24px;
+            gap: 10px;
         }
 
         .tpl-checklist .item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 16px;
+            gap: 10px;
+            font-size: 13px;
             font-weight: 500;
         }
 
         .tpl-checklist .item-icon {
-            width: 26px;
-            height: 26px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
+            font-size: 12px;
             flex-shrink: 0;
         }
 
@@ -898,9 +896,9 @@
 
         .tpl-checklist .cta {
             display: inline-block;
-            padding: 14px 28px;
-            border-radius: 30px;
-            font-size: 15px;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 600;
             width: fit-content;
             margin-top: auto;
@@ -916,6 +914,82 @@
         .theme-white .tpl-checklist .cta {
             background: var(--color-dark);
             color: white;
+        }
+
+        /* ========================================
+           TEMPLATE TYPE: DO'S & DON'TS
+           ======================================== */
+        .tpl-dodont {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tpl-dodont .headline {
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .tpl-dodont .columns {
+            display: flex;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .tpl-dodont .column {
+            flex: 1;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .tpl-dodont .column.do-column {
+            background: #e8f5e9;
+        }
+
+        .tpl-dodont .column.dont-column {
+            background: #ffebee;
+        }
+
+        .tpl-dodont .column-header {
+            font-weight: 700;
+            font-size: 10px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tpl-dodont .column.do-column .column-header {
+            color: #2e7d32;
+        }
+
+        .tpl-dodont .column.dont-column .column-header {
+            color: #c62828;
+        }
+
+        .tpl-dodont .column-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--color-dark);
+        }
+
+        .tpl-dodont .column-item .icon {
+            flex-shrink: 0;
+        }
+
+        .tpl-dodont .column.do-column .icon {
+            color: #2e7d32;
+        }
+
+        .tpl-dodont .column.dont-column .icon {
+            color: #c62828;
         }
 
         /* ========================================
@@ -1493,20 +1567,15 @@
             },
             // Portrait templates
             'do-dont-pt': {
-                type: 'checklist',
+                type: 'dodont',
                 format: 'portrait',
                 theme: 'white',
                 data: {
                     headline: 'Email Warm-up',
-                    items: [
-                        { text: 'Start with engaged subscribers', status: 'good' },
-                        { text: 'Gradually increase volume', status: 'good' },
-                        { text: 'Monitor metrics daily', status: 'good' },
-                        { text: 'Blast your entire list', status: 'bad' },
-                        { text: 'Ignore bounce rates', status: 'bad' },
-                        { text: 'Skip authentication', status: 'bad' }
-                    ],
-                    cta: null
+                    dosAndDonts: {
+                        do: ['Start with engaged subscribers', 'Gradually increase volume', 'Monitor metrics daily'],
+                        dont: ['Blast your entire list', 'Ignore bounce rates', 'Skip authentication']
+                    }
                 }
             },
             'step-process-pt': {
@@ -3128,6 +3197,28 @@
                         </div>
                     `;
                     break;
+
+                case 'dodont':
+                    const doItems = (state.data.dosAndDonts?.do || []).join('\n');
+                    const dontItems = (state.data.dosAndDonts?.dont || []).join('\n');
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Headline</label>
+                            ${getTextColorPickerHTML('inputHeadline')}
+                            <input type="text" class="input-text" id="inputHeadline" value="${state.data.headline || ''}" placeholder="Email Warm-up">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">DO Items</label>
+                            <textarea class="input-textarea" id="inputDoItems" placeholder="One item per line">${doItems}</textarea>
+                            <div class="input-hint">One item per line</div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">DON'T Items</label>
+                            <textarea class="input-textarea" id="inputDontItems" placeholder="One item per line">${dontItems}</textarea>
+                            <div class="input-hint">One item per line</div>
+                        </div>
+                    `;
+                    break;
             }
 
             container.innerHTML = html;
@@ -3253,6 +3344,16 @@
                     state.data.author = document.getElementById('inputAuthor')?.value || '';
                     state.data.authorTitle = document.getElementById('inputAuthorTitle')?.value || '';
                     break;
+
+                case 'dodont':
+                    state.data.headline = document.getElementById('inputHeadline')?.value || '';
+                    const doText = document.getElementById('inputDoItems')?.value || '';
+                    const dontText = document.getElementById('inputDontItems')?.value || '';
+                    state.data.dosAndDonts = {
+                        do: doText.split('\n').filter(l => l.trim()),
+                        dont: dontText.split('\n').filter(l => l.trim())
+                    };
+                    break;
             }
         }
 
@@ -3349,6 +3450,9 @@
                         case 'quote':
                             contentHtml = renderQuoteTemplate();
                             break;
+                        case 'dodont':
+                            contentHtml = renderDodontTemplate();
+                            break;
                     }
                     // Wrap content with z-index
                     return `<div class="content-layer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${zIndex};">${contentHtml}</div>`;
@@ -3361,22 +3465,16 @@
         function renderStatementTemplate() {
             const d = state.data;
             const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
-            const badgeX = d.badgeX ?? 8;
-            const badgeY = d.badgeY ?? 8;
-            // Auto-adjust contentY when badge is present and no explicit contentY is set
-            const defaultContentY = d.badge ? 18 : 8;
-            const contentY = d.contentY ?? defaultContentY;
-            const ctaY = d.ctaY ?? 85;
 
             return `
-                <div class="tpl-statement" style="padding: 0 8%;">
-                    ${d.badge ? `<div class="badge" style="${badgeStyle} position: absolute; left: ${badgeX}%; top: ${badgeY}%;">${d.badge}</div>` : ''}
-                    <div class="content-area" style="position: absolute; top: ${contentY}%; left: 8%; right: 8%;">
-                        ${d.brand ? `<div class="brand">${d.brand}</div>` : ''}
+                <div class="tpl-statement" style="display: flex; flex-direction: column; height: 100%; padding: 8%;">
+                    ${d.badge ? `<div class="badge" style="${badgeStyle}">${d.badge}</div>` : ''}
+                    ${d.brand ? `<div class="brand">${d.brand}</div>` : ''}
+                    <div class="content-area" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
                         ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
                         ${d.body ? `<div class="body">${parseRichText(d.body)}</div>` : ''}
                     </div>
-                    ${d.cta ? `<div class="cta" style="position: absolute; top: ${ctaY}%; left: 8%;">${d.cta}</div>` : ''}
+                    ${d.cta ? `<div class="cta">${d.cta}</div>` : ''}
                 </div>
             `;
         }
@@ -3444,6 +3542,30 @@
                         <div class="author-box">
                             <div class="author-name">${d.author || ''}</div>
                             <div class="author-title">${d.authorTitle || ''}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDodontTemplate() {
+            const d = state.data;
+            const dosAndDonts = d.dosAndDonts || { do: [], dont: [] };
+            return `
+                <div class="tpl-dodont">
+                    ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
+                    <div class="columns">
+                        <div class="column do-column">
+                            <div class="column-header">DO</div>
+                            ${dosAndDonts.do.map(item => `
+                                <div class="column-item"><span class="icon">✓</span> ${item}</div>
+                            `).join('')}
+                        </div>
+                        <div class="column dont-column">
+                            <div class="column-header">DON'T</div>
+                            ${dosAndDonts.dont.map(item => `
+                                <div class="column-item"><span class="icon">✖</span> ${item}</div>
+                            `).join('')}
                         </div>
                     </div>
                 </div>
