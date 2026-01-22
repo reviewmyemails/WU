@@ -167,6 +167,16 @@
             background: var(--color-light);
         }
 
+        .btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.4);
+        }
+
         /* ========================================
            ICONS (Simple SVG)
            ======================================== */
@@ -252,6 +262,83 @@
         .header__cta {
             font-size: 15px;
             padding: 10px 20px;
+        }
+
+        /* Mobile Menu */
+        .header__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .header__mobile-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-white);
+            z-index: 200;
+            padding: var(--space-lg) var(--space-md);
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .mobile-nav__close {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .mobile-nav__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav__links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .mobile-nav__link {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--color-dark);
+            text-decoration: none;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .mobile-nav__cta {
+            margin-top: var(--space-lg);
         }
 
         /* ========================================
@@ -790,8 +877,13 @@
                 gap: var(--space-md);
             }
 
-            .header__link {
+            .header__link,
+            .header__cta {
                 display: none;
+            }
+
+            .header__mobile-toggle {
+                display: block;
             }
 
             .hero {
@@ -851,10 +943,34 @@
             <nav class="header__nav">
                 <a href="/pricing" class="header__link">Pricing</a>
                 <a href="/sos-hotline" class="header__link">SOS Hotline</a>
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">See Pricing & Get Started</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get Started</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
             </nav>
         </div>
     </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__header">
+            <a href="/" class="header__logo">
+                <img src="svg/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="mobile-nav__links">
+            <a href="/pricing" class="mobile-nav__link">Pricing</a>
+            <a href="/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
+            <a href="/about" class="mobile-nav__link">About</a>
+            <a href="/partner" class="mobile-nav__link">Partner</a>
+        </div>
+        <div class="mobile-nav__cta">
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Started</a>
+        </div>
+    </nav>
 
     <!-- ========================================
          HERO
@@ -863,11 +979,11 @@
     <section class="hero">
         <div class="container">
             <a href="https://linkedin.com/in/yannatorry" target="_blank" class="hero__badge">By Yanna-Torry Aspraki</a>
-            <h1 class="hero__headline">Stop guessing what is wrong with your list.<br>I find the problems tools miss.</h1>
+            <h1 class="hero__headline">Stop guessing what is wrong with your list.<br>We find the problems tools miss.</h1>
             <p class="hero__subhead">Validation tools check syntax. I check safety. You get clear labels: Keep, Monitor, Suppress. And the reasoning behind each one.</p>
             <div class="hero__actions">
                 <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
-                <a href="/quiz" class="btn btn-secondary">Take the diagnostic quiz</a>
+                <a href="/quiz" class="btn btn-secondary">Take the 2-Minute Risk Check</a>
             </div>
             <p class="hero__bridge">Most email problems trace back to list quality.</p>
         </div>
@@ -913,7 +1029,7 @@
 
                 <div class="symptoms__cta">
                     <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
-                    <a href="/quiz" class="btn btn-secondary">Take the 2-minute risk check</a>
+                    <a href="/quiz" class="btn btn-secondary">Take the 2-Minute Risk Check</a>
                 </div>
 
             </div>
@@ -1066,7 +1182,7 @@
         <div class="cta-block__inner">
             <h2>Not sure if your list needs this?</h2>
             <p class="cta-block__subtext">Take a 2-minute self-assessment. Six questions about how you built your list, and we'll tell you what risk level you're probably at.</p>
-            <a href="/quiz" class="btn btn-secondary">Check Your List Risk</a>
+            <a href="/quiz" class="btn btn-secondary">Take the 2-Minute Risk Check</a>
         </div>
     </section>
 
@@ -1161,6 +1277,19 @@
             </div>
         </div>
     </footer>
+
+    <!-- Mobile Navigation -->
+    <script>
+        function openMobileNav() {
+            document.getElementById('mobileNav').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    </script>
 
     <!-- Custom Event Tracking -->
     <script>
