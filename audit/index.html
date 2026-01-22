@@ -2084,12 +2084,16 @@
                     <form class="capture-form" onsubmit="submitCapture(event)">
                         <input type="email" class="capture-form__input" placeholder="your@email.com" required id="captureEmail">
                         <label class="capture-form__checkbox">
-                            <input type="checkbox" id="captureNewsletter" checked>
+                            <input type="checkbox" id="captureNewsletter">
                             <span>Send me deliverability tips <span class="capture-form__bonus">+5,000 free credits</span></span>
                         </label>
                         <label class="capture-form__checkbox">
-                            <input type="checkbox" id="captureWaitlist" checked>
+                            <input type="checkbox" id="captureWaitlist">
                             <span>Notify me when self-serve launches</span>
+                        </label>
+                        <label class="capture-form__checkbox">
+                            <input type="checkbox" id="captureContact">
+                            <span>Have someone reach out to discuss my audit results (no sales pitch)</span>
                         </label>
                         <button type="submit" class="btn btn-primary">Send My Report</button>
                         <div class="capture-form__skip" onclick="skipCapture()">Skip, I'll just review on screen</div>
@@ -2162,6 +2166,7 @@
             const email = document.getElementById('captureEmail').value;
             const newsletter = document.getElementById('captureNewsletter').checked;
             const waitlist = document.getElementById('captureWaitlist').checked;
+            const contact = document.getElementById('captureContact').checked;
             const btn = event.target.querySelector('button');
 
             btn.disabled = true;
@@ -2184,6 +2189,7 @@
                         answers: answers,
                         subscribeNewsletter: newsletter,
                         joinWaitlist: waitlist,
+                        requestContact: contact,
                         source: 'audit_results'
                     })
                 });
@@ -2192,12 +2198,15 @@
 
                 if (response.ok) {
                     // Track capture
-                    va('event', { name: 'Audit_Capture', data: { newsletter: newsletter, waitlist: waitlist } });
+                    va('event', { name: 'Audit_Capture', data: { newsletter: newsletter, waitlist: waitlist, contact: contact } });
 
                     // Show thank you message
                     let message = 'Check your inbox for your detailed audit report.';
                     if (newsletter) {
                         message += ' You\'ve also earned 5,000 free credits.';
+                    }
+                    if (contact) {
+                        message += ' We\'ll reach out soon.';
                     }
                     document.querySelector('.results__capture').innerHTML = `
                         <h3>Report Sent!</h3>

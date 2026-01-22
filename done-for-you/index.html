@@ -241,6 +241,83 @@
             padding: 10px 20px;
         }
 
+        /* Mobile Menu */
+        .header__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .header__mobile-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-white);
+            z-index: 200;
+            padding: var(--space-lg) var(--space-md);
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .mobile-nav__close {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .mobile-nav__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav__links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .mobile-nav__link {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--color-dark);
+            text-decoration: none;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .mobile-nav__cta {
+            margin-top: var(--space-lg);
+        }
+
         /* ========================================
            HERO
            ======================================== */
@@ -855,8 +932,13 @@
                 gap: var(--space-md);
             }
 
-            .header__link {
+            .header__link,
+            .header__cta {
                 display: none;
+            }
+
+            .header__mobile-toggle {
+                display: block;
             }
 
             .hero {
@@ -918,9 +1000,33 @@
                 <a href="/pricing" class="header__link">Pricing</a>
                 <a href="/sos-hotline" class="header__link">SOS Hotline</a>
                 <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get Answers</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
             </nav>
         </div>
     </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__header">
+            <a href="/" class="header__logo">
+                <img src="../svg/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="mobile-nav__links">
+            <a href="/pricing" class="mobile-nav__link">Pricing</a>
+            <a href="/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
+            <a href="/about" class="mobile-nav__link">About</a>
+            <a href="/partner" class="mobile-nav__link">Partner</a>
+        </div>
+        <div class="mobile-nav__cta">
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Answers</a>
+        </div>
+    </nav>
 
     <!-- ========================================
          HERO
@@ -1253,6 +1359,19 @@
                 });
             });
         });
+    </script>
+
+    <!-- Mobile Navigation -->
+    <script>
+        function openMobileNav() {
+            document.getElementById('mobileNav').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.body.style.overflow = '';
+        }
     </script>
 
 </body>

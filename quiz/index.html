@@ -489,6 +489,39 @@
                 font-size: 12px;
             }
         }
+
+        /* Additional Issues Section */
+        .additional-issues {
+            background: var(--color-lighter);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #b45309;
+        }
+
+        .additional-issues h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .additional-issues ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .additional-issues li {
+            font-size: 14px;
+            color: var(--color-dark);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .additional-issues li:last-child {
+            margin-bottom: 0;
+        }
     </style>
 
     <!-- Analytics -->
@@ -533,8 +566,7 @@
         <div class="question-step active" id="q1">
             <p class="q-text">How did the majority of these emails get on your list?</p>
             <button class="answer-btn" data-short="Organic" data-context="Organic lists decay too. About 22% go stale every year. Normal." onclick="handleAnswer(1, 'organic', this)">They filled out a form on my website or app</button>
-            <button class="answer-btn" data-short="Purchased" data-context="This is where traps live. Tools miss them. Seen it hundreds of times." onclick="handleAnswer(1, 'purchased', this)">I bought, rented, or scraped the list</button>
-            <button class="answer-btn" data-short="Cold outreach" data-context="Cold lists are the trickiest. Spam traps, stale data, complaint risk. Validation is just one piece - not the whole solution." onclick="handleAnswer(1, 'cold', this)">Cold outreach to business contacts</button>
+            <button class="answer-btn" data-short="No consent" data-context="No consent means higher risk. We can still help clean it—just important to set expectations." onclick="handleAnswer(1, 'no_consent', this)">Purchased, scraped, or cold outreach (no opt-in)</button>
             <button class="answer-btn" data-short="Mixed" data-context="Mixed lists hide surprises. The risky part is always what you didn't build." onclick="handleAnswer(1, 'mixed', this)">Mixed sources / I inherited this list</button>
         </div>
 
@@ -573,62 +605,38 @@
 
         <!-- RESULTS -->
 
-        <!-- Critical: Purchased List -->
-        <div class="result-step" id="res-purchased">
+        <!-- No Consent List (Purchased, Scraped, Cold) -->
+        <div class="result-step" id="res-no-consent">
             <p class="pattern-line">This is one of the most common patterns I see.</p>
-            <span class="verdict-badge verdict-critical">Critical Risk</span>
-            <h2 class="result-headline">Your list needs triage before sending.</h2>
-            <p class="result-subhead">Purchased or scraped lists cannot be "validated" into safety. The addresses may exist, but they are full of recycled spam traps that tools miss.</p>
+            <span class="verdict-badge verdict-high">Higher Risk</span>
+            <h2 class="result-headline">We can absolutely help clean your list.</h2>
+            <p class="result-subhead">Lists without explicit consent carry more risk—but that doesn't mean you can't send safely. We'll remove the addresses most likely to hurt you.</p>
 
             <div class="reality-check">
-                <h4>What this means</h4>
-                <p>Validation checks if an email exists. It does not check if they want to hear from you, or if the address has been converted into a trap. Sending to this list puts your domain at risk.</p>
+                <h4>What we'll do</h4>
+                <p>We catch invalid addresses, spam traps, role accounts, and high-risk patterns that other validators miss. We're thorough. But we're also honest: no tool can catch every trap on a non-consent list because some are designed to be undetectable. That's true for every validator—we're just the ones who tell you.</p>
             </div>
 
-            <a href="/sos-hotline" class="cta-btn">Talk to me first</a>
+            <div id="no-consent-issues" class="additional-issues" style="display:none; margin-bottom: 24px;"></div>
 
-            <div class="result-capture" data-result="purchased">
+            <a href="/sos-hotline" class="cta-btn">Talk to a Specialist</a>
+
+            <div class="result-capture" data-result="no-consent">
                 <div class="result-capture__title">Save your diagnosis</div>
                 <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com">
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-newsletter" checked>
-                        <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
-                    </label>
-                    <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-waitlist" checked>
-                        <span>Notify me when self-serve launches</span>
-                    </label>
-                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
-                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Not a Fit: Cold Email -->
-        <div class="result-step" id="res-cold">
-            <span class="verdict-badge verdict-notfit">Not a Fit</span>
-            <h2 class="result-headline">I am not the right fit for cold outreach.</h2>
-            <p class="result-subhead">Review My Emails specializes in protecting the reputation of permission-based senders. Cold email relies on different mechanics.</p>
-
-            <div class="reality-check">
-                <h4>Why</h4>
-                <p>My "Suppress" criteria are designed for newsletter and marketing lists. They would be too strict for cold outreach goals, where you expect low engagement by design.</p>
-            </div>
-
-            <div class="result-capture" data-result="cold">
-                <div class="result-capture__title">Want deliverability tips anyway?</div>
-                <div class="result-capture__subtitle">Even if we're not the right fit, you can still get our insights.</div>
-                <div class="result-capture__form">
-                    <input type="email" class="result-capture__input" placeholder="your@email.com">
-                    <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-newsletter" checked>
+                        <input type="checkbox" class="capture-newsletter">
                         <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-waitlist">
                         <span>Notify me when self-serve launches</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
                     </label>
                     <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
                     <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
@@ -648,6 +656,8 @@
                 <p>You need a remediation strategy, not just a clean list. I help identify the root cause and build a path back to good standing with your ESP.</p>
             </div>
 
+            <div id="crisis-issues" class="additional-issues" style="display:none;"></div>
+
             <a href="/sos-hotline" class="cta-btn">Open Emergency Ticket</a>
 
             <div class="result-capture" data-result="crisis">
@@ -656,12 +666,16 @@
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com">
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-newsletter" checked>
+                        <input type="checkbox" class="capture-newsletter">
                         <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
                     </label>
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-waitlist" checked>
+                        <input type="checkbox" class="capture-waitlist">
                         <span>Notify me when self-serve launches</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
                     </label>
                     <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
                     <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
@@ -681,6 +695,8 @@
                 <p>Automated tools cannot see behavioral history. They check code, not context. I find the "Valid but Dangerous" addresses they miss.</p>
             </div>
 
+            <div id="tool-failure-issues" class="additional-issues" style="display:none;"></div>
+
             <a href="/done-for-you" class="cta-btn">Get a full review</a>
 
             <div class="result-capture" data-result="tool-failure">
@@ -689,12 +705,16 @@
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com">
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-newsletter" checked>
+                        <input type="checkbox" class="capture-newsletter">
                         <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
                     </label>
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-waitlist" checked>
+                        <input type="checkbox" class="capture-waitlist">
                         <span>Notify me when self-serve launches</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
                     </label>
                     <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
                     <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
@@ -714,6 +734,8 @@
                 <p>Domain authentication tells inbox providers you are who you say you are. Without it, your emails look suspicious regardless of list quality.</p>
             </div>
 
+            <div id="infra-issues" class="additional-issues" style="display:none;"></div>
+
             <a href="/sos-hotline" class="cta-btn">Let's diagnose this</a>
 
             <div class="result-capture" data-result="infra">
@@ -722,12 +744,16 @@
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com">
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-newsletter" checked>
+                        <input type="checkbox" class="capture-newsletter">
                         <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
                     </label>
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-waitlist" checked>
+                        <input type="checkbox" class="capture-waitlist">
                         <span>Notify me when self-serve launches</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
                     </label>
                     <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
                     <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
@@ -747,6 +773,8 @@
                 <p>A large percentage of business domains are catch-all. Validation marks them "Unknown" because it cannot verify. Pattern recognition and engagement history tell a different story.</p>
             </div>
 
+            <div id="catchall-issues" class="additional-issues" style="display:none;"></div>
+
             <a href="/done-for-you" class="cta-btn">Get clarity on your list</a>
 
             <div class="result-capture" data-result="catchall">
@@ -755,12 +783,16 @@
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com">
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-newsletter" checked>
+                        <input type="checkbox" class="capture-newsletter">
                         <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
                     </label>
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-waitlist" checked>
+                        <input type="checkbox" class="capture-waitlist">
                         <span>Notify me when self-serve launches</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
                     </label>
                     <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
                     <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
@@ -780,6 +812,8 @@
                 <p>This is the hardest problem to diagnose because there is no event. Your list has accumulated decay, and it is dragging down your engaged subscribers.</p>
             </div>
 
+            <div id="decay-issues" class="additional-issues" style="display:none;"></div>
+
             <a href="/done-for-you" class="cta-btn">Get the diagnosis</a>
 
             <div class="result-capture" data-result="decay">
@@ -788,12 +822,16 @@
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com">
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-newsletter" checked>
+                        <input type="checkbox" class="capture-newsletter">
                         <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
                     </label>
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-waitlist" checked>
+                        <input type="checkbox" class="capture-waitlist">
                         <span>Notify me when self-serve launches</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
                     </label>
                     <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
                     <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
@@ -813,6 +851,8 @@
                 <p>You are doing the right things. A safety check ensures you do not accidentally hit a trap that did not exist last time you sent.</p>
             </div>
 
+            <div id="preventive-issues" class="additional-issues" style="display:none;"></div>
+
             <a href="https://anchor.reviewmyemails.com" class="cta-btn">Get a safety check</a>
 
             <div class="result-capture" data-result="preventive">
@@ -821,12 +861,16 @@
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com">
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-newsletter" checked>
+                        <input type="checkbox" class="capture-newsletter">
                         <span>Send me deliverability tips <span class="result-capture__bonus">+5,000 free credits</span></span>
                     </label>
                     <label class="result-capture__checkbox">
-                        <input type="checkbox" class="capture-waitlist" checked>
+                        <input type="checkbox" class="capture-waitlist">
                         <span>Notify me when self-serve launches</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
                     </label>
                     <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
                     <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
@@ -904,20 +948,6 @@
 
         // Update summary immediately
         updateSummary();
-
-        // Immediate exits
-        if (question === 1 && answer === 'purchased') {
-            setTimeout(() => {
-                showLoading('res-purchased');
-            }, advanceDelay);
-            return;
-        }
-        if (question === 1 && answer === 'cold') {
-            setTimeout(() => {
-                showResult('res-cold');
-            }, advanceDelay);
-            return;
-        }
 
         // Progress to next question
         if (question < totalQuestions) {
@@ -998,6 +1028,9 @@
         // Show result
         document.getElementById(resultId).classList.add('active');
 
+        // Show additional issues based on all 4 answers
+        showAdditionalIssues(resultId);
+
         // Track quiz completed with result type (Vercel Analytics)
         va('event', { name: 'Quiz_Completed', data: { result: resultId } });
 
@@ -1018,9 +1051,15 @@
     }
 
     function determineResult() {
-        // Crisis path
+        // Crisis path - highest priority
         if (answers[4] === 'crisis') {
             showLoading('res-crisis');
+            return;
+        }
+
+        // No consent list (purchased, scraped, cold) - needs special handling
+        if (answers[1] === 'no_consent') {
+            showLoading('res-no-consent');
             return;
         }
 
@@ -1058,12 +1097,59 @@
         showLoading('res-decay');
     }
 
+    // Build additional issues based on ALL answers (not just primary result)
+    function getAdditionalIssues(primaryResult) {
+        const issues = [];
+
+        // Check Q2: DMARC
+        if (answers[2] === 'dmarc_no' && primaryResult !== 'res-infra') {
+            issues.push('<strong>Infrastructure gap:</strong> Your domain authentication (DMARC) needs attention. Even a clean list can land in spam without proper setup.');
+        } else if (answers[2] === 'dmarc_partial') {
+            issues.push('<strong>Partial DMARC:</strong> Inconsistent authentication settings can confuse inbox providers. Worth reviewing your DNS records.');
+        }
+
+        // Check Q3: Validation history
+        if (answers[3] === 'valid_issues' && primaryResult !== 'res-tool-failure') {
+            issues.push('<strong>Validation gap:</strong> Your previous validation flagged addresses as "valid" that still caused problems. We go deeper than syntax checking.');
+        } else if (answers[3] === 'catchall' && primaryResult !== 'res-catchall') {
+            issues.push('<strong>Catch-all domains:</strong> You have addresses on catch-all domains that other tools mark as "Unknown." We can help identify which are real.');
+        } else if (answers[3] === 'never') {
+            issues.push('<strong>No recent validation:</strong> Lists decay about 22% per year. It\'s been a while since your last check.');
+        }
+
+        // Check Q4: Pain point context
+        if (answers[4] === 'declining' && primaryResult !== 'res-decay') {
+            issues.push('<strong>Declining engagement:</strong> Your open rates are dropping. This often signals list decay even when everything else looks fine.');
+        } else if (answers[4] === 'confused' && primaryResult !== 'res-decay') {
+            issues.push('<strong>Conflicting tool results:</strong> Different validators giving different answers usually means behavioral issues that syntax checks miss.');
+        }
+
+        return issues;
+    }
+
+    // Inject additional issues into result page
+    function showAdditionalIssues(resultId) {
+        const issues = getAdditionalIssues(resultId);
+        if (issues.length === 0) return;
+
+        const issuesContainer = document.getElementById(resultId.replace('res-', '') + '-issues') ||
+                               document.querySelector('#' + resultId + ' .additional-issues');
+
+        if (issuesContainer) {
+            issuesContainer.innerHTML = '<h4>Other things we noticed</h4><ul>' +
+                issues.map(issue => '<li>' + issue + '</li>').join('') +
+                '</ul>';
+            issuesContainer.style.display = 'block';
+        }
+    }
+
     // Email capture submission
     async function submitQuizCapture(btnElement) {
         const captureDiv = btnElement.closest('.result-capture');
         const emailInput = captureDiv.querySelector('.result-capture__input');
         const newsletterCheckbox = captureDiv.querySelector('.capture-newsletter');
         const waitlistCheckbox = captureDiv.querySelector('.capture-waitlist');
+        const contactCheckbox = captureDiv.querySelector('.capture-contact');
         const resultType = captureDiv.getAttribute('data-result');
 
         const email = emailInput.value.trim();
@@ -1077,8 +1163,9 @@
         btnElement.textContent = 'Sending...';
         emailInput.style.borderColor = '';
 
-        const subscribeNewsletter = newsletterCheckbox.checked;
-        const joinWaitlist = waitlistCheckbox.checked;
+        const subscribeNewsletter = newsletterCheckbox ? newsletterCheckbox.checked : false;
+        const joinWaitlist = waitlistCheckbox ? waitlistCheckbox.checked : false;
+        const requestContact = contactCheckbox ? contactCheckbox.checked : false;
 
         try {
             const response = await fetch('/api/quiz-results', {
@@ -1094,6 +1181,7 @@
                     answerData: answerData,
                     subscribeNewsletter: subscribeNewsletter,
                     joinWaitlist: joinWaitlist,
+                    requestContact: requestContact,
                     source: 'quiz_results'
                 })
             });
@@ -1102,13 +1190,16 @@
 
             if (response.ok) {
                 // Track capture
-                va('event', { name: 'Quiz_Capture', data: { result: resultType, newsletter: subscribeNewsletter, waitlist: joinWaitlist } });
+                va('event', { name: 'Quiz_Capture', data: { result: resultType, newsletter: subscribeNewsletter, waitlist: joinWaitlist, contact: requestContact } });
 
                 // Show success
                 const formDiv = captureDiv.querySelector('.result-capture__form');
                 let message = 'Your results have been sent!';
                 if (subscribeNewsletter) {
                     message += ' You\'ve also earned 5,000 free credits.';
+                }
+                if (requestContact) {
+                    message += ' We\'ll reach out soon.';
                 }
                 formDiv.innerHTML = `<div class="result-capture__success">${message}</div>`;
             } else {

@@ -245,6 +245,83 @@
             padding: 10px 20px;
         }
 
+        /* Mobile Menu */
+        .header__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .header__mobile-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-white);
+            z-index: 200;
+            padding: var(--space-lg) var(--space-md);
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .mobile-nav__close {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .mobile-nav__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav__links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .mobile-nav__link {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--color-dark);
+            text-decoration: none;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .mobile-nav__cta {
+            margin-top: var(--space-lg);
+        }
+
         /* ========================================
            HERO
            ======================================== */
@@ -1204,8 +1281,13 @@
                 gap: var(--space-md);
             }
 
-            .header__link {
+            .header__link,
+            .header__cta {
                 display: none;
+            }
+
+            .header__mobile-toggle {
+                display: block;
             }
 
             .hero {
@@ -1262,9 +1344,33 @@
                 <a href="/pricing" class="header__link header__link--active">Pricing</a>
                 <a href="/sos-hotline" class="header__link">SOS Hotline</a>
                 <a href="https://anchor.reviewmyemails.com/" class="btn btn-primary header__cta">Get Answers</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
             </nav>
         </div>
     </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__header">
+            <a href="/" class="header__logo">
+                <img src="../svg/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="mobile-nav__links">
+            <a href="/pricing" class="mobile-nav__link">Pricing</a>
+            <a href="/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
+            <a href="/about" class="mobile-nav__link">About</a>
+            <a href="/partner" class="mobile-nav__link">Partner</a>
+        </div>
+        <div class="mobile-nav__cta">
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Answers</a>
+        </div>
+    </nav>
 
     <!-- ========================================
          HERO
@@ -1443,8 +1549,8 @@
                         <button type="button" class="waitlist-btn" id="waitlistBtn">Join Waitlist</button>
                     </div>
                     <label class="waitlist-checkbox" id="waitlistCheckboxLabel">
-                        <input type="checkbox" id="waitlistNewsletter" checked>
-                        <span>Send me occasional updates and tips for navigating the email seas</span>
+                        <input type="checkbox" id="waitlistNewsletter">
+                        <span>Also send me deliverability tips <span style="background: var(--color-light); color: var(--color-accent); font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; margin-left: 4px;">+5,000 free credits</span></span>
                     </label>
                     <p class="waitlist-success" id="waitlistSuccess" style="display: none;">You're on the list! We'll notify you when self-serve launches.</p>
                 </div>
@@ -1597,7 +1703,15 @@
                 <div class="cta-card">
                     <h3>Join the Waitlist</h3>
                     <p>Be first to access self-serve when it launches.</p>
-                    <a href="https://anchor.reviewmyemails.com" class="btn btn-secondary">Join Waitlist</a>
+                    <div class="waitlist-form" id="waitlistForm2">
+                        <input type="email" class="waitlist-input" id="waitlistEmail2" placeholder="your@email.com">
+                        <button type="button" class="waitlist-btn" id="waitlistBtn2">Join</button>
+                    </div>
+                    <label class="waitlist-checkbox" id="waitlistCheckboxLabel2">
+                        <input type="checkbox" id="waitlistNewsletter2">
+                        <span>Also send me tips <span style="background: var(--color-light); color: var(--color-accent); font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px;">+5,000 credits</span></span>
+                    </label>
+                    <p class="waitlist-success" id="waitlistSuccess2" style="display: none;">You're on the list!</p>
                 </div>
 
                 <div class="cta-card">
@@ -1790,6 +1904,83 @@
                     waitlistBtn.click();
                 }
             });
+        }
+
+        // Second waitlist form (bottom CTA section)
+        const waitlistBtn2 = document.getElementById('waitlistBtn2');
+        const waitlistEmail2 = document.getElementById('waitlistEmail2');
+        const waitlistForm2 = document.getElementById('waitlistForm2');
+        const waitlistSuccess2 = document.getElementById('waitlistSuccess2');
+        const waitlistNewsletter2 = document.getElementById('waitlistNewsletter2');
+        const waitlistCheckboxLabel2 = document.getElementById('waitlistCheckboxLabel2');
+
+        if (waitlistBtn2) {
+            waitlistBtn2.addEventListener('click', async function() {
+                const email = waitlistEmail2.value.trim();
+                const subscribeNewsletter = waitlistNewsletter2.checked;
+
+                if (!email || !email.includes('@')) {
+                    waitlistEmail2.style.borderColor = '#dc2626';
+                    return;
+                }
+
+                waitlistBtn2.disabled = true;
+                waitlistBtn2.textContent = 'Joining...';
+                waitlistEmail2.style.borderColor = '';
+
+                try {
+                    const response = await fetch('/api/waitlist', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email: email,
+                            subscribeNewsletter: subscribeNewsletter,
+                            source: 'pricing_waitlist_bottom'
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        waitlistForm2.style.display = 'none';
+                        waitlistCheckboxLabel2.style.display = 'none';
+                        if (data.alreadyExists) {
+                            waitlistSuccess2.textContent = "You're already on the list!";
+                        }
+                        waitlistSuccess2.style.display = 'block';
+
+                        va('event', { name: 'Waitlist_Joined', data: { source: 'pricing_page_bottom', newsletter: subscribeNewsletter } });
+                    } else {
+                        throw new Error(data.error || 'Failed to join');
+                    }
+                } catch (error) {
+                    console.error('Waitlist error:', error);
+                    waitlistBtn2.disabled = false;
+                    waitlistBtn2.textContent = 'Try Again';
+                    waitlistEmail2.style.borderColor = '#dc2626';
+                }
+            });
+
+            waitlistEmail2.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    waitlistBtn2.click();
+                }
+            });
+        }
+    </script>
+
+    <!-- Mobile Navigation -->
+    <script>
+        function openMobileNav() {
+            document.getElementById('mobileNav').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.body.style.overflow = '';
         }
     </script>
 
