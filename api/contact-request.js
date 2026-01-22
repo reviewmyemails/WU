@@ -17,7 +17,7 @@ async function getMongoClient() {
 }
 
 async function sendNotificationEmail(contactData) {
-  const { name, email, timezone, message, source, quizResult, quizAnswers } = contactData;
+  const { name, email, timezone, message, source, page, quizResult, quizAnswers } = contactData;
 
   let quizInfo = '';
   if (quizResult) {
@@ -33,7 +33,8 @@ New Contact Request
 Name: ${name}
 Email: ${email}
 Timezone: ${timezone || 'Not specified'}
-Source: ${source || 'website'}
+Page: ${page || 'unknown'}
+Button/Source: ${source || 'website'}
 
 Message:
 ${message || '(No message provided)'}
@@ -82,6 +83,7 @@ export default async function handler(req, res) {
       timezone,
       message,
       source,
+      page,
       quizResult,
       quizAnswers
     } = req.body;
@@ -108,6 +110,7 @@ export default async function handler(req, res) {
       timezone: timezone || null,
       message: message || null,
       source: source || 'website',
+      page: page || null,
       quizResult: quizResult || null,
       quizAnswers: quizAnswers || null,
       contacted: false,
@@ -125,6 +128,7 @@ export default async function handler(req, res) {
         timezone,
         message,
         source,
+        page,
         quizResult,
         quizAnswers
       });
