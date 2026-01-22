@@ -854,6 +854,157 @@
         }
 
         /* ========================================
+           CONTACT MODAL
+           ======================================== */
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--color-white);
+            border-radius: 12px;
+            max-width: 480px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal__header {
+            padding: var(--space-md) var(--space-md) 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .modal__title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-dark);
+        }
+
+        .modal__close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--color-muted);
+            transition: color 180ms ease;
+        }
+
+        .modal__close:hover {
+            color: var(--color-dark);
+        }
+
+        .modal__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .modal__body {
+            padding: var(--space-md);
+        }
+
+        .modal__subtitle {
+            font-size: 16px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-dark);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            font-family: var(--font);
+            font-size: 16px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            transition: border-color 180ms ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group small {
+            display: block;
+            font-size: 13px;
+            color: var(--color-muted);
+            margin-top: 4px;
+        }
+
+        .modal__footer {
+            padding: 0 var(--space-md) var(--space-md);
+        }
+
+        .modal__footer .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .form-success {
+            text-align: center;
+            padding: var(--space-lg) var(--space-md);
+        }
+
+        .form-success svg {
+            width: 64px;
+            height: 64px;
+            stroke: var(--color-accent);
+            stroke-width: 2;
+            fill: none;
+            margin-bottom: var(--space-md);
+        }
+
+        .form-success h3 {
+            font-size: 24px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-success p {
+            color: var(--color-muted);
+        }
+
+        /* ========================================
            RESPONSIVE
            ======================================== */
 
@@ -1261,6 +1412,73 @@
     </section>
 
     <!-- ========================================
+         CONTACT MODAL
+         ======================================== -->
+
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal">
+            <div class="modal__header">
+                <h3 class="modal__title">Get in Touch</h3>
+                <button class="modal__close" onclick="closeContactModal()" aria-label="Close">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal__body">
+                <p class="modal__subtitle">Tell us what you're working on. We'll get back to you within one business day.</p>
+                <form id="contactForm">
+                    <input type="hidden" id="contactSource" name="source" value="">
+                    <div class="form-group">
+                        <label for="contactName">Name *</label>
+                        <input type="text" id="contactName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email *</label>
+                        <input type="email" id="contactEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactTimezone">Timezone</label>
+                        <select id="contactTimezone" name="timezone">
+                            <option value="">Select your timezone (optional)</option>
+                            <option value="PT">Pacific Time (PT)</option>
+                            <option value="MT">Mountain Time (MT)</option>
+                            <option value="CT">Central Time (CT)</option>
+                            <option value="ET">Eastern Time (ET)</option>
+                            <option value="GMT">GMT / UTC</option>
+                            <option value="CET">Central European Time (CET)</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" name="message" placeholder="What can we help you with?"></textarea>
+                        <small>Optional - but helps us prepare for the conversation.</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button type="submit" form="contactForm" class="btn btn-primary">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Success Modal -->
+    <div class="modal-overlay" id="contactSuccessModal">
+        <div class="modal">
+            <div class="modal__header">
+                <span></span>
+                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="form-success">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                <h3>Message Sent!</h3>
+                <p>We'll get back to you within one business day.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
          FOOTER
          ======================================== -->
 
@@ -1285,7 +1503,7 @@
 
             <div class="footer__column">
                 <h4>Contact</h4>
-                <a href="mailto:ahoy@reviewmyemails.com">ahoy@reviewmyemails.com</a>
+                <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
             </div>
 
             <div class="footer__bottom">
@@ -1319,6 +1537,79 @@
                     va('event', { name: 'CTA_Clicked', data: { label: label, destination: destination, page: 'homepage' } });
                 });
             });
+        });
+    </script>
+
+    <!-- Contact Modal -->
+    <script>
+        function openContactModal(source) {
+            document.getElementById('contactSource').value = source || 'homepage';
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+            document.getElementById('contactForm').reset();
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('contactSuccessModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) closeContactModal();
+        });
+        document.getElementById('contactSuccessModal').addEventListener('click', function(e) {
+            if (e.target === this) closeSuccessModal();
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.querySelector('.modal__footer .btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            const formData = {
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                timezone: document.getElementById('contactTimezone').value,
+                message: document.getElementById('contactMessage').value,
+                source: document.getElementById('contactSource').value,
+                page: 'homepage'
+            };
+
+            try {
+                const response = await fetch('/api/contact-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    closeContactModal();
+                    document.getElementById('contactSuccessModal').classList.add('active');
+                    document.body.style.overflow = 'hidden';
+
+                    // Track submission
+                    if (window.va) {
+                        va('event', { name: 'Contact_Form_Submitted', data: { source: formData.source, page: 'homepage' } });
+                    }
+                } else {
+                    throw new Error('Failed to submit');
+                }
+            } catch (error) {
+                alert('Something went wrong. Please try again or email us directly at ahoy@reviewmyemails.com');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
     </script>
 
