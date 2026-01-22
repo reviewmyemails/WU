@@ -2367,7 +2367,10 @@
                 if (template.logo) {
                     state.logo = { ...state.logo, ...template.logo };
                 } else {
-                    state.logo.visible = false; // Templates don't show logo by default
+                    // Explicitly hide logo when loading templates that don't define logo settings
+                    state.logo.visible = false;
+                    state.logo.x = 8;
+                    state.logo.y = 8;
                 }
 
                 // Load gradient from template
@@ -3244,7 +3247,9 @@
             const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
             const badgeX = d.badgeX ?? 8;
             const badgeY = d.badgeY ?? 8;
-            const contentY = d.contentY ?? 8;
+            // Auto-adjust contentY when badge is present and no explicit contentY is set
+            const defaultContentY = d.badge ? 18 : 8;
+            const contentY = d.contentY ?? defaultContentY;
             const ctaY = d.ctaY ?? 85;
 
             return `
@@ -3284,7 +3289,9 @@
             const items = d.items || [];
             const badgeX = d.badgeX ?? 8;
             const badgeY = d.badgeY ?? 8;
-            const contentY = d.contentY ?? 8;
+            // Auto-adjust contentY when badge is present and no explicit contentY is set
+            const defaultContentY = d.badge ? 18 : 8;
+            const contentY = d.contentY ?? defaultContentY;
             const ctaY = d.ctaY ?? 85;
 
             return `
