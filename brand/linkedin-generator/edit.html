@@ -2960,6 +2960,11 @@
                             <div class="input-hint">Start with + for green check, - for red X</div>
                         </div>
                         <div class="control-group">
+                            <label class="control-label">Body Text (optional)</label>
+                            ${getTextColorPickerHTML('inputBody')}
+                            <textarea class="input-textarea" id="inputBody" placeholder="Additional text below items">${state.data.body || ''}</textarea>
+                        </div>
+                        <div class="control-group">
                             <label class="control-label">CTA Button (optional)</label>
                             <input type="text" class="input-text" id="inputCta" value="${state.data.cta || ''}" placeholder="e.g., Download Guide">
                         </div>
@@ -3123,6 +3128,7 @@
                     state.data.badge = document.getElementById('inputBadge')?.value || null;
                     state.data.label = document.getElementById('inputLabel')?.value || '';
                     state.data.headline = document.getElementById('inputHeadline')?.value || '';
+                    state.data.body = document.getElementById('inputBody')?.value || '';
                     state.data.cta = document.getElementById('inputCta')?.value || null;
 
                     const itemsText = document.getElementById('inputItems')?.value || '';
