@@ -448,6 +448,48 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
+        /* Pattern Grid */
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .pattern-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            position: relative;
+            background: var(--color-dark);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pattern-item:hover { transform: scale(1.02); }
+        .pattern-item.selected {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3);
+        }
+        .pattern-item svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.25;
+        }
+        .pattern-item span {
+            position: relative;
+            z-index: 1;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            padding: 4px;
+        }
+
         /* Layer List */
         .layer-list {
             display: flex;
@@ -1199,6 +1241,38 @@
                     <div class="control-group">
                         <label class="control-label">Gradient Presets</label>
                         <div class="gradient-grid" id="gradientPresets"></div>
+                    </div>
+                </div>
+
+                <!-- Patterns -->
+                <div class="control-section">
+                    <h3>Decorative Pattern</h3>
+                    <div class="control-group">
+                        <label class="control-label">Pattern Type</label>
+                        <div class="pattern-grid" id="patternGrid">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div id="patternControls" style="display: none;">
+                        <div class="control-group">
+                            <label class="control-label">Opacity</label>
+                            <div class="slider-row">
+                                <span class="slider-label">5</span>
+                                <input type="range" class="slider" id="patternOpacity" min="5" max="40" value="15">
+                                <span class="slider-label">40</span>
+                                <span class="slider-value" id="patternOpacityValue">15%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Position</label>
+                            <select class="input-select" id="patternPosition" style="width: 100%; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: white;">
+                                <option value="all">All Corners</option>
+                                <option value="bottom-left">Bottom Left</option>
+                                <option value="bottom-right">Bottom Right</option>
+                                <option value="top-left">Top Left</option>
+                                <option value="top-right">Top Right</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
@@ -1982,9 +2056,10 @@
                 flipV: false
             },
             gradient: null,
+            pattern: null, // { type: 'tentacles', opacity: 15, position: 'all' }
             data: {},
             // Layer order (bottom to top): lower index = rendered first (behind)
-            layers: ['background', 'gradient', 'content', 'character', 'logo']
+            layers: ['background', 'gradient', 'pattern', 'content', 'character', 'logo']
         };
 
         // ========================================
@@ -2012,6 +2087,7 @@
                 initBackgroundFlip();
                 initGradientOpacitySlider();
                 initGradientPresets();
+                initPatternGrid();
                 initFormatListeners();
                 initThemeListeners();
                 initLogoSliders();
@@ -2287,11 +2363,61 @@
                 state.theme = template.theme;
                 state.data = { ...template.data };
 
+                // Load logo settings from template (default: hidden for templates)
+                if (template.logo) {
+                    state.logo = { ...state.logo, ...template.logo };
+                } else {
+                    state.logo.visible = false; // Templates don't show logo by default
+                }
+
+                // Load gradient from template
+                if (template.gradient) {
+                    state.gradient = { ...template.gradient };
+                } else {
+                    state.gradient = null;
+                }
+
+                // Load character from template
+                if (template.character) {
+                    state.character = { ...state.character, ...template.character };
+                } else {
+                    state.character.visible = false;
+                    state.character.file = null;
+                }
+
+                // Load background from template
+                if (template.background) {
+                    state.background = { ...state.background, ...template.background };
+                }
+
+                // Load pattern from template
+                if (template.pattern) {
+                    state.pattern = { ...template.pattern };
+                } else {
+                    state.pattern = null;
+                }
+
                 // Update UI
                 document.querySelectorAll('.format-item').forEach(i =>
                     i.classList.toggle('selected', i.dataset.format === state.format));
                 document.querySelectorAll('.theme-item').forEach(i =>
                     i.classList.toggle('selected', i.dataset.theme === state.theme));
+
+                // Update logo toggle
+                const logoToggle = document.getElementById('logoVisible');
+                const logoControls = document.getElementById('logoControls');
+                if (logoToggle) {
+                    logoToggle.checked = state.logo.visible;
+                    logoControls.style.display = state.logo.visible ? 'block' : 'none';
+                }
+
+                // Update character toggle
+                const charToggle = document.getElementById('characterVisible');
+                const charControls = document.getElementById('characterControls');
+                if (charToggle) {
+                    charToggle.checked = state.character.visible;
+                    charControls.style.display = state.character.visible ? 'block' : 'none';
+                }
             } else {
                 // Default template
                 state.templateType = 'statement';
@@ -2359,6 +2485,227 @@
             });
         }
 
+        const PATTERNS = [
+            { id: 'none', name: 'None' },
+            { id: 'tentacles', name: 'Tentacles' },
+            { id: 'waves', name: 'Waves' },
+            { id: 'bubbles', name: 'Bubbles' },
+            { id: 'flourish', name: 'Flourishes' }
+        ];
+
+        function initPatternGrid() {
+            const grid = document.getElementById('patternGrid');
+            grid.innerHTML = PATTERNS.map(p => `
+                <div class="pattern-item ${(!state.pattern && p.id === 'none') || (state.pattern?.type === p.id) ? 'selected' : ''}" data-pattern="${p.id}">
+                    ${getPatternPreviewSVG(p.id)}
+                    <span>${p.name}</span>
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.pattern-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.pattern-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    const patternId = item.dataset.pattern;
+                    if (patternId === 'none') {
+                        state.pattern = null;
+                        document.getElementById('patternControls').style.display = 'none';
+                    } else {
+                        state.pattern = {
+                            type: patternId,
+                            opacity: state.pattern?.opacity || 15,
+                            position: state.pattern?.position || 'all'
+                        };
+                        document.getElementById('patternControls').style.display = 'block';
+                    }
+                    renderPreview();
+                });
+            });
+
+            // Pattern controls
+            document.getElementById('patternOpacity').addEventListener('input', (e) => {
+                if (state.pattern) {
+                    state.pattern.opacity = parseInt(e.target.value);
+                    document.getElementById('patternOpacityValue').textContent = e.target.value + '%';
+                    renderPreview();
+                }
+            });
+
+            document.getElementById('patternPosition').addEventListener('change', (e) => {
+                if (state.pattern) {
+                    state.pattern.position = e.target.value;
+                    renderPreview();
+                }
+            });
+        }
+
+        function getPatternPreviewSVG(type) {
+            switch(type) {
+                case 'tentacles':
+                    return `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M-5,100 Q10,70 5,40 Q0,20 15,5" stroke="#0d9488" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <path d="M105,100 Q90,70 95,40 Q100,20 85,5" stroke="#0d9488" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>
+                    </svg>`;
+                case 'waves':
+                    return `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M-10,85 Q10,80 30,85 T70,85 T110,85" stroke="#0d9488" stroke-width="2" fill="none"/>
+                        <path d="M-10,92 Q15,87 35,92 T75,92 T115,92" stroke="#0d9488" stroke-width="2" fill="none" opacity="0.7"/>
+                    </svg>`;
+                case 'bubbles':
+                    return `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <circle cx="20" cy="80" r="10" fill="none" stroke="#0d9488" stroke-width="2"/>
+                        <circle cx="35" cy="60" r="6" fill="none" stroke="#0d9488" stroke-width="2" opacity="0.7"/>
+                        <circle cx="80" cy="25" r="8" fill="none" stroke="#0d9488" stroke-width="2"/>
+                    </svg>`;
+                case 'flourish':
+                    return `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M0,20 Q10,5 25,10 Q35,15 30,25" stroke="#0d9488" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        <path d="M100,80 Q90,95 75,90 Q65,85 70,75" stroke="#0d9488" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </svg>`;
+                default:
+                    return '';
+            }
+        }
+
+        function generatePatternSVG(type, opacity, position) {
+            const color = '#0d9488';
+            const op = opacity / 100;
+
+            switch(type) {
+                case 'tentacles':
+                    return generateTentaclesPattern(color, op, position);
+                case 'waves':
+                    return generateWavesPattern(color, op, position);
+                case 'bubbles':
+                    return generateBubblesPattern(color, op, position);
+                case 'flourish':
+                    return generateFlourishPattern(color, op, position);
+                default:
+                    return '';
+            }
+        }
+
+        function generateTentaclesPattern(color, opacity, position) {
+            const paths = {
+                'all': [
+                    `<path d="M-5,100 Q10,70 5,40 Q0,20 15,5" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M105,100 Q90,70 95,40 Q100,20 85,5" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.8}" stroke-linecap="round"/>`,
+                    `<path d="M-5,0 Q15,30 10,60 Q5,80 20,100" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.6}" stroke-linecap="round"/>`,
+                    `<path d="M105,0 Q85,30 90,60 Q95,80 80,100" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.4}" stroke-linecap="round"/>`
+                ],
+                'bottom-left': [
+                    `<path d="M-5,105 Q15,75 10,50 Q5,30 25,15" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M10,105 Q25,80 20,60 Q15,45 30,35" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'bottom-right': [
+                    `<path d="M105,105 Q85,75 90,50 Q95,30 75,15" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M90,105 Q75,80 80,60 Q85,45 70,35" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'top-left': [
+                    `<path d="M-5,-5 Q15,25 10,50 Q5,70 25,85" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M10,-5 Q25,20 20,40 Q15,55 30,65" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'top-right': [
+                    `<path d="M105,-5 Q85,25 90,50 Q95,70 75,85" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M90,-5 Q75,20 80,40 Q85,55 70,65" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ]
+            };
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${(paths[position] || paths['all']).join('')}</svg>`;
+        }
+
+        function generateWavesPattern(color, opacity, position) {
+            const paths = {
+                'all': [
+                    `<path d="M-10,90 Q10,85 30,90 T70,90 T110,90" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M-10,93 Q15,88 35,93 T75,93 T115,93" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`,
+                    `<path d="M-10,96 Q20,91 40,96 T80,96 T120,96" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}"/>`,
+                    `<path d="M-10,10 Q10,5 30,10 T70,10 T110,10" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.55}"/>`,
+                    `<path d="M-10,7 Q15,2 35,7 T75,7 T115,7" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.4}"/>`
+                ],
+                'bottom-left': [
+                    `<path d="M-10,85 Q10,75 30,85 T60,80" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M-10,90 Q15,82 35,90 T55,87" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`,
+                    `<path d="M-10,95 Q10,88 25,95 T50,92" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}"/>`
+                ],
+                'bottom-right': [
+                    `<path d="M40,80 Q60,75 80,85 T110,85" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M45,87 Q65,82 85,90 T110,90" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`,
+                    `<path d="M50,92 Q70,88 90,95 T110,95" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}"/>`
+                ],
+                'top-left': [
+                    `<path d="M-10,15 Q10,5 30,15 T60,10" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M-10,10 Q15,2 35,10 T55,7" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`
+                ],
+                'top-right': [
+                    `<path d="M40,10 Q60,5 80,15 T110,15" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M45,7 Q65,2 85,10 T110,10" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`
+                ]
+            };
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${(paths[position] || paths['all']).join('')}</svg>`;
+        }
+
+        function generateBubblesPattern(color, opacity, position) {
+            const circles = {
+                'all': [
+                    `<circle cx="15" cy="85" r="8" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="25" cy="70" r="5" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="10" cy="60" r="3" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`,
+                    `<circle cx="85" cy="15" r="6" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="75" cy="25" r="4" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="90" cy="30" r="2.5" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ],
+                'bottom-left': [
+                    `<circle cx="15" cy="85" r="10" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="30" cy="70" r="6" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="10" cy="65" r="4" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ],
+                'bottom-right': [
+                    `<circle cx="85" cy="85" r="10" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="70" cy="70" r="6" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="90" cy="65" r="4" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ],
+                'top-left': [
+                    `<circle cx="15" cy="15" r="8" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="30" cy="25" r="5" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="10" cy="30" r="3" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ],
+                'top-right': [
+                    `<circle cx="85" cy="15" r="8" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="70" cy="25" r="5" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="90" cy="30" r="3" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ]
+            };
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${(circles[position] || circles['all']).join('')}</svg>`;
+        }
+
+        function generateFlourishPattern(color, opacity, position) {
+            const paths = {
+                'all': [
+                    `<path d="M0,15 Q5,5 15,5 Q25,5 25,15 Q25,25 15,25" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M15,0 Q5,5 5,15 Q5,25 15,25 Q25,25 25,15" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`,
+                    `<path d="M100,85 Q95,95 85,95 Q75,95 75,85 Q75,75 85,75" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M85,100 Q95,95 95,85 Q95,75 85,75 Q75,75 75,85" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'bottom-left': [
+                    `<path d="M0,85 Q5,95 15,95 Q25,95 25,85 Q25,75 15,75" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M15,100 Q5,95 5,85 Q5,75 15,75 Q25,75 25,85" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'bottom-right': [
+                    `<path d="M100,85 Q95,95 85,95 Q75,95 75,85 Q75,75 85,75" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M85,100 Q95,95 95,85 Q95,75 85,75 Q75,75 75,85" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'top-left': [
+                    `<path d="M0,15 Q5,5 15,5 Q25,5 25,15 Q25,25 15,25" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M15,0 Q5,5 5,15 Q5,25 15,25 Q25,25 25,15" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'top-right': [
+                    `<path d="M100,15 Q95,5 85,5 Q75,5 75,15 Q75,25 85,25" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M85,0 Q95,5 95,15 Q95,25 85,25 Q75,25 75,15" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ]
+            };
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${(paths[position] || paths['all']).join('')}</svg>`;
+        }
+
         function initFormatListeners() {
             document.querySelectorAll('.format-item').forEach(item => {
                 item.addEventListener('click', () => {
@@ -2392,6 +2739,7 @@
             const layerNames = {
                 'background': 'Background Image',
                 'gradient': 'Gradient/Color',
+                'pattern': 'Pattern',
                 'content': 'Text Content',
                 'character': 'Character',
                 'logo': 'Logo'
@@ -2834,6 +3182,13 @@
                     if (state.gradient && state.background.image) {
                         const gradientOverlay = `linear-gradient(135deg, rgba(${hexToRgb(state.gradient.start)}, ${state.background.gradientOpacity / 100}), rgba(${hexToRgb(state.gradient.end)}, ${state.background.gradientOpacity / 100}))`;
                         return `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: ${gradientOverlay}; z-index: ${zIndex};"></div>`;
+                    }
+                    return '';
+
+                case 'pattern':
+                    if (state.pattern && state.pattern.type && state.pattern.type !== 'none') {
+                        const patternSVG = generatePatternSVG(state.pattern.type, state.pattern.opacity, state.pattern.position);
+                        return `<div class="pattern-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${zIndex}; pointer-events: none;">${patternSVG}</div>`;
                     }
                     return '';
 
