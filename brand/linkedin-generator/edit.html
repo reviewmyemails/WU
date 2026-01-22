@@ -1430,10 +1430,9 @@
                 data: {
                     badge: 'Pro Tip',
                     badgeColor: 'accent',
-                    brand: 'REVIEW MY EMAILS',
-                    headline: 'The "Restraint"\nStrategy.',
-                    body: 'When inbox placement weakens, pushing harder rarely fixes it.',
-                    cta: null
+                    headline: 'Clean your list every 90 days.',
+                    body: 'Stale data is the #1 killer of sender reputation.',
+                    cta: 'Learn More'
                 }
             },
             'stat-focus-sq': {
@@ -1490,6 +1489,107 @@
                     attribution: 'Without it, your offers are invisible.',
                     author: 'Review My Emails',
                     authorTitle: 'Deliverability Experts'
+                }
+            },
+            // Portrait templates
+            'do-dont-pt': {
+                type: 'checklist',
+                format: 'portrait',
+                theme: 'white',
+                data: {
+                    headline: 'Email Warm-up',
+                    items: [
+                        { text: 'Start with engaged subscribers', status: 'good' },
+                        { text: 'Gradually increase volume', status: 'good' },
+                        { text: 'Monitor metrics daily', status: 'good' },
+                        { text: 'Blast your entire list', status: 'bad' },
+                        { text: 'Ignore bounce rates', status: 'bad' },
+                        { text: 'Skip authentication', status: 'bad' }
+                    ],
+                    cta: null
+                }
+            },
+            'step-process-pt': {
+                type: 'statement',
+                format: 'portrait',
+                theme: 'dark',
+                data: {
+                    badge: 'How To',
+                    badgeColor: 'accent',
+                    headline: '3 Steps to Better Deliverability',
+                    body: '01. Audit - Check your current reputation\n02. Clean - Remove invalid addresses\n03. Monitor - Track ongoing metrics',
+                    cta: null
+                }
+            },
+            'qa-format-pt': {
+                type: 'statement',
+                format: 'portrait',
+                theme: 'accent',
+                data: {
+                    brand: 'Q&A TUESDAY',
+                    headline: '"How often should I clean my list?"',
+                    body: 'Ideally, every quarter. Or immediately if your bounce rate hits 2%.',
+                    cta: 'Have a question? DM us.'
+                }
+            },
+            'feature-highlight-sq': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'New Feature',
+                    badgeColor: 'secondary',
+                    headline: 'Real-time Verification API',
+                    body: 'Stop bad emails at the signup form.',
+                    cta: 'View Documentation'
+                }
+            },
+            // Wide templates
+            'value-prop-wd': {
+                type: 'statement',
+                format: 'wide',
+                theme: 'dark',
+                data: {
+                    headline: 'Protect Your Sender Reputation',
+                    body: 'Real-time monitoring. Instant alerts. Expert guidance.',
+                    cta: 'Start Free Trial'
+                }
+            },
+            'social-proof-wd': {
+                type: 'stat',
+                format: 'wide',
+                theme: 'light',
+                data: {
+                    label: 'TRUSTED BY MARKETERS',
+                    stat: '10K+',
+                    statLabel: 'Domains Monitored',
+                    description: '99.2% Inbox Placement • 24/7 Real-time Alerts',
+                    cta: 'Join Them'
+                }
+            },
+            'blog-header-wd': {
+                type: 'statement',
+                format: 'wide',
+                theme: 'accent',
+                data: {
+                    badge: 'Guide',
+                    badgeColor: 'secondary',
+                    headline: 'The Complete Email Deliverability Playbook',
+                    body: 'Everything you need to reach the inbox',
+                    cta: null
+                }
+            },
+            'result-highlight-wd': {
+                type: 'stat',
+                format: 'wide',
+                theme: 'white',
+                data: {
+                    badge: 'Case Study',
+                    badgeColor: 'accent',
+                    label: 'INBOX PLACEMENT RATE',
+                    stat: '45% → 98%',
+                    statLabel: 'Before → After',
+                    cta: 'See How'
                 }
             },
 
@@ -1884,6 +1984,15 @@
                 data: {
                     headline: 'Protect the list\nthat pays.',
                     emoji: '💰',
+                    cta: null
+                }
+            },
+            'w3-daniel-throttle': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    headline: 'Throttle now.\n[teal:Or throttle later under worse terms.]',
                     cta: null
                 }
             },
