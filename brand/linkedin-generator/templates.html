@@ -439,19 +439,19 @@
             {
                 id: 'risk-alert-sq',
                 name: 'Risk Alert',
-                category: 'statement',
+                category: 'checklist',
                 format: 'square',
                 theme: 'white',
-                accent: 'danger',
                 data: {
                     badge: 'Alert',
+                    badgeColor: 'danger',
                     headline: 'Is your domain blacklisted?',
-                    checklist: [
+                    items: [
                         { text: 'Emails going to spam', status: 'bad' },
                         { text: 'Open rates dropping', status: 'bad' },
                         { text: 'Providers blocking you', status: 'bad' }
                     ],
-                    footer: 'Check your status instantly at reviewmyemails.com'
+                    body: 'Check your status instantly at reviewmyemails.com'
                 }
             },
             {
@@ -1326,22 +1326,6 @@
                         </div>
                     `;
 
-                case 'risk-alert-sq':
-                    return `
-                        <div class="template-content ${bgClass}" style="border-top: 4px solid var(--color-danger);">
-                            <div class="c-badge" style="background:#fee2e2; color:var(--color-danger);">${d.badge}</div>
-                            <div style="margin-top:auto; margin-bottom:auto;">
-                                <div class="t-h1">Is your domain <span class="text-danger">blacklisted?</span></div>
-                                <div class="c-list">
-                                    ${d.checklist.map(item => `
-                                        <div class="c-item"><span class="text-danger">✖</span> ${item.text}</div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                            <div class="t-p-small" style="color:var(--color-muted);">${d.footer}</div>
-                        </div>
-                    `;
-
                 case 'minimal-tip-sq':
                     return `
                         <div class="template-content ${bgClass}" style="text-align:center;">
@@ -1505,7 +1489,7 @@
 
         function renderGenericPreview(template, bgClass, d) {
             // Handle different template types generically
-            // Uses absolute positioning to match the editor layout
+            // Uses flexbox layout that fits within the preview container
             const type = template.category;
 
             // Parse rich text [color:text] syntax for preview
@@ -1536,23 +1520,18 @@
                 return colors[colorId] || colors['accent'];
             }
 
-            // Calculate content position based on whether badge exists
-            const badgeY = 8;
-            const contentY = d.badge ? 18 : 8;
-            const ctaY = 85;
-
             if (type === 'statement') {
                 const badgeStyle = getBadgeStyle(d.badgeColor);
 
                 return `
-                    <div class="template-content ${bgClass}" style="position:relative;">
-                        ${d.badge ? `<div class="c-badge" style="${badgeStyle} position:absolute; left:8%; top:${badgeY}%;">${d.badge}</div>` : ''}
-                        <div style="position:absolute; top:${contentY}%; left:8%; right:8%;">
-                            ${d.brand ? `<div class="t-brand">${d.brand}</div>` : ''}
+                    <div class="template-content ${bgClass}">
+                        ${d.badge ? `<div class="c-badge" style="${badgeStyle}">${d.badge}</div>` : ''}
+                        ${d.brand ? `<div class="t-brand">${d.brand}</div>` : ''}
+                        <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
                             ${d.headline ? `<div class="t-h1">${parseRichText(d.headline)}</div>` : ''}
                             ${d.body ? `<div class="t-p">${parseRichText(d.body)}</div>` : ''}
                         </div>
-                        ${d.cta ? `<div class="c-btn-preview" style="background:var(--color-accent); color:white; position:absolute; left:8%; top:${ctaY}%;">${d.cta}</div>` : ''}
+                        ${d.cta ? `<div class="c-btn-preview" style="background:var(--color-accent); color:white;">${d.cta}</div>` : ''}
                     </div>
                 `;
             }
@@ -1561,10 +1540,10 @@
                 const items = d.items || [];
                 const badgeStyle = getBadgeStyle(d.badgeColor);
                 return `
-                    <div class="template-content ${bgClass}" style="position:relative;">
-                        ${d.badge ? `<div class="c-badge" style="${badgeStyle} position:absolute; left:8%; top:${badgeY}%;">${d.badge}</div>` : ''}
-                        <div style="position:absolute; top:${contentY}%; left:8%; right:8%;">
-                            ${d.label ? `<div class="t-brand" style="color:var(--color-muted);">${d.label}</div>` : ''}
+                    <div class="template-content ${bgClass}">
+                        ${d.badge ? `<div class="c-badge" style="${badgeStyle}">${d.badge}</div>` : ''}
+                        ${d.label ? `<div class="t-brand" style="color:var(--color-muted);">${d.label}</div>` : ''}
+                        <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
                             ${d.headline ? `<div class="t-h1">${parseRichText(d.headline)}</div>` : ''}
                             <div class="c-list">
                                 ${items.map(item => `
@@ -1576,43 +1555,40 @@
                                     </div>
                                 `).join('')}
                             </div>
+                            ${d.body ? `<div class="t-p" style="margin-top:12px; color:var(--color-muted);">${parseRichText(d.body)}</div>` : ''}
                         </div>
-                        ${d.cta ? `<div class="c-btn-preview" style="background:var(--color-dark); color:white; position:absolute; left:8%; top:${ctaY}%;">${d.cta}</div>` : ''}
+                        ${d.cta ? `<div class="c-btn-preview" style="background:var(--color-dark); color:white;">${d.cta}</div>` : ''}
                     </div>
                 `;
             }
 
             if (type === 'quote') {
                 return `
-                    <div class="template-content ${bgClass}" style="position:relative; text-align:center;">
-                        <div style="position:absolute; top:8%; left:8%; right:8%;">
-                            ${d.emoji ? `<div style="font-size:2rem; margin-bottom:8px;">${d.emoji}</div>` : `<div style="color:rgba(255,255,255,0.3); font-size:2.5rem; line-height:1;">"</div>`}
-                            <div class="t-h1" style="font-weight:500; font-style:italic;">${d.quote || ''}</div>
-                            <div style="width:30px; height:2px; background:var(--color-accent); margin:16px auto;"></div>
-                            ${d.attribution ? `<div class="t-p-small">${d.attribution}</div>` : ''}
-                            ${d.author ? `
-                                <div style="background:rgba(255,255,255,0.1); padding:8px; border-radius:6px; margin-top:12px;">
-                                    <div style="font-weight:700; font-size:0.75rem;">${d.author}</div>
-                                    ${d.authorTitle ? `<div style="font-size:0.65rem; opacity:0.7;">${d.authorTitle}</div>` : ''}
-                                </div>
-                            ` : ''}
-                        </div>
+                    <div class="template-content ${bgClass}" style="text-align:center; justify-content:center;">
+                        ${d.emoji ? `<div style="font-size:2rem; margin-bottom:8px;">${d.emoji}</div>` : `<div style="color:rgba(255,255,255,0.3); font-size:2.5rem; line-height:1;">"</div>`}
+                        <div class="t-h1" style="font-weight:500; font-style:italic;">${d.quote || ''}</div>
+                        <div style="width:30px; height:2px; background:var(--color-accent); margin:16px auto;"></div>
+                        ${d.attribution ? `<div class="t-p-small">${d.attribution}</div>` : ''}
+                        ${d.author ? `
+                            <div style="background:rgba(255,255,255,0.1); padding:8px; border-radius:6px; margin-top:12px;">
+                                <div style="font-weight:700; font-size:0.75rem;">${d.author}</div>
+                                ${d.authorTitle ? `<div style="font-size:0.65rem; opacity:0.7;">${d.authorTitle}</div>` : ''}
+                            </div>
+                        ` : ''}
                     </div>
                 `;
             }
 
             if (type === 'stat') {
                 return `
-                    <div class="template-content ${bgClass}" style="position:relative;">
-                        <div style="position:absolute; top:8%; left:8%; right:8%;">
-                            ${d.label ? `<div class="t-brand" style="color:white;">${d.label}</div>` : ''}
-                            <div class="c-stat-box">
-                                <div class="t-h1-stat">${d.stat || ''}</div>
-                                <div class="t-p-small" style="margin-top:8px;">${d.statLabel || ''}</div>
-                            </div>
-                            ${d.description ? `<div class="t-p" style="text-align:center; margin-top:16px;">${d.description}</div>` : ''}
-                            ${d.source ? `<div class="t-p-small" style="text-align:center; margin-top:12px;">${d.source}</div>` : ''}
+                    <div class="template-content ${bgClass}" style="justify-content:center;">
+                        ${d.label ? `<div class="t-brand" style="color:white;">${d.label}</div>` : ''}
+                        <div class="c-stat-box">
+                            <div class="t-h1-stat">${d.stat || ''}</div>
+                            <div class="t-p-small" style="margin-top:8px;">${d.statLabel || ''}</div>
                         </div>
+                        ${d.description ? `<div class="t-p" style="text-align:center; margin-top:16px;">${d.description}</div>` : ''}
+                        ${d.source ? `<div class="t-p-small" style="text-align:center; margin-top:12px;">${d.source}</div>` : ''}
                     </div>
                 `;
             }
