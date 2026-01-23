@@ -50,7 +50,7 @@
         :root {
             --rme-primary: #0d9488;
             --rme-text-dark: #134e4a;
-            --rme-bg-light: #f0fdfa;
+            --rme-bg-light: #e6f7f3;
             --rme-green: #10b981;
         }
 
@@ -124,6 +124,77 @@
                 display: block;
             }
         }
+
+        /* Mobile nav overlay */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            z-index: 200;
+            padding: 24px;
+            flex-direction: column;
+        }
+        .mobile-nav.active {
+            display: flex;
+        }
+        .mobile-nav__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+        .mobile-nav__header img {
+            height: 40px;
+        }
+        .mobile-nav__close {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--rme-text-dark);
+        }
+        .mobile-nav__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+        .mobile-nav__links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .mobile-nav__link {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--rme-text-dark);
+            text-decoration: none;
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .mobile-nav__link.active {
+            color: var(--rme-primary);
+            font-weight: 600;
+        }
+        .mobile-nav__cta {
+            margin-top: 32px;
+        }
+        .mobile-nav__cta a {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background: var(--rme-primary);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+        }
     </style>
     <!-- Analytics -->
     <!-- Google Analytics 4 -->
@@ -162,9 +233,31 @@
                 <a href="https://reviewmyemails.com/about">About</a>
                 <a href="index.html">Purchase</a>
             </div>
-            <button class="nav__mobile-toggle" onclick="alert('Mobile menu coming soon')">
+            <button class="nav__mobile-toggle" onclick="openMobileNav()">
                 <i class="fas fa-bars text-xl text-rme-text-dark"></i>
             </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__header">
+            <a href="https://reviewmyemails.com">
+                <img src="https://reviewmyemails.com/svg/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="mobile-nav__links">
+            <a href="https://reviewmyemails.com/pricing" class="mobile-nav__link">Pricing</a>
+            <a href="https://reviewmyemails.com/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
+            <a href="https://reviewmyemails.com/about" class="mobile-nav__link">About</a>
+            <a href="index.html" class="mobile-nav__link">Purchase</a>
+            <a href="security-page.html" class="mobile-nav__link active">Security</a>
+        </div>
+        <div class="mobile-nav__cta">
+            <a href="https://reviewmyemails.com">Back to Main Site</a>
         </div>
     </nav>
 
@@ -593,5 +686,16 @@
         </div>
     </footer>
 
+    <script>
+        function openMobileNav() {
+            document.getElementById('mobileNav').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    </script>
 </body>
 </html>

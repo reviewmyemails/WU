@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color Comparison | Review My Emails</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-white: #fafcfc;
+            --color-muted: #64748b;
+            --color-border: #e2e8f0;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background: var(--color-white);
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Page header */
+        .page-header {
+            padding: 60px 0 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: var(--color-muted);
+            font-size: 16px;
+        }
+
+        /* Option sections */
+        .option-section {
+            padding: 60px 0;
+            border-bottom: 3px solid var(--color-dark);
+        }
+
+        .option-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .option-header h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .option-header p {
+            color: var(--color-muted);
+            font-size: 15px;
+        }
+
+        .option-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--color-dark);
+            color: white;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* Demo sections */
+        .demo-wrapper {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .demo-section {
+            padding: 60px 40px;
+        }
+
+        .demo-section h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .demo-section p {
+            color: var(--color-muted);
+            max-width: 500px;
+        }
+
+        .demo-list {
+            list-style: none;
+            margin-top: 24px;
+        }
+
+        .demo-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--color-border);
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .demo-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 18px;
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        .demo-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* ========================================
+           OPTION A: Neutral Gray
+           ======================================== */
+        .bg-gray-light {
+            background: #f8fafc;
+        }
+
+        .bg-gray-medium {
+            background: #f1f5f9;
+        }
+
+        /* ========================================
+           OPTION B: Subtle Gradient
+           ======================================== */
+        .bg-gradient-light {
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .bg-gradient-medium {
+            background: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+        }
+
+        /* ========================================
+           OPTION C: White with Borders
+           ======================================== */
+        .bg-white-bordered {
+            background: #ffffff;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .bg-white-bordered-alt {
+            background: #ffffff;
+            position: relative;
+        }
+
+        .bg-white-bordered-alt::before,
+        .bg-white-bordered-alt::after {
+            content: "";
+            position: absolute;
+            left: 40px;
+            right: 40px;
+            height: 1px;
+            background: var(--color-border);
+        }
+
+        .bg-white-bordered-alt::before {
+            top: 0;
+        }
+
+        .bg-white-bordered-alt::after {
+            bottom: 0;
+        }
+
+        /* ========================================
+           OPTION D: Current Mint (for reference)
+           ======================================== */
+        .bg-mint-current {
+            background: #ccfbf1;
+        }
+
+        .bg-mint-lighter {
+            background: #e0f7f4;
+        }
+
+        /* ========================================
+           OPTION E: Warm Gray/Cream
+           ======================================== */
+        .bg-warm-light {
+            background: #faf9f7;
+        }
+
+        .bg-warm-medium {
+            background: #f5f3f0;
+        }
+
+        /* ========================================
+           OPTION F: Teal-Tinted Gray (REVISED)
+           ======================================== */
+        .bg-teal-gray-light {
+            background: #e6f7f3;
+        }
+
+        .bg-teal-gray-medium {
+            background: #d1f0e8;
+        }
+
+        .bg-teal-gray-darker {
+            background: #c2ebe0;
+        }
+
+        /* ========================================
+           OPTION G: Teal Gradient
+           ======================================== */
+        .bg-teal-gradient-light {
+            background: linear-gradient(180deg, #ffffff 0%, #e6f7f3 100%);
+        }
+
+        .bg-teal-gradient-medium {
+            background: linear-gradient(180deg, #e6f7f3 0%, #c2ebe0 100%);
+        }
+
+        /* Notes */
+        .notes {
+            background: #fffbeb;
+            border: 1px solid #fbbf24;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+
+        .notes h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 8px;
+        }
+
+        .notes ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            color: #92400e;
+        }
+
+        .notes li {
+            margin-bottom: 4px;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-block;
+            margin: 40px 0;
+            padding: 12px 24px;
+            background: var(--color-accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .back-link:hover {
+            background: #0f766e;
+        }
+
+        /* Comparison table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            font-size: 15px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .comparison-table th {
+            font-weight: 600;
+            background: #f8fafc;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: 500;
+        }
+
+        .color-swatch {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid var(--color-border);
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Background Color Options</h1>
+            <p>Comparing alternatives to the mint background for section contrast</p>
+        </div>
+    </div>
+
+    <!-- Summary Table -->
+    <div class="container">
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>Colors Used</th>
+                    <th>Pros</th>
+                    <th>Cons</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A: Neutral Gray</td>
+                    <td>
+                        <span class="color-swatch" style="background: #f8fafc;"></span>#f8fafc
+                        <span class="color-swatch" style="background: #f1f5f9;"></span>#f1f5f9
+                    </td>
+                    <td>Clean, professional, universally readable</td>
+                    <td>Less brand personality</td>
+                </tr>
+                <tr>
+                    <td>B: Subtle Gradient</td>
+                    <td>Gradient from #f8fafc to #e2e8f0</td>
+                    <td>Adds depth, modern feel</td>
+                    <td>Can look dated if overdone</td>
+                </tr>
+                <tr>
+                    <td>C: White + Borders</td>
+                    <td>White with #e2e8f0 borders</td>
+                    <td>Maximum contrast, very clean</td>
+                    <td>Less visual separation</td>
+                </tr>
+                <tr>
+                    <td>D: Current Mint</td>
+                    <td>
+                        <span class="color-swatch" style="background: #ccfbf1;"></span>#ccfbf1
+                        <span class="color-swatch" style="background: #e0f7f4;"></span>#e0f7f4
+                    </td>
+                    <td>On-brand teal family, warm</td>
+                    <td>Visibility concerns</td>
+                </tr>
+                <tr>
+                    <td>E: Warm Gray</td>
+                    <td>
+                        <span class="color-swatch" style="background: #faf9f7;"></span>#faf9f7
+                        <span class="color-swatch" style="background: #f5f3f0;"></span>#f5f3f0
+                    </td>
+                    <td>Warmer feel, approachable</td>
+                    <td>Less "tech" aesthetic</td>
+                </tr>
+                <tr style="background: #e6f7f3;">
+                    <td><strong>F: Teal-Tinted Gray</strong></td>
+                    <td>
+                        <span class="color-swatch" style="background: #e6f7f3;"></span>#e6f7f3
+                        <span class="color-swatch" style="background: #d1f0e8;"></span>#d1f0e8
+                        <span class="color-swatch" style="background: #c2ebe0;"></span>#c2ebe0
+                    </td>
+                    <td><strong>On-brand + readable</strong></td>
+                    <td>Slightly less "neutral"</td>
+                </tr>
+                <tr style="background: #e6f7f3;">
+                    <td><strong>G: Teal Gradient</strong></td>
+                    <td>Gradient from #f8fdfb to #d1f0e8</td>
+                    <td><strong>Brand personality + depth</strong></td>
+                    <td>More visually active</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========================================
+         OPTION A: Neutral Gray
+         ======================================== -->
+    <section class="option-section">
+        <div class="container">
+            <div class="option-header">
+                <span class="option-badge">Option A</span>
+                <h2>Neutral Gray</h2>
+                <p>Clean slate gray tones. Professional and universally readable.</p>
+            </div>
+
+            <div class="demo-wrapper">
+                <div class="demo-section" style="background: white;">
+                    <h3>White Section (Hero)</h3>
+                    <p>This is a regular white section, like the hero area at the top of the page.</p>
+                </div>
+
+                <div class="demo-section bg-gray-light">
+                    <h3>Light Gray Section</h3>
+                    <p>This background uses #f8fafc - a very subtle gray that creates separation without being heavy.</p>
+                    <ul class="demo-list">
+                        <li>Open rates dropped and nobody can explain why.</li>
+                        <li>List keeps growing. Revenue doesn't.</li>
+                        <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    </ul>
+                </div>
+
+                <div class="demo-section bg-gray-medium">
+                    <h3>Medium Gray Section</h3>
+                    <p>This uses #f1f5f9 - slightly darker for more contrast and alternating sections.</p>
+                </div>
+
+                <div class="demo-section" style="background: white;">
+                    <h3>Back to White</h3>
+                    <p>Normal white section to show the contrast difference.</p>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h4>Notes on Option A:</h4>
+                <ul>
+                    <li>Most common approach for SaaS/professional sites</li>
+                    <li>Works well with your teal accent color</li>
+                    <li>No visibility concerns - high contrast with text</li>
+                    <li>May feel slightly less "branded" than colored backgrounds</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         OPTION B: Subtle Gradient
+         ======================================== -->
+    <section class="option-section">
+        <div class="container">
+            <div class="option-header">
+                <span class="option-badge">Option B</span>
+                <h2>Subtle Gradient</h2>
+                <p>Soft gradients that add depth without overwhelming.</p>
+            </div>
+
+            <div class="demo-wrapper">
+                <div class="demo-section" style="background: white;">
+                    <h3>White Section (Hero)</h3>
+                    <p>This is a regular white section, like the hero area at the top of the page.</p>
+                </div>
+
+                <div class="demo-section bg-gradient-light">
+                    <h3>Light Gradient Section</h3>
+                    <p>Gradient from #f8fafc to #f1f5f9. Adds subtle depth and visual interest.</p>
+                    <ul class="demo-list">
+                        <li>Open rates dropped and nobody can explain why.</li>
+                        <li>List keeps growing. Revenue doesn't.</li>
+                        <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    </ul>
+                </div>
+
+                <div class="demo-section bg-gradient-medium">
+                    <h3>Medium Gradient Section</h3>
+                    <p>Gradient from #f1f5f9 to #e2e8f0. More pronounced but still subtle.</p>
+                </div>
+
+                <div class="demo-section" style="background: white;">
+                    <h3>Back to White</h3>
+                    <p>Normal white section to show the contrast difference.</p>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h4>Notes on Option B:</h4>
+                <ul>
+                    <li>Adds visual interest without being distracting</li>
+                    <li>Modern look popular with newer sites</li>
+                    <li>Can be combined with your teal for accent gradients</li>
+                    <li>Be careful not to overuse - one gradient per page is usually enough</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         OPTION C: White with Borders
+         ======================================== -->
+    <section class="option-section">
+        <div class="container">
+            <div class="option-header">
+                <span class="option-badge">Option C</span>
+                <h2>White with Borders</h2>
+                <p>All white sections, separated by subtle horizontal lines.</p>
+            </div>
+
+            <div class="demo-wrapper">
+                <div class="demo-section" style="background: white;">
+                    <h3>White Section (Hero)</h3>
+                    <p>This is a regular white section, like the hero area at the top of the page.</p>
+                </div>
+
+                <div class="demo-section bg-white-bordered">
+                    <h3>White Section with Borders</h3>
+                    <p>Same white background, but with subtle top/bottom borders for separation.</p>
+                    <ul class="demo-list">
+                        <li>Open rates dropped and nobody can explain why.</li>
+                        <li>List keeps growing. Revenue doesn't.</li>
+                        <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    </ul>
+                </div>
+
+                <div class="demo-section" style="background: white;">
+                    <h3>Another White Section</h3>
+                    <p>Continuous white feels clean and minimal.</p>
+                </div>
+
+                <div class="demo-section bg-white-bordered-alt">
+                    <h3>White with Inset Borders</h3>
+                    <p>Alternative: borders don't extend full width, creating a more editorial feel.</p>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h4>Notes on Option C:</h4>
+                <ul>
+                    <li>Very clean, minimalist look</li>
+                    <li>Apple, Stripe, Linear use this approach</li>
+                    <li>Maximum readability - no color interference</li>
+                    <li>Relies more on spacing and typography for hierarchy</li>
+                    <li>Can feel "flat" if content isn't well-structured</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         OPTION D: Current Mint (Reference)
+         ======================================== -->
+    <section class="option-section">
+        <div class="container">
+            <div class="option-header">
+                <span class="option-badge">Option D (Current)</span>
+                <h2>Current Mint</h2>
+                <p>Your existing teal/mint backgrounds for reference.</p>
+            </div>
+
+            <div class="demo-wrapper">
+                <div class="demo-section" style="background: white;">
+                    <h3>White Section (Hero)</h3>
+                    <p>This is a regular white section, like the hero area at the top of the page.</p>
+                </div>
+
+                <div class="demo-section bg-mint-current">
+                    <h3>Mint Section (#ccfbf1)</h3>
+                    <p>This is the current --color-light value after the recent update.</p>
+                    <ul class="demo-list">
+                        <li>Open rates dropped and nobody can explain why.</li>
+                        <li>List keeps growing. Revenue doesn't.</li>
+                        <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    </ul>
+                </div>
+
+                <div class="demo-section bg-mint-lighter">
+                    <h3>Lighter Mint Section (#e0f7f4)</h3>
+                    <p>This is the current --color-lighter value.</p>
+                </div>
+
+                <div class="demo-section" style="background: white;">
+                    <h3>Back to White</h3>
+                    <p>Normal white section to show the contrast difference.</p>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h4>Notes on Option D (Current):</h4>
+                <ul>
+                    <li>On-brand with your teal color palette</li>
+                    <li>Warmer, more distinctive feel</li>
+                    <li>User feedback: visibility concerns on some screens</li>
+                    <li>Works better on calibrated displays</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         OPTION E: Warm Gray/Cream
+         ======================================== -->
+    <section class="option-section">
+        <div class="container">
+            <div class="option-header">
+                <span class="option-badge">Option E</span>
+                <h2>Warm Gray / Cream</h2>
+                <p>Warmer tones that feel more approachable and less clinical.</p>
+            </div>
+
+            <div class="demo-wrapper">
+                <div class="demo-section" style="background: white;">
+                    <h3>White Section (Hero)</h3>
+                    <p>This is a regular white section, like the hero area at the top of the page.</p>
+                </div>
+
+                <div class="demo-section bg-warm-light">
+                    <h3>Light Warm Section</h3>
+                    <p>Background uses #faf9f7 - a warm off-white with slight cream undertone.</p>
+                    <ul class="demo-list">
+                        <li>Open rates dropped and nobody can explain why.</li>
+                        <li>List keeps growing. Revenue doesn't.</li>
+                        <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    </ul>
+                </div>
+
+                <div class="demo-section bg-warm-medium">
+                    <h3>Medium Warm Section</h3>
+                    <p>Uses #f5f3f0 - slightly warmer and more visible.</p>
+                </div>
+
+                <div class="demo-section" style="background: white;">
+                    <h3>Back to White</h3>
+                    <p>Normal white section to show the contrast difference.</p>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h4>Notes on Option E:</h4>
+                <ul>
+                    <li>Feels warmer and more personal</li>
+                    <li>Good for service-oriented businesses</li>
+                    <li>Pairs well with teal as an accent</li>
+                    <li>Less "tech startup" aesthetic, more consultancy feel</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         OPTION F: Teal-Tinted Gray (RECOMMENDED)
+         ======================================== -->
+    <section class="option-section" style="background: #e6f7f3;">
+        <div class="container">
+            <div class="option-header">
+                <span class="option-badge" style="background: #0d9488;">Option F - Recommended</span>
+                <h2>Teal-Tinted Gray (Revised)</h2>
+                <p>More saturated teal tones that are clearly visible and on-brand.</p>
+            </div>
+
+            <div class="demo-wrapper">
+                <div class="demo-section" style="background: white;">
+                    <h3>White Section (Hero)</h3>
+                    <p>This is a regular white section, like the hero area at the top of the page.</p>
+                </div>
+
+                <div class="demo-section bg-teal-gray-light">
+                    <h3>Light Teal-Gray Section (#e6f7f3)</h3>
+                    <p>A visible teal tint that maintains brand identity. Clear separation from white without being overwhelming.</p>
+                    <ul class="demo-list">
+                        <li>Open rates dropped and nobody can explain why.</li>
+                        <li>List keeps growing. Revenue doesn't.</li>
+                        <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    </ul>
+                </div>
+
+                <div class="demo-section bg-teal-gray-medium">
+                    <h3>Medium Teal-Gray Section (#d1f0e8)</h3>
+                    <p>More saturation for alternating sections or emphasis areas.</p>
+                </div>
+
+                <div class="demo-section bg-teal-gray-darker">
+                    <h3>Darker Teal-Gray Section (#c2ebe0)</h3>
+                    <p>For sections that need more visual weight, like testimonials or feature highlights.</p>
+                </div>
+
+                <div class="demo-section" style="background: white;">
+                    <h3>Back to White</h3>
+                    <p>Normal white section to show the contrast difference.</p>
+                </div>
+            </div>
+
+            <div class="notes" style="background: #d1fae5; border-color: #10b981;">
+                <h4 style="color: #065f46;">Why Option F works well:</h4>
+                <ul style="color: #065f46;">
+                    <li>Keeps your teal brand identity intact</li>
+                    <li>Much better contrast than the original mint (#ccfbf1)</li>
+                    <li>Still feels distinct from generic gray sites</li>
+                    <li>Works well with your accent color (#0d9488)</li>
+                    <li>Good visibility on all monitors and in various lighting</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         OPTION G: Teal Gradient
+         ======================================== -->
+    <section class="option-section">
+        <div class="container">
+            <div class="option-header">
+                <span class="option-badge" style="background: #0d9488;">Option G</span>
+                <h2>Teal Gradient</h2>
+                <p>Subtle gradients with teal undertones for depth and brand personality.</p>
+            </div>
+
+            <div class="demo-wrapper">
+                <div class="demo-section" style="background: white;">
+                    <h3>White Section (Hero)</h3>
+                    <p>This is a regular white section, like the hero area at the top of the page.</p>
+                </div>
+
+                <div class="demo-section bg-teal-gradient-light">
+                    <h3>Light Teal Gradient Section</h3>
+                    <p>Gradient from near-white (#f8fdfb) to light teal-gray (#e6f7f3). Adds subtle depth.</p>
+                    <ul class="demo-list">
+                        <li>Open rates dropped and nobody can explain why.</li>
+                        <li>List keeps growing. Revenue doesn't.</li>
+                        <li>Paid for list cleaning yesterday. Bounces today.</li>
+                    </ul>
+                </div>
+
+                <div class="demo-section bg-teal-gradient-medium">
+                    <h3>Medium Teal Gradient Section</h3>
+                    <p>Gradient from #e6f7f3 to #d1f0e8. More pronounced but still subtle.</p>
+                </div>
+
+                <div class="demo-section" style="background: white;">
+                    <h3>Back to White</h3>
+                    <p>Normal white section to show the contrast difference.</p>
+                </div>
+            </div>
+
+            <div class="notes">
+                <h4>Notes on Option G:</h4>
+                <ul>
+                    <li>Combines brand color with modern gradient trend</li>
+                    <li>Adds visual interest and depth</li>
+                    <li>More distinctive than flat colors</li>
+                    <li>Best used sparingly - one gradient section per page</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="container" style="text-align: center; padding-bottom: 60px;">
+        <a href="/" class="back-link">← Back to Homepage</a>
+    </div>
+
+</body>
+</html>

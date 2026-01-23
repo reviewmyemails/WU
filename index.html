@@ -56,8 +56,8 @@
             --color-accent: #0d9488;
             --color-accent-hover: #0f766e;
             --color-white: #fafcfc;
-            --color-light: #f0fdfa;
-            --color-lighter: #f8fafa;
+            --color-light: #e6f7f3;
+            --color-lighter: #d1f0e8;
             --color-muted: #64748b;
             --color-border: #e2e8f0;
 
@@ -419,125 +419,202 @@
             opacity: 0.8;
         }
 
+        .hero__quiz-link {
+            margin-top: var(--space-xs);
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .hero__quiz-link a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .hero__quiz-link a:hover {
+            text-decoration: underline;
+        }
+
         /* ========================================
-           SYMPTOMS SECTION — Recognition list
+           SYMPTOMS SECTION — V21 Hybrid Design
+           Two-column with checklist + crisis card
            ======================================== */
 
         .symptoms {
-            padding: var(--space-xxl) 0;
-            background: var(--color-light);
+            padding: 100px 24px;
+            background: linear-gradient(135deg, #134e4a 0%, #0d9488 100%);
+            color: white;
         }
 
-        .symptoms__inner {
-            max-width: 640px;
+        .symptoms__container {
+            max-width: 1000px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 48px;
+            align-items: start;
         }
 
         .symptoms__header {
-            text-align: center;
-            margin-bottom: var(--space-xl);
+            margin-bottom: 32px;
         }
 
         .symptoms__header h2 {
-            font-size: clamp(28px, 4vw, 36px);
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .symptoms__header p {
+            opacity: 0.8;
+            font-size: 18px;
         }
 
         .symptoms__list {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .symptoms__list li {
-            font-size: 18px;
-            color: var(--color-dark);
+        .symptoms__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 17px;
             line-height: 1.5;
-            padding: var(--space-sm) 0;
-            padding-left: 28px;
-            position: relative;
-            border-bottom: 1px solid var(--color-border);
         }
 
-        .symptoms__list li:last-child {
-            border-bottom: none;
+        .symptoms__check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
         }
 
-        .symptoms__list li::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 22px;
-            width: 8px;
-            height: 8px;
-            background: var(--color-accent);
-            border-radius: 50%;
+        .symptoms__item strong {
+            color: #fff;
+            font-weight: 600;
         }
 
         .symptoms__crisis {
-            margin-top: var(--space-xl);
-            padding-top: var(--space-lg);
-            border-top: 2px solid var(--color-accent);
+            background: #ffffff;
+            border: 2px solid #f33144;
+            border-radius: 12px;
+            padding: 32px;
+            color: var(--color-dark);
+            position: sticky;
+            top: 100px;
         }
 
         .symptoms__crisis-header {
-            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .symptoms__crisis-icon {
+            width: 40px;
+            height: 40px;
+            background: #f33144;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
         }
 
         .symptoms__crisis-header h3 {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--color-dark);
-            margin-bottom: var(--space-xs);
+            color: #f33144;
+            font-size: 18px;
+            margin: 0;
         }
 
-        .symptoms__crisis-header p {
-            font-size: 16px;
-            color: var(--color-muted);
-            line-height: 1.5;
+        .symptoms__crisis-header span {
+            font-size: 14px;
+            color: #64748b;
+            display: block;
+            margin-top: 2px;
         }
 
-        .symptoms__crisis-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: var(--space-md);
-            padding: 10px 20px;
+        .symptoms__crisis-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px 0;
+        }
+
+        .symptoms__crisis-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
             font-size: 15px;
-            font-weight: 600;
-            color: var(--color-dark);
-            background: transparent;
-            border: 2px solid var(--color-dark);
-            border-radius: 6px;
-            text-decoration: none;
-            transition: all 180ms ease;
-        }
-
-        .symptoms__crisis-cta:hover {
-            background: var(--color-dark);
-            color: var(--color-white);
-        }
-
-        .symptoms__clarification {
-            margin-top: var(--space-lg);
-            padding: var(--space-md);
-            background: var(--color-white);
-            border-radius: 8px;
-            font-size: 16px;
-            color: var(--color-muted);
-            line-height: 1.6;
-            text-align: center;
-        }
-
-        .symptoms__cta {
-            text-align: center;
-            margin-top: var(--space-lg);
+            color: #334155;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--space-sm);
+            align-items: flex-start;
+            gap: 10px;
         }
 
-        @media (max-width: 600px) {
-            .symptoms__cta {
-                flex-direction: column;
+        .symptoms__crisis-list li:last-child {
+            border-bottom: none;
+        }
+
+        .symptoms__crisis-list li::before {
+            content: "!";
+            font-weight: 900;
+            color: #f33144;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            background: #fef2f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .symptoms__crisis-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 14px 24px;
+            background: #f33144;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .symptoms__crisis-btn:hover {
+            background: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .symptoms {
+                padding: 80px 24px;
+            }
+
+            .symptoms__container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .symptoms__crisis {
+                position: static;
+            }
+
+            .symptoms__header h2 {
+                font-size: 28px;
             }
         }
 
@@ -1110,7 +1187,7 @@
                 <a href="/done-for-you" class="header__link">How It Works</a>
                 <a href="/pricing" class="header__link">Pricing</a>
                 <a href="/sos-hotline" class="header__link">SOS Hotline</a>
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get Started</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get My List Cleaned</a>
                 <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
@@ -1136,7 +1213,7 @@
             <a href="/partner" class="mobile-nav__link">Partner</a>
         </div>
         <div class="mobile-nav__cta">
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get Started</a>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get My List Cleaned</a>
         </div>
     </nav>
 
@@ -1151,9 +1228,9 @@
             <p class="hero__subhead">Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.</p>
             <div class="hero__actions">
                 <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
-                <a href="/quiz" class="btn btn-secondary">Take the 2-Minute Risk Check</a>
             </div>
             <p class="hero__bridge">Most email inboxing and deliverability problems trace back to list quality.</p>
+            <p class="hero__quiz-link">Not sure yet? <a href="/quiz">Take the 2-minute risk check →</a></p>
         </div>
     </section>
 
@@ -1163,43 +1240,61 @@
          ======================================== -->
 
     <section class="symptoms">
-        <div class="container">
-            <div class="symptoms__inner">
-
+        <div class="symptoms__container">
+            <div>
                 <div class="symptoms__header">
                     <h2>Sound familiar?</h2>
+                    <p>You're not alone. These are the patterns we see every day.</p>
                 </div>
-
                 <ul class="symptoms__list">
-                    <li>No idea where half this list came from.</li>
-                    <li>One tool says clean. Another says risky.</li>
-                    <li>Scared to remove subscribers, even the ones who never open.</li>
-                    <li>Haven't emailed this list in months. Afraid to restart.</li>
-                    <li>Paid for list cleaning yesterday. Bounces today.</li>
-                    <li>Open rates dropped and nobody can explain why.</li>
-                    <li>List keeps growing. Revenue doesn't.</li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span><strong>No idea</strong> where half this list came from.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>One tool says <strong>clean</strong>. Another says <strong>risky</strong>.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span><strong>Scared to remove</strong> subscribers — even the ones who never open.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>Haven't emailed this list in <strong>months</strong>. Afraid to restart.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>Paid for list cleaning <strong>yesterday</strong>. Bounces <strong>today</strong>.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>Open rates <strong>dropped</strong> and nobody can explain why.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>List keeps <strong>growing</strong>. Revenue <strong>doesn't</strong>.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>Emails <strong>not inboxing</strong> anymore — going to spam or promotions.</span>
+                    </li>
                 </ul>
-
-                <div class="symptoms__crisis">
-                    <div class="symptoms__crisis-header">
-                        <h3>Crisis</h3>
-                        <p>If any of these are true, start here.</p>
+            </div>
+            <div class="symptoms__crisis">
+                <div class="symptoms__crisis-header">
+                    <div class="symptoms__crisis-icon">⚠</div>
+                    <div>
+                        <h3>Crisis Mode?</h3>
+                        <span>If any of these are true, start here.</span>
                     </div>
-                    <ul class="symptoms__list">
-                        <li>ESP sent a compliance warning or paused your sending.</li>
-                        <li>Blocklisted, or you think you might be.</li>
-                        <li>Last send spiked bounces. Now everyone's afraid to send again.</li>
-                    </ul>
-                    <a href="/sos-hotline" class="symptoms__crisis-cta">Start here →</a>
                 </div>
-
-                <p class="symptoms__clarification">If any of this sounds like you, your list probably needs more than a quick validation pass.</p>
-
-                <div class="symptoms__cta">
-                    <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
-                    <a href="/quiz" class="btn btn-secondary">Take the 2-Minute Risk Check</a>
-                </div>
-
+                <ul class="symptoms__crisis-list">
+                    <li>ESP sent a compliance warning or paused your sending.</li>
+                    <li>Blocklisted — or you think you might be.</li>
+                    <li>Last send spiked bounces. Now everyone's afraid to send again.</li>
+                </ul>
+                <a href="/sos-hotline" class="symptoms__crisis-btn">Email the SOS Hotline →</a>
             </div>
         </div>
     </section>
