@@ -61,6 +61,13 @@
             --color-muted: #64748b;
             --color-border: #e2e8f0;
 
+            /* Abyss Mode Colors */
+            --abyss-bg: #020617;
+            --abyss-deep: #0f172a;
+            --abyss-glow: #2dd4bf;
+            --abyss-text: #f1f5f9;
+            --abyss-muted: #94a3b8;
+
             /* Typography */
             --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 
@@ -83,6 +90,220 @@
             line-height: 1.6;
             color: var(--color-dark);
             background: var(--color-white);
+            overflow-x: hidden;
+            transition: background 0.8s ease, color 0.8s ease;
+        }
+
+        /* Abyss Mode - Body State */
+        body.abyss-active {
+            background: var(--abyss-bg);
+            color: var(--abyss-text);
+        }
+
+        /* ========================================
+           THE ABYSS LAYER - Easter Egg
+           ======================================== */
+
+        .abyss-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        body.abyss-active .abyss-layer {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .abyss-spotlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                transparent 0%,
+                transparent 200px,
+                rgba(2, 6, 23, 0.92) 350px,
+                rgba(2, 6, 23, 0.98) 100%
+            );
+            pointer-events: none;
+        }
+
+        .abyss-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .abyss-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -20px;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), rgba(45, 212, 191, 0.1));
+            border-radius: 50%;
+            animation: bubble-rise linear infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes bubble-rise {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
+            25% { transform: translateY(-25vh) translateX(10px) scale(1.05); }
+            50% { transform: translateY(-50vh) translateX(-5px) scale(1.1); }
+            75% { transform: translateY(-75vh) translateX(8px) scale(1.05); }
+            100% { transform: translateY(-110vh) translateX(0) scale(1); opacity: 0; }
+        }
+
+        /* The Fish */
+        .abyss-fish {
+            position: fixed;
+            width: 60px;
+            height: 50px;
+            cursor: pointer;
+            pointer-events: none;
+            z-index: 10001;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        body.abyss-active .abyss-fish { pointer-events: auto; }
+
+        .abyss-fish.swimming {
+            opacity: 1;
+            animation: fish-swim 10s linear forwards, fish-wiggle 0.4s ease-in-out infinite;
+        }
+
+        .abyss-fish.caught {
+            animation: fish-wiggle 0.4s ease-in-out infinite !important;
+            opacity: 1;
+        }
+
+        @keyframes fish-swim {
+            0% { left: -80px; }
+            100% { left: calc(100vw + 80px); }
+        }
+
+        @keyframes fish-wiggle {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            75% { transform: translateY(8px) rotate(-2deg); }
+        }
+
+        .abyss-fish svg { width: 100%; height: 100%; overflow: visible; }
+        .fish-body { fill: var(--abyss-glow); filter: drop-shadow(0 0 12px var(--abyss-glow)) drop-shadow(0 0 25px rgba(45, 212, 191, 0.5)); transition: fill 0.3s, filter 0.3s; }
+        .fish-eye { fill: #020617; }
+        .fish-fin { fill: rgba(45, 212, 191, 0.7); }
+        .abyss-fish:hover .fish-body { fill: #5eead4; filter: drop-shadow(0 0 20px var(--abyss-glow)) drop-shadow(0 0 40px rgba(45, 212, 191, 0.7)); }
+        .abyss-fish.caught .fish-body { fill: #fbbf24; filter: drop-shadow(0 0 25px #fbbf24) drop-shadow(0 0 50px rgba(251, 191, 36, 0.6)); }
+        .abyss-fish.caught .fish-fin { fill: rgba(251, 191, 36, 0.7); }
+
+        /* Fish speech bubble */
+        .fish-bubble {
+            position: fixed;
+            background: white;
+            color: var(--color-dark);
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            text-align: center;
+            line-height: 1.5;
+            z-index: 10002;
+            transform: scale(0.9);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .fish-bubble::after {
+            content: '';
+            position: absolute;
+            border: 10px solid transparent;
+        }
+
+        .fish-bubble.show-above::after { bottom: -18px; left: 50%; transform: translateX(-50%); border-top-color: white; }
+        .fish-bubble.show-below::after { top: -18px; left: 50%; transform: translateX(-50%); border-bottom-color: white; }
+        .fish-bubble.visible { opacity: 1; transform: scale(1); }
+
+        .fish-bubble__code {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--color-accent);
+            margin-top: 8px;
+            letter-spacing: 2px;
+            background: var(--color-light);
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        /* Exit button */
+        .abyss-exit {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--abyss-text);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-family: var(--font);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            z-index: 10002;
+            pointer-events: none;
+        }
+
+        body.abyss-active .abyss-exit { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .abyss-exit:hover { background: rgba(255,255,255,0.2); border-color: var(--abyss-glow); color: var(--abyss-glow); }
+
+        /* Hint text */
+        .abyss-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+
+        body.abyss-active .abyss-hint { opacity: 1; }
+        body.abyss-active .abyss-hint.hidden { opacity: 0; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .bubble, .abyss-fish { animation: none; }
+            .abyss-layer, .abyss-exit { transition: none; }
         }
 
         /* ========================================
@@ -192,6 +413,19 @@
             box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.4);
         }
 
+        /* Abyss mode button styles */
+        body.abyss-active .btn-primary {
+            background: transparent;
+            border-color: var(--abyss-glow);
+            color: var(--abyss-glow);
+        }
+
+        body.abyss-active .btn-primary:hover {
+            background: var(--abyss-glow);
+            color: var(--abyss-bg);
+            box-shadow: 0 0 30px var(--abyss-glow);
+        }
+
         /* ========================================
            ICONS (Simple SVG)
            ======================================== */
@@ -234,6 +468,12 @@
             z-index: 100;
             background: var(--color-white);
             border-bottom: 1px solid var(--color-border);
+            transition: background 0.8s, border-color 0.8s;
+        }
+
+        body.abyss-active .header {
+            background: rgba(2, 6, 23, 0.9);
+            border-color: rgba(255,255,255,0.1);
         }
 
         .header__inner {
@@ -249,12 +489,21 @@
             display: flex;
             align-items: center;
             text-decoration: none;
+            cursor: pointer;
+            user-select: none;
+            transition: filter 0.3s;
         }
 
         .header__logo img {
             height: 60px;
             width: auto;
+            transition: opacity 0.4s;
         }
+
+        .header__logo img.logo-light { display: block; }
+        .header__logo img.logo-dark { display: none; }
+        body.abyss-active .header__logo img.logo-light { display: none; }
+        body.abyss-active .header__logo img.logo-dark { display: block; }
 
         .header__nav {
             display: flex;
@@ -273,6 +522,9 @@
         .header__link:hover {
             color: var(--color-dark);
         }
+
+        body.abyss-active .header__link { color: var(--abyss-muted); }
+        body.abyss-active .header__link:hover { color: var(--abyss-glow); }
 
         .header__cta {
             font-size: 15px;
@@ -385,6 +637,9 @@
             background: var(--color-accent);
             color: var(--color-white);
         }
+
+        body.abyss-active .hero__badge { border-color: var(--abyss-glow); color: var(--abyss-glow); }
+        body.abyss-active .hero__badge:hover { background: var(--abyss-glow); color: var(--abyss-bg); }
 
         .hero__headline {
             max-width: 700px;
@@ -1177,13 +1432,49 @@
 <body>
 
     <!-- ========================================
+         THE ABYSS LAYER - Easter Egg
+         ======================================== -->
+
+    <div class="abyss-layer" id="abyssLayer">
+        <div class="abyss-spotlight" id="abyssSpotlight"></div>
+        <canvas class="abyss-canvas" id="tentacleCanvas"></canvas>
+        <div class="abyss-bubbles" id="abyssBubbles"></div>
+    </div>
+
+    <!-- The Swimming Fish -->
+    <div class="abyss-fish" id="abyssFish" onclick="catchFish()">
+        <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+            <path class="fish-body" d="M 8 20 C 8 10, 20 4, 32 6 C 42 8, 48 14, 50 20 C 48 26, 42 32, 32 34 C 20 36, 8 30, 8 20 Z"/>
+            <path class="fish-body" d="M 48 20 C 52 16, 58 8, 60 10 C 58 20, 58 20, 60 30 C 58 32, 52 24, 48 20 Z"/>
+            <path class="fish-fin" d="M 24 8 C 28 2, 36 2, 38 8 C 34 10, 28 10, 24 8 Z"/>
+            <path class="fish-fin" d="M 28 32 C 30 36, 36 36, 38 32 C 35 31, 31 31, 28 32 Z"/>
+            <path class="fish-fin" d="M 22 22 C 18 26, 14 30, 16 32 C 20 30, 24 26, 24 22 Z"/>
+            <circle class="fish-eye" cx="18" cy="18" r="3"/>
+            <circle fill="white" cx="17" cy="17" r="1"/>
+        </svg>
+    </div>
+
+    <!-- Fish speech bubble -->
+    <div class="fish-bubble" id="fishBubble">
+        <span>You found me! Here's 20% off your first order.</span>
+        <span class="fish-bubble__code">Coupon: DEEPDIVE20</span>
+    </div>
+
+    <!-- Exit button -->
+    <button class="abyss-exit" id="abyssExit" onclick="exitAbyss()">Return to Surface</button>
+
+    <!-- Hint text -->
+    <div class="abyss-hint" id="abyssHint">Something is swimming in the deep...</div>
+
+    <!-- ========================================
          HEADER
          ======================================== -->
 
     <header class="header">
         <div class="header__inner">
-            <a href="/" class="header__logo">
-                <img src="svg/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            <a href="/" class="header__logo" id="headerLogo">
+                <img src="svg/Horizontal-Logo.svg" alt="Review My Emails" height="40" class="logo-light">
+                <img src="svg/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="40" class="logo-dark">
             </a>
             <nav class="header__nav">
                 <a href="/done-for-you" class="header__link">How It Works</a>
@@ -1708,6 +1999,276 @@
                 submitBtn.disabled = false;
             }
         });
+    </script>
+
+    <!-- ========================================
+         ABYSS MODE SCRIPTS - Easter Egg
+         ======================================== -->
+    <script>
+        // ========================================
+        // STATE
+        // ========================================
+        let isAbyssActive = false;
+        let clickCount = 0;
+        let clickTimer = null;
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let fishCaught = false;
+        let fishSwimTimer = null;
+        let lastScrollTime = 0;
+        let isAtBottom = false;
+        let accumulatedScrollDistance = 0;
+        const DIVE_THRESHOLD = 1500;
+
+        // Tentacle state
+        let tentacles = [];
+        const canvas = document.getElementById('tentacleCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+
+        // ========================================
+        // TRIPLE CLICK DETECTION
+        // ========================================
+        const logo = document.getElementById('headerLogo');
+
+        logo.addEventListener('click', function(e) {
+            e.preventDefault();
+            clickCount++;
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 500);
+            if (clickCount >= 3) {
+                clickCount = 0;
+                if (!isAbyssActive) enterAbyss();
+            }
+        });
+
+        // ========================================
+        // ENTER THE ABYSS
+        // ========================================
+        function enterAbyss() {
+            isAbyssActive = true;
+            document.body.classList.add('abyss-active');
+            setupCanvas();
+            createBubbles();
+            initTentacles();
+            animateTentacles();
+            fishCaught = false;
+            document.getElementById('abyssFish').classList.remove('caught');
+            setTimeout(startFishSwim, 2000);
+            if (window.va) va('event', { name: 'Easter_Egg_Activated', data: { type: 'abyss_mode' } });
+        }
+
+        // ========================================
+        // EXIT THE ABYSS
+        // ========================================
+        function exitAbyss() {
+            isAbyssActive = false;
+            document.body.classList.remove('abyss-active');
+            fishCaught = false;
+            const fish = document.getElementById('abyssFish');
+            fish.classList.remove('swimming', 'caught');
+            const bubble = document.getElementById('fishBubble');
+            bubble.style.opacity = '0';
+            bubble.style.transform = 'scale(0.9)';
+            document.getElementById('abyssHint').classList.remove('hidden');
+            if (fishSwimTimer) clearTimeout(fishSwimTimer);
+            document.getElementById('abyssBubbles').innerHTML = '';
+            tentacles = [];
+        }
+
+        // ========================================
+        // MOUSE TRACKING
+        // ========================================
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (isAbyssActive) {
+                const spotlight = document.getElementById('abyssSpotlight');
+                spotlight.style.setProperty('--mouse-x', mouseX + 'px');
+                spotlight.style.setProperty('--mouse-y', mouseY + 'px');
+            }
+        });
+
+        // ========================================
+        // BUBBLES
+        // ========================================
+        function createBubbles() {
+            const container = document.getElementById('abyssBubbles');
+            container.innerHTML = '';
+            for (let i = 0; i < 20; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 20 + 8;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                bubble.style.animationDelay = (Math.random() * 10) + 's';
+                container.appendChild(bubble);
+            }
+        }
+
+        // ========================================
+        // FISH SWIMMING
+        // ========================================
+        function startFishSwim() {
+            if (!isAbyssActive || fishCaught) return;
+            const fish = document.getElementById('abyssFish');
+            fish.style.top = (Math.random() * (window.innerHeight - 250) + 120) + 'px';
+            fish.style.left = '-80px';
+            fish.classList.add('swimming');
+            fishSwimTimer = setTimeout(() => {
+                if (isAbyssActive && !fishCaught) {
+                    fish.classList.remove('swimming');
+                    setTimeout(startFishSwim, Math.random() * 5000 + 3000);
+                }
+            }, 10000);
+        }
+
+        function catchFish() {
+            if (!isAbyssActive || fishCaught) return;
+            fishCaught = true;
+            const fish = document.getElementById('abyssFish');
+            const bubble = document.getElementById('fishBubble');
+            const fishRect = fish.getBoundingClientRect();
+            fish.style.left = fishRect.left + 'px';
+            fish.style.top = fishRect.top + 'px';
+            fish.classList.remove('swimming');
+            fish.classList.add('caught');
+
+            const fishCenterX = fishRect.left + fishRect.width / 2;
+            const fishCenterY = fishRect.top + fishRect.height / 2;
+            const bubbleWidth = 320, bubbleHeight = 100, padding = 20;
+            let bubbleX = Math.max(padding, Math.min(window.innerWidth - bubbleWidth - padding, fishCenterX - bubbleWidth / 2));
+            let bubbleY, showAbove = fishCenterY > window.innerHeight / 2;
+            bubbleY = showAbove ? fishRect.top - bubbleHeight - 20 : fishRect.top + fishRect.height + 20;
+            bubbleY = Math.max(padding, Math.min(window.innerHeight - bubbleHeight - padding, bubbleY));
+
+            bubble.style.left = bubbleX + 'px';
+            bubble.style.top = bubbleY + 'px';
+            bubble.classList.remove('show-above', 'show-below');
+            bubble.classList.add(showAbove ? 'show-above' : 'show-below');
+            bubble.style.opacity = '1';
+            bubble.style.transform = 'scale(1)';
+            document.getElementById('abyssHint').classList.add('hidden');
+            if (fishSwimTimer) clearTimeout(fishSwimTimer);
+            if (window.va) va('event', { name: 'Easter_Egg_Secret_Found', data: { code: 'DEEPDIVE20' } });
+        }
+
+        // ========================================
+        // CANVAS SETUP
+        // ========================================
+        function setupCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', () => {
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                if (isAbyssActive) initTentacles();
+            }
+        });
+
+        // ========================================
+        // TENTACLES
+        // ========================================
+        function initTentacles() {
+            const h = window.innerHeight, w = window.innerWidth;
+            tentacles = [
+                { x: -50, y: h * 0.2, baseAngle: 12, segments: 12, segmentLength: 45, speed: 1.2, phase: 0, baseWidth: 45 },
+                { x: -50, y: h * 0.5, baseAngle: 18, segments: 10, segmentLength: 40, speed: 0.9, phase: 2, baseWidth: 38 },
+                { x: -50, y: h * 0.75, baseAngle: 8, segments: 14, segmentLength: 48, speed: 1.0, phase: 4, baseWidth: 50 },
+                { x: w + 50, y: h * 0.25, baseAngle: 168, segments: 11, segmentLength: 44, speed: 1.1, phase: 1, baseWidth: 42 },
+                { x: w + 50, y: h * 0.55, baseAngle: 162, segments: 9, segmentLength: 38, speed: 1.3, phase: 3, baseWidth: 35 },
+                { x: w + 50, y: h * 0.8, baseAngle: 172, segments: 13, segmentLength: 46, speed: 0.8, phase: 5, baseWidth: 48 },
+                { x: w * 0.12, y: h + 50, baseAngle: 268, segments: 10, segmentLength: 42, speed: 1.0, phase: 0.5, baseWidth: 40 },
+                { x: w * 0.4, y: h + 50, baseAngle: 272, segments: 12, segmentLength: 46, speed: 0.85, phase: 2.5, baseWidth: 46 },
+                { x: w * 0.65, y: h + 50, baseAngle: 265, segments: 8, segmentLength: 36, speed: 1.2, phase: 4.5, baseWidth: 36 },
+                { x: w * 0.88, y: h + 50, baseAngle: 278, segments: 11, segmentLength: 44, speed: 0.95, phase: 1.5, baseWidth: 44 },
+            ];
+        }
+
+        function drawTentacle(tentacle, time) {
+            if (!ctx) return;
+            ctx.save();
+            ctx.translate(tentacle.x, tentacle.y);
+            ctx.rotate(tentacle.baseAngle * Math.PI / 180);
+            const dx = mouseX - tentacle.x, dy = mouseY - tentacle.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const retractionFactor = Math.max(0, 1 - distance / 500);
+
+            for (let i = 0; i < tentacle.segments; i++) {
+                const waveOffset = Math.sin(time * 0.001 * tentacle.speed + tentacle.phase + i * 0.35) * (10 + i * 0.8);
+                const curveAngle = waveOffset * (Math.PI / 180);
+                const width = tentacle.baseWidth * (1 - i / tentacle.segments * 0.65);
+                const length = tentacle.segmentLength * (1 - retractionFactor * 0.2);
+                ctx.rotate(curveAngle);
+                const alpha = 0.9 - i * 0.05;
+                ctx.fillStyle = `rgba(13, 148, 136, ${alpha})`;
+                ctx.beginPath();
+                ctx.roundRect(-width/2, 0, width, length, width * 0.3);
+                ctx.fill();
+                if (i < 3) { ctx.shadowColor = 'rgba(45, 212, 191, 0.4)'; ctx.shadowBlur = 20; }
+                if (i > 0 && i % 2 === 1) {
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+                    ctx.beginPath();
+                    ctx.ellipse(0, length * 0.5, width * 0.35, width * 0.2, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.shadowBlur = 0;
+                ctx.translate(0, length);
+            }
+            ctx.restore();
+        }
+
+        function animateTentacles(time = 0) {
+            if (!isAbyssActive || !ctx) { if (isAbyssActive) requestAnimationFrame(animateTentacles); return; }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            tentacles.forEach(t => drawTentacle(t, time));
+            requestAnimationFrame(animateTentacles);
+        }
+
+        // ========================================
+        // KONAMI CODE
+        // ========================================
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) { konamiIndex = 0; if (!isAbyssActive) enterAbyss(); }
+            } else { konamiIndex = 0; }
+            if (e.key === 'Escape' && isAbyssActive) exitAbyss();
+        });
+
+        // ========================================
+        // DIVE DEEPER SCROLL TRIGGER
+        // ========================================
+        function checkIfAtBottom() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight;
+            return scrollTop + clientHeight >= scrollHeight - 5;
+        }
+
+        window.addEventListener('scroll', () => {
+            isAtBottom = checkIfAtBottom();
+            if (!isAtBottom) accumulatedScrollDistance = 0;
+        });
+
+        window.addEventListener('wheel', (e) => {
+            if (isAbyssActive) return;
+            if (isAtBottom && e.deltaY > 0) {
+                const now = Date.now();
+                if (now - lastScrollTime > 1000) accumulatedScrollDistance = 0;
+                lastScrollTime = now;
+                accumulatedScrollDistance += Math.abs(e.deltaY);
+                if (accumulatedScrollDistance >= DIVE_THRESHOLD) { accumulatedScrollDistance = 0; enterAbyss(); }
+            }
+        }, { passive: true });
     </script>
 
 </body>
