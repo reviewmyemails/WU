@@ -424,27 +424,12 @@
             border-radius: 100px;
             font-size: 14px;
             color: var(--color-dark);
-            opacity: 0.85;
             transition: all 180ms ease;
         }
 
         .topic-pill:hover {
-            opacity: 1;
             border-color: var(--color-accent);
             color: var(--color-accent);
-        }
-
-        /* Vary sizes for organic cloud feel */
-        .topic-pill--lg {
-            font-size: 15px;
-            padding: 12px 22px;
-            opacity: 1;
-        }
-
-        .topic-pill--sm {
-            font-size: 13px;
-            padding: 8px 14px;
-            opacity: 0.7;
         }
 
         .topic-cloud__footer {
@@ -960,25 +945,25 @@
                 <p class="topic-cloud__subhead">You do not need to be a client. You do not need to buy anything.</p>
 
                 <div class="topic-cloud__items">
-                    <span class="topic-pill topic-pill--lg">Deliverability</span>
+                    <span class="topic-pill">Deliverability</span>
                     <span class="topic-pill">Bounces</span>
-                    <span class="topic-pill topic-pill--lg">Blocklists</span>
-                    <span class="topic-pill topic-pill--sm">SPF</span>
+                    <span class="topic-pill">Blocklists</span>
+                    <span class="topic-pill">SPF</span>
                     <span class="topic-pill">DKIM</span>
-                    <span class="topic-pill topic-pill--sm">DMARC</span>
-                    <span class="topic-pill topic-pill--lg">Open rates</span>
+                    <span class="topic-pill">DMARC</span>
+                    <span class="topic-pill">Open rates</span>
                     <span class="topic-pill">ESP migration</span>
-                    <span class="topic-pill topic-pill--sm">Warmup</span>
+                    <span class="topic-pill">Warmup</span>
                     <span class="topic-pill">List cleaning</span>
-                    <span class="topic-pill topic-pill--lg">Engagement</span>
-                    <span class="topic-pill topic-pill--sm">Spam complaints</span>
+                    <span class="topic-pill">Engagement</span>
+                    <span class="topic-pill">Spam complaints</span>
                     <span class="topic-pill">Reputation</span>
-                    <span class="topic-pill topic-pill--sm">IP warming</span>
+                    <span class="topic-pill">IP warming</span>
                     <span class="topic-pill">Segmentation</span>
-                    <span class="topic-pill topic-pill--lg">Inbox placement</span>
-                    <span class="topic-pill topic-pill--sm">Sunsetting</span>
+                    <span class="topic-pill">Inbox placement</span>
+                    <span class="topic-pill">Sunsetting</span>
                     <span class="topic-pill">Re-engagement</span>
-                    <span class="topic-pill topic-pill--sm">Career advice</span>
+                    <span class="topic-pill">Career advice</span>
                 </div>
 
                 <p class="topic-cloud__footer">...and anything else you are wondering about.</p>
@@ -1088,13 +1073,13 @@
                     <div class="bridge-card">
                         <h3>Done-For-You Review</h3>
                         <p>Send us your list. We review every address and return it labeled: Keep, Monitor, or Suppress. Each gets a clear label, a definition, and why it matters.</p>
-                        <a href="/done-for-you" class="btn btn-secondary">See How It Works</a>
+                        <a href="/done-for-you#what-you-get" class="btn btn-secondary">See What You Get</a>
                     </div>
 
                     <div class="bridge-card">
                         <h3>Expert Interpretation</h3>
                         <p>Every list review includes a walkthrough of your results. We explain what we found, what it means, and what to do next. Included free with every cleaning.</p>
-                        <a href="/done-for-you" class="btn btn-secondary">See the Process</a>
+                        <a href="/done-for-you#how-it-works" class="btn btn-secondary">See the Process</a>
                     </div>
                 </div>
             </div>
@@ -1109,8 +1094,7 @@
         <div class="cta-block__inner">
             <h2>Ready to Ask Your Question?</h2>
             <p class="cta-block__subtext">Email us. Within 72 hours. Often sooner.</p>
-            <button type="button" class="btn btn-primary" onclick="openContactModal('sos-hero')">Contact the SOS Hotline</button>
-            <p class="cta-block__email"><a href="#" onclick="openContactModal('cta-block'); return false;">or click here to send a message</a></p>
+            <button type="button" class="btn btn-primary" onclick="openContactModal('sos-cta')">Contact the SOS Hotline</button>
         </div>
     </section>
 
@@ -1122,7 +1106,7 @@
         <div class="footer__inner">
             <div class="footer__brand">
                 <img src="../svg/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
-                <p>Expert email list review. Human judgment, not algorithms.</p>
+                <p>We see what algorithms can't.</p>
             </div>
 
             <div class="footer__column">
@@ -1183,7 +1167,7 @@
                 <button class="contact-modal__close" onclick="closeContactModal()">&times;</button>
             </div>
             <div class="contact-modal__body">
-                <p class="contact-modal__subtitle">Describe your deliverability issue and we'll get back to you within 24-72 hours.</p>
+                <p class="contact-modal__subtitle">Tell us what's going on and we'll get back to you within 24-72 hours.</p>
                 <form id="contactForm" onsubmit="submitContactForm(event)">
                     <input type="hidden" id="contactSource" value="">
                     <div class="contact-modal__field">
@@ -1210,7 +1194,7 @@
                     </div>
                     <div class="contact-modal__field">
                         <label class="contact-modal__label">What's going on? *</label>
-                        <textarea class="contact-modal__textarea" id="contactMessage" required placeholder="Describe your deliverability issue..."></textarea>
+                        <textarea class="contact-modal__textarea" id="contactMessage" required placeholder="What's your email question?"></textarea>
                     </div>
                     <button type="submit" class="contact-modal__submit" id="contactSubmitBtn">Send to SOS Hotline</button>
                 </form>
