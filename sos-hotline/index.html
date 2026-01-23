@@ -370,6 +370,11 @@
             background: var(--color-lighter);
         }
 
+        .section--dark {
+            background: var(--color-dark);
+            color: var(--color-white);
+        }
+
         .section__header {
             text-align: center;
             margin-bottom: var(--space-xl);
@@ -614,7 +619,7 @@
 
         .why-free p {
             font-size: 17px;
-            color: var(--color-dark);
+            color: inherit;
             line-height: 1.7;
             margin-bottom: var(--space-sm);
         }
@@ -1042,14 +1047,14 @@
          WHY FREE
          ======================================== -->
 
-    <section class="section section--light">
+    <section class="section section--dark">
         <div class="container">
             <div class="section__header">
-                <h2>Why Is This Free?</h2>
+                <h2 style="color: var(--color-white);">Why Is This Free?</h2>
             </div>
 
-            <div class="why-free">
-                <p class="why-free__tagline">Trust beats tactics.</p>
+            <div class="why-free" style="color: var(--color-white);">
+                <p class="why-free__tagline" style="color: var(--color-lighter);">Trust beats tactics.</p>
                 <p>We offer real help without charging because it is the right thing to do. Most questions fall into a few common patterns I see every week. Some people need a quick answer. Some need deeper support. Either way, the conversation starts the same.</p>
                 <p>If you need more than guidance, we offer done-for-you list reviews with expert interpretation included. But there is no pressure. The SOS Hotline exists to help, not to sell.</p>
             </div>
