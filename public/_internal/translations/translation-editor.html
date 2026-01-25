@@ -77,8 +77,18 @@
     <div class="controls">
         <button class="btn" onclick="saveAllChanges()" id="saveBtn" disabled>Save All Changes</button>
         <button class="btn secondary" onclick="loadTranslations()">Reload from Database</button>
-        <button class="btn secondary" onclick="exportCSV()">Export CSV</button>
+        <button class="btn secondary" onclick="exportCSV()">Export All CSV</button>
         <button class="btn secondary" onclick="exportJSON()">Export JSON</button>
+        <select id="exportLangSelect" style="padding: 10px 12px; border: 1px solid #6b7280; border-radius: 8px; font-size: 14px; background: white;">
+            <option value="">Export Language...</option>
+            <option value="gr">Greek (GR)</option>
+            <option value="br">Portuguese (BR)</option>
+            <option value="fr">French (FR)</option>
+            <option value="es">Spanish (ES)</option>
+            <option value="de">German (DE)</option>
+            <option value="km">Khmer (KM)</option>
+        </select>
+        <button class="btn secondary" onclick="exportLanguageCSV()">Download</button>
     </div>
 
     <div class="instructions" style="background: #e0f2fe; border: 1px solid #0ea5e9; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
@@ -802,6 +812,40 @@
             const json = JSON.stringify(translationData, null, 2);
             downloadFile(json, 'translations.json', 'application/json');
             showToast('JSON exported', 'success');
+        }
+
+        function exportLanguageCSV() {
+            const langCode = document.getElementById('exportLangSelect').value;
+            if (!langCode) {
+                showToast('Please select a language first', 'error');
+                return;
+            }
+
+            const langNames = {
+                gr: 'Greek',
+                br: 'Portuguese',
+                fr: 'French',
+                es: 'Spanish',
+                de: 'German',
+                km: 'Khmer'
+            };
+
+            let csv = `Key,Page,Section,English,${langNames[langCode]},Notes\n`;
+
+            translationData.forEach(item => {
+                const row = [
+                    item.key,
+                    item.page,
+                    item.section || '',
+                    `"${item.english.replace(/"/g, '""')}"`,
+                    `"${(item.translations[langCode] || '').replace(/"/g, '""')}"`,
+                    `"${(item.notes || '').replace(/"/g, '""')}"`
+                ];
+                csv += row.join(',') + '\n';
+            });
+
+            downloadFile(csv, `translations-${langCode}.csv`, 'text/csv');
+            showToast(`${langNames[langCode]} CSV exported`, 'success');
         }
 
         function downloadFile(content, filename, mimeType) {
