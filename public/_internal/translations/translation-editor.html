@@ -187,6 +187,7 @@
         let translationData = [];
         let savedTranslations = {}; // From database
         let modifiedCells = new Set();
+        let usingFallback = false;
 
         // Source strings with all translations pre-populated (matching actual website content)
         // UPDATED: 2026-01-25 - Aligned with actual English website copy
@@ -502,118 +503,6 @@
             loadTranslations();
         });
 
-        async function loadTranslations() {
-            const statusEl = document.getElementById('connectionStatus');
-            statusEl.textContent = 'Loading...';
-            statusEl.className = 'status saving';
-
-            try {
-                const response = await fetch(API_URL);
-                if (!response.ok) throw new Error('Failed to load from API');
-
-                const data = await response.json();
-
-                // Map database translations to our data
-                if (data.translations && data.translations.length > 0) {
-                    data.translations.forEach(t => {
-                        const dbKey = `${t.key}_${t.language}`;
-                        savedTranslations[dbKey] = t.value;
-
-                        const item = translationData.find(d => d.key === t.key);
-                        if (item) {
-                            item.translations[t.language] = t.value;
-                        }
-                    });
-                    statusEl.textContent = `Connected (${data.translations.length} from DB)`;
-                    statusEl.className = 'status connected';
-                    showToast('Translations loaded from database', 'success');
-                } else {
-                    // Database empty, use embedded translations
-                    statusEl.textContent = 'Connected (using defaults)';
-                    statusEl.className = 'status connected';
-                    showToast('Using embedded translations - database empty', 'info');
-                }
-
-                modifiedCells.clear();
-                renderTable();
-            } catch (error) {
-                console.error('Load error:', error);
-                // Use embedded translations as fallback
-                statusEl.textContent = 'Offline (using defaults)';
-                statusEl.className = 'status disconnected';
-                showToast('Could not connect to database - working offline', 'error');
-                renderTable();
-            }
-        }
-
-        async function saveAllChanges() {
-            if (modifiedCells.size === 0) {
-                showToast('No changes to save', 'info');
-                return;
-            }
-
-            const saveBtn = document.getElementById('saveBtn');
-            const statusEl = document.getElementById('connectionStatus');
-
-            saveBtn.disabled = true;
-            saveBtn.textContent = 'Saving...';
-            statusEl.textContent = 'Saving...';
-            statusEl.className = 'status saving';
-
-            const translations = [];
-            modifiedCells.forEach(cellId => {
-                const [key, lang] = cellId.split('__');
-                const item = translationData.find(d => d.key === key);
-                if (item) {
-                    translations.push({
-                        key,
-                        page: item.page,
-                        language: lang,
-                        value: item.translations[lang]
-                    });
-                }
-            });
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ translations })
-                });
-
-                if (!response.ok) throw new Error('Save failed');
-
-                // Update saved state
-                translations.forEach(t => {
-                    savedTranslations[`${t.key}_${t.language}`] = t.value;
-                });
-
-                // Clear modified state and update UI
-                modifiedCells.forEach(cellId => {
-                    const textarea = document.querySelector(`[data-cell-id="${cellId}"]`);
-                    if (textarea) {
-                        textarea.classList.remove('modified');
-                        textarea.classList.add('saved');
-                        setTimeout(() => textarea.classList.remove('saved'), 2000);
-                    }
-                });
-                modifiedCells.clear();
-
-                statusEl.textContent = 'Connected';
-                statusEl.className = 'status connected';
-                showToast(`${translations.length} translations saved!`, 'success');
-            } catch (error) {
-                console.error('Save error:', error);
-                statusEl.textContent = 'Save failed';
-                statusEl.className = 'status disconnected';
-                showToast('Failed to save - please try again', 'error');
-            }
-
-            saveBtn.disabled = modifiedCells.size === 0;
-            saveBtn.textContent = 'Save All Changes';
-            updateStats();
-        }
-
         function initializeData() {
             translationData = sourceStrings.map(s => ({
                 ...s,
@@ -649,7 +538,6 @@
                 const data = await response.json();
 
                 // Map database translations to our data
-                savedTranslations = {};
                 if (data.translations && data.translations.length > 0) {
                     data.translations.forEach(t => {
                         const dbKey = `${t.key}_${t.language}`;
@@ -660,58 +548,26 @@
                             item.translations[t.language] = t.value;
                         }
                     });
-                    usingFallback = false;
-                    statusEl.textContent = 'Connected';
+                    statusEl.textContent = `Connected (${data.translations.length} from DB)`;
                     statusEl.className = 'status connected';
                     showToast('Translations loaded from database', 'success');
                 } else {
-                    // Database empty, load from JSON fallback
-                    await loadFromJsonFallback(statusEl);
+                    // Database empty, use embedded translations
+                    statusEl.textContent = 'Connected (using defaults)';
+                    statusEl.className = 'status connected';
+                    showToast('Database empty - using embedded translations', 'info');
                 }
 
                 modifiedCells.clear();
                 renderTable();
             } catch (error) {
                 console.error('Load error:', error);
-                // Try JSON fallback
-                await loadFromJsonFallback(statusEl);
+                // Use embedded translations as fallback
+                statusEl.textContent = 'Offline (using defaults)';
+                statusEl.className = 'status disconnected';
+                showToast('Could not connect to database - working offline with embedded translations', 'error');
                 modifiedCells.clear();
                 renderTable();
-            }
-        }
-
-        async function loadFromJsonFallback(statusEl) {
-            try {
-                const response = await fetch(JSON_FALLBACK_URL);
-                if (!response.ok) throw new Error('Failed to load JSON');
-
-                const data = await response.json();
-
-                // Map JSON translations to our data
-                savedTranslations = {};
-                if (data.translations) {
-                    Object.entries(data.translations).forEach(([key, langs]) => {
-                        const item = translationData.find(d => d.key === key);
-                        if (item) {
-                            languages.forEach(lang => {
-                                if (langs[lang]) {
-                                    item.translations[lang] = langs[lang];
-                                    savedTranslations[`${key}_${lang}`] = langs[lang];
-                                }
-                            });
-                        }
-                    });
-                }
-
-                usingFallback = true;
-                statusEl.textContent = 'Using JSON (offline)';
-                statusEl.className = 'status connected';
-                showToast('Loaded translations from JSON file', 'info');
-            } catch (error) {
-                console.error('JSON fallback error:', error);
-                statusEl.textContent = 'Disconnected';
-                statusEl.className = 'status disconnected';
-                showToast('Could not load translations - starting fresh', 'error');
             }
         }
 
