@@ -1,0 +1,3772 @@
+<!DOCTYPE html>
+<!-- v2.6 - Layer ordering, None options, uploaded images persist -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Editor | LinkedIn Content Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        /* ========================================
+           RME BRAND VARIABLES
+           ======================================== */
+        :root {
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #ffffff;
+            --color-off-white: #fafcfc;
+            --color-light: #f0fdfa;
+            --color-light-alt: #ccfbf1;
+            --color-muted: #6b7280;
+            --color-border: #e5e7eb;
+            --color-success: #1fa95c;
+            --color-warning: #f9943b;
+            --color-danger: #f33144;
+            --color-secondary: #fbbf24;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 32px;
+            --space-xl: 48px;
+            --radius-sm: 6px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-family);
+            background: #1a1a2e;
+            color: var(--color-white);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            background: #16162a;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-brand img { height: 28px; }
+        .nav-brand h1 { font-size: 14px; font-weight: 600; }
+
+        .nav-links { display: flex; gap: 16px; }
+
+        .nav-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Layout */
+        .app {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            height: calc(100vh - 53px);
+        }
+
+        .sidebar {
+            background: #16162a;
+            border-right: 1px solid rgba(255,255,255,0.1);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-content {
+            padding: var(--space-md);
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .sidebar-footer {
+            padding: var(--space-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            background: #16162a;
+        }
+
+        .preview-area {
+            background: #1a1a2e;
+            padding: var(--space-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+        }
+
+        /* Control Components */
+        .control-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .control-section h3 {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-sm);
+        }
+
+        .control-group {
+            margin-bottom: var(--space-md);
+        }
+
+        .control-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 6px;
+        }
+
+        .input-text,
+        .input-textarea,
+        .input-select {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            padding: 10px 12px;
+            font-size: 13px;
+            font-family: var(--font-family);
+            color: var(--color-white);
+            transition: border-color 0.2s;
+        }
+
+        .input-text:focus,
+        .input-textarea:focus,
+        .input-select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .input-textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        .input-hint {
+            font-size: 10px;
+            color: var(--color-muted);
+            margin-top: 4px;
+        }
+
+        /* Flip Buttons */
+        .flip-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .flip-btn {
+            flex: 1;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            font-family: var(--font-family);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .flip-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .flip-btn.active {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: white;
+        }
+
+        /* Toggle Switch */
+        .toggle-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .toggle-control input {
+            display: none;
+        }
+
+        .toggle-slider {
+            width: 40px;
+            height: 22px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 11px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .toggle-slider::after {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: all 0.2s;
+        }
+
+        .toggle-control input:checked + .toggle-slider {
+            background: var(--color-accent);
+        }
+
+        .toggle-control input:checked + .toggle-slider::after {
+            left: 20px;
+        }
+
+        .toggle-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Slider */
+        .slider-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slider-label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+            width: 20px;
+            text-align: center;
+        }
+
+        .slider {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 4px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 14px;
+            height: 14px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slider-value {
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            width: 35px;
+            text-align: right;
+        }
+
+        /* Image Grid */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-height: 180px;
+            overflow-y: auto;
+            padding: 4px;
+        }
+
+        .image-item {
+            aspect-ratio: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            padding: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-item:hover { background: rgba(255,255,255,0.1); }
+        .image-item.selected {
+            border-color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.2);
+        }
+        .image-item img { width: 100%; height: 100%; object-fit: contain; }
+
+        /* Badge Color Grid */
+        .badge-color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .badge-color-item {
+            padding: 8px 4px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-color-item:hover { transform: scale(1.05); }
+        .badge-color-item.selected {
+            border-color: var(--color-white);
+            box-shadow: 0 0 0 2px var(--color-accent);
+        }
+
+        .badge-color-item[title]:hover::after {
+            content: attr(title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+            z-index: 100;
+            margin-bottom: 4px;
+        }
+
+        /* Text Color Picker */
+        .text-color-picker {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            align-items: center;
+        }
+        .text-color-picker-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+            margin-right: 4px;
+        }
+        .text-color-btn {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.15s;
+            position: relative;
+        }
+        .text-color-btn:hover {
+            transform: scale(1.15);
+            border-color: rgba(255,255,255,0.5);
+        }
+        .text-color-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a2e;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 10px;
+            white-space: nowrap;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.15s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .text-color-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Gradient Grid */
+        .gradient-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .gradient-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            position: relative;
+        }
+
+        .gradient-item:hover { transform: scale(1.05); }
+        .gradient-item.selected {
+            border-color: var(--color-white);
+            box-shadow: 0 0 0 2px var(--color-accent);
+        }
+
+        .gradient-item span {
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 8px;
+            font-weight: 600;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Pattern Grid */
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .pattern-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            position: relative;
+            background: var(--color-dark);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .pattern-item:hover { transform: scale(1.02); }
+        .pattern-item.selected {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3);
+        }
+        .pattern-item svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.25;
+        }
+        .pattern-item span {
+            position: relative;
+            z-index: 1;
+            font-size: 10px;
+            font-weight: 600;
+            color: white;
+            text-align: center;
+            padding: 4px;
+        }
+
+        /* Layer List */
+        .layer-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .layer-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: var(--radius-sm);
+            cursor: grab;
+            font-size: 12px;
+            color: rgba(255,255,255,0.8);
+            transition: all 0.15s;
+        }
+        .layer-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+        .layer-item.dragging {
+            opacity: 0.5;
+            background: rgba(13, 148, 136, 0.2);
+        }
+        .layer-item .drag-handle {
+            color: rgba(255,255,255,0.3);
+            font-size: 10px;
+        }
+        .layer-item .layer-name {
+            flex: 1;
+            text-transform: capitalize;
+        }
+        .layer-item .layer-index {
+            font-size: 10px;
+            color: rgba(255,255,255,0.4);
+            width: 16px;
+            text-align: center;
+        }
+
+        /* Theme Grid */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .theme-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            position: relative;
+        }
+
+        .theme-item:hover { transform: scale(1.05); }
+        .theme-item.selected {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.3);
+        }
+
+        .theme-item span {
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* Format Grid */
+        .format-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .format-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: var(--radius-sm);
+            padding: 12px 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.15s;
+            text-align: center;
+        }
+
+        .format-item:hover { background: rgba(255,255,255,0.1); }
+        .format-item.selected {
+            border-color: var(--color-accent);
+            background: rgba(13, 148, 136, 0.2);
+        }
+
+        .format-item .icon {
+            margin: 0 auto 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+
+        .format-item .icon.square { width: 28px; height: 28px; }
+        .format-item .icon.portrait { width: 24px; height: 30px; }
+        .format-item .icon.landscape { width: 36px; height: 19px; }
+
+        .format-item span { font-size: 11px; color: rgba(255,255,255,0.7); }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 16px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 500;
+            font-family: var(--font-family);
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s;
+            width: 100%;
+        }
+
+        .btn-primary { background: var(--color-accent); color: white; }
+        .btn-primary:hover { background: var(--color-accent-hover); }
+        .btn-secondary { background: rgba(255,255,255,0.1); color: white; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.15); }
+
+        .btn-group { display: flex; gap: 8px; }
+        .btn-group .btn { flex: 1; }
+
+        /* ========================================
+           PREVIEW - SLIDE CONTAINER
+           ======================================== */
+        .preview-container {
+            background: #0d0d1a;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        .slide-preview {
+            position: relative;
+            overflow: hidden;
+            font-family: var(--font-family);
+        }
+
+        .slide-preview.size-square { width: 400px; height: 400px; }
+        .slide-preview.size-portrait { width: 400px; height: 500px; }
+        .slide-preview.size-landscape,
+        .slide-preview.size-wide { width: 500px; height: 262px; }
+
+        /* Theme Backgrounds */
+        .slide-preview.theme-dark {
+            background: linear-gradient(135deg, #134e4a 0%, #0f3d3a 100%);
+            color: white;
+        }
+        .slide-preview.theme-light {
+            background: linear-gradient(135deg, #f0fdfa 0%, #e6f9f6 100%);
+            color: #134e4a;
+        }
+        .slide-preview.theme-accent {
+            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+            color: white;
+        }
+        .slide-preview.theme-white {
+            background: white;
+            color: #134e4a;
+        }
+
+        /* ========================================
+           TEMPLATE TYPE: STATEMENT
+           ======================================== */
+        .tpl-statement {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .tpl-statement .logo {
+            position: absolute;
+            z-index: 10;
+        }
+
+        .tpl-statement .logo img {
+            height: 100%;
+            width: auto;
+        }
+
+        .tpl-statement .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: fit-content;
+            margin-bottom: 12px;
+            z-index: 15;
+        }
+
+        .tpl-statement .badge.badge-accent {
+            background: rgba(13, 148, 136, 0.15);
+            color: var(--color-accent);
+        }
+        .tpl-statement .badge.badge-danger {
+            background: rgba(243, 49, 68, 0.15);
+            color: var(--color-danger);
+        }
+        .theme-dark .tpl-statement .badge.badge-accent,
+        .theme-accent .tpl-statement .badge.badge-accent {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        .tpl-statement .brand {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        .tpl-statement .headline {
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            white-space: pre-line;
+        }
+
+        .tpl-statement .body {
+            font-size: 14px;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .tpl-statement .cta {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            width: fit-content;
+            margin-top: auto;
+        }
+
+        .theme-dark .tpl-statement .cta,
+        .theme-accent .tpl-statement .cta {
+            background: white;
+            color: var(--color-dark);
+        }
+        .theme-light .tpl-statement .cta,
+        .theme-white .tpl-statement .cta {
+            background: var(--color-accent);
+            color: white;
+        }
+
+        .tpl-statement .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* ========================================
+           TEMPLATE TYPE: STAT FOCUS
+           ======================================== */
+        .tpl-stat {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tpl-stat .label {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .tpl-stat .stat-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .theme-light .tpl-stat .stat-box,
+        .theme-white .tpl-stat .stat-box {
+            background: rgba(13, 148, 136, 0.08);
+            border-color: rgba(13, 148, 136, 0.2);
+        }
+
+        .tpl-stat .stat-value {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .tpl-stat .stat-label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .tpl-stat .description {
+            font-size: 18px;
+            line-height: 1.5;
+            text-align: center;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .tpl-stat .source {
+            font-size: 13px;
+            opacity: 0.6;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        /* ========================================
+           TEMPLATE TYPE: CHECKLIST
+           ======================================== */
+        .tpl-checklist {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .tpl-checklist .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: fit-content;
+            z-index: 15;
+        }
+
+        .tpl-checklist .label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            opacity: 0.7;
+            margin-bottom: 8px;
+        }
+
+        .tpl-checklist .headline {
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .tpl-checklist .items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tpl-checklist .item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .tpl-checklist .item-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .tpl-checklist .item-icon.good {
+            background: var(--color-success);
+            color: white;
+        }
+        .tpl-checklist .item-icon.bad {
+            background: var(--color-danger);
+            color: white;
+        }
+
+        .tpl-checklist .cta {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            width: fit-content;
+            margin-top: auto;
+            text-align: center;
+        }
+
+        .theme-dark .tpl-checklist .cta,
+        .theme-accent .tpl-checklist .cta {
+            background: white;
+            color: var(--color-dark);
+        }
+        .theme-light .tpl-checklist .cta,
+        .theme-white .tpl-checklist .cta {
+            background: var(--color-dark);
+            color: white;
+        }
+
+        /* ========================================
+           TEMPLATE TYPE: DO'S & DON'TS
+           ======================================== */
+        .tpl-dodont {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .tpl-dodont .headline {
+            font-size: 26px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .tpl-dodont .columns {
+            display: flex;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .tpl-dodont .column {
+            flex: 1;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .tpl-dodont .column.do-column {
+            background: #e8f5e9;
+        }
+
+        .tpl-dodont .column.dont-column {
+            background: #ffebee;
+        }
+
+        .tpl-dodont .column-header {
+            font-weight: 700;
+            font-size: 10px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tpl-dodont .column.do-column .column-header {
+            color: #2e7d32;
+        }
+
+        .tpl-dodont .column.dont-column .column-header {
+            color: #c62828;
+        }
+
+        .tpl-dodont .column-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--color-dark);
+        }
+
+        .tpl-dodont .column-item .icon {
+            flex-shrink: 0;
+        }
+
+        .tpl-dodont .column.do-column .icon {
+            color: #2e7d32;
+        }
+
+        .tpl-dodont .column.dont-column .icon {
+            color: #c62828;
+        }
+
+        /* ========================================
+           TEMPLATE TYPE: QUOTE
+           ======================================== */
+        .tpl-quote {
+            padding: 8%;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .tpl-quote .quote-mark {
+            font-size: 72px;
+            line-height: 1;
+            color: var(--color-accent);
+            margin-bottom: -10px;
+        }
+
+        .theme-dark .tpl-quote .quote-mark,
+        .theme-accent .tpl-quote .quote-mark {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .tpl-quote .quote-text {
+            font-size: 28px;
+            font-weight: 600;
+            font-style: italic;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .tpl-quote .divider {
+            width: 40px;
+            height: 3px;
+            background: var(--color-accent);
+            margin: 0 auto 20px;
+        }
+
+        .theme-dark .tpl-quote .divider,
+        .theme-accent .tpl-quote .divider {
+            background: rgba(255,255,255,0.4);
+        }
+
+        .tpl-quote .attribution {
+            font-size: 16px;
+            opacity: 0.8;
+            margin-bottom: 24px;
+        }
+
+        .tpl-quote .author-box {
+            background: rgba(255,255,255,0.1);
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: auto;
+        }
+
+        .theme-light .tpl-quote .author-box,
+        .theme-white .tpl-quote .author-box {
+            background: rgba(13, 148, 136, 0.08);
+        }
+
+        .tpl-quote .author-name {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .tpl-quote .author-title {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        /* Logo positioning */
+        .logo-wrapper {
+            position: absolute;
+            z-index: 10;
+        }
+        .logo-wrapper img {
+            display: block;
+        }
+
+        /* Direct logo image styling */
+        img.logo-img {
+            display: block;
+            max-width: none;
+            object-fit: contain;
+        }
+
+        /* Character positioning */
+        .character-wrapper {
+            position: absolute;
+            z-index: 5;
+        }
+        .character-wrapper img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Background image positioning */
+        .background-image-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .background-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Smart spacing is now handled dynamically via inline styles */
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-brand">
+            <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails">
+            <h1>Template Editor</h1>
+        </div>
+        <div class="nav-links">
+            <a href="templates.html" class="nav-link">Template Library</a>
+            <a href="index.html" class="nav-link">Advanced Editor</a>
+        </div>
+    </nav>
+
+    <div class="app">
+        <div class="sidebar">
+            <div class="sidebar-content">
+                <!-- Format -->
+                <div class="control-section">
+                    <h3>Format</h3>
+                    <div class="format-grid">
+                        <div class="format-item selected" data-format="square">
+                            <div class="icon square"></div>
+                            <span>Square</span>
+                        </div>
+                        <div class="format-item" data-format="portrait">
+                            <div class="icon portrait"></div>
+                            <span>Portrait</span>
+                        </div>
+                        <div class="format-item" data-format="landscape">
+                            <div class="icon landscape"></div>
+                            <span>Landscape</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme -->
+                <div class="control-section">
+                    <h3>Theme</h3>
+                    <div class="theme-grid">
+                        <div class="theme-item selected" data-theme="dark" style="background: linear-gradient(135deg, #134e4a, #0f3d3a); color: white;">
+                            <span>Dark</span>
+                        </div>
+                        <div class="theme-item" data-theme="light" style="background: linear-gradient(135deg, #f0fdfa, #e6f9f6); color: #134e4a;">
+                            <span>Light</span>
+                        </div>
+                        <div class="theme-item" data-theme="accent" style="background: linear-gradient(135deg, #0d9488, #0f766e); color: white;">
+                            <span>Accent</span>
+                        </div>
+                        <div class="theme-item" data-theme="white" style="background: white; color: #134e4a; border: 1px solid #e5e5e5;">
+                            <span>White</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logo -->
+                <div class="control-section">
+                    <h3>Logo</h3>
+                    <div class="control-group">
+                        <label class="toggle-control">
+                            <input type="checkbox" id="logoVisible" checked>
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Show Logo</span>
+                        </label>
+                    </div>
+                    <div id="logoControls">
+                        <div class="control-group">
+                            <label class="control-label">Select Logo</label>
+                            <div class="image-grid" id="logoGrid"></div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Position X</label>
+                        <div class="slider-group">
+                            <span class="slider-label">L</span>
+                            <input type="range" class="slider" id="logoX" min="0" max="100" value="8">
+                            <span class="slider-label">R</span>
+                            <span class="slider-value" id="logoXValue">8%</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Position Y</label>
+                        <div class="slider-group">
+                            <span class="slider-label">T</span>
+                            <input type="range" class="slider" id="logoY" min="0" max="100" value="8">
+                            <span class="slider-label">B</span>
+                            <span class="slider-value" id="logoYValue">8%</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Size</label>
+                        <div class="slider-group">
+                            <span class="slider-label">S</span>
+                            <input type="range" class="slider" id="logoZoom" min="20" max="80" value="36">
+                            <span class="slider-label">L</span>
+                            <span class="slider-value" id="logoZoomValue">36px</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- Character -->
+                <div class="control-section">
+                    <h3>Character</h3>
+                    <div class="control-group">
+                        <label class="toggle-control">
+                            <input type="checkbox" id="characterVisible">
+                            <span class="toggle-slider"></span>
+                            <span class="toggle-label">Show Character</span>
+                        </label>
+                    </div>
+                    <div id="characterControls" style="display: none;">
+                        <div class="control-group">
+                            <label class="control-label">Select Character</label>
+                            <div class="image-grid" id="characterGrid" style="grid-template-columns: repeat(3, 1fr);"></div>
+                            <input type="file" id="characterUpload" accept="image/*" style="display: none;">
+                            <button class="btn btn-secondary" style="margin-top: 8px; padding: 6px 12px; font-size: 11px;" onclick="document.getElementById('characterUpload').click()">
+                                <span id="charUploadText">+ Upload Character</span>
+                            </button>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Position X</label>
+                            <div class="slider-group">
+                                <span class="slider-label">L</span>
+                                <input type="range" class="slider" id="charX" min="0" max="100" value="70">
+                                <span class="slider-label">R</span>
+                                <span class="slider-value" id="charXValue">70%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Position Y</label>
+                            <div class="slider-group">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="charY" min="0" max="100" value="50">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="charYValue">50%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Size</label>
+                            <div class="slider-group">
+                                <span class="slider-label">S</span>
+                                <input type="range" class="slider" id="charZoom" min="50" max="400" value="150">
+                                <span class="slider-label">L</span>
+                                <span class="slider-value" id="charZoomValue">150px</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Rotation</label>
+                            <div class="slider-group">
+                                <span class="slider-label">-180</span>
+                                <input type="range" class="slider" id="charRotation" min="-180" max="180" value="0">
+                                <span class="slider-label">180</span>
+                                <span class="slider-value" id="charRotationValue">0°</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Flip</label>
+                            <div class="flip-buttons">
+                                <button class="flip-btn" id="charFlipH" title="Flip Horizontal">↔ Horizontal</button>
+                                <button class="flip-btn" id="charFlipV" title="Flip Vertical">↕ Vertical</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content (dynamic based on template type) -->
+                <div class="control-section" id="contentControls">
+                    <h3>Content</h3>
+                    <!-- Populated by JS based on template type -->
+                </div>
+
+                <!-- Background -->
+                <div class="control-section">
+                    <h3>Background</h3>
+                    <div class="control-group">
+                        <label class="control-label">Background Image</label>
+                        <div class="image-grid" id="backgroundGrid" style="grid-template-columns: repeat(3, 1fr); max-height: 120px;"></div>
+                        <div style="display: flex; gap: 8px; margin-top: 8px;">
+                            <input type="file" id="backgroundUpload" accept="image/*" style="display: none;">
+                            <button class="btn btn-secondary" style="flex: 1; padding: 6px 12px; font-size: 11px;" onclick="document.getElementById('backgroundUpload').click()">
+                                <span id="bgUploadText">+ Upload</span>
+                            </button>
+                            <button class="btn btn-secondary" style="flex: 1; padding: 6px 12px; font-size: 11px;" onclick="clearBackgroundImage()">Clear</button>
+                        </div>
+                    </div>
+                    <div id="bgImageControls" style="display: none;">
+                        <div class="control-group">
+                            <label class="control-label">Flip Background</label>
+                            <div class="flip-buttons">
+                                <button class="flip-btn" id="bgFlipH" title="Flip Horizontal">↔ Horizontal</button>
+                                <button class="flip-btn" id="bgFlipV" title="Flip Vertical">↕ Vertical</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group" id="gradientOpacityGroup" style="display: none;">
+                        <label class="control-label">Gradient Overlay Opacity</label>
+                        <div class="slider-group">
+                            <span class="slider-label">0</span>
+                            <input type="range" class="slider" id="gradientOpacity" min="0" max="100" value="80">
+                            <span class="slider-label">100</span>
+                            <span class="slider-value" id="gradientOpacityValue">80%</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Gradient Presets</label>
+                        <div class="gradient-grid" id="gradientPresets"></div>
+                    </div>
+                </div>
+
+                <!-- Patterns -->
+                <div class="control-section">
+                    <h3>Decorative Pattern</h3>
+                    <div class="control-group">
+                        <label class="control-label">Pattern Type</label>
+                        <div class="pattern-grid" id="patternGrid">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <div id="patternControls" style="display: none;">
+                        <div class="control-group">
+                            <label class="control-label">Opacity</label>
+                            <div class="slider-row">
+                                <span class="slider-label">5</span>
+                                <input type="range" class="slider" id="patternOpacity" min="5" max="40" value="15">
+                                <span class="slider-label">40</span>
+                                <span class="slider-value" id="patternOpacityValue">15%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Position</label>
+                            <select class="input-select" id="patternPosition" style="width: 100%; padding: 8px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: white;">
+                                <option value="all">All Corners</option>
+                                <option value="bottom-left">Bottom Left</option>
+                                <option value="bottom-right">Bottom Right</option>
+                                <option value="top-left">Top Left</option>
+                                <option value="top-right">Top Right</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Layers -->
+                <div class="control-section">
+                    <h3>Layer Order</h3>
+                    <div class="control-group">
+                        <div class="layer-list" id="layerList">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div class="input-hint" style="margin-top: 8px;">Drag to reorder. Top = front, Bottom = back</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="copyToClipboard()">Copy</button>
+                    <button class="btn btn-primary" onclick="downloadImage()">Download</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-area">
+            <div class="preview-container">
+                <div class="slide-preview size-square theme-dark" id="slidePreview">
+                    <!-- Template content rendered here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('Script starting...');
+
+        // ========================================
+        // CONSTANTS
+        // ========================================
+        const LOGOS = [
+            { file: 'Horizontal-Logo.svg', name: 'Horizontal' },
+            { file: 'Dark-Horizontal-Logo.svg', name: 'Dark Horizontal' },
+            { file: 'Vertical-Logo.svg', name: 'Vertical' },
+            { file: 'Dark-Vertical-Logo.svg', name: 'Dark Vertical' },
+            { file: 'Square-Logo.svg', name: 'Square' },
+            { file: 'Dark-Square-Logo.svg', name: 'Dark Square' },
+            { file: 'Icon.svg', name: 'Icon' },
+            { file: 'Dark-Icon.svg', name: 'Dark Icon' }
+        ];
+
+        const CHARACTERS = [
+            { file: '../assets/captain/Captain - Hand to the left.jpeg', name: 'Captain - Hand Left', category: 'Captain' },
+            { file: '../assets/captain/Captain - Looking right.jpeg', name: 'Captain - Looking Right', category: 'Captain' },
+            { file: '../assets/captain/Captain - Standing left.jpeg', name: 'Captain - Standing', category: 'Captain' },
+            { file: '../assets/captain/Captain - Walking left.jpeg', name: 'Captain - Walking', category: 'Captain' },
+            { file: '../assets/mermaid/Generated Image January 05, 2026 - 1_47AM (1).jpeg', name: 'Mermaid 1', category: 'Mermaid' },
+            { file: '../assets/mermaid/Generated Image January 05, 2026 - 1_57AM.jpeg', name: 'Mermaid 2', category: 'Mermaid' },
+            { file: '../assets/mermaid/Generated Image January 05, 2026 - 2_11AM.jpeg', name: 'Mermaid 3', category: 'Mermaid' },
+            { file: '../assets/mermaid/Generated_Image_January_05__2026_-_3_56PM-removebg-preview.png', name: 'Mermaid (No BG)', category: 'Mermaid' },
+            { file: '../assets/pirate/ChatGPT Image Jan 5, 2026, 01_15_50 AM.png', name: 'Pirate 1', category: 'Pirate' },
+            { file: '../assets/pirate/ChatGPT Image Jan 5, 2026, 01_17_32 AM.png', name: 'Pirate 2', category: 'Pirate' },
+            { file: '../assets/pirate/Generated Image January 05, 2026 - 1_40AM.jpeg', name: 'Pirate 3', category: 'Pirate' },
+            { file: '../assets/pirate/Generated Image January 05, 2026 - 1_44AM.jpeg', name: 'Pirate 4', category: 'Pirate' },
+            { file: '../assets/delphi/Delphi Approved.svg', name: 'Delphi Approved', category: 'Delphi' },
+            { file: '../assets/delphi/Delphi Climbing Ladder.svg', name: 'Delphi Climbing', category: 'Delphi' },
+            { file: '../assets/delphi/Delphi Flashlight.svg', name: 'Delphi Flashlight', category: 'Delphi' },
+            { file: '../assets/delphi/Delphi Mission Control Room.svg', name: 'Delphi Mission Control', category: 'Delphi' },
+            { file: '../assets/delphi/Delphi Sword Looking Sideways.svg', name: 'Delphi Sword', category: 'Delphi' },
+            { file: '../assets/delphi/Delphi and closed treasure chest.svg', name: 'Delphi Treasure', category: 'Delphi' },
+            { file: '../assets/delphi/Delphi 12 Poses-12.svg', name: 'Delphi Poses', category: 'Delphi' },
+            { file: '../assets/delphi/Catching ButterEmails.svg', name: 'Catching Emails', category: 'Delphi' },
+            { file: '../assets/delphi/Sorting Emails.svg', name: 'Sorting Emails', category: 'Delphi' },
+            { file: '../assets/delphi/Analyzing Risky Emails.svg', name: 'Analyzing Emails', category: 'Delphi' },
+            { file: '../assets/delphi/List Cleaning.svg', name: 'List Cleaning', category: 'Delphi' },
+            { file: '../assets/delphi/Identifying Spam Traps.svg', name: 'Spam Traps', category: 'Delphi' },
+            { file: '../assets/delphi/Inbox Placement Testing.svg', name: 'Inbox Testing', category: 'Delphi' },
+            { file: '../assets/delphi/Protecting Sender Reputation.svg', name: 'Sender Reputation', category: 'Delphi' },
+            { file: '../assets/delphi/Custom Warmup Scheduling.svg', name: 'Warmup Scheduling', category: 'Delphi' },
+            { file: '../assets/delphi/Customer Support.svg', name: 'Customer Support', category: 'Delphi' },
+            { file: '../assets/delphi/SPF DKIM DMARC Checklist.svg', name: 'SPF DKIM DMARC', category: 'Delphi' },
+            { file: '../assets/delphi/PLPO Scanner.svg', name: 'PLPO Scanner', category: 'Delphi' },
+            { file: '../assets/delphi/Emaill Trapped In Seaweed.svg', name: 'Email Seaweed', category: 'Delphi' },
+            { file: '../assets/delphi/Lock Suppressed Contacts.svg', name: 'Lock Suppressed', category: 'Delphi' },
+            { file: '../assets/delphi/Unlocking Blocklist.svg', name: 'Unlocking Blocklist', category: 'Delphi' },
+            { file: '../assets/delphi/Gems Open Treasure Chest.svg', name: 'Gems Treasure', category: 'Delphi' }
+        ];
+
+        // Text colors for rich text syntax [color:text]
+        const TEXT_COLORS = [
+            { id: 'teal', color: '#0d9488', usage: 'Emphasis, key terms, positive highlights' },
+            { id: 'red', color: '#f33144', usage: 'Warnings, errors, critical points' },
+            { id: 'green', color: '#1fa95c', usage: 'Success, verified, safe actions' },
+            { id: 'yellow', color: '#fbbf24', usage: 'Caution, highlights, premium' },
+            { id: 'orange', color: '#f9943b', usage: 'Warnings, attention, monitoring' }
+        ];
+
+        const BACKGROUNDS = [
+            { file: '../assets/background/Gemini_Generated_Image_f448y9f448y9f448.png', name: 'Ocean 1' },
+            { file: '../assets/background/Gemini_Generated_Image_vdo9nbvdo9nbvdo9.png', name: 'Ocean 2' },
+            { file: '../assets/background/Gemini_Generated_Image_oxwfzxoxwfzxoxwf.png', name: 'Ocean 3' },
+            { file: '../assets/background/ChatGPT Image Sep 29, 2025, 07_02_37 PM.png', name: 'Abstract 1' },
+            { file: '../assets/background/ChatGPT Image Sep 29, 2025, 07_26_34 PM.png', name: 'Abstract 2' },
+            { file: '../assets/background/ChatGPT Image Sep 29, 2025, 08_50_38 PM.png', name: 'Abstract 3' },
+            { file: '../assets/background/ChatGPT Image Nov 17, 2025, 12_52_31 PM.png', name: 'Digital 1' },
+            { file: '../assets/background/ChatGPT Image Nov 17, 2025, 01_02_55 PM.png', name: 'Digital 2' }
+        ];
+
+        const BADGE_COLORS = [
+            { id: 'accent', name: 'Teal', bg: 'rgba(13, 148, 136, 0.15)', color: '#0d9488', usage: 'Tips, features, general info' },
+            { id: 'secondary', name: 'Gold', bg: 'rgba(251, 191, 36, 0.2)', color: '#fbbf24', usage: 'Strategy, highlights, premium' },
+            { id: 'danger', name: 'Red', bg: 'rgba(243, 49, 68, 0.15)', color: '#f33144', usage: 'Alerts, warnings, critical errors' },
+            { id: 'dark', name: 'Dark', bg: '#134e4a', color: '#ffffff', usage: 'Institutional, authority posts' },
+            { id: 'warning', name: 'Orange', bg: 'rgba(249, 148, 59, 0.2)', color: '#f9943b', usage: 'Caution, monitoring, watch' },
+            { id: 'success', name: 'Green', bg: 'rgba(31, 169, 92, 0.15)', color: '#1fa95c', usage: 'Success, verified, safe' }
+        ];
+
+        const GRADIENT_PRESETS = [
+            { name: 'Teal Deep', start: '#134e4a', end: '#0f3d3a', usage: 'Hero sections, authority posts' },
+            { name: 'Teal Accent', start: '#0d9488', end: '#0f766e', usage: 'CTAs, engagement posts' },
+            { name: 'Teal Light', start: '#14b8a6', end: '#0d9488', usage: 'Tips, announcements' },
+            { name: 'Ocean', start: '#134e4a', end: '#0d9488', usage: 'Educational content' },
+            { name: 'Midnight', start: '#1a1a2e', end: '#16162a', usage: 'Dark mode, tech' },
+            { name: 'Charcoal', start: '#374151', end: '#1f2937', usage: 'Professional, B2B' },
+            { name: 'Slate', start: '#475569', end: '#334155', usage: 'Neutral, data' },
+            { name: 'Deep Sea', start: '#164e63', end: '#0c4a6e', usage: 'Trust signals' },
+            { name: 'Sunset', start: '#f97316', end: '#ea580c', usage: 'Warnings, urgency' },
+            { name: 'Gold', start: '#fbbf24', end: '#f59e0b', usage: 'Premium, highlights' },
+            { name: 'Fire', start: '#ef4444', end: '#dc2626', usage: 'Danger, blacklist' },
+            { name: 'Sky', start: '#38bdf8', end: '#0ea5e9', usage: 'Info, tutorials' },
+            { name: 'Mint', start: '#34d399', end: '#10b981', usage: 'Success, verified' },
+            { name: 'Indigo', start: '#818cf8', end: '#6366f1', usage: 'Creative, AI' },
+            { name: 'Lavender', start: '#a78bfa', end: '#8b5cf6', usage: 'Unique content' },
+            { name: 'Coral', start: '#fb7185', end: '#f43f5e', usage: 'Soft alerts' }
+        ];
+
+        // Template definitions
+        const TEMPLATES = {
+            // ========================================
+            // EXISTING TEMPLATES
+            // ========================================
+            'dark-statement-sq': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    brand: 'REVIEW MY EMAILS',
+                    headline: 'Stop guessing.\nStart knowing.',
+                    body: 'Your bounce rate is telling a story. Are you listening?',
+                    cta: 'Get Free Audit'
+                }
+            },
+            'minimal-tip-sq': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Pro Tip',
+                    badgeColor: 'accent',
+                    headline: 'Clean your list every 90 days.',
+                    body: 'Stale data is the #1 killer of sender reputation.',
+                    cta: 'Learn More'
+                }
+            },
+            'stat-focus-sq': {
+                type: 'stat',
+                format: 'square',
+                theme: 'accent',
+                data: {
+                    label: 'DID YOU KNOW?',
+                    stat: '22.5%',
+                    statLabel: 'Average database decay per year',
+                    description: 'If you haven\'t cleaned your list in a year, nearly a quarter of it is risky.',
+                    source: 'Source: Industry Benchmarks'
+                }
+            },
+            'risk-alert-sq': {
+                type: 'checklist',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'Alert',
+                    badgeColor: 'danger',
+                    headline: 'Is your domain blacklisted?',
+                    items: [
+                        { text: 'Emails going to spam', status: 'bad' },
+                        { text: 'Open rates dropping', status: 'bad' },
+                        { text: 'Providers blocking you', status: 'bad' }
+                    ],
+                    body: 'Check your status instantly at reviewmyemails.com',
+                    cta: null
+                }
+            },
+            'checklist-pt': {
+                type: 'checklist',
+                format: 'portrait',
+                theme: 'light',
+                data: {
+                    label: 'DELIVERABILITY 101',
+                    headline: 'The Safe Sender Checklist',
+                    items: [
+                        { text: 'SPF Record Configured', status: 'good' },
+                        { text: 'DKIM Signature Valid', status: 'good' },
+                        { text: 'DMARC Policy Active', status: 'good' },
+                        { text: 'Hard Bounces Removed', status: 'good' }
+                    ],
+                    cta: 'Download Guide'
+                }
+            },
+            'quote-pt': {
+                type: 'quote',
+                format: 'portrait',
+                theme: 'dark',
+                data: {
+                    quote: 'Trust is the currency of the inbox.',
+                    attribution: 'Without it, your offers are invisible.',
+                    author: 'Review My Emails',
+                    authorTitle: 'Deliverability Experts'
+                }
+            },
+            // Portrait templates
+            'do-dont-pt': {
+                type: 'dodont',
+                format: 'portrait',
+                theme: 'white',
+                data: {
+                    headline: 'Email Warm-up',
+                    dosAndDonts: {
+                        do: ['Start with engaged subscribers', 'Gradually increase volume', 'Monitor metrics daily'],
+                        dont: ['Blast your entire list', 'Ignore bounce rates', 'Skip authentication']
+                    }
+                }
+            },
+            'step-process-pt': {
+                type: 'statement',
+                format: 'portrait',
+                theme: 'dark',
+                data: {
+                    badge: 'How To',
+                    badgeColor: 'accent',
+                    headline: '3 Steps to Better Deliverability',
+                    body: '01. Audit - Check your current reputation\n02. Clean - Remove invalid addresses\n03. Monitor - Track ongoing metrics',
+                    cta: null
+                }
+            },
+            'qa-format-pt': {
+                type: 'statement',
+                format: 'portrait',
+                theme: 'accent',
+                data: {
+                    brand: 'Q&A TUESDAY',
+                    headline: '"How often should I clean my list?"',
+                    body: 'Ideally, every quarter. Or immediately if your bounce rate hits 2%.',
+                    cta: 'Have a question? DM us.'
+                }
+            },
+            'feature-highlight-sq': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'New Feature',
+                    badgeColor: 'secondary',
+                    headline: 'Real-time Verification API',
+                    body: 'Stop bad emails at the signup form.',
+                    cta: 'View Documentation'
+                }
+            },
+            // Wide templates
+            'value-prop-wd': {
+                type: 'statement',
+                format: 'wide',
+                theme: 'dark',
+                data: {
+                    headline: 'Protect Your Sender Reputation',
+                    body: 'Real-time monitoring. Instant alerts. Expert guidance.',
+                    cta: 'Start Free Trial'
+                }
+            },
+            'social-proof-wd': {
+                type: 'stat',
+                format: 'wide',
+                theme: 'light',
+                data: {
+                    label: 'TRUSTED BY MARKETERS',
+                    stat: '10K+',
+                    statLabel: 'Domains Monitored',
+                    description: '99.2% Inbox Placement • 24/7 Real-time Alerts',
+                    cta: 'Join Them'
+                }
+            },
+            'blog-header-wd': {
+                type: 'statement',
+                format: 'wide',
+                theme: 'accent',
+                data: {
+                    badge: 'Guide',
+                    badgeColor: 'secondary',
+                    headline: 'The Complete Email Deliverability Playbook',
+                    body: 'Everything you need to reach the inbox',
+                    cta: null
+                }
+            },
+            'result-highlight-wd': {
+                type: 'stat',
+                format: 'wide',
+                theme: 'white',
+                data: {
+                    badge: 'Case Study',
+                    badgeColor: 'accent',
+                    label: 'INBOX PLACEMENT RATE',
+                    stat: '45% → 98%',
+                    statLabel: 'Before → After',
+                    cta: 'See How'
+                }
+            },
+
+            // ========================================
+            // WEEK 1: Q4 DAMAGE & BASELINES
+            // ========================================
+            'w1-brand-bold': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Strategy',
+                    badgeColor: 'secondary',
+                    headline: 'January is not\na reset.',
+                    body: 'Your baseline is being set right now.',
+                    cta: null
+                }
+            },
+            'w1-brand-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    headline: 'The calendar changes.\n[teal:The tide does not.]',
+                    body: 'Q4 debt follows you.',
+                    cta: null
+                }
+            },
+            'w1-brand-minimal': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'REMINDER',
+                    headline: 'Q4 debt follows you.',
+                    cta: 'Read the Guide'
+                }
+            },
+            'w1-yanna-danger': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Critical Error',
+                    badgeColor: 'danger',
+                    headline: '"Mostly fine"\n[teal:is the danger.]',
+                    body: 'January hides problems best.',
+                    cta: null
+                }
+            },
+            'w1-yanna-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'sea',
+                data: {
+                    headline: 'Most senders do not crash in the storm.\n[teal:They drift afterward.]',
+                    body: null,
+                    cta: null,
+                    borderLeft: true
+                }
+            },
+            'w1-yanna-alert': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    headline: 'Baselines slip\nquietly.',
+                    body: null,
+                    cta: null,
+                    borderDanger: true
+                }
+            },
+            'w1-norris-checklist': {
+                type: 'checklist',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: "It's okay",
+                    badgeColor: 'accent',
+                    headline: 'Confusion in January is normal.',
+                    items: [
+                        { text: 'Signals first', status: 'good' },
+                        { text: 'Answers second', status: 'good' }
+                    ],
+                    cta: null
+                }
+            },
+            'w1-norris-quote': {
+                type: 'quote',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    emoji: '🗺️',
+                    quote: 'It can feel like you are reading the water without a map.',
+                    author: 'Norris Errie',
+                    authorTitle: null
+                }
+            },
+            'w1-norris-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    pills: ['Keep', 'Monitor'],
+                    headline: '[teal:Clarity starts with questions.]',
+                    cta: 'Ask us anything'
+                }
+            },
+            'w1-daniel-chart': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'Forecast Risk',
+                    badgeColor: 'dark',
+                    showChart: true,
+                    headline: 'Small drops\ncompound fast.',
+                    body: 'Baselines shift without alarms.',
+                    cta: null,
+                    borderDark: true
+                }
+            },
+            'w1-daniel-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    pills: ['Drifting', 'Collapse'],
+                    pillColors: ['warning', 'danger'],
+                    headline: 'Baselines do not collapse.\n[teal:They drift.]',
+                    cta: null
+                }
+            },
+            'w1-daniel-icon': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    headline: 'January sets\nthe year.',
+                    emoji: '🪜',
+                    cta: null
+                }
+            },
+
+            // ========================================
+            // WEEK 2: FALSE RECOVERY SIGNALS
+            // ========================================
+            'w2-brand-main': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Metric Analysis',
+                    badgeColor: 'accent',
+                    headline: 'Numbers move\n[teal:before trust.]',
+                    body: 'The surface can look calm while the current shifts.',
+                    cta: null
+                }
+            },
+            'w2-brand-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    pills: ['Incomplete Data'],
+                    pillColors: ['warning'],
+                    headline: 'Metrics are\nincomplete.',
+                    cta: 'Read Why'
+                }
+            },
+            'w2-yanna-blunt': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    emoji: '📉',
+                    headline: 'Dashboards can lie in January.',
+                    body: '[teal:Do not call it recovery.]',
+                    cta: null
+                }
+            },
+            'w2-yanna-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'sea',
+                data: {
+                    headline: 'Calm metrics can feel like calm seas.',
+                    body: 'That is not the same as safety.',
+                    borderLeft: true,
+                    cta: null
+                }
+            },
+            'w2-yanna-alert': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'False Signal',
+                    badgeColor: 'danger',
+                    headline: 'Uncertainty is\nnot improvement.',
+                    borderDanger: true,
+                    cta: null
+                }
+            },
+            'w2-norris-gentle': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Perspective',
+                    badgeColor: 'secondary',
+                    headline: 'Sometimes the calm is real.',
+                    body: 'Sometimes you are simply closer to shore.',
+                    cta: null
+                }
+            },
+            'w2-norris-button': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'PRO TIP',
+                    headline: 'Ask what really changed.',
+                    cta: 'See Checklist'
+                }
+            },
+            'w2-norris-pill': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    pills: ['Keep Visible'],
+                    pillColors: ['success'],
+                    headline: 'The safest audience stays visible.',
+                    cta: null
+                }
+            },
+            'w2-daniel-commercial': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'INVENTORY RISK',
+                    headline: 'Lost inboxes are\n[teal:lost inventory.]',
+                    borderDark: true,
+                    cta: null
+                }
+            },
+            'w2-daniel-contrast': {
+                type: 'statement',
+                format: 'square',
+                theme: 'accent',
+                data: {
+                    headline: 'Measure reach,\nnot relief.',
+                    cta: null
+                }
+            },
+
+            // ========================================
+            // WEEK 3: WHAT SHOULD STOP FIRST
+            // ========================================
+            'w3-brand-bold': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Strategy',
+                    badgeColor: 'secondary',
+                    headline: 'Restraint is\ncontainment.',
+                    body: 'Stop what you cannot defend.',
+                    cta: null
+                }
+            },
+            'w3-brand-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    headline: 'In rough water,\n[teal:you reduce sail.]',
+                    body: 'Pressure increases risk.',
+                    cta: null
+                }
+            },
+            'w3-brand-hook': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'RULE',
+                    headline: 'Stop what you\ncannot defend.',
+                    cta: 'The Pause List'
+                }
+            },
+            'w3-yanna-stop': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Stop',
+                    badgeColor: 'danger',
+                    headline: 'Pause anything\n[teal:based on hope.]',
+                    body: 'Stop adding fuel.',
+                    cta: null
+                }
+            },
+            'w3-yanna-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'sea',
+                data: {
+                    headline: 'Reef the sails before you add speed.\n[teal:Protect what still works.]',
+                    borderLeft: true,
+                    cta: null
+                }
+            },
+            'w3-yanna-alert': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    headline: 'Stop adding\nfuel.',
+                    borderDanger: true,
+                    cta: null
+                }
+            },
+            'w3-norris-checklist': {
+                type: 'checklist',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Strategy',
+                    badgeColor: 'accent',
+                    headline: 'Sending less can be smart.',
+                    items: [
+                        { text: 'Mail people who notice', status: 'good' },
+                        { text: 'Narrow now, expand later', status: 'good' }
+                    ],
+                    cta: null
+                }
+            },
+            'w3-norris-quote': {
+                type: 'quote',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    emoji: '⛵',
+                    quote: 'Staying in safer waters for a moment can protect the voyage.',
+                    author: 'Norris Errie',
+                    authorTitle: null
+                }
+            },
+            'w3-norris-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    pills: ['Safer Waters'],
+                    pillColors: ['success'],
+                    headline: '[teal:Narrow now,]\nexpand later.',
+                    cta: 'Safe Segments Guide'
+                }
+            },
+            'w3-daniel-chart': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'Revenue Risk',
+                    badgeColor: 'dark',
+                    showChart: true,
+                    headline: 'Risky segments\ntax winners.',
+                    body: 'Restraint protects revenue.',
+                    borderDark: true,
+                    cta: null
+                }
+            },
+            'w3-daniel-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    pills: ['Route', 'Retreat'],
+                    pillColors: ['success', 'warning'],
+                    headline: 'A controlled retreat protects the route that converts.',
+                    cta: null
+                }
+            },
+            'w3-daniel-icon': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    headline: 'Protect the list\nthat pays.',
+                    emoji: '💰',
+                    cta: null
+                }
+            },
+            'w3-daniel-throttle': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    headline: 'Throttle now.\n[teal:Or throttle later under worse terms.]',
+                    cta: null
+                }
+            },
+
+            // ========================================
+            // WEEK 4: STICKY DECISIONS
+            // ========================================
+            'w4-brand-main': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    badge: 'Long Term Impact',
+                    badgeColor: 'accent',
+                    headline: 'January decisions\n[teal:are sticky.]',
+                    body: 'Temporary becomes normal.',
+                    cta: null
+                }
+            },
+            'w4-brand-drift': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Drift Warning',
+                    badgeColor: 'dark',
+                    headline: 'Drift becomes the new course if you do not correct it.',
+                    cta: null
+                }
+            },
+            'w4-brand-pills': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    pills: ['Ceiling Set'],
+                    pillColors: ['warning'],
+                    headline: 'Baselines become\nceilings.',
+                    cta: 'Review Now'
+                }
+            },
+            'w4-yanna-blunt': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    emoji: '🌫️',
+                    headline: 'Do not pretend nothing moved.',
+                    body: '[teal:Panic changes hide causes.]',
+                    cta: null
+                }
+            },
+            'w4-yanna-sea': {
+                type: 'statement',
+                format: 'square',
+                theme: 'sea',
+                data: {
+                    headline: 'Do not change course in fog.',
+                    body: 'Stabilise before you change.',
+                    borderLeft: true,
+                    cta: null
+                }
+            },
+            'w4-yanna-stop': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    badge: 'Stop',
+                    badgeColor: 'danger',
+                    headline: 'Panic changes\nhide causes.',
+                    borderDanger: true,
+                    cta: null
+                }
+            },
+            'w4-norris-gentle': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    badge: 'Perspective',
+                    badgeColor: 'secondary',
+                    headline: 'Waiting feels safe but is risky.',
+                    body: 'Small check ins prevent drift.',
+                    cta: null
+                }
+            },
+            'w4-norris-button': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'PRO TIP',
+                    headline: 'Questions are most useful now.',
+                    cta: 'Ask Here'
+                }
+            },
+            'w4-norris-pill': {
+                type: 'statement',
+                format: 'square',
+                theme: 'light',
+                data: {
+                    pills: ['Drift is Quiet'],
+                    pillColors: ['warning'],
+                    headline: 'Drift is quiet. That is why it wins.',
+                    cta: null
+                }
+            },
+            'w4-daniel-planning': {
+                type: 'statement',
+                format: 'square',
+                theme: 'white',
+                data: {
+                    brand: 'PLANNING',
+                    headline: 'Baselines rewrite\n[teal:forecasts.]',
+                    borderDark: true,
+                    cta: null
+                }
+            },
+            'w4-daniel-org': {
+                type: 'statement',
+                format: 'square',
+                theme: 'dark',
+                data: {
+                    headline: 'Once the course is accepted, the organisation plans around it.',
+                    cta: null
+                }
+            },
+            'w4-daniel-contrast': {
+                type: 'statement',
+                format: 'square',
+                theme: 'accent',
+                data: {
+                    headline: 'A weak January\nshapes the year.',
+                    cta: null
+                }
+            }
+        };
+
+        // ========================================
+        // STATE
+        // ========================================
+        let state = {
+            templateId: null,
+            templateType: 'statement',
+            format: 'square',
+            theme: 'dark',
+            logo: {
+                visible: true,
+                file: 'Horizontal-Logo.svg',
+                x: 8,
+                y: 8,
+                zoom: 36
+            },
+            character: {
+                visible: false,
+                file: null,
+                isBlob: false,
+                x: 70,
+                y: 50,
+                zoom: 150,
+                rotation: 0,
+                flipH: false,
+                flipV: false
+            },
+            background: {
+                image: null,
+                isBlob: false,
+                gradientOpacity: 80,
+                flipH: false,
+                flipV: false
+            },
+            gradient: null,
+            pattern: null, // { type: 'tentacles', opacity: 15, position: 'all' }
+            data: {},
+            // Layer order (bottom to top): lower index = rendered first (behind)
+            layers: ['background', 'gradient', 'pattern', 'content', 'character', 'logo']
+        };
+
+        // ========================================
+        // DYNAMIC IMAGE STORAGE (loaded from Vercel Blob)
+        // ========================================
+        let uploadedCharacters = [];
+        let uploadedBackgrounds = [];
+
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+        function initializeApp() {
+            try {
+                // Load uploaded images from Vercel Blob (non-blocking)
+                loadUploadedImages().catch(e => console.log('Could not load uploaded images:', e));
+
+                initLogoGrid();
+                initLogoToggle();
+                initCharacterGrid();
+                initCharacterToggle();
+                initCharacterSliders();
+                initCharacterUpload();
+                initBackgroundGrid();
+                initBackgroundUpload();
+                initBackgroundFlip();
+                initGradientOpacitySlider();
+                initGradientPresets();
+                initPatternGrid();
+                initFormatListeners();
+                initThemeListeners();
+                initLogoSliders();
+                initLayerList();
+                loadTemplateFromURL();
+                renderPreview();
+                console.log('App initialized!');
+            } catch (error) {
+                console.error('Initialization error:', error);
+            }
+        }
+
+        // Run init when DOM is ready - check if already loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            // DOM already ready, init immediately
+            initializeApp();
+        }
+
+        async function loadUploadedImages() {
+            try {
+                const response = await fetch('/api/images?type=all');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.success && data.images) {
+                        uploadedCharacters = data.images
+                            .filter(img => img.type === 'character')
+                            .map(img => ({ file: img.url, name: img.filename, category: 'Uploaded', isBlob: true }));
+                        uploadedBackgrounds = data.images
+                            .filter(img => img.type === 'background')
+                            .map(img => ({ file: img.url, name: img.filename, isBlob: true }));
+                        // Refresh grids after loading uploaded images
+                        initCharacterGrid();
+                        initBackgroundGrid();
+                    }
+                }
+            } catch (error) {
+                console.log('Could not load uploaded images:', error);
+            }
+        }
+
+        function initCharacterUpload() {
+            const input = document.getElementById('characterUpload');
+            input.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const uploadText = document.getElementById('charUploadText');
+                uploadText.textContent = 'Uploading...';
+
+                try {
+                    const response = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}&type=character`, {
+                        method: 'POST',
+                        body: file
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        // Add to uploaded characters
+                        uploadedCharacters.push({ file: data.url, name: data.filename, category: 'Uploaded', isBlob: true });
+                        // Refresh the grid
+                        initCharacterGrid();
+                        uploadText.textContent = '+ Upload Character';
+                    } else {
+                        throw new Error('Upload failed');
+                    }
+                } catch (error) {
+                    console.error('Character upload error:', error);
+                    uploadText.textContent = 'Upload Failed';
+                    setTimeout(() => { uploadText.textContent = '+ Upload Character'; }, 2000);
+                }
+
+                input.value = ''; // Reset input
+            });
+        }
+
+        function initBackgroundUpload() {
+            const input = document.getElementById('backgroundUpload');
+            input.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const uploadText = document.getElementById('bgUploadText');
+                uploadText.textContent = 'Uploading...';
+
+                try {
+                    const response = await fetch(`/api/upload?filename=${encodeURIComponent(file.name)}&type=background`, {
+                        method: 'POST',
+                        body: file
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        // Add to uploaded backgrounds
+                        uploadedBackgrounds.push({ file: data.url, name: data.filename, isBlob: true });
+                        // Refresh the grid
+                        initBackgroundGrid();
+                        uploadText.textContent = '+ Upload';
+                    } else {
+                        throw new Error('Upload failed');
+                    }
+                } catch (error) {
+                    console.error('Background upload error:', error);
+                    uploadText.textContent = 'Failed';
+                    setTimeout(() => { uploadText.textContent = '+ Upload'; }, 2000);
+                }
+
+                input.value = ''; // Reset input
+            });
+        }
+
+        function initLogoToggle() {
+            const toggle = document.getElementById('logoVisible');
+            const controls = document.getElementById('logoControls');
+
+            toggle.addEventListener('change', () => {
+                state.logo.visible = toggle.checked;
+                controls.style.display = toggle.checked ? 'block' : 'none';
+                renderPreview();
+            });
+        }
+
+        function initCharacterGrid() {
+            const grid = document.getElementById('characterGrid');
+
+            // Combine local characters with uploaded ones
+            const allCharacters = [...CHARACTERS, ...uploadedCharacters];
+
+            // Add "None" option first
+            grid.innerHTML = `
+                <div class="image-item none-option ${!state.character.file ? 'selected' : ''}" data-character="" title="No Character">
+                    <span style="font-size: 10px; color: rgba(255,255,255,0.5);">None</span>
+                </div>
+            ` + allCharacters.map((char, i) => `
+                <div class="image-item ${state.character.file === char.file ? 'selected' : ''}" data-character="${char.file}" data-is-blob="${char.isBlob || false}" title="${char.name}">
+                    <img src="${char.isBlob ? char.file : '../' + char.file}" alt="${char.name}" style="object-fit: cover;">
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.image-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.character.file = item.dataset.character || null;
+                    state.character.isBlob = item.dataset.isBlob === 'true';
+                    renderPreview();
+                });
+            });
+        }
+
+        function initCharacterToggle() {
+            const toggle = document.getElementById('characterVisible');
+            const controls = document.getElementById('characterControls');
+
+            toggle.addEventListener('change', () => {
+                state.character.visible = toggle.checked;
+                controls.style.display = toggle.checked ? 'block' : 'none';
+                renderPreview();
+            });
+        }
+
+        function initCharacterSliders() {
+            ['charX', 'charY', 'charZoom', 'charRotation'].forEach(id => {
+                const slider = document.getElementById(id);
+                slider.addEventListener('input', (e) => {
+                    const key = id.replace('char', '').toLowerCase();
+                    state.character[key] = parseInt(e.target.value);
+                    if (key === 'rotation') {
+                        document.getElementById(id + 'Value').textContent = e.target.value + '°';
+                    } else if (key === 'zoom') {
+                        document.getElementById(id + 'Value').textContent = e.target.value + 'px';
+                    } else {
+                        document.getElementById(id + 'Value').textContent = e.target.value + '%';
+                    }
+                    renderPreview();
+                });
+            });
+
+            // Flip buttons
+            document.getElementById('charFlipH').addEventListener('click', () => {
+                state.character.flipH = !state.character.flipH;
+                document.getElementById('charFlipH').classList.toggle('active', state.character.flipH);
+                renderPreview();
+            });
+
+            document.getElementById('charFlipV').addEventListener('click', () => {
+                state.character.flipV = !state.character.flipV;
+                document.getElementById('charFlipV').classList.toggle('active', state.character.flipV);
+                renderPreview();
+            });
+        }
+
+        function initBackgroundGrid() {
+            const grid = document.getElementById('backgroundGrid');
+
+            // Combine local backgrounds with uploaded ones
+            const allBackgrounds = [...BACKGROUNDS, ...uploadedBackgrounds];
+
+            // Add "None" option first
+            grid.innerHTML = `
+                <div class="image-item none-option ${!state.background.image ? 'selected' : ''}" data-background="" title="No Background Image">
+                    <span style="font-size: 10px; color: rgba(255,255,255,0.5);">None</span>
+                </div>
+            ` + allBackgrounds.map((bg, i) => `
+                <div class="image-item ${state.background.image === bg.file ? 'selected' : ''}" data-background="${bg.file}" data-is-blob="${bg.isBlob || false}" title="${bg.name}">
+                    <img src="${bg.isBlob ? bg.file : '../' + bg.file}" alt="${bg.name}" style="object-fit: cover;">
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.image-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    const bgFile = item.dataset.background;
+                    if (bgFile) {
+                        state.background.image = bgFile;
+                        state.background.isBlob = item.dataset.isBlob === 'true';
+                        document.getElementById('gradientOpacityGroup').style.display = 'block';
+                        document.getElementById('bgImageControls').style.display = 'block';
+                    } else {
+                        clearBackgroundImage();
+                    }
+                    renderPreview();
+                });
+            });
+        }
+
+        function initBackgroundFlip() {
+            document.getElementById('bgFlipH').addEventListener('click', () => {
+                state.background.flipH = !state.background.flipH;
+                document.getElementById('bgFlipH').classList.toggle('active', state.background.flipH);
+                renderPreview();
+            });
+
+            document.getElementById('bgFlipV').addEventListener('click', () => {
+                state.background.flipV = !state.background.flipV;
+                document.getElementById('bgFlipV').classList.toggle('active', state.background.flipV);
+                renderPreview();
+            });
+        }
+
+        function clearBackgroundImage() {
+            state.background.image = null;
+            state.background.flipH = false;
+            state.background.flipV = false;
+            document.getElementById('backgroundGrid').querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
+            document.getElementById('gradientOpacityGroup').style.display = 'none';
+            document.getElementById('bgImageControls').style.display = 'none';
+            document.getElementById('bgFlipH').classList.remove('active');
+            document.getElementById('bgFlipV').classList.remove('active');
+            renderPreview();
+        }
+
+        function initGradientOpacitySlider() {
+            const slider = document.getElementById('gradientOpacity');
+            slider.addEventListener('input', (e) => {
+                state.background.gradientOpacity = parseInt(e.target.value);
+                document.getElementById('gradientOpacityValue').textContent = e.target.value + '%';
+                renderPreview();
+            });
+        }
+
+        function loadTemplateFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const templateId = urlParams.get('template');
+
+            if (templateId && TEMPLATES[templateId]) {
+                const template = TEMPLATES[templateId];
+                state.templateId = templateId;
+                state.templateType = template.type;
+                state.format = template.format;
+                state.theme = template.theme;
+                state.data = { ...template.data };
+
+                // Load logo settings from template (default: hidden for templates)
+                if (template.logo) {
+                    state.logo = { ...state.logo, ...template.logo };
+                } else {
+                    // Explicitly hide logo when loading templates that don't define logo settings
+                    state.logo.visible = false;
+                    state.logo.x = 8;
+                    state.logo.y = 8;
+                }
+
+                // Load gradient from template
+                if (template.gradient) {
+                    state.gradient = { ...template.gradient };
+                } else {
+                    state.gradient = null;
+                }
+
+                // Load character from template
+                if (template.character) {
+                    state.character = { ...state.character, ...template.character };
+                } else {
+                    state.character.visible = false;
+                    state.character.file = null;
+                }
+
+                // Load background from template
+                if (template.background) {
+                    state.background = { ...state.background, ...template.background };
+                }
+
+                // Load pattern from template
+                if (template.pattern) {
+                    state.pattern = { ...template.pattern };
+                } else {
+                    state.pattern = null;
+                }
+
+                // Update UI
+                document.querySelectorAll('.format-item').forEach(i =>
+                    i.classList.toggle('selected', i.dataset.format === state.format));
+                document.querySelectorAll('.theme-item').forEach(i =>
+                    i.classList.toggle('selected', i.dataset.theme === state.theme));
+
+                // Update logo toggle
+                const logoToggle = document.getElementById('logoVisible');
+                const logoControls = document.getElementById('logoControls');
+                if (logoToggle) {
+                    logoToggle.checked = state.logo.visible;
+                    logoControls.style.display = state.logo.visible ? 'block' : 'none';
+                }
+
+                // Update character toggle
+                const charToggle = document.getElementById('characterVisible');
+                const charControls = document.getElementById('characterControls');
+                if (charToggle) {
+                    charToggle.checked = state.character.visible;
+                    charControls.style.display = state.character.visible ? 'block' : 'none';
+                }
+            } else {
+                // Default template
+                state.templateType = 'statement';
+                state.data = {
+                    brand: 'REVIEW MY EMAILS',
+                    headline: 'Your headline here',
+                    body: 'Supporting text goes here',
+                    cta: 'Learn More'
+                };
+            }
+
+            renderContentControls();
+            renderPreview();
+        }
+
+        function initLogoGrid() {
+            const grid = document.getElementById('logoGrid');
+            grid.innerHTML = LOGOS.map((logo, i) => `
+                <div class="image-item ${i === 0 ? 'selected' : ''}" data-logo="${logo.file}" title="${logo.name}">
+                    <img src="../assets/logos/${logo.file}" alt="${logo.name}">
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.image-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.image-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.logo.file = item.dataset.logo;
+                    renderPreview();
+                });
+            });
+        }
+
+        function initGradientPresets() {
+            const grid = document.getElementById('gradientPresets');
+            // Add "None" option first
+            grid.innerHTML = `
+                <div class="gradient-item none-option ${!state.gradient ? 'selected' : ''}" data-start="" data-end=""
+                     style="background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;"
+                     title="No Gradient - Use Theme Color">
+                    <span>None</span>
+                </div>
+            ` + GRADIENT_PRESETS.map((grad, i) => `
+                <div class="gradient-item ${state.gradient?.start === grad.start ? 'selected' : ''}" data-start="${grad.start}" data-end="${grad.end}"
+                     style="background: linear-gradient(135deg, ${grad.start}, ${grad.end});"
+                     title="${grad.name}: ${grad.usage}">
+                    <span>${grad.name}</span>
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.gradient-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.gradient-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    if (item.dataset.start) {
+                        state.gradient = {
+                            start: item.dataset.start,
+                            end: item.dataset.end
+                        };
+                    } else {
+                        state.gradient = null;
+                    }
+                    renderPreview();
+                });
+            });
+        }
+
+        const PATTERNS = [
+            { id: 'none', name: 'None' },
+            { id: 'tentacles', name: 'Tentacles' },
+            { id: 'waves', name: 'Waves' },
+            { id: 'bubbles', name: 'Bubbles' },
+            { id: 'flourish', name: 'Flourishes' }
+        ];
+
+        function initPatternGrid() {
+            const grid = document.getElementById('patternGrid');
+            grid.innerHTML = PATTERNS.map(p => `
+                <div class="pattern-item ${(!state.pattern && p.id === 'none') || (state.pattern?.type === p.id) ? 'selected' : ''}" data-pattern="${p.id}">
+                    ${getPatternPreviewSVG(p.id)}
+                    <span>${p.name}</span>
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.pattern-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.pattern-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    const patternId = item.dataset.pattern;
+                    if (patternId === 'none') {
+                        state.pattern = null;
+                        document.getElementById('patternControls').style.display = 'none';
+                    } else {
+                        state.pattern = {
+                            type: patternId,
+                            opacity: state.pattern?.opacity || 15,
+                            position: state.pattern?.position || 'all'
+                        };
+                        document.getElementById('patternControls').style.display = 'block';
+                    }
+                    renderPreview();
+                });
+            });
+
+            // Pattern controls
+            document.getElementById('patternOpacity').addEventListener('input', (e) => {
+                if (state.pattern) {
+                    state.pattern.opacity = parseInt(e.target.value);
+                    document.getElementById('patternOpacityValue').textContent = e.target.value + '%';
+                    renderPreview();
+                }
+            });
+
+            document.getElementById('patternPosition').addEventListener('change', (e) => {
+                if (state.pattern) {
+                    state.pattern.position = e.target.value;
+                    renderPreview();
+                }
+            });
+        }
+
+        function getPatternPreviewSVG(type) {
+            switch(type) {
+                case 'tentacles':
+                    return `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M-5,100 Q10,70 5,40 Q0,20 15,5" stroke="#0d9488" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <path d="M105,100 Q90,70 95,40 Q100,20 85,5" stroke="#0d9488" stroke-width="3" fill="none" opacity="0.7" stroke-linecap="round"/>
+                    </svg>`;
+                case 'waves':
+                    return `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M-10,85 Q10,80 30,85 T70,85 T110,85" stroke="#0d9488" stroke-width="2" fill="none"/>
+                        <path d="M-10,92 Q15,87 35,92 T75,92 T115,92" stroke="#0d9488" stroke-width="2" fill="none" opacity="0.7"/>
+                    </svg>`;
+                case 'bubbles':
+                    return `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <circle cx="20" cy="80" r="10" fill="none" stroke="#0d9488" stroke-width="2"/>
+                        <circle cx="35" cy="60" r="6" fill="none" stroke="#0d9488" stroke-width="2" opacity="0.7"/>
+                        <circle cx="80" cy="25" r="8" fill="none" stroke="#0d9488" stroke-width="2"/>
+                    </svg>`;
+                case 'flourish':
+                    return `<svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M0,20 Q10,5 25,10 Q35,15 30,25" stroke="#0d9488" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        <path d="M100,80 Q90,95 75,90 Q65,85 70,75" stroke="#0d9488" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </svg>`;
+                default:
+                    return '';
+            }
+        }
+
+        function generatePatternSVG(type, opacity, position) {
+            const color = '#0d9488';
+            const op = opacity / 100;
+
+            switch(type) {
+                case 'tentacles':
+                    return generateTentaclesPattern(color, op, position);
+                case 'waves':
+                    return generateWavesPattern(color, op, position);
+                case 'bubbles':
+                    return generateBubblesPattern(color, op, position);
+                case 'flourish':
+                    return generateFlourishPattern(color, op, position);
+                default:
+                    return '';
+            }
+        }
+
+        function generateTentaclesPattern(color, opacity, position) {
+            const paths = {
+                'all': [
+                    `<path d="M-5,100 Q10,70 5,40 Q0,20 15,5" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M105,100 Q90,70 95,40 Q100,20 85,5" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.8}" stroke-linecap="round"/>`,
+                    `<path d="M-5,0 Q15,30 10,60 Q5,80 20,100" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.6}" stroke-linecap="round"/>`,
+                    `<path d="M105,0 Q85,30 90,60 Q95,80 80,100" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.4}" stroke-linecap="round"/>`
+                ],
+                'bottom-left': [
+                    `<path d="M-5,105 Q15,75 10,50 Q5,30 25,15" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M10,105 Q25,80 20,60 Q15,45 30,35" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'bottom-right': [
+                    `<path d="M105,105 Q85,75 90,50 Q95,30 75,15" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M90,105 Q75,80 80,60 Q85,45 70,35" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'top-left': [
+                    `<path d="M-5,-5 Q15,25 10,50 Q5,70 25,85" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M10,-5 Q25,20 20,40 Q15,55 30,65" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'top-right': [
+                    `<path d="M105,-5 Q85,25 90,50 Q95,70 75,85" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M90,-5 Q75,20 80,40 Q85,55 70,65" stroke="${color}" stroke-width="3" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ]
+            };
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${(paths[position] || paths['all']).join('')}</svg>`;
+        }
+
+        function generateWavesPattern(color, opacity, position) {
+            const paths = {
+                'all': [
+                    `<path d="M-10,90 Q10,85 30,90 T70,90 T110,90" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M-10,93 Q15,88 35,93 T75,93 T115,93" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`,
+                    `<path d="M-10,96 Q20,91 40,96 T80,96 T120,96" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}"/>`,
+                    `<path d="M-10,10 Q10,5 30,10 T70,10 T110,10" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.55}"/>`,
+                    `<path d="M-10,7 Q15,2 35,7 T75,7 T115,7" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.4}"/>`
+                ],
+                'bottom-left': [
+                    `<path d="M-10,85 Q10,75 30,85 T60,80" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M-10,90 Q15,82 35,90 T55,87" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`,
+                    `<path d="M-10,95 Q10,88 25,95 T50,92" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}"/>`
+                ],
+                'bottom-right': [
+                    `<path d="M40,80 Q60,75 80,85 T110,85" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M45,87 Q65,82 85,90 T110,90" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`,
+                    `<path d="M50,92 Q70,88 90,95 T110,95" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}"/>`
+                ],
+                'top-left': [
+                    `<path d="M-10,15 Q10,5 30,15 T60,10" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M-10,10 Q15,2 35,10 T55,7" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`
+                ],
+                'top-right': [
+                    `<path d="M40,10 Q60,5 80,15 T110,15" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}"/>`,
+                    `<path d="M45,7 Q65,2 85,10 T110,10" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.85}"/>`
+                ]
+            };
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${(paths[position] || paths['all']).join('')}</svg>`;
+        }
+
+        function generateBubblesPattern(color, opacity, position) {
+            const circles = {
+                'all': [
+                    `<circle cx="15" cy="85" r="8" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="25" cy="70" r="5" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="10" cy="60" r="3" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`,
+                    `<circle cx="85" cy="15" r="6" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="75" cy="25" r="4" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="90" cy="30" r="2.5" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ],
+                'bottom-left': [
+                    `<circle cx="15" cy="85" r="10" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="30" cy="70" r="6" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="10" cy="65" r="4" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ],
+                'bottom-right': [
+                    `<circle cx="85" cy="85" r="10" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="70" cy="70" r="6" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="90" cy="65" r="4" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ],
+                'top-left': [
+                    `<circle cx="15" cy="15" r="8" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="30" cy="25" r="5" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="10" cy="30" r="3" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ],
+                'top-right': [
+                    `<circle cx="85" cy="15" r="8" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity}"/>`,
+                    `<circle cx="70" cy="25" r="5" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.8}"/>`,
+                    `<circle cx="90" cy="30" r="3" fill="none" stroke="${color}" stroke-width="1.5" opacity="${opacity * 0.6}"/>`
+                ]
+            };
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${(circles[position] || circles['all']).join('')}</svg>`;
+        }
+
+        function generateFlourishPattern(color, opacity, position) {
+            const paths = {
+                'all': [
+                    `<path d="M0,15 Q5,5 15,5 Q25,5 25,15 Q25,25 15,25" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M15,0 Q5,5 5,15 Q5,25 15,25 Q25,25 25,15" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`,
+                    `<path d="M100,85 Q95,95 85,95 Q75,95 75,85 Q75,75 85,75" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M85,100 Q95,95 95,85 Q95,75 85,75 Q75,75 75,85" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'bottom-left': [
+                    `<path d="M0,85 Q5,95 15,95 Q25,95 25,85 Q25,75 15,75" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M15,100 Q5,95 5,85 Q5,75 15,75 Q25,75 25,85" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'bottom-right': [
+                    `<path d="M100,85 Q95,95 85,95 Q75,95 75,85 Q75,75 85,75" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M85,100 Q95,95 95,85 Q95,75 85,75 Q75,75 75,85" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'top-left': [
+                    `<path d="M0,15 Q5,5 15,5 Q25,5 25,15 Q25,25 15,25" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M15,0 Q5,5 5,15 Q5,25 15,25 Q25,25 25,15" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ],
+                'top-right': [
+                    `<path d="M100,15 Q95,5 85,5 Q75,5 75,15 Q75,25 85,25" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity}" stroke-linecap="round"/>`,
+                    `<path d="M85,0 Q95,5 95,15 Q95,25 85,25 Q75,25 75,15" stroke="${color}" stroke-width="1.5" fill="none" opacity="${opacity * 0.7}" stroke-linecap="round"/>`
+                ]
+            };
+            return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">${(paths[position] || paths['all']).join('')}</svg>`;
+        }
+
+        function initFormatListeners() {
+            document.querySelectorAll('.format-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.format-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.format = item.dataset.format;
+                    renderPreview();
+                });
+            });
+        }
+
+        function initThemeListeners() {
+            document.querySelectorAll('.theme-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    document.querySelectorAll('.theme-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.theme = item.dataset.theme;
+                    state.gradient = null; // Reset gradient when theme changes
+                    document.querySelectorAll('.gradient-item').forEach(i => i.classList.remove('selected'));
+                    renderPreview();
+                });
+            });
+        }
+
+        function initLayerList() {
+            renderLayerList();
+        }
+
+        function renderLayerList() {
+            const list = document.getElementById('layerList');
+            const layerNames = {
+                'background': 'Background Image',
+                'gradient': 'Gradient/Color',
+                'pattern': 'Pattern',
+                'content': 'Text Content',
+                'character': 'Character',
+                'logo': 'Logo'
+            };
+
+            // Reverse for display (top of list = front)
+            const displayLayers = [...state.layers].reverse();
+
+            list.innerHTML = displayLayers.map((layer, i) => `
+                <div class="layer-item" draggable="true" data-layer="${layer}">
+                    <span class="drag-handle">☰</span>
+                    <span class="layer-name">${layerNames[layer] || layer}</span>
+                    <span class="layer-index">${displayLayers.length - i}</span>
+                </div>
+            `).join('');
+
+            // Add drag and drop handlers
+            const items = list.querySelectorAll('.layer-item');
+            items.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('drop', handleDrop);
+                item.addEventListener('dragend', handleDragEnd);
+            });
+        }
+
+        let draggedLayer = null;
+
+        function handleDragStart(e) {
+            draggedLayer = e.target.dataset.layer;
+            e.target.classList.add('dragging');
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const targetLayer = e.target.closest('.layer-item')?.dataset.layer;
+            if (!targetLayer || targetLayer === draggedLayer) return;
+
+            // Get current indices (in display order, which is reversed)
+            const displayLayers = [...state.layers].reverse();
+            const fromIndex = displayLayers.indexOf(draggedLayer);
+            const toIndex = displayLayers.indexOf(targetLayer);
+
+            // Reorder in display order
+            displayLayers.splice(fromIndex, 1);
+            displayLayers.splice(toIndex, 0, draggedLayer);
+
+            // Save back (reverse again for storage order)
+            state.layers = displayLayers.reverse();
+
+            renderLayerList();
+            renderPreview();
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+            draggedLayer = null;
+        }
+
+        function initLogoSliders() {
+            ['logoX', 'logoY', 'logoZoom'].forEach(id => {
+                const slider = document.getElementById(id);
+                slider.addEventListener('input', (e) => {
+                    const key = id.replace('logo', '').toLowerCase();
+                    state.logo[key === 'zoom' ? 'zoom' : key] = parseInt(e.target.value);
+                    document.getElementById(id + 'Value').textContent =
+                        key === 'zoom' ? e.target.value + 'px' : e.target.value + '%';
+                    renderPreview();
+                });
+            });
+        }
+
+        // ========================================
+        // CONTENT CONTROLS (Type-specific)
+        // ========================================
+        function renderContentControls() {
+            const container = document.getElementById('contentControls');
+            let html = '<h3>Content</h3>';
+
+            switch (state.templateType) {
+                case 'statement':
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Badge (optional)</label>
+                            <input type="text" class="input-text" id="inputBadge" value="${state.data.badge || ''}" placeholder="e.g., Pro Tip">
+                            <div class="badge-color-grid" id="badgeColorGrid"></div>
+                            <div class="slider-row" style="margin-top: 10px;">
+                                <span class="slider-label">L</span>
+                                <input type="range" class="slider" id="badgeX" min="0" max="100" value="${state.data.badgeX ?? 8}">
+                                <span class="slider-label">R</span>
+                                <span class="slider-value" id="badgeXValue">${state.data.badgeX ?? 8}%</span>
+                            </div>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="badgeY" min="0" max="100" value="${state.data.badgeY ?? 8}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="badgeYValue">${state.data.badgeY ?? 8}%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Brand Text</label>
+                            <input type="text" class="input-text" id="inputBrand" value="${state.data.brand || ''}" placeholder="REVIEW MY EMAILS">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Headline</label>
+                            ${getTextColorPickerHTML('inputHeadline')}
+                            <textarea class="input-textarea" id="inputHeadline" placeholder="Main headline">${state.data.headline || ''}</textarea>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Body Text</label>
+                            ${getTextColorPickerHTML('inputBody')}
+                            <textarea class="input-textarea" id="inputBody" placeholder="Supporting text">${state.data.body || ''}</textarea>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">CTA Button (optional)</label>
+                            <input type="text" class="input-text" id="inputCta" value="${state.data.cta || ''}" placeholder="e.g., Learn More">
+                        </div>
+                        <div class="control-group" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <label class="control-label">Content Position</label>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="contentY" min="5" max="50" value="${state.data.contentY ?? 8}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="contentYValue">${state.data.contentY ?? 8}%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">CTA Position</label>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="ctaY" min="50" max="95" value="${state.data.ctaY ?? 85}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="ctaYValue">${state.data.ctaY ?? 85}%</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'stat':
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Top Label</label>
+                            <input type="text" class="input-text" id="inputLabel" value="${state.data.label || ''}" placeholder="DID YOU KNOW?">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Stat Value</label>
+                            ${getTextColorPickerHTML('inputStat')}
+                            <input type="text" class="input-text" id="inputStat" value="${state.data.stat || ''}" placeholder="22.5%">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Stat Label</label>
+                            ${getTextColorPickerHTML('inputStatLabel')}
+                            <input type="text" class="input-text" id="inputStatLabel" value="${state.data.statLabel || ''}" placeholder="Average database decay">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Description</label>
+                            ${getTextColorPickerHTML('inputDescription')}
+                            <textarea class="input-textarea" id="inputDescription">${state.data.description || ''}</textarea>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Source</label>
+                            <input type="text" class="input-text" id="inputSource" value="${state.data.source || ''}" placeholder="Source: ...">
+                        </div>
+                        <div class="control-group" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <label class="control-label">Content Position</label>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="contentY" min="5" max="50" value="${state.data.contentY ?? 8}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="contentYValue">${state.data.contentY ?? 8}%</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'checklist':
+                    const itemsText = (state.data.items || []).map(i =>
+                        (i.status === 'good' ? '+ ' : '- ') + i.text
+                    ).join('\n');
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Badge (optional)</label>
+                            <input type="text" class="input-text" id="inputBadge" value="${state.data.badge || ''}" placeholder="e.g., Alert">
+                            <div class="badge-color-grid" id="badgeColorGrid"></div>
+                            <div class="slider-row" style="margin-top: 10px;">
+                                <span class="slider-label">L</span>
+                                <input type="range" class="slider" id="badgeX" min="0" max="100" value="${state.data.badgeX ?? 8}">
+                                <span class="slider-label">R</span>
+                                <span class="slider-value" id="badgeXValue">${state.data.badgeX ?? 8}%</span>
+                            </div>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="badgeY" min="0" max="100" value="${state.data.badgeY ?? 8}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="badgeYValue">${state.data.badgeY ?? 8}%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Label (optional)</label>
+                            <input type="text" class="input-text" id="inputLabel" value="${state.data.label || ''}" placeholder="DELIVERABILITY 101">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Headline</label>
+                            ${getTextColorPickerHTML('inputHeadline')}
+                            <input type="text" class="input-text" id="inputHeadline" value="${state.data.headline || ''}" placeholder="The Safe Sender Checklist">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Checklist Items</label>
+                            <textarea class="input-textarea" id="inputItems" placeholder="+ Good item\n- Bad item">${itemsText}</textarea>
+                            <div class="input-hint">Start with + for green check, - for red X</div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Body Text (optional)</label>
+                            ${getTextColorPickerHTML('inputBody')}
+                            <textarea class="input-textarea" id="inputBody" placeholder="Additional text below items">${state.data.body || ''}</textarea>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">CTA Button (optional)</label>
+                            <input type="text" class="input-text" id="inputCta" value="${state.data.cta || ''}" placeholder="e.g., Download Guide">
+                        </div>
+                        <div class="control-group" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <label class="control-label">Content Position</label>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="contentY" min="5" max="50" value="${state.data.contentY ?? 8}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="contentYValue">${state.data.contentY ?? 8}%</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">CTA Position</label>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="ctaY" min="50" max="95" value="${state.data.ctaY ?? 85}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="ctaYValue">${state.data.ctaY ?? 85}%</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'quote':
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Quote</label>
+                            ${getTextColorPickerHTML('inputQuote')}
+                            <textarea class="input-textarea" id="inputQuote">${state.data.quote || ''}</textarea>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Attribution</label>
+                            <input type="text" class="input-text" id="inputAttribution" value="${state.data.attribution || ''}" placeholder="Supporting context">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Author Name</label>
+                            <input type="text" class="input-text" id="inputAuthor" value="${state.data.author || ''}" placeholder="Review My Emails">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Author Title</label>
+                            <input type="text" class="input-text" id="inputAuthorTitle" value="${state.data.authorTitle || ''}" placeholder="Deliverability Experts">
+                        </div>
+                        <div class="control-group" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
+                            <label class="control-label">Content Position</label>
+                            <div class="slider-row">
+                                <span class="slider-label">T</span>
+                                <input type="range" class="slider" id="contentY" min="5" max="50" value="${state.data.contentY ?? 8}">
+                                <span class="slider-label">B</span>
+                                <span class="slider-value" id="contentYValue">${state.data.contentY ?? 8}%</span>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'dodont':
+                    const doItems = (state.data.dosAndDonts?.do || []).join('\n');
+                    const dontItems = (state.data.dosAndDonts?.dont || []).join('\n');
+                    html += `
+                        <div class="control-group">
+                            <label class="control-label">Headline</label>
+                            ${getTextColorPickerHTML('inputHeadline')}
+                            <input type="text" class="input-text" id="inputHeadline" value="${state.data.headline || ''}" placeholder="Email Warm-up">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">DO Items</label>
+                            <textarea class="input-textarea" id="inputDoItems" placeholder="One item per line">${doItems}</textarea>
+                            <div class="input-hint">One item per line</div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">DON'T Items</label>
+                            <textarea class="input-textarea" id="inputDontItems" placeholder="One item per line">${dontItems}</textarea>
+                            <div class="input-hint">One item per line</div>
+                        </div>
+                    `;
+                    break;
+            }
+
+            container.innerHTML = html;
+
+            // Initialize badge color grid if present
+            initBadgeColorGrid();
+
+            // Initialize badge position sliders
+            initBadgeSliders();
+
+            // Initialize content/CTA position sliders
+            initPositionSliders();
+
+            // Initialize text color pickers
+            initTextColorPickers();
+
+            // Add event listeners to all inputs
+            container.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', () => {
+                    updateStateFromInputs();
+                    renderPreview();
+                });
+            });
+        }
+
+        function initBadgeColorGrid() {
+            const grid = document.getElementById('badgeColorGrid');
+            if (!grid) return;
+
+            grid.innerHTML = BADGE_COLORS.map(bc => `
+                <div class="badge-color-item ${state.data.badgeColor === bc.id ? 'selected' : ''}"
+                     data-color="${bc.id}"
+                     style="background: ${bc.bg}; color: ${bc.color};"
+                     title="${bc.usage}">
+                    ${bc.name}
+                </div>
+            `).join('');
+
+            grid.querySelectorAll('.badge-color-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    grid.querySelectorAll('.badge-color-item').forEach(i => i.classList.remove('selected'));
+                    item.classList.add('selected');
+                    state.data.badgeColor = item.dataset.color;
+                    renderPreview();
+                });
+            });
+        }
+
+        function initBadgeSliders() {
+            const badgeX = document.getElementById('badgeX');
+            const badgeY = document.getElementById('badgeY');
+            if (!badgeX || !badgeY) return;
+
+            badgeX.addEventListener('input', (e) => {
+                state.data.badgeX = parseInt(e.target.value);
+                document.getElementById('badgeXValue').textContent = e.target.value + '%';
+                renderPreview();
+            });
+
+            badgeY.addEventListener('input', (e) => {
+                state.data.badgeY = parseInt(e.target.value);
+                document.getElementById('badgeYValue').textContent = e.target.value + '%';
+                renderPreview();
+            });
+        }
+
+        function initPositionSliders() {
+            const contentY = document.getElementById('contentY');
+            const ctaY = document.getElementById('ctaY');
+
+            if (contentY) {
+                contentY.addEventListener('input', (e) => {
+                    state.data.contentY = parseInt(e.target.value);
+                    document.getElementById('contentYValue').textContent = e.target.value + '%';
+                    renderPreview();
+                });
+            }
+
+            if (ctaY) {
+                ctaY.addEventListener('input', (e) => {
+                    state.data.ctaY = parseInt(e.target.value);
+                    document.getElementById('ctaYValue').textContent = e.target.value + '%';
+                    renderPreview();
+                });
+            }
+        }
+
+        function updateStateFromInputs() {
+            switch (state.templateType) {
+                case 'statement':
+                    state.data.badge = document.getElementById('inputBadge')?.value || null;
+                    state.data.brand = document.getElementById('inputBrand')?.value || '';
+                    state.data.headline = document.getElementById('inputHeadline')?.value || '';
+                    state.data.body = document.getElementById('inputBody')?.value || '';
+                    state.data.cta = document.getElementById('inputCta')?.value || null;
+                    break;
+
+                case 'stat':
+                    state.data.label = document.getElementById('inputLabel')?.value || '';
+                    state.data.stat = document.getElementById('inputStat')?.value || '';
+                    state.data.statLabel = document.getElementById('inputStatLabel')?.value || '';
+                    state.data.description = document.getElementById('inputDescription')?.value || '';
+                    state.data.source = document.getElementById('inputSource')?.value || '';
+                    break;
+
+                case 'checklist':
+                    state.data.badge = document.getElementById('inputBadge')?.value || null;
+                    state.data.label = document.getElementById('inputLabel')?.value || '';
+                    state.data.headline = document.getElementById('inputHeadline')?.value || '';
+                    state.data.body = document.getElementById('inputBody')?.value || '';
+                    state.data.cta = document.getElementById('inputCta')?.value || null;
+
+                    const itemsText = document.getElementById('inputItems')?.value || '';
+                    state.data.items = itemsText.split('\n').filter(l => l.trim()).map(line => ({
+                        text: line.replace(/^[+-]\s*/, ''),
+                        status: line.trim().startsWith('+') ? 'good' : 'bad'
+                    }));
+                    break;
+
+                case 'quote':
+                    state.data.quote = document.getElementById('inputQuote')?.value || '';
+                    state.data.attribution = document.getElementById('inputAttribution')?.value || '';
+                    state.data.author = document.getElementById('inputAuthor')?.value || '';
+                    state.data.authorTitle = document.getElementById('inputAuthorTitle')?.value || '';
+                    break;
+
+                case 'dodont':
+                    state.data.headline = document.getElementById('inputHeadline')?.value || '';
+                    const doText = document.getElementById('inputDoItems')?.value || '';
+                    const dontText = document.getElementById('inputDontItems')?.value || '';
+                    state.data.dosAndDonts = {
+                        do: doText.split('\n').filter(l => l.trim()),
+                        dont: dontText.split('\n').filter(l => l.trim())
+                    };
+                    break;
+            }
+        }
+
+        // ========================================
+        // PREVIEW RENDERING
+        // ========================================
+        function renderPreview() {
+            const preview = document.getElementById('slidePreview');
+
+            // Update classes
+            preview.className = `slide-preview size-${state.format} theme-${state.theme}`;
+
+            // Build background style (gradient only if no bg image and gradient is first layer)
+            let bgStyle = '';
+            if (state.gradient && !state.background.image) {
+                bgStyle = `background: linear-gradient(135deg, ${state.gradient.start}, ${state.gradient.end});`;
+            }
+            preview.style.cssText = bgStyle;
+
+            // Build layers in order (lower index = behind)
+            let html = '';
+            state.layers.forEach((layer, index) => {
+                const zIndex = index + 1;
+                html += renderLayer(layer, zIndex);
+            });
+
+            preview.innerHTML = html;
+        }
+
+        function renderLayer(layerType, zIndex) {
+            switch (layerType) {
+                case 'background':
+                    if (state.background.image) {
+                        const bgImageUrl = state.background.isBlob ? state.background.image : `../${state.background.image}`;
+                        const bgScaleX = state.background.flipH ? -1 : 1;
+                        const bgScaleY = state.background.flipV ? -1 : 1;
+                        return `
+                            <div class="background-image-wrapper" style="z-index: ${zIndex};">
+                                <img src="${bgImageUrl}" alt="" style="transform: scaleX(${bgScaleX}) scaleY(${bgScaleY});">
+                            </div>
+                        `;
+                    }
+                    return '';
+
+                case 'gradient':
+                    if (state.gradient && state.background.image) {
+                        const gradientOverlay = `linear-gradient(135deg, rgba(${hexToRgb(state.gradient.start)}, ${state.background.gradientOpacity / 100}), rgba(${hexToRgb(state.gradient.end)}, ${state.background.gradientOpacity / 100}))`;
+                        return `<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: ${gradientOverlay}; z-index: ${zIndex};"></div>`;
+                    }
+                    return '';
+
+                case 'pattern':
+                    if (state.pattern && state.pattern.type && state.pattern.type !== 'none') {
+                        const patternSVG = generatePatternSVG(state.pattern.type, state.pattern.opacity, state.pattern.position);
+                        return `<div class="pattern-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${zIndex}; pointer-events: none;">${patternSVG}</div>`;
+                    }
+                    return '';
+
+                case 'logo':
+                    if (state.logo.visible) {
+                        return `
+                            <img class="logo-img" src="../assets/logos/${state.logo.file}" alt="Logo"
+                                 style="position: absolute; left: ${state.logo.x}%; top: ${state.logo.y}%; z-index: ${zIndex}; height: ${state.logo.zoom}px; width: auto;">
+                        `;
+                    }
+                    return '';
+
+                case 'character':
+                    if (state.character.visible && state.character.file) {
+                        const charImageUrl = state.character.isBlob ? state.character.file : `../${state.character.file}`;
+                        const charScaleX = state.character.flipH ? -1 : 1;
+                        const charScaleY = state.character.flipV ? -1 : 1;
+                        const charRotation = state.character.rotation || 0;
+                        return `
+                            <div class="character-wrapper" style="left: ${state.character.x}%; top: ${state.character.y}%; transform: translate(-50%, -50%) rotate(${charRotation}deg) scaleX(${charScaleX}) scaleY(${charScaleY}); height: ${state.character.zoom}px; z-index: ${zIndex};">
+                                <img src="${charImageUrl}" alt="Character">
+                            </div>
+                        `;
+                    }
+                    return '';
+
+                case 'content':
+                    let contentHtml = '';
+                    switch (state.templateType) {
+                        case 'statement':
+                            contentHtml = renderStatementTemplate();
+                            break;
+                        case 'stat':
+                            contentHtml = renderStatTemplate();
+                            break;
+                        case 'checklist':
+                            contentHtml = renderChecklistTemplate();
+                            break;
+                        case 'quote':
+                            contentHtml = renderQuoteTemplate();
+                            break;
+                        case 'dodont':
+                            contentHtml = renderDodontTemplate();
+                            break;
+                    }
+                    // Wrap content with z-index
+                    return `<div class="content-layer" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: ${zIndex};">${contentHtml}</div>`;
+
+                default:
+                    return '';
+            }
+        }
+
+        function renderStatementTemplate() {
+            const d = state.data;
+            const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
+
+            return `
+                <div class="tpl-statement" style="display: flex; flex-direction: column; height: 100%; padding: 8%;">
+                    ${d.badge ? `<div class="badge" style="${badgeStyle}">${d.badge}</div>` : ''}
+                    ${d.brand ? `<div class="brand">${d.brand}</div>` : ''}
+                    <div class="content-area" style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                        ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
+                        ${d.body ? `<div class="body">${parseRichText(d.body)}</div>` : ''}
+                    </div>
+                    ${d.cta ? `<div class="cta">${d.cta}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderStatTemplate() {
+            const d = state.data;
+            const contentY = d.contentY ?? 8;
+            return `
+                <div class="tpl-stat" style="padding: 0 8%;">
+                    <div class="stat-content" style="position: absolute; top: ${contentY}%; left: 8%; right: 8%;">
+                        ${d.label ? `<div class="label">${d.label}</div>` : ''}
+                        <div class="stat-box">
+                            <div class="stat-value">${d.stat || ''}</div>
+                            <div class="stat-label">${d.statLabel || ''}</div>
+                        </div>
+                        ${d.description ? `<div class="description">${d.description}</div>` : ''}
+                        ${d.source ? `<div class="source">${d.source}</div>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderChecklistTemplate() {
+            const d = state.data;
+            const badgeStyle = getBadgeStyle(d.badgeColor || 'accent');
+            const items = d.items || [];
+            const badgeX = d.badgeX ?? 8;
+            const badgeY = d.badgeY ?? 8;
+            // Auto-adjust contentY when badge is present and no explicit contentY is set
+            const defaultContentY = d.badge ? 18 : 8;
+            const contentY = d.contentY ?? defaultContentY;
+            const ctaY = d.ctaY ?? 85;
+
+            return `
+                <div class="tpl-checklist" style="padding: 0 8%;">
+                    ${d.badge ? `<div class="badge" style="${badgeStyle} position: absolute; left: ${badgeX}%; top: ${badgeY}%;">${d.badge}</div>` : ''}
+                    <div class="checklist-content" style="position: absolute; top: ${contentY}%; left: 8%; right: 8%;">
+                        ${d.label ? `<div class="label">${d.label}</div>` : ''}
+                        ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
+                        <div class="items">
+                            ${items.map(item => `
+                                <div class="item">
+                                    <div class="item-icon ${item.status}">${item.status === 'good' ? '✓' : '✕'}</div>
+                                    <span>${item.text}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        ${d.body ? `<div class="body" style="margin-top: 16px;">${parseRichText(d.body)}</div>` : ''}
+                    </div>
+                    ${d.cta ? `<div class="cta" style="position: absolute; top: ${ctaY}%; left: 8%;">${d.cta}</div>` : ''}
+                </div>
+            `;
+        }
+
+        function renderQuoteTemplate() {
+            const d = state.data;
+            const contentY = d.contentY ?? 8;
+            return `
+                <div class="tpl-quote" style="padding: 0 8%;">
+                    <div class="quote-content" style="position: absolute; top: ${contentY}%; left: 8%; right: 8%;">
+                        <div class="quote-mark">"</div>
+                        <div class="quote-text">${d.quote || ''}</div>
+                        <div class="divider"></div>
+                        ${d.attribution ? `<div class="attribution">${d.attribution}</div>` : ''}
+                        <div class="author-box">
+                            <div class="author-name">${d.author || ''}</div>
+                            <div class="author-title">${d.authorTitle || ''}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDodontTemplate() {
+            const d = state.data;
+            const dosAndDonts = d.dosAndDonts || { do: [], dont: [] };
+            return `
+                <div class="tpl-dodont">
+                    ${d.headline ? `<div class="headline">${parseRichText(d.headline)}</div>` : ''}
+                    <div class="columns">
+                        <div class="column do-column">
+                            <div class="column-header">DO</div>
+                            ${dosAndDonts.do.map(item => `
+                                <div class="column-item"><span class="icon">✓</span> ${item}</div>
+                            `).join('')}
+                        </div>
+                        <div class="column dont-column">
+                            <div class="column-header">DON'T</div>
+                            ${dosAndDonts.dont.map(item => `
+                                <div class="column-item"><span class="icon">✖</span> ${item}</div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getBadgeStyle(colorId) {
+            const bc = BADGE_COLORS.find(b => b.id === colorId) || BADGE_COLORS[0];
+            return `display:inline-block;padding:8px 16px;border-radius:6px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;background:${bc.bg};color:${bc.color};`;
+        }
+
+        function getTextColorPickerHTML(targetInputId) {
+            return `
+                <div class="text-color-picker" data-target="${targetInputId}">
+                    <span class="text-color-picker-label">Colors:</span>
+                    ${TEXT_COLORS.map(tc => `
+                        <button type="button" class="text-color-btn"
+                                style="background: ${tc.color};"
+                                data-color="${tc.id}"
+                                data-tooltip="[${tc.id}:] ${tc.usage}">
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function initTextColorPickers() {
+            document.querySelectorAll('.text-color-picker').forEach(picker => {
+                const targetId = picker.dataset.target;
+                const targetInput = document.getElementById(targetId);
+                if (!targetInput) return;
+
+                picker.querySelectorAll('.text-color-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const colorId = btn.dataset.color;
+                        const selStart = targetInput.selectionStart;
+                        const selEnd = targetInput.selectionEnd;
+                        const text = targetInput.value;
+                        const selectedText = text.substring(selStart, selEnd);
+
+                        let newText;
+                        if (selectedText) {
+                            // Wrap selected text with color syntax
+                            newText = text.substring(0, selStart) + `[${colorId}:${selectedText}]` + text.substring(selEnd);
+                        } else {
+                            // Insert color syntax at cursor
+                            newText = text.substring(0, selStart) + `[${colorId}:]` + text.substring(selEnd);
+                        }
+
+                        targetInput.value = newText;
+                        targetInput.focus();
+
+                        // Position cursor inside the brackets
+                        const newPos = selectedText ? selStart + colorId.length + 2 + selectedText.length + 1 : selStart + colorId.length + 2;
+                        targetInput.setSelectionRange(newPos, newPos);
+
+                        // Trigger input event to update preview
+                        targetInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    });
+                });
+            });
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ?
+                `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` :
+                '0, 0, 0';
+        }
+
+        function parseRichText(text) {
+            if (!text) return '';
+            let escaped = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            escaped = escaped.replace(/\n/g, '<br>');
+            const colorMap = {
+                'red': 'var(--color-danger)',
+                'teal': 'var(--color-accent)',
+                'green': 'var(--color-success)',
+                'yellow': 'var(--color-secondary)',
+                'orange': 'var(--color-warning)'
+            };
+            return escaped.replace(/\[(\w+):([^\]]+)\]/g, (match, color, content) => {
+                const cssColor = colorMap[color.toLowerCase()];
+                if (cssColor) return `<span style="color: ${cssColor};">${content}</span>`;
+                return content;
+            });
+        }
+
+        // ========================================
+        // EXPORT
+        // ========================================
+
+        // Convert SVG to PNG data URL for reliable html2canvas rendering
+        async function svgToPngDataUrl(svgUrl, width, height) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width * 3;  // 3x for quality
+                    canvas.height = height * 3;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    resolve(canvas.toDataURL('image/png'));
+                };
+                img.onerror = reject;
+                img.src = svgUrl;
+            });
+        }
+
+        async function downloadImage() {
+            const preview = document.getElementById('slidePreview');
+            const dimensions = {
+                square: { width: 1080, height: 1080 },
+                portrait: { width: 1080, height: 1350 },
+                landscape: { width: 1200, height: 628 }
+            };
+            const dim = dimensions[state.format];
+            const scale = dim.width / preview.offsetWidth;
+
+            // Pre-convert SVG logo to PNG for reliable rendering
+            const logoImg = preview.querySelector('.logo-img');
+            let originalSrc = null;
+            if (logoImg && logoImg.src.includes('.svg')) {
+                originalSrc = logoImg.src;
+                try {
+                    const pngDataUrl = await svgToPngDataUrl(logoImg.src, logoImg.offsetWidth, logoImg.offsetHeight);
+                    logoImg.src = pngDataUrl;
+                    // Wait for the new image to load
+                    await new Promise(r => setTimeout(r, 100));
+                } catch (e) {
+                    console.log('Could not convert SVG to PNG:', e);
+                }
+            }
+
+            const canvas = await html2canvas(preview, {
+                scale: scale,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            });
+
+            // Restore original SVG src
+            if (originalSrc && logoImg) {
+                logoImg.src = originalSrc;
+            }
+
+            const link = document.createElement('a');
+            link.download = `rme-${state.templateType}-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+
+        async function copyToClipboard() {
+            const preview = document.getElementById('slidePreview');
+            const dimensions = {
+                square: { width: 1080, height: 1080 },
+                portrait: { width: 1080, height: 1350 },
+                landscape: { width: 1200, height: 628 }
+            };
+            const dim = dimensions[state.format];
+            const scale = dim.width / preview.offsetWidth;
+
+            // Pre-convert SVG logo to PNG for reliable rendering
+            const logoImg = preview.querySelector('.logo-img');
+            let originalSrc = null;
+            if (logoImg && logoImg.src.includes('.svg')) {
+                originalSrc = logoImg.src;
+                try {
+                    const pngDataUrl = await svgToPngDataUrl(logoImg.src, logoImg.offsetWidth, logoImg.offsetHeight);
+                    logoImg.src = pngDataUrl;
+                    await new Promise(r => setTimeout(r, 100));
+                } catch (e) {
+                    console.log('Could not convert SVG to PNG:', e);
+                }
+            }
+
+            const canvas = await html2canvas(preview, {
+                scale: scale,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: null
+            });
+
+            // Restore original SVG src
+            if (originalSrc && logoImg) {
+                logoImg.src = originalSrc;
+            }
+
+            canvas.toBlob(async (blob) => {
+                try {
+                    await navigator.clipboard.write([
+                        new ClipboardItem({ 'image/png': blob })
+                    ]);
+                    alert('Copied to clipboard!');
+                } catch (err) {
+                    alert('Failed to copy to clipboard');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OG Image Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f0f0f0;
+            padding: 40px;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 16px;
+            margin-top: 40px;
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .instructions {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            max-width: 800px;
+        }
+
+        .instructions h1 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .instructions p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .instructions ol {
+            margin-top: 12px;
+            padding-left: 20px;
+            color: #666;
+        }
+
+        .instructions li {
+            margin-bottom: 8px;
+        }
+
+        /* OG Image Container */
+        .og-image {
+            width: 1200px;
+            height: 630px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+        }
+
+        /* ========================================
+           OPTION 1: Clean Brand
+           ======================================== */
+        .og-clean {
+            background: linear-gradient(135deg, #134e4a 0%, #0f3d3a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+        }
+
+        .og-clean__logo {
+            height: 80px;
+            margin-bottom: 40px;
+        }
+
+        .og-clean__tagline {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            text-align: center;
+            max-width: 900px;
+            line-height: 1.3;
+            margin-bottom: 24px;
+        }
+
+        .og-clean__subtext {
+            font-size: 24px;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+        }
+
+        /* ========================================
+           OPTION 2: With Labels
+           ======================================== */
+        .og-labels {
+            background: linear-gradient(135deg, #134e4a 0%, #0f3d3a 100%);
+            display: flex;
+            padding: 60px 80px;
+        }
+
+        .og-labels__left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .og-labels__logo {
+            height: 60px;
+            margin-bottom: 32px;
+        }
+
+        .og-labels__headline {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .og-labels__subtext {
+            font-size: 22px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.5;
+        }
+
+        .og-labels__right {
+            width: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 16px;
+            padding-left: 60px;
+        }
+
+        .label-card {
+            padding: 20px 24px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .label-card--keep {
+            background: rgba(22, 163, 74, 0.15);
+            border: 2px solid #16a34a;
+        }
+
+        .label-card--monitor {
+            background: rgba(217, 119, 6, 0.15);
+            border: 2px solid #d97706;
+        }
+
+        .label-card--suppress {
+            background: rgba(220, 38, 38, 0.15);
+            border: 2px solid #dc2626;
+        }
+
+        .label-card__badge {
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .label-card--keep .label-card__badge {
+            background: #16a34a;
+            color: white;
+        }
+
+        .label-card--monitor .label-card__badge {
+            background: #d97706;
+            color: white;
+        }
+
+        .label-card--suppress .label-card__badge {
+            background: #dc2626;
+            color: white;
+        }
+
+        .label-card__text {
+            font-size: 16px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* ========================================
+           OPTION 3: Minimal with URL
+           ======================================== */
+        .og-minimal {
+            background: #fafcfc;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            position: relative;
+        }
+
+        .og-minimal__accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: #0d9488;
+        }
+
+        .og-minimal__logo {
+            height: 70px;
+            margin-bottom: 40px;
+        }
+
+        .og-minimal__tagline {
+            font-size: 44px;
+            font-weight: 700;
+            color: #134e4a;
+            text-align: center;
+            max-width: 900px;
+            line-height: 1.3;
+            margin-bottom: 24px;
+        }
+
+        .og-minimal__subtext {
+            font-size: 24px;
+            color: #64748b;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .og-minimal__url {
+            font-size: 20px;
+            color: #0d9488;
+            font-weight: 600;
+        }
+
+        /* ========================================
+           OPTION 4: Bold Statement
+           ======================================== */
+        .og-bold {
+            background: #0d9488;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px;
+            position: relative;
+        }
+
+        .og-bold__pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+
+        .og-bold__content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .og-bold__headline {
+            font-size: 64px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.15;
+            margin-bottom: 24px;
+        }
+
+        .og-bold__subtext {
+            font-size: 28px;
+            color: rgba(255,255,255,0.85);
+            margin-bottom: 40px;
+        }
+
+        .og-bold__brand {
+            font-size: 24px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .og-bold__brand::before {
+            content: "";
+            width: 40px;
+            height: 2px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .og-bold__brand::after {
+            content: "";
+            width: 40px;
+            height: 2px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* ========================================
+           OPTION 5: With Mascot Space
+           ======================================== */
+        .og-mascot {
+            background: linear-gradient(135deg, #134e4a 0%, #0f3d3a 100%);
+            display: flex;
+            padding: 60px;
+        }
+
+        .og-mascot__left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 40px;
+        }
+
+        .og-mascot__logo {
+            height: 50px;
+            margin-bottom: 24px;
+        }
+
+        .og-mascot__headline {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+
+        .og-mascot__subtext {
+            font-size: 20px;
+            color: rgba(255,255,255,0.75);
+            line-height: 1.5;
+        }
+
+        .og-mascot__right {
+            width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .og-mascot__placeholder {
+            width: 250px;
+            height: 250px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed rgba(255,255,255,0.3);
+        }
+
+        .og-mascot__placeholder span {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="instructions">
+        <h1>OG Image Generator</h1>
+        <p>These are 1200x630px templates for your Open Graph image. To save:</p>
+        <ol>
+            <li>Open this file in Chrome</li>
+            <li>Right-click on the image you want</li>
+            <li>Select "Inspect" to open DevTools</li>
+            <li>Right-click the element in DevTools and select "Capture node screenshot"</li>
+            <li>Or use a screenshot tool and crop to exactly the image boundaries</li>
+        </ol>
+        <p style="margin-top: 16px;"><strong>Tip:</strong> For best quality, you can also use a tool like <a href="https://htmlcsstoimage.com" target="_blank">htmlcsstoimage.com</a> to render these as PNGs.</p>
+    </div>
+
+    <!-- OPTION 1: Clean Brand -->
+    <h2>Option 1: Clean Brand (Recommended)</h2>
+    <div class="og-image og-clean">
+        <img src="/public/Dark-Horizontal-Logo.svg" alt="Review My Emails" class="og-clean__logo">
+        <div class="og-clean__tagline">Email List Cleaning That Tells You What to Do</div>
+        <div class="og-clean__subtext">Patterns. Context. Risk. Clear recommendations.</div>
+    </div>
+
+    <!-- OPTION 2: With Labels -->
+    <h2>Option 2: With Keep/Monitor/Suppress Labels</h2>
+    <div class="og-image og-labels">
+        <div class="og-labels__left">
+            <img src="/public/Dark-Horizontal-Logo.svg" alt="Review My Emails" class="og-labels__logo">
+            <div class="og-labels__headline">Not just validation.<br>Interpretation.</div>
+            <div class="og-labels__subtext">Every address gets a label and the reasoning behind it.</div>
+        </div>
+        <div class="og-labels__right">
+            <div class="label-card label-card--keep">
+                <span class="label-card__badge">Keep</span>
+                <span class="label-card__text">Safe to mail</span>
+            </div>
+            <div class="label-card label-card--monitor">
+                <span class="label-card__badge">Monitor</span>
+                <span class="label-card__text">Watch these</span>
+            </div>
+            <div class="label-card label-card--suppress">
+                <span class="label-card__badge">Suppress</span>
+                <span class="label-card__text">Do not mail</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- OPTION 3: Minimal Light -->
+    <h2>Option 3: Light Background</h2>
+    <div class="og-image og-minimal">
+        <div class="og-minimal__accent"></div>
+        <img src="/public/Horizontal-Logo.svg" alt="Review My Emails" class="og-minimal__logo">
+        <div class="og-minimal__tagline">Email List Cleaning That Tells You What to Do</div>
+        <div class="og-minimal__subtext">We see patterns, context, and risk. Then we give you clear recommendations.</div>
+        <div class="og-minimal__url">reviewmyemails.com</div>
+    </div>
+
+    <!-- OPTION 4: Bold Statement -->
+    <h2>Option 4: Bold Statement</h2>
+    <div class="og-image og-bold">
+        <div class="og-bold__pattern"></div>
+        <div class="og-bold__content">
+            <div class="og-bold__headline">Stop Guessing.<br>Start Knowing.</div>
+            <div class="og-bold__subtext">Email list cleaning with clear recommendations.</div>
+            <div class="og-bold__brand">Review My Emails</div>
+        </div>
+    </div>
+
+    <!-- OPTION 5: With Mascot Space -->
+    <h2>Option 5: With Mascot Space (if you want to add Luna)</h2>
+    <div class="og-image og-mascot">
+        <div class="og-mascot__left">
+            <img src="/public/Dark-Horizontal-Logo.svg" alt="Review My Emails" class="og-mascot__logo">
+            <div class="og-mascot__headline">Email list cleaning that tells you what to do.</div>
+            <div class="og-mascot__subtext">Patterns. Context. Risk. Clear labels: Keep, Monitor, Suppress.</div>
+        </div>
+        <div class="og-mascot__right">
+            <div class="og-mascot__placeholder">
+                <span>Add mascot<br>image here</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,2378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails | Email List Cleaning That Tells You What to Do</title>
+    <meta name="description" content="Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do. Clear labels: Keep, Monitor, Suppress. With the reasoning behind each one.">
+    <link rel="canonical" href="https://reviewmyemails.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Review My Emails | Email List Cleaning That Tells You What to Do">
+    <meta property="og:description" content="Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.">
+    <meta property="og:url" content="https://reviewmyemails.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://reviewmyemails.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Review My Emails | Email List Cleaning That Tells You What to Do">
+    <meta name="twitter:description" content="Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.">
+    <meta name="twitter:image" content="https://reviewmyemails.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           DESIGN TOKENS
+           ======================================== */
+
+        :root {
+            /* Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #fafcfc;
+            --color-light: #e6f7f3;
+            --color-lighter: #d1f0e8;
+            --color-muted: #64748b;
+            --color-border: #e2e8f0;
+
+            /* Abyss Mode Colors */
+            --abyss-bg: #020617;
+            --abyss-deep: #0f172a;
+            --abyss-glow: #2dd4bf;
+            --abyss-text: #f1f5f9;
+            --abyss-muted: #94a3b8;
+
+            /* Typography */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+            --space-xxl: 100px;
+
+            /* Layout */
+            --container: 1140px;
+            --content: 680px;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background: var(--color-white);
+            overflow-x: hidden;
+            transition: background 0.8s ease, color 0.8s ease;
+        }
+
+        /* Abyss Mode - Body State */
+        body.abyss-active {
+            background: var(--abyss-bg);
+            color: var(--abyss-text);
+        }
+
+        /* ========================================
+           THE ABYSS LAYER - Easter Egg
+           ======================================== */
+
+        .abyss-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        body.abyss-active .abyss-layer {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .abyss-spotlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(
+                circle 350px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+                transparent 0%,
+                transparent 200px,
+                rgba(2, 6, 23, 0.92) 350px,
+                rgba(2, 6, 23, 0.98) 100%
+            );
+            pointer-events: none;
+        }
+
+        .abyss-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .abyss-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -20px;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4), rgba(45, 212, 191, 0.1));
+            border-radius: 50%;
+            animation: bubble-rise linear infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes bubble-rise {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.6; }
+            25% { transform: translateY(-25vh) translateX(10px) scale(1.05); }
+            50% { transform: translateY(-50vh) translateX(-5px) scale(1.1); }
+            75% { transform: translateY(-75vh) translateX(8px) scale(1.05); }
+            100% { transform: translateY(-110vh) translateX(0) scale(1); opacity: 0; }
+        }
+
+        /* The Fish */
+        .abyss-fish {
+            position: fixed;
+            width: 60px;
+            height: 50px;
+            cursor: pointer;
+            pointer-events: none;
+            z-index: 10001;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        body.abyss-active .abyss-fish { pointer-events: auto; }
+
+        .abyss-fish.swimming {
+            opacity: 1;
+            animation: fish-swim 10s linear forwards, fish-wiggle 0.4s ease-in-out infinite;
+        }
+
+        .abyss-fish.caught {
+            animation: fish-wiggle 0.4s ease-in-out infinite !important;
+            opacity: 1;
+        }
+
+        @keyframes fish-swim {
+            0% { left: -80px; }
+            100% { left: calc(100vw + 80px); }
+        }
+
+        @keyframes fish-wiggle {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(2deg); }
+            75% { transform: translateY(8px) rotate(-2deg); }
+        }
+
+        .abyss-fish svg { width: 100%; height: 100%; overflow: visible; }
+        .fish-body { fill: var(--abyss-glow); filter: drop-shadow(0 0 12px var(--abyss-glow)) drop-shadow(0 0 25px rgba(45, 212, 191, 0.5)); transition: fill 0.3s, filter 0.3s; }
+        .fish-eye { fill: #020617; }
+        .fish-fin { fill: rgba(45, 212, 191, 0.7); }
+        .abyss-fish:hover .fish-body { fill: #5eead4; filter: drop-shadow(0 0 20px var(--abyss-glow)) drop-shadow(0 0 40px rgba(45, 212, 191, 0.7)); }
+        .abyss-fish.caught .fish-body { fill: #fbbf24; filter: drop-shadow(0 0 25px #fbbf24) drop-shadow(0 0 50px rgba(251, 191, 36, 0.6)); }
+        .abyss-fish.caught .fish-fin { fill: rgba(251, 191, 36, 0.7); }
+
+        /* Fish speech bubble */
+        .fish-bubble {
+            position: fixed;
+            background: white;
+            color: var(--color-dark);
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            text-align: center;
+            line-height: 1.5;
+            z-index: 10002;
+            transform: scale(0.9);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .fish-bubble::after {
+            content: '';
+            position: absolute;
+            border: 10px solid transparent;
+        }
+
+        .fish-bubble.show-above::after { bottom: -18px; left: 50%; transform: translateX(-50%); border-top-color: white; }
+        .fish-bubble.show-below::after { top: -18px; left: 50%; transform: translateX(-50%); border-bottom-color: white; }
+        .fish-bubble.visible { opacity: 1; transform: scale(1); }
+
+        .fish-bubble__code {
+            display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--color-accent);
+            margin-top: 8px;
+            letter-spacing: 2px;
+            background: var(--color-light);
+            padding: 6px 12px;
+            border-radius: 6px;
+        }
+
+        /* Exit button */
+        .abyss-exit {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--abyss-text);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-family: var(--font);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            z-index: 10002;
+            pointer-events: none;
+        }
+
+        body.abyss-active .abyss-exit { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .abyss-exit:hover { background: rgba(255,255,255,0.2); border-color: var(--abyss-glow); color: var(--abyss-glow); }
+
+        /* Hint text */
+        .abyss-hint {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+
+        body.abyss-active .abyss-hint { opacity: 1; }
+        body.abyss-active .abyss-hint.hidden { opacity: 0; }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .bubble, .abyss-fish { animation: none; }
+            .abyss-layer, .abyss-exit { transition: none; }
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .container--narrow {
+            max-width: var(--content);
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+
+        h1 {
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--color-dark);
+        }
+
+        h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            color: var(--color-dark);
+        }
+
+        h3 {
+            font-size: 22px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--color-dark);
+        }
+
+        .text-muted {
+            color: var(--color-muted);
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        .text-small {
+            font-size: 16px;
+        }
+
+        .text-large {
+            font-size: 20px;
+        }
+
+        /* ========================================
+           BUTTON
+           ======================================== */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 180ms ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-light);
+        }
+
+        .btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.4);
+        }
+
+        /* Abyss mode button styles */
+        body.abyss-active .btn-primary {
+            background: transparent;
+            border-color: var(--abyss-glow);
+            color: var(--abyss-glow);
+        }
+
+        body.abyss-active .btn-primary:hover {
+            background: var(--abyss-glow);
+            color: var(--abyss-bg);
+            box-shadow: 0 0 30px var(--abyss-glow);
+        }
+
+        body.abyss-active .btn-secondary {
+            border-color: var(--abyss-glow);
+            color: var(--abyss-glow);
+        }
+
+        body.abyss-active .btn-secondary:hover {
+            background: rgba(45, 212, 191, 0.1);
+        }
+
+        /* ========================================
+           ABYSS MODE - Section Styles
+           ======================================== */
+
+        /* Hero */
+        body.abyss-active h1 span { color: var(--abyss-glow); }
+        body.abyss-active .hero__subhead { color: var(--abyss-muted); }
+        body.abyss-active .hero__bridge { color: var(--abyss-muted); }
+        body.abyss-active .hero__quiz-link a { color: var(--abyss-glow); }
+
+        /* Symptoms */
+        body.abyss-active .symptoms { background: var(--abyss-deep); }
+        body.abyss-active .symptoms__header h2 { color: var(--abyss-glow); }
+        body.abyss-active .symptoms__check { border-color: var(--abyss-glow); color: var(--abyss-glow); }
+        body.abyss-active .symptoms__item strong { color: var(--abyss-glow); }
+        body.abyss-active .symptoms__crisis { background: var(--abyss-deep) !important; border-color: var(--abyss-glow) !important; }
+        body.abyss-active .symptoms__crisis-header h3 { color: var(--abyss-glow); }
+        body.abyss-active .symptoms__crisis-list li { color: var(--abyss-muted); }
+        body.abyss-active .symptoms__crisis-btn { background: var(--abyss-glow); color: var(--abyss-bg); }
+
+        /* Steps */
+        body.abyss-active .steps { background: var(--abyss-bg); }
+        body.abyss-active .steps__header h2 { color: var(--abyss-text); }
+        body.abyss-active .steps__header p { color: var(--abyss-muted); }
+        body.abyss-active .icon-box { background: transparent; border: 2px solid var(--abyss-glow); color: var(--abyss-glow); box-shadow: 0 0 20px rgba(45, 212, 191, 0.3); }
+        body.abyss-active .step__number { color: var(--abyss-glow); }
+        body.abyss-active .step h3 { color: var(--abyss-text); }
+        body.abyss-active .step p { color: var(--abyss-muted); }
+        body.abyss-active .steps__whisper { color: var(--abyss-glow); }
+
+        /* Pull Quote */
+        body.abyss-active .pull-quote { background: var(--abyss-deep); }
+        body.abyss-active .pull-quote__text { color: var(--abyss-text); }
+        body.abyss-active .pull-quote__attribution { color: var(--abyss-muted); }
+        body.abyss-active .manifesto { background: var(--abyss-bg); }
+
+        /* Features */
+        body.abyss-active .features { background: #0a0f1a; }
+        body.abyss-active .features__header h2 { color: var(--abyss-glow); }
+        body.abyss-active .feature-card { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.1); }
+        body.abyss-active .feature-card:hover { border-color: var(--abyss-glow); box-shadow: 0 0 30px rgba(45, 212, 191, 0.15); }
+        body.abyss-active .feature-card__icon { color: var(--abyss-glow); }
+        body.abyss-active .feature-card h3 { color: var(--abyss-text); }
+        body.abyss-active .feature-card p { color: var(--abyss-muted); }
+
+        /* CTA Block */
+        body.abyss-active .cta-block { background: var(--abyss-bg) !important; }
+        body.abyss-active .cta-block h2 { color: var(--abyss-text); }
+        body.abyss-active .cta-block__subtext { color: var(--abyss-muted); }
+        body.abyss-active .cta-block__footer { color: var(--abyss-muted); }
+
+        /* Testimonials */
+        body.abyss-active .testimonials { background: var(--abyss-bg); }
+        body.abyss-active .testimonials__header h2 { color: var(--abyss-text); }
+        body.abyss-active .testimonials__header p { color: var(--abyss-muted); }
+        body.abyss-active .testimonial { border-color: rgba(255,255,255,0.1); }
+        body.abyss-active .testimonial__name { color: var(--abyss-text); }
+        body.abyss-active .testimonial__role { color: var(--abyss-muted); }
+        body.abyss-active .testimonial__quote { color: var(--abyss-muted); }
+
+        /* Footer */
+        body.abyss-active .footer { background: #000; border-top: 1px solid rgba(255,255,255,0.1); }
+        body.abyss-active .footer__column a:hover { color: var(--abyss-glow); }
+
+        /* ========================================
+           ICONS (Simple SVG)
+           ======================================== */
+
+        .icon {
+            width: 32px;
+            height: 32px;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon--large {
+            width: 48px;
+            height: 48px;
+        }
+
+        .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: var(--color-accent);
+            border-radius: 8px;
+            color: var(--color-white);
+            transition: all 0.3s;
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+            transition: background 0.8s, border-color 0.8s;
+        }
+
+        body.abyss-active .header {
+            background: rgba(2, 6, 23, 0.9);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .header__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: var(--space-sm) var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            cursor: pointer;
+            user-select: none;
+            transition: filter 0.3s;
+        }
+
+        .header__logo img {
+            height: 60px;
+            width: auto;
+            transition: opacity 0.4s;
+        }
+
+        .header__logo img.logo-light { display: block; }
+        .header__logo img.logo-dark { display: none; }
+        body.abyss-active .header__logo img.logo-light { display: none; }
+        body.abyss-active .header__logo img.logo-dark { display: block; }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .header__link {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-muted);
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+
+        .header__link:hover {
+            color: var(--color-dark);
+        }
+
+        body.abyss-active .header__link { color: var(--abyss-muted); }
+        body.abyss-active .header__link:hover { color: var(--abyss-glow); }
+
+        .header__cta {
+            font-size: 15px;
+            padding: 10px 20px;
+        }
+
+        /* Mobile Menu */
+        .header__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .header__mobile-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-white);
+            z-index: 200;
+            padding: var(--space-lg) var(--space-md);
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .mobile-nav__close {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .mobile-nav__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav__links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .mobile-nav__link {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--color-dark);
+            text-decoration: none;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .mobile-nav__cta {
+            margin-top: var(--space-lg);
+        }
+
+        /* ========================================
+           HERO — Centered but with character
+           ======================================== */
+
+        .hero {
+            padding: 160px 0 var(--space-xxl);
+            text-align: center;
+        }
+
+        .hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: transparent;
+            border: 1px solid var(--color-accent);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: var(--space-md);
+            text-decoration: none;
+            transition: all 180ms ease;
+        }
+
+        .hero__badge:hover {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        body.abyss-active .hero__badge { border-color: var(--abyss-glow); color: var(--abyss-glow); }
+        body.abyss-active .hero__badge:hover { background: var(--abyss-glow); color: var(--abyss-bg); }
+
+        .hero__headline {
+            max-width: 700px;
+            margin: 0 auto var(--space-md);
+        }
+
+        .hero__subhead {
+            font-size: 20px;
+            color: var(--color-muted);
+            max-width: 540px;
+            margin: 0 auto var(--space-lg);
+            line-height: 1.6;
+        }
+
+        .hero__actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        .hero__proof {
+            margin-top: var(--space-xl);
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .hero__bridge {
+            margin-top: var(--space-sm);
+            font-size: 15px;
+            color: var(--color-muted);
+            opacity: 0.8;
+        }
+
+        .hero__quiz-link {
+            margin-top: var(--space-xs);
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .hero__quiz-link a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .hero__quiz-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========================================
+           SYMPTOMS SECTION — V21 Hybrid Design
+           Two-column with checklist + crisis card
+           ======================================== */
+
+        .symptoms {
+            padding: 100px 24px;
+            background: linear-gradient(135deg, #134e4a 0%, #0d9488 100%);
+            color: white;
+            transition: background 0.8s;
+        }
+
+        .symptoms__container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .symptoms__header {
+            margin-bottom: 32px;
+        }
+
+        .symptoms__header h2 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .symptoms__header p {
+            opacity: 0.8;
+            font-size: 18px;
+        }
+
+        .symptoms__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .symptoms__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        .symptoms__check {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255,255,255,0.4);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+
+        .symptoms__item strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .symptoms__crisis {
+            background: #ffffff;
+            border: 2px solid #f33144;
+            border-radius: 12px;
+            padding: 32px;
+            color: var(--color-dark);
+            position: sticky;
+            top: 100px;
+        }
+
+        .symptoms__crisis-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .symptoms__crisis-icon {
+            width: 40px;
+            height: 40px;
+            background: #f33144;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .symptoms__crisis-header h3 {
+            color: #f33144;
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .symptoms__crisis-header span {
+            font-size: 14px;
+            color: #64748b;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .symptoms__crisis-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px 0;
+        }
+
+        .symptoms__crisis-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 15px;
+            color: #334155;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .symptoms__crisis-list li:last-child {
+            border-bottom: none;
+        }
+
+        .symptoms__crisis-list li::before {
+            content: "!";
+            font-weight: 900;
+            color: #f33144;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            background: #fef2f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .symptoms__crisis-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 14px 24px;
+            background: #f33144;
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .symptoms__crisis-btn:hover {
+            background: #dc2626;
+        }
+
+        @media (max-width: 768px) {
+            .symptoms {
+                padding: 80px 24px;
+            }
+
+            .symptoms__container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .symptoms__crisis {
+                position: static;
+            }
+
+            .symptoms__header h2 {
+                font-size: 28px;
+            }
+        }
+
+        /* ========================================
+           STEPS SECTION — With icons, staggered
+           ======================================== */
+
+        .steps {
+            padding: var(--space-xxl) 0;
+            background: var(--color-white);
+            transition: background 0.8s;
+        }
+
+        .steps__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .steps__header h2 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .steps__header p {
+            color: var(--color-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .steps__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .step {
+            position: relative;
+        }
+
+        .step__icon {
+            margin-bottom: var(--space-md);
+        }
+
+        .step__number {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-xs);
+        }
+
+        .step h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .step p {
+            font-size: 16px;
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+
+        /* Whisper between steps */
+        .steps__whisper {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: var(--space-lg) 0;
+            font-size: 15px;
+            font-style: italic;
+            color: var(--color-accent);
+        }
+
+        /* ========================================
+           PULL QUOTE
+           ======================================== */
+
+        .pull-quote {
+            padding: var(--space-xxl) var(--space-md);
+            background: var(--color-lighter);
+            color: var(--color-dark);
+            transition: background 0.8s;
+        }
+
+        .pull-quote__inner {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .pull-quote__text {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 400;
+            line-height: 1.4;
+            margin-bottom: var(--space-lg);
+        }
+
+        .pull-quote__attribution {
+            font-size: 15px;
+            opacity: 0.7;
+        }
+
+        /* Manifesto variant */
+        .manifesto {
+            background: var(--color-white);
+        }
+
+        .manifesto__text {
+            font-size: clamp(20px, 2.5vw, 26px);
+            font-weight: 500;
+            line-height: 1.8;
+            letter-spacing: 0.01em;
+        }
+
+        /* ========================================
+           WHAT YOU GET — Cards
+           ======================================== */
+
+        .features {
+            padding: var(--space-xxl) 0;
+            background: var(--color-dark);
+            transition: background 0.8s;
+        }
+
+        .features__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .features__header h2 {
+            margin-bottom: var(--space-sm);
+            color: var(--color-white);
+        }
+
+        .features__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .feature-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            transition: all 200ms ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 4px 24px rgba(13, 148, 136, 0.08);
+        }
+
+        .feature-card__icon {
+            margin-bottom: var(--space-md);
+            color: var(--color-accent);
+        }
+
+        .feature-card h3 {
+            margin-bottom: var(--space-sm);
+            font-size: 18px;
+        }
+
+        .feature-card p {
+            font-size: 15px;
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           TESTIMONIALS — Editorial
+           ======================================== */
+
+        .testimonials {
+            padding: var(--space-xxl) 0;
+            background: var(--color-light);
+            transition: background 0.8s;
+        }
+
+        .testimonials__header {
+            margin-bottom: var(--space-xl);
+        }
+
+        .testimonials__header h2 {
+            margin-bottom: var(--space-xs);
+        }
+
+        .testimonials__header p {
+            color: var(--color-muted);
+        }
+
+        .testimonial {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: var(--space-lg);
+            padding: var(--space-lg) 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .testimonial:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+
+        .testimonial__meta {
+            font-size: 14px;
+        }
+
+        .testimonial__name {
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 4px;
+        }
+
+        .testimonial__role {
+            color: var(--color-muted);
+            line-height: 1.4;
+        }
+
+        .testimonial__quote {
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark);
+        }
+
+        /* ========================================
+           CTA BLOCK
+           ======================================== */
+
+        .cta-block {
+            padding: var(--space-xxl) var(--space-md);
+            text-align: center;
+            background: var(--color-dark);
+            transition: background 0.8s;
+        }
+
+        .cta-block h2,
+        .cta-block__subtext,
+        .cta-block__footer {
+            color: var(--color-white);
+        }
+
+        .cta-block--light {
+            background: var(--color-light);
+        }
+
+        .cta-block--light h2,
+        .cta-block--light .cta-block__subtext,
+        .cta-block--light .cta-block__footer {
+            color: var(--color-dark);
+        }
+
+        .cta-block--white {
+            background: var(--color-white);
+        }
+
+        .cta-block--white h2,
+        .cta-block--white .cta-block__subtext,
+        .cta-block--white .cta-block__footer {
+            color: var(--color-dark);
+        }
+
+        .cta-block__inner {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .cta-block h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .cta-block__subtext {
+            margin-bottom: var(--space-lg);
+        }
+
+        .cta-block__footer {
+            margin-top: var(--space-md);
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+
+        .footer {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: var(--space-xl) var(--space-md);
+            transition: background 0.8s;
+        }
+
+        .footer__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .footer__brand p {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-top: var(--space-xs);
+            max-width: 240px;
+        }
+
+        .footer__column h4 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-sm);
+            opacity: 0.5;
+        }
+
+        .footer__column a {
+            display: block;
+            font-size: 15px;
+            color: var(--color-white);
+            text-decoration: none;
+            opacity: 0.8;
+            margin-bottom: var(--space-xs);
+            transition: opacity 180ms ease;
+        }
+
+        .footer__column a:hover {
+            opacity: 1;
+        }
+
+        .footer__bottom {
+            grid-column: 1 / -1;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           CONTACT MODAL
+           ======================================== */
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--color-white);
+            border-radius: 12px;
+            max-width: 480px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal__header {
+            padding: var(--space-md) var(--space-md) 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .modal__title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-dark);
+        }
+
+        .modal__close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: var(--color-muted);
+            transition: color 180ms ease;
+        }
+
+        .modal__close:hover {
+            color: var(--color-dark);
+        }
+
+        .modal__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .modal__body {
+            padding: var(--space-md);
+        }
+
+        .modal__subtitle {
+            font-size: 16px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-dark);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            font-family: var(--font);
+            font-size: 16px;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            transition: border-color 180ms ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group small {
+            display: block;
+            font-size: 13px;
+            color: var(--color-muted);
+            margin-top: 4px;
+        }
+
+        .modal__footer {
+            padding: 0 var(--space-md) var(--space-md);
+        }
+
+        .modal__footer .btn {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .form-success {
+            text-align: center;
+            padding: var(--space-lg) var(--space-md);
+        }
+
+        .form-success svg {
+            width: 64px;
+            height: 64px;
+            stroke: var(--color-accent);
+            stroke-width: 2;
+            fill: none;
+            margin-bottom: var(--space-md);
+        }
+
+        .form-success h3 {
+            font-size: 24px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .form-success p {
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+
+        @media (max-width: 900px) {
+            .steps__grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+            }
+
+            .step:nth-child(2) {
+                margin-top: 0;
+            }
+
+            .features__grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .testimonial {
+                grid-template-columns: 1fr;
+                gap: var(--space-sm);
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer__brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header__nav {
+                gap: var(--space-md);
+            }
+
+            .header__link,
+            .header__cta {
+                display: none;
+            }
+
+            .header__mobile-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .hero__actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+        }
+    </style>
+    <!-- Analytics -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5PYH0SJWEW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5PYH0SJWEW');
+    </script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "rfdccvjnjx");
+    </script>
+    <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+    <!-- ========================================
+         THE ABYSS LAYER - Easter Egg
+         ======================================== -->
+
+    <div class="abyss-layer" id="abyssLayer">
+        <div class="abyss-spotlight" id="abyssSpotlight"></div>
+        <canvas class="abyss-canvas" id="tentacleCanvas"></canvas>
+        <div class="abyss-bubbles" id="abyssBubbles"></div>
+    </div>
+
+    <!-- The Swimming Fish -->
+    <div class="abyss-fish" id="abyssFish" onclick="catchFish()">
+        <svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+            <path class="fish-body" d="M 8 20 C 8 10, 20 4, 32 6 C 42 8, 48 14, 50 20 C 48 26, 42 32, 32 34 C 20 36, 8 30, 8 20 Z"/>
+            <path class="fish-body" d="M 48 20 C 52 16, 58 8, 60 10 C 58 20, 58 20, 60 30 C 58 32, 52 24, 48 20 Z"/>
+            <path class="fish-fin" d="M 24 8 C 28 2, 36 2, 38 8 C 34 10, 28 10, 24 8 Z"/>
+            <path class="fish-fin" d="M 28 32 C 30 36, 36 36, 38 32 C 35 31, 31 31, 28 32 Z"/>
+            <path class="fish-fin" d="M 22 22 C 18 26, 14 30, 16 32 C 20 30, 24 26, 24 22 Z"/>
+            <circle class="fish-eye" cx="18" cy="18" r="3"/>
+            <circle fill="white" cx="17" cy="17" r="1"/>
+        </svg>
+    </div>
+
+    <!-- Fish speech bubble -->
+    <div class="fish-bubble" id="fishBubble">
+        <span>You found me! Here's 20% off your first order.</span>
+        <span class="fish-bubble__code">Coupon: DEEPDIVE20</span>
+    </div>
+
+    <!-- Exit button -->
+    <button class="abyss-exit" id="abyssExit" onclick="exitAbyss()">Return to Surface</button>
+
+    <!-- Hint text -->
+    <div class="abyss-hint" id="abyssHint">Something is swimming in the deep...</div>
+
+    <!-- ========================================
+         HEADER
+         ======================================== -->
+
+    <header class="header">
+        <div class="header__inner">
+            <a href="index.html" class="header__logo" id="headerLogo">
+                <img src="assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40" class="logo-light">
+                <img src="assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="40" class="logo-dark">
+            </a>
+            <nav class="header__nav">
+                <a href="done-for-you.html" class="header__link">How It Works</a>
+                <a href="pricing.html" class="header__link">Pricing</a>
+                <a href="sos-hotline.html" class="header__link">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get My List Cleaned</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__header">
+            <a href="index.html" class="header__logo">
+                <img src="assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="mobile-nav__links">
+            <a href="done-for-you.html" class="mobile-nav__link">How It Works</a>
+            <a href="pricing.html" class="mobile-nav__link">Pricing</a>
+            <a href="sos-hotline.html" class="mobile-nav__link">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link">About</a>
+            <a href="partner.html" class="mobile-nav__link">Partner</a>
+        </div>
+        <div class="mobile-nav__cta">
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get My List Cleaned</a>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         HERO
+         ======================================== -->
+
+    <section class="hero">
+        <div class="container">
+            <a href="https://linkedin.com/in/yannatorry" target="_blank" class="hero__badge">By Yanna-Torry Aspraki</a>
+            <h1 class="hero__headline">Stop guessing what is wrong with your list.<br><span style="color: var(--color-accent);">We find the problems tools miss.</span></h1>
+            <p class="hero__subhead">Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.</p>
+            <div class="hero__actions">
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
+            </div>
+            <p class="hero__bridge">Most email inboxing and deliverability problems trace back to list quality.</p>
+            <p class="hero__quiz-link">Not sure yet? <a href="quiz.html">Take the 2-minute risk check →</a></p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SYMPTOMS — Recognition section
+         "Sound familiar?" creates the "that's me" moment
+         ======================================== -->
+
+    <section class="symptoms">
+        <div class="symptoms__container">
+            <div>
+                <div class="symptoms__header">
+                    <h2 style="color: white;">Sound familiar?</h2>
+                    <p>You're not alone. These are the patterns we see every day.</p>
+                </div>
+                <ul class="symptoms__list">
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span><strong>No idea</strong> where half this list came from.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>One tool says <strong>clean</strong>. Another says <strong>risky</strong>.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span><strong>Scared to remove</strong> subscribers, even the ones who never open.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>Haven't emailed this list in <strong>months</strong>. Afraid to restart.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>Paid for list cleaning <strong>yesterday</strong>. Bounces <strong>today</strong>.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>Open rates <strong>dropped</strong> and nobody can explain why.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>List keeps <strong>growing</strong>. Revenue <strong>doesn't</strong>.</span>
+                    </li>
+                    <li class="symptoms__item">
+                        <span class="symptoms__check">✓</span>
+                        <span>Emails <strong>not inboxing</strong> anymore, going to spam or nowhere at all.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="symptoms__crisis">
+                <div class="symptoms__crisis-header">
+                    <div class="symptoms__crisis-icon">⚠</div>
+                    <div>
+                        <h3>Crisis Mode?</h3>
+                        <span>If any of these are true, start here.</span>
+                    </div>
+                </div>
+                <ul class="symptoms__crisis-list">
+                    <li>ESP sent a compliance warning or paused your sending.</li>
+                    <li>Blocklisted, or you think you might be.</li>
+                    <li>Last send spiked bounces. Now everyone's afraid to send again.</li>
+                </ul>
+                <a href="sos-hotline.html" class="symptoms__crisis-btn">Email the SOS Hotline →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         STEPS — How we work
+         ======================================== -->
+
+    <section class="steps">
+        <div class="container">
+            <div class="steps__header">
+                <h2>How we actually work</h2>
+                <p>Simple process. Expert execution. Real results.</p>
+            </div>
+
+            <div class="steps__grid">
+
+                <div class="step">
+                    <div class="step__icon">
+                        <div class="icon-box">
+                            <svg class="icon icon--large" viewBox="0 0 24 24">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="17 8 12 3 7 8"/>
+                                <line x1="12" y1="3" x2="12" y2="15"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step__number">Step 01</div>
+                    <h3>Send us your list</h3>
+                    <p>CSV, Excel, whatever you have. We've seen it all. No judgment, no questions.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step__icon">
+                        <div class="icon-box">
+                            <svg class="icon icon--large" viewBox="0 0 24 24">
+                                <circle cx="11" cy="11" r="8"/>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                                <line x1="11" y1="8" x2="11" y2="14"/>
+                                <line x1="8" y1="11" x2="14" y2="11"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step__number">Step 02</div>
+                    <h3>We review every address</h3>
+                    <p>One by one. Looking for bounces, spam traps, disposables, and reputation killers.</p>
+                </div>
+
+                <div class="step">
+                    <div class="step__icon">
+                        <div class="icon-box">
+                            <svg class="icon icon--large" viewBox="0 0 24 24">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="step__number">Step 03</div>
+                    <h3>Get your clean list back</h3>
+                    <p>With clear labels and a report. You'll know exactly what to do with each address.</p>
+                </div>
+
+                <p class="steps__whisper">No outsourcing. No AI guesswork. Just experienced eyes on every list.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         OPTION A: TESTIMONIAL PULL QUOTE
+         ======================================== -->
+
+    <section class="pull-quote">
+        <div class="pull-quote__inner">
+            <p class="pull-quote__text">"She cleaned and organized our database with incredible efficiency and set us up for long-term success."</p>
+            <p class="pull-quote__attribution">Sam Cande, UK</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         WHY TOOLS AREN'T ENOUGH
+         A symptom that hooks the "burned by tools" visitor
+         ======================================== -->
+
+    <section class="pull-quote manifesto">
+        <div class="pull-quote__inner">
+            <p class="manifesto__text">You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened. That's the gap between validation and understanding.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         WHAT YOU GET — Features
+         ======================================== -->
+
+    <section class="features">
+        <div class="container">
+            <div class="features__header">
+                <h2>What you actually get</h2>
+            </div>
+
+            <div class="features__grid">
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg class="icon icon--large" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14 2 14 8 20 8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10 9 9 9 8 9"/>
+                        </svg>
+                    </div>
+                    <h3>Clear action labels</h3>
+                    <p>Every email marked Keep, Monitor, or Suppress. No ambiguity, no guessing what to do next.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg class="icon icon--large" viewBox="0 0 24 24">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>Detailed reasoning</h3>
+                    <p>Not just "risky", we tell you why. Spam trap patterns, domain issues, behavioral signals.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">
+                        <svg class="icon icon--large" viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Expert interpretation included</h3>
+                    <p>Not just data, context. Every list review includes a walkthrough of your results. I explain what I found, what it means, and exactly what to do next.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         NOT READY? — Soft conversion point
+         For the 40-second visitor who isn't converting today
+         ======================================== -->
+
+    <section class="cta-block cta-block--white">
+        <div class="cta-block__inner">
+            <h2>Not sure if your list needs this?</h2>
+            <p class="cta-block__subtext">Take a 2-minute self-assessment. Four questions about how you built your list, and we'll tell you what risk level you're probably at.</p>
+            <a href="quiz.html" class="btn btn-secondary">Take the 2-Minute Risk Check</a>
+        </div>
+    </section>
+
+    <!-- ========================================
+         TESTIMONIALS
+         ======================================== -->
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials__header">
+                <h2>People who trusted us</h2>
+                <p>Real feedback from real senders.</p>
+            </div>
+
+            <article class="testimonial">
+                <div class="testimonial__meta">
+                    <p class="testimonial__name">Megan S.</p>
+                    <p class="testimonial__role">UK</p>
+                </div>
+                <blockquote class="testimonial__quote">
+                    "The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call."
+                </blockquote>
+            </article>
+
+            <article class="testimonial">
+                <div class="testimonial__meta">
+                    <p class="testimonial__name">Chris Mead</p>
+                    <p class="testimonial__role">UK</p>
+                </div>
+                <blockquote class="testimonial__quote">
+                    "Real human expertise. Tailor-made solutions. Not an AI tool."
+                </blockquote>
+            </article>
+
+            <article class="testimonial">
+                <div class="testimonial__meta">
+                    <p class="testimonial__name">Adeola Sole</p>
+                    <p class="testimonial__role">UK</p>
+                </div>
+                <blockquote class="testimonial__quote">
+                    "RME provides deep insights our ESP misses and helped us segment smarter."
+                </blockquote>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- ========================================
+         CTA BLOCK
+         ======================================== -->
+
+    <section class="cta-block">
+        <div class="cta-block__inner">
+            <h2>Ready to know what's in your list?</h2>
+            <p class="cta-block__subtext">Send us your list. We'll tell you exactly what's safe to send, what needs watching, and what will hurt you.</p>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
+            <p class="cta-block__footer">Most lists returned within 24 hours.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CONTACT MODAL
+         ======================================== -->
+
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal">
+            <div class="modal__header">
+                <h3 class="modal__title">Get in Touch</h3>
+                <button class="modal__close" onclick="closeContactModal()" aria-label="Close">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal__body">
+                <p class="modal__subtitle">Tell us what you're working on. We'll get back to you within one business day.</p>
+                <form id="contactForm">
+                    <input type="hidden" id="contactSource" name="source" value="">
+                    <div class="form-group">
+                        <label for="contactName">Name *</label>
+                        <input type="text" id="contactName" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Email *</label>
+                        <input type="email" id="contactEmail" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactTimezone">Timezone</label>
+                        <select id="contactTimezone" name="timezone">
+                            <option value="">Select your timezone (optional)</option>
+                            <option value="PT">Pacific Time (PT)</option>
+                            <option value="MT">Mountain Time (MT)</option>
+                            <option value="CT">Central Time (CT)</option>
+                            <option value="ET">Eastern Time (ET)</option>
+                            <option value="GMT">GMT / UTC</option>
+                            <option value="CET">Central European Time (CET)</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" name="message" placeholder="What can we help you with?"></textarea>
+                        <small>Optional - but helps us prepare for the conversation.</small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal__footer">
+                <button type="submit" form="contactForm" class="btn btn-primary">Send Message</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Success Modal -->
+    <div class="modal-overlay" id="contactSuccessModal">
+        <div class="modal">
+            <div class="modal__header">
+                <span></span>
+                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close">
+                    <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="form-success">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+                <h3>Message Sent!</h3>
+                <p>We'll get back to you within one business day.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <img src="assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
+                <p>We see what algorithms can't.</p>
+            </div>
+
+            <div class="footer__column">
+                <h4>Services</h4>
+                <a href="pricing.html">Pricing</a>
+                <a href="sos-hotline.html">SOS Hotline</a>
+            </div>
+
+            <div class="footer__column">
+                <h4>Company</h4>
+                <a href="about.html">About</a>
+                <a href="partner.html">Partner</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html">Security</a>
+            </div>
+
+            <div class="footer__column">
+                <h4>Contact</h4>
+                <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
+            </div>
+
+            <div class="footer__bottom">
+                <span>© 2026 Review My Emails. All rights reserved.</span>
+                <span>Privacy Policy · Terms</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation -->
+    <script>
+        function openMobileNav() {
+            document.getElementById('mobileNav').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    </script>
+
+    <!-- Custom Event Tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track CTA button clicks
+            document.querySelectorAll('.btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var destination = this.getAttribute('href') || '';
+                    var label = this.textContent.trim();
+                    va('event', { name: 'CTA_Clicked', data: { label: label, destination: destination, page: 'homepage' } });
+                });
+            });
+        });
+    </script>
+
+    <!-- Contact Modal -->
+    <script>
+        function openContactModal(source) {
+            document.getElementById('contactSource').value = source || 'homepage';
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+            document.getElementById('contactForm').reset();
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('contactSuccessModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) closeContactModal();
+        });
+        document.getElementById('contactSuccessModal').addEventListener('click', function(e) {
+            if (e.target === this) closeSuccessModal();
+        });
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.querySelector('.modal__footer .btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            const formData = {
+                name: document.getElementById('contactName').value,
+                email: document.getElementById('contactEmail').value,
+                timezone: document.getElementById('contactTimezone').value,
+                message: document.getElementById('contactMessage').value,
+                source: document.getElementById('contactSource').value,
+                page: 'homepage'
+            };
+
+            try {
+                const response = await fetch('/api/contact-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    closeContactModal();
+                    document.getElementById('contactSuccessModal').classList.add('active');
+                    document.body.style.overflow = 'hidden';
+
+                    // Track submission
+                    if (window.va) {
+                        va('event', { name: 'Contact_Form_Submitted', data: { source: formData.source, page: 'homepage' } });
+                    }
+                } else {
+                    throw new Error('Failed to submit');
+                }
+            } catch (error) {
+                alert('Something went wrong. Please try again or email us directly at ahoy@reviewmyemails.com');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+
+    <!-- ========================================
+         ABYSS MODE SCRIPTS - Easter Egg
+         ======================================== -->
+    <script>
+        // ========================================
+        // STATE
+        // ========================================
+        let isAbyssActive = false;
+        let clickCount = 0;
+        let clickTimer = null;
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let fishCaught = false;
+        let fishSwimTimer = null;
+        let lastScrollTime = 0;
+        let isAtBottom = false;
+        let accumulatedScrollDistance = 0;
+        const DIVE_THRESHOLD = 1500;
+
+        // Tentacle state
+        let tentacles = [];
+        const canvas = document.getElementById('tentacleCanvas');
+        const ctx = canvas ? canvas.getContext('2d') : null;
+
+        // ========================================
+        // TRIPLE CLICK DETECTION
+        // ========================================
+        const logo = document.getElementById('headerLogo');
+
+        logo.addEventListener('click', function(e) {
+            e.preventDefault();
+            clickCount++;
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => { clickCount = 0; }, 500);
+            if (clickCount >= 3) {
+                clickCount = 0;
+                if (!isAbyssActive) enterAbyss();
+            }
+        });
+
+        // ========================================
+        // ENTER THE ABYSS
+        // ========================================
+        function enterAbyss() {
+            isAbyssActive = true;
+            document.body.classList.add('abyss-active');
+            setupCanvas();
+            createBubbles();
+            initTentacles();
+            animateTentacles();
+            fishCaught = false;
+            document.getElementById('abyssFish').classList.remove('caught');
+            setTimeout(startFishSwim, 2000);
+            if (window.va) va('event', { name: 'Easter_Egg_Activated', data: { type: 'abyss_mode' } });
+        }
+
+        // ========================================
+        // EXIT THE ABYSS
+        // ========================================
+        function exitAbyss() {
+            isAbyssActive = false;
+            document.body.classList.remove('abyss-active');
+            fishCaught = false;
+            const fish = document.getElementById('abyssFish');
+            fish.classList.remove('swimming', 'caught');
+            const bubble = document.getElementById('fishBubble');
+            bubble.style.opacity = '0';
+            bubble.style.transform = 'scale(0.9)';
+            document.getElementById('abyssHint').classList.remove('hidden');
+            if (fishSwimTimer) clearTimeout(fishSwimTimer);
+            document.getElementById('abyssBubbles').innerHTML = '';
+            tentacles = [];
+        }
+
+        // ========================================
+        // MOUSE TRACKING
+        // ========================================
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (isAbyssActive) {
+                const spotlight = document.getElementById('abyssSpotlight');
+                spotlight.style.setProperty('--mouse-x', mouseX + 'px');
+                spotlight.style.setProperty('--mouse-y', mouseY + 'px');
+            }
+        });
+
+        // ========================================
+        // BUBBLES
+        // ========================================
+        function createBubbles() {
+            const container = document.getElementById('abyssBubbles');
+            container.innerHTML = '';
+            for (let i = 0; i < 20; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = Math.random() * 20 + 8;
+                bubble.style.width = size + 'px';
+                bubble.style.height = size + 'px';
+                bubble.style.left = Math.random() * 100 + '%';
+                bubble.style.animationDuration = (Math.random() * 8 + 6) + 's';
+                bubble.style.animationDelay = (Math.random() * 10) + 's';
+                container.appendChild(bubble);
+            }
+        }
+
+        // ========================================
+        // FISH SWIMMING
+        // ========================================
+        function startFishSwim() {
+            if (!isAbyssActive || fishCaught) return;
+            const fish = document.getElementById('abyssFish');
+            fish.style.top = (Math.random() * (window.innerHeight - 250) + 120) + 'px';
+            fish.style.left = '-80px';
+            fish.classList.add('swimming');
+            fishSwimTimer = setTimeout(() => {
+                if (isAbyssActive && !fishCaught) {
+                    fish.classList.remove('swimming');
+                    setTimeout(startFishSwim, Math.random() * 5000 + 3000);
+                }
+            }, 10000);
+        }
+
+        function catchFish() {
+            if (!isAbyssActive || fishCaught) return;
+            fishCaught = true;
+            const fish = document.getElementById('abyssFish');
+            const bubble = document.getElementById('fishBubble');
+            const fishRect = fish.getBoundingClientRect();
+            fish.style.left = fishRect.left + 'px';
+            fish.style.top = fishRect.top + 'px';
+            fish.classList.remove('swimming');
+            fish.classList.add('caught');
+
+            const fishCenterX = fishRect.left + fishRect.width / 2;
+            const fishCenterY = fishRect.top + fishRect.height / 2;
+            const bubbleWidth = 320, bubbleHeight = 100, padding = 20;
+            let bubbleX = Math.max(padding, Math.min(window.innerWidth - bubbleWidth - padding, fishCenterX - bubbleWidth / 2));
+            let bubbleY, showAbove = fishCenterY > window.innerHeight / 2;
+            bubbleY = showAbove ? fishRect.top - bubbleHeight - 20 : fishRect.top + fishRect.height + 20;
+            bubbleY = Math.max(padding, Math.min(window.innerHeight - bubbleHeight - padding, bubbleY));
+
+            bubble.style.left = bubbleX + 'px';
+            bubble.style.top = bubbleY + 'px';
+            bubble.classList.remove('show-above', 'show-below');
+            bubble.classList.add(showAbove ? 'show-above' : 'show-below');
+            bubble.style.opacity = '1';
+            bubble.style.transform = 'scale(1)';
+            document.getElementById('abyssHint').classList.add('hidden');
+            if (fishSwimTimer) clearTimeout(fishSwimTimer);
+            if (window.va) va('event', { name: 'Easter_Egg_Secret_Found', data: { code: 'DEEPDIVE20' } });
+        }
+
+        // ========================================
+        // CANVAS SETUP
+        // ========================================
+        function setupCanvas() {
+            if (!canvas) return;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', () => {
+            if (canvas) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                if (isAbyssActive) initTentacles();
+            }
+        });
+
+        // ========================================
+        // TENTACLES
+        // ========================================
+        function initTentacles() {
+            const h = window.innerHeight, w = window.innerWidth;
+            tentacles = [
+                { x: -50, y: h * 0.2, baseAngle: 12, segments: 12, segmentLength: 45, speed: 1.2, phase: 0, baseWidth: 45 },
+                { x: -50, y: h * 0.5, baseAngle: 18, segments: 10, segmentLength: 40, speed: 0.9, phase: 2, baseWidth: 38 },
+                { x: -50, y: h * 0.75, baseAngle: 8, segments: 14, segmentLength: 48, speed: 1.0, phase: 4, baseWidth: 50 },
+                { x: w + 50, y: h * 0.25, baseAngle: 168, segments: 11, segmentLength: 44, speed: 1.1, phase: 1, baseWidth: 42 },
+                { x: w + 50, y: h * 0.55, baseAngle: 162, segments: 9, segmentLength: 38, speed: 1.3, phase: 3, baseWidth: 35 },
+                { x: w + 50, y: h * 0.8, baseAngle: 172, segments: 13, segmentLength: 46, speed: 0.8, phase: 5, baseWidth: 48 },
+                { x: w * 0.12, y: h + 50, baseAngle: 268, segments: 10, segmentLength: 42, speed: 1.0, phase: 0.5, baseWidth: 40 },
+                { x: w * 0.4, y: h + 50, baseAngle: 272, segments: 12, segmentLength: 46, speed: 0.85, phase: 2.5, baseWidth: 46 },
+                { x: w * 0.65, y: h + 50, baseAngle: 265, segments: 8, segmentLength: 36, speed: 1.2, phase: 4.5, baseWidth: 36 },
+                { x: w * 0.88, y: h + 50, baseAngle: 278, segments: 11, segmentLength: 44, speed: 0.95, phase: 1.5, baseWidth: 44 },
+            ];
+        }
+
+        function drawTentacle(tentacle, time) {
+            if (!ctx) return;
+            ctx.save();
+            ctx.translate(tentacle.x, tentacle.y);
+            ctx.rotate(tentacle.baseAngle * Math.PI / 180);
+            const dx = mouseX - tentacle.x, dy = mouseY - tentacle.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const retractionFactor = Math.max(0, 1 - distance / 500);
+
+            for (let i = 0; i < tentacle.segments; i++) {
+                const waveOffset = Math.sin(time * 0.001 * tentacle.speed + tentacle.phase + i * 0.35) * (10 + i * 0.8);
+                const curveAngle = waveOffset * (Math.PI / 180);
+                const width = tentacle.baseWidth * (1 - i / tentacle.segments * 0.65);
+                const length = tentacle.segmentLength * (1 - retractionFactor * 0.2);
+                ctx.rotate(curveAngle);
+                const alpha = 0.9 - i * 0.05;
+                ctx.fillStyle = `rgba(13, 148, 136, ${alpha})`;
+                ctx.beginPath();
+                ctx.roundRect(-width/2, 0, width, length, width * 0.3);
+                ctx.fill();
+                if (i < 3) { ctx.shadowColor = 'rgba(45, 212, 191, 0.4)'; ctx.shadowBlur = 20; }
+                if (i > 0 && i % 2 === 1) {
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.35)';
+                    ctx.beginPath();
+                    ctx.ellipse(0, length * 0.5, width * 0.35, width * 0.2, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.shadowBlur = 0;
+                ctx.translate(0, length);
+            }
+            ctx.restore();
+        }
+
+        function animateTentacles(time = 0) {
+            if (!isAbyssActive || !ctx) { if (isAbyssActive) requestAnimationFrame(animateTentacles); return; }
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            tentacles.forEach(t => drawTentacle(t, time));
+            requestAnimationFrame(animateTentacles);
+        }
+
+        // ========================================
+        // KONAMI CODE
+        // ========================================
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === konamiCode[konamiIndex]) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) { konamiIndex = 0; if (!isAbyssActive) enterAbyss(); }
+            } else { konamiIndex = 0; }
+            if (e.key === 'Escape' && isAbyssActive) exitAbyss();
+        });
+
+        // ========================================
+        // DIVE DEEPER SCROLL TRIGGER
+        // ========================================
+        function checkIfAtBottom() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight;
+            const clientHeight = document.documentElement.clientHeight;
+            return scrollTop + clientHeight >= scrollHeight - 5;
+        }
+
+        window.addEventListener('scroll', () => {
+            isAtBottom = checkIfAtBottom();
+            if (!isAtBottom) accumulatedScrollDistance = 0;
+        });
+
+        window.addEventListener('wheel', (e) => {
+            if (isAbyssActive) return;
+            if (isAtBottom && e.deltaY > 0) {
+                const now = Date.now();
+                if (now - lastScrollTime > 1000) accumulatedScrollDistance = 0;
+                lastScrollTime = now;
+                accumulatedScrollDistance += Math.abs(e.deltaY);
+                if (accumulatedScrollDistance >= DIVE_THRESHOLD) { accumulatedScrollDistance = 0; enterAbyss(); }
+            }
+        }, { passive: true });
+    </script>
+
+</body>
+</html>

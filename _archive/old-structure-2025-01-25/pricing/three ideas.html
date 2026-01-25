@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RME Problem Section - Refined</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           GLOBAL TOKENS
+           ======================================== */
+        :root {
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-white: #fafcfc;
+            --color-light: #f0fdfa;
+            --color-lighter: #ccfbf1;
+            --color-muted: #64748b;
+            --color-border: #e2e8f0;
+
+            --font: 'Inter', sans-serif;
+
+            --radius-md: 8px;
+            --shadow: 0 4px 12px rgba(19, 78, 74, 0.08);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font); color: var(--color-dark); background: #e2e8f0; padding-bottom: 100px; }
+
+        .header-label {
+            background: var(--color-dark); color: white; padding: 20px; text-align: center;
+            font-size: 14px; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;
+        }
+        .header-label span {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.7;
+            margin-top: 4px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        /* Status Badges (Shared) */
+        .status-badge { display: inline-block; padding: 5px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; }
+        .bg-green { background: #dcfce7; color: #166534; }
+        .bg-red { background: #fee2e2; color: #991b1b; }
+        .bg-yellow { background: #fef3c7; color: #92400e; }
+        .bg-gray { background: #f3f4f6; color: #6b7280; }
+
+        /* ========================================
+           OPTION 1: Clean Editorial List
+           ======================================== */
+        .v1-section { padding: 100px 24px; background: white; }
+        .v1-container { max-width: 680px; margin: 0 auto; }
+
+        .v1-header { text-align: center; margin-bottom: 48px; }
+        .v1-header h2 { font-size: 32px; font-weight: 700; margin-bottom: 20px; }
+        .v1-intro { font-size: 18px; line-height: 1.7; color: var(--color-muted); margin-bottom: 28px; }
+
+        .v1-badges { margin-bottom: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+        .v1-list { list-style: none; padding: 0; border-top: 1px solid var(--color-border); }
+        .v1-list li {
+            font-size: 17px; padding: 20px 0; border-bottom: 1px solid var(--color-border);
+            display: flex; align-items: baseline; gap: 14px; color: var(--color-dark); line-height: 1.5; font-weight: 500;
+            transition: color 0.2s;
+        }
+        .v1-list li:hover { color: var(--color-accent); }
+        .v1-list li::before {
+            content: "?"; color: var(--color-accent); font-weight: 700; font-size: 18px;
+            width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+            background: var(--color-light); border-radius: 50%; flex-shrink: 0;
+        }
+
+        .v1-footer {
+            margin-top: 48px; text-align: center; font-size: 19px; font-weight: 600; color: var(--color-dark);
+            padding: 20px 24px; background: var(--color-light); border-radius: 8px;
+        }
+
+        /* ========================================
+           OPTION 2: The Cards Grid
+           ======================================== */
+        .v2-section { padding: 100px 24px; background: var(--color-white); }
+        .v2-container { max-width: 800px; margin: 0 auto; text-align: center; }
+
+        .v2-header h2 { font-size: 32px; font-weight: 700; margin-bottom: 20px; }
+        .v2-intro { font-size: 18px; line-height: 1.7; color: var(--color-muted); margin-bottom: 28px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        .v2-badges { margin-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+        .v2-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 48px; text-align: left;
+        }
+        @media (max-width: 600px) { .v2-grid { grid-template-columns: 1fr; } }
+
+        .v2-card {
+            background: white; border: 1px solid var(--color-border); border-radius: 10px; padding: 22px 24px;
+            font-size: 16px; color: var(--color-dark); font-weight: 500; line-height: 1.5;
+            display: flex; align-items: start; gap: 14px;
+            transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .v2-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.12);
+            transform: translateY(-2px);
+        }
+        .v2-icon {
+            color: var(--color-accent); font-weight: 700; font-size: 16px;
+            width: 28px; height: 28px; display: flex; align-items: center; justify-content: center;
+            background: var(--color-light); border-radius: 50%; flex-shrink: 0;
+        }
+
+        .v2-footer {
+            background: var(--color-lighter); padding: 24px 32px; border-radius: 10px;
+            font-weight: 600; font-size: 18px; color: var(--color-dark); display: inline-block;
+        }
+
+        /* ========================================
+           OPTION 3: Interactive Rows
+           ======================================== */
+        .v3-section { padding: 100px 24px; background: var(--color-light); }
+        .v3-container { max-width: 700px; margin: 0 auto; }
+
+        .v3-header { text-align: center; margin-bottom: 20px; }
+        .v3-header h2 { font-size: 32px; color: var(--color-dark); }
+        .v3-intro { font-size: 18px; color: var(--color-muted); margin-bottom: 28px; text-align: center; line-height: 1.7; }
+
+        .v3-badges { text-align: center; margin-bottom: 40px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+
+        .v3-item {
+            background: white; border: 1px solid var(--color-border); border-radius: 10px;
+            margin-bottom: 10px; padding: 20px 24px; display: flex; justify-content: space-between;
+            align-items: center; cursor: default; transition: all 0.2s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+        .v3-item:hover {
+            border-color: var(--color-accent);
+            transform: translateX(6px);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.1);
+        }
+        .v3-item:hover .v3-arrow { opacity: 1; color: var(--color-accent); }
+        .v3-text { font-size: 17px; color: var(--color-dark); font-weight: 500; }
+        .v3-arrow { color: var(--color-muted); opacity: 0.4; font-size: 20px; transition: all 0.2s; }
+
+        .v3-footer {
+            margin-top: 40px; text-align: center; font-size: 19px; font-weight: 600; color: var(--color-dark);
+            padding: 20px 24px; background: white; border-radius: 10px; border: 2px solid var(--color-accent);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- OPTION 1: Clean Editorial List -->
+    <div class="header-label">Option 1: Clean Editorial List<span>Minimal, vertical flow with bordered rows</span></div>
+    <section class="v1-section">
+        <div class="v1-container">
+            <div class="v1-header">
+                <h2>The Problem</h2>
+                <p class="v1-intro">Most list cleaning tools give you a status and leave you guessing. That tells you what to remove. It does not tell you what is actually wrong.</p>
+                <div class="v1-badges">
+                    <span class="status-badge bg-green">Deliverable</span>
+                    <span class="status-badge bg-red">Undeliverable</span>
+                    <span class="status-badge bg-yellow">Risky</span>
+                    <span class="status-badge bg-gray">Unknown</span>
+                </div>
+            </div>
+
+            <ul class="v1-list">
+                <li>Why is engagement dropping?</li>
+                <li>Why are complaints rising?</li>
+                <li>Is it the list, the sending, or both?</li>
+                <li>Which addresses are actually hurting me?</li>
+                <li>What patterns should I watch for?</li>
+                <li>What should I do about the "risky" ones?</li>
+            </ul>
+
+            <p class="v1-footer">We give you the context to answer those questions.</p>
+        </div>
+    </section>
+
+    <!-- OPTION 2: Grid of Cards -->
+    <div class="header-label">Option 2: Grid of Cards<span>Two-column layout with hover lift effect</span></div>
+    <section class="v2-section">
+        <div class="v2-container">
+            <div class="v2-header">
+                <h2>The Problem</h2>
+            </div>
+
+            <p class="v2-intro">Most list cleaning tools give you a status and leave you guessing. That tells you what to remove. It does not tell you what is actually wrong.</p>
+
+            <div class="v2-badges">
+                <span class="status-badge bg-green">Deliverable</span>
+                <span class="status-badge bg-red">Undeliverable</span>
+                <span class="status-badge bg-yellow">Risky</span>
+                <span class="status-badge bg-gray">Unknown</span>
+            </div>
+
+            <div class="v2-grid">
+                <div class="v2-card">
+                    <span class="v2-icon">?</span>
+                    Why is engagement dropping?
+                </div>
+                <div class="v2-card">
+                    <span class="v2-icon">?</span>
+                    Why are complaints rising?
+                </div>
+                <div class="v2-card">
+                    <span class="v2-icon">?</span>
+                    Is it the list, the sending, or both?
+                </div>
+                <div class="v2-card">
+                    <span class="v2-icon">?</span>
+                    Which addresses are actually hurting me?
+                </div>
+                <div class="v2-card">
+                    <span class="v2-icon">?</span>
+                    What patterns should I watch for?
+                </div>
+                <div class="v2-card">
+                    <span class="v2-icon">?</span>
+                    What should I do about the "risky" ones?
+                </div>
+            </div>
+
+            <div class="v2-footer">
+                We give you the context to answer those questions.
+            </div>
+        </div>
+    </section>
+
+    <!-- OPTION 3: Interactive Rows -->
+    <div class="header-label">Option 3: Interactive Rows<span>Full-width items with slide-right hover</span></div>
+    <section class="v3-section">
+        <div class="v3-container">
+            <div class="v3-header">
+                <h2>The Problem</h2>
+            </div>
+
+            <p class="v3-intro">Most list cleaning tools give you a status and leave you guessing. That tells you what to remove. It does not tell you what is actually wrong.</p>
+
+            <div class="v3-badges">
+                <span class="status-badge bg-green">Deliverable</span>
+                <span class="status-badge bg-red">Undeliverable</span>
+                <span class="status-badge bg-yellow">Risky</span>
+                <span class="status-badge bg-gray">Unknown</span>
+            </div>
+
+            <div class="v3-item">
+                <span class="v3-text">Why is engagement dropping?</span>
+                <span class="v3-arrow">&rarr;</span>
+            </div>
+            <div class="v3-item">
+                <span class="v3-text">Why are complaints rising?</span>
+                <span class="v3-arrow">&rarr;</span>
+            </div>
+            <div class="v3-item">
+                <span class="v3-text">Is it the list, the sending, or both?</span>
+                <span class="v3-arrow">&rarr;</span>
+            </div>
+            <div class="v3-item">
+                <span class="v3-text">Which addresses are actually hurting me?</span>
+                <span class="v3-arrow">&rarr;</span>
+            </div>
+            <div class="v3-item">
+                <span class="v3-text">What patterns should I watch for?</span>
+                <span class="v3-arrow">&rarr;</span>
+            </div>
+            <div class="v3-item">
+                <span class="v3-text">What should I do about the "risky" ones?</span>
+                <span class="v3-arrow">&rarr;</span>
+            </div>
+
+            <p class="v3-footer">We give you the context to answer those questions.</p>
+        </div>
+    </section>
+
+</body>
+</html>

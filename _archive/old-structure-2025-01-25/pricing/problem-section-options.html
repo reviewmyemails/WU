@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Problem Section - 3 Options</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-white: #fafcfc;
+            --color-light: #e6f7f3;
+            --color-lighter: #d1f0e8;
+            --color-muted: #64748b;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+            --space-xxl: 100px;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--color-dark);
+            color: white;
+            font-size: 28px;
+        }
+
+        .option-label {
+            text-align: center;
+            padding: 30px 20px 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-accent);
+            background: #fff;
+        }
+
+        .option-label span {
+            display: block;
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--color-muted);
+            margin-top: 4px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .divider {
+            height: 4px;
+            background: var(--color-dark);
+            margin: 0;
+        }
+
+        /* Shared styles */
+        .section {
+            padding: var(--space-xxl) var(--space-md);
+        }
+
+        .section--lighter {
+            background: var(--color-lighter);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section__header h2 {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--color-dark);
+        }
+
+        .section__header p {
+            color: var(--color-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .status-badge--deliverable { background: #dcfce7; color: #166534; }
+        .status-badge--undeliverable { background: #fee2e2; color: #991b1b; }
+        .status-badge--risky { background: #fef3c7; color: #92400e; }
+        .status-badge--unknown { background: #f3f4f6; color: #6b7280; }
+
+        .problem-box {
+            background: var(--color-white);
+            border-radius: 16px;
+            padding: var(--space-xl);
+            margin: var(--space-lg) auto;
+            border: 2px solid var(--color-accent);
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.1);
+        }
+
+        .problem-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md) var(--space-xl);
+            text-align: center;
+            margin: 0;
+            list-style: none;
+            padding: 0;
+        }
+
+        .problem-questions li {
+            font-size: 17px;
+            color: var(--color-dark);
+            padding: var(--space-sm) 0;
+            font-weight: 500;
+        }
+
+        .problem-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .problem-content .status-labels {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin: var(--space-lg) 0;
+        }
+
+        .problem-content .emphasis {
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-top: var(--space-lg);
+        }
+
+        @media (max-width: 600px) {
+            .problem-questions {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ========================================
+           OPTION A: Wider subtitle
+           ======================================== */
+        .option-a .section__header p {
+            max-width: 700px;
+        }
+
+        /* ========================================
+           OPTION B: Restructured layout
+           ======================================== */
+        .option-b .section__header {
+            margin-bottom: var(--space-lg);
+        }
+
+        .option-b .problem-intro {
+            font-size: 18px;
+            color: var(--color-dark);
+            max-width: 700px;
+            margin: 0 auto var(--space-md);
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        /* ========================================
+           OPTION C: Simplified
+           ======================================== */
+        .option-c .section__header {
+            margin-bottom: var(--space-lg);
+        }
+
+        .option-c .problem-intro {
+            font-size: 19px;
+            color: var(--color-dark);
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        .option-c .problem-box {
+            margin-top: var(--space-xl);
+        }
+
+        .option-c .problem-questions li {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>The Problem Section - Compare 3 Options</h1>
+
+<!-- ========================================
+     OPTION A: Wider subtitle (current structure, just wider)
+     ======================================== -->
+
+<p class="option-label">Option A: Wider Subtitle<span>Same structure, just increase max-width from 500px to 700px</span></p>
+
+<section class="section section--lighter option-a">
+    <div class="container">
+        <div class="section__header">
+            <h2>The Problem</h2>
+            <p>Most list cleaning tools give you a status and leave you guessing.<br>That tells you what to remove. It does not tell you what is actually wrong.</p>
+        </div>
+
+        <div class="problem-content">
+            <div class="status-labels">
+                <span class="status-badge status-badge--deliverable">Deliverable</span>
+                <span class="status-badge status-badge--undeliverable">Undeliverable</span>
+                <span class="status-badge status-badge--risky">Risky</span>
+                <span class="status-badge status-badge--unknown">Unknown</span>
+            </div>
+
+            <div class="problem-box">
+                <ul class="problem-questions">
+                    <li>Why is engagement dropping?</li>
+                    <li>Why are complaints rising?</li>
+                    <li>Is it the list, the sending, or both?</li>
+                    <li>Which addresses are actually hurting me?</li>
+                    <li>What patterns should I watch for?</li>
+                    <li>What should I do about the "risky" ones?</li>
+                </ul>
+            </div>
+
+            <p class="emphasis">We give you the context to answer those questions.</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========================================
+     OPTION B: Restructured layout
+     ======================================== -->
+
+<p class="option-label">Option B: Restructured Layout<span>Move subtitle into problem-content, flows with badges</span></p>
+
+<section class="section section--lighter option-b">
+    <div class="container">
+        <div class="section__header">
+            <h2>The Problem</h2>
+        </div>
+
+        <div class="problem-content">
+            <p class="problem-intro">Most list cleaning tools give you a status and leave you guessing. That tells you what to remove. It does not tell you what is actually wrong.</p>
+
+            <div class="status-labels">
+                <span class="status-badge status-badge--deliverable">Deliverable</span>
+                <span class="status-badge status-badge--undeliverable">Undeliverable</span>
+                <span class="status-badge status-badge--risky">Risky</span>
+                <span class="status-badge status-badge--unknown">Unknown</span>
+            </div>
+
+            <div class="problem-box">
+                <ul class="problem-questions">
+                    <li>Why is engagement dropping?</li>
+                    <li>Why are complaints rising?</li>
+                    <li>Is it the list, the sending, or both?</li>
+                    <li>Which addresses are actually hurting me?</li>
+                    <li>What patterns should I watch for?</li>
+                    <li>What should I do about the "risky" ones?</li>
+                </ul>
+            </div>
+
+            <p class="emphasis">We give you the context to answer those questions.</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ========================================
+     OPTION C: Simplified (no badges)
+     ======================================== -->
+
+<p class="option-label">Option C: Simplified<span>Remove status badges, cleaner flow, questions tell the story</span></p>
+
+<section class="section section--lighter option-c">
+    <div class="container">
+        <div class="section__header">
+            <h2>The Problem</h2>
+        </div>
+
+        <div class="problem-content">
+            <p class="problem-intro">Most list cleaning tools give you a status and leave you guessing. That tells you what to remove. It does not tell you what is actually wrong.</p>
+
+            <div class="problem-box">
+                <ul class="problem-questions">
+                    <li>Why is engagement dropping?</li>
+                    <li>Why are complaints rising?</li>
+                    <li>Is it the list, the sending, or both?</li>
+                    <li>Which addresses are actually hurting me?</li>
+                    <li>What patterns should I watch for?</li>
+                    <li>What should I do about the "risky" ones?</li>
+                </ul>
+            </div>
+
+            <p class="emphasis">We give you the context to answer those questions.</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

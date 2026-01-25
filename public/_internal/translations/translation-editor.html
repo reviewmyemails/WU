@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Editor - Review My Emails</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px; }
+        h1 { color: #134e4a; }
+        .status { padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; }
+        .status.connected { background: #d1fae5; color: #065f46; }
+        .status.disconnected { background: #fee2e2; color: #dc2626; }
+        .status.saving { background: #fef3c7; color: #92400e; }
+
+        .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .btn { padding: 10px 20px; background: #0d9488; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 500; font-size: 14px; }
+        .btn:hover { background: #0f766e; }
+        .btn:disabled { background: #9ca3af; cursor: not-allowed; }
+        .btn.secondary { background: #6b7280; }
+        .btn.secondary:hover { background: #4b5563; }
+
+        .filters { background: white; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
+        .filters label { font-size: 13px; color: #64748b; }
+        .filters select, .filters input { padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; font-size: 14px; }
+        .filters input { width: 200px; }
+
+        .legend { background: #fff3cd; border: 1px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+        .legend h3 { color: #856404; margin-bottom: 10px; font-size: 14px; }
+        .legend ul { margin-left: 20px; font-size: 13px; }
+        .legend code { background: #f8f9fa; padding: 2px 6px; border-radius: 4px; }
+
+        .table-container { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th { background: #134e4a; color: white; text-align: left; padding: 12px 10px; font-weight: 600; position: sticky; top: 0; z-index: 10; }
+        td { padding: 10px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+        tr:hover { background: #f8fffe; }
+        tr.subsection { background: #e6f7f3; }
+        tr.subsection td { font-weight: 600; color: #134e4a; padding: 8px 10px; }
+
+        .key-cell { font-family: monospace; font-size: 11px; color: #666; background: #f8fafc; width: 140px; word-break: break-all; }
+        .english-cell { width: 250px; color: #1e293b; }
+        .lang-cell { width: 180px; }
+        .lang-cell textarea { width: 100%; min-height: 60px; padding: 8px; border: 1px solid #e2e8f0; border-radius: 4px; font-size: 12px; font-family: inherit; resize: vertical; }
+        .lang-cell textarea:focus { outline: none; border-color: #0d9488; box-shadow: 0 0 0 2px rgba(13, 148, 136, 0.1); }
+        .lang-cell textarea.modified { border-color: #f59e0b; background: #fffbeb; }
+        .lang-cell textarea.saved { border-color: #10b981; background: #ecfdf5; }
+        .notes-cell { font-size: 11px; color: #64748b; font-style: italic; width: 150px; }
+
+        .do-not-translate { background: #fee2e2; color: #dc2626; font-weight: 600; padding: 2px 6px; border-radius: 4px; font-size: 10px; }
+
+        .toast { position: fixed; bottom: 20px; right: 20px; padding: 15px 25px; border-radius: 8px; color: white; font-weight: 500; z-index: 1000; opacity: 0; transition: opacity 0.3s; }
+        .toast.show { opacity: 1; }
+        .toast.success { background: #10b981; }
+        .toast.error { background: #ef4444; }
+        .toast.info { background: #3b82f6; }
+
+        .stats { background: white; padding: 15px 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; gap: 30px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 24px; font-weight: 700; color: #134e4a; }
+        .stat-label { font-size: 12px; color: #64748b; }
+
+        @media (max-width: 1200px) {
+            .lang-cell { width: 150px; }
+            .english-cell { width: 200px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Translation Editor</h1>
+        <span id="connectionStatus" class="status disconnected">Checking connection...</span>
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="saveAllChanges()" id="saveBtn" disabled>Save All Changes</button>
+        <button class="btn secondary" onclick="loadTranslations()">Reload from Database</button>
+        <button class="btn secondary" onclick="exportCSV()">Export CSV</button>
+        <button class="btn secondary" onclick="exportJSON()">Export JSON</button>
+    </div>
+
+    <div class="instructions" style="background: #e0f2fe; border: 1px solid #0ea5e9; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+        <h3 style="color: #0369a1; margin-bottom: 10px; font-size: 14px;">How to Use This Editor</h3>
+        <ol style="margin-left: 20px; font-size: 13px; color: #0c4a6e;">
+            <li>Find your language column (GR, BR, FR, ES, DE, or KM)</li>
+            <li>Type translations in the text boxes - the English text is shown for reference</li>
+            <li>Changes auto-highlight in yellow. Click <strong>"Save All Changes"</strong> to save to database</li>
+            <li>Your changes sync to the cloud - nothing is lost!</li>
+        </ol>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-value" id="totalStrings">0</div>
+            <div class="stat-label">Total Strings</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="translatedCount">0</div>
+            <div class="stat-label">Translated</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="pendingCount">0</div>
+            <div class="stat-label">Pending</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value" id="modifiedCount">0</div>
+            <div class="stat-label">Unsaved Changes</div>
+        </div>
+    </div>
+
+    <div class="filters">
+        <div>
+            <label>Page:</label>
+            <select id="filterPage" onchange="applyFilters()">
+                <option value="">All Pages</option>
+                <option value="homepage">Homepage</option>
+                <option value="common">Common (Nav, Footer, Modal, UI)</option>
+            </select>
+        </div>
+        <div>
+            <label>Language:</label>
+            <select id="filterLanguage" onchange="applyFilters()">
+                <option value="">All Languages</option>
+                <option value="gr">Greek (GR)</option>
+                <option value="br">Portuguese (BR)</option>
+                <option value="fr">French (FR)</option>
+                <option value="es">Spanish (ES)</option>
+                <option value="de">German (DE)</option>
+                <option value="km">Khmer (KM)</option>
+            </select>
+        </div>
+        <div>
+            <label>Status:</label>
+            <select id="filterStatus" onchange="applyFilters()">
+                <option value="">All</option>
+                <option value="empty">Not Translated</option>
+                <option value="translated">Translated</option>
+                <option value="modified">Modified (Unsaved)</option>
+            </select>
+        </div>
+        <div>
+            <label>Search:</label>
+            <input type="text" id="searchInput" placeholder="Search keys or text..." oninput="applyFilters()">
+        </div>
+    </div>
+
+    <div class="legend">
+        <h3>Translation Guidelines</h3>
+        <ul>
+            <li><strong>DO NOT TRANSLATE</strong> terms marked with <span class="do-not-translate">DNT</span>: Keep, Monitor, Suppress, SOS Hotline, Deliverability, Inboxing, Validation, DMARC, SPF, DKIM, Review My Emails, Diagnostic Quiz</li>
+            <li>Maintain the <strong>authoritative, expert tone</strong></li>
+            <li>Keep technical terms in English where industry-standard</li>
+            <li>Preserve HTML tags and placeholders like <code>{number}</code> or <code>{email}</code></li>
+        </ul>
+    </div>
+
+    <div class="table-container">
+        <table id="translationTable">
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>English</th>
+                    <th>GR</th>
+                    <th>BR</th>
+                    <th>FR</th>
+                    <th>ES</th>
+                    <th>DE</th>
+                    <th>KM</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Rows will be populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        // API endpoint - uses live Vercel API
+        const API_URL = 'https://reviewmyemails.com/api/translations';
+
+        // Store all translation data
+        let translationData = [];
+        let savedTranslations = {}; // From database
+        let modifiedCells = new Set();
+
+        // Source strings with all translations pre-populated (matching actual website content)
+        // UPDATED: 2026-01-25 - Aligned with actual English website copy
+        const sourceStrings = [
+            // ========================================
+            // HOMEPAGE - META & SEO
+            // ========================================
+            { page: 'homepage', section: 'META & SEO', key: 'home.title', english: 'Review My Emails | Email List Cleaning That Tells You What to Do', notes: 'DNT "Review My Emails"',
+              translations: { gr: 'Review My Emails | Επαγγελματικός Καθαρισμός Λίστας Email', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'META & SEO', key: 'home.meta_desc', english: 'Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do. Clear labels: Keep, Monitor, Suppress. With the reasoning behind each one.', notes: 'DNT Keep/Monitor/Suppress',
+              translations: { gr: 'Τα εργαλεία Validation βλέπουν διευθύνσεις. Εμείς βλέπουμε μοτίβα, πλαίσιο και κίνδυνο. Μετά σας λέμε ακριβώς τι να κάνετε. Σαφείς ετικέτες: Keep, Monitor, Suppress. Με την αιτιολόγηση πίσω από κάθε μία.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'META & SEO', key: 'home.og_title', english: 'Review My Emails | Email List Cleaning That Tells You What to Do', notes: 'Same as title, for social sharing',
+              translations: { gr: 'Review My Emails | Επαγγελματικός Καθαρισμός Λίστας Email', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'META & SEO', key: 'home.og_desc', english: 'Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.', notes: 'For social sharing',
+              translations: { gr: 'Τα εργαλεία Validation βλέπουν διευθύνσεις. Εμείς βλέπουμε μοτίβα, πλαίσιο και κίνδυνο. Μετά σας λέμε ακριβώς τι να κάνετε.', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - HERO
+            // ========================================
+            { page: 'homepage', section: 'HERO', key: 'home.hero_badge', english: 'By Yanna-Torry Aspraki', notes: 'DNT name',
+              translations: { gr: 'Από την Yanna-Torry Aspraki', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'HERO', key: 'home.hero_headline_1', english: 'Stop guessing what is wrong with your list.', notes: 'First line of headline',
+              translations: { gr: 'Σταματήστε να μαντεύετε τι πρόβλημα έχει η λίστα σας.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'HERO', key: 'home.hero_headline_2', english: 'We find the problems tools miss.', notes: 'Second line, highlighted',
+              translations: { gr: 'Βρίσκουμε τα προβλήματα που χάνουν τα εργαλεία.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'HERO', key: 'home.hero_subhead', english: 'Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.', notes: '',
+              translations: { gr: 'Τα εργαλεία Validation βλέπουν διευθύνσεις. Εμείς βλέπουμε μοτίβα, πλαίσιο και κίνδυνο. Μετά σας λέμε ακριβώς τι να κάνετε.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'HERO', key: 'home.cta_primary', english: 'Get My List Cleaned', notes: 'Main CTA button',
+              translations: { gr: 'Καθαρίστε τη Λίστα Μου', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'HERO', key: 'home.hero_bridge', english: 'Most email inboxing and deliverability problems trace back to list quality.', notes: '',
+              translations: { gr: 'Τα περισσότερα προβλήματα inboxing και deliverability οφείλονται στην ποιότητα της λίστας.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'HERO', key: 'home.hero_quiz_prefix', english: 'Not sure yet?', notes: '',
+              translations: { gr: 'Δεν είστε σίγουροι;', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'HERO', key: 'home.hero_quiz_link', english: 'Take the 2-minute risk check', notes: '',
+              translations: { gr: 'Κάντε τον 2λεπτο έλεγχο κινδύνου', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - SYMPTOMS SECTION ("Sound familiar?")
+            // ========================================
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptoms_title', english: 'Sound familiar?', notes: 'Section title',
+              translations: { gr: 'Σας θυμίζει κάτι;', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptoms_subtitle', english: "You're not alone. These are the patterns we see every day.", notes: '',
+              translations: { gr: 'Δεν είστε μόνοι. Αυτά είναι τα μοτίβα που βλέπουμε κάθε μέρα.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptom_1', english: '<strong>No idea</strong> where half this list came from.', notes: 'Bold: No idea',
+              translations: { gr: '<strong>Καμία ιδέα</strong> από πού προήλθε η μισή λίστα.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptom_2', english: 'One tool says <strong>clean</strong>. Another says <strong>risky</strong>.', notes: 'Bold: clean, risky',
+              translations: { gr: 'Ένα εργαλείο λέει <strong>καθαρό</strong>. Ένα άλλο λέει <strong>επικίνδυνο</strong>.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptom_3', english: '<strong>Scared to remove</strong> subscribers, even the ones who never open.', notes: 'Bold: Scared to remove',
+              translations: { gr: '<strong>Φοβάστε να αφαιρέσετε</strong> συνδρομητές, ακόμα κι αυτούς που δεν ανοίγουν ποτέ.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptom_4', english: "Haven't emailed this list in <strong>months</strong>. Afraid to restart.", notes: 'Bold: months',
+              translations: { gr: 'Δεν στείλατε email σε αυτή τη λίστα εδώ και <strong>μήνες</strong>. Φοβάστε να ξαναρχίσετε.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptom_5', english: 'Paid for list cleaning <strong>yesterday</strong>. Bounces <strong>today</strong>.', notes: 'Bold: yesterday, today',
+              translations: { gr: 'Πληρώσατε για καθαρισμό λίστας <strong>χθες</strong>. Bounces <strong>σήμερα</strong>.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptom_6', english: 'Open rates <strong>dropped</strong> and nobody can explain why.', notes: 'Bold: dropped',
+              translations: { gr: 'Τα open rates <strong>έπεσαν</strong> και κανείς δεν μπορεί να εξηγήσει γιατί.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptom_7', english: "List keeps <strong>growing</strong>. Revenue <strong>doesn't</strong>.", notes: "Bold: growing, doesn't",
+              translations: { gr: 'Η λίστα συνεχίζει να <strong>μεγαλώνει</strong>. Τα έσοδα <strong>όχι</strong>.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'SYMPTOMS', key: 'home.symptom_8', english: 'Emails <strong>not inboxing</strong> anymore, going to spam or nowhere at all.', notes: 'Bold: not inboxing',
+              translations: { gr: 'Τα emails <strong>δεν φτάνουν στα εισερχόμενα</strong> πια, πάνε στα spam ή πουθενά.', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - CRISIS BOX
+            // ========================================
+            { page: 'homepage', section: 'CRISIS', key: 'home.crisis_title', english: 'Crisis Mode?', notes: 'Box title',
+              translations: { gr: 'Κατάσταση Κρίσης;', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'CRISIS', key: 'home.crisis_subtitle', english: 'If any of these are true, start here.', notes: '',
+              translations: { gr: 'Αν ισχύει κάτι από αυτά, ξεκινήστε εδώ.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'CRISIS', key: 'home.crisis_item_1', english: 'ESP sent a compliance warning or paused your sending.', notes: '',
+              translations: { gr: 'Ο ESP έστειλε προειδοποίηση συμμόρφωσης ή ανέστειλε την αποστολή σας.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'CRISIS', key: 'home.crisis_item_2', english: 'Blocklisted, or you think you might be.', notes: '',
+              translations: { gr: 'Είστε σε blocklist, ή νομίζετε ότι μπορεί να είστε.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'CRISIS', key: 'home.crisis_item_3', english: "Last send spiked bounces. Now everyone's afraid to send again.", notes: '',
+              translations: { gr: 'Η τελευταία αποστολή είχε spike στα bounces. Τώρα όλοι φοβούνται να στείλουν ξανά.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'CRISIS', key: 'home.crisis_cta', english: 'Email the SOS Hotline', notes: 'DNT SOS Hotline',
+              translations: { gr: 'Στείλτε email στο SOS Hotline', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - STEPS SECTION
+            // ========================================
+            { page: 'homepage', section: 'STEPS', key: 'home.steps_title', english: 'How we actually work', notes: '',
+              translations: { gr: 'Πώς δουλεύουμε στην πραγματικότητα', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.steps_subtitle', english: 'Simple process. Expert execution. Real results.', notes: '',
+              translations: { gr: 'Απλή διαδικασία. Εκτέλεση από ειδικούς. Πραγματικά αποτελέσματα.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.step1_number', english: 'Step 01', notes: '',
+              translations: { gr: 'Βήμα 01', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.step1_title', english: 'Send us your list', notes: '',
+              translations: { gr: 'Στείλτε μας τη λίστα σας', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.step1_desc', english: "CSV, Excel, whatever you have. We've seen it all. No judgment, no questions.", notes: '',
+              translations: { gr: 'CSV, Excel, ό,τι έχετε. Τα έχουμε δει όλα. Χωρίς κρίση, χωρίς ερωτήσεις.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.step2_number', english: 'Step 02', notes: '',
+              translations: { gr: 'Βήμα 02', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.step2_title', english: 'We review every address', notes: '',
+              translations: { gr: 'Ελέγχουμε κάθε διεύθυνση', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.step2_desc', english: 'One by one. Looking for bounces, spam traps, disposables, and reputation killers.', notes: '',
+              translations: { gr: 'Μία προς μία. Ψάχνοντας για bounces, spam traps, disposables και reputation killers.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.step3_number', english: 'Step 03', notes: '',
+              translations: { gr: 'Βήμα 03', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.step3_title', english: 'Get your clean list back', notes: '',
+              translations: { gr: 'Πάρτε πίσω την καθαρή λίστα σας', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.step3_desc', english: "With clear labels and a report. You'll know exactly what to do with each address.", notes: '',
+              translations: { gr: 'Με σαφείς ετικέτες και αναφορά. Θα ξέρετε ακριβώς τι να κάνετε με κάθε διεύθυνση.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'STEPS', key: 'home.steps_whisper', english: 'No outsourcing. No AI guesswork. Just experienced eyes on every list.', notes: 'Small text at bottom',
+              translations: { gr: 'Χωρίς outsourcing. Χωρίς AI guesswork. Απλά έμπειρα μάτια σε κάθε λίστα.', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - PULL QUOTE / TESTIMONIAL
+            // ========================================
+            { page: 'homepage', section: 'TESTIMONIAL', key: 'home.pullquote_text', english: '"She cleaned and organized our database with incredible efficiency and set us up for long-term success."', notes: '',
+              translations: { gr: '"Καθάρισε και οργάνωσε τη βάση δεδομένων μας με απίστευτη αποτελεσματικότητα και μας προετοίμασε για μακροπρόθεσμη επιτυχία."', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIAL', key: 'home.pullquote_author', english: 'Sam Cande, UK', notes: '',
+              translations: { gr: 'Sam Cande, UK', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - MANIFESTO QUOTE
+            // ========================================
+            { page: 'homepage', section: 'MANIFESTO', key: 'home.manifesto_text', english: "You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened. That's the gap between validation and understanding.", notes: '',
+              translations: { gr: 'Πιθανότατα έχετε περάσει τη λίστα σας από κάποιο εργαλείο. Είπε 95% valid. Στείλατε ούτως ή άλλως. Ήρθαν bounces. Αυτό είναι το κενό μεταξύ validation και κατανόησης.', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - FEATURES SECTION
+            // ========================================
+            { page: 'homepage', section: 'FEATURES', key: 'home.features_title', english: 'What you actually get', notes: '',
+              translations: { gr: 'Τι πραγματικά παίρνετε', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'FEATURES', key: 'home.feature1_title', english: 'Clear action labels', notes: '',
+              translations: { gr: 'Σαφείς ετικέτες δράσης', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'FEATURES', key: 'home.feature1_desc', english: 'Every email marked Keep, Monitor, or Suppress. No ambiguity, no guessing what to do next.', notes: 'DNT Keep/Monitor/Suppress',
+              translations: { gr: 'Κάθε email με σήμανση Keep, Monitor ή Suppress. Χωρίς ασάφεια, χωρίς να αναρωτιέστε τι να κάνετε μετά.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'FEATURES', key: 'home.feature2_title', english: 'Detailed reasoning', notes: '',
+              translations: { gr: 'Λεπτομερής αιτιολόγηση', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'FEATURES', key: 'home.feature2_desc', english: "Not just 'risky', we tell you why. Spam trap patterns, domain issues, behavioral signals.", notes: '',
+              translations: { gr: "Όχι απλά 'επικίνδυνο', σας λέμε γιατί. Μοτίβα spam trap, προβλήματα domain, σήματα συμπεριφοράς.", br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'FEATURES', key: 'home.feature3_title', english: 'Expert interpretation included', notes: '',
+              translations: { gr: 'Ερμηνεία από ειδικό περιλαμβάνεται', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'FEATURES', key: 'home.feature3_desc', english: 'Not just data, context. Every list review includes a walkthrough of your results. I explain what I found, what it means, and exactly what to do next.', notes: '',
+              translations: { gr: 'Όχι απλά δεδομένα, πλαίσιο. Κάθε έλεγχος λίστας περιλαμβάνει επεξήγηση των αποτελεσμάτων. Εξηγώ τι βρήκα, τι σημαίνει και ακριβώς τι να κάνετε μετά.', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - QUIZ CTA SECTION
+            // ========================================
+            { page: 'homepage', section: 'QUIZ CTA', key: 'home.quiz_cta_title', english: 'Not sure if your list needs this?', notes: '',
+              translations: { gr: 'Δεν είστε σίγουροι αν η λίστα σας το χρειάζεται;', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'QUIZ CTA', key: 'home.quiz_cta_subtext', english: "Take a 2-minute self-assessment. Four questions about how you built your list, and we'll tell you what risk level you're probably at.", notes: '',
+              translations: { gr: 'Κάντε μια 2λεπτη αυτοαξιολόγηση. Τέσσερις ερωτήσεις για το πώς χτίσατε τη λίστα σας, και θα σας πούμε σε τι επίπεδο κινδύνου πιθανόν βρίσκεστε.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'QUIZ CTA', key: 'home.quiz_cta_button', english: 'Take the 2-Minute Risk Check', notes: '',
+              translations: { gr: 'Κάντε τον 2λεπτο Έλεγχο Κινδύνου', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - TESTIMONIALS SECTION
+            // ========================================
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonials_title', english: 'People who trusted us', notes: '',
+              translations: { gr: 'Άνθρωποι που μας εμπιστεύτηκαν', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonials_subtitle', english: 'Real feedback from real senders.', notes: '',
+              translations: { gr: 'Πραγματικά σχόλια από πραγματικούς αποστολείς.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonial1_name', english: 'Megan S.', notes: '',
+              translations: { gr: 'Megan S.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonial1_role', english: 'UK', notes: '',
+              translations: { gr: 'UK', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonial1_quote', english: '"The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call."', notes: 'DNT SOS Hotline, Yanna-Torry',
+              translations: { gr: '"Το SOS Hotline μου έδωσε εξαιρετικά χρήσιμη καθοδήγηση. Η Yanna-Torry καθάρισε τη λίστα μας και μας υποστήριξε πέρα από το αναμενόμενο."', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonial2_name', english: 'Chris Mead', notes: '',
+              translations: { gr: 'Chris Mead', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonial2_role', english: 'UK', notes: '',
+              translations: { gr: 'UK', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonial2_quote', english: '"Real human expertise. Tailor-made solutions. Not an AI tool."', notes: '',
+              translations: { gr: '"Πραγματική ανθρώπινη εξειδίκευση. Εξατομικευμένες λύσεις. Όχι εργαλείο AI."', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonial3_name', english: 'Adeola Sole', notes: '',
+              translations: { gr: 'Adeola Sole', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonial3_role', english: 'UK', notes: '',
+              translations: { gr: 'UK', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'TESTIMONIALS', key: 'home.testimonial3_quote', english: '"RME provides deep insights our ESP misses and helped us segment smarter."', notes: 'DNT RME, ESP',
+              translations: { gr: '"Το RME παρέχει βαθιές γνώσεις που χάνει ο ESP μας και μας βοήθησε να κάνουμε εξυπνότερο segmentation."', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // HOMEPAGE - FINAL CTA
+            // ========================================
+            { page: 'homepage', section: 'FINAL CTA', key: 'home.final_title', english: "Ready to know what's in your list?", notes: '',
+              translations: { gr: 'Έτοιμοι να μάθετε τι υπάρχει στη λίστα σας;', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'FINAL CTA', key: 'home.final_subtext', english: "Send us your list. We'll tell you exactly what's safe to send, what needs watching, and what will hurt you.", notes: '',
+              translations: { gr: 'Στείλτε μας τη λίστα σας. Θα σας πούμε ακριβώς τι είναι ασφαλές να στείλετε, τι χρειάζεται παρακολούθηση και τι θα σας βλάψει.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'FINAL CTA', key: 'home.final_cta', english: 'Get My List Cleaned', notes: '',
+              translations: { gr: 'Καθαρίστε τη Λίστα Μου', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'homepage', section: 'FINAL CTA', key: 'home.final_footer', english: 'Most lists returned within 24 hours.', notes: '',
+              translations: { gr: 'Οι περισσότερες λίστες επιστρέφονται εντός 24 ωρών.', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // CONTACT MODAL
+            // ========================================
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.contact_title', english: 'Get in Touch', notes: '',
+              translations: { gr: 'Επικοινωνήστε μαζί μας', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.contact_subtitle', english: "Tell us what you're working on. We'll get back to you within one business day.", notes: '',
+              translations: { gr: 'Πείτε μας τι δουλεύετε. Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.form_name', english: 'Name', notes: '',
+              translations: { gr: 'Όνομα', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.form_email', english: 'Email', notes: '',
+              translations: { gr: 'Email', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.form_timezone', english: 'Timezone', notes: '',
+              translations: { gr: 'Ζώνη ώρας', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.form_timezone_placeholder', english: 'Select your timezone (optional)', notes: '',
+              translations: { gr: 'Επιλέξτε τη ζώνη ώρας σας (προαιρετικό)', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.form_message', english: 'Message', notes: '',
+              translations: { gr: 'Μήνυμα', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.form_message_placeholder', english: 'What can we help you with?', notes: '',
+              translations: { gr: 'Πώς μπορούμε να σας βοηθήσουμε;', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.form_message_helper', english: 'Optional - but helps us prepare for the conversation.', notes: '',
+              translations: { gr: 'Προαιρετικό - αλλά μας βοηθά να προετοιμαστούμε για τη συζήτηση.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.form_submit', english: 'Send Message', notes: '',
+              translations: { gr: 'Αποστολή Μηνύματος', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.success_title', english: 'Message Sent!', notes: '',
+              translations: { gr: 'Το Μήνυμα Εστάλη!', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'CONTACT MODAL', key: 'modal.success_message', english: "We'll get back to you within one business day.", notes: '',
+              translations: { gr: 'Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // NAVIGATION
+            // ========================================
+            { page: 'common', section: 'NAVIGATION', key: 'nav.home', english: 'Home', notes: '',
+              translations: { gr: 'Αρχική', br: 'Início', fr: 'Accueil', es: 'Inicio', de: 'Startseite', km: 'ទំព័រដើម' } },
+            { page: 'common', section: 'NAVIGATION', key: 'nav.how_it_works', english: 'How It Works', notes: '',
+              translations: { gr: 'Πώς Λειτουργεί', br: 'Como Funciona', fr: 'Comment Ça Marche', es: 'Cómo Funciona', de: 'So Funktioniert Es', km: 'របៀបដែលវាដំណើរការ' } },
+            { page: 'common', section: 'NAVIGATION', key: 'nav.pricing', english: 'Pricing', notes: '',
+              translations: { gr: 'Τιμές', br: 'Preços', fr: 'Tarifs', es: 'Precios', de: 'Preise', km: 'តម្លៃ' } },
+            { page: 'common', section: 'NAVIGATION', key: 'nav.sos_hotline', english: 'SOS Hotline', notes: 'DNT SOS Hotline',
+              translations: { gr: 'SOS Hotline', br: 'SOS Hotline', fr: 'SOS Hotline', es: 'SOS Hotline', de: 'SOS Hotline', km: 'SOS Hotline' } },
+            { page: 'common', section: 'NAVIGATION', key: 'nav.about', english: 'About', notes: '',
+              translations: { gr: 'Σχετικά', br: 'Sobre', fr: 'À Propos', es: 'Acerca de', de: 'Über Uns', km: 'អំពី' } },
+            { page: 'common', section: 'NAVIGATION', key: 'nav.partner', english: 'Partner', notes: '',
+              translations: { gr: 'Συνεργάτες', br: 'Parceiros', fr: 'Partenaires', es: 'Socios', de: 'Partner', km: 'ដៃគូ' } },
+            { page: 'common', section: 'NAVIGATION', key: 'nav.quiz', english: 'Free Quiz', notes: '',
+              translations: { gr: 'Δωρεάν Quiz', br: 'Quiz Gratuito', fr: 'Quiz Gratuit', es: 'Quiz Gratis', de: 'Kostenloses Quiz', km: 'Quiz ឥតគិតថ្លៃ' } },
+            { page: 'common', section: 'NAVIGATION', key: 'nav.audit', english: 'Self-Audit', notes: '',
+              translations: { gr: 'Αυτοαξιολόγηση', br: 'Autoauditoria', fr: 'Auto-Audit', es: 'Autoauditoría', de: 'Selbst-Audit', km: 'ការត្រួតពិនិត្យខ្លួនឯង' } },
+            { page: 'common', section: 'NAVIGATION', key: 'nav.cta', english: 'Get My List Cleaned', notes: '',
+              translations: { gr: 'Καθαρίστε τη Λίστα Μου', br: 'Limpar Minha Lista', fr: 'Nettoyer Ma Liste', es: 'Limpiar Mi Lista', de: 'Meine Liste Bereinigen', km: 'សម្អាតបញ្ជីរបស់ខ្ញុំ' } },
+
+            // ========================================
+            // FOOTER
+            // ========================================
+            { page: 'common', section: 'FOOTER', key: 'footer.tagline', english: "We see what algorithms can't.", notes: '',
+              translations: { gr: 'Βλέπουμε αυτά που οι αλγόριθμοι δεν μπορούν.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'FOOTER', key: 'footer.services', english: 'Services', notes: '',
+              translations: { gr: 'Υπηρεσίες', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'FOOTER', key: 'footer.company', english: 'Company', notes: '',
+              translations: { gr: 'Εταιρεία', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'FOOTER', key: 'footer.contact', english: 'Contact', notes: '',
+              translations: { gr: 'Επικοινωνία', br: 'Contato', fr: 'Contact', es: 'Contacto', de: 'Kontakt', km: 'ទំនាក់ទំនង' } },
+            { page: 'common', section: 'FOOTER', key: 'footer.security', english: 'Security', notes: '',
+              translations: { gr: 'Ασφάλεια', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'FOOTER', key: 'footer.copyright', english: '© 2026 Review My Emails. All rights reserved.', notes: 'DNT brand',
+              translations: { gr: '© 2026 Review My Emails. Με επιφύλαξη παντός δικαιώματος.', br: '© 2026 Review My Emails. Todos os direitos reservados.', fr: '© 2026 Review My Emails. Tous droits réservés.', es: '© 2026 Review My Emails. Todos los derechos reservados.', de: '© 2026 Review My Emails. Alle Rechte vorbehalten.', km: '© 2026 Review My Emails។ រក្សាសិទ្ធិគ្រប់យ៉ាង។' } },
+            { page: 'common', section: 'FOOTER', key: 'footer.privacy', english: 'Privacy Policy', notes: '',
+              translations: { gr: 'Πολιτική Απορρήτου', br: 'Privacidade', fr: 'Confidentialité', es: 'Privacidad', de: 'Datenschutz', km: 'ភាពឯកជន' } },
+            { page: 'common', section: 'FOOTER', key: 'footer.terms', english: 'Terms', notes: '',
+              translations: { gr: 'Όροι', br: 'Termos', fr: 'Conditions', es: 'Términos', de: 'AGB', km: 'លក្ខខណ្ឌ' } },
+
+            // ========================================
+            // LANGUAGE SWITCHER
+            // ========================================
+            { page: 'common', section: 'LANGUAGE', key: 'lang.select', english: 'Language', notes: '',
+              translations: { gr: 'Γλώσσα', br: 'Idioma', fr: 'Langue', es: 'Idioma', de: 'Sprache', km: 'ភាសា' } },
+            { page: 'common', section: 'LANGUAGE', key: 'lang.current_en', english: 'Language: English', notes: '',
+              translations: { gr: 'Γλώσσα: Ελληνικά', br: 'Idioma: Português', fr: 'Langue: Français', es: 'Idioma: Español', de: 'Sprache: Deutsch', km: 'ភាសា: ខ្មែរ' } },
+
+            // ========================================
+            // UI ELEMENTS
+            // ========================================
+            { page: 'common', section: 'UI', key: 'ui.loading', english: 'Loading...', notes: '',
+              translations: { gr: 'Φόρτωση...', br: 'Carregando...', fr: 'Chargement...', es: 'Cargando...', de: 'Laden...', km: 'កំពុងផ្ទុក...' } },
+            { page: 'common', section: 'UI', key: 'ui.submit', english: 'Submit', notes: '',
+              translations: { gr: 'Υποβολή', br: 'Enviar', fr: 'Soumettre', es: 'Enviar', de: 'Absenden', km: 'បញ្ជូន' } },
+            { page: 'common', section: 'UI', key: 'ui.cancel', english: 'Cancel', notes: '',
+              translations: { gr: 'Ακύρωση', br: 'Cancelar', fr: 'Annuler', es: 'Cancelar', de: 'Abbrechen', km: 'បោះបង់' } },
+            { page: 'common', section: 'UI', key: 'ui.close', english: 'Close', notes: '',
+              translations: { gr: 'Κλείσιμο', br: 'Fechar', fr: 'Fermer', es: 'Cerrar', de: 'Schließen', km: 'បិទ' } },
+            { page: 'common', section: 'UI', key: 'ui.learn_more', english: 'Learn More', notes: '',
+              translations: { gr: 'Μάθετε Περισσότερα', br: 'Saiba Mais', fr: 'En Savoir Plus', es: 'Saber Más', de: 'Mehr Erfahren', km: 'ស្វែងយល់បន្ថែម' } },
+            { page: 'common', section: 'UI', key: 'ui.view_details', english: 'View Details', notes: '',
+              translations: { gr: 'Δείτε Λεπτομέρειες', br: 'Ver Detalhes', fr: 'Voir les Détails', es: 'Ver Detalles', de: 'Details Anzeigen', km: 'មើលព័ត៌មានលម្អិត' } },
+            { page: 'common', section: 'UI', key: 'ui.success', english: 'Success!', notes: '',
+              translations: { gr: 'Επιτυχία!', br: 'Sucesso!', fr: 'Succès!', es: '¡Éxito!', de: 'Erfolg!', km: 'ជោគជ័យ!' } },
+            { page: 'common', section: 'UI', key: 'ui.error', english: 'Something went wrong. Please try again.', notes: '',
+              translations: { gr: 'Κάτι πήγε στραβά. Παρακαλώ δοκιμάστε ξανά.', br: 'Algo deu errado. Por favor, tente novamente.', fr: 'Quelque chose s\'est mal passé. Veuillez réessayer.', es: 'Algo salió mal. Por favor intenta de nuevo.', de: 'Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.', km: 'មានអ្វីមួយខុសប្រក្រតី។ សូមព្យាយាមម្តងទៀត។' } },
+            { page: 'common', section: 'UI', key: 'ui.required', english: 'Required', notes: '',
+              translations: { gr: 'Απαιτείται', br: 'Obrigatório', fr: 'Requis', es: 'Requerido', de: 'Erforderlich', km: 'ចាំបាច់' } },
+
+            // ========================================
+            // OG IMAGE TEXT (for og-image-generator.html)
+            // ========================================
+            { page: 'common', section: 'OG IMAGE', key: 'og.headline', english: "Stop guessing what's wrong with your list", notes: 'Main text on OG image',
+              translations: { gr: 'Σταματήστε να μαντεύετε τι πρόβλημα έχει η λίστα σας', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'OG IMAGE', key: 'og.subhead', english: 'We find the problems tools miss', notes: 'Secondary text',
+              translations: { gr: 'Βρίσκουμε τα προβλήματα που χάνουν τα εργαλεία', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'OG IMAGE', key: 'og.tagline', english: 'Expert Email List Cleaning', notes: 'Bottom tagline',
+              translations: { gr: 'Επαγγελματικός Καθαρισμός Λίστας Email', br: '', fr: '', es: '', de: '', km: '' } },
+
+            // ========================================
+            // EASTER EGG (Optional - Abyss Mode)
+            // ========================================
+            { page: 'common', section: 'EASTER EGG', key: 'easter.fish_message', english: "You found me! Here's 20% off your first order.", notes: 'Optional',
+              translations: { gr: 'Με βρήκατε! Πάρτε 20% έκπτωση στην πρώτη σας παραγγελία.', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'EASTER EGG', key: 'easter.fish_coupon', english: 'Coupon: DEEPDIVE20', notes: 'DNT coupon code',
+              translations: { gr: 'Κουπόνι: DEEPDIVE20', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'EASTER EGG', key: 'easter.exit_button', english: 'Return to Surface', notes: '',
+              translations: { gr: 'Επιστροφή στην Επιφάνεια', br: '', fr: '', es: '', de: '', km: '' } },
+            { page: 'common', section: 'EASTER EGG', key: 'easter.hint', english: 'Something is swimming in the deep...', notes: '',
+              translations: { gr: 'Κάτι κολυμπάει στα βάθη...', br: '', fr: '', es: '', de: '', km: '' } },
+        ];
+
+        const languages = ['gr', 'br', 'fr', 'es', 'de', 'km'];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeData();
+            loadTranslations();
+        });
+
+        async function loadTranslations() {
+            const statusEl = document.getElementById('connectionStatus');
+            statusEl.textContent = 'Loading...';
+            statusEl.className = 'status saving';
+
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Failed to load from API');
+
+                const data = await response.json();
+
+                // Map database translations to our data
+                if (data.translations && data.translations.length > 0) {
+                    data.translations.forEach(t => {
+                        const dbKey = `${t.key}_${t.language}`;
+                        savedTranslations[dbKey] = t.value;
+
+                        const item = translationData.find(d => d.key === t.key);
+                        if (item) {
+                            item.translations[t.language] = t.value;
+                        }
+                    });
+                    statusEl.textContent = `Connected (${data.translations.length} from DB)`;
+                    statusEl.className = 'status connected';
+                    showToast('Translations loaded from database', 'success');
+                } else {
+                    // Database empty, use embedded translations
+                    statusEl.textContent = 'Connected (using defaults)';
+                    statusEl.className = 'status connected';
+                    showToast('Using embedded translations - database empty', 'info');
+                }
+
+                modifiedCells.clear();
+                renderTable();
+            } catch (error) {
+                console.error('Load error:', error);
+                // Use embedded translations as fallback
+                statusEl.textContent = 'Offline (using defaults)';
+                statusEl.className = 'status disconnected';
+                showToast('Could not connect to database - working offline', 'error');
+                renderTable();
+            }
+        }
+
+        async function saveAllChanges() {
+            if (modifiedCells.size === 0) {
+                showToast('No changes to save', 'info');
+                return;
+            }
+
+            const saveBtn = document.getElementById('saveBtn');
+            const statusEl = document.getElementById('connectionStatus');
+
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'Saving...';
+            statusEl.textContent = 'Saving...';
+            statusEl.className = 'status saving';
+
+            const translations = [];
+            modifiedCells.forEach(cellId => {
+                const [key, lang] = cellId.split('__');
+                const item = translationData.find(d => d.key === key);
+                if (item) {
+                    translations.push({
+                        key,
+                        page: item.page,
+                        language: lang,
+                        value: item.translations[lang]
+                    });
+                }
+            });
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ translations })
+                });
+
+                if (!response.ok) throw new Error('Save failed');
+
+                // Update saved state
+                translations.forEach(t => {
+                    savedTranslations[`${t.key}_${t.language}`] = t.value;
+                });
+
+                // Clear modified state and update UI
+                modifiedCells.forEach(cellId => {
+                    const textarea = document.querySelector(`[data-cell-id="${cellId}"]`);
+                    if (textarea) {
+                        textarea.classList.remove('modified');
+                        textarea.classList.add('saved');
+                        setTimeout(() => textarea.classList.remove('saved'), 2000);
+                    }
+                });
+                modifiedCells.clear();
+
+                statusEl.textContent = 'Connected';
+                statusEl.className = 'status connected';
+                showToast(`${translations.length} translations saved!`, 'success');
+            } catch (error) {
+                console.error('Save error:', error);
+                statusEl.textContent = 'Save failed';
+                statusEl.className = 'status disconnected';
+                showToast('Failed to save - please try again', 'error');
+            }
+
+            saveBtn.disabled = modifiedCells.size === 0;
+            saveBtn.textContent = 'Save All Changes';
+            updateStats();
+        }
+
+        function initializeData() {
+            translationData = sourceStrings.map(s => ({
+                ...s,
+                translations: s.translations ? { ...s.translations } : {}
+            }));
+            // Fill in any missing languages with empty strings
+            languages.forEach(lang => {
+                translationData.forEach(item => {
+                    if (!item.translations[lang]) {
+                        item.translations[lang] = '';
+                    }
+                });
+            });
+            // Pre-populate savedTranslations with embedded translations
+            translationData.forEach(item => {
+                languages.forEach(lang => {
+                    if (item.translations[lang]) {
+                        savedTranslations[`${item.key}_${lang}`] = item.translations[lang];
+                    }
+                });
+            });
+        }
+
+        async function loadTranslations() {
+            const statusEl = document.getElementById('connectionStatus');
+            statusEl.textContent = 'Loading...';
+            statusEl.className = 'status saving';
+
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Failed to load from API');
+
+                const data = await response.json();
+
+                // Map database translations to our data
+                savedTranslations = {};
+                if (data.translations && data.translations.length > 0) {
+                    data.translations.forEach(t => {
+                        const dbKey = `${t.key}_${t.language}`;
+                        savedTranslations[dbKey] = t.value;
+
+                        const item = translationData.find(d => d.key === t.key);
+                        if (item) {
+                            item.translations[t.language] = t.value;
+                        }
+                    });
+                    usingFallback = false;
+                    statusEl.textContent = 'Connected';
+                    statusEl.className = 'status connected';
+                    showToast('Translations loaded from database', 'success');
+                } else {
+                    // Database empty, load from JSON fallback
+                    await loadFromJsonFallback(statusEl);
+                }
+
+                modifiedCells.clear();
+                renderTable();
+            } catch (error) {
+                console.error('Load error:', error);
+                // Try JSON fallback
+                await loadFromJsonFallback(statusEl);
+                modifiedCells.clear();
+                renderTable();
+            }
+        }
+
+        async function loadFromJsonFallback(statusEl) {
+            try {
+                const response = await fetch(JSON_FALLBACK_URL);
+                if (!response.ok) throw new Error('Failed to load JSON');
+
+                const data = await response.json();
+
+                // Map JSON translations to our data
+                savedTranslations = {};
+                if (data.translations) {
+                    Object.entries(data.translations).forEach(([key, langs]) => {
+                        const item = translationData.find(d => d.key === key);
+                        if (item) {
+                            languages.forEach(lang => {
+                                if (langs[lang]) {
+                                    item.translations[lang] = langs[lang];
+                                    savedTranslations[`${key}_${lang}`] = langs[lang];
+                                }
+                            });
+                        }
+                    });
+                }
+
+                usingFallback = true;
+                statusEl.textContent = 'Using JSON (offline)';
+                statusEl.className = 'status connected';
+                showToast('Loaded translations from JSON file', 'info');
+            } catch (error) {
+                console.error('JSON fallback error:', error);
+                statusEl.textContent = 'Disconnected';
+                statusEl.className = 'status disconnected';
+                showToast('Could not load translations - starting fresh', 'error');
+            }
+        }
+
+        async function saveAllChanges() {
+            if (modifiedCells.size === 0) {
+                showToast('No changes to save', 'info');
+                return;
+            }
+
+            const saveBtn = document.getElementById('saveBtn');
+            const statusEl = document.getElementById('connectionStatus');
+
+            saveBtn.disabled = true;
+            saveBtn.textContent = 'Saving...';
+            statusEl.textContent = 'Saving...';
+            statusEl.className = 'status saving';
+
+            const translations = [];
+            modifiedCells.forEach(cellId => {
+                const [key, lang] = cellId.split('__');
+                const item = translationData.find(d => d.key === key);
+                if (item) {
+                    translations.push({
+                        key,
+                        page: item.page,
+                        language: lang,
+                        value: item.translations[lang]
+                    });
+                }
+            });
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ translations })
+                });
+
+                if (!response.ok) throw new Error('Save failed');
+
+                // Update saved state
+                translations.forEach(t => {
+                    savedTranslations[`${t.key}_${t.language}`] = t.value;
+                });
+
+                // Clear modified state and update UI
+                modifiedCells.forEach(cellId => {
+                    const textarea = document.querySelector(`[data-cell-id="${cellId}"]`);
+                    if (textarea) {
+                        textarea.classList.remove('modified');
+                        textarea.classList.add('saved');
+                        setTimeout(() => textarea.classList.remove('saved'), 2000);
+                    }
+                });
+                modifiedCells.clear();
+
+                statusEl.textContent = 'Connected';
+                statusEl.className = 'status connected';
+                showToast(`${translations.length} translations saved!`, 'success');
+            } catch (error) {
+                console.error('Save error:', error);
+                statusEl.textContent = 'Save failed';
+                statusEl.className = 'status disconnected';
+                showToast('Failed to save - please try again', 'error');
+            }
+
+            saveBtn.disabled = modifiedCells.size === 0;
+            saveBtn.textContent = 'Save All Changes';
+            updateStats();
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+
+            let currentPage = '';
+            let currentSection = '';
+
+            const filteredData = getFilteredData();
+
+            filteredData.forEach(item => {
+                // Add page header
+                if (item.page !== currentPage) {
+                    currentPage = item.page;
+                    currentSection = '';
+                    const pageRow = document.createElement('tr');
+                    pageRow.className = 'subsection';
+                    pageRow.innerHTML = `<td colspan="9" style="background: #134e4a; color: white; font-size: 14px; text-transform: uppercase;">${item.page.replace('-', ' ')}</td>`;
+                    tbody.appendChild(pageRow);
+                }
+
+                // Add section header
+                if (item.section !== currentSection) {
+                    currentSection = item.section;
+                    const sectionRow = document.createElement('tr');
+                    sectionRow.className = 'subsection';
+                    sectionRow.innerHTML = `<td colspan="9">${item.section}</td>`;
+                    tbody.appendChild(sectionRow);
+                }
+
+                // Add data row
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="key-cell">${item.key}</td>
+                    <td class="english-cell">${escapeHtml(item.english)}</td>
+                    ${languages.map(lang => `
+                        <td class="lang-cell">
+                            <textarea
+                                data-key="${item.key}"
+                                data-lang="${lang}"
+                                data-cell-id="${item.key}__${lang}"
+                                oninput="handleInput(this)"
+                                placeholder="Enter ${lang.toUpperCase()}..."
+                            >${escapeHtml(item.translations[lang] || '')}</textarea>
+                        </td>
+                    `).join('')}
+                    <td class="notes-cell">${item.notes ? item.notes.replace('DNT', '<span class="do-not-translate">DNT</span>') : ''}</td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            updateStats();
+        }
+
+        function getFilteredData() {
+            const pageFilter = document.getElementById('filterPage').value;
+            const langFilter = document.getElementById('filterLanguage').value;
+            const statusFilter = document.getElementById('filterStatus').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+
+            return translationData.filter(item => {
+                if (pageFilter && item.page !== pageFilter) return false;
+
+                if (searchTerm) {
+                    const matchesKey = item.key.toLowerCase().includes(searchTerm);
+                    const matchesEnglish = item.english.toLowerCase().includes(searchTerm);
+                    const matchesTranslation = Object.values(item.translations).some(t =>
+                        t && t.toLowerCase().includes(searchTerm)
+                    );
+                    if (!matchesKey && !matchesEnglish && !matchesTranslation) return false;
+                }
+
+                if (statusFilter) {
+                    const langsToCheck = langFilter ? [langFilter] : languages;
+                    if (statusFilter === 'empty') {
+                        const hasEmpty = langsToCheck.some(l => !item.translations[l]);
+                        if (!hasEmpty) return false;
+                    } else if (statusFilter === 'translated') {
+                        const allTranslated = langsToCheck.every(l => item.translations[l]);
+                        if (!allTranslated) return false;
+                    } else if (statusFilter === 'modified') {
+                        const hasModified = langsToCheck.some(l => modifiedCells.has(`${item.key}__${l}`));
+                        if (!hasModified) return false;
+                    }
+                }
+
+                return true;
+            });
+        }
+
+        function applyFilters() {
+            renderTable();
+        }
+
+        function handleInput(textarea) {
+            const key = textarea.dataset.key;
+            const lang = textarea.dataset.lang;
+            const cellId = textarea.dataset.cellId;
+            const value = textarea.value;
+
+            // Update data
+            const item = translationData.find(d => d.key === key);
+            if (item) {
+                item.translations[lang] = value;
+            }
+
+            // Check if modified from saved value
+            const savedValue = savedTranslations[`${key}_${lang}`] || '';
+            if (value !== savedValue) {
+                modifiedCells.add(cellId);
+                textarea.classList.add('modified');
+                textarea.classList.remove('saved');
+            } else {
+                modifiedCells.delete(cellId);
+                textarea.classList.remove('modified');
+            }
+
+            document.getElementById('saveBtn').disabled = modifiedCells.size === 0;
+            updateStats();
+        }
+
+        function updateStats() {
+            const total = translationData.length * languages.length;
+            let translated = 0;
+
+            translationData.forEach(item => {
+                languages.forEach(lang => {
+                    if (item.translations[lang]) translated++;
+                });
+            });
+
+            document.getElementById('totalStrings').textContent = translationData.length;
+            document.getElementById('translatedCount').textContent = translated;
+            document.getElementById('pendingCount').textContent = total - translated;
+            document.getElementById('modifiedCount').textContent = modifiedCells.size;
+        }
+
+        function exportCSV() {
+            let csv = 'Key,Page,English,Greek,Portuguese,French,Spanish,German,Khmer,Notes\n';
+
+            translationData.forEach(item => {
+                const row = [
+                    item.key,
+                    item.page,
+                    `"${item.english.replace(/"/g, '""')}"`,
+                    `"${(item.translations.gr || '').replace(/"/g, '""')}"`,
+                    `"${(item.translations.br || '').replace(/"/g, '""')}"`,
+                    `"${(item.translations.fr || '').replace(/"/g, '""')}"`,
+                    `"${(item.translations.es || '').replace(/"/g, '""')}"`,
+                    `"${(item.translations.de || '').replace(/"/g, '""')}"`,
+                    `"${(item.translations.km || '').replace(/"/g, '""')}"`,
+                    `"${(item.notes || '').replace(/"/g, '""')}"`
+                ];
+                csv += row.join(',') + '\n';
+            });
+
+            downloadFile(csv, 'translations.csv', 'text/csv');
+            showToast('CSV exported', 'success');
+        }
+
+        function exportJSON() {
+            const json = JSON.stringify(translationData, null, 2);
+            downloadFile(json, 'translations.json', 'application/json');
+            showToast('JSON exported', 'success');
+        }
+
+        function downloadFile(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+    </script>
+</body>
+</html>
