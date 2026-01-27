@@ -93,28 +93,16 @@ function applyTranslations(html, translations, langConfig) {
     }
 
     // Replace data-i18n text content
-    // Matches: <tag data-i18n="key">text</tag> or <tag data-i18n="key" ...>text</tag>
+    // Uses a more robust approach that handles nested HTML tags like <strong>
+    // Matches: <tag data-i18n="key">...content with possible nested tags...</tag>
     result = result.replace(
-        /(<[^>]+data-i18n="([^"]+)"[^>]*>)([^<]*)(<\/[^>]+>)/g,
-        (match, openTag, key, originalText, closeTag) => {
+        /(<([a-z][a-z0-9]*)[^>]*data-i18n="([^"]+)"[^>]*>)([\s\S]*?)(<\/\2>)/gi,
+        (match, openTag, tagName, key, originalContent, closeTag) => {
             const translation = translations[key];
             if (translation) {
                 return `${openTag}${translation}${closeTag}`;
             }
             return match; // Keep original if no translation
-        }
-    );
-
-    // Handle self-closing or empty tags with data-i18n
-    // e.g., <span data-i18n="key"></span>
-    result = result.replace(
-        /(<[^>]+data-i18n="([^"]+)"[^>]*>)(<\/[^>]+>)/g,
-        (match, openTag, key, closeTag) => {
-            const translation = translations[key];
-            if (translation) {
-                return `${openTag}${translation}${closeTag}`;
-            }
-            return match;
         }
     );
 
