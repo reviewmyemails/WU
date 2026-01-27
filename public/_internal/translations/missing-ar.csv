@@ -1,60 +1,4 @@
 Key,Page,English
-home.step1_title,homepage,Send us your list
-home.step1_desc,homepage,"CSV, Excel, whatever you have. We've seen it all. No judgment, no questions."
-home.step2_title,homepage,We review every address
-home.step2_desc,homepage,"One by one. Looking for bounces, spam traps, disposables, and reputation killers."
-home.step3_title,homepage,Get your clean list back
-home.step3_desc,homepage,With clear labels and a report. You'll know exactly what to do with each address.
-home.crisis_title,homepage,Crisis Mode?
-home.crisis_cta,homepage,Email the SOS Hotline
-home.final_title,homepage,Ready to know what's in your list?
-home.final_cta,homepage,Get My List Cleaned
-home.symptoms_title,homepage,Sound familiar?
-home.symptoms_subtitle,homepage,You're not alone. These are the patterns we see every day.
-home.symptom_1,homepage,<strong>No idea</strong> where half this list came from.
-home.symptom_2,homepage,One tool says <strong>clean</strong>. Another says <strong>risky</strong>.
-home.symptom_3,homepage,"<strong>Scared to remove</strong> subscribers, even the ones who never open."
-home.symptom_4,homepage,Haven't emailed this list in <strong>months</strong>. Afraid to restart.
-home.symptom_5,homepage,Paid for list cleaning <strong>yesterday</strong>. Bounces <strong>today</strong>.
-home.symptom_6,homepage,Open rates <strong>dropped</strong> and nobody can explain why.
-home.symptom_7,homepage,List keeps <strong>growing</strong>. Revenue <strong>doesn't</strong>.
-home.symptom_8,homepage,"Emails <strong>not inboxing</strong> anymore, going to spam or nowhere at all."
-home.crisis_subtitle,homepage,"If any of these are true, start here."
-home.crisis_item_1,homepage,ESP sent a compliance warning or paused your sending.
-home.crisis_item_2,homepage,"Blocklisted, or you think you might be."
-home.crisis_item_3,homepage,Last send spiked bounces. Now everyone's afraid to send again.
-home.steps_title,homepage,How we actually work
-home.steps_subtitle,homepage,Simple process. Expert execution. Real results.
-home.step1_number,homepage,Step 01
-home.step2_number,homepage,Step 02
-home.step3_number,homepage,Step 03
-home.steps_whisper,homepage,No outsourcing. No AI guesswork. Just experienced eyes on every list.
-home.pullquote_text,homepage,"""She cleaned and organized our database with incredible efficiency and set us up for long-term success."""
-home.pullquote_author,homepage,"Sam Cande, UK"
-home.manifesto_text,homepage,You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened. That's the gap between validation and understanding.
-home.features_title,homepage,What you actually get
-home.feature1_title,homepage,Clear action labels
-home.feature1_desc,homepage,"Every email marked Keep, Monitor, or Suppress. No ambiguity, no guessing what to do next."
-home.feature2_title,homepage,Detailed reasoning
-home.feature2_desc,homepage,"Not just 'risky', we tell you why. Spam trap patterns, domain issues, behavioral signals."
-home.feature3_title,homepage,Expert interpretation included
-home.feature3_desc,homepage,"Not just data, context. Every list review includes a walkthrough of your results. I explain what I found, what it means, and exactly what to do next."
-home.quiz_cta_title,homepage,Not sure if your list needs this?
-home.quiz_cta_subtext,homepage,"Take a 2-minute self-assessment. Four questions about how you built your list, and we'll tell you what risk level you're probably at."
-home.quiz_cta_button,homepage,Take the 2-Minute Risk Check
-home.testimonials_title,homepage,People who trusted us
-home.testimonials_subtitle,homepage,Real feedback from real senders.
-home.testimonial1_name,homepage,Megan S.
-home.testimonial1_role,homepage,UK
-home.testimonial1_quote,homepage,"""The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call."""
-home.testimonial2_name,homepage,Chris Mead
-home.testimonial2_role,homepage,UK
-home.testimonial2_quote,homepage,"""Real human expertise. Tailor-made solutions. Not an AI tool."""
-home.testimonial3_name,homepage,Adeola Sole
-home.testimonial3_role,homepage,UK
-home.testimonial3_quote,homepage,"""RME provides deep insights our ESP misses and helped us segment smarter."""
-home.final_subtext,homepage,"Send us your list. We'll tell you exactly what's safe to send, what needs watching, and what will hurt you."
-home.final_footer,homepage,Most lists returned within 24 hours.
 modal.contact_title,common,Get in Touch
 modal.contact_subtitle,common,Tell us what you're working on. We'll get back to you within one business day.
 modal.form_name,common,Name
@@ -141,46 +85,6 @@ sos.more_dfy,sos-hotline,Done-For-You Review
 sos.more_dfy_cta,sos-hotline,See What You Get
 sos.more_expert,sos-hotline,Expert Interpretation
 sos.final_title,sos-hotline,Ready to Ask Your Question?
-sos.final_cta,sos-hotline,Contact the SOS Hotline
-sos.modal_title,sos-hotline,SOS Hotline
-sos.modal_message_label,sos-hotline,What's going on?
-sos.modal_placeholder,sos-hotline,What's your email question?
-sos.modal_submit,sos-hotline,Send to SOS Hotline
-sos.modal_success,sos-hotline,Message Received
-sos.modal_success_text,sos-hotline,We'll get back to you within 24-48 hours.
-sos.topics_subhead,sos-hotline,You do not need to be a client. You do not need to buy anything.
-sos.topics_footer,sos-hotline,...and anything else you are wondering about.
-sos.topic_deliverability,sos-hotline,Deliverability
-sos.topic_bounces,sos-hotline,Bounces
-sos.topic_blocklists,sos-hotline,Blocklists
-sos.topic_open_rates,sos-hotline,Open rates
-sos.topic_esp_migration,sos-hotline,ESP migration
-sos.topic_warmup,sos-hotline,Warmup
-sos.topic_list_cleaning,sos-hotline,List cleaning
-sos.topic_engagement,sos-hotline,Engagement
-sos.topic_spam_complaints,sos-hotline,Spam complaints
-sos.topic_reputation,sos-hotline,Reputation
-sos.topic_ip_warming,sos-hotline,IP warming
-sos.topic_segmentation,sos-hotline,Segmentation
-sos.topic_inbox_placement,sos-hotline,Inbox placement
-sos.topic_sunsetting,sos-hotline,Sunsetting
-sos.topic_reengagement,sos-hotline,Re-engagement
-sos.topic_career,sos-hotline,Career advice
-sos.step1,sos-hotline,You send an email to the SOS Hotline
-sos.step2,sos-hotline,You receive an automatic reply confirming we got it
-sos.step3,sos-hotline,YT personally reads and responds within 48 hours
-sos.how_footer,sos-hotline,That is it. No booking system. Just reach out.
-sos.how_send_message,sos-hotline,Send a message
-sos.testimonial1_quote,sos-hotline,The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call.
-sos.testimonial1_author,sos-hotline,"Megan S, UK"
-sos.testimonial2_quote,sos-hotline,Real human expertise. Tailor-made solutions. Not an AI tool.
-sos.testimonial2_author,sos-hotline,"Chris Mead, UK"
-sos.testimonial3_quote,sos-hotline,RME provides deep insights our ESP misses and helped us segment smarter.
-sos.testimonial3_author,sos-hotline,"Adeola Sole, UK"
-sos.why_tagline,sos-hotline,Trust beats tactics.
 sos.why_p1,sos-hotline,"We offer real help without charging because it is the right thing to do. Most questions fall into a few common patterns I see every week. Some people need a quick answer. Some need deeper support. Either way, the conversation starts the same."
 sos.why_p2,sos-hotline,"If you need more than guidance, we offer done-for-you list reviews with expert interpretation included. But there is no pressure. The SOS Hotline exists to help, not to sell."
-sos.more_intro,sos-hotline,"SOS gives you guidance. If you need someone to actually touch your data, we offer:"
-sos.more_dfy_desc,sos-hotline,"Send us your list. We review every address and return it labeled: Keep, Monitor, or Suppress. Each gets a clear label, a definition, and why it matters."
-sos.more_expert_desc,sos-hotline,"Every list review includes a walkthrough of your results. We explain what we found, what it means, and what to do next. Included free with every cleaning."
 sos.final_subtext,sos-hotline,Email us. Within 48 hours. Often sooner.

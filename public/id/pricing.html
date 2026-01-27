@@ -1604,7 +1604,7 @@
     <section class="hero">
         <div class="container">
             <h1 class="hero__headline"><span data-i18n="pricing.hero_headline1">Di Luar Validasi.</span><br><span data-i18n="pricing.hero_headline2">Kami Memberitahu Anda Arti Daftar Anda.</span></h1>
-            <p class="hero__subhead" data-i18n="pricing.hero_subhead">Bukan hanya lulus/gagal. Setiap alamat disertai alasan sehingga Anda tahu apa yang harus disimpan, dipantau, dan ditahan (suppress).</p>
+            <p class="hero__subhead" data-i18n="pricing.hero_subhead">Bukan hanya lulus/gagal. Setiap alamat disertai alasan sehingga Anda tahu apa yang harus disimpan, dipantau, dan ditahan.</p>
         </div>
     </section>
 
@@ -1634,7 +1634,7 @@
 
                 <div class="output-card">
                     <span class="output-card__label output-card__label--suppress">Suppress</span>
-                    <h3 data-i18n="pricing.suppress_title">Risiko Jelas</h3>
+                    <h3 data-i18n="pricing.suppress_title">Risiko Jelas, Alasan Jelas</h3>
                     <p data-i18n="pricing.suppress_desc">Sinyal risiko yang jelas: domain bermasalah yang diketahui</p>
                 </div>
             </div>
@@ -1656,7 +1656,7 @@
 
             <div class="who-list">
                 <ul>
-                    <li data-i18n="pricing.who_item1">Menjalankan kampanye tetapi melihat keterlibatan menurun</li>
+                    <li data-i18n="pricing.who_item1">Menjalankan kampanye tetapi melihat penurunan keterlibatan</li>
                     <li data-i18n="pricing.who_item2">Khawatir tentang bounce</li>
                     <li data-i18n="pricing.who_item3">Mewarisi daftar yang tidak Anda buat sendiri</li>
                     <li data-i18n="pricing.who_item4">Di bawah tekanan untuk kirim saja tetapi merasakan risiko</li>
@@ -1716,24 +1716,24 @@
             <div class="comparison-list">
                 <ul>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them1">Validators check if an inbox exists.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us1">We assess whether sending there is safe.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them1">Validator memeriksa apakah kotak masuk ada.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us1">Kami menilai apakah pengiriman ke sana aman.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them2">Validators give you a status.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us2">We give you the reasoning behind a decision.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them2">Validator memberi Anda status.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us2">Kami memberi Anda alasan di balik keputusan.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them3">Validators flag what bounces.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us3">We flag what damages your reputation without bouncing.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them3">Validator menandai apa yang bounce.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us3">Kami menandai apa yang merusak reputasi Anda tanpa bounce.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them4">Validators process volume.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us4">We interpret patterns across your entire list.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them4">Validator memproses volume.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us4">Kami menafsirkan pola di seluruh daftar Anda.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them5">Validators leave you guessing.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us5">We tell you what to do and why.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them5">Validator membiarkan Anda menebak-nebak.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us5">Kami memberi tahu Anda apa yang harus dilakukan dan mengapa.</span>
                     </li>
                 </ul>
             </div>
@@ -2270,7 +2270,7 @@
     <div class="contact-modal" id="contactModal">
         <div class="contact-modal__content">
             <div class="contact-modal__header">
-                <h3 class="contact-modal__title" data-i18n="modal.contact_title">Get in Touch</h3>
+                <h3 class="contact-modal__title" data-i18n="modal.contact_title">Hubungi Kami</h3>
                 <button class="contact-modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">&times;</button>
             </div>
             <div class="contact-modal__body">
@@ -2278,17 +2278,17 @@
                 <form id="contactForm" onsubmit="submitContactForm(event)">
                     <input type="hidden" id="contactSource" value="">
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label" data-i18n="modal.form_name">Name *</label>
+                        <label class="contact-modal__label" data-i18n="modal.form_name">Nama</label>
                         <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="modal.name_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label" data-i18n="modal.form_email">Email *</label>
+                        <label class="contact-modal__label" data-i18n="modal.form_email">Email</label>
                         <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label" data-i18n="modal.form_timezone">Timezone (optional)</label>
+                        <label class="contact-modal__label" data-i18n="modal.form_timezone">Zona Waktu</label>
                         <select class="contact-modal__select" id="contactTimezone">
-                            <option value="" data-i18n="modal.form_timezone_placeholder">Select your timezone</option>
+                            <option value="" data-i18n="modal.form_timezone_placeholder">Pilih zona waktu Anda (opsional)</option>
                             <option value="America/New_York" data-i18n="modal.timezone_et">Eastern Time (ET)</option>
                             <option value="America/Chicago" data-i18n="modal.timezone_ct">Central Time (CT)</option>
                             <option value="America/Denver" data-i18n="modal.timezone_mt">Mountain Time (MT)</option>
@@ -2300,10 +2300,10 @@
                         </select>
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label" data-i18n="modal.form_message">Message (optional)</label>
+                        <label class="contact-modal__label" data-i18n="modal.form_message">Pesan</label>
                         <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..." data-i18n-placeholder="modal.message_placeholder"></textarea>
                     </div>
-                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="modal.form_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Send Request</button>
+                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="modal.form_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Kirim Pesan</button>
                 </form>
             </div>
         </div>
