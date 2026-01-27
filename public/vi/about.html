@@ -1258,10 +1258,16 @@
             function getCurrentPage() {
                 const path = window.location.pathname;
                 const parts = path.split('/').filter(Boolean);
-                const lastPart = parts[parts.length - 1] || 'index.html';
-                // If it's a language folder, get the next part
-                if (['gr', 'br', 'es', 'fr', 'de', 'ar', 'tr', 'th', 'id', 'vi', 'km'].includes(lastPart)) {
+                const lastPart = parts[parts.length - 1] || '';
+                // If it's a language folder or empty, return index
+                if (!lastPart || ['gr', 'br', 'es', 'fr', 'de', 'ar', 'tr', 'th', 'id', 'vi', 'km'].includes(lastPart)) {
                     return 'index.html';
+                }
+                // Known pages (handles both with and without .html extension)
+                const knownPages = ['index', 'about', 'pricing', 'done-for-you', 'sos-hotline', 'partner', 'quiz', 'audit'];
+                const pageName = lastPart.replace('.html', '');
+                if (knownPages.includes(pageName)) {
+                    return pageName + '.html';
                 }
                 return lastPart.includes('.html') ? lastPart : 'index.html';
             }
