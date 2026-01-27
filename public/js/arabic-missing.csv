@@ -1,0 +1,90 @@
+Key,Page,Arabic
+modal.contact_title,common,تواصل معنا
+modal.contact_subtitle,common,أخبرنا بما تعمل عليه. سنرد عليك خلال يوم عمل واحد.
+modal.form_name,common,الاسم
+modal.form_email,common,البريد الإلكتروني
+modal.form_timezone,common,المنطقة الزمنية
+modal.form_timezone_placeholder,common,اختر منطقتك الزمنية (اختياري)
+modal.form_message,common,الرسالة
+modal.form_message_placeholder,common,كيف يمكننا مساعدتك؟
+modal.form_message_helper,common,اختياري - لكنه يساعدنا في التحضير للمحادثة.
+modal.form_submit,common,إرسال الرسالة
+modal.success_title,common,تم إرسال الرسالة!
+modal.success_message,common,سنرد عليك خلال يوم عمل واحد.
+dfy.consult_call_title,done-for-you,مكالمة فردية مع YT
+dfy.contact_first,done-for-you,تواصل معنا أولاً
+dfy.how_read_title,done-for-you,كيف أقرأ قائمتك
+dfy.keep_desc,done-for-you,"لم يُعثر على مشاكل. النطاق سليم، التحقق ناجح، لا إشارات خطر. هذه آمنة للإرسال."
+dfy.keep_title,done-for-you,آمن للإرسال
+dfy.modal_submit,done-for-you,إرسال الطلب
+dfy.modal_subtitle,done-for-you,أخبرنا عن وضعك وسنرد عليك خلال 24 ساعة.
+dfy.monitor_desc,done-for-you,كل عنوان يأتي مع تصنيفات محددة توضح سبب وجوده هنا. السياق مهم.
+dfy.monitor_title,done-for-you,علامات تحذيرية
+dfy.pricing_ask,done-for-you,فقط اسأل
+dfy.pricing_questions,done-for-you,لديك أسئلة أولاً؟
+dfy.read1_desc,done-for-you,"سلوك النطاق، التاريخ، والأنماط عبر قائمتك بأكملها. السياق، وليس مجرد الوجود."
+dfy.read1_title,done-for-you,أنظر أبعد من العنوان
+dfy.read2_desc,done-for-you,"الفخاخ، حسابات الأدوار، النطاقات السامة، الأنماط المؤقتة. الأشياء التي لا ترتد لكنها تؤذيك."
+dfy.read2_title,done-for-you,أتحقق مما يفوت الآخرين
+dfy.read3_desc,done-for-you,ليس مجرد تصنيفات. تحصل على التفكير وراء كل قرار لتفهم السبب.
+dfy.read3_title,done-for-you,أشرح أسبابي
+dfy.sos_cta,done-for-you,تعرف على خط الطوارئ SOS
+dfy.sos_desc,done-for-you,لديك سؤال قبل الالتزام؟ استخدم خط الطوارئ SOS. مجاني. لا عروض بيع.
+dfy.sos_title,done-for-you,لست متأكداً بعد؟
+dfy.suppress_desc,done-for-you,"كل عنوان يأتي مع تصنيفات محددة توضح السبب. غير صالح، محتمل فخ، مؤقت، أو إشارات خطر أخرى. لا ترسل إليها."
+dfy.suppress_title,done-for-you,لا ترسل
+dfy.who_for1,done-for-you,تدير حملات لكن ترى تراجعاً في التفاعل
+dfy.who_for2,done-for-you,"قلق من الارتدادات، الشكاوى، أو القوائم السوداء"
+dfy.who_for3,done-for-you,ورثت قائمة لم تبنها
+dfy.who_for4,done-for-you,"تحت ضغط لـ ""الإرسال فقط"" لكن تشعر بالخطر"
+dfy.who_for5,done-for-you,تحاول شرح مخاطر قابلية التسليم داخلياً
+dfy.who_for_title,done-for-you,هذا لك إذا
+dfy.who_not1,done-for-you,تريد شخصاً يكتب أو يرسل الحملات نيابة عنك
+dfy.who_not2,done-for-you,تحتاج مساعدة في الانتقال أو إعداد ESP
+dfy.who_not3,done-for-you,تريد خدمات مُدارة مستمرة
+dfy.who_not4,done-for-you,تحتاج عمل محتوى أو تصميم
+dfy.who_not_title,done-for-you,ليس لك إذا
+dfy.who_partner_cta,done-for-you,تواصل مع شريك
+dfy.who_title,done-for-you,لمن هذا
+home.manifesto,homepage,ربما مررت قائمتك عبر أداة من قبل. قالت 95% صالح. أرسلت على أي حال. حدثت ارتدادات. هذه هي الفجوة بين التحقق والفهم.
+home.quiz_cta_btn,homepage,قم بفحص المخاطر في دقيقتين
+home.quiz_cta_desc,homepage,"قم بتقييم ذاتي لمدة دقيقتين. أربعة أسئلة حول كيفية بناء قائمتك، وسنخبرك بمستوى الخطر المحتمل."
+pricing.compare_them1,pricing,المدققون يتحققون من وجود صندوق البريد.
+pricing.compare_them2,pricing,المدققون يعطونك حالة.
+pricing.compare_them3,pricing,المدققون يحددون ما يرتد.
+pricing.compare_them4,pricing,المدققون يعالجون الكميات.
+pricing.compare_them5,pricing,المدققون يتركونك في حيرة.
+pricing.compare_us1,pricing,نحن نقيّم ما إذا كان الإرسال آمناً.
+pricing.compare_us2,pricing,نحن نعطيك الأسباب وراء القرار.
+pricing.compare_us3,pricing,نحن نحدد ما يضر سمعتك دون أن يرتد.
+pricing.compare_us4,pricing,نحن نفسر الأنماط عبر قائمتك بأكملها.
+pricing.compare_us5,pricing,نحن نخبرك ماذا تفعل ولماذا.
+modal.timezone_pt,common,توقيت المحيط الهادئ (PT)
+modal.timezone_mt,common,توقيت الجبال (MT)
+modal.timezone_ct,common,التوقيت المركزي (CT)
+modal.timezone_et,common,التوقيت الشرقي (ET)
+modal.timezone_gmt,common,GMT / UTC
+modal.timezone_cet,common,توقيت وسط أوروبا (CET)
+modal.timezone_other,common,أخرى
+modal.form_sending,common,جاري الإرسال...
+modal.form_try_again,common,حاول مرة أخرى
+modal.form_error,common,حدث خطأ ما. يرجى المحاولة مرة أخرى أو مراسلتنا مباشرة على ahoy@reviewmyemails.com
+modal.request_received,common,تم استلام الطلب
+modal.timezone_london,common,لندن (GMT/BST)
+modal.timezone_singapore,common,توقيت سنغافورة
+modal.timezone_sydney,common,التوقيت الشرقي الأسترالي
+modal.timezone_alaska,common,توقيت ألاسكا
+modal.timezone_hawaii,common,توقيت هاواي
+modal.timezone_eet,common,توقيت شرق أوروبا
+modal.timezone_gulf,common,توقيت الخليج
+modal.timezone_india,common,التوقيت الهندي
+modal.timezone_japan,common,توقيت اليابان
+modal.timezone_nz,common,توقيت نيوزيلندا
+sos.more_title,sos-hotline,تحتاج أكثر من مجرد نصيحة؟
+sos.more_dfy,sos-hotline,مراجعة متكاملة
+sos.more_dfy_cta,sos-hotline,انظر ماذا ستحصل
+sos.more_expert,sos-hotline,تفسير الخبراء
+sos.final_title,sos-hotline,جاهز لطرح سؤالك؟
+sos.why_p1,sos-hotline,"نحن نقدم مساعدة حقيقية مجاناً لأن هذا هو الشيء الصحيح. معظم الأسئلة تقع ضمن أنماط شائعة أراها كل أسبوع. البعض يحتاج إجابة سريعة. البعض يحتاج دعماً أعمق. في كلتا الحالتين، تبدأ المحادثة بنفس الطريقة."
+sos.why_p2,sos-hotline,"إذا كنت بحاجة لأكثر من التوجيه، نحن نقدم مراجعات قوائم متكاملة تتضمن تفسير الخبراء. لكن لا ضغوط. خط الطوارئ SOS موجود للمساعدة، وليس للبيع."
+sos.final_subtext,sos-hotline,راسلنا. خلال 48 ساعة. وغالباً قبل ذلك.

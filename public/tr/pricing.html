@@ -1716,24 +1716,24 @@
             <div class="comparison-list">
                 <ul>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them1">Validators check if an inbox exists.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us1">We assess whether sending there is safe.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them1">Doğrulayıcılar gelen kutusunun var olup olmadığını kontrol eder.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us1">Oraya göndermenin güvenli olup olmadığını değerlendiriyoruz.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them2">Validators give you a status.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us2">We give you the reasoning behind a decision.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them2">Doğrulayıcılar size bir durum verir.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us2">Bir kararın arkasındaki mantığı size veriyoruz.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them3">Validators flag what bounces.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us3">We flag what damages your reputation without bouncing.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them3">Doğrulayıcılar neyin geri döndüğünü işaretler.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us3">Geri dönmeden itibarınıza zarar vereni işaretliyoruz.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them4">Validators process volume.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us4">We interpret patterns across your entire list.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them4">Doğrulayıcılar hacim işler.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us4">Tüm listenizdeki kalıpları yorumluyoruz.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them" data-i18n="pricing.compare_them5">Validators leave you guessing.</span>
-                        <span class="comparison-list__us" data-i18n="pricing.compare_us5">We tell you what to do and why.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them5">Doğrulayıcılar sizi tahmin eder bırakır.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us5">Ne yapmanız gerektiğini ve nedenini söylüyoruz.</span>
                     </li>
                 </ul>
             </div>
@@ -2270,7 +2270,7 @@
     <div class="contact-modal" id="contactModal">
         <div class="contact-modal__content">
             <div class="contact-modal__header">
-                <h3 class="contact-modal__title" data-i18n="modal.contact_title">Get in Touch</h3>
+                <h3 class="contact-modal__title" data-i18n="modal.contact_title">İletişime Geçin</h3>
                 <button class="contact-modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">&times;</button>
             </div>
             <div class="contact-modal__body">
@@ -2278,32 +2278,32 @@
                 <form id="contactForm" onsubmit="submitContactForm(event)">
                     <input type="hidden" id="contactSource" value="">
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label" data-i18n="modal.form_name">Name *</label>
+                        <label class="contact-modal__label" data-i18n="modal.form_name">İsim</label>
                         <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="modal.name_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label" data-i18n="modal.form_email">Email *</label>
+                        <label class="contact-modal__label" data-i18n="modal.form_email">E-posta</label>
                         <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label" data-i18n="modal.form_timezone">Timezone (optional)</label>
+                        <label class="contact-modal__label" data-i18n="modal.form_timezone">Saat Dilimi</label>
                         <select class="contact-modal__select" id="contactTimezone">
-                            <option value="" data-i18n="modal.form_timezone_placeholder">Select your timezone</option>
-                            <option value="America/New_York" data-i18n="modal.timezone_et">Eastern Time (ET)</option>
-                            <option value="America/Chicago" data-i18n="modal.timezone_ct">Central Time (CT)</option>
-                            <option value="America/Denver" data-i18n="modal.timezone_mt">Mountain Time (MT)</option>
-                            <option value="America/Los_Angeles" data-i18n="modal.timezone_pt">Pacific Time (PT)</option>
-                            <option value="Europe/London" data-i18n="modal.timezone_london">London (GMT/BST)</option>
-                            <option value="Europe/Paris" data-i18n="modal.timezone_cet">Central European Time</option>
-                            <option value="Asia/Singapore" data-i18n="modal.timezone_singapore">Singapore Time</option>
-                            <option value="Australia/Sydney" data-i18n="modal.timezone_sydney">Australian Eastern Time</option>
+                            <option value="" data-i18n="modal.form_timezone_placeholder">Saat diliminizi seçin (isteğe bağlı)</option>
+                            <option value="America/New_York" data-i18n="modal.timezone_et">Doğu Saati (ET)</option>
+                            <option value="America/Chicago" data-i18n="modal.timezone_ct">Merkezi Saat (CT)</option>
+                            <option value="America/Denver" data-i18n="modal.timezone_mt">Dağ Saati (MT)</option>
+                            <option value="America/Los_Angeles" data-i18n="modal.timezone_pt">Pasifik Saati (PT)</option>
+                            <option value="Europe/London" data-i18n="modal.timezone_london">Londra (GMT/BST)</option>
+                            <option value="Europe/Paris" data-i18n="modal.timezone_cet">Orta Avrupa Saati (CET)</option>
+                            <option value="Asia/Singapore" data-i18n="modal.timezone_singapore">Singapur Saati</option>
+                            <option value="Australia/Sydney" data-i18n="modal.timezone_sydney">Avustralya Doğu Saati</option>
                         </select>
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label" data-i18n="modal.form_message">Message (optional)</label>
+                        <label class="contact-modal__label" data-i18n="modal.form_message">Mesaj</label>
                         <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..." data-i18n-placeholder="modal.message_placeholder"></textarea>
                     </div>
-                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="modal.form_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Send Request</button>
+                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="modal.form_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Mesaj Gönder</button>
                 </form>
             </div>
         </div>
