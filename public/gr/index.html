@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review My Emails | Επαγγελματικός Καθαρισμός Λίστας Email</title>
-    <meta name="description" content="Επαγγελματικές υπηρεσίες καθαρισμού λίστας email. Όχι αυτοματοποιημένο Validation - πρακτική ανάλυση που εντοπίζει spam traps, επικίνδυνες επαφές και παράγοντες που καταστρέφουν τη φήμη σας.">
-    <link rel="canonical" href="https://reviewmyemails.com/">
+    <title>Review My Emails | Επαγγελματικός Έλεγχος & Καθαρισμός Λίστας Email</title>
+    <meta name="description" content="Τα εργαλεία validation βλέπουν διευθύνσεις. Εμείς βλέπουμε μοτίβα και προβλήματα παραδοσιμότητας. Όχι αυτόματο validation, αλλά ανθρώπινος έλεγχος που σας λέει ακριβώς τι να κάνετε (Keep, Monitor, Suppress).">
+    <link rel="canonical" href="https://reviewmyemails.com/gr/">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Review My Emails | Email List Cleaning That Tells You What to Do">
@@ -605,199 +605,6 @@
             padding: 10px 20px;
         }
 
-        /* Language Switcher */
-        .lang-switcher {
-            position: relative;
-        }
-
-        .lang-switcher__toggle {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 8px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--color-muted);
-            font-family: var(--font);
-            font-size: 14px;
-            transition: color 180ms ease;
-        }
-
-        .lang-switcher__toggle:hover {
-            color: var(--color-dark);
-        }
-
-        .lang-switcher__toggle svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .lang-switcher__toggle .arrow {
-            width: 12px;
-            height: 12px;
-            transition: transform 200ms ease;
-        }
-
-        .lang-switcher.open .lang-switcher__toggle .arrow {
-            transform: rotate(180deg);
-        }
-
-        .lang-switcher__menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            margin-top: 8px;
-            background: var(--color-white);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            min-width: 160px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-8px);
-            transition: all 200ms ease;
-            z-index: 200;
-        }
-
-        .lang-switcher.open .lang-switcher__menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .lang-switcher__item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 16px;
-            color: var(--color-dark);
-            text-decoration: none;
-            font-size: 14px;
-            transition: background 150ms ease;
-        }
-
-        .lang-switcher__item:first-child {
-            border-radius: 8px 8px 0 0;
-        }
-
-        .lang-switcher__item:last-child {
-            border-radius: 0 0 8px 8px;
-        }
-
-        .lang-switcher__item:hover {
-            background: var(--color-light);
-        }
-
-        .lang-switcher__item.active {
-            background: var(--color-light);
-            font-weight: 500;
-        }
-
-        .lang-switcher__item span.code {
-            color: var(--color-muted);
-            font-size: 12px;
-            min-width: 24px;
-        }
-
-        /* Abyss mode */
-        body.abyss-active .lang-switcher__toggle { color: var(--abyss-muted); }
-        body.abyss-active .lang-switcher__toggle:hover { color: var(--abyss-glow); }
-        body.abyss-active .lang-switcher__menu { background: var(--abyss-deep); border-color: rgba(255,255,255,0.1); }
-        body.abyss-active .lang-switcher__item { color: var(--abyss-text); }
-        body.abyss-active .lang-switcher__item:hover { background: rgba(255,255,255,0.05); }
-        body.abyss-active .lang-switcher__item.active { background: rgba(45, 212, 191, 0.1); }
-
-        /* Footer language switcher */
-        .footer__lang {
-            position: relative;
-            display: inline-block;
-        }
-
-        .footer__lang-toggle {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: none;
-            border: none;
-            color: var(--color-white);
-            opacity: 0.8;
-            font-family: var(--font);
-            font-size: 15px;
-            cursor: pointer;
-            padding: 0;
-            transition: opacity 180ms ease;
-        }
-
-        .footer__lang-toggle:hover {
-            opacity: 1;
-        }
-
-        .footer__lang-toggle .arrow {
-            width: 12px;
-            height: 12px;
-            transition: transform 200ms ease;
-        }
-
-        .footer__lang.open .footer__lang-toggle .arrow {
-            transform: rotate(180deg);
-        }
-
-        .footer__lang-menu {
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            margin-bottom: 8px;
-            background: var(--color-white);
-            border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-            min-width: 160px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(8px);
-            transition: all 200ms ease;
-            z-index: 200;
-        }
-
-        .footer__lang.open .footer__lang-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .footer__lang-menu a {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 16px;
-            color: var(--color-dark) !important;
-            opacity: 1 !important;
-            font-size: 14px;
-        }
-
-        .footer__lang-menu a:first-child {
-            border-radius: 8px 8px 0 0;
-        }
-
-        .footer__lang-menu a:last-child {
-            border-radius: 0 0 8px 8px;
-        }
-
-        .footer__lang-menu a:hover {
-            background: var(--color-light);
-        }
-
-        .footer__lang-menu a.active {
-            background: var(--color-light);
-            font-weight: 500;
-        }
-
-        .footer__lang-menu span.code {
-            color: var(--color-muted);
-            font-size: 12px;
-            min-width: 24px;
-        }
-
         /* Mobile Menu */
         .header__mobile-toggle {
             display: none;
@@ -1178,11 +985,6 @@
             position: relative;
         }
 
-        /* Stagger effect */
-        .step:nth-child(2) {
-            margin-top: var(--space-lg);
-        }
-
         .step__icon {
             margin-bottom: var(--space-md);
         }
@@ -1318,7 +1120,7 @@
 
         .testimonials {
             padding: var(--space-xxl) 0;
-            background: var(--color-white);
+            background: var(--color-light);
             transition: background 0.8s;
         }
 
@@ -1375,7 +1177,34 @@
         .cta-block {
             padding: var(--space-xxl) var(--space-md);
             text-align: center;
+            background: var(--color-dark);
             transition: background 0.8s;
+        }
+
+        .cta-block h2,
+        .cta-block__subtext,
+        .cta-block__footer {
+            color: var(--color-white);
+        }
+
+        .cta-block--light {
+            background: var(--color-light);
+        }
+
+        .cta-block--light h2,
+        .cta-block--light .cta-block__subtext,
+        .cta-block--light .cta-block__footer {
+            color: var(--color-dark);
+        }
+
+        .cta-block--white {
+            background: var(--color-white);
+        }
+
+        .cta-block--white h2,
+        .cta-block--white .cta-block__subtext,
+        .cta-block--white .cta-block__footer {
+            color: var(--color-dark);
         }
 
         .cta-block__inner {
@@ -1390,14 +1219,13 @@
         }
 
         .cta-block__subtext {
-            color: var(--color-muted);
             margin-bottom: var(--space-lg);
         }
 
         .cta-block__footer {
             margin-top: var(--space-md);
             font-size: 14px;
-            color: var(--color-muted);
+            opacity: 0.85;
         }
 
         /* ========================================
@@ -1746,38 +1574,16 @@
 
     <header class="header">
         <div class="header__inner">
-            <a href="/" class="header__logo" id="headerLogo">
+            <a href="index.html" class="header__logo" id="headerLogo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40" class="logo-light">
                 <img src="../assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="40" class="logo-dark">
             </a>
             <nav class="header__nav">
-                <a href="/gr/done-for-you.html" class="header__link">Πώς Λειτουργεί</a>
-                <a href="/gr/pricing.html" class="header__link">Τιμές</a>
-                <a href="/gr/sos-hotline.html" class="header__link">SOS Hotline</a>
-
-                <!-- Language Switcher -->
-                <div class="lang-switcher" id="langSwitcher">
-                    <button class="lang-switcher__toggle" onclick="toggleLangMenu()" aria-label="Change language">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"/>
-                        </svg>
-                        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9"/>
-                        </svg>
-                    </button>
-                    <div class="lang-switcher__menu">
-                        <a href="/" class="lang-switcher__item"><span class="code">EN</span> English</a>
-                        <a href="/gr/" class="lang-switcher__item active"><span class="code">GR</span> Ελληνικά</a>
-                        <a href="/br/" class="lang-switcher__item"><span class="code">BR</span> Português</a>
-                        <a href="/fr/" class="lang-switcher__item"><span class="code">FR</span> Français</a>
-                        <a href="/es/" class="lang-switcher__item"><span class="code">ES</span> Español</a>
-                        <a href="/de/" class="lang-switcher__item"><span class="code">DE</span> Deutsch</a>
-                        <a href="/km/" class="lang-switcher__item"><span class="code">KM</span> ភាសាខ្មែរ</a>
-                    </div>
-                </div>
-
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Καθαρίστε τη Λίστα Μου</a>
-                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">Πώς Λειτουργεί</a>
+                <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Τιμές</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">Καθαρίστε τη Λίστα Μου</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
             </nav>
@@ -1787,34 +1593,22 @@
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav__header">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
-            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
                 <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
         <div class="mobile-nav__links">
-            <a href="/gr/done-for-you.html" class="mobile-nav__link">Πώς Λειτουργεί</a>
-            <a href="/gr/pricing.html" class="mobile-nav__link">Τιμές</a>
-            <a href="/gr/sos-hotline.html" class="mobile-nav__link">SOS Hotline</a>
-            <a href="/gr/about.html" class="mobile-nav__link">Σχετικά</a>
-            <a href="/gr/partner.html" class="mobile-nav__link">Συνεργάτες</a>
-            <div style="border-top: 1px solid var(--color-border); margin-top: 16px; padding-top: 16px;">
-                <span style="font-size: 13px; color: var(--color-muted); text-transform: uppercase; letter-spacing: 0.05em;">Γλώσσα</span>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;">
-                    <a href="/" style="padding: 8px 12px; background: var(--color-light); border-radius: 6px; font-size: 14px; color: var(--color-dark); text-decoration: none;">EN</a>
-                    <a href="/gr/" style="padding: 8px 12px; background: var(--color-accent); border-radius: 6px; font-size: 14px; color: white; text-decoration: none;">GR</a>
-                    <a href="/br/" style="padding: 8px 12px; background: var(--color-light); border-radius: 6px; font-size: 14px; color: var(--color-dark); text-decoration: none;">BR</a>
-                    <a href="/fr/" style="padding: 8px 12px; background: var(--color-light); border-radius: 6px; font-size: 14px; color: var(--color-dark); text-decoration: none;">FR</a>
-                    <a href="/es/" style="padding: 8px 12px; background: var(--color-light); border-radius: 6px; font-size: 14px; color: var(--color-dark); text-decoration: none;">ES</a>
-                    <a href="/de/" style="padding: 8px 12px; background: var(--color-light); border-radius: 6px; font-size: 14px; color: var(--color-dark); text-decoration: none;">DE</a>
-                    <a href="/km/" style="padding: 8px 12px; background: var(--color-light); border-radius: 6px; font-size: 14px; color: var(--color-dark); text-decoration: none;">KM</a>
-                </div>
-            </div>
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">Πώς Λειτουργεί</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Τιμές</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">Σχετικά</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Συνεργάτες</a>
         </div>
         <div class="mobile-nav__cta">
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Καθαρίστε τη Λίστα Μου</a>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.cta">Καθαρίστε τη Λίστα Μου</a>
         </div>
     </nav>
 
@@ -1824,14 +1618,14 @@
 
     <section class="hero">
         <div class="container">
-            <a href="https://linkedin.com/in/yannatorry" target="_blank" class="hero__badge">Από την Yanna-Torry Aspraki</a>
-            <h1 class="hero__headline">Σταματήστε να μαντεύετε τι πρόβλημα έχει η λίστα σας.<br><span style="color: var(--color-accent);">Βρίσκουμε τα προβλήματα που χάνουν τα εργαλεία.</span></h1>
-            <p class="hero__subhead">Τα εργαλεία Validation βλέπουν διευθύνσεις. Εμείς βλέπουμε μοτίβα, πλαίσιο και κίνδυνο. Μετά σας λέμε ακριβώς τι να κάνετε.</p>
+            <a href="https://linkedin.com/in/yannatorry" target="_blank" class="hero__badge" data-i18n="home.hero_badge">Πέρα από το Validation</a>
+            <h1 class="hero__headline"><span data-i18n="home.hero_headline_1">Σταματήστε να μαντεύετε τι πρόβλημα έχει η λίστα σας.</span><br><span style="color: var(--color-accent);" data-i18n="home.hero_headline_2">Εντοπίζουμε τα προβλήματα που διαφεύγουν από τα εργαλεία.</span></h1>
+            <p class="hero__subhead" data-i18n="home.hero_subhead">Τα εργαλεία validation βλέπουν απλώς διευθύνσεις. Εμείς βλέπουμε μοτίβα και κίνδυνο, λέγοντάς σας ακριβώς τι να κάνετε.</p>
             <div class="hero__actions">
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Καθαρίστε τη Λίστα Μου</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Καθαρίστε τη Λίστα Μου</a>
             </div>
-            <p class="hero__bridge">Τα περισσότερα προβλήματα inboxing και deliverability οφείλονται στην ποιότητα της λίστας.</p>
-            <p class="hero__quiz-link">Δεν είστε σίγουροι; <a href="/gr/quiz.html">Κάντε τον 2λεπτο έλεγχο κινδύνου →</a></p>
+            <p class="hero__bridge" data-i18n="home.hero_bridge">Τα περισσότερα προβλήματα inboxing και deliverability οφείλονται στην ποιότητα της λίστας.</p>
+            <p class="hero__quiz-link"><span data-i18n="home.hero_quiz_prefix">Δεν είστε σίγουροι;</span> <a href="quiz.html" data-i18n="home.hero_quiz_link">Κάντε τον 2λεπτο έλεγχο κινδύνου</a></p>
         </div>
     </section>
 
@@ -1844,41 +1638,41 @@
         <div class="symptoms__container">
             <div>
                 <div class="symptoms__header">
-                    <h2 style="color: white;">Σας θυμίζει κάτι;</h2>
-                    <p>Δεν είστε μόνοι. Αυτά είναι τα μοτίβα που βλέπουμε κάθε μέρα.</p>
+                    <h2 style="color: white;" data-i18n="home.symptoms_title">Σας θυμίζει κάτι;</h2>
+                    <p data-i18n="home.symptoms_subtitle">Δεν είστε μόνοι. Αυτά είναι τα μοτίβα που βλέπουμε κάθε μέρα.</p>
                 </div>
                 <ul class="symptoms__list">
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span><strong>Καμία ιδέα</strong> από πού προήλθε η μισή λίστα.</span>
+                        <span data-i18n="home.symptom_1"><strong>No idea</strong> where half this list came from.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Ένα εργαλείο λέει <strong>καθαρό</strong>. Ένα άλλο λέει <strong>επικίνδυνο</strong>.</span>
+                        <span data-i18n="home.symptom_2">One tool says <strong>clean</strong>. Another says <strong>risky</strong>.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span><strong>Φοβάστε να αφαιρέσετε</strong> συνδρομητές, ακόμα κι αυτούς που δεν ανοίγουν ποτέ.</span>
+                        <span data-i18n="home.symptom_3"><strong>Scared to remove</strong> subscribers, even the ones who never open.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Δεν στείλατε email σε αυτή τη λίστα εδώ και <strong>μήνες</strong>. Φοβάστε να ξαναρχίσετε.</span>
+                        <span data-i18n="home.symptom_4">Haven't emailed this list in <strong>months</strong>. Afraid to restart.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Πληρώσατε για καθαρισμό λίστας <strong>χθες</strong>. Bounces <strong>σήμερα</strong>.</span>
+                        <span data-i18n="home.symptom_5">Paid for list cleaning <strong>yesterday</strong>. Bounces <strong>today</strong>.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Τα open rates <strong>έπεσαν</strong> και κανείς δεν μπορεί να εξηγήσει γιατί.</span>
+                        <span data-i18n="home.symptom_6">Open rates <strong>dropped</strong> and nobody can explain why.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Η λίστα συνεχίζει να <strong>μεγαλώνει</strong>. Τα έσοδα <strong>όχι</strong>.</span>
+                        <span data-i18n="home.symptom_7">List keeps <strong>growing</strong>. Revenue <strong>doesn't</strong>.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Τα emails <strong>δεν φτάνουν στα εισερχόμενα</strong> πια, πάνε στα spam ή πουθενά.</span>
+                        <span data-i18n="home.symptom_8">Emails <strong>not inboxing</strong> anymore, going to spam or nowhere at all.</span>
                     </li>
                 </ul>
             </div>
@@ -1886,16 +1680,16 @@
                 <div class="symptoms__crisis-header">
                     <div class="symptoms__crisis-icon">⚠</div>
                     <div>
-                        <h3>Κατάσταση Κρίσης;</h3>
-                        <span>Αν ισχύει κάτι από αυτά, ξεκινήστε εδώ.</span>
+                        <h3 data-i18n="home.crisis_title">Στη blocklist; Προειδοποίηση ESP; Η φήμη καταρρέει;</h3>
+                        <span data-i18n="home.crisis_subtitle">Αν ισχύει κάτι από αυτά, ξεκινήστε εδώ.</span>
                     </div>
                 </div>
                 <ul class="symptoms__crisis-list">
-                    <li>Ο ESP έστειλε προειδοποίηση συμμόρφωσης ή ανέστειλε την αποστολή σας.</li>
-                    <li>Είστε σε blocklist, ή νομίζετε ότι μπορεί να είστε.</li>
-                    <li>Η τελευταία αποστολή είχε spike στα bounces. Τώρα όλοι φοβούνται να στείλουν ξανά.</li>
+                    <li data-i18n="home.crisis_item_1">Ο ESP έστειλε προειδοποίηση συμμόρφωσης ή ανέστειλε την αποστολή σας.</li>
+                    <li data-i18n="home.crisis_item_2">Είστε σε blocklist, ή νομίζετε ότι μπορεί να είστε.</li>
+                    <li data-i18n="home.crisis_item_3">Η τελευταία αποστολή είχε spike στα bounces. Τώρα όλοι φοβούνται να στείλουν ξανά.</li>
                 </ul>
-                <a href="/gr/sos-hotline.html" class="symptoms__crisis-btn">Στείλτε email στο SOS Hotline →</a>
+                <a href="sos-hotline.html" class="symptoms__crisis-btn" data-i18n="home.crisis_cta">Λάβετε Επείγουσα Βοήθεια</a>
             </div>
         </div>
     </section>
@@ -1907,8 +1701,8 @@
     <section class="steps">
         <div class="container">
             <div class="steps__header">
-                <h2>Πώς δουλεύουμε στην πραγματικότητα</h2>
-                <p>Απλή διαδικασία. Εκτέλεση από ειδικούς. Πραγματικά αποτελέσματα.</p>
+                <h2 data-i18n="home.steps_title">Πώς δουλεύουμε στην πραγματικότητα</h2>
+                <p data-i18n="home.steps_subtitle">Απλή διαδικασία. Εκτέλεση από ειδικούς. Πραγματικά αποτελέσματα.</p>
             </div>
 
             <div class="steps__grid">
@@ -1923,9 +1717,9 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="step__number">Βήμα 01</div>
-                    <h3>Στείλτε μας τη λίστα σας</h3>
-                    <p>CSV, Excel, ό,τι έχετε. Τα έχουμε δει όλα. Χωρίς κριτική, χωρίς ερωτήσεις.</p>
+                    <div class="step__number" data-i18n="home.step1_number">Βήμα 01</div>
+                    <h3 data-i18n="home.step1_title">Στείλτε τη λίστα σας</h3>
+                    <p data-i18n="home.step1_desc">CSV ή Excel. Όλα δεκτά. Χωρίς κριτική, χωρίς ερωτήσεις.</p>
                 </div>
 
                 <div class="step">
@@ -1939,9 +1733,9 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="step__number">Βήμα 02</div>
-                    <h3>Ελέγχουμε κάθε διεύθυνση</h3>
-                    <p>Μία προς μία. Ψάχνουμε bounces, spam traps, προσωρινές διευθύνσεις και reputation killers.</p>
+                    <div class="step__number" data-i18n="home.step2_number">Βήμα 02</div>
+                    <h3 data-i18n="home.step2_title">Το ελέγχουμε χειροκίνητα</h3>
+                    <p data-i18n="home.step2_desc">Ένα προς ένα. Ψάχνουμε bounces, spam traps και ό,τι καταστρέφει το reputation σας. Αποτελέσματα σε 24-48 ώρες.</p>
                 </div>
 
                 <div class="step">
@@ -1953,12 +1747,12 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="step__number">Βήμα 03</div>
-                    <h3>Παίρνετε την καθαρή λίστα σας</h3>
-                    <p>Με σαφείς ετικέτες και αναφορά. Θα ξέρετε ακριβώς τι να κάνετε με κάθε διεύθυνση.</p>
+                    <div class="step__number" data-i18n="home.step3_number">Βήμα 03</div>
+                    <h3 data-i18n="home.step3_title">Λάβετε την καθαρή λίστα</h3>
+                    <p data-i18n="home.step3_desc">Κάθε διεύθυνση με ετικέτα. Πλήρης αναφορά. Θα ξέρετε ακριβώς τι να κάνετε με κάθε επαφή.</p>
                 </div>
 
-                <p class="steps__whisper">Χωρίς outsourcing. Χωρίς AI guesswork. Απλά έμπειρα μάτια σε κάθε λίστα.</p>
+                <p class="steps__whisper" data-i18n="home.steps_whisper">Χωρίς outsourcing. Χωρίς AI μαντεψιές. Μόνο έμπειρα μάτια σε κάθε λίστα.</p>
 
             </div>
         </div>
@@ -1970,8 +1764,8 @@
 
     <section class="pull-quote">
         <div class="pull-quote__inner">
-            <p class="pull-quote__text">"Καθάρισε και οργάνωσε τη βάση δεδομένων μας με απίστευτη αποτελεσματικότητα και μας προετοίμασε για μακροπρόθεσμη επιτυχία."</p>
-            <p class="pull-quote__attribution">Sam Cande, UK</p>
+            <p class="pull-quote__text" data-i18n="home.pullquote_text">"Καθάρισε και οργάνωσε τη βάση δεδομένων μας με απίστευτη αποτελεσματικότητα—δεν είχα συνειδητοποιήσει πόσες άχρηστες επαφές είχαμε."</p>
+            <p class="pull-quote__attribution" data-i18n="home.pullquote_author">Sam Cande, UK</p>
         </div>
     </section>
 
@@ -1982,7 +1776,7 @@
 
     <section class="pull-quote manifesto">
         <div class="pull-quote__inner">
-            <p class="manifesto__text">Πιθανότατα έχετε περάσει τη λίστα σας από κάποιο εργαλείο. Είπε 95% valid. Στείλατε ούτως ή άλλως. Ήρθαν bounces. Αυτό είναι το κενό μεταξύ validation και κατανόησης.</p>
+            <p class="manifesto__text" data-i18n="home.manifesto">Πιθανότατα έχετε περάσει τη λίστα σας από κάποιο εργαλείο. Είπε 95% valid. Στείλατε ούτως ή άλλως. Ήρθαν bounces. Αυτό είναι το κενό μεταξύ validation και κατανόησης.</p>
         </div>
     </section>
 
@@ -1993,7 +1787,7 @@
     <section class="features">
         <div class="container">
             <div class="features__header">
-                <h2>Τι παίρνετε πραγματικά</h2>
+                <h2 data-i18n="home.features_title">Τι πραγματικά παίρνετε</h2>
             </div>
 
             <div class="features__grid">
@@ -2008,8 +1802,8 @@
                             <polyline points="10 9 9 9 8 9"/>
                         </svg>
                     </div>
-                    <h3>Σαφείς ετικέτες δράσης</h3>
-                    <p>Κάθε email με σήμανση Keep, Monitor ή Suppress. Χωρίς ασάφεια, χωρίς να μαντεύετε τι να κάνετε.</p>
+                    <h3 data-i18n="home.feature1_title">Σαφείς ετικέτες δράσης</h3>
+                    <p data-i18n="home.feature1_desc">Κάθε email με σήμανση Keep, Monitor ή Suppress. Χωρίς ασάφειες, χωρίς να μαντεύετε την επόμενη κίνηση.</p>
                 </div>
 
                 <div class="feature-card">
@@ -2019,8 +1813,8 @@
                             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                         </svg>
                     </div>
-                    <h3>Λεπτομερής αιτιολόγηση</h3>
-                    <p>Όχι απλά "επικίνδυνο", σας λέμε γιατί. Μοτίβα spam trap, προβλήματα domain, σήματα συμπεριφοράς.</p>
+                    <h3 data-i18n="home.feature2_title">Λεπτομερής αιτιολόγηση</h3>
+                    <p data-i18n="home.feature2_desc">Όχι απλά 'επικίνδυνο', σας λέμε γιατί. Μοτίβα spam trap, προβλήματα domain, σήματα συμπεριφοράς.</p>
                 </div>
 
                 <div class="feature-card">
@@ -2029,8 +1823,8 @@
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         </svg>
                     </div>
-                    <h3>Ερμηνεία από ειδικό περιλαμβάνεται</h3>
-                    <p>Όχι απλά δεδομένα, αλλά πλαίσιο. Κάθε έλεγχος λίστας περιλαμβάνει επεξήγηση των αποτελεσμάτων. Εξηγώ τι βρήκα, τι σημαίνει και τι ακριβώς να κάνετε.</p>
+                    <h3 data-i18n="home.feature3_title">Ερμηνεία από ειδικό περιλαμβάνεται</h3>
+                    <p data-i18n="home.feature3_desc">Όχι απλά δεδομένα, αλλά ουσία. Κάθε έλεγχος περιλαμβάνει παρουσίαση αποτελεσμάτων. Εξηγώ τι βρήκα, τι σημαίνει και ποια είναι τα επόμενα βήματα.</p>
                 </div>
 
             </div>
@@ -2042,11 +1836,11 @@
          For the 40-second visitor who isn't converting today
          ======================================== -->
 
-    <section class="cta-block" style="background: var(--color-white);">
+    <section class="cta-block cta-block--white">
         <div class="cta-block__inner">
-            <h2>Δεν είστε σίγουροι αν η λίστα σας το χρειάζεται;</h2>
-            <p class="cta-block__subtext">Κάντε μια 2λεπτη αυτοαξιολόγηση. Τέσσερις ερωτήσεις για το πώς φτιάξατε τη λίστα σας, και θα σας πούμε σε τι επίπεδο κινδύνου βρίσκεστε.</p>
-            <a href="/gr/quiz.html" class="btn btn-secondary">Κάντε τον 2λεπτο Έλεγχο Κινδύνου</a>
+            <h2 data-i18n="home.quiz_cta_title">Δεν είστε σίγουροι αν η λίστα σας το χρειάζεται;</h2>
+            <p class="cta-block__subtext" data-i18n="home.quiz_cta_desc">Κάντε μια 2λεπτη αυτοαξιολόγηση. Τέσσερις ερωτήσεις για το πώς χτίσατε τη λίστα σας, και θα σας πούμε σε τι επίπεδο κινδύνου πιθανόν βρίσκεστε.</p>
+            <a href="quiz.html" class="btn btn-secondary" data-i18n="home.quiz_cta_btn">Κάντε τον 2λεπτο Έλεγχο Κινδύνου</a>
         </div>
     </section>
 
@@ -2057,38 +1851,32 @@
     <section class="testimonials">
         <div class="container">
             <div class="testimonials__header">
-                <h2>Άνθρωποι που μας εμπιστεύτηκαν</h2>
-                <p>Πραγματικά σχόλια από πραγματικούς αποστολείς.</p>
+                <h2 data-i18n="home.testimonials_title">Άνθρωποι που μας εμπιστεύτηκαν</h2>
+                <p data-i18n="home.testimonials_subtitle">Πραγματικά σχόλια από πραγματικούς αποστολείς.</p>
             </div>
 
             <article class="testimonial">
                 <div class="testimonial__meta">
-                    <p class="testimonial__name">Megan S.</p>
-                    <p class="testimonial__role">UK</p>
+                    <p class="testimonial__name" data-i18n="home.testimonial1_name">Megan S.</p>
+                    <p class="testimonial__role" data-i18n="home.testimonial1_role">UK</p>
                 </div>
-                <blockquote class="testimonial__quote">
-                    "Το SOS Hotline μου έδωσε εξαιρετικά χρήσιμη καθοδήγηση. Η Yanna-Torry καθάρισε τη λίστα μας και μας υποστήριξε πέρα από κάθε προσδοκία."
-                </blockquote>
+                <blockquote class="testimonial__quote" data-i18n="home.testimonial1_quote">"Το SOS Hotline μου έδωσε εξαιρετικά χρήσιμη καθοδήγηση. Η Yanna-Torry καθάρισε τη λίστα μας και μας υποστήριξε πέρα από κάθε προσδοκία."</blockquote>
             </article>
 
             <article class="testimonial">
                 <div class="testimonial__meta">
-                    <p class="testimonial__name">Chris Mead</p>
-                    <p class="testimonial__role">UK</p>
+                    <p class="testimonial__name" data-i18n="home.testimonial2_name">Chris Mead</p>
+                    <p class="testimonial__role" data-i18n="home.testimonial2_role">UK</p>
                 </div>
-                <blockquote class="testimonial__quote">
-                    "Πραγματική ανθρώπινη εξειδίκευση. Λύσεις προσαρμοσμένες στις ανάγκες μας. Όχι εργαλείο AI."
-                </blockquote>
+                <blockquote class="testimonial__quote" data-i18n="home.testimonial2_quote">"Πραγματική ανθρώπινη εξειδίκευση. Εξατομικευμένες λύσεις. Όχι εργαλείο AI."</blockquote>
             </article>
 
             <article class="testimonial">
                 <div class="testimonial__meta">
-                    <p class="testimonial__name">Adeola Sole</p>
-                    <p class="testimonial__role">UK</p>
+                    <p class="testimonial__name" data-i18n="home.testimonial3_name">Adeola Sole</p>
+                    <p class="testimonial__role" data-i18n="home.testimonial3_role">UK</p>
                 </div>
-                <blockquote class="testimonial__quote">
-                    "Το RME παρέχει βαθιές γνώσεις που χάνει ο ESP μας και μας βοήθησε να κάνουμε πιο έξυπνη κατάτμηση."
-                </blockquote>
+                <blockquote class="testimonial__quote" data-i18n="home.testimonial3_quote">"Το RME παρέχει βαθιές γνώσεις που χάνει ο ESP μας και μας βοήθησε να κάνουμε εξυπνότερο segmentation."</blockquote>
             </article>
 
         </div>
@@ -2100,10 +1888,10 @@
 
     <section class="cta-block">
         <div class="cta-block__inner">
-            <h2>Έτοιμοι να μάθετε τι υπάρχει στη λίστα σας;</h2>
-            <p class="cta-block__subtext">Στείλτε μας τη λίστα σας. Θα σας πούμε ακριβώς τι είναι ασφαλές να στείλετε, τι χρειάζεται παρακολούθηση και τι θα σας βλάψει.</p>
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Καθαρίστε τη Λίστα Μου</a>
-            <p class="cta-block__footer">Οι περισσότερες λίστες επιστρέφονται εντός 24 ωρών.</p>
+            <h2 data-i18n="home.final_title">Έτοιμοι να δείτε τι πραγματικά υπάρχει στη λίστα σας;</h2>
+            <p class="cta-block__subtext" data-i18n="home.final_subtext">Στείλτε μας τη λίστα σας. Θα σας πούμε ακριβώς τι είναι ασφαλές να στείλετε, τι χρειάζεται παρακολούθηση και τι θα σας βλάψει.</p>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Καθαρίστε τη Λίστα Μου</a>
+            <p class="cta-block__footer" data-i18n="home.final_footer">Οι περισσότερες λίστες επιστρέφονται εντός 24 ωρών.</p>
         </div>
     </section>
 
@@ -2114,45 +1902,45 @@
     <div class="modal-overlay" id="contactModal">
         <div class="modal">
             <div class="modal__header">
-                <h3 class="modal__title">Επικοινωνήστε Μαζί Μας</h3>
-                <button class="modal__close" onclick="closeContactModal()" aria-label="Close">
+                <h3 class="modal__title" data-i18n="contact.modal_title">Επικοινωνήστε μαζί μας</h3>
+                <button class="modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">
                     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
             <div class="modal__body">
-                <p class="modal__subtitle">Πείτε μας σε τι εργάζεστε. Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.</p>
+                <p class="modal__subtitle" data-i18n="contact.modal_subtitle">Πείτε μας τι δουλεύετε. Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.</p>
                 <form id="contactForm">
                     <input type="hidden" id="contactSource" name="source" value="">
                     <div class="form-group">
-                        <label for="contactName">Όνομα *</label>
-                        <input type="text" id="contactName" name="name" required>
+                        <label for="contactName" data-i18n="form.name_label">Όνομα *</label>
+                        <input type="text" id="contactName" name="name" required data-i18n-placeholder="form.name_placeholder">
                     </div>
                     <div class="form-group">
-                        <label for="contactEmail">Email *</label>
-                        <input type="email" id="contactEmail" name="email" required>
+                        <label for="contactEmail" data-i18n="form.email_label">Email *</label>
+                        <input type="email" id="contactEmail" name="email" required data-i18n-placeholder="form.email_placeholder">
                     </div>
                     <div class="form-group">
-                        <label for="contactTimezone">Ζώνη Ώρας</label>
+                        <label for="contactTimezone" data-i18n="form.timezone_label">Ζώνη ώρας (προαιρετικό)</label>
                         <select id="contactTimezone" name="timezone">
-                            <option value="">Επιλέξτε ζώνη ώρας (προαιρετικό)</option>
-                            <option value="PT">Pacific Time (PT)</option>
-                            <option value="MT">Mountain Time (MT)</option>
-                            <option value="CT">Central Time (CT)</option>
-                            <option value="ET">Eastern Time (ET)</option>
-                            <option value="GMT">GMT / UTC</option>
-                            <option value="CET">Central European Time (CET)</option>
-                            <option value="Other">Other</option>
+                            <option value="" data-i18n="form.timezone_select_optional">Επιλέξτε τη ζώνη ώρας σας (προαιρετικό)</option>
+                            <option value="PT" data-i18n="form.tz_pacific">Ειρηνική Ώρα (PT)</option>
+                            <option value="MT" data-i18n="form.tz_mountain">Ορεινή Ώρα (MT)</option>
+                            <option value="CT" data-i18n="form.tz_central">Κεντρική Ώρα (CT)</option>
+                            <option value="ET" data-i18n="form.tz_eastern">Ανατολική Ώρα (ET)</option>
+                            <option value="GMT" data-i18n="form.tz_gmt">GMT / UTC</option>
+                            <option value="CET" data-i18n="form.tz_cet">Κεντροευρωπαϊκή Ώρα (CET)</option>
+                            <option value="Other" data-i18n="form.tz_other">Άλλο</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="contactMessage">Μήνυμα</label>
-                        <textarea id="contactMessage" name="message" placeholder="Πώς μπορούμε να σας βοηθήσουμε;"></textarea>
-                        <small>Προαιρετικό - αλλά μας βοηθά να προετοιμαστούμε για τη συνομιλία.</small>
+                        <label for="contactMessage" data-i18n="form.message_label">Μήνυμα</label>
+                        <textarea id="contactMessage" name="message" placeholder="What can we help you with?" data-i18n-placeholder="form.message_placeholder"></textarea>
+                        <small data-i18n="form.message_hint">Προαιρετικό - αλλά μας βοηθά να προετοιμαστούμε για τη συζήτηση.</small>
                     </div>
                 </form>
             </div>
             <div class="modal__footer">
-                <button type="submit" form="contactForm" class="btn btn-primary">Αποστολή Μηνύματος</button>
+                <button type="submit" form="contactForm" class="btn btn-primary" data-i18n="contact.submit" data-i18n-sending="modal.form_sending">Αποστολή Μηνύματος</button>
             </div>
         </div>
     </div>
@@ -2162,14 +1950,14 @@
         <div class="modal">
             <div class="modal__header">
                 <span></span>
-                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close">
+                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close" data-i18n-aria="ui.close">
                     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
             <div class="form-success">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-                <h3>Το μήνυμα εστάλη!</h3>
-                <p>Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.</p>
+                <h3 data-i18n="ui.message_sent">Το Μήνυμα Εστάλη!</h3>
+                <p data-i18n="ui.response_time_business">Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.</p>
             </div>
         </div>
     </div>
@@ -2182,53 +1970,35 @@
         <div class="footer__inner">
             <div class="footer__brand">
                 <img src="../assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
-                <p>Βλέπουμε αυτά που οι αλγόριθμοι δεν μπορούν.</p>
+                <p data-i18n="footer.tagline">Βλέπουμε αυτά που οι αλγόριθμοι αδυνατούν να δουν.</p>
             </div>
 
             <div class="footer__column">
-                <h4>Υπηρεσίες</h4>
-                <a href="/gr/pricing.html">Τιμές</a>
-                <a href="/gr/sos-hotline.html">SOS Hotline</a>
+                <h4 data-i18n="footer.services">Υπηρεσίες</h4>
+                <a href="pricing.html" data-i18n="nav.pricing">Τιμές</a>
+                <a href="sos-hotline.html" data-i18n="nav.sos_hotline">SOS Hotline</a>
             </div>
 
             <div class="footer__column">
-                <h4>Εταιρεία</h4>
-                <a href="/gr/about.html">Σχετικά</a>
-                <a href="/gr/partner.html">Συνεργάτες</a>
+                <h4 data-i18n="footer.company">Εταιρεία</h4>
+                <a href="about.html" data-i18n="nav.about">Σχετικά</a>
+                <a href="partner.html" data-i18n="nav.partner">Συνεργάτες</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html" data-i18n="footer.security">Ασφάλεια</a>
             </div>
 
             <div class="footer__column">
-                <h4>Επικοινωνία</h4>
+                <h4 data-i18n="footer.contact">Επικοινωνία</h4>
                 <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
             </div>
 
             <div class="footer__bottom">
-                <span>© 2026 Review My Emails. Με επιφύλαξη παντός δικαιώματος.</span>
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <div class="footer__lang" id="footerLang">
-                        <button class="footer__lang-toggle" onclick="toggleFooterLang()">
-                            Γλώσσα: Ελληνικά
-                            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="6 9 12 15 18 9"/>
-                            </svg>
-                        </button>
-                        <div class="footer__lang-menu">
-                            <a href="/"><span class="code">EN</span> English</a>
-                            <a href="/gr/" class="active"><span class="code">GR</span> Ελληνικά</a>
-                            <a href="/br/"><span class="code">BR</span> Português</a>
-                            <a href="/fr/"><span class="code">FR</span> Français</a>
-                            <a href="/es/"><span class="code">ES</span> Español</a>
-                            <a href="/de/"><span class="code">DE</span> Deutsch</a>
-                            <a href="/km/"><span class="code">KM</span> ភាសាខ្មែរ</a>
-                        </div>
-                    </div>
-                    <span>Απόρρητο · Όροι</span>
-                </div>
+                <span data-i18n="footer.copyright">© 2026 Review My Emails. Με την επιφύλαξη παντός δικαιώματος.</span>
+                <span data-i18n="footer.legal">Πολιτική Απορρήτου · Όροι</span>
             </div>
         </div>
     </footer>
 
-    <!-- Mobile Navigation & Language Switcher -->
+    <!-- Mobile Navigation -->
     <script>
         function openMobileNav() {
             document.getElementById('mobileNav').classList.add('active');
@@ -2239,28 +2009,6 @@
             document.getElementById('mobileNav').classList.remove('active');
             document.body.style.overflow = '';
         }
-
-        // Language Switcher
-        function toggleLangMenu() {
-            document.getElementById('langSwitcher').classList.toggle('open');
-        }
-
-        function toggleFooterLang() {
-            document.getElementById('footerLang').classList.toggle('open');
-        }
-
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function(e) {
-            const langSwitcher = document.getElementById('langSwitcher');
-            const footerLang = document.getElementById('footerLang');
-
-            if (langSwitcher && !langSwitcher.contains(e.target)) {
-                langSwitcher.classList.remove('open');
-            }
-            if (footerLang && !footerLang.contains(e.target)) {
-                footerLang.classList.remove('open');
-            }
-        });
     </script>
 
     <!-- Custom Event Tracking -->
@@ -2310,7 +2058,7 @@
 
             const submitBtn = document.querySelector('.modal__footer .btn');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
+            submitBtn.textContent = submitBtn.dataset.i18nSending || 'Sending...';
             submitBtn.disabled = true;
 
             const formData = {
@@ -2620,5 +2368,7 @@
         }, { passive: true });
     </script>
 
+    <!-- i18n Translation Loader -->
+    <script src="/js/i18n.js"></script>
 </body>
 </html>

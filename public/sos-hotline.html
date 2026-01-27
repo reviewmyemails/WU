@@ -890,11 +890,11 @@
                 <img src="assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
             <nav class="header__nav">
-                <a href="done-for-you.html" class="header__link">How It Works</a>
-                <a href="pricing.html" class="header__link">Pricing</a>
-                <a href="sos-hotline.html" class="header__link">SOS Hotline</a>
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get My List Cleaned</a>
-                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">How It Works</a>
+                <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Pricing</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">Get My List Cleaned</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
             </nav>
@@ -907,19 +907,19 @@
             <a href="index.html" class="header__logo">
                 <img src="assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
-            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
                 <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
         <div class="mobile-nav__links">
-            <a href="done-for-you.html" class="mobile-nav__link">How It Works</a>
-            <a href="pricing.html" class="mobile-nav__link">Pricing</a>
-            <a href="sos-hotline.html" class="mobile-nav__link">SOS Hotline</a>
-            <a href="about.html" class="mobile-nav__link">About</a>
-            <a href="partner.html" class="mobile-nav__link">Partner</a>
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">How It Works</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Pricing</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">About</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Partner</a>
         </div>
         <div class="mobile-nav__cta">
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get My List Cleaned</a>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.cta">Get My List Cleaned</a>
         </div>
     </nav>
 
@@ -929,13 +929,13 @@
 
     <section class="hero">
         <div class="container">
-            <span class="hero__badge">Free Service</span>
-            <h1 class="hero__headline">Email SOS Hotline</h1>
-            <p class="hero__subhead">Free expert guidance for anyone with an email question. No sales pitch. No catch. Just honest answers from a deliverability specialist who gets emails into inboxes for a living.</p>
+            <span class="hero__badge" data-i18n="sos.badge">Free Service</span>
+            <h1 class="hero__headline" data-i18n="sos.title">Email SOS Hotline</h1>
+            <p class="hero__subhead" data-i18n="sos.subtitle">Free expert guidance for anyone with an email question. No sales pitch. No catch. Just honest answers from a deliverability specialist who gets emails into inboxes for a living.</p>
             <div class="hero__actions">
-                <button type="button" class="btn btn-primary" onclick="openContactModal('sos-hero')">Contact the SOS Hotline</button>
+                <button type="button" class="btn btn-primary" onclick="openContactModal('sos-hero')" data-i18n="sos.cta">Contact the SOS Hotline</button>
             </div>
-            <p class="hero__note">Within 48 hours. Often sooner.</p>
+            <p class="hero__note" data-i18n="sos.note">Within 48 hours. Often sooner.</p>
         </div>
     </section>
 
@@ -946,32 +946,32 @@
     <section class="section section--light">
         <div class="container">
             <div class="topic-cloud">
-                <p class="topic-cloud__headline">If it touches email, we can help.</p>
-                <p class="topic-cloud__subhead">You do not need to be a client. You do not need to buy anything.</p>
+                <p class="topic-cloud__headline" data-i18n="sos.topics_headline">If it touches email, we can help.</p>
+                <p class="topic-cloud__subhead" data-i18n="sos.topics_subhead">You do not need to be a client. You do not need to buy anything.</p>
 
                 <div class="topic-cloud__items">
-                    <span class="topic-pill">Deliverability</span>
-                    <span class="topic-pill">Bounces</span>
-                    <span class="topic-pill">Blocklists</span>
+                    <span class="topic-pill" data-i18n="sos.topic_deliverability">Deliverability</span>
+                    <span class="topic-pill" data-i18n="sos.topic_bounces">Bounces</span>
+                    <span class="topic-pill" data-i18n="sos.topic_blocklists">Blocklists</span>
                     <span class="topic-pill">SPF</span>
                     <span class="topic-pill">DKIM</span>
                     <span class="topic-pill">DMARC</span>
-                    <span class="topic-pill">Open rates</span>
-                    <span class="topic-pill">ESP migration</span>
-                    <span class="topic-pill">Warmup</span>
-                    <span class="topic-pill">List cleaning</span>
-                    <span class="topic-pill">Engagement</span>
-                    <span class="topic-pill">Spam complaints</span>
-                    <span class="topic-pill">Reputation</span>
-                    <span class="topic-pill">IP warming</span>
-                    <span class="topic-pill">Segmentation</span>
-                    <span class="topic-pill">Inbox placement</span>
-                    <span class="topic-pill">Sunsetting</span>
-                    <span class="topic-pill">Re-engagement</span>
-                    <span class="topic-pill">Career advice</span>
+                    <span class="topic-pill" data-i18n="sos.topic_open_rates">Open rates</span>
+                    <span class="topic-pill" data-i18n="sos.topic_esp_migration">ESP migration</span>
+                    <span class="topic-pill" data-i18n="sos.topic_warmup">Warmup</span>
+                    <span class="topic-pill" data-i18n="sos.topic_list_cleaning">List cleaning</span>
+                    <span class="topic-pill" data-i18n="sos.topic_engagement">Engagement</span>
+                    <span class="topic-pill" data-i18n="sos.topic_spam_complaints">Spam complaints</span>
+                    <span class="topic-pill" data-i18n="sos.topic_reputation">Reputation</span>
+                    <span class="topic-pill" data-i18n="sos.topic_ip_warming">IP warming</span>
+                    <span class="topic-pill" data-i18n="sos.topic_segmentation">Segmentation</span>
+                    <span class="topic-pill" data-i18n="sos.topic_inbox_placement">Inbox placement</span>
+                    <span class="topic-pill" data-i18n="sos.topic_sunsetting">Sunsetting</span>
+                    <span class="topic-pill" data-i18n="sos.topic_reengagement">Re-engagement</span>
+                    <span class="topic-pill" data-i18n="sos.topic_career_advice">Career advice</span>
                 </div>
 
-                <p class="topic-cloud__footer">...and anything else you are wondering about.</p>
+                <p class="topic-cloud__footer" data-i18n="sos.topics_footer">...and anything else you are wondering about.</p>
             </div>
         </div>
     </section>
@@ -983,33 +983,33 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>How It Works</h2>
+                <h2 data-i18n="sos.how_title">How It Works</h2>
             </div>
 
             <div class="how-steps">
                 <div class="how-step">
                     <div class="how-step__number">1</div>
                     <div class="how-step__content">
-                        <p>You send an email to the SOS Hotline</p>
+                        <p data-i18n="sos.how_step1">You send an email to the SOS Hotline</p>
                     </div>
                 </div>
                 <div class="how-step">
                     <div class="how-step__number">2</div>
                     <div class="how-step__content">
-                        <p>You receive an automatic reply confirming we got it</p>
+                        <p data-i18n="sos.how_step2">You receive an automatic reply confirming we got it</p>
                     </div>
                 </div>
                 <div class="how-step">
                     <div class="how-step__number">3</div>
                     <div class="how-step__content">
-                        <p>YT personally reads and responds within 48 hours</p>
+                        <p data-i18n="sos.how_step3">YT personally reads and responds within 48 hours</p>
                     </div>
                 </div>
             </div>
 
             <div class="how-email">
-                <p class="how-email__label">That is it. No booking system. Just reach out.</p>
-                <p class="how-email__address"><a href="#" onclick="openContactModal('how-email'); return false;">Send a message</a></p>
+                <p class="how-email__label" data-i18n="sos.how_footer">That is it. No booking system. Just reach out.</p>
+                <p class="how-email__address"><a href="#" onclick="openContactModal('how-email'); return false;" data-i18n="sos.how_send_message">Send a message</a></p>
             </div>
         </div>
     </section>
@@ -1021,23 +1021,23 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>What People Say</h2>
+                <h2 data-i18n="sos.testimonials_title">What People Say</h2>
             </div>
 
             <div class="testimonial-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-card__quote">"The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call."</p>
-                    <p class="testimonial-card__author">Megan S, UK</p>
+                    <p class="testimonial-card__quote" data-i18n="sos.testimonial1_quote">"The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call."</p>
+                    <p class="testimonial-card__author" data-i18n="sos.testimonial1_author">Megan S, UK</p>
                 </div>
 
                 <div class="testimonial-card">
-                    <p class="testimonial-card__quote">"Real human expertise. Tailor-made solutions. Not an AI tool."</p>
-                    <p class="testimonial-card__author">Chris Mead, UK</p>
+                    <p class="testimonial-card__quote" data-i18n="sos.testimonial2_quote">"Real human expertise. Tailor-made solutions. Not an AI tool."</p>
+                    <p class="testimonial-card__author" data-i18n="sos.testimonial2_author">Chris Mead, UK</p>
                 </div>
 
                 <div class="testimonial-card">
-                    <p class="testimonial-card__quote">"RME provides deep insights our ESP misses and helped us segment smarter."</p>
-                    <p class="testimonial-card__author">Adeola Sole, UK</p>
+                    <p class="testimonial-card__quote" data-i18n="sos.testimonial3_quote">"RME provides deep insights our ESP misses and helped us segment smarter."</p>
+                    <p class="testimonial-card__author" data-i18n="sos.testimonial3_author">Adeola Sole, UK</p>
                 </div>
             </div>
         </div>
@@ -1050,13 +1050,13 @@
     <section class="section section--dark">
         <div class="container">
             <div class="section__header">
-                <h2 style="color: var(--color-white);">Why Is This Free?</h2>
+                <h2 style="color: var(--color-white);" data-i18n="sos.why_free_title">Why Is This Free?</h2>
             </div>
 
             <div class="why-free" style="color: var(--color-white);">
-                <p class="why-free__tagline" style="color: var(--color-lighter);">Trust beats tactics.</p>
-                <p>We offer real help without charging because it is the right thing to do. Most questions fall into a few common patterns I see every week. Some people need a quick answer. Some need deeper support. Either way, the conversation starts the same.</p>
-                <p>If you need more than guidance, we offer done-for-you list reviews with expert interpretation included. But there is no pressure. The SOS Hotline exists to help, not to sell.</p>
+                <p class="why-free__tagline" style="color: var(--color-lighter);" data-i18n="sos.why_free_tagline">Trust beats tactics.</p>
+                <p data-i18n="sos.why_free_p1">We offer real help without charging because it is the right thing to do. Most questions fall into a few common patterns I see every week. Some people need a quick answer. Some need deeper support. Either way, the conversation starts the same.</p>
+                <p data-i18n="sos.why_free_p2">If you need more than guidance, we offer done-for-you list reviews with expert interpretation included. But there is no pressure. The SOS Hotline exists to help, not to sell.</p>
             </div>
         </div>
     </section>
@@ -1068,23 +1068,23 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>Need More Than Advice?</h2>
+                <h2 data-i18n="sos.bridge_title">Need More Than Advice?</h2>
             </div>
 
             <div class="bridge">
-                <p class="bridge__intro">SOS gives you guidance. If you need someone to actually touch your data, we offer:</p>
+                <p class="bridge__intro" data-i18n="sos.bridge_intro">SOS gives you guidance. If you need someone to actually touch your data, we offer:</p>
 
                 <div class="bridge-cards">
                     <div class="bridge-card">
-                        <h3>Done-For-You Review</h3>
-                        <p>Send us your list. We review every address and return it labeled: Keep, Monitor, or Suppress. Each gets a clear label, a definition, and why it matters.</p>
-                        <a href="/done-for-you#what-you-get" class="btn btn-secondary">See What You Get</a>
+                        <h3 data-i18n="sos.bridge_dfy_title">Done-For-You Review</h3>
+                        <p data-i18n="sos.bridge_dfy_desc">Send us your list. We review every address and return it labeled: Keep, Monitor, or Suppress. Each gets a clear label, a definition, and why it matters.</p>
+                        <a href="/done-for-you#what-you-get" class="btn btn-secondary" data-i18n="sos.bridge_dfy_cta">See What You Get</a>
                     </div>
 
                     <div class="bridge-card">
-                        <h3>Expert Interpretation</h3>
-                        <p>Every list review includes a walkthrough of your results. We explain what we found, what it means, and what to do next. Included free with every cleaning.</p>
-                        <a href="/done-for-you#how-it-works" class="btn btn-secondary">See the Process</a>
+                        <h3 data-i18n="sos.bridge_expert_title">Expert Interpretation</h3>
+                        <p data-i18n="sos.bridge_expert_desc">Every list review includes a walkthrough of your results. We explain what we found, what it means, and what to do next. Included free with every cleaning.</p>
+                        <a href="/done-for-you#how-it-works" class="btn btn-secondary" data-i18n="sos.bridge_expert_cta">See the Process</a>
                     </div>
                 </div>
             </div>
@@ -1097,9 +1097,9 @@
 
     <section class="cta-block" style="background: var(--color-light);">
         <div class="cta-block__inner">
-            <h2>Ready to Ask Your Question?</h2>
-            <p class="cta-block__subtext">Email us. Within 48 hours. Often sooner.</p>
-            <button type="button" class="btn btn-primary" onclick="openContactModal('sos-cta')">Contact the SOS Hotline</button>
+            <h2 data-i18n="sos.final_cta_title">Ready to Ask Your Question?</h2>
+            <p class="cta-block__subtext" data-i18n="sos.final_cta_subtext">Email us. Within 48 hours. Often sooner.</p>
+            <button type="button" class="btn btn-primary" onclick="openContactModal('sos-cta')" data-i18n="sos.cta">Contact the SOS Hotline</button>
         </div>
     </section>
 
@@ -1111,30 +1111,30 @@
         <div class="footer__inner">
             <div class="footer__brand">
                 <img src="assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
-                <p>We see what algorithms can't.</p>
+                <p data-i18n="footer.tagline">We see what algorithms can't.</p>
             </div>
 
             <div class="footer__column">
-                <h4>Services</h4>
-                <a href="pricing.html">Pricing</a>
-                <a href="sos-hotline.html">SOS Hotline</a>
+                <h4 data-i18n="footer.services">Services</h4>
+                <a href="pricing.html" data-i18n="nav.pricing">Pricing</a>
+                <a href="sos-hotline.html" data-i18n="nav.sos_hotline">SOS Hotline</a>
             </div>
 
             <div class="footer__column">
-                <h4>Company</h4>
-                <a href="about.html">About</a>
-                <a href="partner.html">Partner</a>
-                <a href="https://anchor.reviewmyemails.com/security-page.html">Security</a>
+                <h4 data-i18n="footer.company">Company</h4>
+                <a href="about.html" data-i18n="nav.about">About</a>
+                <a href="partner.html" data-i18n="nav.partner">Partner</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html" data-i18n="footer.security">Security</a>
             </div>
 
             <div class="footer__column">
-                <h4>Contact</h4>
+                <h4 data-i18n="footer.contact">Contact</h4>
                 <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
             </div>
 
             <div class="footer__bottom">
-                <span>© 2026 Review My Emails. All rights reserved.</span>
-                <span>Privacy Policy · Terms</span>
+                <span data-i18n="footer.copyright">© 2026 Review My Emails. All rights reserved.</span>
+                <span data-i18n="footer.legal">Privacy Policy · Terms</span>
             </div>
         </div>
     </footer>
@@ -1169,40 +1169,40 @@
     <div class="contact-modal" id="contactModal">
         <div class="contact-modal__content">
             <div class="contact-modal__header">
-                <h3 class="contact-modal__title">SOS Hotline</h3>
-                <button class="contact-modal__close" onclick="closeContactModal()">&times;</button>
+                <h3 class="contact-modal__title" data-i18n="sos.modal_title">SOS Hotline</h3>
+                <button class="contact-modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">&times;</button>
             </div>
             <div class="contact-modal__body">
-                <p class="contact-modal__subtitle">Tell us what's going on and we'll get back to you within 24-48 hours.</p>
+                <p class="contact-modal__subtitle" data-i18n="sos.modal_subtitle">Tell us what's going on and we'll get back to you within 24-48 hours.</p>
                 <form id="contactForm" onsubmit="submitContactForm(event)">
                     <input type="hidden" id="contactSource" value="">
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Name *</label>
-                        <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name">
+                        <label class="contact-modal__label" data-i18n="form.name_label">Name *</label>
+                        <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="form.name_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Email *</label>
-                        <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com">
+                        <label class="contact-modal__label" data-i18n="form.email_label">Email *</label>
+                        <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="form.email_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Timezone (optional)</label>
+                        <label class="contact-modal__label" data-i18n="form.timezone_label">Timezone (optional)</label>
                         <select class="contact-modal__select" id="contactTimezone">
-                            <option value="">Select your timezone</option>
-                            <option value="America/New_York">Eastern Time (ET)</option>
-                            <option value="America/Chicago">Central Time (CT)</option>
-                            <option value="America/Denver">Mountain Time (MT)</option>
-                            <option value="America/Los_Angeles">Pacific Time (PT)</option>
-                            <option value="Europe/London">London (GMT/BST)</option>
-                            <option value="Europe/Paris">Central European Time</option>
-                            <option value="Asia/Singapore">Singapore Time</option>
-                            <option value="Australia/Sydney">Australian Eastern Time</option>
+                            <option value="" data-i18n="form.timezone_select">Select your timezone</option>
+                            <option value="America/New_York" data-i18n="form.tz_eastern">Eastern Time (ET)</option>
+                            <option value="America/Chicago" data-i18n="form.tz_central">Central Time (CT)</option>
+                            <option value="America/Denver" data-i18n="form.tz_mountain">Mountain Time (MT)</option>
+                            <option value="America/Los_Angeles" data-i18n="form.tz_pacific">Pacific Time (PT)</option>
+                            <option value="Europe/London" data-i18n="form.tz_london">London (GMT/BST)</option>
+                            <option value="Europe/Paris" data-i18n="form.tz_cet">Central European Time</option>
+                            <option value="Asia/Singapore" data-i18n="form.tz_singapore">Singapore Time</option>
+                            <option value="Australia/Sydney" data-i18n="form.tz_sydney">Australian Eastern Time</option>
                         </select>
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">What's going on? *</label>
-                        <textarea class="contact-modal__textarea" id="contactMessage" required placeholder="What's your email question?"></textarea>
+                        <label class="contact-modal__label" data-i18n="sos.modal_message_label">What's going on? *</label>
+                        <textarea class="contact-modal__textarea" id="contactMessage" required placeholder="What's your email question?" data-i18n-placeholder="sos.modal_message_placeholder"></textarea>
                     </div>
-                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn">Send to SOS Hotline</button>
+                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="sos.modal_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Send to SOS Hotline</button>
                 </form>
             </div>
         </div>
@@ -1228,7 +1228,7 @@
             const timezone = document.getElementById('contactTimezone').value;
             const message = document.getElementById('contactMessage').value.trim();
             const source = document.getElementById('contactSource').value;
-            btn.disabled = true; btn.textContent = 'Sending...';
+            btn.disabled = true; btn.textContent = btn.dataset.i18nSending || 'Sending...';
             try {
                 const response = await fetch('/api/contact-request', {
                     method: 'POST',
@@ -1237,12 +1237,14 @@
                 });
                 const data = await response.json();
                 if (data.success) {
-                    document.querySelector('.contact-modal__body').innerHTML = '<div class="contact-modal__success"><div class="contact-modal__success-icon">✓</div><div class="contact-modal__success-title">Message Received</div><p class="contact-modal__success-text">We\'ll get back to you within 24-48 hours.</p></div>';
+                    document.querySelector('.contact-modal__body').innerHTML = '<div class="contact-modal__success"><div class="contact-modal__success-icon">✓</div><div class="contact-modal__success-title" data-i18n="ui.message_received">Message Received</div><p class="contact-modal__success-text" data-i18n="ui.response_time">We\'ll get back to you within 24-48 hours.</p></div>';
                     va('event', { name: 'Contact_Form_Submitted', data: { source, page: 'sos-hotline' } });
                 } else { throw new Error(data.error || 'Failed to submit'); }
-            } catch (error) { console.error('Contact form error:', error); btn.disabled = false; btn.textContent = 'Try Again'; }
+            } catch (error) { console.error('Contact form error:', error); btn.disabled = false; btn.textContent = btn.dataset.i18nRetry || 'Try Again'; }
         }
     </script>
 
+    <!-- i18n Translation Loader -->
+    <script src="/js/i18n.js"></script>
 </body>
 </html>

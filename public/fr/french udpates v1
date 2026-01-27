@@ -1,0 +1,260 @@
+Key,Page,Section,English,French,Notes
+home.title,homepage,META & SEO,Review My Emails | Email List Cleaning That Tells You What to Do,Review My Emails | Audit et Nettoyage de Liste Email,"DNT ""Review My Emails"""
+home.meta_desc,homepage,META & SEO,"Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do. Clear labels: Keep, Monitor, Suppress. With the reasoning behind each one.","Les outils de validation voient des adresses. Nous voyons des patterns et des risques de délivrabilité. Ce n'est pas juste une validation : c'est une analyse humaine qui vous dit exactement quoi faire (Keep, Monitor, Suppress).",DNT Keep/Monitor/Suppress
+home.og_title,homepage,META & SEO,Review My Emails | Email List Cleaning That Tells You What to Do,Review My Emails | Nettoyage de Liste Email Qui Vous Dit Quoi Faire,"Same as title, for social sharing"
+home.og_desc,homepage,META & SEO,"Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.",Les outils de validation voient des adresses. Nous voyons des patterns. Nous identifions le risque et vous disons exactement quelle est la prochaine étape.,For social sharing
+home.hero_badge,homepage,HERO,By Yanna-Torry Aspraki,Par Yanna-Torry Aspraki,DNT name
+home.hero_headline_1,homepage,HERO,Stop guessing what is wrong with your list.,Arrêtez de deviner ce qui ne va pas avec votre liste.,First line of headline
+home.hero_headline_2,homepage,HERO,We find the problems tools miss.,Nous trouvons les problèmes qui échappent aux outils.,"Second line, highlighted"
+home.hero_subhead,homepage,HERO,"Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.","Les outils de validation ne voient que des adresses. Nous analysons les patterns et le risque, en vous disant exactement quoi faire.",
+home.cta_primary,homepage,HERO,Get My List Cleaned,Nettoyer Ma Liste,Main CTA button
+home.hero_bridge,homepage,HERO,Most email inboxing and deliverability problems trace back to list quality.,La plupart des problèmes de délivrabilité et d'inbox viennent de la qualité de la liste.,
+home.hero_quiz_prefix,homepage,HERO,Not sure yet?,Pas encore sûr ?,
+home.hero_quiz_link,homepage,HERO,Take the 2-minute risk check,Faites le test de risque en 2 minutes,
+home.symptoms_title,homepage,SYMPTOMS,Sound familiar?,Ça vous dit quelque chose ?,Section title
+home.symptoms_subtitle,homepage,SYMPTOMS,You're not alone. These are the patterns we see every day.,Vous n'êtes pas seul. Ce sont les patterns que nous voyons chaque jour.,
+home.symptom_1,homepage,SYMPTOMS,<strong>No idea</strong> where half this list came from.,<strong>Aucune idée</strong> d'où vient la moitié de cette liste.,Bold: No idea
+home.symptom_2,homepage,SYMPTOMS,One tool says <strong>clean</strong>. Another says <strong>risky</strong>.,Un outil dit <strong>propre</strong>. Un autre dit <strong>risqué</strong>. Vous êtes dans le flou.,"Bold: clean, risky"
+home.symptom_3,homepage,SYMPTOMS,"<strong>Scared to remove</strong> subscribers, even the ones who never open.","<strong>Peur de supprimer</strong> des abonnés, même ceux qui n'ouvrent jamais.",Bold: Scared to remove
+home.symptom_4,homepage,SYMPTOMS,Haven't emailed this list in <strong>months</strong>. Afraid to restart.,Pas d'envoi sur cette liste depuis des <strong>mois</strong>. Peur de recommencer.,Bold: months
+home.symptom_5,homepage,SYMPTOMS,Paid for list cleaning <strong>yesterday</strong>. Bounces <strong>today</strong>.,"L'outil vous avait donné le <strong>feu vert</strong>. Les résultats, <strong>non</strong>.","Bold: yesterday, today"
+home.symptom_6,homepage,SYMPTOMS,Open rates <strong>dropped</strong> and nobody can explain why.,Les taux d'ouverture ont <strong>chuté</strong> et personne ne peut expliquer pourquoi.,Bold: dropped
+home.symptom_7,homepage,SYMPTOMS,List keeps <strong>growing</strong>. Revenue <strong>doesn't</strong>.,La liste continue de <strong>grandir</strong>. Les revenus <strong>non</strong>.,"Bold: growing, doesn't"
+home.symptom_8,homepage,SYMPTOMS,"Emails <strong>not inboxing</strong> anymore, going to spam or nowhere at all.","Les emails <strong>n'arrivent plus en boîte de réception</strong>, ils vont en spam ou nulle part.",Bold: not inboxing
+home.crisis_title,homepage,CRISIS,Crisis Mode?,Sur une blocklist? Avertissement ESP? Réputation en chute?,Box title
+home.crisis_subtitle,homepage,CRISIS,"If any of these are true, start here.","Si l'un de ces cas est vrai, commencez ici.",
+home.crisis_item_1,homepage,CRISIS,ESP sent a compliance warning or paused your sending.,L'ESP a envoyé un avertissement de conformité ou a mis en pause vos envois.,
+home.crisis_item_2,homepage,CRISIS,"Blocklisted, or you think you might be.","Sur une blocklist, ou vous pensez que vous pourriez y être.",
+home.crisis_item_3,homepage,CRISIS,Last send spiked bounces. Now everyone's afraid to send again.,Le dernier envoi a fait exploser les bounces. Maintenant tout le monde a peur d'envoyer à nouveau.,
+home.crisis_cta,homepage,CRISIS,Email the SOS Hotline,Obtenir de l'Aide d'Urgence,DNT SOS Hotline
+home.steps_title,homepage,STEPS,How we actually work,Comment nous travaillons vraiment,
+home.steps_subtitle,homepage,STEPS,Simple process. Expert execution. Real results.,Processus simple. Exécution experte. Résultats réels.,
+home.step1_number,homepage,STEPS,Step 01,Étape 01,
+home.step1_title,homepage,STEPS,Send us your list,Importez votre liste,
+home.step1_desc,homepage,STEPS,"CSV, Excel, whatever you have. We've seen it all. No judgment, no questions.","CSV ou Excel. Nous acceptons tout. Pas de jugement, pas de questions.",
+home.step2_number,homepage,STEPS,Step 02,Étape 02,
+home.step2_title,homepage,STEPS,We review every address,Nous l'examinons manuellement,
+home.step2_desc,homepage,STEPS,"One by one. Looking for bounces, spam traps, disposables, and reputation killers.","Un par un. Nous cherchons les bounces, spam traps et tout ce qui détruit votre réputation. Résultats en 24-48h.",
+home.step3_number,homepage,STEPS,Step 03,Étape 03,
+home.step3_title,homepage,STEPS,Get your clean list back,Recevez votre liste propre,
+home.step3_desc,homepage,STEPS,With clear labels and a report. You'll know exactly what to do with each address.,Chaque adresse avec une étiquette. Rapport complet. Vous saurez exactement quoi faire avec chaque contact.,
+home.steps_whisper,homepage,STEPS,No outsourcing. No AI guesswork. Just experienced eyes on every list.,Pas d'externalisation. Pas de devinettes IA. Juste des yeux expérimentés sur chaque liste.,Small text at bottom
+home.pullquote_text,homepage,TESTIMONIAL,"""She cleaned and organized our database with incredible efficiency and set us up for long-term success.""","""Elle a nettoyé et organisé notre base de données avec une efficacité incroyable et nous a préparés pour un succès à long terme.""",
+home.pullquote_author,homepage,TESTIMONIAL,"Sam Cande, UK","Sam Cande, UK",
+home.manifesto_text,homepage,MANIFESTO,You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened. That's the gap between validation and understanding.,"Vous avez probablement déjà utilisé un outil de validation. Il affichait 95% valide. Vous avez envoyé. Et vous avez eu des bounces. C'est ça, le fossé entre validation et compréhension.",
+home.features_title,homepage,FEATURES,What you actually get,Ce que vous recevez vraiment,
+home.feature1_title,homepage,FEATURES,Clear action labels,Étiquettes d'action claires,
+home.feature1_desc,homepage,FEATURES,"Every email marked Keep, Monitor, or Suppress. No ambiguity, no guessing what to do next.","Chaque email marqué Keep, Monitor ou Suppress. Pas d'ambiguïté, pas de doute sur quoi faire ensuite.",DNT Keep/Monitor/Suppress
+home.feature2_title,homepage,FEATURES,Detailed reasoning,Raisonnement détaillé,
+home.feature2_desc,homepage,FEATURES,"Not just 'risky', we tell you why. Spam trap patterns, domain issues, behavioral signals.","Pas juste 'risqué', nous vous disons pourquoi. Patterns de spam trap, problèmes de domaine, signaux comportementaux.",
+home.feature3_title,homepage,FEATURES,Expert interpretation included,Interprétation experte incluse,
+home.feature3_desc,homepage,FEATURES,"Not just data, context. Every list review includes a walkthrough of your results. I explain what I found, what it means, and exactly what to do next.","Pas juste des données, du contexte. Chaque audit inclut une explication des résultats. J'explique ce que j'ai trouvé, ce que ça signifie et les prochaines étapes.",
+home.quiz_cta_title,homepage,QUIZ CTA,Not sure if your list needs this?,Pas sûr si votre liste en a besoin ?,
+home.quiz_cta_subtext,homepage,QUIZ CTA,"Take a 2-minute self-assessment. Four questions about how you built your list, and we'll tell you what risk level you're probably at.","Faites une auto-évaluation de 2 minutes. Quatre questions sur comment vous avez construit votre liste, et nous vous dirons à quel niveau de risque vous êtes probablement.",
+home.quiz_cta_button,homepage,QUIZ CTA,Take the 2-Minute Risk Check,Faites le Test de Risque en 2 Minutes,
+home.testimonials_title,homepage,TESTIMONIALS,People who trusted us,Personnes qui nous ont fait confiance,
+home.testimonials_subtitle,homepage,TESTIMONIALS,Real feedback from real senders.,Retours réels d'expéditeurs réels.,
+home.testimonial1_name,homepage,TESTIMONIALS,Megan S.,Megan S.,
+home.testimonial1_role,homepage,TESTIMONIALS,UK,UK,
+home.testimonial1_quote,homepage,TESTIMONIALS,"""The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call.""","""Le SOS Hotline m'a donné des conseils extrêmement utiles. Yanna-Torry a nettoyé notre liste et nous a soutenus au-delà des attentes.""","DNT SOS Hotline, Yanna-Torry"
+home.testimonial2_name,homepage,TESTIMONIALS,Chris Mead,Chris Mead,
+home.testimonial2_role,homepage,TESTIMONIALS,UK,UK,
+home.testimonial2_quote,homepage,TESTIMONIALS,"""Real human expertise. Tailor-made solutions. Not an AI tool.""","""Une vraie expertise humaine. Des solutions sur mesure. Pas un outil IA.""",
+home.testimonial3_name,homepage,TESTIMONIALS,Adeola Sole,Adeola Sole,
+home.testimonial3_role,homepage,TESTIMONIALS,UK,UK,
+home.testimonial3_quote,homepage,TESTIMONIALS,"""RME provides deep insights our ESP misses and helped us segment smarter.""","""RME fournit des insights profonds que notre ESP manque et nous a aidés à segmenter plus intelligemment.""","DNT RME, ESP"
+home.final_title,homepage,FINAL CTA,Ready to know what's in your list?,Prêt à voir ce qu'il y a vraiment dans votre liste?,
+home.final_subtext,homepage,FINAL CTA,"Send us your list. We'll tell you exactly what's safe to send, what needs watching, and what will hurt you.","Envoyez-nous votre liste. Nous vous dirons exactement ce qui est sûr à envoyer, ce qui nécessite surveillance et ce qui vous nuira.",
+home.final_cta,homepage,FINAL CTA,Get My List Cleaned,Nettoyer ma liste,
+home.final_footer,homepage,FINAL CTA,Most lists returned within 24 hours.,La plupart des listes sont retournées sous 24 heures.,
+modal.contact_title,common,CONTACT MODAL,Get in Touch,Contactez-nous,
+modal.contact_subtitle,common,CONTACT MODAL,Tell us what you're working on. We'll get back to you within one business day.,Dites-nous sur quoi vous travaillez. Nous vous répondrons sous un jour ouvré.,
+modal.form_name,common,CONTACT MODAL,Name,Nom,
+modal.form_email,common,CONTACT MODAL,Email,Email,
+modal.form_timezone,common,CONTACT MODAL,Timezone,Fuseau horaire,
+modal.form_timezone_placeholder,common,CONTACT MODAL,Select your timezone (optional),Sélectionnez votre fuseau horaire (optionnel),
+modal.form_message,common,CONTACT MODAL,Message,Message,
+modal.form_message_placeholder,common,CONTACT MODAL,What can we help you with?,Comment pouvons-nous vous aider ?,
+modal.form_message_helper,common,CONTACT MODAL,Optional - but helps us prepare for the conversation.,Optionnel - mais nous aide à préparer la conversation.,
+modal.form_submit,common,CONTACT MODAL,Send Message,Envoyer le Message,
+modal.success_title,common,CONTACT MODAL,Message Sent!,Message Envoyé !,
+modal.success_message,common,CONTACT MODAL,We'll get back to you within one business day.,Nous vous répondrons sous un jour ouvré.,
+modal.timezone_pt,common,CONTACT MODAL,Pacific Time (PT),Heure du Pacifique (PT),
+modal.timezone_mt,common,CONTACT MODAL,Mountain Time (MT),Heure des Rocheuses (MT),
+modal.timezone_ct,common,CONTACT MODAL,Central Time (CT),Heure Centrale (CT),
+modal.timezone_et,common,CONTACT MODAL,Eastern Time (ET),Heure de l'Est (ET),
+modal.timezone_gmt,common,CONTACT MODAL,GMT / UTC,GMT / UTC,
+modal.timezone_cet,common,CONTACT MODAL,Central European Time (CET),Heure d'Europe Centrale (CET),
+modal.timezone_other,common,CONTACT MODAL,Other,Autre,
+modal.form_sending,common,CONTACT MODAL,Sending...,Envoi en cours...,
+modal.form_try_again,common,CONTACT MODAL,Try Again,Réessayer,
+modal.form_error,common,CONTACT MODAL,Something went wrong. Please try again or email us directly at ahoy@reviewmyemails.com,Une erreur s'est produite. Veuillez réessayer ou nous envoyer un email à ahoy@reviewmyemails.com,
+modal.request_received,common,CONTACT MODAL,Request Received,Demande Reçue,
+modal.timezone_london,common,CONTACT MODAL,London (GMT/BST),Londres (GMT/BST),
+modal.timezone_singapore,common,CONTACT MODAL,Singapore Time,Heure de Singapour,
+modal.timezone_sydney,common,CONTACT MODAL,Australian Eastern Time,Heure de l'Est Australien,
+modal.timezone_alaska,common,CONTACT MODAL,Alaska Time,Heure de l'Alaska,
+modal.timezone_hawaii,common,CONTACT MODAL,Hawaii Time,Heure d'Hawaï,
+modal.timezone_eet,common,CONTACT MODAL,Eastern European Time,Heure d'Europe de l'Est,
+modal.timezone_gulf,common,CONTACT MODAL,Gulf Standard Time,Heure du Golfe,
+modal.timezone_india,common,CONTACT MODAL,India Standard Time,Heure de l'Inde,
+modal.timezone_japan,common,CONTACT MODAL,Japan Standard Time,Heure du Japon,
+modal.timezone_nz,common,CONTACT MODAL,New Zealand Time,Heure de Nouvelle-Zélande,
+ui.menu_open,common,UI,Open menu,Ouvrir le menu,Accessibility label
+ui.menu_close,common,UI,Close menu,Fermer le menu,Accessibility label
+nav.home,common,NAVIGATION,Home,Accueil,
+nav.how_it_works,common,NAVIGATION,How It Works,Comment Ça Marche,
+nav.pricing,common,NAVIGATION,Pricing,Tarifs,
+nav.sos_hotline,common,NAVIGATION,SOS Hotline,SOS Hotline,DNT SOS Hotline
+nav.about,common,NAVIGATION,About,À Propos,
+nav.partner,common,NAVIGATION,Partner,Partenaires,
+nav.quiz,common,NAVIGATION,Free Quiz,Quiz Gratuit,
+nav.audit,common,NAVIGATION,Self-Audit,Auto-Audit,
+nav.cta,common,NAVIGATION,Get My List Cleaned,Nettoyer ma liste,
+footer.tagline,common,FOOTER,We see what algorithms can't.,Nous voyons ce que les algorithmes ne voient pas.,
+footer.services,common,FOOTER,Services,Services,
+footer.company,common,FOOTER,Company,Entreprise,
+footer.contact,common,FOOTER,Contact,Contact,
+footer.security,common,FOOTER,Security,Sécurité,
+footer.copyright,common,FOOTER,© 2026 Review My Emails. All rights reserved.,© 2026 Review My Emails. Tous droits réservés.,DNT brand
+footer.privacy,common,FOOTER,Privacy Policy,Confidentialité,
+footer.terms,common,FOOTER,Terms,Conditions,
+lang.select,common,LANGUAGE,Language,Langue,
+lang.current_en,common,LANGUAGE,Language: English,Langue: Français,
+ui.loading,common,UI,Loading...,Chargement...,
+ui.submit,common,UI,Submit,Soumettre,
+ui.cancel,common,UI,Cancel,Annuler,
+ui.close,common,UI,Close,Fermer,
+ui.learn_more,common,UI,Learn More,En Savoir Plus,
+ui.view_details,common,UI,View Details,Voir les Détails,
+ui.success,common,UI,Success!,Succès!,
+ui.error,common,UI,Something went wrong. Please try again.,Quelque chose s'est mal passé. Veuillez réessayer.,
+ui.required,common,UI,Required,Requis,
+og.headline,common,OG IMAGE,Stop guessing what's wrong with your list,Arrêtez de deviner ce qui ne va pas avec votre liste,Main text on OG image
+og.subhead,common,OG IMAGE,We find the problems tools miss,Nous trouvons les problèmes que les outils manquent,Secondary text
+og.tagline,common,OG IMAGE,Expert Email List Cleaning,Nettoyage de Liste Email Expert,Bottom tagline
+easter.fish_message,common,EASTER EGG,You found me! Here's 20% off your first order.,Vous m'avez trouvé ! Voici 20% de réduction sur votre première commande.,Optional
+easter.fish_coupon,common,EASTER EGG,Coupon: DEEPDIVE20,Coupon: DEEPDIVE20,DNT coupon code
+easter.exit_button,common,EASTER EGG,Return to Surface,Retour à la Surface,
+easter.hint,common,EASTER EGG,Something is swimming in the deep...,Quelque chose nage dans les profondeurs...,
+about.title,about,HERO,About,À Propos,
+about.subtitle,about,HERO,The person behind Review My Emails.,La personne derrière Review My Emails.,DNT Review My Emails
+about.name,about,BIO,Yanna-Torry Aspraki,Yanna-Torry Aspraki,DNT name
+about.role,about,BIO,"Founder, Review My Emails","Fondatrice, Review My Emails",DNT Review My Emails
+about.bio_p1,about,BIO,"I started Review My Emails because I kept seeing the same problem. Marketers would run their lists through validation tools, get a clean bill of health, and then watch their deliverability tank anyway.","J'ai créé Review My Emails parce que je voyais sans cesse le même problème. Les marketeurs passaient leurs listes dans des outils de validation, obtenaient un certificat de bonne santé, puis voyaient leur délivrabilité s'effondrer quand même.",DNT Review My Emails
+about.bio_p2,about,BIO,The tools were not lying. They just were not telling the whole story.,Les outils ne mentaient pas. Ils ne racontaient simplement pas toute l'histoire.,
+about.bio_p3,about,BIO,"Validation checks if an address exists. It does not check if sending there is safe. It does not know about complaint histories, engagement patterns, or domain-level risk signals that accumulate over time.","La validation vérifie si une adresse existe. Elle ne vérifie pas s'il est sûr d'y envoyer. Elle ne connaît pas les historiques de plaintes, les modèles d'engagement ou les signaux de risque au niveau du domaine qui s'accumulent au fil du temps.",
+about.bio_p4,about,BIO,"I spent years in email deliverability, working with senders of all sizes. I learned that list health is not binary. An address can be technically valid and still damage your reputation. The question is not ""will this bounce?"" but ""should I send here?""","J'ai passé des années dans la délivrabilité email, travaillant avec des expéditeurs de toutes tailles. J'ai appris que la santé d'une liste n'est pas binaire. Une adresse peut être techniquement valide et quand même nuire à votre réputation. La question n'est pas ""est-ce que ça va rebondir ?"" mais ""dois-je envoyer ici ?""",
+about.bio_p5,about,BIO,"That is what Review My Emails answers. Every address gets labeled Keep, Monitor, or Suppress. And every label comes with the reasoning behind it. No black boxes. No guessing.","C'est ce que Review My Emails répond. Chaque adresse reçoit une étiquette Keep, Monitor ou Suppress. Et chaque étiquette vient avec le raisonnement derrière. Pas de boîtes noires. Pas de devinettes.","DNT Review My Emails, Keep, Monitor, Suppress"
+about.bio_p6,about,BIO,"If you have questions about your list or your deliverability, I am happy to talk. That is what the SOS Hotline is for.","Si vous avez des questions sur votre liste ou votre délivrabilité, je suis ravie d'en parler. C'est pour ça que le SOS Hotline existe.",DNT SOS Hotline
+about.cta_title,about,CTA,Questions?,Questions ?,
+about.cta_subtitle,about,CTA,Talk through your situation. No pitch. Just answers.,Discutez de votre situation. Pas de pitch. Juste des réponses.,
+about.cta_sos,about,CTA,Learn About SOS Hotline,Découvrir le SOS Hotline,DNT SOS Hotline
+about.cta_pricing,about,CTA,See Pricing,Voir les Tarifs,
+about.team_title,about,TEAM,The Team,L'Équipe,
+about.team_subtitle,about,TEAM,Need a hand (or eight)? We have got you covered.,Besoin d'un coup de main (ou huit) ? On vous couvre.,
+about.team_contact,about,TEAM,Get in touch:,Contactez-nous :,
+about.modal_title,about,MODAL,Get in Touch,Contactez-Nous,
+about.modal_subtitle,about,MODAL,Tell us what you're working on. We'll get back to you within one business day.,Dites-nous sur quoi vous travaillez. Nous vous répondrons dans un jour ouvrable.,
+about.modal_success,about,MODAL,Message Sent!,Message Envoyé !,
+dfy.hero_title,done-for-you,HERO,Validators check addresses. I read risk.,"Les validateurs vérifient les adresses. Moi, je lis le risque.",
+dfy.hero_subtitle,done-for-you,HERO,"Your list isn't broken. The assumptions behind it are. I read lists the way experience taught me, not the way software defaults to.","Votre liste n'est pas cassée. Ce sont les hypothèses derrière elle qui le sont. Je lis les listes comme l'expérience me l'a appris, pas comme le logiciel le fait par défaut.",
+dfy.hero_cta,done-for-you,HERO,Get My List Cleaned,Faire Nettoyer Ma Liste,
+dfy.hero_cta_secondary,done-for-you,HERO,Contact Us First,Contactez-Nous D'abord,
+dfy.output_title,done-for-you,OUTPUT,What You Get Back,Ce Que Vous Recevez,
+dfy.output_subtitle,done-for-you,OUTPUT,"Your list sorted into three buckets, with the labels and reasoning behind each decision.","Votre liste triée en trois catégories, avec les étiquettes et le raisonnement derrière chaque décision.",
+dfy.output_safe,done-for-you,OUTPUT,Safe to Mail,Sûr à Envoyer,
+dfy.output_safe_desc,done-for-you,OUTPUT,"No flags found. Domain checks out, validation passed, no risk signals. These are clear to send.","Aucun signal d'alerte trouvé. Domaine vérifié, validation passée, pas de signaux de risque. Ceux-ci sont prêts à envoyer.",
+dfy.output_yellow,done-for-you,OUTPUT,Yellow Flags,Alertes Jaunes,
+dfy.output_yellow_desc,done-for-you,OUTPUT,Each address comes with specific labels explaining why it landed here. Context matters. How you segment and send to these decides the outcome.,Chaque adresse vient avec des étiquettes spécifiques expliquant pourquoi elle est ici. Le contexte compte. Comment vous segmentez et envoyez à celles-ci détermine le résultat.,
+dfy.output_donotmail,done-for-you,OUTPUT,Do Not Mail,Ne Pas Envoyer,
+dfy.output_donotmail_desc,done-for-you,OUTPUT,"Each address comes with specific labels explaining why. Invalid, trap-likely, disposable, or other risk signals. Don't send here.","Chaque adresse vient avec des étiquettes spécifiques expliquant pourquoi. Invalide, piège probable, jetable ou autres signaux de risque. N'envoyez pas ici.",
+dfy.output_note,done-for-you,OUTPUT,You also get the validation and DNS data that informed each decision. Not just buckets. The full picture.,Vous recevez aussi les données de validation et DNS qui ont informé chaque décision. Pas juste des catégories. L'image complète.,
+dfy.howread_title,done-for-you,HOW I READ,How I Read Your List,Comment Je Lis Votre Liste,
+dfy.howread_beyond,done-for-you,HOW I READ,I Look Beyond the Address,Je Regarde Au-Delà de l'Adresse,
+dfy.howread_beyond_desc,done-for-you,HOW I READ,"Domain behavior, history, and patterns across your entire list. Context, not just existence. An address that ""works"" can still be dangerous.","Comportement du domaine, historique et modèles sur toute votre liste. Le contexte, pas juste l'existence. Une adresse qui ""fonctionne"" peut quand même être dangereuse.",
+dfy.howread_miss,done-for-you,HOW I READ,I Check What Others Miss,Je Vérifie Ce Que Les Autres Manquent,
+dfy.howread_miss_desc,done-for-you,HOW I READ,"Traps, role accounts, toxic domains, disposable patterns. The things that don't bounce but still hurt you. I've learned what to look for.","Pièges, comptes de rôle, domaines toxiques, modèles jetables. Les choses qui ne rebondissent pas mais vous nuisent quand même. J'ai appris quoi chercher.",
+dfy.howread_reasoning,done-for-you,HOW I READ,I Explain My Reasoning,J'Explique Mon Raisonnement,
+dfy.howread_reasoning_desc,done-for-you,HOW I READ,"Not just labels. You get the thinking behind each decision so you understand why, and can make smarter calls next time.","Pas juste des étiquettes. Vous obtenez la réflexion derrière chaque décision pour comprendre pourquoi, et pouvoir prendre de meilleures décisions la prochaine fois.",
+dfy.process_title,done-for-you,PROCESS,How It Works,Comment Ça Marche,
+dfy.process_subtitle,done-for-you,PROCESS,Simple process. Expert execution.,Processus simple. Exécution experte.,
+dfy.step1_title,done-for-you,PROCESS,Send Us Your List,Envoyez-Nous Votre Liste,
+dfy.step2_title,done-for-you,PROCESS,I Read Your List,Je Lis Votre Liste,
+dfy.step3_title,done-for-you,PROCESS,Get Labeled Results Back,Recevez les Résultats Étiquetés,
+dfy.step4_title,done-for-you,PROCESS,Optional: Book a Walkthrough Call,Optionnel : Réservez un Appel Explicatif,
+dfy.consult_title,done-for-you,CONSULTATION,Not Sure What You Need?,Pas Sûr De Ce Dont Vous Avez Besoin ?,
+dfy.consult_card,done-for-you,CONSULTATION,1:1 Call with YT,Appel 1:1 avec YT,DNT YT
+dfy.consult_cta,done-for-you,CONSULTATION,Book a Free Consultation,Réservez une Consultation Gratuite,
+dfy.whofor_title,done-for-you,WHO FOR,Who This Is For,Pour Qui Est-Ce,
+dfy.whofor_yes,done-for-you,WHO FOR,This Is For You If,C'est Pour Vous Si,
+dfy.whofor_no,done-for-you,WHO FOR,Not For You If,Ce N'est Pas Pour Vous Si,
+dfy.whofor_partner,done-for-you,WHO FOR,Connect With a Partner,Connectez-Vous Avec un Partenaire,
+dfy.pricing_title,done-for-you,PRICING,Pricing,Tarifs,
+dfy.notsure_title,done-for-you,PRICING,Not sure if you need this?,Pas sûr si vous en avez besoin ?,
+sos.badge,sos-hotline,HERO,"Free Service","Service SOS Gratuit",""
+sos.title,sos-hotline,HERO,"Email SOS Hotline","Email SOS Hotline","DNT SOS Hotline"
+sos.subtitle,sos-hotline,HERO,"Free expert guidance for anyone with an email question. No sales pitch. No catch. Just honest answers from a deliverability specialist who gets emails into inboxes for a living.","Conseils d'experts gratuits. Pas de vente, pas de piège. Juste des réponses honnêtes de ceux qui résolvent des problèmes de délivrabilité au quotidien.",""
+sos.cta,sos-hotline,HERO,"Contact the SOS Hotline","Contacter le SOS Hotline","DNT SOS Hotline"
+sos.note,sos-hotline,HERO,"Within 48 hours. Often sooner.","Sous 48 heures. Souvent plus tôt.",""
+sos.how_title,sos-hotline,HOW IT WORKS,"How It Works","Comment Ça Marche",""
+sos.testimonials_title,sos-hotline,TESTIMONIALS,"What People Say","Ce Que Disent Les Gens",""
+sos.why_title,sos-hotline,WHY FREE,"Why Is This Free?","Pourquoi Est-Ce Gratuit ?",""
+sos.why_free_p1,sos-hotline,WHY FREE,"We offer real help without charging because it is the right thing to do.","Nous offrons une aide réelle gratuitement, simplement parce que c'est la chose à faire.",""
+sos.why_free_p2,sos-hotline,WHY FREE,"We know that if you ever need a deep list review, you will remember who helped you when you were stuck. But that is for later. Right now, let's just fix your problem.","Nous savons que si un jour vous avez besoin d'un audit approfondi de liste, vous vous souviendrez de qui vous a aidé quand vous étiez bloqué. Mais ça, c'est pour plus tard. Pour l'instant, réglons juste votre problème.",""
+sos.more_title,sos-hotline,BRIDGE,"Need More Than Advice?","Besoin de Plus Que des Conseils ?",""
+sos.final_cta_subtext,sos-hotline,FINAL CTA,"Email us. Within 48 hours. Often sooner.","Envoyez-nous un email. Sous 48 heures. Souvent plus tôt.",""
+sos.final_cta_title,sos-hotline,FINAL CTA,"Ready to Ask Your Question?","Prêt à Poser Votre Question ?",""
+sos.how_step1,sos-hotline,HOW IT WORKS,"You send an email to the SOS Hotline","Vous envoyez un email au SOS Hotline","DNT SOS Hotline"
+sos.how_step2,sos-hotline,HOW IT WORKS,"You receive an automatic reply confirming we got it","Vous recevez une réponse automatique confirmant que nous l'avons reçu",""
+sos.how_step3,sos-hotline,HOW IT WORKS,"YT personally reads and responds within 48 hours","Yanna-Torry lit personnellement et répond sous 48 heures","DNT YT"
+sos.topic_career_advice,sos-hotline,TOPICS,"Career advice","Conseils de carrière",""
+sos.topic_deliverability,sos-hotline,TOPICS,"Deliverability","Délivrabilité","DNT Deliverability"
+sos.topic_bounces,sos-hotline,TOPICS,"Bounces","Bounces","DNT Bounces"
+sos.topic_blocklists,sos-hotline,TOPICS,"Blocklists","Blocklists","DNT Blocklists"
+sos.topic_open_rates,sos-hotline,TOPICS,"Open rates","Taux d'ouverture","DNT Open rates"
+sos.topic_esp_migration,sos-hotline,TOPICS,"ESP migration","Migration ESP","DNT ESP"
+sos.topic_warmup,sos-hotline,TOPICS,"Warmup","Warmup","DNT Warmup"
+sos.topic_list_cleaning,sos-hotline,TOPICS,"List cleaning","Nettoyage de liste",""
+sos.more_dfy,sos-hotline,BRIDGE,"Done-For-You Review","Audit Clé en Main",""
+sos.more_dfy_cta,sos-hotline,BRIDGE,"See What You Get","Voir Ce Que Vous Recevez",""
+sos.more_expert,sos-hotline,BRIDGE,"Expert Interpretation","Interprétation Experte",""
+sos.more_expert_cta,sos-hotline,BRIDGE,"See the Process","Voir le Processus",""
+sos.modal_title,sos-hotline,MODAL,"SOS Hotline","SOS Hotline","DNT SOS Hotline"
+sos.modal_subtitle,sos-hotline,MODAL,"Tell us what's going on and we'll get back to you within 24-48 hours.","Dites-nous ce qui se passe et nous reviendrons vers vous sous 24-48 heures.",""
+sos.modal_message_label,sos-hotline,MODAL,"What's going on?","Qu'est-ce qui se passe ?",""
+sos.modal_placeholder,sos-hotline,MODAL,"What's your email question?","Quelle est votre question email ?",""
+sos.modal_submit,sos-hotline,MODAL,"Send to SOS Hotline","Envoyer au SOS Hotline","DNT SOS Hotline"
+sos.modal_success,sos-hotline,MODAL,"Message Received","Message Reçu",""
+sos.modal_success_text,sos-hotline,MODAL,"We'll get back to you within 24-48 hours.","Nous reviendrons vers vous sous 24-48 heures.",""
+sos.topics_headline,sos-hotline,TOPICS,"If it touches email, we can help.","Si ça concerne l'email, nous pouvons aider.",""
+sos.topics_subhead,sos-hotline,TOPICS,"You do not need to be a client. You do not need to buy anything.","Vous n'avez pas besoin d'être client. Vous n'avez rien à acheter.",""
+sos.topics_footer,sos-hotline,TOPICS,"...and anything else you are wondering about.","...et tout ce que vous vous demandez d'autre.",""
+pricing.title,pricing,HERO,"Simple, Flat Pricing","Tarification Simple et Unique",""
+pricing.subtitle,pricing,HERO,"One price for everything. No hidden fees. No upsells.","Un prix pour tout. Pas de frais cachés. Pas de ventes additionnelles.",""
+pricing.card_title,pricing,PRICING CARD,"Comprehensive Audit","Audit Complet",""
+pricing.card_price,pricing,PRICING CARD,"$499","499 €",""
+pricing.card_desc,pricing,PRICING CARD,"For lists up to 100k contacts","Pour les listes jusqu'à 100k contacts",""
+pricing.feature_1,pricing,PRICING CARD,"Manual Human Review","Revue Humaine Manuelle",""
+pricing.feature_2,pricing,PRICING CARD,"Deep Pattern Analysis","Analyse Approfondie des Patterns",""
+pricing.feature_3,pricing,PRICING CARD,"Deliverability Risk Assessment","Évaluation des Risques de Délivrabilité",""
+pricing.feature_4,pricing,PRICING CARD,"Custom Action Plan","Plan d'Action Personnalisé",""
+pricing.feature_5,pricing,PRICING CARD,"30-min Strategy Call","Appel Stratégique de 30 min",""
+pricing.cta,pricing,PRICING CARD,"Get Started","Commencer",""
+pricing.guarantee,pricing,PRICING CARD,"100% Money Back Guarantee","Garantie Satisfait ou Remboursé à 100%",""
+pricing.faq_title,pricing,FAQ,"Common Questions","Questions Fréquentes",""
+pricing.faq_1_q,pricing,FAQ,"How long does it take?","Combien de temps cela prend-il ?",""
+pricing.faq_1_a,pricing,FAQ,"Usually 24-48 hours. We review every list manually.","Généralement 24-48 heures. Nous examinons chaque liste manuellement.",""
+pricing.faq_2_q,pricing,FAQ,"What if my list is larger?","Et si ma liste est plus grande ?",""
+pricing.faq_2_a,pricing,FAQ,"Contact us for a custom quote.","Contactez-nous pour un devis personnalisé.",""
+pricing.faq_3_q,pricing,FAQ,"Do you delete my data?","Supprimez-vous mes données ?",""
+pricing.faq_3_a,pricing,FAQ,"Yes. We delete all list data 30 days after delivery.","Oui. Nous supprimons toutes les données de liste 30 jours après la livraison.",""
+pricing.sos_title,pricing,SOS,"SOS Hotline","SOS Hotline","DNT SOS Hotline"
+pricing.sos_desc,pricing,SOS,"Free expert support for deliverability questions. No data touched. No list processed. Just honest answers.","Support délivrabilité gratuit. Nous ne touchons pas à vos données. Pas de traitement de liste. Juste des réponses honnêtes.",""
+pricing.sos_status,pricing,SOS,"Use it before, during, or after cleaning to understand your situation.","Utilisez-le avant, pendant ou après l'audit pour comprendre votre situation.",""
+pricing.sos_section_title,pricing,SOS,"SOS Email Hotline","SOS Email Hotline","DNT SOS Hotline"
+pricing.sos_free_help,pricing,SOS,"Free Email Help","Aide Email Gratuite",""
+pricing.sos_learn_more,pricing,SOS,"Learn More About SOS Hotline","En Savoir Plus Sur le SOS Hotline","DNT SOS Hotline"
+pricing.sos_section_intro,pricing,SOS,"Free email support for any email-related question.","Support email gratuit pour toute question liée à l'email.",""
+pricing.sos_card_desc,pricing,SOS,"Ask any email question. Get a real answer from a real expert. No sales pitch, no strings attached.","Posez n'importe quelle question email. Recevez une réponse d'expert. Pas de vente, sans engagement.",""
+pricing.sos_duration,pricing,SOS,"Response within 48 hours. Usually faster.","Réponse sous 48 heures. Souvent plus rapide.",""

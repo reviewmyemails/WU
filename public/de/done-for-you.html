@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Done-For-You Email List Cleaning | Review My Emails</title>
-    <meta name="description" content="Send us your list. We review every address and return it labeled: Keep, Monitor, or Suppress. With the specific reasoning behind each decision.">
+    <title>Review My Emails | Professionelle E-Mail-Listen-Bereinigung</title>
+    <meta name="description" content="Professionelle E-Mail-Listen-Bereinigung. Keine automatisierte Validation - praktische Analyse, die Spam-Traps, riskante Kontakte und Reputationskiller aufspürt.">
     <link rel="canonical" href="https://reviewmyemails.com/done-for-you/">
 
     <!-- Open Graph -->
@@ -381,6 +381,10 @@
             color: var(--color-muted);
             max-width: 500px;
             margin: 0 auto;
+        }
+
+        .section--dark .section__header h2 {
+            color: var(--color-white);
         }
 
         .section--dark .section__header p {
@@ -1142,15 +1146,15 @@
 
     <header class="header">
         <div class="header__inner">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
             <nav class="header__nav">
-                <a href="/done-for-you" class="header__link header__link--active">How It Works</a>
-                <a href="/pricing" class="header__link">Pricing</a>
-                <a href="/sos-hotline" class="header__link">SOS Hotline</a>
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get My List Cleaned</a>
-                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                <a href="done-for-you.html" class="header__link header__link--active" data-i18n="nav.how_it_works">So Funktioniert Es</a>
+                <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Preise</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">Meine Liste Bereinigen</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
             </nav>
@@ -1160,22 +1164,22 @@
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav__header">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
-            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
                 <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
         <div class="mobile-nav__links">
-            <a href="/done-for-you" class="mobile-nav__link">How It Works</a>
-            <a href="/pricing" class="mobile-nav__link">Pricing</a>
-            <a href="/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
-            <a href="/about" class="mobile-nav__link">About</a>
-            <a href="/partner" class="mobile-nav__link">Partner</a>
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">So Funktioniert Es</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Preise</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">Über Uns</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Partner</a>
         </div>
         <div class="mobile-nav__cta">
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get My List Cleaned</a>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.cta">Meine Liste Bereinigen</a>
         </div>
     </nav>
 
@@ -1185,11 +1189,11 @@
 
     <section class="hero">
         <div class="container">
-            <h1 class="hero__headline">Validators check addresses.<br>I read risk.</h1>
-            <p class="hero__subhead">Your list isn't broken. The assumptions behind it are. I read lists the way experience taught me, not the way software defaults to.</p>
+            <h1 class="hero__headline"><span data-i18n="dfy.hero_title">Validatoren prüfen Adressen. Ich lese Risiko.</span><br><span data-i18n="dfy.hero_subtitle">Ihre Liste ist nicht kaputt. Die Annahmen dahinter sind es. Ich lese Listen so, wie es mir die Erfahrung beigebracht hat, nicht so, wie Software standardmäßig funktioniert.</span></h1>
+            <p class="hero__subhead" data-i18n="dfy.hero_subtitle">Ihre Liste ist nicht kaputt. Die Annahmen dahinter sind es. Ich lese Listen so, wie es mir die Erfahrung beigebracht hat, nicht so, wie Software standardmäßig funktioniert.</p>
             <div class="hero__actions">
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
-                <button type="button" class="btn btn-secondary" onclick="openContactModal('hero-contact-us-first')">Contact Us First</button>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Meine Liste Bereinigen</a>
+                <button type="button" class="btn btn-secondary" onclick="openContactModal('hero-contact-us-first')" data-i18n="dfy.contact_first">Kontaktieren Sie uns zuerst</button>
             </div>
         </div>
     </section>
@@ -1201,31 +1205,31 @@
     <section class="section section--light" id="what-you-get">
         <div class="container">
             <div class="section__header">
-                <h2>What You Get Back</h2>
-                <p>Your list sorted into three buckets, with the labels and reasoning behind each decision.</p>
+                <h2 data-i18n="dfy.output_title">Was Sie zurückbekommen</h2>
+                <p data-i18n="dfy.output_subtitle">Ihre Liste sortiert in drei Kategorien, mit den Kennzeichnungen und der Begründung hinter jeder Entscheidung.</p>
             </div>
 
             <div class="output-grid">
                 <div class="output-card">
                     <span class="output-card__label output-card__label--keep">Keep</span>
-                    <h3>Safe to Mail</h3>
-                    <p>No flags found. Domain checks out, validation passed, no risk signals. These are clear to send.</p>
+                    <h3 data-i18n="dfy.keep_title">Sicher zum Versenden</h3>
+                    <p data-i18n="dfy.keep_desc">Keine Flags gefunden. Domain überprüft, Validierung bestanden, keine Risikosignale. Diese können sicher versendet werden.</p>
                 </div>
 
                 <div class="output-card">
                     <span class="output-card__label output-card__label--monitor">Monitor</span>
-                    <h3>Yellow Flags</h3>
-                    <p>Each address comes with specific labels explaining why it landed here. Context matters. How you segment and send to these decides the outcome.</p>
+                    <h3 data-i18n="dfy.monitor_title">Gelbe Flaggen</h3>
+                    <p data-i18n="dfy.monitor_desc">Jede Adresse kommt mit spezifischen Labels, die erklären, warum sie hier gelandet ist. Kontext ist wichtig.</p>
                 </div>
 
                 <div class="output-card">
                     <span class="output-card__label output-card__label--suppress">Suppress</span>
-                    <h3>Do Not Mail</h3>
-                    <p>Each address comes with specific labels explaining why. Invalid, trap-likely, disposable, or other risk signals. Don't send here.</p>
+                    <h3 data-i18n="dfy.suppress_title">Nicht senden</h3>
+                    <p data-i18n="dfy.suppress_desc">Jede Adresse kommt mit spezifischen Labels, die erklären warum. Ungültig, wahrscheinlich Falle, Wegwerf oder andere Risikosignale. Nicht hierhin senden.</p>
                 </div>
             </div>
 
-            <p class="output-note">You also get the validation and DNS data that informed each decision. Not just buckets. The full picture.</p>
+            <p class="output-note" data-i18n="dfy.output_note">Sie erhalten auch die Validierungs- und DNS-Daten, die jede Entscheidung informiert haben. Nicht nur Kategorien. Das vollständige Bild.</p>
         </div>
     </section>
 
@@ -1236,7 +1240,7 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>How I Read Your List</h2>
+                <h2 data-i18n="dfy.how_read_title">Wie ich Ihre Liste lese</h2>
             </div>
 
             <div class="included-list">
@@ -1249,8 +1253,8 @@
                         </svg>
                     </div>
                     <div class="included-item__content">
-                        <h3>I Look Beyond the Address</h3>
-                        <p>Domain behavior, history, and patterns across your entire list. Context, not just existence. An address that "works" can still be dangerous.</p>
+                        <h3 data-i18n="dfy.read1_title">Ich schaue über die Adresse hinaus</h3>
+                        <p data-i18n="dfy.read1_desc">Domain-Verhalten, Geschichte und Muster in Ihrer gesamten Liste. Kontext, nicht nur Existenz.</p>
                     </div>
                 </div>
 
@@ -1261,8 +1265,8 @@
                         </svg>
                     </div>
                     <div class="included-item__content">
-                        <h3>I Check What Others Miss</h3>
-                        <p>Traps, role accounts, toxic domains, disposable patterns. The things that don't bounce but still hurt you. I've learned what to look for.</p>
+                        <h3 data-i18n="dfy.read2_title">Ich prüfe, was andere übersehen</h3>
+                        <p data-i18n="dfy.read2_desc">Fallen, Rollenkonten, toxische Domains, Wegwerf-Muster. Die Dinge, die nicht bouncen, aber Ihnen trotzdem schaden.</p>
                     </div>
                 </div>
 
@@ -1274,8 +1278,8 @@
                         </svg>
                     </div>
                     <div class="included-item__content">
-                        <h3>I Explain My Reasoning</h3>
-                        <p>Not just labels. You get the thinking behind each decision so you understand why, and can make smarter calls next time.</p>
+                        <h3 data-i18n="dfy.read3_title">Ich erkläre meine Überlegung</h3>
+                        <p data-i18n="dfy.read3_desc">Nicht nur Labels. Sie bekommen die Überlegung hinter jeder Entscheidung, damit Sie verstehen warum.</p>
                     </div>
                 </div>
             </div>
@@ -1289,40 +1293,40 @@
     <section class="section section--dark" id="how-it-works">
         <div class="container">
             <div class="section__header">
-                <h2>How It Works</h2>
-                <p>Simple process. Expert execution.</p>
+                <h2 data-i18n="dfy.process_title">So funktioniert es</h2>
+                <p data-i18n="dfy.process_subtitle">Einfacher Prozess. Professionelle Ausführung.</p>
             </div>
 
             <div class="process-steps">
                 <div class="process-step">
                     <div class="process-step__number">1</div>
                     <div class="process-step__content">
-                        <h3>Send Us Your List</h3>
-                        <p>CSV, Excel, whatever you have. We have seen it all. No judgment, no questions.</p>
+                        <h3 data-i18n="dfy.step1_title">Senden Sie uns Ihre Liste</h3>
+                        <p data-i18n="dfy.step1_desc">CSV, Excel, was immer Sie haben. Wir haben alles gesehen. Keine Urteile, keine Fragen.</p>
                     </div>
                 </div>
 
                 <div class="process-step">
                     <div class="process-step__number">2</div>
                     <div class="process-step__content">
-                        <h3>I Read Your List</h3>
-                        <p>Every address gets examined. Domain patterns, history, risk signals. The full picture, not just a validity check.</p>
+                        <h3 data-i18n="dfy.step2_title">Ich lese Ihre Liste</h3>
+                        <p data-i18n="dfy.step2_desc">Jede Adresse wird untersucht. Domain-Muster, Historie, Risikosignale. Das vollständige Bild, nicht nur eine Gültigkeitsprüfung.</p>
                     </div>
                 </div>
 
                 <div class="process-step">
                     <div class="process-step__number">3</div>
                     <div class="process-step__content">
-                        <h3>Get Labeled Results Back</h3>
-                        <p>Keep, Monitor, or Suppress. With the specific reasons behind each decision. You will know what to do and why.</p>
+                        <h3 data-i18n="dfy.step3_title">Gekennzeichnete Ergebnisse zurückerhalten</h3>
+                        <p data-i18n="dfy.step3_desc">Keep, Monitor oder Suppress. Mit den spezifischen Gründen hinter jeder Entscheidung. Sie werden wissen, was zu tun ist und warum.</p>
                     </div>
                 </div>
 
                 <div class="process-step">
                     <div class="process-step__number">4</div>
                     <div class="process-step__content">
-                        <h3>Optional: Book a Walkthrough Call</h3>
-                        <p>Talk through the results with me. Understand what we found and plan your next steps.</p>
+                        <h3 data-i18n="dfy.step4_title">Optional: Erklärungsgespräch buchen</h3>
+                        <p data-i18n="dfy.step4_desc">Besprechen Sie die Ergebnisse mit mir. Verstehen Sie, was wir gefunden haben, und planen Sie Ihre nächsten Schritte.</p>
                     </div>
                 </div>
             </div>
@@ -1336,30 +1340,30 @@
     <section class="section section--light">
         <div class="container">
             <div class="section__header">
-                <h2>Not Sure What You Need?</h2>
+                <h2 data-i18n="dfy.consult_title">Nicht sicher, was Sie brauchen?</h2>
+                <p data-i18n="dfy.consult_subtitle">Kein Druck, kein Verkaufsgespräch. Lassen Sie uns über Ihre Situation sprechen und herausfinden, ob Listenbereinigung überhaupt der richtige Schritt ist.</p>
             </div>
 
             <div class="call-block">
-                <p class="call-block__intro">No pressure, no pitch. Let's talk through your situation and figure out if list cleaning is even the right move.</p>
 
                 <div class="call-card">
-                    <span class="call-card__badge">Free Consultation</span>
-                    <h3>1:1 Call with YT</h3>
-                    <p class="call-card__description">Tell me what's going on with your list, your sending, your concerns. I'll give you my honest take on what you actually need—even if it's not me.</p>
-                    <p class="call-card__duration"><strong>15-30 minutes.</strong> No commitment required.</p>
+                    <span class="call-card__badge" data-i18n="dfy.consult_badge">Erste kostenlose Beratung</span>
+                    <h3 data-i18n="dfy.consult_call_title">1:1-Gespräch mit YT</h3>
+                    <p class="call-card__description" data-i18n="dfy.consult_card_desc">Erzählen Sie mir, was mit Ihrer Liste, Ihrem Versand, Ihren Bedenken los ist. Ich gebe Ihnen meine ehrliche Einschätzung, was Sie wirklich brauchen – auch wenn das nicht ich bin.</p>
+                    <p class="call-card__duration" data-i18n="dfy.consult_duration"><strong>15-30 minutes.</strong> No commitment required.</p>
 
                     <div class="call-topics">
-                        <p class="call-topics__label">We can discuss</p>
+                        <p class="call-topics__label" data-i18n="dfy.consult_topics_label">Wir können besprechen</p>
                         <ul>
-                            <li>Whether list cleaning makes sense for your situation</li>
-                            <li>What's likely causing your deliverability issues</li>
-                            <li>Which service level fits your needs</li>
-                            <li>Timeline and turnaround expectations</li>
-                            <li>Questions about the process</li>
+                            <li data-i18n="dfy.consult_topic1">Ob Listenbereinigung für Ihre Situation sinnvoll ist</li>
+                            <li data-i18n="dfy.consult_topic2">Was wahrscheinlich Ihre Zustellbarkeitsprobleme verursacht</li>
+                            <li data-i18n="dfy.consult_topic3">Welches Servicelevel zu Ihren Bedürfnissen passt</li>
+                            <li data-i18n="dfy.consult_topic4">Zeitplan und Bearbeitungserwartungen</li>
+                            <li data-i18n="dfy.consult_topic5">Fragen zum Prozess</li>
                         </ul>
                     </div>
 
-                    <button type="button" class="btn btn-primary" onclick="openContactModal('book-consultation')">Book a Free Consultation</button>
+                    <button type="button" class="btn btn-primary" onclick="openContactModal('book-consultation')" data-i18n="dfy.consult_cta">Kostenlose Beratung buchen</button>
                 </div>
             </div>
         </div>
@@ -1372,30 +1376,30 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>Who This Is For</h2>
+                <h2 data-i18n="dfy.who_title">Für wen das ist</h2>
             </div>
 
             <div class="who-grid">
                 <div class="who-card">
-                    <h3>This Is For You If</h3>
+                    <h3 data-i18n="dfy.who_for_title">Das ist für Sie, wenn</h3>
                     <ul>
-                        <li>Running campaigns but seeing declining engagement</li>
-                        <li>Worried about bounces, complaints, or blocklists</li>
-                        <li>Inheriting a list you did not build</li>
-                        <li>Under pressure to "just send" but sensing risk</li>
-                        <li>Trying to explain deliverability risks internally</li>
+                        <li data-i18n="dfy.who_for1">Sie führen Kampagnen durch, sehen aber sinkendes Engagement</li>
+                        <li data-i18n="dfy.who_for2">Besorgt über Bounces, Beschwerden oder Blocklists</li>
+                        <li data-i18n="dfy.who_for3">Sie übernehmen eine Liste, die Sie nicht aufgebaut haben</li>
+                        <li data-i18n="dfy.who_for4">Unter Druck "einfach zu senden" aber Risiko spürend</li>
+                        <li data-i18n="dfy.who_for5">Versuchen, Zustellbarkeitsrisiken intern zu erklären</li>
                     </ul>
                 </div>
 
                 <div class="who-card">
-                    <h3>Not For You If</h3>
+                    <h3 data-i18n="dfy.who_not_title">Nicht für Sie, wenn</h3>
                     <ul>
-                        <li>You want someone to write or send campaigns for you</li>
-                        <li>You need ESP migration or setup help</li>
-                        <li>You want ongoing managed services</li>
-                        <li>You need content or design work</li>
+                        <li data-i18n="dfy.who_not1">Sie möchten jemanden, der Kampagnen für Sie schreibt oder sendet</li>
+                        <li data-i18n="dfy.who_not2">Sie brauchen Hilfe bei ESP-Migration oder Einrichtung</li>
+                        <li data-i18n="dfy.who_not3">Sie möchten laufende verwaltete Dienste</li>
+                        <li data-i18n="dfy.who_not4">Sie brauchen Content- oder Designarbeit</li>
                     </ul>
-                    <a href="/partner" class="btn btn-secondary" style="margin-top: var(--space-sm);">Connect With a Partner</a>
+                    <a href="partner.html" class="btn btn-secondary" style="margin-top: var(--space-sm);" data-i18n="dfy.who_partner_cta">Mit einem Partner verbinden</a>
                 </div>
             </div>
         </div>
@@ -1408,8 +1412,8 @@
     <section class="section section--lighter">
         <div class="container">
             <div class="testimonial-featured">
-                <p class="testimonial-featured__quote">"The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call."</p>
-                <p class="testimonial-featured__author">Megan S, UK</p>
+                <p class="testimonial-featured__quote" data-i18n="dfy.testimonial_quote">Das SOS Hotline gab mir äußerst hilfreiche Beratung. Yanna-Torry hat unsere Liste bereinigt und uns über das Erwartete hinaus unterstützt.</p>
+                <p class="testimonial-featured__author" data-i18n="dfy.testimonial_author">Megan S, UK</p>
             </div>
         </div>
     </section>
@@ -1421,15 +1425,15 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>Pricing</h2>
+                <h2 data-i18n="nav.pricing">Preise</h2>
+                <p data-i18n="dfy.pricing_subtitle">Mengenpreise: Je mehr Credits Sie kaufen, desto weniger zahlen Sie pro Credit. Keine Verträge, keine Tricks.</p>
             </div>
 
             <div class="pricing-preview">
-                <p class="pricing-preview__note">Volume pricing: buy more credits, pay less per credit. No contracts, no tricks.</p>
 
                 <div class="pricing-cta">
-                    <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
-                    <p class="pricing-contact">Questions first? <a href="#" onclick="openContactModal('pricing-just-ask'); return false;">Just ask</a></p>
+                    <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Meine Liste Bereinigen</a>
+                    <p class="pricing-contact"><span data-i18n="dfy.pricing_questions">Zuerst Fragen?</span> <a href="#" onclick="openContactModal('pricing-just-ask'); return false;" data-i18n="dfy.pricing_ask">Fragen Sie einfach</a></p>
                 </div>
             </div>
         </div>
@@ -1442,9 +1446,9 @@
     <section class="section section--light">
         <div class="container">
             <div class="sos-bridge">
-                <h3>Not Sure Yet?</h3>
-                <p>Have a question before committing? Use the SOS Hotline. It is free. No sales pitch. Just honest answers.</p>
-                <a href="/sos-hotline" class="btn btn-secondary">Learn About SOS Hotline</a>
+                <h3 data-i18n="dfy.sos_title">Noch unsicher?</h3>
+                <p data-i18n="dfy.sos_desc">Haben Sie eine Frage, bevor Sie sich festlegen? Nutzen Sie das SOS Hotline. Es ist kostenlos. Kein Verkaufsgespräch.</p>
+                <a href="sos-hotline.html" class="btn btn-secondary" data-i18n="dfy.sos_cta">Mehr über SOS Hotline erfahren</a>
             </div>
         </div>
     </section>
@@ -1455,10 +1459,10 @@
 
     <section class="cta-block">
         <div class="cta-block__inner">
-            <h2>Ready to Know What's Actually In Your List?</h2>
-            <p class="cta-block__subtext">Send it over. I'll tell you what to keep, what to watch, and what to never send to again. With the reasoning behind every call.</p>
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
-            <p class="cta-block__footer">Most lists returned within 24-48 hours.</p>
+            <h2 data-i18n="dfy.cta_title">Bereit zu erfahren, was wirklich in Ihrer Liste ist?</h2>
+            <p class="cta-block__subtext" data-i18n="dfy.cta_subtitle">Schicken Sie sie uns. Ich sage Ihnen, was Sie behalten, was Sie beobachten und wohin Sie nie wieder senden sollten. Mit der Begründung hinter jeder Entscheidung.</p>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Meine Liste Bereinigen</a>
+            <p class="cta-block__footer" data-i18n="dfy.cta_footer">Die meisten Listen werden innerhalb von 24-48 Stunden zurückgegeben.</p>
         </div>
     </section>
 
@@ -1470,29 +1474,30 @@
         <div class="footer__inner">
             <div class="footer__brand">
                 <img src="../assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
-                <p>We see what algorithms can't.</p>
+                <p data-i18n="footer.tagline">Wir sehen, was Algorithmen nicht können.</p>
             </div>
 
             <div class="footer__column">
-                <h4>Services</h4>
-                <a href="/pricing">Pricing</a>
-                <a href="/sos-hotline">SOS Hotline</a>
+                <h4 data-i18n="footer.services">Dienstleistungen</h4>
+                <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
+                <a href="sos-hotline.html" data-i18n="nav.sos_hotline">SOS Hotline</a>
             </div>
 
             <div class="footer__column">
-                <h4>Company</h4>
-                <a href="/about">About</a>
-                <a href="/partner">Partner</a>
+                <h4 data-i18n="footer.company">Unternehmen</h4>
+                <a href="about.html" data-i18n="nav.about">Über Uns</a>
+                <a href="partner.html" data-i18n="nav.partner">Partner</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html" data-i18n="footer.security">Sicherheit</a>
             </div>
 
             <div class="footer__column">
-                <h4>Contact</h4>
+                <h4 data-i18n="footer.contact">Kontakt</h4>
                 <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
             </div>
 
             <div class="footer__bottom">
-                <span>© 2026 Review My Emails. All rights reserved.</span>
-                <span>Privacy Policy · Terms</span>
+                <span data-i18n="footer.copyright">© 2026 Review My Emails. Alle Rechte vorbehalten.</span>
+                <span data-i18n="footer.legal">Datenschutzrichtlinie · AGB</span>
             </div>
         </div>
     </footer>
@@ -1527,47 +1532,47 @@
     <div class="contact-modal" id="contactModal">
         <div class="contact-modal__content">
             <div class="contact-modal__header">
-                <h3 class="contact-modal__title">Get in Touch</h3>
-                <button class="contact-modal__close" onclick="closeContactModal()">&times;</button>
+                <h3 class="contact-modal__title" data-i18n="contact.modal_title">Kontakt aufnehmen</h3>
+                <button class="contact-modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">&times;</button>
             </div>
             <div class="contact-modal__body">
-                <p class="contact-modal__subtitle">Tell us about your situation and we'll get back to you within 24 hours.</p>
+                <p class="contact-modal__subtitle" data-i18n="dfy.modal_subtitle">Erzählen Sie uns von Ihrer Situation und wir melden uns innerhalb von 24 Stunden.</p>
                 <form id="contactForm" onsubmit="submitContactForm(event)">
                     <input type="hidden" id="contactSource" value="">
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Name *</label>
-                        <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name">
+                        <label class="contact-modal__label" data-i18n="form.name_label">Name *</label>
+                        <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="form.name_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Email *</label>
-                        <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com">
+                        <label class="contact-modal__label" data-i18n="form.email_label">E-Mail *</label>
+                        <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="form.email_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Timezone (optional)</label>
+                        <label class="contact-modal__label" data-i18n="form.timezone_label">Zeitzone (optional)</label>
                         <select class="contact-modal__select" id="contactTimezone">
-                            <option value="">Select your timezone</option>
-                            <option value="America/New_York">Eastern Time (ET)</option>
-                            <option value="America/Chicago">Central Time (CT)</option>
-                            <option value="America/Denver">Mountain Time (MT)</option>
-                            <option value="America/Los_Angeles">Pacific Time (PT)</option>
-                            <option value="America/Anchorage">Alaska Time</option>
-                            <option value="Pacific/Honolulu">Hawaii Time</option>
-                            <option value="Europe/London">London (GMT/BST)</option>
-                            <option value="Europe/Paris">Central European Time</option>
-                            <option value="Europe/Athens">Eastern European Time</option>
-                            <option value="Asia/Dubai">Gulf Standard Time</option>
-                            <option value="Asia/Kolkata">India Standard Time</option>
-                            <option value="Asia/Singapore">Singapore Time</option>
-                            <option value="Asia/Tokyo">Japan Standard Time</option>
-                            <option value="Australia/Sydney">Australian Eastern Time</option>
-                            <option value="Pacific/Auckland">New Zealand Time</option>
+                            <option value="" data-i18n="form.timezone_select">Wählen Sie Ihre Zeitzone</option>
+                            <option value="America/New_York" data-i18n="form.tz_eastern">Eastern Time (ET)</option>
+                            <option value="America/Chicago" data-i18n="form.tz_central">Central Time (CT)</option>
+                            <option value="America/Denver" data-i18n="form.tz_mountain">Mountain Time (MT)</option>
+                            <option value="America/Los_Angeles" data-i18n="form.tz_pacific">Pacific Time (PT)</option>
+                            <option value="America/Anchorage" data-i18n="form.tz_alaska">Alaska-Zeit</option>
+                            <option value="Pacific/Honolulu" data-i18n="form.tz_hawaii">Hawaii-Zeit</option>
+                            <option value="Europe/London" data-i18n="form.tz_london">London (GMT/BST)</option>
+                            <option value="Europe/Paris" data-i18n="form.tz_cet">Mitteleuropäische Zeit (MEZ)</option>
+                            <option value="Europe/Athens" data-i18n="form.tz_eet">Osteuropäische Zeit (OEZ)</option>
+                            <option value="Asia/Dubai" data-i18n="form.tz_gulf">Golf-Standardzeit</option>
+                            <option value="Asia/Kolkata" data-i18n="form.tz_india">Indische Standardzeit</option>
+                            <option value="Asia/Singapore" data-i18n="form.tz_singapore">Singapur-Zeit</option>
+                            <option value="Asia/Tokyo" data-i18n="form.tz_japan">Japanische Standardzeit</option>
+                            <option value="Australia/Sydney" data-i18n="form.tz_sydney">Australische Ostzeit</option>
+                            <option value="Pacific/Auckland" data-i18n="form.tz_nz">Neuseeland-Zeit</option>
                         </select>
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Message (optional)</label>
-                        <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..."></textarea>
+                        <label class="contact-modal__label" data-i18n="form.message_optional_label">Nachricht (optional)</label>
+                        <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..." data-i18n-placeholder="dfy.modal_message_placeholder"></textarea>
                     </div>
-                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn">Send Request</button>
+                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="dfy.modal_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Anfrage senden</button>
                 </form>
             </div>
         </div>
@@ -1604,7 +1609,7 @@
             const source = document.getElementById('contactSource').value;
 
             btn.disabled = true;
-            btn.textContent = 'Sending...';
+            btn.textContent = btn.dataset.i18nSending || 'Sending...';
 
             try {
                 const response = await fetch('/api/contact-request', {
@@ -1625,8 +1630,8 @@
                     document.querySelector('.contact-modal__body').innerHTML = `
                         <div class="contact-modal__success">
                             <div class="contact-modal__success-icon">✓</div>
-                            <div class="contact-modal__success-title">Request Received</div>
-                            <p class="contact-modal__success-text">We'll get back to you within 24 hours.</p>
+                            <div class="contact-modal__success-title" data-i18n="ui.request_received">Anfrage erhalten</div>
+                            <p class="contact-modal__success-text" data-i18n="ui.response_time">Wir melden uns innerhalb von 24-48 Stunden.</p>
                         </div>
                     `;
                     va('event', { name: 'Contact_Form_Submitted', data: { source: source, page: 'done-for-you' } });
@@ -1636,10 +1641,12 @@
             } catch (error) {
                 console.error('Contact form error:', error);
                 btn.disabled = false;
-                btn.textContent = 'Try Again';
+                btn.textContent = btn.dataset.i18nRetry || 'Try Again';
             }
         }
     </script>
 
+    <!-- i18n Translation Loader -->
+    <script src="/js/i18n.js"></script>
 </body>
 </html>

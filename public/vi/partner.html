@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails | Dịch Vụ Làm Sạch Danh Sách Email Chuyên Nghiệp</title>
+    <meta name="description" content="Các công cụ Validation chỉ thấy địa chỉ. Chúng tôi thấy các mô hình, ngữ cảnh và rủi ro. Sau đó, chúng tôi cho bạn biết chính xác cần làm gì. Nhãn rõ ràng: Giữ (Keep), Theo dõi (Monitor), Chặn (Suppress). Với lý do đằng sau mỗi nhãn.">
+    <link rel="canonical" href="https://reviewmyemails.com/partner/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Partner With Us | Review My Emails">
+    <meta property="og:description" content="Work with Review My Emails to help your clients protect their sender reputation.">
+    <meta property="og:url" content="https://reviewmyemails.com/partner/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://reviewmyemails.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Partner With Us | Review My Emails">
+    <meta name="twitter:description" content="Work with Review My Emails to help your clients protect their sender reputation.">
+    <meta name="twitter:image" content="https://reviewmyemails.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           DESIGN TOKENS
+           ======================================== */
+
+        :root {
+            /* Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #fafcfc;
+            --color-light: #e6f7f3;
+            --color-lighter: #d1f0e8;
+            --color-muted: #64748b;
+            --color-border: #e2e8f0;
+
+            /* Typography */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+            --space-xxl: 100px;
+
+            /* Layout */
+            --container: 1140px;
+            --content: 680px;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background: var(--color-white);
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .container--narrow {
+            max-width: var(--content);
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+
+        h1 {
+            font-size: clamp(36px, 5vw, 52px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--color-dark);
+        }
+
+        h2 {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            color: var(--color-dark);
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--color-dark);
+        }
+
+        .text-muted {
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           BUTTON
+           ======================================== */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 180ms ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-light);
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: var(--space-sm) var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .header__logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .header__link {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-muted);
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+
+        .header__link:hover {
+            color: var(--color-dark);
+        }
+
+        .header__link--active {
+            color: var(--color-dark);
+        }
+
+        .header__cta {
+            font-size: 15px;
+            padding: 10px 20px;
+        }
+
+        /* Mobile Menu */
+        .header__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .header__mobile-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-white);
+            z-index: 200;
+            padding: var(--space-lg) var(--space-md);
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .mobile-nav__close {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .mobile-nav__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav__links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .mobile-nav__link {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--color-dark);
+            text-decoration: none;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .mobile-nav__cta {
+            margin-top: var(--space-lg);
+        }
+
+        /* ========================================
+           HERO
+           ======================================== */
+
+        .hero {
+            padding: 160px 0 var(--space-xl);
+            text-align: center;
+        }
+
+        .hero__headline {
+            max-width: 720px;
+            margin: 0 auto var(--space-md);
+        }
+
+        .hero__subhead {
+            font-size: 20px;
+            color: var(--color-muted);
+            max-width: 580px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           SECTION
+           ======================================== */
+
+        .section {
+            padding: var(--space-xxl) 0;
+        }
+
+        .section--light {
+            background: var(--color-light);
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section__header h2 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .section__header p {
+            color: var(--color-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ========================================
+           PARTNER CONTENT
+           ======================================== */
+
+        .partner-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .partner-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: var(--space-md);
+            color: var(--color-dark);
+        }
+
+        .partner-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .partner-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+        }
+
+        .partner-card h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .partner-card p {
+            font-size: 15px;
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+
+        /* ========================================
+           CTA SECTION
+           ======================================== */
+
+        .cta-section {
+            text-align: center;
+            padding: var(--space-xl) 0;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .cta-section p {
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+
+        .footer {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: var(--space-xl) var(--space-md);
+        }
+
+        .footer__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .footer__brand p {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-top: var(--space-xs);
+            max-width: 240px;
+        }
+
+        .footer__column h4 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-sm);
+            opacity: 0.5;
+        }
+
+        .footer__column a {
+            display: block;
+            font-size: 15px;
+            color: var(--color-white);
+            text-decoration: none;
+            opacity: 0.8;
+            margin-bottom: var(--space-xs);
+            transition: opacity 180ms ease;
+        }
+
+        .footer__column a:hover {
+            opacity: 1;
+        }
+
+        .footer__bottom {
+            grid-column: 1 / -1;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+
+        @media (max-width: 900px) {
+            .partner-types {
+                grid-template-columns: 1fr;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer__brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header__nav {
+                gap: var(--space-md);
+            }
+
+            .header__link,
+            .header__cta {
+                display: none;
+            }
+
+            .header__mobile-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+        }
+
+        /* Contact Modal */
+        .contact-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; padding: 20px; }
+        .contact-modal.active { display: flex; }
+        .contact-modal__content { background: white; border-radius: 12px; max-width: 480px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+        .contact-modal__header { padding: 24px 24px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+        .contact-modal__title { font-size: 20px; font-weight: 700; color: var(--color-dark); margin: 0; }
+        .contact-modal__close { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--color-muted); padding: 0; line-height: 1; }
+        .contact-modal__close:hover { color: var(--color-dark); }
+        .contact-modal__body { padding: 20px 24px 24px; }
+        .contact-modal__subtitle { font-size: 14px; color: var(--color-muted); margin: 0 0 20px; }
+        .contact-modal__field { margin-bottom: 16px; }
+        .contact-modal__label { display: block; font-size: 13px; font-weight: 500; color: var(--color-dark); margin-bottom: 6px; }
+        .contact-modal__input, .contact-modal__textarea, .contact-modal__select { width: 100%; padding: 12px 14px; border: 1px solid var(--color-border); border-radius: 6px; font-size: 14px; font-family: var(--font); background: white; }
+        .contact-modal__input:focus, .contact-modal__textarea:focus, .contact-modal__select:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1); }
+        .contact-modal__textarea { resize: vertical; min-height: 100px; }
+        .contact-modal__submit { width: 100%; background: var(--color-accent); color: white; padding: 14px 24px; border: none; border-radius: 6px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: var(--font); margin-top: 8px; }
+        .contact-modal__submit:hover { background: var(--color-accent-hover); }
+        .contact-modal__submit:disabled { background: #ccc; cursor: not-allowed; }
+        .contact-modal__success { text-align: center; padding: 20px 0; }
+        .contact-modal__success-icon { font-size: 48px; margin-bottom: 16px; }
+        .contact-modal__success-title { font-size: 18px; font-weight: 600; color: var(--color-dark); margin-bottom: 8px; }
+        .contact-modal__success-text { font-size: 14px; color: var(--color-muted); }
+    </style>
+
+    <!-- Analytics -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5PYH0SJWEW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5PYH0SJWEW');
+    </script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "rfdccvjnjx");
+    </script>
+    <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+    <!-- ========================================
+         HEADER
+         ======================================== -->
+
+    <header class="header">
+        <div class="header__inner">
+            <a href="index.html" class="header__logo">
+                <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <nav class="header__nav">
+                <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">Cách Hoạt Động</a>
+                <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Giá Cả</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">Làm Sạch Danh Sách</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
+                    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__header">
+            <a href="index.html" class="header__logo">
+                <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="mobile-nav__links">
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">Cách Hoạt Động</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Giá Cả</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">Về Chúng Tôi</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Đối Tác</a>
+        </div>
+        <div class="mobile-nav__cta">
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.cta">Làm Sạch Danh Sách</a>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         HERO
+         ======================================== -->
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero__headline" data-i18n="partner.title">Hợp Tác Với Chúng Tôi</h1>
+            <p class="hero__subhead" data-i18n="partner.subtitle">Làm việc với Review My Emails để giúp khách hàng của bạn bảo vệ danh tiếng người gửi.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PARTNER TYPES
+         ======================================== -->
+
+    <section class="section section--light">
+        <div class="container">
+            <div class="section__header">
+                <h2 data-i18n="partner.types_title">Chúng Tôi Làm Việc Với Ai</h2>
+            </div>
+
+            <div class="partner-types">
+                <div class="partner-card">
+                    <h3 data-i18n="partner.esp_title">Nhà Cung Cấp Dịch Vụ Email (ESP)</h3>
+                    <p data-i18n="partner.esp_desc">Giúp khách hàng của bạn duy trì danh sách sạch. Giảm khiếu nại và bounce trước khi chúng làm hại hạ tầng chung của bạn.</p>
+                </div>
+
+                <div class="partner-card">
+                    <h3 data-i18n="partner.agency_title">Agency Tiếp Thị</h3>
+                    <p data-i18n="partner.agency_desc">not just validation scores.</p>
+                </div>
+
+                <div class="partner-card">
+                    <h3 data-i18n="partner.consultant_title">Chuyên Gia Tư Vấn Deliverability</h3>
+                    <p data-i18n="partner.consultant_desc">Thêm diễn giải danh sách vào bộ công cụ của bạn. Nhận phân tích chi tiết bạn có thể sử dụng trong báo cáo khách hàng và kế hoạch khắc phục.</p>
+                </div>
+
+                <div class="partner-card">
+                    <h3 data-i18n="partner.data_title">Nhà Cung Cấp Dữ Liệu</h3>
+                    <p data-i18n="partner.data_desc">Xác thực chất lượng dữ liệu email trước khi nó đến tay khách hàng của bạn. Giảm khiếu nại và xây dựng lòng tin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         CTA SECTION
+         ======================================== -->
+
+    <section class="section">
+        <div class="container">
+            <div class="cta-section">
+                <h2 data-i18n="partner.cta_title">Quan Tâm?</h2>
+                <p data-i18n="partner.cta_subtitle">Liên hệ để thảo luận cách hợp tác. Không cần hồ sơ năng lực. Chỉ cần cho biết bạn đang cố giải quyết vấn đề gì.</p>
+                <a href="#" class="btn btn-primary" onclick="openContactModal('partner-cta-email-us'); return false;" data-i18n="partner.cta_button">Gửi Email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <img src="../assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
+                <p data-i18n="footer.tagline">Chúng tôi thấy những gì thuật toán không thể thấy.</p>
+            </div>
+
+            <div class="footer__column">
+                <h4 data-i18n="footer.services">Dịch Vụ</h4>
+                <a href="pricing.html" data-i18n="nav.pricing">Giá Cả</a>
+                <a href="sos-hotline.html" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            </div>
+
+            <div class="footer__column">
+                <h4 data-i18n="footer.company">Công Ty</h4>
+                <a href="about.html" data-i18n="nav.about">Về Chúng Tôi</a>
+                <a href="partner.html" data-i18n="nav.partner">Đối Tác</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html" data-i18n="footer.security">Bảo Mật</a>
+            </div>
+
+            <div class="footer__column">
+                <h4 data-i18n="footer.contact">Liên Hệ</h4>
+                <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
+            </div>
+
+            <div class="footer__bottom">
+                <span data-i18n="footer.copyright">© 2026 Review My Emails. Bảo lưu mọi quyền.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Event Tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var destination = this.getAttribute('href') || '';
+                    var label = this.textContent.trim();
+                    va('event', { name: 'CTA_Clicked', data: { label: label, destination: destination, page: 'partner' } });
+                });
+            });
+        });
+    </script>
+
+    <!-- Mobile Navigation -->
+    <script>
+        function openMobileNav() {
+            document.getElementById('mobileNav').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    </script>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contactModal">
+        <div class="contact-modal__content">
+            <div class="contact-modal__header">
+                <h3 class="contact-modal__title" data-i18n="partner.modal_title">Hợp Tác Với Chúng Tôi</h3>
+                <button class="contact-modal__close" onclick="closeContactModal()">&times;</button>
+            </div>
+            <div class="contact-modal__body">
+                <p class="contact-modal__subtitle" data-i18n="partner.modal_subtitle">Kể về doanh nghiệp của bạn và chúng tôi sẽ phản hồi trong 24 giờ.</p>
+                <form id="contactForm" onsubmit="submitContactForm(event)">
+                    <input type="hidden" id="contactSource" value="">
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label" data-i18n="modal.form_name">Name *</label>
+                        <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="modal.form_name_placeholder">
+                    </div>
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label" data-i18n="modal.form_email">Email *</label>
+                        <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="modal.form_email_placeholder">
+                    </div>
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label" data-i18n="modal.form_message">Message (optional)</label>
+                        <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Kể về doanh nghiệp của bạn và mong muốn hợp tác..." data-i18n-placeholder="partner.modal_placeholder"></textarea>
+                    </div>
+                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="partner.modal_button" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Gửi Tin Nhắn</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function openContactModal(source) {
+            document.getElementById('contactSource').value = source || 'partner';
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            va('event', { name: 'Contact_Modal_Opened', data: { source: source || 'partner', page: 'partner' } });
+        }
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        document.getElementById('contactModal').addEventListener('click', function(e) { if (e.target === this) closeContactModal(); });
+        document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeContactModal(); });
+        async function submitContactForm(e) {
+            e.preventDefault();
+            const btn = document.getElementById('contactSubmitBtn');
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
+            const source = document.getElementById('contactSource').value;
+            btn.disabled = true; btn.textContent = btn.dataset.i18nSending || 'Sending...';
+            try {
+                const response = await fetch('/api/contact-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message, source, page: 'partner' })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    document.querySelector('.contact-modal__body').innerHTML = '<div class="contact-modal__success"><div class="contact-modal__success-icon">✓</div><div class="contact-modal__success-title" data-i18n="partner.modal_success_title">Đã Nhận Tin Nhắn</div><p class="contact-modal__success-text" data-i18n="partner.modal_success_text">Chúng tôi sẽ phản hồi trong vòng 24 giờ.</p></div>';
+                    va('event', { name: 'Contact_Form_Submitted', data: { source, page: 'partner' } });
+                } else { throw new Error(data.error || 'Failed to submit'); }
+            } catch (error) { console.error('Contact form error:', error); btn.disabled = false; btn.textContent = btn.dataset.i18nRetry || 'Try Again'; }
+        }
+    </script>
+
+    <!-- Translation System -->
+    <script src="/js/i18n.js"></script>
+</body>
+</html>

@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails | Pembersihan Daftar Email yang Memberitahu Anda Apa yang Harus Dilakukan</title>
+    <meta name="description" content="Alat validasi melihat alamat. Kami melihat pola, konteks, dan risiko. Lalu kami memberi tahu Anda apa yang harus dilakukan. Label jelas: Simpan (Keep), Pantau (Monitor), Tahan (Suppress). Dengan alasan di balik setiap label.">
+    <link rel="canonical" href="https://reviewmyemails.com/done-for-you/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Done-For-You Email List Cleaning | Review My Emails">
+    <meta property="og:description" content="Send us your list. We review every address and return it labeled with reasoning.">
+    <meta property="og:url" content="https://reviewmyemails.com/done-for-you/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://reviewmyemails.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Done-For-You Email List Cleaning | Review My Emails">
+    <meta name="twitter:description" content="Send us your list. We review every address and return it labeled with reasoning.">
+    <meta name="twitter:image" content="https://reviewmyemails.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           RESET & BASE
+           ======================================== */
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========================================
+           DESIGN TOKENS (V3)
+           ======================================== */
+
+        :root {
+            /* Colors */
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-white: #fafcfc;
+            --color-light: #e6f7f3;
+            --color-lighter: #d1f0e8;
+            --color-muted: #64748b;
+            --color-border: #e2e8f0;
+
+            /* Typography */
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            /* Spacing */
+            --space-xs: 8px;
+            --space-sm: 16px;
+            --space-md: 24px;
+            --space-lg: 40px;
+            --space-xl: 64px;
+            --space-xxl: 100px;
+
+            /* Layout */
+            --container: 1140px;
+            --content: 680px;
+        }
+
+        body {
+            font-family: var(--font);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--color-dark);
+            background: var(--color-white);
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 var(--space-md);
+        }
+
+        .container--narrow {
+            max-width: var(--content);
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+
+        h1 {
+            font-size: clamp(36px, 5vw, 52px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            color: var(--color-dark);
+        }
+
+        h2 {
+            font-size: clamp(24px, 3vw, 32px);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            color: var(--color-dark);
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.3;
+            color: var(--color-dark);
+        }
+
+        .text-muted {
+            color: var(--color-muted);
+        }
+
+        .text-accent {
+            color: var(--color-accent);
+        }
+
+        /* ========================================
+           BUTTON
+           ======================================== */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 180ms ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-color: var(--color-accent);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            border-color: var(--color-accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-light);
+        }
+
+        .btn-dark {
+            background: var(--color-dark);
+            color: var(--color-white);
+            border-color: var(--color-dark);
+        }
+
+        .btn-dark:hover {
+            opacity: 0.9;
+        }
+
+        /* ========================================
+           HEADER
+           ======================================== */
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: var(--space-sm) var(--space-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .header__logo img {
+            height: 60px;
+            width: auto;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+        }
+
+        .header__link {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-muted);
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+
+        .header__link:hover {
+            color: var(--color-dark);
+        }
+
+        .header__cta {
+            font-size: 15px;
+            padding: 10px 20px;
+        }
+
+        /* Mobile Menu */
+        .header__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .header__mobile-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-white);
+            z-index: 200;
+            padding: var(--space-lg) var(--space-md);
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .mobile-nav__close {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .mobile-nav__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav__links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+
+        .mobile-nav__link {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--color-dark);
+            text-decoration: none;
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .mobile-nav__cta {
+            margin-top: var(--space-lg);
+        }
+
+        /* ========================================
+           HERO
+           ======================================== */
+
+        .hero {
+            padding: 160px 0 var(--space-xl);
+            text-align: center;
+        }
+
+        .hero__headline {
+            max-width: 720px;
+            margin: 0 auto var(--space-md);
+        }
+
+        .hero__subhead {
+            font-size: 20px;
+            color: var(--color-muted);
+            max-width: 580px;
+            margin: 0 auto var(--space-lg);
+            line-height: 1.6;
+        }
+
+        .hero__actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+
+        /* ========================================
+           SECTION — Generic
+           ======================================== */
+
+        .section {
+            padding: var(--space-xxl) 0;
+        }
+
+        .section--light {
+            background: var(--color-light);
+        }
+
+        .section--lighter {
+            background: var(--color-lighter);
+        }
+
+        .section--dark {
+            background: var(--color-dark);
+            color: var(--color-white);
+        }
+
+        .section__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section__header h2 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .section__header p {
+            color: var(--color-muted);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .section--dark .section__header h2 {
+            color: var(--color-white);
+        }
+
+        .section--dark .section__header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* ========================================
+           WHAT YOU GET — Output categories
+           ======================================== */
+
+        .output-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .output-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .output-card__label {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .output-card__label--keep {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .output-card__label--monitor {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .output-card__label--suppress {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .output-card h3 {
+            margin-bottom: var(--space-sm);
+            font-size: 18px;
+        }
+
+        .output-card p {
+            font-size: 15px;
+            color: var(--color-muted);
+            line-height: 1.6;
+        }
+
+        .output-note {
+            text-align: center;
+            margin-top: var(--space-lg);
+            font-size: 16px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           ALSO INCLUDED — Features list
+           ======================================== */
+
+        .included-list {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .included-item {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .included-item:last-child {
+            border-bottom: none;
+        }
+
+        .included-item__icon {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--color-accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+        }
+
+        .included-item__icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .included-item__content h3 {
+            font-size: 17px;
+            margin-bottom: 4px;
+        }
+
+        .included-item__content p {
+            font-size: 15px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           HOW IT WORKS — Process
+           ======================================== */
+
+        .process-steps {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-lg) 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .process-step:last-child {
+            border-bottom: none;
+        }
+
+        .process-step__number {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            background: var(--color-accent);
+            color: var(--color-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .process-step__content {
+            padding-top: 8px;
+        }
+
+        .process-step__content h3 {
+            color: var(--color-white);
+            margin-bottom: var(--space-xs);
+        }
+
+        .process-step__content p {
+            color: rgba(255,255,255,0.7);
+            font-size: 16px;
+        }
+
+        /* ========================================
+           STRATEGY CALL — Highlight block
+           ======================================== */
+
+        .call-block {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .call-block__intro {
+            font-size: 17px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .call-card {
+            padding: var(--space-xl);
+            background: var(--color-white);
+            border: 2px solid var(--color-accent);
+            border-radius: 16px;
+        }
+
+        .call-card__badge {
+            display: inline-block;
+            padding: 6px 14px;
+            background: var(--color-light);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: var(--space-md);
+        }
+
+        .call-card h3 {
+            font-size: 24px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .call-card__description {
+            font-size: 16px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-md);
+            line-height: 1.6;
+        }
+
+        .call-card__duration {
+            font-size: 15px;
+            color: var(--color-dark);
+            margin-bottom: var(--space-lg);
+        }
+
+        .call-card__duration strong {
+            font-weight: 600;
+        }
+
+        .call-topics {
+            text-align: left;
+            margin: var(--space-lg) 0;
+            padding: var(--space-md);
+            background: var(--color-lighter);
+            border-radius: 8px;
+        }
+
+        .call-topics__label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--color-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-sm);
+        }
+
+        .call-topics ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xs);
+        }
+
+        .call-topics li {
+            font-size: 15px;
+            color: var(--color-dark);
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .call-topics li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        /* ========================================
+           WHO THIS IS FOR
+           ======================================== */
+
+        .who-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .who-card {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+        }
+
+        .who-card h3 {
+            margin-bottom: var(--space-md);
+            font-size: 18px;
+        }
+
+        .who-card ul {
+            list-style: none;
+        }
+
+        .who-card li {
+            font-size: 15px;
+            color: var(--color-muted);
+            padding: var(--space-xs) 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .who-card li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        /* ========================================
+           PRICING PREVIEW
+           ======================================== */
+
+        .pricing-preview {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .pricing-preview__note {
+            font-size: 17px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+            line-height: 1.6;
+        }
+
+        .pricing-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .pricing-option {
+            padding: var(--space-lg);
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            text-align: left;
+        }
+
+        .pricing-option h3 {
+            font-size: 17px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .pricing-option p {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .pricing-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .pricing-contact {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .pricing-contact a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .pricing-contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* ========================================
+           TESTIMONIALS
+           ======================================== */
+
+        .testimonial-featured {
+            max-width: 640px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-featured__quote {
+            font-size: clamp(20px, 2.5vw, 24px);
+            line-height: 1.5;
+            color: var(--color-dark);
+            margin-bottom: var(--space-lg);
+        }
+
+        .testimonial-featured__author {
+            font-size: 15px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           SOS BRIDGE — Soft mention
+           ======================================== */
+
+        .sos-bridge {
+            max-width: 560px;
+            margin: 0 auto;
+            text-align: center;
+            padding: var(--space-xl);
+            background: var(--color-lighter);
+            border-radius: 16px;
+        }
+
+        .sos-bridge h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        .sos-bridge p {
+            font-size: 16px;
+            color: var(--color-muted);
+            margin-bottom: var(--space-md);
+        }
+
+        .sos-bridge .btn {
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+
+        /* ========================================
+           CTA BLOCK — Final
+           ======================================== */
+
+        .cta-block {
+            padding: var(--space-xxl) var(--space-md);
+            text-align: center;
+        }
+
+        .cta-block__inner {
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .cta-block h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .cta-block__subtext {
+            color: var(--color-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .cta-block__footer {
+            margin-top: var(--space-md);
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        /* ========================================
+           FOOTER
+           ======================================== */
+
+        .footer {
+            background: var(--color-dark);
+            color: var(--color-white);
+            padding: var(--space-xl) var(--space-md);
+        }
+
+        .footer__inner {
+            max-width: var(--container);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto auto auto;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+
+        .footer__brand p {
+            font-size: 14px;
+            opacity: 0.6;
+            margin-top: var(--space-xs);
+            max-width: 240px;
+        }
+
+        .footer__column h4 {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-sm);
+            opacity: 0.5;
+        }
+
+        .footer__column a {
+            display: block;
+            font-size: 15px;
+            color: var(--color-white);
+            text-decoration: none;
+            opacity: 0.8;
+            margin-bottom: var(--space-xs);
+            transition: opacity 180ms ease;
+        }
+
+        .footer__column a:hover {
+            opacity: 1;
+        }
+
+        .footer__bottom {
+            grid-column: 1 / -1;
+            margin-top: var(--space-lg);
+            padding-top: var(--space-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            opacity: 0.5;
+        }
+
+        /* ========================================
+           RESPONSIVE
+           ======================================== */
+
+        @media (max-width: 900px) {
+            .output-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .who-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-options {
+                grid-template-columns: 1fr;
+            }
+
+            .call-topics ul {
+                grid-template-columns: 1fr;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer__brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header__nav {
+                gap: var(--space-md);
+            }
+
+            .header__link,
+            .header__cta {
+                display: none;
+            }
+
+            .header__mobile-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 120px;
+            }
+
+            .hero__actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer__inner {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+
+            .footer__bottom {
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+        }
+
+        /* Contact Modal */
+        .contact-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .contact-modal.active {
+            display: flex;
+        }
+
+        .contact-modal__content {
+            background: white;
+            border-radius: 12px;
+            max-width: 480px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .contact-modal__header {
+            padding: 24px 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .contact-modal__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin: 0;
+        }
+
+        .contact-modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-muted);
+            padding: 0;
+            line-height: 1;
+        }
+
+        .contact-modal__close:hover {
+            color: var(--color-dark);
+        }
+
+        .contact-modal__body {
+            padding: 20px 24px 24px;
+        }
+
+        .contact-modal__subtitle {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin: 0 0 20px;
+        }
+
+        .contact-modal__field {
+            margin-bottom: 16px;
+        }
+
+        .contact-modal__label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-dark);
+            margin-bottom: 6px;
+        }
+
+        .contact-modal__input,
+        .contact-modal__textarea,
+        .contact-modal__select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: var(--font);
+            background: white;
+        }
+
+        .contact-modal__input:focus,
+        .contact-modal__textarea:focus,
+        .contact-modal__select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .contact-modal__textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-modal__submit {
+            width: 100%;
+            background: var(--color-accent);
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font);
+            margin-top: 8px;
+        }
+
+        .contact-modal__submit:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .contact-modal__submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .contact-modal__success {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .contact-modal__success-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .contact-modal__success-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 8px;
+        }
+
+        .contact-modal__success-text {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+    </style>
+
+    <!-- Analytics -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5PYH0SJWEW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5PYH0SJWEW');
+    </script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "rfdccvjnjx");
+    </script>
+    <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+    <!-- ========================================
+         HEADER
+         ======================================== -->
+
+    <header class="header">
+        <div class="header__inner">
+            <a href="index.html" class="header__logo">
+                <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <nav class="header__nav">
+                <a href="done-for-you.html" class="header__link header__link--active" data-i18n="nav.how_it_works">Cara Kerjanya</a>
+                <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Harga</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">Hotline SOS</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">Bersihkan Daftar Saya</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
+                    <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav__header">
+            <a href="index.html" class="header__logo">
+                <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+            </a>
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div class="mobile-nav__links">
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">Cara Kerjanya</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Harga</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">Hotline SOS</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">Tentang</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Mitra</a>
+        </div>
+        <div class="mobile-nav__cta">
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.cta">Bersihkan Daftar Saya</a>
+        </div>
+    </nav>
+
+    <!-- ========================================
+         HERO
+         ======================================== -->
+
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero__headline"><span data-i18n="dfy.hero_title">Validator memeriksa alamat. Saya membaca risiko.</span><br><span data-i18n="dfy.hero_subtitle">Daftar Anda tidak rusak. Asumsi di baliknya yang salah. Saya membaca daftar dengan cara yang diajarkan pengalaman, bukan cara default perangkat lunak.</span></h1>
+            <p class="hero__subhead" data-i18n="dfy.hero_subtitle">Daftar Anda tidak rusak. Asumsi di baliknya yang salah. Saya membaca daftar dengan cara yang diajarkan pengalaman, bukan cara default perangkat lunak.</p>
+            <div class="hero__actions">
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Bersihkan Daftar Saya</a>
+                <button type="button" class="btn btn-secondary" onclick="openContactModal('hero-contact-us-first')" data-i18n="dfy.contact_first">Contact Us First</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         WHAT YOU GET — The three categories
+         ======================================== -->
+
+    <section class="section section--light" id="what-you-get">
+        <div class="container">
+            <div class="section__header">
+                <h2 data-i18n="dfy.output_title">Apa yang Anda Dapatkan Kembali</h2>
+                <p data-i18n="dfy.output_subtitle">Daftar Anda disortir menjadi tiga kelompok, dengan label dan alasan di balik setiap keputusan.</p>
+            </div>
+
+            <div class="output-grid">
+                <div class="output-card">
+                    <span class="output-card__label output-card__label--keep">Keep</span>
+                    <h3 data-i18n="dfy.keep_title">Safe to Mail</h3>
+                    <p data-i18n="dfy.keep_desc">No flags found. Domain checks out, validation passed, no risk signals. These are clear to send.</p>
+                </div>
+
+                <div class="output-card">
+                    <span class="output-card__label output-card__label--monitor">Monitor</span>
+                    <h3 data-i18n="dfy.monitor_title">Yellow Flags</h3>
+                    <p data-i18n="dfy.monitor_desc">Each address comes with specific labels explaining why it landed here. Context matters. How you segment and send to these decides the outcome.</p>
+                </div>
+
+                <div class="output-card">
+                    <span class="output-card__label output-card__label--suppress">Suppress</span>
+                    <h3 data-i18n="dfy.suppress_title">Do Not Mail</h3>
+                    <p data-i18n="dfy.suppress_desc">Each address comes with specific labels explaining why. Invalid, trap-likely, disposable, or other risk signals. Don't send here.</p>
+                </div>
+            </div>
+
+            <p class="output-note" data-i18n="dfy.output_note">Anda juga mendapatkan data validasi dan DNS yang mendasari setiap keputusan. Bukan hanya pengelompokan. Gambaran lengkapnya.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         ALSO INCLUDED
+         ======================================== -->
+
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2 data-i18n="dfy.how_read_title">How I Read Your List</h2>
+            </div>
+
+            <div class="included-list">
+                <div class="included-item">
+                    <div class="included-item__icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                    <div class="included-item__content">
+                        <h3 data-i18n="dfy.read1_title">I Look Beyond the Address</h3>
+                        <p data-i18n="dfy.read1_desc">Domain behavior, history, and patterns across your entire list. Context, not just existence. An address that "works" can still be dangerous.</p>
+                    </div>
+                </div>
+
+                <div class="included-item">
+                    <div class="included-item__icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <div class="included-item__content">
+                        <h3 data-i18n="dfy.read2_title">I Check What Others Miss</h3>
+                        <p data-i18n="dfy.read2_desc">Traps, role accounts, toxic domains, disposable patterns. The things that don't bounce but still hurt you. I've learned what to look for.</p>
+                    </div>
+                </div>
+
+                <div class="included-item">
+                    <div class="included-item__icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <div class="included-item__content">
+                        <h3 data-i18n="dfy.read3_title">I Explain My Reasoning</h3>
+                        <p data-i18n="dfy.read3_desc">Not just labels. You get the thinking behind each decision so you understand why, and can make smarter calls next time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         HOW IT WORKS — Dark section
+         ======================================== -->
+
+    <section class="section section--dark" id="how-it-works">
+        <div class="container">
+            <div class="section__header">
+                <h2 data-i18n="dfy.process_title">Cara Kerjanya</h2>
+                <p data-i18n="dfy.process_subtitle">Proses sederhana. Eksekusi ahli.</p>
+            </div>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-step__number">1</div>
+                    <div class="process-step__content">
+                        <h3 data-i18n="dfy.step1_title">Kirim Daftar Anda Kepada Kami</h3>
+                        <p data-i18n="dfy.step1_desc">CSV, Excel, apa pun yang Anda miliki. Kami sudah melihat semuanya. Tidak ada penghakiman, tidak ada pertanyaan.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-step__number">2</div>
+                    <div class="process-step__content">
+                        <h3 data-i18n="dfy.step2_title">Saya Membaca Daftar Anda</h3>
+                        <p data-i18n="dfy.step2_desc">Setiap alamat diperiksa. Pola domain, riwayat, sinyal risiko. Gambaran lengkap, bukan hanya pemeriksaan validitas.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-step__number">3</div>
+                    <div class="process-step__content">
+                        <h3 data-i18n="dfy.step3_title">Dapatkan Hasil Berlabel Kembali</h3>
+                        <p data-i18n="dfy.step3_desc">Simpan, Pantau, atau Tahan. Dengan alasan spesifik di balik setiap keputusan. Anda akan tahu apa yang harus dilakukan dan mengapa.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-step__number">4</div>
+                    <div class="process-step__content">
+                        <h3 data-i18n="dfy.step4_title">Opsional: Pesan Panggilan Penjelasan</h3>
+                        <p data-i18n="dfy.step4_desc">Diskusikan hasilnya dengan saya. Pahami apa yang kami temukan dan rencanakan langkah selanjutnya.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PRE-SALES CONSULTATION — Not sure what you need?
+         ======================================== -->
+
+    <section class="section section--light">
+        <div class="container">
+            <div class="section__header">
+                <h2 data-i18n="dfy.consult_title">Tidak Yakin Apa yang Anda Butuhkan?</h2>
+                <p data-i18n="dfy.consult_subtitle">no pitch. Let's talk through your situation and figure out if list cleaning is even the right move.</p>
+            </div>
+
+            <div class="call-block">
+
+                <div class="call-card">
+                    <span class="call-card__badge" data-i18n="dfy.consult_badge">Konsultasi Gratis Pertama</span>
+                    <h3 data-i18n="dfy.consult_call_title">1:1 Call with YT</h3>
+                    <p class="call-card__description" data-i18n="dfy.consult_card_desc">your sending</p>
+                    <p class="call-card__duration" data-i18n="dfy.consult_duration"><strong>15-30 minutes.</strong> No commitment required.</p>
+
+                    <div class="call-topics">
+                        <p class="call-topics__label" data-i18n="dfy.consult_topics_label">Kita bisa mendiskusikan</p>
+                        <ul>
+                            <li data-i18n="dfy.consult_topic1">Apakah pembersihan daftar masuk akal untuk situasi Anda</li>
+                            <li data-i18n="dfy.consult_topic2">Apa yang mungkin menyebabkan masalah deliverability Anda</li>
+                            <li data-i18n="dfy.consult_topic3">Tingkat layanan mana yang sesuai dengan kebutuhan Anda</li>
+                            <li data-i18n="dfy.consult_topic4">Ekspektasi waktu dan penyelesaian</li>
+                            <li data-i18n="dfy.consult_topic5">Pertanyaan tentang prosesnya</li>
+                        </ul>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="openContactModal('book-consultation')" data-i18n="dfy.consult_cta">Pesan Konsultasi Gratis</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         WHO THIS IS FOR
+         ======================================== -->
+
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2 data-i18n="dfy.who_title">Who This Is For</h2>
+            </div>
+
+            <div class="who-grid">
+                <div class="who-card">
+                    <h3 data-i18n="dfy.who_for_title">This Is For You If</h3>
+                    <ul>
+                        <li data-i18n="dfy.who_for1">Running campaigns but seeing declining engagement</li>
+                        <li data-i18n="dfy.who_for2">Worried about bounces, complaints, or blocklists</li>
+                        <li data-i18n="dfy.who_for3">Inheriting a list you did not build</li>
+                        <li data-i18n="dfy.who_for4">Under pressure to "just send" but sensing risk</li>
+                        <li data-i18n="dfy.who_for5">Trying to explain deliverability risks internally</li>
+                    </ul>
+                </div>
+
+                <div class="who-card">
+                    <h3 data-i18n="dfy.who_not_title">Not For You If</h3>
+                    <ul>
+                        <li data-i18n="dfy.who_not1">You want someone to write or send campaigns for you</li>
+                        <li data-i18n="dfy.who_not2">You need ESP migration or setup help</li>
+                        <li data-i18n="dfy.who_not3">You want ongoing managed services</li>
+                        <li data-i18n="dfy.who_not4">You need content or design work</li>
+                    </ul>
+                    <a href="partner.html" class="btn btn-secondary" style="margin-top: var(--space-sm);" data-i18n="dfy.who_partner_cta">Connect With a Partner</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         TESTIMONIAL
+         ======================================== -->
+
+    <section class="section section--lighter">
+        <div class="container">
+            <div class="testimonial-featured">
+                <p class="testimonial-featured__quote" data-i18n="dfy.testimonial_quote">Hotline SOS memberi saya panduan yang sangat membantu. Yanna-Torry membersihkan daftar kami dan mendukung kami lebih dari sekadar panggilan.</p>
+                <p class="testimonial-featured__author" data-i18n="dfy.testimonial_author">Megan S, UK</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         PRICING PREVIEW
+         ======================================== -->
+
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <h2 data-i18n="nav.pricing">Harga</h2>
+                <p data-i18n="dfy.pricing_subtitle">Harga volume: beli lebih banyak kredit, bayar lebih murah per kredit. Tidak ada kontrak, tidak ada trik.</p>
+            </div>
+
+            <div class="pricing-preview">
+
+                <div class="pricing-cta">
+                    <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Bersihkan Daftar Saya</a>
+                    <p class="pricing-contact"><span data-i18n="dfy.pricing_questions">Questions first?</span> <a href="#" onclick="openContactModal('pricing-just-ask'); return false;" data-i18n="dfy.pricing_ask">Just ask</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         SOS BRIDGE — Not ready yet?
+         ======================================== -->
+
+    <section class="section section--light">
+        <div class="container">
+            <div class="sos-bridge">
+                <h3 data-i18n="dfy.sos_title">Not Sure Yet?</h3>
+                <p data-i18n="dfy.sos_desc">Have a question before committing? Use the SOS Hotline. It is free. No sales pitch. Just honest answers.</p>
+                <a href="sos-hotline.html" class="btn btn-secondary" data-i18n="dfy.sos_cta">Learn About SOS Hotline</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FINAL CTA
+         ======================================== -->
+
+    <section class="cta-block">
+        <div class="cta-block__inner">
+            <h2 data-i18n="dfy.cta_title">Siap Mengetahui Apa yang Sebenarnya Ada di Daftar Anda?</h2>
+            <p class="cta-block__subtext" data-i18n="dfy.cta_subtitle">Kirimkan. Saya akan memberi tahu Anda apa yang harus disimpan, apa yang harus diawasi, dan apa yang tidak boleh dikirimi lagi. Dengan alasan di balik setiap keputusan.</p>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Bersihkan Daftar Saya</a>
+            <p class="cta-block__footer" data-i18n="dfy.cta_footer">Sebagian besar daftar dikembalikan dalam 24-48 jam.</p>
+        </div>
+    </section>
+
+    <!-- ========================================
+         FOOTER
+         ======================================== -->
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__brand">
+                <img src="../assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
+                <p data-i18n="footer.tagline">Kami melihat apa yang tidak bisa dilihat algoritma.</p>
+            </div>
+
+            <div class="footer__column">
+                <h4 data-i18n="footer.services">Layanan</h4>
+                <a href="pricing.html" data-i18n="nav.pricing">Harga</a>
+                <a href="sos-hotline.html" data-i18n="nav.sos_hotline">Hotline SOS</a>
+            </div>
+
+            <div class="footer__column">
+                <h4 data-i18n="footer.company">Perusahaan</h4>
+                <a href="about.html" data-i18n="nav.about">Tentang</a>
+                <a href="partner.html" data-i18n="nav.partner">Mitra</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html" data-i18n="footer.security">Keamanan</a>
+            </div>
+
+            <div class="footer__column">
+                <h4 data-i18n="footer.contact">Kontak</h4>
+                <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
+            </div>
+
+            <div class="footer__bottom">
+                <span data-i18n="footer.copyright">© 2026 Review My Emails. Hak cipta dilindungi undang-undang.</span>
+                <span data-i18n="footer.legal">Kebijakan Privasi · Ketentuan</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Event Tracking -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var destination = this.getAttribute('href') || '';
+                    var label = this.textContent.trim();
+                    va('event', { name: 'CTA_Clicked', data: { label: label, destination: destination, page: 'done-for-you' } });
+                });
+            });
+        });
+    </script>
+
+    <!-- Mobile Navigation -->
+    <script>
+        function openMobileNav() {
+            document.getElementById('mobileNav').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    </script>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contactModal">
+        <div class="contact-modal__content">
+            <div class="contact-modal__header">
+                <h3 class="contact-modal__title" data-i18n="contact.modal_title">Hubungi Kami</h3>
+                <button class="contact-modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">&times;</button>
+            </div>
+            <div class="contact-modal__body">
+                <p class="contact-modal__subtitle" data-i18n="dfy.modal_subtitle">Tell us about your situation and we'll get back to you within 24 hours.</p>
+                <form id="contactForm" onsubmit="submitContactForm(event)">
+                    <input type="hidden" id="contactSource" value="">
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label" data-i18n="form.name_label">Nama \*</label>
+                        <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="form.name_placeholder">
+                    </div>
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label" data-i18n="form.email_label">Email \*</label>
+                        <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="form.email_placeholder">
+                    </div>
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label" data-i18n="form.timezone_label">Zona Waktu (opsional)</label>
+                        <select class="contact-modal__select" id="contactTimezone">
+                            <option value="" data-i18n="form.timezone_select">Pilih zona waktu Anda</option>
+                            <option value="America/New_York" data-i18n="form.tz_eastern">Waktu Timur (ET)</option>
+                            <option value="America/Chicago" data-i18n="form.tz_central">Waktu Tengah (CT)</option>
+                            <option value="America/Denver" data-i18n="form.tz_mountain">Waktu Pegunungan (MT)</option>
+                            <option value="America/Los_Angeles" data-i18n="form.tz_pacific">Waktu Pasifik (PT)</option>
+                            <option value="America/Anchorage" data-i18n="form.tz_alaska">Waktu Alaska</option>
+                            <option value="Pacific/Honolulu" data-i18n="form.tz_hawaii">Waktu Hawaii</option>
+                            <option value="Europe/London" data-i18n="form.tz_london">London (GMT/BST)</option>
+                            <option value="Europe/Paris" data-i18n="form.tz_cet">Waktu Eropa Tengah (CET)</option>
+                            <option value="Europe/Athens" data-i18n="form.tz_eet">Waktu Eropa Timur</option>
+                            <option value="Asia/Dubai" data-i18n="form.tz_gulf">Waktu Standar Teluk</option>
+                            <option value="Asia/Kolkata" data-i18n="form.tz_india">Waktu Standar India</option>
+                            <option value="Asia/Singapore" data-i18n="form.tz_singapore">Waktu Singapura</option>
+                            <option value="Asia/Tokyo" data-i18n="form.tz_japan">Waktu Standar Jepang</option>
+                            <option value="Australia/Sydney" data-i18n="form.tz_sydney">Waktu Australia Timur</option>
+                            <option value="Pacific/Auckland" data-i18n="form.tz_nz">Waktu Selandia Baru</option>
+                        </select>
+                    </div>
+                    <div class="contact-modal__field">
+                        <label class="contact-modal__label" data-i18n="form.message_optional_label">Pesan (opsional)</label>
+                        <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..." data-i18n-placeholder="dfy.modal_message_placeholder"></textarea>
+                    </div>
+                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="dfy.modal_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Send Request</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openContactModal(source) {
+            document.getElementById('contactSource').value = source || 'done-for-you';
+            document.getElementById('contactModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            va('event', { name: 'Contact_Modal_Opened', data: { source: source || 'done-for-you', page: 'done-for-you' } });
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('contactModal').addEventListener('click', function(e) {
+            if (e.target === this) closeContactModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeContactModal();
+        });
+
+        async function submitContactForm(e) {
+            e.preventDefault();
+            const btn = document.getElementById('contactSubmitBtn');
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const timezone = document.getElementById('contactTimezone').value;
+            const message = document.getElementById('contactMessage').value.trim();
+            const source = document.getElementById('contactSource').value;
+
+            btn.disabled = true;
+            btn.textContent = btn.dataset.i18nSending || 'Sending...';
+
+            try {
+                const response = await fetch('/api/contact-request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        timezone,
+                        message,
+                        source: source,
+                        page: 'done-for-you'
+                    })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    document.querySelector('.contact-modal__body').innerHTML = `
+                        <div class="contact-modal__success">
+                            <div class="contact-modal__success-icon">✓</div>
+                            <div class="contact-modal__success-title" data-i18n="ui.request_received">Permintaan Diterima</div>
+                            <p class="contact-modal__success-text" data-i18n="ui.response_time">Kami akan menghubungi Anda kembali dalam 24-48 jam.</p>
+                        </div>
+                    `;
+                    va('event', { name: 'Contact_Form_Submitted', data: { source: source, page: 'done-for-you' } });
+                } else {
+                    throw new Error(data.error || 'Failed to submit');
+                }
+            } catch (error) {
+                console.error('Contact form error:', error);
+                btn.disabled = false;
+                btn.textContent = btn.dataset.i18nRetry || 'Try Again';
+            }
+        }
+    </script>
+
+    <!-- i18n Translation Loader -->
+    <script src="/js/i18n.js"></script>
+</body>
+</html>

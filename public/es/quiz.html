@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Is Your Email List Safe? | Free Risk Assessment | Review My Emails</title>
-    <meta name="description" content="Take a 2-minute self-assessment to find out if your email list is putting your sender reputation at risk. Identify problems before they hurt you.">
+    <title>Review My Emails | Limpieza Profesional de Listas de Email</title>
+    <meta name="description" content="Servicios profesionales de limpieza de listas de email. No es Validation automatizado - análisis manual que detecta spam traps, contactos riesgosos y factores que dañan tu reputación.">
     <link rel="canonical" href="https://reviewmyemails.com/quiz/">
 
     <!-- Open Graph -->
@@ -908,15 +908,15 @@
 <!-- Header -->
 <header class="header">
     <div class="header__inner">
-        <a href="/" class="header__logo">
+        <a href="index.html" class="header__logo">
             <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
         </a>
         <nav class="header__nav">
-            <a href="/done-for-you" class="header__link">How It Works</a>
-            <a href="/pricing" class="header__link">Pricing</a>
-            <a href="/sos-hotline" class="header__link">SOS Hotline</a>
-            <a href="https://anchor.reviewmyemails.com" class="header__cta">Get My List Cleaned</a>
-            <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+            <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">Cómo Funciona</a>
+            <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Precios</a>
+            <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="https://anchor.reviewmyemails.com" class="header__cta" data-i18n="nav.cta">Limpiar Mi Lista</a>
+            <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                 <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
             </button>
         </nav>
@@ -926,22 +926,22 @@
 <!-- Mobile Navigation -->
 <nav class="mobile-nav" id="mobileNav">
     <div class="mobile-nav__header">
-        <a href="/" class="header__logo">
+        <a href="index.html" class="header__logo">
             <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
         </a>
-        <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+        <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
             <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
     </div>
     <div class="mobile-nav__links">
-        <a href="/done-for-you" class="mobile-nav__link">How It Works</a>
-        <a href="/pricing" class="mobile-nav__link">Pricing</a>
-        <a href="/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
-        <a href="/about" class="mobile-nav__link">About</a>
-        <a href="/partner" class="mobile-nav__link">Partner</a>
+        <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">Cómo Funciona</a>
+        <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Precios</a>
+        <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+        <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">Acerca de</a>
+        <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Socios</a>
     </div>
     <div class="mobile-nav__cta">
-        <a href="https://anchor.reviewmyemails.com">Get My List Cleaned</a>
+        <a href="https://anchor.reviewmyemails.com" data-i18n="nav.cta">Limpiar Mi Lista</a>
     </div>
 </nav>
 
@@ -949,8 +949,8 @@
 <div class="diagnostic-container">
 
     <div class="diag-header" id="diagHeader">
-        <h3>Is Your List Safe?</h3>
-        <div class="diag-step" id="stepIndicator">Question 1 of 4</div>
+        <h3 data-i18n="quiz.title">¿Tu Lista es Segura?</h3>
+        <div class="diag-step" id="stepIndicator" data-i18n="quiz.step_1_of_4">Pregunta 1 de 4</div>
         <div class="diag-progress"><div class="diag-bar" id="progressBar"></div></div>
     </div>
 
@@ -961,323 +961,323 @@
 
         <!-- Q1: Source -->
         <div class="question-step active" id="q1">
-            <p class="q-text">How did the majority of these emails get on your list?</p>
-            <button class="answer-btn" data-short="Organic" data-context="Organic lists decay too. About 22% go stale every year. Normal." onclick="handleAnswer(1, 'organic', this)">They filled out a form on my website or app</button>
-            <button class="answer-btn" data-short="No consent" data-context="No consent means higher risk. We can still help clean it—just important to set expectations." onclick="handleAnswer(1, 'no_consent', this)">Purchased, scraped, or cold outreach (no opt-in)</button>
-            <button class="answer-btn" data-short="Mixed" data-context="Mixed lists hide surprises. The risky part is always what you didn't build." onclick="handleAnswer(1, 'mixed', this)">Mixed sources / I inherited this list</button>
+            <p class="q-text" data-i18n="quiz.q1_text">¿Cómo llegó la mayoría de estos emails a tu lista?</p>
+            <button class="answer-btn" data-short="Organic" data-context="Organic lists decay too. About 22% go stale every year. Normal." onclick="handleAnswer(1, 'organic', this)" data-i18n="quiz.q1_a1">Completaron un formulario en mi sitio web o app</button>
+            <button class="answer-btn" data-short="No consent" data-context="No consent means higher risk. We can still help clean it—just important to set expectations." onclick="handleAnswer(1, 'no_consent', this)" data-i18n="quiz.q1_a2">Comprados, scrapeados o prospección fría (sin opt-in)</button>
+            <button class="answer-btn" data-short="Mixed" data-context="Mixed lists hide surprises. The risky part is always what you didn't build." onclick="handleAnswer(1, 'mixed', this)" data-i18n="quiz.q1_a3">Fuentes mixtas / Heredé esta lista</button>
         </div>
 
         <!-- Q2: Authentication -->
         <div class="question-step" id="q2">
-            <p class="q-text">Is your sending domain authenticated with DMARC?</p>
-            <button class="answer-btn" data-short="Yes" data-context="Good. Infrastructure isn't your problem." onclick="handleAnswer(2, 'dmarc_yes', this)">Yes, DMARC is set to Reject or Quarantine</button>
-            <button class="answer-btn" data-short="Partial" data-context="Partial setup confuses inboxes. Inconsistency signals risk." onclick="handleAnswer(2, 'dmarc_partial', this)">I think so, but I'm not sure of the settings</button>
-            <button class="answer-btn" data-short="No" data-context="Even a clean list won't save you without auth." onclick="handleAnswer(2, 'dmarc_no', this)">No / What is DMARC?</button>
+            <p class="q-text" data-i18n="quiz.q2_text">¿Tu dominio de envío está autenticado con DMARC?</p>
+            <button class="answer-btn" data-short="Yes" data-context="Good. Infrastructure isn't your problem." onclick="handleAnswer(2, 'dmarc_yes', this)" data-i18n="quiz.q2_a1">Sí, DMARC está configurado en Reject o Quarantine</button>
+            <button class="answer-btn" data-short="Partial" data-context="Partial setup confuses inboxes. Inconsistency signals risk." onclick="handleAnswer(2, 'dmarc_partial', this)" data-i18n="quiz.q2_a2">Creo que sí, pero no estoy seguro de la configuración</button>
+            <button class="answer-btn" data-short="No" data-context="Even a clean list won't save you without auth." onclick="handleAnswer(2, 'dmarc_no', this)" data-i18n="quiz.q2_a3">No / ¿Qué es DMARC?</button>
         </div>
 
         <!-- Q3: Validation Experience -->
         <div class="question-step" id="q3">
-            <p class="q-text">Have you run this list through a validation tool?</p>
-            <button class="answer-btn" data-short="Never" data-context="Six months is a long time. Lists go stale fast." onclick="handleAnswer(3, 'never', this)">No, never / Not in the last 6 months</button>
-            <button class="answer-btn" data-short="Valid but issues" data-context="Valid means deliverable, not safe. There's a gap between syntax and reputation." onclick="handleAnswer(3, 'valid_issues', this)">Yes, it said "Valid" but I'm still seeing issues</button>
-            <button class="answer-btn" data-short="Catch-all flagged" data-context="Catch-all domains accept everything, which is why tools mark them unknown." onclick="handleAnswer(3, 'catchall', this)">Yes, it flagged a lot as "Unknown" or "Catch-All"</button>
-            <button class="answer-btn" data-short="Clean" data-context="If everything looks fine, the problem isn't technical." onclick="handleAnswer(3, 'clean', this)">Yes, and everything seems fine</button>
+            <p class="q-text" data-i18n="quiz.q3_text">¿Has pasado esta lista por una herramienta de validación?</p>
+            <button class="answer-btn" data-short="Never" data-context="Six months is a long time. Lists go stale fast." onclick="handleAnswer(3, 'never', this)" data-i18n="quiz.q3_a1">No, nunca / No en los últimos 6 meses</button>
+            <button class="answer-btn" data-short="Valid but issues" data-context="Valid means deliverable, not safe. There's a gap between syntax and reputation." onclick="handleAnswer(3, 'valid_issues', this)" data-i18n="quiz.q3_a2">Sí, dijo "Valid" pero sigo viendo problemas</button>
+            <button class="answer-btn" data-short="Catch-all flagged" data-context="Catch-all domains accept everything, which is why tools mark them unknown." onclick="handleAnswer(3, 'catchall', this)" data-i18n="quiz.q3_a3">Sí, marcó muchos como "Unknown" o "Catch-All"</button>
+            <button class="answer-btn" data-short="Clean" data-context="If everything looks fine, the problem isn't technical." onclick="handleAnswer(3, 'clean', this)" data-i18n="quiz.q3_a4">Sí, y todo parece bien</button>
         </div>
 
         <!-- Q4: Pain Point -->
         <div class="question-step" id="q4">
-            <p class="q-text">What brought you here today?</p>
-            <button class="answer-btn" data-short="Declining rates" data-context="Slow decline. Hardest to spot." onclick="handleAnswer(4, 'declining', this)">Open rates are slowly dropping over time</button>
-            <button class="answer-btn" data-short="ESP warning" data-context="That's already affecting your reputation." onclick="handleAnswer(4, 'crisis', this)">ESP warning or suspension</button>
-            <button class="answer-btn" data-short="Preventive" data-context="You're early. Smart." onclick="handleAnswer(4, 'preventive', this)">I want to be safe before a big send</button>
-            <button class="answer-btn" data-short="Conflicting tools" data-context="Tools disagree when behaviour is the issue." onclick="handleAnswer(4, 'confused', this)">Tools give conflicting answers</button>
+            <p class="q-text" data-i18n="quiz.q4_text">¿Qué te trajo aquí hoy?</p>
+            <button class="answer-btn" data-short="Declining rates" data-context="Slow decline. Hardest to spot." onclick="handleAnswer(4, 'declining', this)" data-i18n="quiz.q4_a1">Las tasas de apertura están bajando lentamente con el tiempo</button>
+            <button class="answer-btn" data-short="ESP warning" data-context="That's already affecting your reputation." onclick="handleAnswer(4, 'crisis', this)" data-i18n="quiz.q4_a2">Advertencia o suspensión del ESP</button>
+            <button class="answer-btn" data-short="Preventive" data-context="You're early. Smart." onclick="handleAnswer(4, 'preventive', this)" data-i18n="quiz.q4_a3">Quiero estar seguro antes de un envío grande</button>
+            <button class="answer-btn" data-short="Conflicting tools" data-context="Tools disagree when behaviour is the issue." onclick="handleAnswer(4, 'confused', this)" data-i18n="quiz.q4_a4">Las herramientas dan respuestas contradictorias</button>
         </div>
 
         <!-- Loading -->
         <div class="loading-step" id="loadingStep">
             <div class="spinner"></div>
-            <div class="loading-text" id="loadingMain">Analyzing your responses...</div>
-            <div class="loading-sub" id="loadingSub">Comparing against common patterns</div>
+            <div class="loading-text" id="loadingMain" data-i18n="quiz.loading_analyzing">Analizando tus respuestas...</div>
+            <div class="loading-sub" id="loadingSub" data-i18n="quiz.loading_comparing">Comparando con patrones comunes</div>
         </div>
 
         <!-- RESULTS -->
 
         <!-- No Consent List (Purchased, Scraped, Cold) -->
         <div class="result-step" id="res-no-consent">
-            <p class="pattern-line">This is one of the most common patterns I see.</p>
-            <span class="verdict-badge verdict-high">Higher Risk</span>
-            <h2 class="result-headline">We can absolutely help clean your list.</h2>
-            <p class="result-subhead">Lists without explicit consent carry more risk—but that doesn't mean you can't send safely. We'll remove the addresses most likely to hurt you.</p>
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Este es uno de los patrones más comunes que veo.</p>
+            <span class="verdict-badge verdict-high" data-i18n="quiz.badge_higher_risk">Riesgo Mayor</span>
+            <h2 class="result-headline" data-i18n="quiz.res_noconsent_headline">Definitivamente podemos ayudarte a limpiar tu lista.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_noconsent_subhead">Las listas sin consentimiento explícito conllevan más riesgo—pero eso no significa que no puedas enviar de forma segura.</p>
 
             <div class="reality-check">
-                <h4>What we'll do</h4>
-                <p>We catch invalid addresses, spam traps, role accounts, and high-risk patterns that other validators miss. We're thorough. But we're also honest: no tool can catch every trap on a non-consent list because some are designed to be undetectable. That's true for every validator—we're just the ones who tell you.</p>
+                <h4 data-i18n="quiz.what_well_do">Lo que haremos</h4>
+                <p data-i18n="quiz.res_noconsent_reality">Detectamos direcciones inválidas, trampas de spam, cuentas de rol y patrones de alto riesgo que otros validadores no detectan.</p>
             </div>
 
             <div id="no-consent-issues" class="additional-issues" style="display:none; margin-bottom: 24px;"></div>
 
-            <button type="button" class="cta-btn" onclick="openContactModal()">Talk to a Specialist</button>
-            <p class="result-direct-link">Ready to go? <a href="https://anchor.reviewmyemails.com">Get My List Cleaned →</a></p>
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_talk_specialist">Hablar con un Especialista</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">¿Listo para comenzar?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Limpiar Mi Lista →</a></p>
 
             <div class="result-capture" data-result="no-consent">
-                <div class="result-capture__title">Save your diagnosis</div>
-                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Guardar tu diagnóstico</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Recibe tus resultados por email y opcionalmente únete a nuestra lista de espera para herramientas de autoservicio.</div>
                 <div class="result-capture__form">
-                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-newsletter">
-                        <span>Monthly deliverability insights (no spam, just signal) + <span class="result-capture__bonus">1,500 credits when we launch</span></span>
+                        <span><span data-i18n="quiz.newsletter_opt">Información mensual de entregabilidad (sin spam, solo señal)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">1.500 créditos cuando lancemos</span></span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-waitlist">
-                        <span>Notify me when self-serve launches</span>
+                        <span data-i18n="quiz.notify_launch">Notificarme cuando se lance el autoservicio</span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-contact">
-                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
+                        <span data-i18n="quiz.request_contact">Que alguien me contacte para discutir mi situación (sin venta)</span>
                     </label>
-                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
-                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Enviar Mis Resultados</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Omitir</div>
                 </div>
             </div>
         </div>
 
         <!-- Critical: ESP Crisis -->
         <div class="result-step" id="res-crisis">
-            <p class="pattern-line">This is one of the most common patterns I see.</p>
-            <span class="verdict-badge verdict-critical">Critical</span>
-            <h2 class="result-headline">You need triage, not just cleaning.</h2>
-            <p class="result-subhead">An ESP warning is the final straw. Your reputation is already damaged. Automated cleaning alone will not get you reinstated.</p>
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Este es uno de los patrones más comunes que veo.</p>
+            <span class="verdict-badge verdict-critical" data-i18n="quiz.badge_critical">Crítico</span>
+            <h2 class="result-headline" data-i18n="quiz.res_crisis_headline">Necesitas triaje, no solo limpieza.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_crisis_subhead">Una advertencia del ESP es la gota que colma el vaso. Tu reputación ya está dañada.</p>
 
             <div class="reality-check">
-                <h4>What this means</h4>
-                <p>You need a remediation strategy, not just a clean list. I help identify the root cause and build a path back to good standing with your ESP.</p>
+                <h4 data-i18n="quiz.what_this_means">Qué significa esto</h4>
+                <p data-i18n="quiz.res_crisis_reality">Necesitas una estrategia de remediación, no solo una lista limpia. Ayudo a identificar la causa raíz.</p>
             </div>
 
             <div id="crisis-issues" class="additional-issues" style="display:none;"></div>
 
-            <button type="button" class="cta-btn" onclick="openContactModal()">Talk to a Specialist</button>
-            <p class="result-direct-link">Ready to go? <a href="https://anchor.reviewmyemails.com">Get My List Cleaned →</a></p>
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_talk_specialist">Hablar con un Especialista</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">¿Listo para comenzar?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Limpiar Mi Lista →</a></p>
 
             <div class="result-capture" data-result="crisis">
-                <div class="result-capture__title">Save your diagnosis</div>
-                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Guardar tu diagnóstico</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Recibe tus resultados por email y opcionalmente únete a nuestra lista de espera para herramientas de autoservicio.</div>
                 <div class="result-capture__form">
-                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-newsletter">
-                        <span>Monthly deliverability insights (no spam, just signal) + <span class="result-capture__bonus">1,500 credits when we launch</span></span>
+                        <span><span data-i18n="quiz.newsletter_opt">Información mensual de entregabilidad (sin spam, solo señal)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">1.500 créditos cuando lancemos</span></span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-waitlist">
-                        <span>Notify me when self-serve launches</span>
+                        <span data-i18n="quiz.notify_launch">Notificarme cuando se lance el autoservicio</span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-contact">
-                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
+                        <span data-i18n="quiz.request_contact">Que alguien me contacte para discutir mi situación (sin venta)</span>
                     </label>
-                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
-                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Enviar Mis Resultados</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Omitir</div>
                 </div>
             </div>
         </div>
 
         <!-- High Risk: Tool Failure -->
         <div class="result-step" id="res-tool-failure">
-            <p class="pattern-line">This is one of the most common patterns I see.</p>
-            <span class="verdict-badge verdict-high">High Risk</span>
-            <h2 class="result-headline">Your validation tool missed something.</h2>
-            <p class="result-subhead">You paid for syntax checking. You were punished for reputation. A "Valid" email can still be a spam trap or chronic complainer.</p>
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Este es uno de los patrones más comunes que veo.</p>
+            <span class="verdict-badge verdict-high" data-i18n="quiz.badge_high_risk">Riesgo Alto</span>
+            <h2 class="result-headline" data-i18n="quiz.res_toolfail_headline">Tu herramienta de validación pasó algo por alto.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_toolfail_subhead">Pagaste por verificación de sintaxis. Fuiste castigado por la reputación.</p>
 
             <div class="reality-check">
-                <h4>What this means</h4>
-                <p>Automated tools cannot see behavioral history. They check code, not context. I find the "Valid but Dangerous" addresses they miss.</p>
+                <h4 data-i18n="quiz.what_this_means">Qué significa esto</h4>
+                <p data-i18n="quiz.res_toolfail_reality">Las herramientas automatizadas no pueden ver el historial de comportamiento. Verifican código, no contexto.</p>
             </div>
 
             <div id="tool-failure-issues" class="additional-issues" style="display:none;"></div>
 
-            <button type="button" class="cta-btn" onclick="openContactModal()">Get a full review</button>
-            <p class="result-direct-link">Ready to go? <a href="https://anchor.reviewmyemails.com">Get My List Cleaned →</a></p>
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_full_review">Obtener una revisión completa</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">¿Listo para comenzar?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Limpiar Mi Lista →</a></p>
 
             <div class="result-capture" data-result="tool-failure">
-                <div class="result-capture__title">Save your diagnosis</div>
-                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Guardar tu diagnóstico</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Recibe tus resultados por email y opcionalmente únete a nuestra lista de espera para herramientas de autoservicio.</div>
                 <div class="result-capture__form">
-                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-newsletter">
-                        <span>Monthly deliverability insights (no spam, just signal) + <span class="result-capture__bonus">1,500 credits when we launch</span></span>
+                        <span><span data-i18n="quiz.newsletter_opt">Información mensual de entregabilidad (sin spam, solo señal)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">1.500 créditos cuando lancemos</span></span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-waitlist">
-                        <span>Notify me when self-serve launches</span>
+                        <span data-i18n="quiz.notify_launch">Notificarme cuando se lance el autoservicio</span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-contact">
-                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
+                        <span data-i18n="quiz.request_contact">Que alguien me contacte para discutir mi situación (sin venta)</span>
                     </label>
-                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
-                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Enviar Mis Resultados</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Omitir</div>
                 </div>
             </div>
         </div>
 
         <!-- High Risk: Infrastructure Gap -->
         <div class="result-step" id="res-infra">
-            <p class="pattern-line">This is one of the most common patterns I see.</p>
-            <span class="verdict-badge verdict-high">High Risk</span>
-            <h2 class="result-headline">Your infrastructure may be the problem.</h2>
-            <p class="result-subhead">Without proper DMARC authentication, even a clean list can land in spam. This is a fixable issue, but it needs attention before list cleaning matters.</p>
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Este es uno de los patrones más comunes que veo.</p>
+            <span class="verdict-badge verdict-high" data-i18n="quiz.badge_high_risk">Riesgo Alto</span>
+            <h2 class="result-headline" data-i18n="quiz.res_infra_headline">Tu infraestructura puede ser el problema.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_infra_subhead">Sin autenticación DMARC adecuada, incluso una lista limpia puede terminar en spam.</p>
 
             <div class="reality-check">
-                <h4>What this means</h4>
-                <p>Domain authentication tells inbox providers you are who you say you are. Without it, your emails look suspicious regardless of list quality.</p>
+                <h4 data-i18n="quiz.what_this_means">Qué significa esto</h4>
+                <p data-i18n="quiz.res_infra_reality">La autenticación de dominio le dice a los proveedores de bandeja de entrada que eres quien dices ser.</p>
             </div>
 
             <div id="infra-issues" class="additional-issues" style="display:none;"></div>
 
-            <button type="button" class="cta-btn" onclick="openContactModal()">Let's diagnose this</button>
-            <p class="result-direct-link">Ready to go? <a href="https://anchor.reviewmyemails.com">Get My List Cleaned →</a></p>
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_diagnose">Diagnostiquemos esto</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">¿Listo para comenzar?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Limpiar Mi Lista →</a></p>
 
             <div class="result-capture" data-result="infra">
-                <div class="result-capture__title">Save your diagnosis</div>
-                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Guardar tu diagnóstico</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Recibe tus resultados por email y opcionalmente únete a nuestra lista de espera para herramientas de autoservicio.</div>
                 <div class="result-capture__form">
-                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-newsletter">
-                        <span>Monthly deliverability insights (no spam, just signal) + <span class="result-capture__bonus">1,500 credits when we launch</span></span>
+                        <span><span data-i18n="quiz.newsletter_opt">Información mensual de entregabilidad (sin spam, solo señal)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">1.500 créditos cuando lancemos</span></span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-waitlist">
-                        <span>Notify me when self-serve launches</span>
+                        <span data-i18n="quiz.notify_launch">Notificarme cuando se lance el autoservicio</span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-contact">
-                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
+                        <span data-i18n="quiz.request_contact">Que alguien me contacte para discutir mi situación (sin venta)</span>
                     </label>
-                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
-                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Enviar Mis Resultados</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Omitir</div>
                 </div>
             </div>
         </div>
 
         <!-- Medium Risk: Catch-All Confusion -->
         <div class="result-step" id="res-catchall">
-            <p class="pattern-line">This is one of the most common patterns I see.</p>
-            <span class="verdict-badge verdict-medium">Medium Risk</span>
-            <h2 class="result-headline">Those "Unknown" addresses are not unknown to me.</h2>
-            <p class="result-subhead">Catch-all domains accept everything. Validation tools cannot tell you which addresses are real. I can.</p>
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Este es uno de los patrones más comunes que veo.</p>
+            <span class="verdict-badge verdict-medium" data-i18n="quiz.badge_medium_risk">Riesgo Medio</span>
+            <h2 class="result-headline" data-i18n="quiz.res_catchall_headline">Esas direcciones "Desconocidas" no son desconocidas para mí.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_catchall_subhead">Los dominios catch-all aceptan todo. Las herramientas de validación no pueden decirte qué direcciones son reales. Yo sí puedo.</p>
 
             <div class="reality-check">
-                <h4>What this means</h4>
-                <p>A large percentage of business domains are catch-all. Validation marks them "Unknown" because it cannot verify. Pattern recognition and engagement history tell a different story.</p>
+                <h4 data-i18n="quiz.what_this_means">Qué significa esto</h4>
+                <p data-i18n="quiz.res_catchall_reality">Un gran porcentaje de dominios empresariales son catch-all. La validación los marca como "Desconocidos" porque no puede verificar.</p>
             </div>
 
             <div id="catchall-issues" class="additional-issues" style="display:none;"></div>
 
-            <button type="button" class="cta-btn" onclick="openContactModal()">Get clarity on your list</button>
-            <p class="result-direct-link">Ready to go? <a href="https://anchor.reviewmyemails.com">Get My List Cleaned →</a></p>
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_clarity">Obtén claridad sobre tu lista</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">¿Listo para comenzar?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Limpiar Mi Lista →</a></p>
 
             <div class="result-capture" data-result="catchall">
-                <div class="result-capture__title">Save your diagnosis</div>
-                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Guardar tu diagnóstico</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Recibe tus resultados por email y opcionalmente únete a nuestra lista de espera para herramientas de autoservicio.</div>
                 <div class="result-capture__form">
-                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-newsletter">
-                        <span>Monthly deliverability insights (no spam, just signal) + <span class="result-capture__bonus">1,500 credits when we launch</span></span>
+                        <span><span data-i18n="quiz.newsletter_opt">Información mensual de entregabilidad (sin spam, solo señal)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">1.500 créditos cuando lancemos</span></span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-waitlist">
-                        <span>Notify me when self-serve launches</span>
+                        <span data-i18n="quiz.notify_launch">Notificarme cuando se lance el autoservicio</span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-contact">
-                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
+                        <span data-i18n="quiz.request_contact">Que alguien me contacte para discutir mi situación (sin venta)</span>
                     </label>
-                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
-                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Enviar Mis Resultados</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Omitir</div>
                 </div>
             </div>
         </div>
 
         <!-- Medium Risk: Reputation Decay -->
         <div class="result-step" id="res-decay">
-            <p class="pattern-line">This is one of the most common patterns I see.</p>
-            <span class="verdict-badge verdict-medium">Medium Risk</span>
-            <h2 class="result-headline">Your list is slowly suffocating your delivery.</h2>
-            <p class="result-subhead">No bounce spike. No warning. Just a quiet decline as dead weight accumulates and inbox providers filter you to spam.</p>
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Este es uno de los patrones más comunes que veo.</p>
+            <span class="verdict-badge verdict-medium" data-i18n="quiz.badge_medium_risk">Riesgo Medio</span>
+            <h2 class="result-headline" data-i18n="quiz.res_decay_headline">Tu lista está asfixiando lentamente tu entregabilidad.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_decay_subhead">Sin pico de rebotes. Sin advertencia. Solo un declive silencioso mientras se acumula el peso muerto.</p>
 
             <div class="reality-check">
-                <h4>What this means</h4>
-                <p>This is the hardest problem to diagnose because there is no event. Your list has accumulated decay, and it is dragging down your engaged subscribers.</p>
+                <h4 data-i18n="quiz.what_this_means">Qué significa esto</h4>
+                <p data-i18n="quiz.res_decay_reality">Este es el problema más difícil de diagnosticar porque no hay un evento.</p>
             </div>
 
             <div id="decay-issues" class="additional-issues" style="display:none;"></div>
 
-            <button type="button" class="cta-btn" onclick="openContactModal()">Get the diagnosis</button>
-            <p class="result-direct-link">Ready to go? <a href="https://anchor.reviewmyemails.com">Get My List Cleaned →</a></p>
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_get_diagnosis">Obtener el diagnóstico</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">¿Listo para comenzar?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Limpiar Mi Lista →</a></p>
 
             <div class="result-capture" data-result="decay">
-                <div class="result-capture__title">Save your diagnosis</div>
-                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Guardar tu diagnóstico</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Recibe tus resultados por email y opcionalmente únete a nuestra lista de espera para herramientas de autoservicio.</div>
                 <div class="result-capture__form">
-                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-newsletter">
-                        <span>Monthly deliverability insights (no spam, just signal) + <span class="result-capture__bonus">1,500 credits when we launch</span></span>
+                        <span><span data-i18n="quiz.newsletter_opt">Información mensual de entregabilidad (sin spam, solo señal)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">1.500 créditos cuando lancemos</span></span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-waitlist">
-                        <span>Notify me when self-serve launches</span>
+                        <span data-i18n="quiz.notify_launch">Notificarme cuando se lance el autoservicio</span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-contact">
-                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
+                        <span data-i18n="quiz.request_contact">Que alguien me contacte para discutir mi situación (sin venta)</span>
                     </label>
-                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
-                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Enviar Mis Resultados</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Omitir</div>
                 </div>
             </div>
         </div>
 
         <!-- Low Risk: Preventive -->
         <div class="result-step" id="res-preventive">
-            <p class="pattern-line">This is one of the most common patterns I see.</p>
-            <span class="verdict-badge verdict-low">Low Risk</span>
-            <h2 class="result-headline">You are in a good spot. Let's keep it that way.</h2>
-            <p class="result-subhead">Healthy lists still decay by about 22% every year. A preventative review before a big send catches recycled traps that formed since your last campaign.</p>
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Este es uno de los patrones más comunes que veo.</p>
+            <span class="verdict-badge verdict-low" data-i18n="quiz.badge_low_risk">Riesgo Bajo</span>
+            <h2 class="result-headline" data-i18n="quiz.res_preventive_headline">Estás en buena posición. Mantengámoslo así.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_preventive_subhead">Las listas saludables aún decaen aproximadamente un 22% cada año.</p>
 
             <div class="reality-check">
-                <h4>What this means</h4>
-                <p>You are doing the right things. A safety check ensures you do not accidentally hit a trap that did not exist last time you sent.</p>
+                <h4 data-i18n="quiz.what_this_means">Qué significa esto</h4>
+                <p data-i18n="quiz.res_preventive_reality">Estás haciendo las cosas bien. Una verificación de seguridad asegura que no caigas accidentalmente en una trampa.</p>
             </div>
 
             <div id="preventive-issues" class="additional-issues" style="display:none;"></div>
 
-            <button type="button" class="cta-btn" onclick="openContactModal()">Get a safety check</button>
-            <p class="result-direct-link">Ready to go? <a href="https://anchor.reviewmyemails.com">Get My List Cleaned →</a></p>
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_safety_check">Obtener una verificación de seguridad</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">¿Listo para comenzar?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Limpiar Mi Lista →</a></p>
 
             <div class="result-capture" data-result="preventive">
-                <div class="result-capture__title">Save your diagnosis</div>
-                <div class="result-capture__subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Guardar tu diagnóstico</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Recibe tus resultados por email y opcionalmente únete a nuestra lista de espera para herramientas de autoservicio.</div>
                 <div class="result-capture__form">
-                    <input type="email" class="result-capture__input" placeholder="your@email.com">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-newsletter">
-                        <span>Monthly deliverability insights (no spam, just signal) + <span class="result-capture__bonus">1,500 credits when we launch</span></span>
+                        <span><span data-i18n="quiz.newsletter_opt">Información mensual de entregabilidad (sin spam, solo señal)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">1.500 créditos cuando lancemos</span></span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-waitlist">
-                        <span>Notify me when self-serve launches</span>
+                        <span data-i18n="quiz.notify_launch">Notificarme cuando se lance el autoservicio</span>
                     </label>
                     <label class="result-capture__checkbox">
                         <input type="checkbox" class="capture-contact">
-                        <span>Have someone reach out to discuss my situation (no sales pitch)</span>
+                        <span data-i18n="quiz.request_contact">Que alguien me contacte para discutir mi situación (sin venta)</span>
                     </label>
-                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)">Send My Results</button>
-                    <div class="result-capture__skip" onclick="skipCapture(this)">Skip</div>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Enviar Mis Resultados</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Omitir</div>
                 </div>
             </div>
         </div>
@@ -1578,7 +1578,7 @@
         }
 
         btnElement.disabled = true;
-        btnElement.textContent = 'Sending...';
+        btnElement.textContent = btnElement.dataset.i18nSending || 'Sending...';
         emailInput.style.borderColor = '';
 
         const subscribeNewsletter = newsletterCheckbox ? newsletterCheckbox.checked : false;
@@ -1626,7 +1626,7 @@
         } catch (error) {
             console.error('Quiz capture error:', error);
             btnElement.disabled = false;
-            btnElement.textContent = 'Try Again';
+            btnElement.textContent = btnElement.dataset.i18nRetry || 'Try Again';
             emailInput.style.borderColor = '#dc2626';
         }
     }
@@ -1644,46 +1644,46 @@
 <div class="contact-modal" id="contactModal">
     <div class="contact-modal__content">
         <div class="contact-modal__header">
-            <h3 class="contact-modal__title">Talk to a Specialist</h3>
-            <button class="contact-modal__close" onclick="closeContactModal()">&times;</button>
+            <h3 class="contact-modal__title" data-i18n="quiz.modal_title">Hablar con un Especialista</h3>
+            <button class="contact-modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">&times;</button>
         </div>
         <div class="contact-modal__body">
-            <p class="contact-modal__subtitle">Tell us about your situation and we'll get back to you within 24 hours.</p>
+            <p class="contact-modal__subtitle" data-i18n="modal.subtitle">Cuéntanos sobre tu situación y te responderemos en 24 horas.</p>
             <form id="contactForm" onsubmit="submitContactForm(event)">
                 <div class="contact-modal__field">
-                    <label class="contact-modal__label">Name *</label>
-                    <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name">
+                    <label class="contact-modal__label" data-i18n="modal.form_name">Nombre</label>
+                    <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="modal.name_placeholder">
                 </div>
                 <div class="contact-modal__field">
-                    <label class="contact-modal__label">Email *</label>
-                    <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com">
+                    <label class="contact-modal__label" data-i18n="modal.form_email">Email</label>
+                    <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                 </div>
                 <div class="contact-modal__field">
-                    <label class="contact-modal__label">Timezone (optional)</label>
+                    <label class="contact-modal__label" data-i18n="modal.form_timezone">Zona horaria</label>
                     <select class="contact-modal__select" id="contactTimezone">
-                        <option value="">Select your timezone</option>
-                        <option value="America/New_York">Eastern Time (ET)</option>
-                        <option value="America/Chicago">Central Time (CT)</option>
-                        <option value="America/Denver">Mountain Time (MT)</option>
-                        <option value="America/Los_Angeles">Pacific Time (PT)</option>
-                        <option value="America/Anchorage">Alaska Time</option>
-                        <option value="Pacific/Honolulu">Hawaii Time</option>
-                        <option value="Europe/London">London (GMT/BST)</option>
-                        <option value="Europe/Paris">Central European Time</option>
-                        <option value="Europe/Athens">Eastern European Time</option>
-                        <option value="Asia/Dubai">Gulf Standard Time</option>
-                        <option value="Asia/Kolkata">India Standard Time</option>
-                        <option value="Asia/Singapore">Singapore Time</option>
-                        <option value="Asia/Tokyo">Japan Standard Time</option>
-                        <option value="Australia/Sydney">Australian Eastern Time</option>
-                        <option value="Pacific/Auckland">New Zealand Time</option>
+                        <option value="" data-i18n="modal.form_timezone_placeholder">Selecciona tu zona horaria (opcional)</option>
+                        <option value="America/New_York" data-i18n="modal.timezone_et">Hora del Este (ET)</option>
+                        <option value="America/Chicago" data-i18n="modal.timezone_ct">Hora Central (CT)</option>
+                        <option value="America/Denver" data-i18n="modal.timezone_mt">Hora de Montaña (MT)</option>
+                        <option value="America/Los_Angeles" data-i18n="modal.timezone_pt">Hora del Pacífico (PT)</option>
+                        <option value="America/Anchorage" data-i18n="modal.timezone_alaska">Hora de Alaska</option>
+                        <option value="Pacific/Honolulu" data-i18n="modal.timezone_hawaii">Hora de Hawái</option>
+                        <option value="Europe/London" data-i18n="modal.timezone_london">Londres (GMT/BST)</option>
+                        <option value="Europe/Paris" data-i18n="modal.timezone_cet">Hora de Europa Central (CET)</option>
+                        <option value="Europe/Athens" data-i18n="modal.timezone_eet">Hora de Europa del Este</option>
+                        <option value="Asia/Dubai" data-i18n="modal.timezone_gulf">Hora del Golfo</option>
+                        <option value="Asia/Kolkata" data-i18n="modal.timezone_india">Hora de India</option>
+                        <option value="Asia/Singapore" data-i18n="modal.timezone_singapore">Hora de Singapur</option>
+                        <option value="Asia/Tokyo" data-i18n="modal.timezone_japan">Hora de Japón</option>
+                        <option value="Australia/Sydney" data-i18n="modal.timezone_sydney">Hora del Este de Australia</option>
+                        <option value="Pacific/Auckland" data-i18n="modal.timezone_nz">Hora de Nueva Zelanda</option>
                     </select>
                 </div>
                 <div class="contact-modal__field">
-                    <label class="contact-modal__label">Message (optional)</label>
-                    <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..."></textarea>
+                    <label class="contact-modal__label" data-i18n="modal.form_message">Mensaje</label>
+                    <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..." data-i18n-placeholder="modal.message_placeholder"></textarea>
                 </div>
-                <button type="submit" class="contact-modal__submit" id="contactSubmitBtn">Send Request</button>
+                <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="modal.form_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Enviar Mensaje</button>
             </form>
         </div>
     </div>
@@ -1720,7 +1720,7 @@
         const message = document.getElementById('contactMessage').value.trim();
 
         btn.disabled = true;
-        btn.textContent = 'Sending...';
+        btn.textContent = btn.dataset.i18nSending || 'Sending...';
 
         try {
             const response = await fetch('/api/contact-request', {
@@ -1753,10 +1753,13 @@
         } catch (error) {
             console.error('Contact form error:', error);
             btn.disabled = false;
-            btn.textContent = 'Try Again';
+            btn.textContent = btn.dataset.i18nRetry || 'Try Again';
         }
     }
 </script>
+
+<!-- Translation Loader -->
+<script src="/js/i18n.js"></script>
 
 </body>
 </html>

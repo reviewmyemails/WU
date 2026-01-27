@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Review My Emails | Email List Cleaning That Tells You What to Do</title>
-    <meta name="description" content="Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do. Clear labels: Keep, Monitor, Suppress. With the reasoning behind each one.">
-    <link rel="canonical" href="https://reviewmyemails.com/">
+    <title>Review My Emails | Professionelle E-Mail-Listen-Bereinigung</title>
+    <meta name="description" content="Professionelle E-Mail-Listen-Bereinigung. Keine automatisierte Validation - praktische Analyse, die Spam-Traps, riskante Kontakte und Reputationskiller aufspürt.">
+    <link rel="canonical" href="https://reviewmyemails.com/de/">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Review My Emails | Email List Cleaning That Tells You What to Do">
@@ -985,11 +985,6 @@
             position: relative;
         }
 
-        /* Stagger effect */
-        .step:nth-child(2) {
-            margin-top: var(--space-lg);
-        }
-
         .step__icon {
             margin-bottom: var(--space-md);
         }
@@ -1125,7 +1120,7 @@
 
         .testimonials {
             padding: var(--space-xxl) 0;
-            background: var(--color-white);
+            background: var(--color-light);
             transition: background 0.8s;
         }
 
@@ -1182,7 +1177,34 @@
         .cta-block {
             padding: var(--space-xxl) var(--space-md);
             text-align: center;
+            background: var(--color-dark);
             transition: background 0.8s;
+        }
+
+        .cta-block h2,
+        .cta-block__subtext,
+        .cta-block__footer {
+            color: var(--color-white);
+        }
+
+        .cta-block--light {
+            background: var(--color-light);
+        }
+
+        .cta-block--light h2,
+        .cta-block--light .cta-block__subtext,
+        .cta-block--light .cta-block__footer {
+            color: var(--color-dark);
+        }
+
+        .cta-block--white {
+            background: var(--color-white);
+        }
+
+        .cta-block--white h2,
+        .cta-block--white .cta-block__subtext,
+        .cta-block--white .cta-block__footer {
+            color: var(--color-dark);
         }
 
         .cta-block__inner {
@@ -1197,14 +1219,13 @@
         }
 
         .cta-block__subtext {
-            color: var(--color-muted);
             margin-bottom: var(--space-lg);
         }
 
         .cta-block__footer {
             margin-top: var(--space-md);
             font-size: 14px;
-            color: var(--color-muted);
+            opacity: 0.85;
         }
 
         /* ========================================
@@ -1553,16 +1574,16 @@
 
     <header class="header">
         <div class="header__inner">
-            <a href="/" class="header__logo" id="headerLogo">
+            <a href="index.html" class="header__logo" id="headerLogo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40" class="logo-light">
                 <img src="../assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="40" class="logo-dark">
             </a>
             <nav class="header__nav">
-                <a href="/done-for-you" class="header__link">How It Works</a>
-                <a href="/pricing" class="header__link">Pricing</a>
-                <a href="/sos-hotline" class="header__link">SOS Hotline</a>
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get My List Cleaned</a>
-                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">So Funktioniert Es</a>
+                <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Preise</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">Meine Liste Bereinigen</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
             </nav>
@@ -1572,22 +1593,22 @@
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav__header">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
-            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
                 <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
         <div class="mobile-nav__links">
-            <a href="/done-for-you" class="mobile-nav__link">How It Works</a>
-            <a href="/pricing" class="mobile-nav__link">Pricing</a>
-            <a href="/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
-            <a href="/about" class="mobile-nav__link">About</a>
-            <a href="/partner" class="mobile-nav__link">Partner</a>
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">So Funktioniert Es</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Preise</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">Über Uns</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Partner</a>
         </div>
         <div class="mobile-nav__cta">
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get My List Cleaned</a>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.cta">Meine Liste Bereinigen</a>
         </div>
     </nav>
 
@@ -1597,14 +1618,14 @@
 
     <section class="hero">
         <div class="container">
-            <a href="https://linkedin.com/in/yannatorry" target="_blank" class="hero__badge">By Yanna-Torry Aspraki</a>
-            <h1 class="hero__headline">Stop guessing what is wrong with your list.<br><span style="color: var(--color-accent);">We find the problems tools miss.</span></h1>
-            <p class="hero__subhead">Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.</p>
+            <a href="https://linkedin.com/in/yannatorry" target="_blank" class="hero__badge" data-i18n="home.hero_badge">Über Validation hinaus</a>
+            <h1 class="hero__headline"><span data-i18n="home.hero_headline_1">Hören Sie auf zu raten, was mit Ihrer Liste nicht stimmt.</span><br><span style="color: var(--color-accent);" data-i18n="home.hero_headline_2">Wir finden die Probleme, die Tools übersehen.</span></h1>
+            <p class="hero__subhead" data-i18n="home.hero_subhead">Was Sie erhalten: Eine bereinigte Liste mit Keep, Monitor oder Suppress—plus die Begründung für jede Entscheidung.</p>
             <div class="hero__actions">
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Meine Liste Bereinigen</a>
             </div>
-            <p class="hero__bridge">Most email inboxing and deliverability problems trace back to list quality.</p>
-            <p class="hero__quiz-link">Not sure yet? <a href="/quiz">Take the 2-minute risk check →</a></p>
+            <p class="hero__bridge" data-i18n="home.hero_bridge">Die meisten Inboxing- und Deliverability-Probleme stammen von der Listenqualität.</p>
+            <p class="hero__quiz-link"><span data-i18n="home.hero_quiz_prefix">Noch nicht sicher?</span> <a href="quiz.html" data-i18n="home.hero_quiz_link">Machen Sie den 2-Minuten-Risikocheck</a></p>
         </div>
     </section>
 
@@ -1617,41 +1638,41 @@
         <div class="symptoms__container">
             <div>
                 <div class="symptoms__header">
-                    <h2 style="color: white;">Sound familiar?</h2>
-                    <p>You're not alone. These are the patterns we see every day.</p>
+                    <h2 style="color: white;" data-i18n="home.symptoms_title">Kommt Ihnen das bekannt vor?</h2>
+                    <p data-i18n="home.symptoms_subtitle">Sie sind nicht allein. Das sind die Muster, die wir täglich sehen.</p>
                 </div>
                 <ul class="symptoms__list">
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span><strong>No idea</strong> where half this list came from.</span>
+                        <span data-i18n="home.symptom_1"><strong>No idea</strong> where half this list came from.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>One tool says <strong>clean</strong>. Another says <strong>risky</strong>.</span>
+                        <span data-i18n="home.symptom_2">One tool says <strong>clean</strong>. Another says <strong>risky</strong>.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span><strong>Scared to remove</strong> subscribers, even the ones who never open.</span>
+                        <span data-i18n="home.symptom_3"><strong>Scared to remove</strong> subscribers, even the ones who never open.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Haven't emailed this list in <strong>months</strong>. Afraid to restart.</span>
+                        <span data-i18n="home.symptom_4">Haven't emailed this list in <strong>months</strong>. Afraid to restart.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Paid for list cleaning <strong>yesterday</strong>. Bounces <strong>today</strong>.</span>
+                        <span data-i18n="home.symptom_5">Paid for list cleaning <strong>yesterday</strong>. Bounces <strong>today</strong>.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Open rates <strong>dropped</strong> and nobody can explain why.</span>
+                        <span data-i18n="home.symptom_6">Open rates <strong>dropped</strong> and nobody can explain why.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>List keeps <strong>growing</strong>. Revenue <strong>doesn't</strong>.</span>
+                        <span data-i18n="home.symptom_7">List keeps <strong>growing</strong>. Revenue <strong>doesn't</strong>.</span>
                     </li>
                     <li class="symptoms__item">
                         <span class="symptoms__check">✓</span>
-                        <span>Emails <strong>not inboxing</strong> anymore, going to spam or promotions.</span>
+                        <span data-i18n="home.symptom_8">Emails <strong>not inboxing</strong> anymore, going to spam or nowhere at all.</span>
                     </li>
                 </ul>
             </div>
@@ -1659,16 +1680,16 @@
                 <div class="symptoms__crisis-header">
                     <div class="symptoms__crisis-icon">⚠</div>
                     <div>
-                        <h3>Crisis Mode?</h3>
-                        <span>If any of these are true, start here.</span>
+                        <h3 data-i18n="home.crisis_title">Auf der Blocklist? ESP-Warnung? Reputation im Keller?</h3>
+                        <span data-i18n="home.crisis_subtitle">Wenn eines davon zutrifft, starten Sie hier.</span>
                     </div>
                 </div>
                 <ul class="symptoms__crisis-list">
-                    <li>ESP sent a compliance warning or paused your sending.</li>
-                    <li>Blocklisted, or you think you might be.</li>
-                    <li>Last send spiked bounces. Now everyone's afraid to send again.</li>
+                    <li data-i18n="home.crisis_item_1">ESP hat Compliance-Warnung gesendet oder Ihre Sendungen pausiert.</li>
+                    <li data-i18n="home.crisis_item_2">Auf einer Blocklist, oder Sie denken, Sie könnten es sein.</li>
+                    <li data-i18n="home.crisis_item_3">Letzter Versand hat Bounces explodieren lassen. Jetzt haben alle Angst, wieder zu senden.</li>
                 </ul>
-                <a href="/sos-hotline" class="symptoms__crisis-btn">Email the SOS Hotline →</a>
+                <a href="sos-hotline.html" class="symptoms__crisis-btn" data-i18n="home.crisis_cta">Notfallhilfe Erhalten</a>
             </div>
         </div>
     </section>
@@ -1680,8 +1701,8 @@
     <section class="steps">
         <div class="container">
             <div class="steps__header">
-                <h2>How we actually work</h2>
-                <p>Simple process. Expert execution. Real results.</p>
+                <h2 data-i18n="home.steps_title">Wie wir wirklich arbeiten</h2>
+                <p data-i18n="home.steps_subtitle">Einfacher Prozess. Experten-Ausführung. Echte Ergebnisse.</p>
             </div>
 
             <div class="steps__grid">
@@ -1696,9 +1717,9 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="step__number">Step 01</div>
-                    <h3>Send us your list</h3>
-                    <p>CSV, Excel, whatever you have. We've seen it all. No judgment, no questions.</p>
+                    <div class="step__number" data-i18n="home.step1_number">Schritt 01</div>
+                    <h3 data-i18n="home.step1_title">Senden Sie Ihre Liste</h3>
+                    <p data-i18n="home.step1_desc">CSV oder Excel. Bis zu 500K Adressen. Sichere Übertragung inklusive.</p>
                 </div>
 
                 <div class="step">
@@ -1712,9 +1733,9 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="step__number">Step 02</div>
-                    <h3>We review every address</h3>
-                    <p>One by one. Looking for bounces, spam traps, disposables, and reputation killers.</p>
+                    <div class="step__number" data-i18n="home.step2_number">Schritt 02</div>
+                    <h3 data-i18n="home.step2_title">Wir prüfen es manuell</h3>
+                    <p data-i18n="home.step2_desc">Musteranalyse. Fallen-Erkennung. Reputationsrisiko-Bewertung. 24-48 Stunden.</p>
                 </div>
 
                 <div class="step">
@@ -1726,12 +1747,12 @@
                             </svg>
                         </div>
                     </div>
-                    <div class="step__number">Step 03</div>
-                    <h3>Get your clean list back</h3>
-                    <p>With clear labels and a report. You'll know exactly what to do with each address.</p>
+                    <div class="step__number" data-i18n="home.step3_number">Schritt 03</div>
+                    <h3 data-i18n="home.step3_title">Erhalten Sie Ihre saubere Liste</h3>
+                    <p data-i18n="home.step3_desc">Jede Adresse gekennzeichnet. Vollständiger Erklärungsbericht. 30-minütiger Durchsprech-Anruf.</p>
                 </div>
 
-                <p class="steps__whisper">No outsourcing. No AI guesswork. Just experienced eyes on every list.</p>
+                <p class="steps__whisper" data-i18n="home.steps_whisper">Kein Outsourcing. Kein KI-Raten. Nur erfahrene Augen auf jeder Liste.</p>
 
             </div>
         </div>
@@ -1743,8 +1764,8 @@
 
     <section class="pull-quote">
         <div class="pull-quote__inner">
-            <p class="pull-quote__text">"She cleaned and organized our database with incredible efficiency and set us up for long-term success."</p>
-            <p class="pull-quote__attribution">Sam Cande, UK</p>
+            <p class="pull-quote__text" data-i18n="home.pullquote_text">"Sie hat unsere Datenbank mit unglaublicher Effizienz bereinigt und organisiert und uns für langfristigen Erfolg aufgestellt."</p>
+            <p class="pull-quote__attribution" data-i18n="home.pullquote_author">Sam Cande, UK</p>
         </div>
     </section>
 
@@ -1755,7 +1776,7 @@
 
     <section class="pull-quote manifesto">
         <div class="pull-quote__inner">
-            <p class="manifesto__text">You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened. That's the gap between validation and understanding.</p>
+            <p class="manifesto__text" data-i18n="home.manifesto">Sie haben Ihre Liste wahrscheinlich schon durch ein Tool laufen lassen. Es sagte 95% gültig. Sie haben trotzdem gesendet. Bounces passierten. Das ist die Lücke zwischen Validierung und Verständnis.</p>
         </div>
     </section>
 
@@ -1766,7 +1787,7 @@
     <section class="features">
         <div class="container">
             <div class="features__header">
-                <h2>What you actually get</h2>
+                <h2 data-i18n="home.features_title">Was Sie wirklich bekommen</h2>
             </div>
 
             <div class="features__grid">
@@ -1781,8 +1802,8 @@
                             <polyline points="10 9 9 9 8 9"/>
                         </svg>
                     </div>
-                    <h3>Clear action labels</h3>
-                    <p>Every email marked Keep, Monitor, or Suppress. No ambiguity, no guessing what to do next.</p>
+                    <h3 data-i18n="home.feature1_title">Klare Aktions-Labels</h3>
+                    <p data-i18n="home.feature1_desc">Jede E-Mail als Keep, Monitor oder Suppress markiert. Keine Unklarheit, kein Rätselraten, was zu tun ist.</p>
                 </div>
 
                 <div class="feature-card">
@@ -1792,8 +1813,8 @@
                             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                         </svg>
                     </div>
-                    <h3>Detailed reasoning</h3>
-                    <p>Not just "risky", we tell you why. Spam trap patterns, domain issues, behavioral signals.</p>
+                    <h3 data-i18n="home.feature2_title">Detaillierte Begründung</h3>
+                    <p data-i18n="home.feature2_desc">Nicht nur 'riskant', wir sagen Ihnen warum. Spam-Trap-Muster, Domain-Probleme, Verhaltenssignale.</p>
                 </div>
 
                 <div class="feature-card">
@@ -1802,8 +1823,8 @@
                             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                         </svg>
                     </div>
-                    <h3>Expert interpretation included</h3>
-                    <p>Not just data, context. Every list review includes a walkthrough of your results. I explain what I found, what it means, and exactly what to do next.</p>
+                    <h3 data-i18n="home.feature3_title">Experten-Interpretation inklusive</h3>
+                    <p data-i18n="home.feature3_desc">Nicht nur Daten, Kontext. Jede Listenprüfung beinhaltet eine Erklärung der Ergebnisse. Ich erkläre, was ich gefunden habe, was es bedeutet und genau, was als nächstes zu tun ist.</p>
                 </div>
 
             </div>
@@ -1815,11 +1836,11 @@
          For the 40-second visitor who isn't converting today
          ======================================== -->
 
-    <section class="cta-block" style="background: var(--color-white);">
+    <section class="cta-block cta-block--white">
         <div class="cta-block__inner">
-            <h2>Not sure if your list needs this?</h2>
-            <p class="cta-block__subtext">Take a 2-minute self-assessment. Four questions about how you built your list, and we'll tell you what risk level you're probably at.</p>
-            <a href="/quiz" class="btn btn-secondary">Take the 2-Minute Risk Check</a>
+            <h2 data-i18n="home.quiz_cta_title">Nicht sicher, ob Ihre Liste das braucht?</h2>
+            <p class="cta-block__subtext" data-i18n="home.quiz_cta_desc">Machen Sie eine 2-Minuten-Selbstbewertung. Vier Fragen darüber, wie Sie Ihre Liste aufgebaut haben, und wir sagen Ihnen, auf welchem Risikoniveau Sie wahrscheinlich sind.</p>
+            <a href="quiz.html" class="btn btn-secondary" data-i18n="home.quiz_cta_btn">Machen Sie den 2-Minuten-Risikocheck</a>
         </div>
     </section>
 
@@ -1830,38 +1851,32 @@
     <section class="testimonials">
         <div class="container">
             <div class="testimonials__header">
-                <h2>People who trusted us</h2>
-                <p>Real feedback from real senders.</p>
+                <h2 data-i18n="home.testimonials_title">Menschen, die uns vertraut haben</h2>
+                <p data-i18n="home.testimonials_subtitle">Echtes Feedback von echten Versendern.</p>
             </div>
 
             <article class="testimonial">
                 <div class="testimonial__meta">
-                    <p class="testimonial__name">Megan S.</p>
-                    <p class="testimonial__role">UK</p>
+                    <p class="testimonial__name" data-i18n="home.testimonial1_name">Megan S.</p>
+                    <p class="testimonial__role" data-i18n="home.testimonial1_role">UK</p>
                 </div>
-                <blockquote class="testimonial__quote">
-                    "The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call."
-                </blockquote>
+                <blockquote class="testimonial__quote" data-i18n="home.testimonial1_quote">"Die SOS Hotline gab mir äußerst hilfreiche Anleitung. Yanna-Torry hat unsere Liste bereinigt und uns über das Erwartete hinaus unterstützt."</blockquote>
             </article>
 
             <article class="testimonial">
                 <div class="testimonial__meta">
-                    <p class="testimonial__name">Chris Mead</p>
-                    <p class="testimonial__role">UK</p>
+                    <p class="testimonial__name" data-i18n="home.testimonial2_name">Chris Mead</p>
+                    <p class="testimonial__role" data-i18n="home.testimonial2_role">UK</p>
                 </div>
-                <blockquote class="testimonial__quote">
-                    "Real human expertise. Tailor-made solutions. Not an AI tool."
-                </blockquote>
+                <blockquote class="testimonial__quote" data-i18n="home.testimonial2_quote">"Echte menschliche Expertise. Maßgeschneiderte Lösungen. Kein KI-Tool."</blockquote>
             </article>
 
             <article class="testimonial">
                 <div class="testimonial__meta">
-                    <p class="testimonial__name">Adeola Sole</p>
-                    <p class="testimonial__role">UK</p>
+                    <p class="testimonial__name" data-i18n="home.testimonial3_name">Adeola Sole</p>
+                    <p class="testimonial__role" data-i18n="home.testimonial3_role">UK</p>
                 </div>
-                <blockquote class="testimonial__quote">
-                    "RME provides deep insights our ESP misses and helped us segment smarter."
-                </blockquote>
+                <blockquote class="testimonial__quote" data-i18n="home.testimonial3_quote">"RME liefert tiefe Einblicke, die unser ESP übersieht, und half uns, intelligenter zu segmentieren."</blockquote>
             </article>
 
         </div>
@@ -1873,10 +1888,10 @@
 
     <section class="cta-block">
         <div class="cta-block__inner">
-            <h2>Ready to know what's in your list?</h2>
-            <p class="cta-block__subtext">Send us your list. We'll tell you exactly what's safe to send, what needs watching, and what will hurt you.</p>
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary">Get My List Cleaned</a>
-            <p class="cta-block__footer">Most lists returned within 24 hours.</p>
+            <h2 data-i18n="home.final_title">Bereit zu sehen, was wirklich in Ihrer Liste ist?</h2>
+            <p class="cta-block__subtext" data-i18n="home.final_subtext">Senden Sie uns Ihre Liste. Wir sagen Ihnen genau, was sicher zu senden ist, was Überwachung braucht und was Ihnen schadet.</p>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" data-i18n="nav.cta">Meine Liste Bereinigen</a>
+            <p class="cta-block__footer" data-i18n="home.final_footer">Die meisten Listen werden innerhalb von 24 Stunden zurückgegeben.</p>
         </div>
     </section>
 
@@ -1887,45 +1902,45 @@
     <div class="modal-overlay" id="contactModal">
         <div class="modal">
             <div class="modal__header">
-                <h3 class="modal__title">Get in Touch</h3>
-                <button class="modal__close" onclick="closeContactModal()" aria-label="Close">
+                <h3 class="modal__title" data-i18n="contact.modal_title">Kontakt aufnehmen</h3>
+                <button class="modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">
                     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
             <div class="modal__body">
-                <p class="modal__subtitle">Tell us what you're working on. We'll get back to you within one business day.</p>
+                <p class="modal__subtitle" data-i18n="contact.modal_subtitle">Erzählen Sie uns, woran Sie arbeiten. Wir melden uns innerhalb eines Werktags.</p>
                 <form id="contactForm">
                     <input type="hidden" id="contactSource" name="source" value="">
                     <div class="form-group">
-                        <label for="contactName">Name *</label>
-                        <input type="text" id="contactName" name="name" required>
+                        <label for="contactName" data-i18n="form.name_label">Name *</label>
+                        <input type="text" id="contactName" name="name" required data-i18n-placeholder="form.name_placeholder">
                     </div>
                     <div class="form-group">
-                        <label for="contactEmail">Email *</label>
-                        <input type="email" id="contactEmail" name="email" required>
+                        <label for="contactEmail" data-i18n="form.email_label">E-Mail *</label>
+                        <input type="email" id="contactEmail" name="email" required data-i18n-placeholder="form.email_placeholder">
                     </div>
                     <div class="form-group">
-                        <label for="contactTimezone">Timezone</label>
+                        <label for="contactTimezone" data-i18n="form.timezone_label">Zeitzone (optional)</label>
                         <select id="contactTimezone" name="timezone">
-                            <option value="">Select your timezone (optional)</option>
-                            <option value="PT">Pacific Time (PT)</option>
-                            <option value="MT">Mountain Time (MT)</option>
-                            <option value="CT">Central Time (CT)</option>
-                            <option value="ET">Eastern Time (ET)</option>
-                            <option value="GMT">GMT / UTC</option>
-                            <option value="CET">Central European Time (CET)</option>
-                            <option value="Other">Other</option>
+                            <option value="" data-i18n="form.timezone_select_optional">Wählen Sie Ihre Zeitzone (optional)</option>
+                            <option value="PT" data-i18n="form.tz_pacific">Pacific Time (PT)</option>
+                            <option value="MT" data-i18n="form.tz_mountain">Mountain Time (MT)</option>
+                            <option value="CT" data-i18n="form.tz_central">Central Time (CT)</option>
+                            <option value="ET" data-i18n="form.tz_eastern">Eastern Time (ET)</option>
+                            <option value="GMT" data-i18n="form.tz_gmt">GMT / UTC</option>
+                            <option value="CET" data-i18n="form.tz_cet">Mitteleuropäische Zeit (MEZ)</option>
+                            <option value="Other" data-i18n="form.tz_other">Andere</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="contactMessage">Message</label>
-                        <textarea id="contactMessage" name="message" placeholder="What can we help you with?"></textarea>
-                        <small>Optional - but helps us prepare for the conversation.</small>
+                        <label for="contactMessage" data-i18n="form.message_label">Nachricht</label>
+                        <textarea id="contactMessage" name="message" placeholder="What can we help you with?" data-i18n-placeholder="form.message_placeholder"></textarea>
+                        <small data-i18n="form.message_hint">Optional - aber hilft uns, das Gespräch vorzubereiten.</small>
                     </div>
                 </form>
             </div>
             <div class="modal__footer">
-                <button type="submit" form="contactForm" class="btn btn-primary">Send Message</button>
+                <button type="submit" form="contactForm" class="btn btn-primary" data-i18n="contact.submit" data-i18n-sending="modal.form_sending">Nachricht senden</button>
             </div>
         </div>
     </div>
@@ -1935,14 +1950,14 @@
         <div class="modal">
             <div class="modal__header">
                 <span></span>
-                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close">
+                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close" data-i18n-aria="ui.close">
                     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
             <div class="form-success">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-                <h3>Message Sent!</h3>
-                <p>We'll get back to you within one business day.</p>
+                <h3 data-i18n="ui.message_sent">Nachricht gesendet!</h3>
+                <p data-i18n="ui.response_time_business">Wir melden uns innerhalb eines Werktags.</p>
             </div>
         </div>
     </div>
@@ -1955,29 +1970,30 @@
         <div class="footer__inner">
             <div class="footer__brand">
                 <img src="../assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
-                <p>We see what algorithms can't.</p>
+                <p data-i18n="footer.tagline">Wir sehen, was Algorithmen nicht können.</p>
             </div>
 
             <div class="footer__column">
-                <h4>Services</h4>
-                <a href="/pricing">Pricing</a>
-                <a href="/sos-hotline">SOS Hotline</a>
+                <h4 data-i18n="footer.services">Dienstleistungen</h4>
+                <a href="pricing.html" data-i18n="nav.pricing">Preise</a>
+                <a href="sos-hotline.html" data-i18n="nav.sos_hotline">SOS Hotline</a>
             </div>
 
             <div class="footer__column">
-                <h4>Company</h4>
-                <a href="/about">About</a>
-                <a href="/partner">Partner</a>
+                <h4 data-i18n="footer.company">Unternehmen</h4>
+                <a href="about.html" data-i18n="nav.about">Über Uns</a>
+                <a href="partner.html" data-i18n="nav.partner">Partner</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html" data-i18n="footer.security">Sicherheit</a>
             </div>
 
             <div class="footer__column">
-                <h4>Contact</h4>
+                <h4 data-i18n="footer.contact">Kontakt</h4>
                 <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
             </div>
 
             <div class="footer__bottom">
-                <span>© 2026 Review My Emails. All rights reserved.</span>
-                <span>Privacy Policy · Terms</span>
+                <span data-i18n="footer.copyright">© 2026 Review My Emails. Alle Rechte vorbehalten.</span>
+                <span data-i18n="footer.legal">Datenschutzrichtlinie · AGB</span>
             </div>
         </div>
     </footer>
@@ -2042,7 +2058,7 @@
 
             const submitBtn = document.querySelector('.modal__footer .btn');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
+            submitBtn.textContent = submitBtn.dataset.i18nSending || 'Sending...';
             submitBtn.disabled = true;
 
             const formData = {
@@ -2352,5 +2368,7 @@
         }, { passive: true });
     </script>
 
+    <!-- i18n Translation Loader -->
+    <script src="/js/i18n.js"></script>
 </body>
 </html>

@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review My Emails | Size Ne Yapmanız Gerektiğini Söyleyen E-posta Listesi Temizliği</title>
+    <meta name="description" content="Doğrulama araçları adresleri görür. Biz kalıpları, bağlamı ve riski görürüz. Sonra size tam olarak ne yapmanız gerektiğini söyleriz. Net etiketler: Sakla (Keep), İzle (Monitor), Kaldır (Suppress). Her birinin arkasındaki gerekçeyle birlikte.">
+    <link rel="canonical" href="https://reviewmyemails.com/quiz/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Is Your Email List Safe? | Free Risk Assessment">
+    <meta property="og:description" content="Take a 2-minute self-assessment to find out if your email list is putting your sender reputation at risk.">
+    <meta property="og:url" content="https://reviewmyemails.com/quiz/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://reviewmyemails.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Is Your Email List Safe? | Free Risk Assessment">
+    <meta name="twitter:description" content="Take a 2-minute self-assessment to find out if your email list is putting your sender reputation at risk.">
+    <meta name="twitter:image" content="https://reviewmyemails.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/favicon/favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon/favicon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-dark: #134e4a;
+            --color-accent: #0d9488;
+            --color-accent-hover: #0f766e;
+            --color-light: #e6f7f3;
+            --color-lighter: #d1f0e8;
+            --color-white: #fafcfc;
+            --color-border: #e2e8f0;
+            --color-muted: #64748b;
+            --color-crisis: #b91c1c;
+            --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--color-light);
+            min-height: 100vh;
+            color: var(--color-dark);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--color-white);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .header__inner {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .header__logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .header__nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .header__link {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--color-muted);
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+
+        .header__link:hover {
+            color: var(--color-dark);
+        }
+
+        .header__cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            background: var(--color-accent);
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 180ms ease;
+        }
+
+        .header__cta:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .header__mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .header__mobile-toggle svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--color-white);
+            z-index: 200;
+            padding: 40px 24px;
+            flex-direction: column;
+        }
+
+        .mobile-nav.active {
+            display: flex;
+        }
+
+        .mobile-nav__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 48px;
+        }
+
+        .mobile-nav__close {
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-dark);
+        }
+
+        .mobile-nav__close svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        .mobile-nav__links {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .mobile-nav__link {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--color-dark);
+            text-decoration: none;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .mobile-nav__cta {
+            margin-top: 32px;
+        }
+
+        .mobile-nav__cta a {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 14px 24px;
+            background: var(--color-accent);
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 24px;
+            padding-right: 24px;
+            padding-bottom: 24px;
+        }
+
+        .diagnostic-container {
+            width: 100%;
+            max-width: 680px;
+            background: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        /* Header */
+        .diag-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--color-border);
+            background: #fff;
+        }
+
+        .diag-header h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--color-dark);
+        }
+
+        .diag-step {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        .diag-progress {
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .diag-bar {
+            height: 100%;
+            background: var(--color-accent);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Summary Strip */
+        .summary-strip {
+            display: none;
+            padding: 16px 32px;
+            background: var(--color-lighter);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .summary-strip.visible {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            padding: 6px 0;
+            font-size: 13px;
+            line-height: 1.4;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: var(--color-muted);
+            font-weight: 500;
+            flex-shrink: 0;
+            min-width: 70px;
+        }
+
+        .summary-answer {
+            color: var(--color-dark);
+            font-weight: 500;
+        }
+
+        .summary-context {
+            color: var(--color-muted);
+            font-style: italic;
+            margin-left: 4px;
+        }
+
+        /* Content Area */
+        .diag-content {
+            padding: 40px 32px;
+            min-height: 320px;
+        }
+
+        /* Question Styles */
+        .question-step {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .question-step.active {
+            display: block;
+        }
+
+        .q-text {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 28px;
+            line-height: 1.35;
+        }
+
+        /* Answer Buttons */
+        .answer-btn {
+            display: block;
+            width: 100%;
+            padding: 18px 20px;
+            margin-bottom: 10px;
+            background: #fff;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            text-align: left;
+            font-size: 16px;
+            font-family: var(--font);
+            color: var(--color-dark);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .answer-btn:hover {
+            border-color: var(--color-accent);
+            background: var(--color-light);
+        }
+
+        .answer-btn:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.15);
+        }
+
+        .answer-btn.selected {
+            border-color: var(--color-accent);
+            background: var(--color-light);
+        }
+
+        /* Loading View */
+        .loading-step {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .loading-step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .spinner {
+            width: 44px;
+            height: 44px;
+            border: 3px solid var(--color-light);
+            border-top: 3px solid var(--color-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 17px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 6px;
+        }
+
+        .loading-sub {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        /* Result Styles */
+        .result-step {
+            display: none;
+            padding: 20px 0;
+        }
+
+        .result-step.active {
+            display: block;
+            animation: slideUp 0.4s ease;
+        }
+
+        .pattern-line {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-bottom: 16px;
+            font-style: italic;
+        }
+
+        .verdict-badge {
+            display: inline-block;
+            background: var(--color-dark);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 11px;
+            margin-bottom: 16px;
+        }
+
+        .verdict-critical { background: var(--color-crisis); }
+        .verdict-high { background: #c2410c; }
+        .verdict-medium { background: #b45309; }
+        .verdict-low { background: var(--color-dark); }
+        .verdict-notfit { background: var(--color-muted); }
+
+        .result-headline {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--color-dark);
+            line-height: 1.2;
+        }
+
+        .result-subhead {
+            font-size: 17px;
+            color: var(--color-muted);
+            margin-bottom: 24px;
+            line-height: 1.55;
+        }
+
+        .reality-check {
+            background: var(--color-lighter);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--color-accent);
+        }
+
+        .reality-check h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .reality-check p {
+            font-size: 15px;
+            margin: 0;
+            color: var(--color-dark);
+            line-height: 1.55;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: var(--color-accent);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 15px;
+            transition: background 0.15s ease;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font);
+            margin-top: 24px;
+            margin-bottom: 24px;
+        }
+
+        .cta-btn:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .cta-btn-secondary {
+            background: transparent;
+            color: var(--color-accent);
+            border: 2px solid var(--color-accent);
+            margin-left: 12px;
+        }
+
+        .cta-btn-secondary:hover {
+            background: var(--color-light);
+        }
+
+        .result-direct-link {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-top: -12px;
+            margin-bottom: 24px;
+        }
+
+        .result-direct-link a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .result-direct-link a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .header__nav {
+                gap: 16px;
+            }
+
+            .header__link {
+                display: none;
+            }
+
+            .header__cta {
+                display: none;
+            }
+
+            .header__mobile-toggle {
+                display: block;
+            }
+
+            .main-content {
+                padding-top: 72px;
+                padding-left: 16px;
+                padding-right: 16px;
+                align-items: flex-start;
+                padding-top: 88px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .diag-content { padding: 28px 20px; }
+            .summary-strip { padding: 12px 20px; }
+            .q-text { font-size: 19px; }
+            .answer-btn { font-size: 15px; padding: 16px; }
+            .result-headline { font-size: 24px; }
+            .cta-btn-secondary { margin-left: 0; margin-top: 12px; display: block; text-align: center; }
+            .summary-item { flex-wrap: wrap; }
+            .summary-context { margin-left: 0; display: block; margin-top: 2px; }
+        }
+
+        /* Email Capture */
+        .result-capture {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .result-capture__title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 8px;
+        }
+
+        .result-capture__subtitle {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin-bottom: 16px;
+        }
+
+        .result-capture__form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .result-capture__input {
+            padding: 12px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-family: var(--font);
+            font-size: 15px;
+            color: var(--color-dark);
+        }
+
+        .result-capture__input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .result-capture__checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--color-muted);
+            cursor: pointer;
+        }
+
+        .result-capture__checkbox input {
+            width: 16px;
+            height: 16px;
+            margin-top: 2px;
+            accent-color: var(--color-accent);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .result-capture__checkbox span {
+            line-height: 1.4;
+        }
+
+        .result-capture__bonus {
+            display: inline-block;
+            background: var(--color-light);
+            color: var(--color-accent);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 4px;
+        }
+
+        .result-capture__btn {
+            padding: 12px 20px;
+            background: var(--color-dark);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 180ms ease;
+        }
+
+        .result-capture__btn:hover {
+            opacity: 0.9;
+        }
+
+        .result-capture__btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .result-capture__success {
+            padding: 16px;
+            background: var(--color-light);
+            border-radius: 8px;
+            font-size: 14px;
+            color: var(--color-dark);
+            text-align: center;
+        }
+
+        .result-capture__skip {
+            font-size: 12px;
+            color: var(--color-muted);
+            text-align: center;
+            margin-top: 8px;
+            cursor: pointer;
+        }
+
+        .result-capture__skip:hover {
+            color: var(--color-dark);
+        }
+
+        @media (max-width: 600px) {
+            .result-capture__checkbox {
+                font-size: 12px;
+            }
+        }
+
+        /* Contact Modal */
+        .contact-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .contact-modal.active {
+            display: flex;
+        }
+
+        .contact-modal__content {
+            background: white;
+            border-radius: 12px;
+            max-width: 480px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        }
+
+        .contact-modal__header {
+            padding: 24px 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .contact-modal__title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-dark);
+            margin: 0;
+        }
+
+        .contact-modal__close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--color-muted);
+            padding: 0;
+            line-height: 1;
+        }
+
+        .contact-modal__close:hover {
+            color: var(--color-dark);
+        }
+
+        .contact-modal__body {
+            padding: 20px 24px 24px;
+        }
+
+        .contact-modal__subtitle {
+            font-size: 14px;
+            color: var(--color-muted);
+            margin: 0 0 20px;
+        }
+
+        .contact-modal__field {
+            margin-bottom: 16px;
+        }
+
+        .contact-modal__label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-dark);
+            margin-bottom: 6px;
+        }
+
+        .contact-modal__input,
+        .contact-modal__textarea,
+        .contact-modal__select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: var(--font);
+            background: white;
+        }
+
+        .contact-modal__input:focus,
+        .contact-modal__textarea:focus,
+        .contact-modal__select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .contact-modal__textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .contact-modal__submit {
+            width: 100%;
+            background: var(--color-accent);
+            color: white;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: var(--font);
+            margin-top: 8px;
+        }
+
+        .contact-modal__submit:hover {
+            background: var(--color-accent-hover);
+        }
+
+        .contact-modal__submit:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .contact-modal__success {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .contact-modal__success-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .contact-modal__success-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 8px;
+        }
+
+        .contact-modal__success-text {
+            font-size: 14px;
+            color: var(--color-muted);
+        }
+
+        /* Additional Issues Section */
+        .additional-issues {
+            background: var(--color-lighter);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #b45309;
+        }
+
+        .additional-issues h4 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--color-muted);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .additional-issues ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .additional-issues li {
+            font-size: 14px;
+            color: var(--color-dark);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .additional-issues li:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+
+    <!-- Analytics -->
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5PYH0SJWEW"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5PYH0SJWEW');
+    </script>
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "rfdccvjnjx");
+    </script>
+    <!-- Vercel Analytics -->
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+    <div class="header__inner">
+        <a href="index.html" class="header__logo">
+            <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+        </a>
+        <nav class="header__nav">
+            <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">Nasıl Çalışır</a>
+            <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Fiyatlandırma</a>
+            <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hattı</a>
+            <a href="https://anchor.reviewmyemails.com" class="header__cta" data-i18n="nav.cta">Listemi Temizle</a>
+            <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
+                <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<!-- Mobile Navigation -->
+<nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav__header">
+        <a href="index.html" class="header__logo">
+            <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
+        </a>
+        <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </div>
+    <div class="mobile-nav__links">
+        <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">Nasıl Çalışır</a>
+        <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Fiyatlandırma</a>
+        <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hattı</a>
+        <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">Hakkımızda</a>
+        <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Ortaklar</a>
+    </div>
+    <div class="mobile-nav__cta">
+        <a href="https://anchor.reviewmyemails.com" data-i18n="nav.cta">Listemi Temizle</a>
+    </div>
+</nav>
+
+<main class="main-content">
+<div class="diagnostic-container">
+
+    <div class="diag-header" id="diagHeader">
+        <h3 data-i18n="quiz.title">Listeniz Güvenli mi?</h3>
+        <div class="diag-step" id="stepIndicator" data-i18n="quiz.step_1_of_4">Soru 1 / 4</div>
+        <div class="diag-progress"><div class="diag-bar" id="progressBar"></div></div>
+    </div>
+
+    <!-- Summary Strip: shows previous answers -->
+    <div class="summary-strip" id="summaryStrip"></div>
+
+    <div class="diag-content">
+
+        <!-- Q1: Source -->
+        <div class="question-step active" id="q1">
+            <p class="q-text" data-i18n="quiz.q1_text">Bu e-postaların çoğunluğu listenize nasıl girdi?</p>
+            <button class="answer-btn" data-short="Organic" data-context="Organic lists decay too. About 22% go stale every year. Normal." onclick="handleAnswer(1, 'organic', this)" data-i18n="quiz.q1_a1">Web sitemdeki veya uygulamamdaki bir formu doldurdular</button>
+            <button class="answer-btn" data-short="No consent" data-context="No consent means higher risk. We can still help clean it—just important to set expectations." onclick="handleAnswer(1, 'no_consent', this)" data-i18n="quiz.q1_a2">Satın alındı, kazındı (scraped) veya soğuk erişim (izin yok)</button>
+            <button class="answer-btn" data-short="Mixed" data-context="Mixed lists hide surprises. The risky part is always what you didn't build." onclick="handleAnswer(1, 'mixed', this)" data-i18n="quiz.q1_a3">Karışık kaynaklar / Bu listeyi devraldım</button>
+        </div>
+
+        <!-- Q2: Authentication -->
+        <div class="question-step" id="q2">
+            <p class="q-text" data-i18n="quiz.q2_text">Gönderen alan adınız DMARC ile doğrulandı mı?</p>
+            <button class="answer-btn" data-short="Yes" data-context="Good. Infrastructure isn't your problem." onclick="handleAnswer(2, 'dmarc_yes', this)" data-i18n="quiz.q2_a1">Evet, DMARC Reject veya Quarantine olarak ayarlı</button>
+            <button class="answer-btn" data-short="Partial" data-context="Partial setup confuses inboxes. Inconsistency signals risk." onclick="handleAnswer(2, 'dmarc_partial', this)" data-i18n="quiz.q2_a2">Sanırım öyle, ama ayarlardan emin değilim</button>
+            <button class="answer-btn" data-short="No" data-context="Even a clean list won't save you without auth." onclick="handleAnswer(2, 'dmarc_no', this)" data-i18n="quiz.q2_a3">Hayır / DMARC nedir?</button>
+        </div>
+
+        <!-- Q3: Validation Experience -->
+        <div class="question-step" id="q3">
+            <p class="q-text" data-i18n="quiz.q3_text">Bu listeyi bir doğrulama aracından geçirdiniz mi?</p>
+            <button class="answer-btn" data-short="Never" data-context="Six months is a long time. Lists go stale fast." onclick="handleAnswer(3, 'never', this)" data-i18n="quiz.q3_a1">never / Not in the last 6 months</button>
+            <button class="answer-btn" data-short="Valid but issues" data-context="Valid means deliverable, not safe. There's a gap between syntax and reputation." onclick="handleAnswer(3, 'valid_issues', this)" data-i18n="quiz.q3_a2">it said Valid but I'm still seeing issues</button>
+            <button class="answer-btn" data-short="Catch-all flagged" data-context="Catch-all domains accept everything, which is why tools mark them unknown." onclick="handleAnswer(3, 'catchall', this)" data-i18n="quiz.q3_a3">it flagged a lot as Unknown or Catch-All</button>
+            <button class="answer-btn" data-short="Clean" data-context="If everything looks fine, the problem isn't technical." onclick="handleAnswer(3, 'clean', this)" data-i18n="quiz.q3_a4">and everything seems fine</button>
+        </div>
+
+        <!-- Q4: Pain Point -->
+        <div class="question-step" id="q4">
+            <p class="q-text" data-i18n="quiz.q4_text">Sizi bugün buraya ne getirdi?</p>
+            <button class="answer-btn" data-short="Declining rates" data-context="Slow decline. Hardest to spot." onclick="handleAnswer(4, 'declining', this)" data-i18n="quiz.q4_a1">Açılma oranları zamanla yavaşça düşüyor</button>
+            <button class="answer-btn" data-short="ESP warning" data-context="That's already affecting your reputation." onclick="handleAnswer(4, 'crisis', this)" data-i18n="quiz.q4_a2">ESP uyarısı veya askıya alma</button>
+            <button class="answer-btn" data-short="Preventive" data-context="You're early. Smart." onclick="handleAnswer(4, 'preventive', this)" data-i18n="quiz.q4_a3">Büyük bir gönderimden önce güvende olmak istiyorum</button>
+            <button class="answer-btn" data-short="Conflicting tools" data-context="Tools disagree when behaviour is the issue." onclick="handleAnswer(4, 'confused', this)" data-i18n="quiz.q4_a4">Araçlar çelişkili cevaplar veriyor</button>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading-step" id="loadingStep">
+            <div class="spinner"></div>
+            <div class="loading-text" id="loadingMain" data-i18n="quiz.loading_analyzing">Yanıtlarınız analiz ediliyor...</div>
+            <div class="loading-sub" id="loadingSub" data-i18n="quiz.loading_comparing">Yaygın kalıplarla karşılaştırılıyor</div>
+        </div>
+
+        <!-- RESULTS -->
+
+        <!-- No Consent List (Purchased, Scraped, Cold) -->
+        <div class="result-step" id="res-no-consent">
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Bu gördüğüm en yaygın kalıplardan biri.</p>
+            <span class="verdict-badge verdict-high" data-i18n="quiz.badge_higher_risk">Daha Yüksek Risk</span>
+            <h2 class="result-headline" data-i18n="quiz.res_noconsent_headline">Listenizi temizlemenize kesinlikle yardımcı olabiliriz.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_noconsent_subhead">Açık rıza olmayan listeler daha fazla risk taşır—ancak bu güvenli gönderim yapamayacağınız anlamına gelmez. Size zarar verme olasılığı en yüksek olan adresleri kaldıracağız.</p>
+
+            <div class="reality-check">
+                <h4 data-i18n="quiz.what_well_do">Ne yapacağız</h4>
+                <p data-i18n="quiz.res_noconsent_reality">Diğer doğrulayıcıların kaçırdığı geçersiz adresleri, spam tuzaklarını, rol hesaplarını ve yüksek riskli kalıpları yakalıyoruz. Titiziz. Ama aynı zamanda dürüstüz: hiçbir araç izinli olmayan bir listedeki her tuzağı yakalayamaz çünkü bazıları tespit edilemez olacak şekilde tasarlanmıştır. Bu her doğrulayıcı için geçerlidir—sadece biz size bunu söylüyoruz.</p>
+            </div>
+
+            <div id="no-consent-issues" class="additional-issues" style="display:none; margin-bottom: 24px;"></div>
+
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_talk_specialist">Bir Uzmanla Konuşun</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">Başlamaya hazır mısınız?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Listemi Temizle →</a></p>
+
+            <div class="result-capture" data-result="no-consent">
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Teşhisinizi kaydedin</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Sonuçlarınızı e-posta ile alın ve isteğe bağlı olarak self-servis araçlar için bekleme listemize katılın.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter">
+                        <span><span data-i18n="quiz.newsletter_opt">Aylık deliverability içgörüleri (spam yok, sadece bilgi)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">500 credits when we launch</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist">
+                        <span data-i18n="quiz.notify_launch">Self-servis başladığında bana bildir</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span data-i18n="quiz.request_contact">Durumumu görüşmek için birinin bana ulaşmasını istiyorum (satış yok)</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Sonuçlarımı Gönder</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Atla</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Critical: ESP Crisis -->
+        <div class="result-step" id="res-crisis">
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Bu gördüğüm en yaygın kalıplardan biri.</p>
+            <span class="verdict-badge verdict-critical" data-i18n="quiz.badge_critical">Kritik</span>
+            <h2 class="result-headline" data-i18n="quiz.res_crisis_headline">not just cleaning.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_crisis_subhead">Bir ESP uyarısı son damladır. İtibarınız zaten zarar görmüş. Sadece otomatik temizlik sizi eski halinize getirmez.</p>
+
+            <div class="reality-check">
+                <h4 data-i18n="quiz.what_this_means">Bu ne anlama geliyor</h4>
+                <p data-i18n="quiz.res_crisis_reality">not just a clean list. I help identify the root cause and build a path back to good standing with your ESP.</p>
+            </div>
+
+            <div id="crisis-issues" class="additional-issues" style="display:none;"></div>
+
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_talk_specialist">Bir Uzmanla Konuşun</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">Başlamaya hazır mısınız?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Listemi Temizle →</a></p>
+
+            <div class="result-capture" data-result="crisis">
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Teşhisinizi kaydedin</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Sonuçlarınızı e-posta ile alın ve isteğe bağlı olarak self-servis araçlar için bekleme listemize katılın.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter">
+                        <span><span data-i18n="quiz.newsletter_opt">Aylık deliverability içgörüleri (spam yok, sadece bilgi)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">500 credits when we launch</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist">
+                        <span data-i18n="quiz.notify_launch">Self-servis başladığında bana bildir</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span data-i18n="quiz.request_contact">Durumumu görüşmek için birinin bana ulaşmasını istiyorum (satış yok)</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Sonuçlarımı Gönder</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Atla</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Risk: Tool Failure -->
+        <div class="result-step" id="res-tool-failure">
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Bu gördüğüm en yaygın kalıplardan biri.</p>
+            <span class="verdict-badge verdict-high" data-i18n="quiz.badge_high_risk">Yüksek Risk</span>
+            <h2 class="result-headline" data-i18n="quiz.res_toolfail_headline">Doğrulama aracınız bir şeyleri kaçırmış.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_toolfail_subhead">Sözdizimi kontrolü için ödeme yaptınız. İtibar için cezalandırıldınız. 'Geçerli' bir e-posta hala bir spam tuzağı veya kronik şikayetçi olabilir.</p>
+
+            <div class="reality-check">
+                <h4 data-i18n="quiz.what_this_means">Bu ne anlama geliyor</h4>
+                <p data-i18n="quiz.res_toolfail_reality">not context. I find the 'Valid but Dangerous' addresses they miss.</p>
+            </div>
+
+            <div id="tool-failure-issues" class="additional-issues" style="display:none;"></div>
+
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_full_review">Tam inceleme alın</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">Başlamaya hazır mısınız?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Listemi Temizle →</a></p>
+
+            <div class="result-capture" data-result="tool-failure">
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Teşhisinizi kaydedin</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Sonuçlarınızı e-posta ile alın ve isteğe bağlı olarak self-servis araçlar için bekleme listemize katılın.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter">
+                        <span><span data-i18n="quiz.newsletter_opt">Aylık deliverability içgörüleri (spam yok, sadece bilgi)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">500 credits when we launch</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist">
+                        <span data-i18n="quiz.notify_launch">Self-servis başladığında bana bildir</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span data-i18n="quiz.request_contact">Durumumu görüşmek için birinin bana ulaşmasını istiyorum (satış yok)</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Sonuçlarımı Gönder</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Atla</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Risk: Infrastructure Gap -->
+        <div class="result-step" id="res-infra">
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Bu gördüğüm en yaygın kalıplardan biri.</p>
+            <span class="verdict-badge verdict-high" data-i18n="quiz.badge_high_risk">Yüksek Risk</span>
+            <h2 class="result-headline" data-i18n="quiz.res_infra_headline">Altyapınız sorun olabilir.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_infra_subhead">even a clean list can land in spam. This is a fixable issue</p>
+
+            <div class="reality-check">
+                <h4 data-i18n="quiz.what_this_means">Bu ne anlama geliyor</h4>
+                <p data-i18n="quiz.res_infra_reality">your emails look suspicious regardless of list quality.</p>
+            </div>
+
+            <div id="infra-issues" class="additional-issues" style="display:none;"></div>
+
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_diagnose">Bunu teşhis edelim</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">Başlamaya hazır mısınız?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Listemi Temizle →</a></p>
+
+            <div class="result-capture" data-result="infra">
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Teşhisinizi kaydedin</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Sonuçlarınızı e-posta ile alın ve isteğe bağlı olarak self-servis araçlar için bekleme listemize katılın.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter">
+                        <span><span data-i18n="quiz.newsletter_opt">Aylık deliverability içgörüleri (spam yok, sadece bilgi)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">500 credits when we launch</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist">
+                        <span data-i18n="quiz.notify_launch">Self-servis başladığında bana bildir</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span data-i18n="quiz.request_contact">Durumumu görüşmek için birinin bana ulaşmasını istiyorum (satış yok)</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Sonuçlarımı Gönder</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Atla</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medium Risk: Catch-All Confusion -->
+        <div class="result-step" id="res-catchall">
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Bu gördüğüm en yaygın kalıplardan biri.</p>
+            <span class="verdict-badge verdict-medium" data-i18n="quiz.badge_medium_risk">Orta Risk</span>
+            <h2 class="result-headline" data-i18n="quiz.res_catchall_headline">O Bilinmeyen adresler benim için bilinmeyen değil.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_catchall_subhead">Catch-all alan adları her şeyi kabul eder. Doğrulama araçları hangi adreslerin gerçek olduğunu size söyleyemez. Ben söyleyebilirim.</p>
+
+            <div class="reality-check">
+                <h4 data-i18n="quiz.what_this_means">Bu ne anlama geliyor</h4>
+                <p data-i18n="quiz.res_catchall_reality">İş alan adlarının büyük bir yüzdesi catch-all'dır. Doğrulama</p>
+            </div>
+
+            <div id="catchall-issues" class="additional-issues" style="display:none;"></div>
+
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_clarity">Listenizde netlik kazanın</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">Başlamaya hazır mısınız?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Listemi Temizle →</a></p>
+
+            <div class="result-capture" data-result="catchall">
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Teşhisinizi kaydedin</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Sonuçlarınızı e-posta ile alın ve isteğe bağlı olarak self-servis araçlar için bekleme listemize katılın.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter">
+                        <span><span data-i18n="quiz.newsletter_opt">Aylık deliverability içgörüleri (spam yok, sadece bilgi)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">500 credits when we launch</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist">
+                        <span data-i18n="quiz.notify_launch">Self-servis başladığında bana bildir</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span data-i18n="quiz.request_contact">Durumumu görüşmek için birinin bana ulaşmasını istiyorum (satış yok)</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Sonuçlarımı Gönder</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Atla</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medium Risk: Reputation Decay -->
+        <div class="result-step" id="res-decay">
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Bu gördüğüm en yaygın kalıplardan biri.</p>
+            <span class="verdict-badge verdict-medium" data-i18n="quiz.badge_medium_risk">Orta Risk</span>
+            <h2 class="result-headline" data-i18n="quiz.res_decay_headline">Listeniz teslimatınızı yavaşça boğuyor.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_decay_subhead">Bounce artışı yok. Uyarı yok. Sadece ölü ağırlık biriktikçe ve gelen kutusu sağlayıcıları sizi spame filtreledikçe sessiz bir düşüş.</p>
+
+            <div class="reality-check">
+                <h4 data-i18n="quiz.what_this_means">Bu ne anlama geliyor</h4>
+                <p data-i18n="quiz.res_decay_reality">and it is dragging down your engaged subscribers.</p>
+            </div>
+
+            <div id="decay-issues" class="additional-issues" style="display:none;"></div>
+
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_get_diagnosis">Teşhisi alın</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">Başlamaya hazır mısınız?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Listemi Temizle →</a></p>
+
+            <div class="result-capture" data-result="decay">
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Teşhisinizi kaydedin</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Sonuçlarınızı e-posta ile alın ve isteğe bağlı olarak self-servis araçlar için bekleme listemize katılın.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter">
+                        <span><span data-i18n="quiz.newsletter_opt">Aylık deliverability içgörüleri (spam yok, sadece bilgi)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">500 credits when we launch</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist">
+                        <span data-i18n="quiz.notify_launch">Self-servis başladığında bana bildir</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span data-i18n="quiz.request_contact">Durumumu görüşmek için birinin bana ulaşmasını istiyorum (satış yok)</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Sonuçlarımı Gönder</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Atla</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Low Risk: Preventive -->
+        <div class="result-step" id="res-preventive">
+            <p class="pattern-line" data-i18n="quiz.pattern_line">Bu gördüğüm en yaygın kalıplardan biri.</p>
+            <span class="verdict-badge verdict-low" data-i18n="quiz.badge_low_risk">Düşük Risk</span>
+            <h2 class="result-headline" data-i18n="quiz.res_preventive_headline">İyi bir noktadasınız. Böyle devam edelim.</h2>
+            <p class="result-subhead" data-i18n="quiz.res_preventive_subhead">Sağlıklı listeler bile her yıl yaklaşık %22 oranında bozulur. Büyük bir gönderimden önce önleyici bir inceleme</p>
+
+            <div class="reality-check">
+                <h4 data-i18n="quiz.what_this_means">Bu ne anlama geliyor</h4>
+                <p data-i18n="quiz.res_preventive_reality">Doğru şeyleri yapıyorsunuz. Güvenlik kontrolü</p>
+            </div>
+
+            <div id="preventive-issues" class="additional-issues" style="display:none;"></div>
+
+            <button type="button" class="cta-btn" onclick="openContactModal()" data-i18n="quiz.cta_safety_check">Güvenlik kontrolü yapın</button>
+            <p class="result-direct-link"><span data-i18n="quiz.ready_to_go">Başlamaya hazır mısınız?</span> <a href="https://anchor.reviewmyemails.com" data-i18n="quiz.get_list_cleaned">Listemi Temizle →</a></p>
+
+            <div class="result-capture" data-result="preventive">
+                <div class="result-capture__title" data-i18n="quiz.save_diagnosis">Teşhisinizi kaydedin</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Sonuçlarınızı e-posta ile alın ve isteğe bağlı olarak self-servis araçlar için bekleme listemize katılın.</div>
+                <div class="result-capture__form">
+                    <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-newsletter">
+                        <span><span data-i18n="quiz.newsletter_opt">Aylık deliverability içgörüleri (spam yok, sadece bilgi)</span> + <span class="result-capture__bonus" data-i18n="quiz.bonus_credits">500 credits when we launch</span></span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-waitlist">
+                        <span data-i18n="quiz.notify_launch">Self-servis başladığında bana bildir</span>
+                    </label>
+                    <label class="result-capture__checkbox">
+                        <input type="checkbox" class="capture-contact">
+                        <span data-i18n="quiz.request_contact">Durumumu görüşmek için birinin bana ulaşmasını istiyorum (satış yok)</span>
+                    </label>
+                    <button type="button" class="result-capture__btn" onclick="submitQuizCapture(this)" data-i18n="quiz.send_results" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Sonuçlarımı Gönder</button>
+                    <div class="result-capture__skip" onclick="skipCapture(this)" data-i18n="quiz.skip">Atla</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</main>
+
+<script>
+    // Mobile navigation
+    function openMobileNav() {
+        document.getElementById('mobileNav').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+        document.getElementById('mobileNav').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+</script>
+
+<script>
+    // State
+    let answers = {};
+    let answerData = {};
+    let currentQuestion = 1;
+    const totalQuestions = 4;
+    const sessionId = 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+    // Track quiz started on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        va('event', { name: 'Quiz_Started' });
+        trackQuizEvent('started');
+    });
+
+    // Track quiz events to MongoDB
+    function trackQuizEvent(event, data = {}) {
+        fetch('/api/quiz-track', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                sessionId: sessionId,
+                quizType: 'risk-assessment',
+                event: event,
+                timestamp: new Date().toISOString(),
+                ...data
+            })
+        }).catch(err => console.log('Tracking error:', err));
+    }
+
+    // Question labels for summary
+    const questionLabels = {
+        1: 'Source',
+        2: 'DMARC',
+        3: 'Validation',
+        4: 'Pain point'
+    };
+
+    // Timing
+    const advanceDelay = 1200; // ms before advancing to next question
+
+    function handleAnswer(question, answer, btnElement) {
+        answers[question] = answer;
+
+        // Store data for summary
+        answerData[question] = {
+            short: btnElement.getAttribute('data-short'),
+            context: btnElement.getAttribute('data-context')
+        };
+
+        // Track question answered (Vercel Analytics)
+        va('event', { name: 'Question_Answered', data: { question: question, answer: answer } });
+
+        // Track to MongoDB for detailed analysis
+        trackQuizEvent('answer', {
+            question: question,
+            answer: answer,
+            answerLabel: answerData[question].short,
+            answerContext: answerData[question].context
+        });
+
+        // Mark button as selected
+        const questionDiv = document.getElementById('q' + question);
+        questionDiv.querySelectorAll('.answer-btn').forEach(btn => btn.classList.remove('selected'));
+        btnElement.classList.add('selected');
+
+        // Update summary immediately
+        updateSummary();
+
+        // Progress to next question
+        if (question < totalQuestions) {
+            setTimeout(() => {
+                currentQuestion = question + 1;
+                showQuestion(currentQuestion);
+            }, advanceDelay);
+        } else {
+            setTimeout(() => {
+                determineResult();
+            }, advanceDelay);
+        }
+    }
+
+    function updateSummary() {
+        const strip = document.getElementById('summaryStrip');
+        let html = '';
+
+        for (let q = 1; q <= totalQuestions; q++) {
+            if (answerData[q]) {
+                html += `
+                    <div class="summary-item">
+                        <span class="summary-label">${questionLabels[q]}:</span>
+                        <span class="summary-answer">${answerData[q].short}</span>
+                        <span class="summary-context">— "${answerData[q].context}"</span>
+                    </div>
+                `;
+            }
+        }
+
+        strip.innerHTML = html;
+        if (html) {
+            strip.classList.add('visible');
+        }
+    }
+
+    function showQuestion(num) {
+        // Hide all questions
+        document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
+        // Reset all selected states
+        document.querySelectorAll('.answer-btn').forEach(btn => btn.classList.remove('selected'));
+        // Show target
+        document.getElementById('q' + num).classList.add('active');
+        // Update progress
+        document.getElementById('stepIndicator').textContent = `Question ${num} of ${totalQuestions}`;
+        document.getElementById('progressBar').style.width = ((num - 1) / totalQuestions * 100) + '%';
+    }
+
+    function showLoading(resultId) {
+        // Hide questions
+        document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
+        // Show loading
+        document.getElementById('loadingStep').classList.add('active');
+        document.getElementById('progressBar').style.width = '100%';
+
+        // Staged loading messages
+        setTimeout(() => {
+            document.getElementById('loadingMain').textContent = 'Checking risk indicators...';
+            document.getElementById('loadingSub').textContent = 'Matching against known patterns';
+        }, 800);
+
+        setTimeout(() => {
+            document.getElementById('loadingMain').textContent = 'Preparing your diagnosis...';
+            document.getElementById('loadingSub').textContent = '';
+        }, 1600);
+
+        setTimeout(() => {
+            showResult(resultId);
+        }, 2400);
+    }
+
+    function showResult(resultId) {
+        // Hide everything
+        document.querySelectorAll('.question-step').forEach(el => el.classList.remove('active'));
+        document.getElementById('loadingStep').classList.remove('active');
+        // Hide header but keep summary visible
+        document.getElementById('diagHeader').style.display = 'none';
+        // Show result
+        document.getElementById(resultId).classList.add('active');
+
+        // Show additional issues based on all 4 answers
+        showAdditionalIssues(resultId);
+
+        // Track quiz completed with result type (Vercel Analytics)
+        va('event', { name: 'Quiz_Completed', data: { result: resultId } });
+
+        // Track to MongoDB with full answer history
+        trackQuizEvent('completed', {
+            result: resultId,
+            answers: answers,
+            answerData: answerData
+        });
+
+        // Add click tracking to CTA buttons in this result
+        const resultEl = document.getElementById(resultId);
+        resultEl.querySelectorAll('.cta-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                va('event', { name: 'CTA_Clicked', data: { result: resultId, destination: this.href } });
+            });
+        });
+    }
+
+    function determineResult() {
+        // Crisis path - highest priority
+        if (answers[4] === 'crisis') {
+            showLoading('res-crisis');
+            return;
+        }
+
+        // No consent list (purchased, scraped, cold) - needs special handling
+        if (answers[1] === 'no_consent') {
+            showLoading('res-no-consent');
+            return;
+        }
+
+        // Infrastructure issue
+        if (answers[2] === 'dmarc_no') {
+            showLoading('res-infra');
+            return;
+        }
+
+        // Tool failure (valid but issues)
+        if (answers[3] === 'valid_issues') {
+            showLoading('res-tool-failure');
+            return;
+        }
+
+        // Catch-all confusion
+        if (answers[3] === 'catchall') {
+            showLoading('res-catchall');
+            return;
+        }
+
+        // Slow decay
+        if (answers[4] === 'declining' || answers[4] === 'confused') {
+            showLoading('res-decay');
+            return;
+        }
+
+        // Preventive
+        if (answers[4] === 'preventive') {
+            showLoading('res-preventive');
+            return;
+        }
+
+        // Default to decay if nothing else matches
+        showLoading('res-decay');
+    }
+
+    // Build additional issues based on ALL answers (not just primary result)
+    function getAdditionalIssues(primaryResult) {
+        const issues = [];
+
+        // Check Q2: DMARC
+        if (answers[2] === 'dmarc_no' && primaryResult !== 'res-infra') {
+            issues.push('<strong>Infrastructure gap:</strong> Your domain authentication (DMARC) needs attention. Even a clean list can land in spam without proper setup.');
+        } else if (answers[2] === 'dmarc_partial') {
+            issues.push('<strong>Partial DMARC:</strong> Inconsistent authentication settings can confuse inbox providers. Worth reviewing your DNS records.');
+        }
+
+        // Check Q3: Validation history
+        if (answers[3] === 'valid_issues' && primaryResult !== 'res-tool-failure') {
+            issues.push('<strong>Validation gap:</strong> Your previous validation flagged addresses as "valid" that still caused problems. We go deeper than syntax checking.');
+        } else if (answers[3] === 'catchall' && primaryResult !== 'res-catchall') {
+            issues.push('<strong>Catch-all domains:</strong> You have addresses on catch-all domains that other tools mark as "Unknown." We can help identify which are real.');
+        } else if (answers[3] === 'never') {
+            issues.push('<strong>No recent validation:</strong> Lists decay about 22% per year. It\'s been a while since your last check.');
+        }
+
+        // Check Q4: Pain point context
+        if (answers[4] === 'declining' && primaryResult !== 'res-decay') {
+            issues.push('<strong>Declining engagement:</strong> Your open rates are dropping. This often signals list decay even when everything else looks fine.');
+        } else if (answers[4] === 'confused' && primaryResult !== 'res-decay') {
+            issues.push('<strong>Conflicting tool results:</strong> Different validators giving different answers usually means behavioral issues that syntax checks miss.');
+        }
+
+        return issues;
+    }
+
+    // Inject additional issues into result page
+    function showAdditionalIssues(resultId) {
+        const issues = getAdditionalIssues(resultId);
+        if (issues.length === 0) return;
+
+        const issuesContainer = document.getElementById(resultId.replace('res-', '') + '-issues') ||
+                               document.querySelector('#' + resultId + ' .additional-issues');
+
+        if (issuesContainer) {
+            issuesContainer.innerHTML = '<h4>Other things we noticed</h4><ul>' +
+                issues.map(issue => '<li>' + issue + '</li>').join('') +
+                '</ul>';
+            issuesContainer.style.display = 'block';
+        }
+    }
+
+    // Email capture submission
+    async function submitQuizCapture(btnElement) {
+        const captureDiv = btnElement.closest('.result-capture');
+        const emailInput = captureDiv.querySelector('.result-capture__input');
+        const newsletterCheckbox = captureDiv.querySelector('.capture-newsletter');
+        const waitlistCheckbox = captureDiv.querySelector('.capture-waitlist');
+        const contactCheckbox = captureDiv.querySelector('.capture-contact');
+        const resultType = captureDiv.getAttribute('data-result');
+
+        const email = emailInput.value.trim();
+
+        if (!email || !email.includes('@')) {
+            emailInput.style.borderColor = '#dc2626';
+            return;
+        }
+
+        btnElement.disabled = true;
+        btnElement.textContent = btnElement.dataset.i18nSending || 'Sending...';
+        emailInput.style.borderColor = '';
+
+        const subscribeNewsletter = newsletterCheckbox ? newsletterCheckbox.checked : false;
+        const joinWaitlist = waitlistCheckbox ? waitlistCheckbox.checked : false;
+        const requestContact = contactCheckbox ? contactCheckbox.checked : false;
+
+        try {
+            const response = await fetch('/api/quiz-results', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    quizType: 'risk-assessment',
+                    result: resultType,
+                    answers: answers,
+                    answerData: answerData,
+                    subscribeNewsletter: subscribeNewsletter,
+                    joinWaitlist: joinWaitlist,
+                    requestContact: requestContact,
+                    source: 'quiz_results'
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Track capture
+                va('event', { name: 'Quiz_Capture', data: { result: resultType, newsletter: subscribeNewsletter, waitlist: joinWaitlist, contact: requestContact } });
+
+                // Show success
+                const formDiv = captureDiv.querySelector('.result-capture__form');
+                let message = 'Your results have been sent!';
+                if (subscribeNewsletter) {
+                    message += ' You\'ve also earned 1,500 free credits.';
+                }
+                if (requestContact) {
+                    message += ' We\'ll reach out soon.';
+                }
+                formDiv.innerHTML = `<div class="result-capture__success">${message}</div>`;
+            } else {
+                throw new Error(data.error || 'Failed to submit');
+            }
+        } catch (error) {
+            console.error('Quiz capture error:', error);
+            btnElement.disabled = false;
+            btnElement.textContent = btnElement.dataset.i18nRetry || 'Try Again';
+            emailInput.style.borderColor = '#dc2626';
+        }
+    }
+
+    function skipCapture(skipElement) {
+        const captureDiv = skipElement.closest('.result-capture');
+        captureDiv.style.display = 'none';
+
+        // Track skip
+        va('event', { name: 'Quiz_Capture_Skipped', data: { result: captureDiv.getAttribute('data-result') } });
+    }
+</script>
+
+<!-- Contact Modal -->
+<div class="contact-modal" id="contactModal">
+    <div class="contact-modal__content">
+        <div class="contact-modal__header">
+            <h3 class="contact-modal__title" data-i18n="quiz.modal_title">Bir Uzmanla Konuşun</h3>
+            <button class="contact-modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">&times;</button>
+        </div>
+        <div class="contact-modal__body">
+            <p class="contact-modal__subtitle" data-i18n="modal.subtitle">Bize durumunuzu anlatın</p>
+            <form id="contactForm" onsubmit="submitContactForm(event)">
+                <div class="contact-modal__field">
+                    <label class="contact-modal__label" data-i18n="modal.form_name">Name *</label>
+                    <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="modal.name_placeholder">
+                </div>
+                <div class="contact-modal__field">
+                    <label class="contact-modal__label" data-i18n="modal.form_email">Email *</label>
+                    <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                </div>
+                <div class="contact-modal__field">
+                    <label class="contact-modal__label" data-i18n="modal.form_timezone">Timezone (optional)</label>
+                    <select class="contact-modal__select" id="contactTimezone">
+                        <option value="" data-i18n="modal.form_timezone_placeholder">Select your timezone</option>
+                        <option value="America/New_York" data-i18n="modal.timezone_et">Eastern Time (ET)</option>
+                        <option value="America/Chicago" data-i18n="modal.timezone_ct">Central Time (CT)</option>
+                        <option value="America/Denver" data-i18n="modal.timezone_mt">Mountain Time (MT)</option>
+                        <option value="America/Los_Angeles" data-i18n="modal.timezone_pt">Pacific Time (PT)</option>
+                        <option value="America/Anchorage" data-i18n="modal.timezone_alaska">Alaska Time</option>
+                        <option value="Pacific/Honolulu" data-i18n="modal.timezone_hawaii">Hawaii Time</option>
+                        <option value="Europe/London" data-i18n="modal.timezone_london">London (GMT/BST)</option>
+                        <option value="Europe/Paris" data-i18n="modal.timezone_cet">Central European Time</option>
+                        <option value="Europe/Athens" data-i18n="modal.timezone_eet">Eastern European Time</option>
+                        <option value="Asia/Dubai" data-i18n="modal.timezone_gulf">Gulf Standard Time</option>
+                        <option value="Asia/Kolkata" data-i18n="modal.timezone_india">India Standard Time</option>
+                        <option value="Asia/Singapore" data-i18n="modal.timezone_singapore">Singapore Time</option>
+                        <option value="Asia/Tokyo" data-i18n="modal.timezone_japan">Japan Standard Time</option>
+                        <option value="Australia/Sydney" data-i18n="modal.timezone_sydney">Australian Eastern Time</option>
+                        <option value="Pacific/Auckland" data-i18n="modal.timezone_nz">New Zealand Time</option>
+                    </select>
+                </div>
+                <div class="contact-modal__field">
+                    <label class="contact-modal__label" data-i18n="modal.form_message">Message (optional)</label>
+                    <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..." data-i18n-placeholder="modal.message_placeholder"></textarea>
+                </div>
+                <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="modal.form_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Send Request</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openContactModal() {
+        document.getElementById('contactModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+        va('event', { name: 'Contact_Modal_Opened', data: { source: 'quiz' } });
+    }
+
+    function closeContactModal() {
+        document.getElementById('contactModal').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close on backdrop click
+    document.getElementById('contactModal').addEventListener('click', function(e) {
+        if (e.target === this) closeContactModal();
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeContactModal();
+    });
+
+    async function submitContactForm(e) {
+        e.preventDefault();
+        const btn = document.getElementById('contactSubmitBtn');
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const timezone = document.getElementById('contactTimezone').value;
+        const message = document.getElementById('contactMessage').value.trim();
+
+        btn.disabled = true;
+        btn.textContent = btn.dataset.i18nSending || 'Sending...';
+
+        try {
+            const response = await fetch('/api/contact-request', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    timezone,
+                    message,
+                    source: 'quiz',
+                    quizResult: window.quizFinalResult || null,
+                    quizAnswers: window.quizAnswers || null
+                })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                document.querySelector('.contact-modal__body').innerHTML = `
+                    <div class="contact-modal__success">
+                        <div class="contact-modal__success-icon">✓</div>
+                        <div class="contact-modal__success-title">Request Received</div>
+                        <p class="contact-modal__success-text">We'll get back to you within 24 hours.</p>
+                    </div>
+                `;
+                va('event', { name: 'Contact_Form_Submitted', data: { source: 'quiz' } });
+            } else {
+                throw new Error(data.error || 'Failed to submit');
+            }
+        } catch (error) {
+            console.error('Contact form error:', error);
+            btn.disabled = false;
+            btn.textContent = btn.dataset.i18nRetry || 'Try Again';
+        }
+    }
+</script>
+
+<!-- Translation Loader -->
+<script src="/js/i18n.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+Key,Page,Section,English,Greek,Notes
+home.title,homepage,META & SEO,Review My Emails | Email List Cleaning That Tells You What to Do,Review My Emails | Επαγγελματικός Έλεγχος & Καθαρισμός Λίστας Email,"DNT ""Review My Emails"""
+home.meta_desc,homepage,META & SEO,"Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do. Clear labels: Keep, Monitor, Suppress. With the reasoning behind each one.","Τα εργαλεία validation βλέπουν διευθύνσεις. Εμείς βλέπουμε μοτίβα και προβλήματα παραδοσιμότητας. Όχι αυτόματο validation, αλλά ανθρώπινος έλεγχος που σας λέει ακριβώς τι να κάνετε (Keep, Monitor, Suppress).",DNT Keep/Monitor/Suppress
+home.og_title,homepage,META & SEO,Review My Emails | Email List Cleaning That Tells You What to Do,Review My Emails | Επαγγελματικός Έλεγχος Λίστας Email,"Same as title, for social sharing"
+home.og_desc,homepage,META & SEO,"Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.",Τα εργαλεία validation βλέπουν διευθύνσεις. Εμείς βλέπουμε μοτίβα. Εντοπίζουμε τον κίνδυνο και σας λέμε ακριβώς τι να κάνετε.,For social sharing
+home.hero_badge,homepage,HERO,By Yanna-Torry Aspraki,Από την Yanna-Torry Aspraki,DNT name
+home.hero_headline_1,homepage,HERO,Stop guessing what is wrong with your list.,Σταματήστε να μαντεύετε τι πρόβλημα έχει η λίστα σας.,First line of headline
+home.hero_headline_2,homepage,HERO,We find the problems tools miss.,Εντοπίζουμε τα προβλήματα που διαφεύγουν από τα εργαλεία.,"Second line, highlighted"
+home.hero_subhead,homepage,HERO,"Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.","Τα εργαλεία validation βλέπουν απλώς διευθύνσεις. Εμείς αναλύουμε μοτίβα και κίνδυνο, λέγοντάς σας ακριβώς τι να κάνετε.",
+home.cta_primary,homepage,HERO,Get My List Cleaned,Θέλω Καθαρή Λίστα,Main CTA button
+home.hero_bridge,homepage,HERO,Most email inboxing and deliverability problems trace back to list quality.,Τα περισσότερα προβλήματα inboxing και deliverability οφείλονται στην ποιότητα της λίστας.,
+home.hero_quiz_prefix,homepage,HERO,Not sure yet?,Δεν είστε σίγουροι;,
+home.hero_quiz_link,homepage,HERO,Take the 2-minute risk check,Κάντε τον 2λεπτο έλεγχο κινδύνου,
+home.symptoms_title,homepage,SYMPTOMS,Sound familiar?,Σας θυμίζει κάτι;,Section title
+home.symptoms_subtitle,homepage,SYMPTOMS,You're not alone. These are the patterns we see every day.,Δεν είστε μόνοι. Αυτά είναι τα μοτίβα που βλέπουμε κάθε μέρα.,
+home.symptom_1,homepage,SYMPTOMS,<strong>No idea</strong> where half this list came from.,<strong>Δεν έχετε ιδέα</strong> πώς βρέθηκε εκεί η μισή λίστα.,Bold: No idea
+home.symptom_2,homepage,SYMPTOMS,One tool says <strong>clean</strong>. Another says <strong>risky</strong>.,Ένα εργαλείο τη βγάζει <strong>καθαρή</strong>. Ένα άλλο <strong>επικίνδυνη</strong>. Βαδίζετε στα τυφλά.,"Bold: clean, risky"
+home.symptom_3,homepage,SYMPTOMS,"<strong>Scared to remove</strong> subscribers, even the ones who never open.","<strong>Διστάζετε να διαγράψετε</strong> συνδρομητές, ακόμα και αυτούς που δεν ανοίγουν ποτέ.",Bold: Scared to remove
+home.symptom_4,homepage,SYMPTOMS,Haven't emailed this list in <strong>months</strong>. Afraid to restart.,Δεν στείλατε email σε αυτή τη λίστα εδώ και <strong>μήνες</strong>. Φοβάστε να ξαναρχίσετε.,Bold: months
+home.symptom_5,homepage,SYMPTOMS,Paid for list cleaning <strong>yesterday</strong>. Bounces <strong>today</strong>.,Πληρώσατε για καθαρισμό λίστας <strong>χθες</strong>. Bounces <strong>σήμερα</strong>.,"Bold: yesterday, today"
+home.symptom_6,homepage,SYMPTOMS,Open rates <strong>dropped</strong> and nobody can explain why.,Τα open rates <strong>έπεσαν</strong> και κανείς δεν μπορεί να εξηγήσει γιατί.,Bold: dropped
+home.symptom_7,homepage,SYMPTOMS,List keeps <strong>growing</strong>. Revenue <strong>doesn't</strong>.,Η λίστα συνεχίζει να <strong>μεγαλώνει</strong>. Τα έσοδα <strong>όχι</strong>.,"Bold: growing, doesn't"
+home.symptom_8,homepage,SYMPTOMS,"Emails <strong>not inboxing</strong> anymore, going to spam or nowhere at all.","Τα emails <strong>δεν φτάνουν στο inbox</strong>, αλλά καταλήγουν στα spam ή στο κενό.",Bold: not inboxing
+home.crisis_title,homepage,CRISIS,Crisis Mode?,Στη blocklist; Προειδοποίηση ESP; Η φήμη καταρρέει;,Box title
+home.crisis_subtitle,homepage,CRISIS,"If any of these are true, start here.","Αν ισχύει κάτι από αυτά, ξεκινήστε εδώ.",
+home.crisis_item_1,homepage,CRISIS,ESP sent a compliance warning or paused your sending.,Ο ESP έστειλε προειδοποίηση συμμόρφωσης ή ανέστειλε την αποστολή σας.,
+home.crisis_item_2,homepage,CRISIS,"Blocklisted, or you think you might be.","Είστε σε blocklist, ή νομίζετε ότι μπορεί να είστε.",
+home.crisis_item_3,homepage,CRISIS,Last send spiked bounces. Now everyone's afraid to send again.,Η τελευταία αποστολή είχε spike στα bounces. Τώρα όλοι φοβούνται να στείλουν ξανά.,
+home.crisis_cta,homepage,CRISIS,Email the SOS Hotline,Λάβετε Επείγουσα Βοήθεια,DNT SOS Hotline
+home.steps_title,homepage,STEPS,How we actually work,Πώς δουλεύουμε στην πραγματικότητα,
+home.steps_subtitle,homepage,STEPS,Simple process. Expert execution. Real results.,Απλή διαδικασία. Εκτέλεση από ειδικούς. Πραγματικά αποτελέσματα.,
+home.step1_number,homepage,STEPS,Step 01,Βήμα 01,
+home.step1_title,homepage,STEPS,Send us your list,Στείλτε τη λίστα σας,
+home.step1_desc,homepage,STEPS,"CSV, Excel, whatever you have. We've seen it all. No judgment, no questions.","CSV ή Excel. Όλα δεκτά. Χωρίς κριτική, χωρίς ερωτήσεις.",
+home.step2_number,homepage,STEPS,Step 02,Βήμα 02,
+home.step2_title,homepage,STEPS,We review every address,Το ελέγχουμε χειροκίνητα,
+home.step2_desc,homepage,STEPS,"One by one. Looking for bounces, spam traps, disposables, and reputation killers.","Ένα προς ένα. Ψάχνουμε bounces, spam traps και ό,τι καταστρέφει το reputation σας. Αποτελέσματα σε 24-48 ώρες.",
+home.step3_number,homepage,STEPS,Step 03,Βήμα 03,
+home.step3_title,homepage,STEPS,Get your clean list back,Λάβετε την καθαρή λίστα,
+home.step3_desc,homepage,STEPS,With clear labels and a report. You'll know exactly what to do with each address.,Κάθε διεύθυνση με ετικέτα. Πλήρης αναφορά. Θα ξέρετε ακριβώς τι να κάνετε με κάθε επαφή.,
+home.steps_whisper,homepage,STEPS,No outsourcing. No AI guesswork. Just experienced eyes on every list.,Χωρίς outsourcing. Χωρίς AI μαντεψιές. Μόνο έμπειρα μάτια σε κάθε λίστα.,Small text at bottom
+home.pullquote_text,homepage,TESTIMONIAL,"""She cleaned and organized our database with incredible efficiency and set us up for long-term success.""","""Καθάρισε και οργάνωσε τη βάση δεδομένων μας με απίστευτη αποτελεσματικότητα—δεν είχα συνειδητοποιήσει πόσες άχρηστες επαφές είχαμε.""",
+home.pullquote_author,homepage,TESTIMONIAL,"Sam Cande, UK","Sam Cande, UK",
+home.manifesto_text,homepage,MANIFESTO,You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened. That's the gap between validation and understanding.,"Πιθανότατα έχετε χρησιμοποιήσει κάποιο εργαλείο validation. Έδειξε 95% valid. Στείλατε το email. Και όμως, είχατε bounces. Αυτό είναι το κενό μεταξύ του validation και της πραγματικής κατανόησης.",
+home.features_title,homepage,FEATURES,What you actually get,Τι πραγματικά παίρνετε,
+home.feature1_title,homepage,FEATURES,Clear action labels,Σαφείς ετικέτες δράσης,
+home.feature1_desc,homepage,FEATURES,"Every email marked Keep, Monitor, or Suppress. No ambiguity, no guessing what to do next.","Κάθε email με σήμανση Keep, Monitor ή Suppress. Χωρίς ασάφειες, χωρίς να μαντεύετε την επόμενη κίνηση.",DNT Keep/Monitor/Suppress
+home.feature2_title,homepage,FEATURES,Detailed reasoning,Λεπτομερής αιτιολόγηση,
+home.feature2_desc,homepage,FEATURES,"Not just 'risky', we tell you why. Spam trap patterns, domain issues, behavioral signals.","Όχι απλά 'επικίνδυνο', σας λέμε γιατί. Μοτίβα spam trap, προβλήματα domain, σήματα συμπεριφοράς.",
+home.feature3_title,homepage,FEATURES,Expert interpretation included,Ερμηνεία από ειδικό περιλαμβάνεται,
+home.feature3_desc,homepage,FEATURES,"Not just data, context. Every list review includes a walkthrough of your results. I explain what I found, what it means, and exactly what to do next.","Όχι απλά δεδομένα, αλλά ουσία. Κάθε έλεγχος περιλαμβάνει παρουσίαση αποτελεσμάτων. Εξηγώ τι βρήκα, τι σημαίνει και ποια είναι τα επόμενα βήματα.",
+home.quiz_cta_title,homepage,QUIZ CTA,Not sure if your list needs this?,Δεν είστε σίγουροι αν η λίστα σας το χρειάζεται;,
+home.quiz_cta_subtext,homepage,QUIZ CTA,"Take a 2-minute self-assessment. Four questions about how you built your list, and we'll tell you what risk level you're probably at.","Κάντε μια 2λεπτη αυτοαξιολόγηση. Τέσσερις ερωτήσεις για το πώς χτίσατε τη λίστα σας, και θα σας πούμε σε τι επίπεδο κινδύνου πιθανόν βρίσκεστε.",
+home.quiz_cta_button,homepage,QUIZ CTA,Take the 2-Minute Risk Check,Κάντε τον 2λεπτο Έλεγχο Κινδύνου,
+home.testimonials_title,homepage,TESTIMONIALS,People who trusted us,Άνθρωποι που μας εμπιστεύτηκαν,
+home.testimonials_subtitle,homepage,TESTIMONIALS,Real feedback from real senders.,Πραγματικά σχόλια από πραγματικούς αποστολείς.,
+home.testimonial1_name,homepage,TESTIMONIALS,Megan S.,Megan S.,
+home.testimonial1_role,homepage,TESTIMONIALS,UK,UK,
+home.testimonial1_quote,homepage,TESTIMONIALS,"""The SOS Hotline gave me extremely helpful guidance. Yanna-Torry cleaned our list and supported us beyond the call.""","""Το SOS Hotline μου έδωσε εξαιρετικά χρήσιμη καθοδήγηση. Η Yanna-Torry καθάρισε τη λίστα μας και μας υποστήριξε πέρα από κάθε προσδοκία.""","DNT SOS Hotline, Yanna-Torry"
+home.testimonial2_name,homepage,TESTIMONIALS,Chris Mead,Chris Mead,
+home.testimonial2_role,homepage,TESTIMONIALS,UK,UK,
+home.testimonial2_quote,homepage,TESTIMONIALS,"""Real human expertise. Tailor-made solutions. Not an AI tool.""","""Πραγματική ανθρώπινη εξειδίκευση. Εξατομικευμένες λύσεις. Όχι εργαλείο AI.""",
+home.testimonial3_name,homepage,TESTIMONIALS,Adeola Sole,Adeola Sole,
+home.testimonial3_role,homepage,TESTIMONIALS,UK,UK,
+home.testimonial3_quote,homepage,TESTIMONIALS,"""RME provides deep insights our ESP misses and helped us segment smarter.""","""Το RME παρέχει βαθιές γνώσεις που χάνει ο ESP μας και μας βοήθησε να κάνουμε εξυπνότερο segmentation.""","DNT RME, ESP"
+home.final_title,homepage,FINAL CTA,Ready to know what's in your list?,Έτοιμοι να δείτε τι πραγματικά υπάρχει στη λίστα σας;,
+home.final_subtext,homepage,FINAL CTA,"Send us your list. We'll tell you exactly what's safe to send, what needs watching, and what will hurt you.","Στείλτε μας τη λίστα σας. Θα σας πούμε ακριβώς τι είναι ασφαλές να στείλετε, τι χρειάζεται παρακολούθηση και τι θα σας βλάψει.",
+home.final_cta,homepage,FINAL CTA,Get My List Cleaned,Ξεκινήστε Τώρα,
+home.final_footer,homepage,FINAL CTA,Most lists returned within 24 hours.,Οι περισσότερες λίστες επιστρέφονται εντός 24 ωρών.,
+modal.contact_title,common,CONTACT MODAL,Get in Touch,Επικοινωνήστε μαζί μας,
+modal.contact_subtitle,common,CONTACT MODAL,Tell us what you're working on. We'll get back to you within one business day.,Πείτε μας τι δουλεύετε. Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.,
+modal.form_name,common,CONTACT MODAL,Name,Όνομα,
+modal.form_email,common,CONTACT MODAL,Email,Email,
+modal.form_timezone,common,CONTACT MODAL,Timezone,Ζώνη ώρας,
+modal.form_timezone_placeholder,common,CONTACT MODAL,Select your timezone (optional),Επιλέξτε ζώνη ώρας (προαιρετικό),
+modal.form_message,common,CONTACT MODAL,Message,Μήνυμα,
+modal.form_message_placeholder,common,CONTACT MODAL,What can we help you with?,Πώς μπορούμε να σας βοηθήσουμε;,
+modal.form_message_helper,common,CONTACT MODAL,Optional - but helps us prepare for the conversation.,Προαιρετικό - αλλά μας βοηθά να προετοιμαστούμε για τη συζήτηση.,
+modal.form_submit,common,CONTACT MODAL,Send Message,Αποστολή Μηνύματος,
+modal.success_title,common,CONTACT MODAL,Message Sent!,Το Μήνυμα Εστάλη!,
+modal.success_message,common,CONTACT MODAL,We'll get back to you within one business day.,Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.,
+modal.timezone_pt,common,CONTACT MODAL,Pacific Time (PT),Ώρα Ειρηνικού (PT),
+modal.timezone_mt,common,CONTACT MODAL,Mountain Time (MT),Ορεινή Ώρα (MT),
+modal.timezone_ct,common,CONTACT MODAL,Central Time (CT),Κεντρική Ώρα (CT),
+modal.timezone_et,common,CONTACT MODAL,Eastern Time (ET),Ανατολική Ώρα (ET),
+modal.timezone_gmt,common,CONTACT MODAL,GMT / UTC,GMT / UTC,
+modal.timezone_cet,common,CONTACT MODAL,Central European Time (CET),Κεντροευρωπαϊκή Ώρα (CET),
+modal.timezone_other,common,CONTACT MODAL,Other,Άλλο,
+modal.form_sending,common,CONTACT MODAL,Sending...,Αποστολή...,
+modal.form_try_again,common,CONTACT MODAL,Try Again,Δοκιμάστε Ξανά,
+modal.form_error,common,CONTACT MODAL,Something went wrong. Please try again or email us directly at ahoy@reviewmyemails.com,Κάτι πήγε στραβά. Δοκιμάστε ξανά ή στείλτε μας email στο ahoy@reviewmyemails.com,
+modal.request_received,common,CONTACT MODAL,Request Received,Το Αίτημα Ελήφθη,
+modal.timezone_london,common,CONTACT MODAL,London (GMT/BST),Λονδίνο (GMT/BST),
+modal.timezone_singapore,common,CONTACT MODAL,Singapore Time,Ώρα Σιγκαπούρης,
+modal.timezone_sydney,common,CONTACT MODAL,Australian Eastern Time,Ανατολική Ώρα Αυστραλίας,
+modal.timezone_alaska,common,CONTACT MODAL,Alaska Time,Ώρα Αλάσκας,
+modal.timezone_hawaii,common,CONTACT MODAL,Hawaii Time,Ώρα Χαβάης,
+modal.timezone_eet,common,CONTACT MODAL,Eastern European Time,Ανατολικοευρωπαϊκή Ώρα,
+modal.timezone_gulf,common,CONTACT MODAL,Gulf Standard Time,Ώρα Περσικού Κόλπου,
+modal.timezone_india,common,CONTACT MODAL,India Standard Time,Ώρα Ινδίας,
+modal.timezone_japan,common,CONTACT MODAL,Japan Standard Time,Ώρα Ιαπωνίας,
+modal.timezone_nz,common,CONTACT MODAL,New Zealand Time,Ώρα Νέας Ζηλανδίας,
+ui.menu_open,common,UI,Open menu,Άνοιγμα μενού,Accessibility label
+ui.menu_close,common,UI,Close menu,Κλείσιμο μενού,Accessibility label
+nav.home,common,NAVIGATION,Home,Αρχική,
+nav.how_it_works,common,NAVIGATION,How It Works,Πώς Λειτουργεί,
+nav.pricing,common,NAVIGATION,Pricing,Τιμές,
+nav.sos_hotline,common,NAVIGATION,SOS Hotline,SOS Hotline,DNT SOS Hotline
+nav.about,common,NAVIGATION,About,Σχετικά,
+nav.partner,common,NAVIGATION,Partner,Συνεργάτες,
+nav.quiz,common,NAVIGATION,Free Quiz,Δωρεάν Quiz,
+nav.audit,common,NAVIGATION,Self-Audit,Αυτοαξιολόγηση,
+nav.cta,common,NAVIGATION,Get My List Cleaned,Καθαρίστε τη Λίστα Μου,
+footer.tagline,common,FOOTER,We see what algorithms can't.,Βλέπουμε αυτά που οι αλγόριθμοι αδυνατούν να δουν.,
+footer.services,common,FOOTER,Services,Υπηρεσίες,
+footer.company,common,FOOTER,Company,Εταιρεία,
+footer.contact,common,FOOTER,Contact,Επικοινωνία,
+footer.security,common,FOOTER,Security,Ασφάλεια,
+footer.copyright,common,FOOTER,© 2026 Review My Emails. All rights reserved.,© 2026 Review My Emails. Με την επιφύλαξη παντός δικαιώματος.,DNT brand
+footer.privacy,common,FOOTER,Privacy Policy,Απόρρητο,
+footer.terms,common,FOOTER,Terms,Όροι,
+lang.select,common,LANGUAGE,Language,Γλώσσα,
+lang.current_en,common,LANGUAGE,Language: English,Γλώσσα: Ελληνικά,
+ui.loading,common,UI,Loading...,Φόρτωση...,
+ui.submit,common,UI,Submit,Υποβολή,
+ui.cancel,common,UI,Cancel,Ακύρωση,
+ui.close,common,UI,Close,Κλείσιμο,
+ui.learn_more,common,UI,Learn More,Μάθετε Περισσότερα,
+ui.view_details,common,UI,View Details,Δείτε Λεπτομέρειες,
+ui.success,common,UI,Success!,Επιτυχία!,
+ui.error,common,UI,Something went wrong. Please try again.,Κάτι πήγε στραβά. Παρακαλούμε δοκιμάστε ξανά.,
+ui.required,common,UI,Required,Απαιτείται,
+og.headline,common,OG IMAGE,Stop guessing what's wrong with your list,Σταματήστε να μαντεύετε τι πρόβλημα έχει η λίστα σας,Main text on OG image
+og.subhead,common,OG IMAGE,We find the problems tools miss,Βρίσκουμε τα προβλήματα που τα εργαλεία δεν βλέπουν.,Secondary text
+og.tagline,common,OG IMAGE,Expert Email List Cleaning,Επαγγελματικός Καθαρισμός Λίστας Email,Bottom tagline
+easter.fish_message,common,EASTER EGG,You found me! Here's 20% off your first order.,Με βρήκατε! Πάρτε 20% έκπτωση στην πρώτη σας παραγγελία.,Optional
+easter.fish_coupon,common,EASTER EGG,Coupon: DEEPDIVE20,Κουπόνι: DEEPDIVE20,DNT coupon code
+easter.exit_button,common,EASTER EGG,Return to Surface,Επιστροφή στην Επιφάνεια,
+easter.hint,common,EASTER EGG,Something is swimming in the deep...,Κάτι κολυμπάει στα βάθη...,
+about.title,about,HERO,About,Σχετικά,
+about.subtitle,about,HERO,The person behind Review My Emails.,Το άτομο πίσω από το Review My Emails.,DNT Review My Emails
+about.name,about,BIO,Yanna-Torry Aspraki,Yanna-Torry Aspraki,DNT name
+about.role,about,BIO,"Founder, Review My Emails","Ιδρύτρια, Review My Emails",DNT Review My Emails
+about.bio_p1,about,BIO,"I started Review My Emails because I kept seeing the same problem. Marketers would run their lists through validation tools, get a clean bill of health, and then watch their deliverability tank anyway.","Ξεκίνησα το Review My Emails γιατί έβλεπα συνεχώς το ίδιο πρόβλημα. Οι marketers περνούσαν τις λίστες τους από εργαλεία επικύρωσης, έπαιρναν καθαρό πιστοποιητικό υγείας, και μετά έβλεπαν την παραδοσιμότητά τους να καταρρέει ούτως ή άλλως.",DNT Review My Emails
+about.bio_p2,about,BIO,The tools were not lying. They just were not telling the whole story.,Τα εργαλεία δεν έλεγαν ψέματα. Απλά δεν έλεγαν όλη την ιστορία.,
+about.bio_p3,about,BIO,"Validation checks if an address exists. It does not check if sending there is safe. It does not know about complaint histories, engagement patterns, or domain-level risk signals that accumulate over time.","Η επικύρωση ελέγχει αν υπάρχει μια διεύθυνση. Δεν ελέγχει αν είναι ασφαλές να στείλεις εκεί. Δεν γνωρίζει για ιστορικά παραπόνων, μοτίβα αλληλεπίδρασης ή σήματα κινδύνου σε επίπεδο domain που συσσωρεύονται με τον καιρό.",
+about.bio_p4,about,BIO,"I spent years in email deliverability, working with senders of all sizes. I learned that list health is not binary. An address can be technically valid and still damage your reputation. The question is not ""will this bounce?"" but ""should I send here?""","Πέρασα χρόνια στην παραδοσιμότητα email, δουλεύοντας με αποστολείς κάθε μεγέθους. Έμαθα ότι η υγεία της λίστας δεν είναι δυαδική. Μια διεύθυνση μπορεί να είναι τεχνικά έγκυρη και να βλάπτει τη φήμη σου. Το ερώτημα δεν είναι ""θα γυρίσει πίσω;"" αλλά ""πρέπει να στείλω εδώ;""",
+about.bio_p5,about,BIO,"That is what Review My Emails answers. Every address gets labeled Keep, Monitor, or Suppress. And every label comes with the reasoning behind it. No black boxes. No guessing.","Αυτό απαντά το Review My Emails. Κάθε διεύθυνση παίρνει ετικέτα Keep, Monitor ή Suppress. Και κάθε ετικέτα συνοδεύεται από την αιτιολόγηση πίσω από αυτήν. Χωρίς μαύρα κουτιά. Χωρίς εικασίες.","DNT Review My Emails, Keep, Monitor, Suppress"
+about.bio_p6,about,BIO,"If you have questions about your list or your deliverability, I am happy to talk. That is what the SOS Hotline is for.","Αν έχεις ερωτήσεις για τη λίστα σου ή την παραδοσιμότητά σου, είμαι στη διάθεσή σου. Γι' αυτό υπάρχει το SOS Hotline.",DNT SOS Hotline
+about.cta_title,about,CTA,Questions?,Ερωτήσεις;,
+about.cta_subtitle,about,CTA,Talk through your situation. No pitch. Just answers.,Συζήτησε την κατάστασή σου. Χωρίς πώληση. Μόνο απαντήσεις.,
+about.cta_sos,about,CTA,Learn About SOS Hotline,Μάθε για το SOS Hotline,DNT SOS Hotline
+about.cta_pricing,about,CTA,See Pricing,Δες τις Τιμές,
+about.team_title,about,TEAM,The Team,Η Ομάδα,
+about.team_subtitle,about,TEAM,Need a hand (or eight)? We have got you covered.,Χρειάζεσαι ένα χέρι (ή οκτώ); Σε καλύπτουμε.,
+about.team_contact,about,TEAM,Get in touch:,Επικοινώνησε:,
+about.modal_title,about,MODAL,Get in Touch,Επικοινωνήστε,
+about.modal_subtitle,about,MODAL,Tell us what you're working on. We'll get back to you within one business day.,Πείτε μας σε τι εργάζεστε. Θα απαντήσουμε εντός μίας εργάσιμης ημέρας.,
+about.modal_success,about,MODAL,Message Sent!,Το Μήνυμα Εστάλη!,
+about.modal_close,about,MODAL,Close,Κλείσιμο,
+sos.badge,sos-hotline,HERO,"Free Service","Δωρεάν Υπηρεσία SOS",""
+sos.title,sos-hotline,HERO,"Email SOS Hotline","Email SOS Hotline","DNT SOS Hotline"
+sos.subtitle,sos-hotline,HERO,"Free expert guidance for anyone with an email question. No sales pitch. No catch. Just honest answers from a deliverability specialist who gets emails into inboxes for a living.","Δωρεάν καθοδήγηση από ειδικούς. Χωρίς πωλήσεις, χωρίς κρυφούς όρους. Μόνο ειλικρινείς απαντήσεις από ανθρώπους που λύνουν προβλήματα inbox καθημερινά.",""
+sos.cta,sos-hotline,HERO,"Contact the SOS Hotline","Επικοινωνήστε με το SOS Hotline","DNT SOS Hotline"
+sos.note,sos-hotline,HERO,"Within 48 hours. Often sooner.","Εντός 48 ωρών. Συχνά και νωρίτερα.",""
+sos.how_title,sos-hotline,HOW IT WORKS,"How It Works","Πώς Λειτουργεί",""
+sos.testimonials_title,sos-hotline,TESTIMONIALS,"What People Say","Τι Λένε για Εμάς",""
+sos.why_title,sos-hotline,WHY FREE,"Why Is This Free?","Γιατί Είναι Δωρεάν;",""
+sos.why_free_p1,sos-hotline,WHY FREE,"We offer real help without charging because it is the right thing to do.","Προσφέρουμε ουσιαστική βοήθεια δωρεάν, απλώς επειδή αυτό είναι το σωστό.",""
+sos.why_free_p2,sos-hotline,WHY FREE,"We know that if you ever need a deep list review, you will remember who helped you when you were stuck. But that is for later. Right now, let's just fix your problem.","Ξέρουμε ότι αν ποτέ χρειαστείτε βαθύ έλεγχο λίστας, θα θυμηθείτε ποιος σας βοήθησε όταν είχατε κολλήσει. Αλλά αυτό είναι για αργότερα. Τώρα, ας λύσουμε το πρόβλημά σας.",""
+sos.more_title,sos-hotline,BRIDGE,"Need More Than Advice?","Χρειάζεστε Κάτι Περισσότερο από Συμβουλές;",""
+sos.final_cta_subtext,sos-hotline,FINAL CTA,"Email us. Within 48 hours. Often sooner.","Στείλτε μας email. Εντός 48 ωρών. Συχνά και νωρίτερα.",""
+sos.final_cta_title,sos-hotline,FINAL CTA,"Ready to Ask Your Question?","Έτοιμοι να Κάνετε την Ερώτησή σας;",""
+sos.how_step1,sos-hotline,HOW IT WORKS,"You send an email to the SOS Hotline","Στέλνετε email στο SOS Hotline","DNT SOS Hotline"
+sos.how_step2,sos-hotline,HOW IT WORKS,"You receive an automatic reply confirming we got it","Λαμβάνετε αυτόματη απάντηση που επιβεβαιώνει ότι το λάβαμε",""
+sos.how_step3,sos-hotline,HOW IT WORKS,"YT personally reads and responds within 48 hours","Η Yanna-Torry διαβάζει τα μηνύματα προσωπικά και απαντά εντός 48 ωρών","DNT YT"
+sos.topic_career_advice,sos-hotline,TOPICS,"Career advice","Συμβουλές καριέρας",""
+sos.topic_deliverability,sos-hotline,TOPICS,"Deliverability","Deliverability","DNT Deliverability"
+sos.topic_bounces,sos-hotline,TOPICS,"Bounces","Bounces","DNT Bounces"
+sos.topic_blocklists,sos-hotline,TOPICS,"Blocklists","Blocklists","DNT Blocklists"
+sos.topic_open_rates,sos-hotline,TOPICS,"Open rates","Open rates","DNT Open rates"
+sos.topic_esp_migration,sos-hotline,TOPICS,"ESP migration","Μετάβαση ESP","DNT ESP"
+sos.topic_warmup,sos-hotline,TOPICS,"Warmup","Warmup","DNT Warmup"
+sos.topic_list_cleaning,sos-hotline,TOPICS,"List cleaning","Καθαρισμός λίστας",""
+sos.more_dfy,sos-hotline,BRIDGE,"Done-For-You Review","Ολοκληρωμένη Ανασκόπηση",""
+sos.more_dfy_cta,sos-hotline,BRIDGE,"See What You Get","Δείτε Τι Λαμβάνετε",""
+sos.more_expert,sos-hotline,BRIDGE,"Expert Interpretation","Ερμηνεία Ειδικού",""
+sos.more_expert_cta,sos-hotline,BRIDGE,"See the Process","Δείτε τη Διαδικασία",""
+sos.modal_title,sos-hotline,MODAL,"SOS Hotline","SOS Hotline","DNT SOS Hotline"
+sos.modal_subtitle,sos-hotline,MODAL,"Tell us what's going on and we'll get back to you within 24-48 hours.","Πείτε μας τι συμβαίνει και θα επικοινωνήσουμε μαζί σας εντός 24-48 ωρών.",""
+sos.modal_message_label,sos-hotline,MODAL,"What's going on?","Τι συμβαίνει;",""
+sos.modal_placeholder,sos-hotline,MODAL,"What's your email question?","Ποια είναι η ερώτησή σας για email;",""
+sos.modal_submit,sos-hotline,MODAL,"Send to SOS Hotline","Αποστολή στο SOS Hotline","DNT SOS Hotline"
+sos.modal_success,sos-hotline,MODAL,"Message Received","Μήνυμα Λήφθηκε",""
+sos.modal_success_text,sos-hotline,MODAL,"We'll get back to you within 24-48 hours.","Θα επικοινωνήσουμε μαζί σας εντός 24-48 ωρών.",""
+sos.topics_headline,sos-hotline,TOPICS,"If it touches email, we can help.","Αν αφορά το email, μπορούμε να βοηθήσουμε.",""
+sos.topics_subhead,sos-hotline,TOPICS,"You do not need to be a client. You do not need to buy anything.","Δεν χρειάζεται να είστε πελάτης. Δεν χρειάζεται να αγοράσετε τίποτα.",""
+sos.topics_footer,sos-hotline,TOPICS,"...and anything else you are wondering about.","...και οτιδήποτε άλλο αναρωτιέστε.",""
+pricing.title,pricing,HERO,"Simple, Flat Pricing","Απλές, Σταθερές Τιμές",""
+pricing.subtitle,pricing,HERO,"One price for everything. No hidden fees. No upsells.","Μία τιμή για όλα. Χωρίς κρυφές χρεώσεις. Χωρίς upsells.",""
+pricing.card_title,pricing,PRICING CARD,"Comprehensive Audit","Πλήρης Έλεγχος",""
+pricing.card_price,pricing,PRICING CARD,"$499","€499",""
+pricing.card_desc,pricing,PRICING CARD,"For lists up to 100k contacts","Για λίστες έως 100k επαφές",""
+pricing.feature_1,pricing,PRICING CARD,"Manual Human Review","Χειροκίνητος Ανθρώπινος Έλεγχος",""
+pricing.feature_2,pricing,PRICING CARD,"Deep Pattern Analysis","Βαθιά Ανάλυση Μοτίβων",""
+pricing.feature_3,pricing,PRICING CARD,"Deliverability Risk Assessment","Αξιολόγηση Κινδύνου Παραδοσιμότητας",""
+pricing.feature_4,pricing,PRICING CARD,"Custom Action Plan","Εξατομικευμένο Σχέδιο Δράσης",""
+pricing.feature_5,pricing,PRICING CARD,"30-min Strategy Call","30-λεπτη Κλήση Στρατηγικής",""
+pricing.cta,pricing,PRICING CARD,"Get Started","Ξεκινήστε Τώρα",""
+pricing.guarantee,pricing,PRICING CARD,"100% Money Back Guarantee","100% Εγγύηση Επιστροφής Χρημάτων",""
+pricing.faq_title,pricing,FAQ,"Common Questions","Συχνές Ερωτήσεις",""
+pricing.faq_1_q,pricing,FAQ,"How long does it take?","Πόσο χρόνο παίρνει;",""
+pricing.faq_1_a,pricing,FAQ,"Usually 24-48 hours. We review every list manually.","Συνήθως 24-48 ώρες. Ελέγχουμε κάθε λίστα χειροκίνητα.",""
+pricing.faq_2_q,pricing,FAQ,"What if my list is larger?","Τι γίνεται αν η λίστα μου είναι μεγαλύτερη;",""
+pricing.faq_2_a,pricing,FAQ,"Contact us for a custom quote.","Επικοινωνήστε μαζί μας για μια προσαρμοσμένη προσφορά.",""
+pricing.faq_3_q,pricing,FAQ,"Do you delete my data?","Διαγράφετε τα δεδομένα μου;",""
+pricing.faq_3_a,pricing,FAQ,"Yes. We delete all list data 30 days after delivery.","Ναι. Διαγράφουμε όλα τα δεδομένα λίστας 30 ημέρες μετά την παράδοση.",""
+pricing.sos_title,pricing,SOS,"SOS Hotline","SOS Hotline","DNT SOS Hotline"
+pricing.sos_desc,pricing,SOS,"Free expert support for deliverability questions. No data touched. No list processed. Just honest answers.","Δωρεάν υποστήριξη deliverability. Δεν αγγίζουμε τα δεδομένα σας. Δεν επεξεργαζόμαστε τη λίστα σας. Μόνο ειλικρινείς απαντήσεις.",""
+pricing.sos_status,pricing,SOS,"Use it before, during, or after cleaning to understand your situation.","Χρησιμοποιήστε το πριν, κατά τη διάρκεια ή μετά τον έλεγχο για να καταλάβετε πού βρίσκεστε.",""
+pricing.sos_section_title,pricing,SOS,"SOS Email Hotline","SOS Email Hotline","DNT SOS Hotline"
+pricing.sos_free_help,pricing,SOS,"Free Email Help","Δωρεάν Βοήθεια Email",""
+pricing.sos_learn_more,pricing,SOS,"Learn More About SOS Hotline","Μάθετε Περισσότερα για το SOS Hotline","DNT SOS Hotline"
+pricing.sos_section_intro,pricing,SOS,"Free email support for any email-related question.","Δωρεάν υποστήριξη email για οποιαδήποτε ερώτηση σχετική με email.",""
+pricing.sos_card_desc,pricing,SOS,"Ask any email question. Get a real answer from a real expert. No sales pitch, no strings attached.","Κάντε οποιαδήποτε ερώτηση. Λάβετε απάντηση από ειδικό. Χωρίς ""πώληση"", χωρίς δεσμεύσεις.",""
+pricing.sos_duration,pricing,SOS,"Response within 48 hours. Usually faster.","Απάντηση εντός 48 ωρών. Συνήθως πιο γρήγορα.",""

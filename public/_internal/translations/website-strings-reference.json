@@ -1,0 +1,647 @@
+{
+  "_metadata": {
+    "description": "All translatable strings extracted from the Review My Emails website",
+    "extractedDate": "2026-01-25",
+    "purpose": "Reference file for comparison with translation editor sourceStrings"
+  },
+
+  "common": {
+    "navigation": {
+      "howItWorks": "How It Works",
+      "pricing": "Pricing",
+      "sosHotline": "SOS Hotline",
+      "about": "About",
+      "partner": "Partner",
+      "getMyListCleaned": "Get My List Cleaned"
+    },
+    "footer": {
+      "copyright": "Review My Emails",
+      "builtBy": "Built by"
+    },
+    "buttons": {
+      "learnMore": "Learn More",
+      "getStarted": "Get Started",
+      "talkToSpecialist": "Talk to a Specialist",
+      "sendRequest": "Send Request",
+      "sending": "Sending..."
+    },
+    "contactModal": {
+      "title": "Talk to a Specialist",
+      "subtitle": "Tell us about your situation and we'll get back to you within 24 hours.",
+      "nameLabel": "Name *",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email *",
+      "emailPlaceholder": "your@email.com",
+      "timezoneLabel": "Timezone (optional)",
+      "timezonePlaceholder": "Select your timezone",
+      "messageLabel": "Message (optional)",
+      "messagePlaceholder": "Tell us about your situation...",
+      "successTitle": "Request Received",
+      "successText": "We'll get back to you within 24 hours."
+    },
+    "timezones": {
+      "eastern": "Eastern Time (ET)",
+      "central": "Central Time (CT)",
+      "mountain": "Mountain Time (MT)",
+      "pacific": "Pacific Time (PT)",
+      "alaska": "Alaska Time",
+      "hawaii": "Hawaii Time",
+      "london": "London (GMT/BST)",
+      "centralEuropean": "Central European Time",
+      "easternEuropean": "Eastern European Time",
+      "gulf": "Gulf Standard Time",
+      "india": "India Standard Time",
+      "singapore": "Singapore Time",
+      "japan": "Japan Standard Time",
+      "australiaEastern": "Australian Eastern Time",
+      "newZealand": "New Zealand Time"
+    }
+  },
+
+  "index": {
+    "hero": {
+      "title": "Email List Cleaning That Tells You What to Do",
+      "subtitle": "Validation tools see addresses. We see patterns, context, and risk. Then we tell you exactly what to do.",
+      "description": "Clear labels: Keep, Monitor, Suppress. With the reasoning behind each one.",
+      "cta": "Talk to an Expert — Free"
+    },
+    "symptoms": {
+      "sectionLabel": "Sound Familiar?",
+      "title": "The Problems That Bring People Here",
+      "symptom1Title": "Deliverability tanked after a campaign",
+      "symptom1Desc": "Opens dropped, complaints spiked. You validated first, but something still went wrong.",
+      "symptom2Title": "Mixed signals from your validator",
+      "symptom2Desc": "Half the list came back \"unknown\" or \"risky.\" Now what?",
+      "symptom3Title": "Cleaning before a migration",
+      "symptom3Desc": "New ESP, clean start. But you're not sure what's safe to bring over.",
+      "symptom4Title": "Re-engagement gone wrong",
+      "symptom4Desc": "You tried to wake up old subscribers. It backfired.",
+      "symptom5Title": "Blocklisted out of nowhere",
+      "symptom5Desc": "You're on Spamhaus or a major ISP blocklist. No idea why.",
+      "symptom6Title": "Spam traps you can't find",
+      "symptom6Desc": "Validators say the list is clean. But you're still hitting traps."
+    },
+    "howItWorks": {
+      "sectionLabel": "How It Works",
+      "title": "We Read Your List. Then We Tell You What to Do.",
+      "subtitle": "Every address reviewed. Every risk explained. Every action labeled.",
+      "step1Title": "Send Your List",
+      "step1Desc": "Upload via our secure portal. We accept up to 5 million records per batch.",
+      "step2Title": "We Analyze Everything",
+      "step2Desc": "Syntax, domain health, engagement patterns, historical risk signals.",
+      "step3Title": "You Get a Decision File",
+      "step3Desc": "Every row has a label—Keep, Monitor, or Suppress—with reasoning."
+    },
+    "labels": {
+      "sectionLabel": "Output",
+      "title": "Clear Labels. Not Just Scores.",
+      "subtitle": "Every address gets a recommendation, not a probability.",
+      "keepLabel": "Keep",
+      "keepDesc": "Safe to mail. Active domain, valid format, no red flags.",
+      "monitorLabel": "Monitor",
+      "monitorDesc": "Proceed with caution. Watch engagement closely.",
+      "suppressLabel": "Suppress",
+      "suppressDesc": "Do not mail. High risk of bounce, trap, or complaint."
+    },
+    "whyDifferent": {
+      "sectionLabel": "Why We're Different",
+      "title": "What We Catch That Others Miss",
+      "subtitle": "Validators check syntax and pings. We go deeper.",
+      "point1Title": "Domain Context",
+      "point1Desc": "We check MX records, catch-all status, and historical behavior. A \"valid\" address on a dead domain is still a bad send.",
+      "point2Title": "Pattern Detection",
+      "point2Desc": "Spam traps don't announce themselves. We look at list composition, acquisition patterns, and anomalies.",
+      "point3Title": "Engagement Integration",
+      "point3Desc": "If you share engagement data, we factor it in. Opens, clicks, recency—all influence the final label."
+    },
+    "comparison": {
+      "title": "Standard Validators vs. Review My Emails",
+      "otherTools": "Other Tools",
+      "us": "Review My Emails",
+      "row1Label": "Output",
+      "row1Other": "Valid / Invalid / Unknown",
+      "row1Us": "Keep / Monitor / Suppress + reasoning",
+      "row2Label": "Catch-all handling",
+      "row2Other": "Marked \"accept-all\" — no guidance",
+      "row2Us": "Analyzed for actual risk",
+      "row3Label": "Domain health",
+      "row3Other": "MX check only",
+      "row3Us": "Full domain reputation + history",
+      "row4Label": "Spam trap detection",
+      "row4Other": "Limited",
+      "row4Us": "Pattern + network analysis",
+      "row5Label": "Engagement context",
+      "row5Other": "Not considered",
+      "row5Us": "Integrated into scoring"
+    },
+    "testimonials": {
+      "sectionLabel": "What Clients Say",
+      "title": "From Marketers Who've Been There",
+      "testimonial1Text": "Review My Emails identified 12% of our list as hidden risk—addresses that passed every validator we tried. After suppressing them, our inbox rate jumped from 74% to 93%.",
+      "testimonial1Author": "Marcela V.",
+      "testimonial1Location": "Brazil",
+      "testimonial2Text": "We were about to mail 80,000 re-engagement contacts. RME flagged 31% as high-risk. We pulled them. Zero complaints. The campaign actually worked.",
+      "testimonial2Author": "Thomas K.",
+      "testimonial2Location": "Germany",
+      "testimonial3Text": "After months of deliverability issues, RME found a cluster of spam traps tied to a single acquisition campaign from 2019. We'd been mailing them for years.",
+      "testimonial3Author": "Amanda R.",
+      "testimonial3Location": "USA"
+    },
+    "finalCta": {
+      "title": "Ready to See What's Really in Your List?",
+      "subtitle": "Get a clear, actionable report. No more guessing.",
+      "cta": "Get My List Cleaned"
+    }
+  },
+
+  "about": {
+    "hero": {
+      "sectionLabel": "About",
+      "title": "The person behind Review My Emails",
+      "bioP1": "I'm YT, and I've spent 17 years helping senders land in the inbox instead of the spam folder.",
+      "bioP2": "Before Review My Emails, I led deliverability at multiple ESPs and consulted for brands sending billions of emails per month. I've seen what works, what fails, and what the data actually says—versus what vendors claim.",
+      "bioP3": "Most validation tools stop at syntax checks and MX lookups. They'll tell you an address is \"valid\" even if it belongs to a dead domain, a recycled spam trap, or a mailbox that hasn't been opened in three years. That's not useful. That's dangerous.",
+      "bioP4": "Review My Emails exists to fill that gap. We analyze list composition, acquisition patterns, engagement signals, and domain health—then give you a clear answer: Keep, Monitor, or Suppress.",
+      "bioP5": "No ambiguity. No \"unknown\" buckets. Just the decision you need to protect your sending reputation."
+    },
+    "mission": {
+      "title": "Why This Exists",
+      "p1": "Email deliverability shouldn't require guesswork. But most senders are stuck between oversimplified validation tools and expensive enterprise consultants who speak in jargon.",
+      "p2": "I built this to give marketers, growth teams, and email operators a direct path to list health—without needing a six-month consulting engagement or a PhD in SMTP headers."
+    },
+    "team": {
+      "title": "The Team",
+      "description": "A small, focused group that lives and breathes email.",
+      "ytName": "YT",
+      "ytRole": "Founder & Principal Analyst",
+      "ytDesc": "17 years in email deliverability. Former ESP head of deliverability. Cleaned lists for brands sending 500M+ emails/month.",
+      "member2Name": "Ana",
+      "member2Role": "Senior Deliverability Analyst",
+      "member2Desc": "Former postmaster at a major ISP. Specializes in domain reputation and spam trap identification.",
+      "member3Name": "Marcus",
+      "member3Role": "Data Engineer",
+      "member3Desc": "Built the pipeline that processes millions of records per hour. Obsessed with accuracy and speed."
+    },
+    "contact": {
+      "title": "Get in Touch",
+      "description": "Questions? Just want to talk email? Reach out.",
+      "email": "yt@reviewmyemails.com"
+    }
+  },
+
+  "doneForYou": {
+    "hero": {
+      "sectionLabel": "Done-For-You",
+      "title": "Validators check addresses. I read risk.",
+      "subtitle": "Most tools stop at \"valid\" or \"invalid.\" I tell you what to actually do with each record.",
+      "cta": "Get My List Cleaned"
+    },
+    "labels": {
+      "title": "Three Labels. Zero Ambiguity.",
+      "subtitle": "Every record in your file gets one of these:",
+      "keepLabel": "Keep",
+      "keepDesc": "Safe to mail. No flags.",
+      "monitorLabel": "Monitor",
+      "monitorDesc": "Watch for drops. Lower priority.",
+      "suppressLabel": "Suppress",
+      "suppressDesc": "Do not mail. Remove from sends.",
+      "footer": "Plus the reason behind each decision—so you can audit, learn, and defend your choices."
+    },
+    "process": {
+      "title": "How the Process Works",
+      "step1Title": "1. Submit Your List",
+      "step1Desc": "Upload via secure portal or send directly. Up to 5 million records per batch.",
+      "step2Title": "2. I Analyze the Data",
+      "step2Desc": "I check syntax, domain health, behavioral patterns, engagement context, and historical risk signals.",
+      "step3Title": "3. You Get a Decision File",
+      "step3Desc": "Download your cleaned file with every row labeled: Keep, Monitor, or Suppress—with reasoning."
+    },
+    "turnaround": {
+      "title": "Turnaround",
+      "description": "Most lists are processed within 24-48 hours. Larger or more complex files may take longer. You'll get an estimate when you submit."
+    },
+    "whatWeCheck": {
+      "title": "What I Check",
+      "item1": "Syntax and format",
+      "item2": "Domain MX and deliverability",
+      "item3": "Catch-all and accept-all behavior",
+      "item4": "Role account detection",
+      "item5": "Disposable and temporary domains",
+      "item6": "Spam trap network signals",
+      "item7": "Historical bounce patterns",
+      "item8": "Engagement data (if provided)",
+      "item9": "List composition anomalies"
+    },
+    "testimonial": {
+      "text": "Review My Emails goes beyond standard tools by identifying risky patterns others miss.",
+      "author": "Julia S.",
+      "location": "Italy"
+    },
+    "pricing": {
+      "title": "Pricing",
+      "description": "See current rates and volume pricing.",
+      "cta": "View Pricing"
+    },
+    "finalCta": {
+      "title": "Ready to clean your list?",
+      "cta": "Get My List Cleaned"
+    }
+  },
+
+  "partner": {
+    "hero": {
+      "sectionLabel": "Partner Program",
+      "title": "Partner With Us",
+      "subtitle": "Whether you're an ESP, agency, or consultant—we can help your clients with list health."
+    },
+    "partnerTypes": {
+      "title": "Who We Work With",
+      "esp": {
+        "title": "ESPs & Email Platforms",
+        "desc": "Offer list cleaning as a native feature or integration."
+      },
+      "agency": {
+        "title": "Agencies",
+        "desc": "White-label or referral options for your clients."
+      },
+      "consultant": {
+        "title": "Consultants",
+        "desc": "Partner on client projects. We handle the data, you handle the strategy."
+      },
+      "dataProvider": {
+        "title": "Data Providers",
+        "desc": "Integrate our analysis into your enrichment pipeline."
+      }
+    },
+    "benefits": {
+      "title": "Partner Benefits",
+      "benefit1": "Revenue sharing or referral fees",
+      "benefit2": "Co-branded reports",
+      "benefit3": "API access for integrations",
+      "benefit4": "Dedicated partner support",
+      "benefit5": "Priority processing for partner clients"
+    },
+    "cta": {
+      "title": "Interested in partnering?",
+      "description": "Reach out and we'll set up a call.",
+      "buttonText": "Contact Us"
+    }
+  },
+
+  "pricing": {
+    "hero": {
+      "title": "Pricing",
+      "subtitle": "Transparent pricing based on list size."
+    },
+    "options": {
+      "sosHotline": {
+        "title": "SOS Hotline",
+        "price": "Free",
+        "description": "Talk to a deliverability expert. No pitch, just answers.",
+        "cta": "Learn More"
+      },
+      "doneForYou": {
+        "title": "Done-For-You",
+        "priceLabel": "Starting at",
+        "price": "$0.003",
+        "priceUnit": "per record",
+        "description": "Full analysis with Keep/Monitor/Suppress labels.",
+        "cta": "Get Started"
+      },
+      "selfServe": {
+        "title": "Self-Serve",
+        "badge": "Coming Soon",
+        "description": "Upload and process your own lists.",
+        "waitlistCta": "Join Waitlist"
+      }
+    },
+    "calculator": {
+      "title": "Price Calculator",
+      "listSizeLabel": "List size:",
+      "recordsLabel": "records",
+      "estimatedCostLabel": "Estimated cost:",
+      "volumeDiscountLabel": "Volume discount applied"
+    },
+    "volumeTable": {
+      "title": "Volume Pricing",
+      "tierHeader": "Records",
+      "priceHeader": "Price per record",
+      "tier1": "Up to 50,000",
+      "tier1Price": "$0.004",
+      "tier2": "50,001 - 250,000",
+      "tier2Price": "$0.003",
+      "tier3": "250,001 - 1,000,000",
+      "tier3Price": "$0.002",
+      "tier4": "1,000,001+",
+      "tier4Price": "Contact us"
+    },
+    "faq": {
+      "title": "Common Questions",
+      "q1": "What format do you need?",
+      "a1": "CSV with email addresses. Additional columns (engagement data, source) help but aren't required.",
+      "q2": "How fast is turnaround?",
+      "a2": "Most lists under 500k are processed within 24 hours. Larger lists may take 48-72 hours.",
+      "q3": "What if I need regular cleaning?",
+      "a3": "We offer monthly and quarterly plans for ongoing list hygiene. Contact us for details."
+    }
+  },
+
+  "quiz": {
+    "intro": {
+      "badge": "2-Minute Assessment",
+      "title": "What's Actually Hurting Your Deliverability?",
+      "subtitle": "Answer four questions. Get a diagnosis.",
+      "description": "Most senders chase symptoms—open rates, bounce rates, complaints. But the root cause is usually something else. This quiz helps you find it.",
+      "cta": "Start Quiz"
+    },
+    "questions": {
+      "q1": {
+        "question": "When did you first notice deliverability issues?",
+        "opt1": "After a specific campaign or send",
+        "opt2": "Gradual decline over months",
+        "opt3": "After switching ESPs or IPs",
+        "opt4": "After re-engaging old subscribers"
+      },
+      "q2": {
+        "question": "What does your validation tool say about your list?",
+        "opt1": "Most addresses are \"valid\"",
+        "opt2": "High percentage of \"unknown\" or \"risky\"",
+        "opt3": "Some \"invalid\" but mostly fine",
+        "opt4": "Haven't validated recently"
+      },
+      "q3": {
+        "question": "How did you build your list?",
+        "opt1": "Organic signup (website forms, checkout)",
+        "opt2": "Mix of organic and purchased/rented",
+        "opt3": "Imported from another system",
+        "opt4": "Not sure—inherited it"
+      },
+      "q4": {
+        "question": "How often do you email your full list?",
+        "opt1": "Daily",
+        "opt2": "Weekly",
+        "opt3": "Monthly",
+        "opt4": "Less than monthly"
+      }
+    },
+    "results": {
+      "crisis": {
+        "title": "Reputation Crisis",
+        "description": "Something specific triggered a reputation hit. Could be a spam trap cluster, a bad campaign, or a compromised segment.",
+        "recommendation": "Focus on identifying and isolating the problem segment. Don't blast more email until you know what went wrong."
+      },
+      "noConsent": {
+        "title": "Consent Decay",
+        "description": "Your list likely contains addresses that never consented, aged out, or were acquired through questionable sources.",
+        "recommendation": "Segment by acquisition source and date. Suppress anything over 12 months old without engagement."
+      },
+      "toolFailure": {
+        "title": "Validation Gap",
+        "description": "Your validator is missing things. \"Unknown\" and \"risky\" aren't actions—they're uncertainty. And uncertainty is risk.",
+        "recommendation": "Get a second opinion on your list. We specialize in the gray areas validators punt on."
+      },
+      "infra": {
+        "title": "Infrastructure Transition",
+        "description": "ESP migrations reset your sending reputation. New IPs, new domains, new signals for mailbox providers to evaluate.",
+        "recommendation": "Warm up properly. Don't import your full list on day one. Start with your most engaged segment."
+      },
+      "catchall": {
+        "title": "Catch-All Confusion",
+        "description": "Your list may contain addresses at catch-all domains—servers that accept everything, including dead mailboxes.",
+        "recommendation": "Treat catch-all addresses as a separate segment. Test carefully before mailing at scale."
+      },
+      "decay": {
+        "title": "List Decay",
+        "description": "Infrequent mailing accelerates list rot. Addresses go stale, traps get recycled, and engagement dies.",
+        "recommendation": "Increase frequency for engaged segments. Sunset non-responders more aggressively."
+      },
+      "preventive": {
+        "title": "Preventive Mode",
+        "description": "No obvious red flags—but that doesn't mean you're safe. Silent traps and reputation erosion don't announce themselves.",
+        "recommendation": "Run a proactive audit. Find problems before they find you."
+      }
+    },
+    "resultsCta": {
+      "title": "Ready to dig deeper?",
+      "description": "Get a full analysis of your list.",
+      "primaryCta": "Get My List Cleaned",
+      "secondaryCta": "Talk to an Expert"
+    }
+  },
+
+  "sosHotline": {
+    "hero": {
+      "badge": "Free Service",
+      "title": "Email SOS Hotline",
+      "subtitle": "Stuck on a deliverability problem? Talk to someone who's seen it before.",
+      "description": "No pitch. No upsell. Just answers.",
+      "cta": "Book a Call"
+    },
+    "topics": {
+      "title": "What You Can Ask About",
+      "pills": [
+        "Deliverability",
+        "Bounces",
+        "Spam Complaints",
+        "Blocklists",
+        "ESP Migration",
+        "List Hygiene",
+        "Inbox Placement",
+        "Warming Up IPs"
+      ]
+    },
+    "howItWorks": {
+      "title": "How It Works",
+      "step1Title": "1. Book a slot",
+      "step1Desc": "Pick a time that works. 15-minute slots.",
+      "step2Title": "2. Describe your problem",
+      "step2Desc": "Brief context helps. But you can also just show up.",
+      "step3Title": "3. Get answers",
+      "step3Desc": "We'll diagnose, explain, and point you in the right direction."
+    },
+    "whyFree": {
+      "title": "Why Is This Free?",
+      "p1": "Because most senders don't know where to start. They Google, read conflicting advice, and make things worse.",
+      "p2": "This hotline exists to give you a straight answer—fast. If you need more help after, you'll know where to find us."
+    },
+    "testimonial": {
+      "text": "I was stuck on a Spamhaus listing for weeks. One call with YT and I knew exactly what to do. Delisted in 48 hours.",
+      "author": "Jason M.",
+      "location": "Canada"
+    },
+    "finalCta": {
+      "title": "Need help now?",
+      "cta": "Book a Free Call"
+    }
+  },
+
+  "audit": {
+    "intro": {
+      "badge": "Free Self-Assessment",
+      "title": "Inbox Placement Self-Audit",
+      "subtitle": "What most senders never check. Use this monthly. Be honest. This is how problems get caught before revenue drops.",
+      "cta": "Start Audit"
+    },
+    "sections": {
+      "automationTiming": {
+        "title": "Automation Timing",
+        "questions": {
+          "instant": "Do any emails fire within 60 seconds of an open?",
+          "stacked": "Do multiple automations stack back to back?",
+          "openOnly": "Are follow-ups triggered by opens only?",
+          "fixedDelays": "Do you use fixed delays instead of ranges?",
+          "throttle": "Do you throttle bulk sends?",
+          "dailyCap": "Do you cap daily sends per user?"
+        },
+        "tips": {
+          "instantTitle": "Instant triggers look automated",
+          "stackedTitle": "Stacked automations overwhelm recipients",
+          "openOnlyTitle": "Open-only triggers are unreliable",
+          "fixedDelaysTitle": "Fixed delays create patterns",
+          "throttleTitle": "Unthrottled sends spike suspiciously",
+          "dailyCapTitle": "No daily cap = potential spam complaints"
+        }
+      },
+      "headerFooter": {
+        "title": "Header & Footer Hygiene",
+        "questions": {
+          "tallHeader": "Is your header taller than a phone screen?",
+          "ctaVisible": "Is your main CTA visible without scrolling?",
+          "brokenLinks": "Are all links in your emails working?",
+          "physicalAddress": "Is your physical address real and current?",
+          "oneClickUnsub": "Is your unsubscribe one-click?",
+          "domainMatch": "Do your brand domains match your sender domain?",
+          "urlShorteners": "Do you use URL shorteners (bit.ly, etc)?"
+        }
+      },
+      "trackingDomain": {
+        "title": "Tracking Domain Risk",
+        "questions": {
+          "sharedDomain": "Do multiple brands share the same tracking domain?",
+          "clientsDomain": "Do clients or partners use your tracking domain?",
+          "dnsSecure": "Is your DNS locked and secure?",
+          "domainWarmed": "Is your tracking domain properly warmed?",
+          "domainAge": "Is your domain older than 30 days?",
+          "blocklists": "Do you monitor blocklists for your domain?"
+        }
+      },
+      "engagementLogic": {
+        "title": "Engagement Logic",
+        "questions": {
+          "signals": "What signals define \"engaged\" for you?",
+          "timeWindow": "What engagement time window do you use?",
+          "ispSegment": "Do you segment engagement by ISP (Gmail vs Outlook vs Yahoo)?",
+          "appleOpens": "Do you track Apple opens differently?",
+          "decayScores": "Do you decay engagement scores over time?",
+          "suppressCold": "Do you automatically suppress cold users?"
+        }
+      },
+      "layoutPattern": {
+        "title": "Layout Pattern Risk",
+        "questions": {
+          "sameTemplate": "Do you use the same template for every send?",
+          "ctaLocation": "Is your CTA always in the same location?",
+          "textImageRatio": "Is your text-to-image ratio always the same?"
+        }
+      },
+      "sendTimeLogic": {
+        "title": "Send Time Logic",
+        "questions": {
+          "sameHour": "Do you send at the exact same hour every day?",
+          "sameMinute": "Do you send at the exact same minute?",
+          "timezoneLogic": "Do you use timezone logic for sends?",
+          "sendTimeOptimization": "Do you use engagement-based send time optimization?"
+        }
+      },
+      "espMigration": {
+        "title": "ESP Migration Risk",
+        "questions": {
+          "suppressionLists": "Did you import old suppression lists during migration?",
+          "bounceLists": "Did you import old hard bounce lists?",
+          "reValidate": "Did you re-validate your list after migration?",
+          "warmUp": "Did you warm up as a new sender after migration?"
+        }
+      },
+      "subjectPreview": {
+        "title": "Subject vs Preview Trust",
+        "questions": {
+          "contentAlign": "Do your subject and preview align with email content?",
+          "clickbait": "Do you use clickbait subject lines?",
+          "allCaps": "Do you use ALL CAPS in subject lines?",
+          "triggerWords": "Do you avoid spam trigger words (FREE, URGENT, etc)?"
+        }
+      },
+      "spamRendering": {
+        "title": "Spam Folder Rendering",
+        "questions": {
+          "testedSpam": "Have you tested how your emails render in spam folders?",
+          "imagesLoad": "Do your images load in spam view?",
+          "plainTextCta": "Do you have plain text CTAs as fallbacks?",
+          "darkMode": "Have you tested dark mode rendering?"
+        }
+      },
+      "validationFrequency": {
+        "title": "Validation Frequency",
+        "questions": {
+          "cleanFrequency": "How often do you validate/clean your list?",
+          "validateImports": "Do you validate new imports before sending?",
+          "suppressBounces": "Do you automatically suppress hard bounces?",
+          "handleUnknown": "Do you monitor and handle unknown/risky addresses?",
+          "roleAccounts": "Do you suppress or segment role accounts (info@, sales@)?"
+        }
+      }
+    },
+    "results": {
+      "scoreLabels": {
+        "strongFoundation": "Strong Foundation",
+        "needsAttention": "Needs Attention",
+        "highRisk": "High Risk"
+      },
+      "summaries": {
+        "strongFoundation": "Your email practices are solid. Focus on the few areas flagged below to optimize further.",
+        "needsAttention": "You have some good practices but several areas need work before they impact your deliverability.",
+        "highRisk": "Multiple issues detected that are likely hurting your inbox placement. Prioritize the recommendations below."
+      },
+      "labels": {
+        "outOf100": "out of 100",
+        "scoreBySection": "Score by Section",
+        "actionItemsBySection": "Action Items by Section",
+        "everythingFlagged": "Everything flagged based on your answers. Review what applies to you:"
+      },
+      "remember": "Remember: Not every item applies to every business. A score of 70 might be perfectly fine for your use case. These are guidelines, not mandates. Use your judgment about what matters for your specific situation."
+    },
+    "sosPlug": {
+      "title": "Not Sure What Applies to You?",
+      "description": "Every business is different. What's critical for a daily sender might be irrelevant for a monthly newsletter. If you're unsure which items actually matter for your situation, talk to someone who's seen it all.",
+      "badge": "Free. No pitch. Just answers.",
+      "ytDescription": "The SOS Hotline connects you with YT, a deliverability specialist who's cleaned thousands of lists and diagnosed hundreds of sending problems. Ask anything.",
+      "cta": "Talk to a Specialist",
+      "learnMore": "Learn About SOS Hotline"
+    },
+    "testimonial": {
+      "text": "Review My Emails goes beyond standard tools by identifying risky patterns others miss.",
+      "author": "Julia S.",
+      "location": "Italy"
+    },
+    "capture": {
+      "title": "Save Your Results",
+      "description": "Get a detailed report emailed and optionally join our waitlist.",
+      "emailPlaceholder": "your@email.com",
+      "newsletterCheckbox": "Monthly deliverability insights (no spam, just signal) +",
+      "creditBonus": "1,500 credits when we launch",
+      "waitlistCheckbox": "Notify me when self-serve launches",
+      "contactCheckbox": "Have someone reach out to discuss my audit results (no sales pitch)",
+      "submitButton": "Send My Report",
+      "skipLink": "Skip, I'll just review on screen",
+      "successTitle": "Report Sent!",
+      "successMessage": "Check your inbox for your detailed audit report."
+    },
+    "buttons": {
+      "startAudit": "Start Audit",
+      "nextSection": "Next Section",
+      "seeResults": "See Results",
+      "retakeAudit": "Retake Audit",
+      "getExpertCleaning": "Get Expert List Cleaning"
+    }
+  }
+}

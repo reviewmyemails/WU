@@ -1,0 +1,1398 @@
+[
+  {
+    "key": "about.email_link",
+    "english": "Email",
+    "files": [
+      "about.html"
+    ]
+  },
+  {
+    "key": "about.founder_title",
+    "english": "Founder, Review My Emails",
+    "files": [
+      "about.html"
+    ]
+  },
+  {
+    "key": "audit.back",
+    "english": "Back",
+    "files": [
+      "audit.html"
+    ]
+  },
+  {
+    "key": "audit.built_by",
+    "english": "Built by",
+    "files": [
+      "audit.html"
+    ]
+  },
+  {
+    "key": "audit.get_cleaned",
+    "english": "Get Your List Cleaned",
+    "files": [
+      "audit.html"
+    ]
+  },
+  {
+    "key": "audit.important",
+    "english": "Important:",
+    "files": [
+      "audit.html"
+    ]
+  },
+  {
+    "key": "audit.what_cover",
+    "english": "What we'll cover",
+    "files": [
+      "audit.html"
+    ]
+  },
+  {
+    "key": "contact.modal_subtitle",
+    "english": "Tell us what you're working on. We'll get back to you within one business day.",
+    "files": [
+      "about.html",
+      "index.html"
+    ]
+  },
+  {
+    "key": "contact.modal_title",
+    "english": "Get in Touch",
+    "files": [
+      "about.html",
+      "done-for-you.html",
+      "index.html"
+    ]
+  },
+  {
+    "key": "contact.submit",
+    "english": "Send Message",
+    "files": [
+      "about.html",
+      "index.html"
+    ]
+  },
+  {
+    "key": "dfy.consult_call_title",
+    "english": "1:1 Call with YT",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.contact_first",
+    "english": "Contact Us First",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.how_read_title",
+    "english": "How I Read Your List",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.keep_desc",
+    "english": "No flags found. Domain checks out, validation passed, no risk signals. These are clear to send.",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.keep_title",
+    "english": "Safe to Mail",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.modal_submit",
+    "english": "Send Request",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.modal_subtitle",
+    "english": "Tell us about your situation and we'll get back to you within 24 hours.",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.monitor_desc",
+    "english": "Each address comes with specific labels explaining why it landed here. Context matters. How you segment and send to these decides the outcome.",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.monitor_title",
+    "english": "Yellow Flags",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.pricing_ask",
+    "english": "Just ask",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.pricing_questions",
+    "english": "Questions first?",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.read1_desc",
+    "english": "Domain behavior, history, and patterns across your entire list. Context, not just existence. An address that \"works\" can still be dangerous.",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.read1_title",
+    "english": "I Look Beyond the Address",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.read2_desc",
+    "english": "Traps, role accounts, toxic domains, disposable patterns. The things that don't bounce but still hurt you. I've learned what to look for.",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.read2_title",
+    "english": "I Check What Others Miss",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.read3_desc",
+    "english": "Not just labels. You get the thinking behind each decision so you understand why, and can make smarter calls next time.",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.read3_title",
+    "english": "I Explain My Reasoning",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.sos_cta",
+    "english": "Learn About SOS Hotline",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.sos_desc",
+    "english": "Have a question before committing? Use the SOS Hotline. It is free. No sales pitch. Just honest answers.",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.sos_title",
+    "english": "Not Sure Yet?",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.suppress_desc",
+    "english": "Each address comes with specific labels explaining why. Invalid, trap-likely, disposable, or other risk signals. Don't send here.",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.suppress_title",
+    "english": "Do Not Mail",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_for1",
+    "english": "Running campaigns but seeing declining engagement",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_for2",
+    "english": "Worried about bounces, complaints, or blocklists",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_for3",
+    "english": "Inheriting a list you did not build",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_for4",
+    "english": "Under pressure to \"just send\" but sensing risk",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_for5",
+    "english": "Trying to explain deliverability risks internally",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_for_title",
+    "english": "This Is For You If",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_not1",
+    "english": "You want someone to write or send campaigns for you",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_not2",
+    "english": "You need ESP migration or setup help",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_not3",
+    "english": "You want ongoing managed services",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_not4",
+    "english": "You need content or design work",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_not_title",
+    "english": "Not For You If",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_partner_cta",
+    "english": "Connect With a Partner",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "dfy.who_title",
+    "english": "Who This Is For",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "footer.legal",
+    "english": "Privacy Policy · Terms",
+    "files": [
+      "done-for-you.html",
+      "index.html",
+      "pricing.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.email_label",
+    "english": "Email *",
+    "files": [
+      "about.html",
+      "done-for-you.html",
+      "index.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.message_hint",
+    "english": "Optional - but helps us prepare for the conversation.",
+    "files": [
+      "about.html",
+      "index.html"
+    ]
+  },
+  {
+    "key": "form.message_label",
+    "english": "Message",
+    "files": [
+      "about.html",
+      "index.html"
+    ]
+  },
+  {
+    "key": "form.message_optional_label",
+    "english": "Message (optional)",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "form.name_label",
+    "english": "Name *",
+    "files": [
+      "about.html",
+      "done-for-you.html",
+      "index.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.timezone_label",
+    "english": "Timezone (optional)",
+    "files": [
+      "about.html",
+      "done-for-you.html",
+      "index.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.timezone_select",
+    "english": "Select your timezone",
+    "files": [
+      "done-for-you.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.timezone_select_optional",
+    "english": "Select your timezone (optional)",
+    "files": [
+      "about.html",
+      "index.html"
+    ]
+  },
+  {
+    "key": "form.tz_alaska",
+    "english": "Alaska Time",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "form.tz_central",
+    "english": "Central Time (CT)",
+    "files": [
+      "about.html",
+      "done-for-you.html",
+      "index.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.tz_cet",
+    "english": "Central European Time (CET)",
+    "files": [
+      "about.html",
+      "done-for-you.html",
+      "index.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.tz_eastern",
+    "english": "Eastern Time (ET)",
+    "files": [
+      "about.html",
+      "done-for-you.html",
+      "index.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.tz_eet",
+    "english": "Eastern European Time",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "form.tz_gmt",
+    "english": "GMT / UTC",
+    "files": [
+      "about.html",
+      "index.html"
+    ]
+  },
+  {
+    "key": "form.tz_gulf",
+    "english": "Gulf Standard Time",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "form.tz_hawaii",
+    "english": "Hawaii Time",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "form.tz_india",
+    "english": "India Standard Time",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "form.tz_japan",
+    "english": "Japan Standard Time",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "form.tz_london",
+    "english": "London (GMT/BST)",
+    "files": [
+      "done-for-you.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.tz_mountain",
+    "english": "Mountain Time (MT)",
+    "files": [
+      "about.html",
+      "done-for-you.html",
+      "index.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.tz_nz",
+    "english": "New Zealand Time",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "form.tz_other",
+    "english": "Other",
+    "files": [
+      "about.html",
+      "index.html"
+    ]
+  },
+  {
+    "key": "form.tz_pacific",
+    "english": "Pacific Time (PT)",
+    "files": [
+      "about.html",
+      "done-for-you.html",
+      "index.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.tz_singapore",
+    "english": "Singapore Time",
+    "files": [
+      "done-for-you.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "form.tz_sydney",
+    "english": "Australian Eastern Time",
+    "files": [
+      "done-for-you.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "home.manifesto",
+    "english": "You've probably run your list through a tool before. It said 95% valid. You sent anyway. Bounces happened. That's the gap between validation and understanding.",
+    "files": [
+      "index.html"
+    ]
+  },
+  {
+    "key": "home.quiz_cta_btn",
+    "english": "Take the 2-Minute Risk Check",
+    "files": [
+      "index.html"
+    ]
+  },
+  {
+    "key": "home.quiz_cta_desc",
+    "english": "Take a 2-minute self-assessment. Four questions about how you built your list, and we'll tell you what risk level you're probably at.",
+    "files": [
+      "index.html"
+    ]
+  },
+  {
+    "key": "modal.subtitle",
+    "english": "Tell us about your situation and we'll get back to you within 24 hours.",
+    "files": [
+      "audit.html",
+      "pricing.html",
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "pricing.calc_heading",
+    "english": "Calculate Your Price",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.calc_intro",
+    "english": "Simple. More volume, lower rate.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.calc_subtitle",
+    "english": "Pay only for what you need. Credits never expire.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.calc_title",
+    "english": "Pricing Calculator",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_subtitle",
+    "english": "The difference between checking and interpreting.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_them1",
+    "english": "Validators check if an inbox exists.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_them2",
+    "english": "Validators give you a status.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_them3",
+    "english": "Validators flag what bounces.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_them4",
+    "english": "Validators process volume.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_them5",
+    "english": "Validators leave you guessing.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_title",
+    "english": "What You Are Actually Paying For",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_us1",
+    "english": "We assess whether sending there is safe.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_us2",
+    "english": "We give you the reasoning behind a decision.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_us3",
+    "english": "We flag what damages your reputation without bouncing.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_us4",
+    "english": "We interpret patterns across your entire list.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.compare_us5",
+    "english": "We tell you what to do and why.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.cta_clean_desc",
+    "english": "Done-for-you service. Send your list, get results.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.cta_clean_title",
+    "english": "Get My List Cleaned",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.cta_help_desc",
+    "english": "Email our SOS hotline with your questions.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.cta_help_title",
+    "english": "Get Free Help",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.cta_waitlist_title",
+    "english": "Join the Waitlist",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.for_custom",
+    "english": "for custom pricing.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.free_help_desc",
+    "english": "Ask any email question. Get a real answer from a real expert. No sales pitch, no strings attached.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.free_help_title",
+    "english": "Free Email Help",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.get_started_btn",
+    "english": "Get Started",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.hero_headline1",
+    "english": "Beyond Validation.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.hero_headline2",
+    "english": "We Tell You What Your List Means.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.hero_subhead",
+    "english": "Not just pass/fail. Every address comes with reasoning so you know what to keep, what to monitor, and what to suppress.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.join",
+    "english": "Join",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.keep_desc",
+    "english": "No risk patterns surfaced during review. Domain behavior and historical signals support continued sending.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.keep_title",
+    "english": "Cleared After Full Review",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.learn_more_sos",
+    "english": "Learn More About SOS Hotline",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.monitor_desc",
+    "english": "These require judgment. We surface historical patterns and relationship context. You decide how to segment based on your tolerance and goals.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.monitor_title",
+    "english": "Patterns Worth Watching",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.need_more",
+    "english": "Need more than 1 million?",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.newsletter_opt",
+    "english": "Monthly deliverability insights (no spam, just signal)",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.option_automation",
+    "english": "Automation",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.option_execution",
+    "english": "Execution",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.option_guidance",
+    "english": "Guidance",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.questions_title",
+    "english": "Questions?",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.suppress_desc",
+    "english": "Clear risk signals: known problem domains, disposable patterns, historical trap indicators. Each address includes the specific flags that earned suppression. You will know exactly why.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.suppress_title",
+    "english": "Clear Risk, Clear Reasoning",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.waitlist_success_short",
+    "english": "You're on the list!",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.what_you_get_subtitle",
+    "english": "A cleaned list with clear recommendations.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.what_you_get_title",
+    "english": "What You Get",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.who_item1",
+    "english": "Running campaigns but seeing declining engagement",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.who_item2",
+    "english": "Worried about bounces, complaints, or blocklists",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.who_item3",
+    "english": "Inheriting a list you did not build",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.who_item4",
+    "english": "Under pressure to \"just send\" but sensing risk",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.who_item5",
+    "english": "Trying to explain deliverability to a boss who does not get it",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.who_note",
+    "english": "If you care about long-term reputation, not just short-term volume, this is for you.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.who_subtitle",
+    "english": "Marketers who already send email and want to protect their sender reputation.",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "pricing.who_title",
+    "english": "Who This Is For",
+    "files": [
+      "pricing.html"
+    ]
+  },
+  {
+    "key": "quiz.bonus_credits",
+    "english": "1,500 credits when we launch",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.cta_get_diagnosis",
+    "english": "Get the diagnosis",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.cta_safety_check",
+    "english": "Get a safety check",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.get_list_cleaned",
+    "english": "Get My List Cleaned →",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.loading_analyzing",
+    "english": "Analyzing your responses...",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.loading_comparing",
+    "english": "Comparing against common patterns",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.newsletter_opt",
+    "english": "Monthly deliverability insights (no spam, just signal)",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.notify_launch",
+    "english": "Notify me when self-serve launches",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.pattern_line",
+    "english": "This is one of the most common patterns I see.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.q1_text",
+    "english": "How did the majority of these emails get on your list?",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.q2_text",
+    "english": "Is your sending domain authenticated with DMARC?",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.q3_text",
+    "english": "Have you run this list through a validation tool?",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.q4_text",
+    "english": "What brought you here today?",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.ready_to_go",
+    "english": "Ready to go?",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.request_contact",
+    "english": "Have someone reach out to discuss my situation (no sales pitch)",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_catchall_headline",
+    "english": "Those \"Unknown\" addresses are not unknown to me.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_catchall_reality",
+    "english": "A large percentage of business domains are catch-all. Validation marks them \"Unknown\" because it cannot verify. Pattern recognition and engagement history tell a different story.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_catchall_subhead",
+    "english": "Catch-all domains accept everything. Validation tools cannot tell you which addresses are real. I can.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_crisis_headline",
+    "english": "You need triage, not just cleaning.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_crisis_reality",
+    "english": "You need a remediation strategy, not just a clean list. I help identify the root cause and build a path back to good standing with your ESP.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_crisis_subhead",
+    "english": "An ESP warning is the final straw. Your reputation is already damaged. Automated cleaning alone will not get you reinstated.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_decay_headline",
+    "english": "Your list is slowly suffocating your delivery.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_decay_reality",
+    "english": "This is the hardest problem to diagnose because there is no event. Your list has accumulated decay, and it is dragging down your engaged subscribers.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_decay_subhead",
+    "english": "No bounce spike. No warning. Just a quiet decline as dead weight accumulates and inbox providers filter you to spam.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_infra_headline",
+    "english": "Your infrastructure may be the problem.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_infra_reality",
+    "english": "Domain authentication tells inbox providers you are who you say you are. Without it, your emails look suspicious regardless of list quality.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_infra_subhead",
+    "english": "Without proper DMARC authentication, even a clean list can land in spam. This is a fixable issue, but it needs attention before list cleaning matters.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_noconsent_headline",
+    "english": "We can absolutely help clean your list.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_noconsent_reality",
+    "english": "We catch invalid addresses, spam traps, role accounts, and high-risk patterns that other validators miss. We're thorough. But we're also honest: no tool can catch every trap on a non-consent list because some are designed to be undetectable. That's true for every validator—we're just the ones who tell you.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_noconsent_subhead",
+    "english": "Lists without explicit consent carry more risk—but that doesn't mean you can't send safely. We'll remove the addresses most likely to hurt you.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_preventive_headline",
+    "english": "You are in a good spot. Let's keep it that way.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_preventive_reality",
+    "english": "You are doing the right things. A safety check ensures you do not accidentally hit a trap that did not exist last time you sent.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_preventive_subhead",
+    "english": "Healthy lists still decay by about 22% every year. A preventative review before a big send catches recycled traps that formed since your last campaign.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_toolfail_headline",
+    "english": "Your validation tool missed something.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_toolfail_reality",
+    "english": "Automated tools cannot see behavioral history. They check code, not context. I find the \"Valid but Dangerous\" addresses they miss.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.res_toolfail_subhead",
+    "english": "You paid for syntax checking. You were punished for reputation. A \"Valid\" email can still be a spam trap or chronic complainer.",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.save_diagnosis",
+    "english": "Save your diagnosis",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.send_results",
+    "english": "Send My Results",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.skip",
+    "english": "Skip",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.step_1_of_4",
+    "english": "Question 1 of 4",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.what_this_means",
+    "english": "What this means",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "quiz.what_well_do",
+    "english": "What we'll do",
+    "files": [
+      "quiz.html"
+    ]
+  },
+  {
+    "key": "sos.bridge_dfy_cta",
+    "english": "See What You Get",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.bridge_dfy_desc",
+    "english": "Send us your list. We review every address and return it labeled: Keep, Monitor, or Suppress. Each gets a clear label, a definition, and why it matters.",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.bridge_dfy_title",
+    "english": "Done-For-You Review",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.bridge_expert_cta",
+    "english": "See the Process",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.bridge_expert_desc",
+    "english": "Every list review includes a walkthrough of your results. We explain what we found, what it means, and what to do next. Included free with every cleaning.",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.bridge_expert_title",
+    "english": "Expert Interpretation",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.bridge_intro",
+    "english": "SOS gives you guidance. If you need someone to actually touch your data, we offer:",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.bridge_title",
+    "english": "Need More Than Advice?",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.final_cta_subtext",
+    "english": "Email us. Within 48 hours. Often sooner.",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.final_cta_title",
+    "english": "Ready to Ask Your Question?",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.how_step1",
+    "english": "You send an email to the SOS Hotline",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.how_step2",
+    "english": "You receive an automatic reply confirming we got it",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.how_step3",
+    "english": "YT personally reads and responds within 48 hours",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.topic_career_advice",
+    "english": "Career advice",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.why_free_p1",
+    "english": "We offer real help without charging because it is the right thing to do. Most questions fall into a few common patterns I see every week. Some people need a quick answer. Some need deeper support. Either way, the conversation starts the same.",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.why_free_p2",
+    "english": "If you need more than guidance, we offer done-for-you list reviews with expert interpretation included. But there is no pressure. The SOS Hotline exists to help, not to sell.",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.why_free_tagline",
+    "english": "Trust beats tactics.",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "sos.why_free_title",
+    "english": "Why Is This Free?",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "ui.message_received",
+    "english": "Message Received",
+    "files": [
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "ui.message_sent",
+    "english": "Message Sent!",
+    "files": [
+      "about.html",
+      "index.html"
+    ]
+  },
+  {
+    "key": "ui.request_received",
+    "english": "Request Received",
+    "files": [
+      "done-for-you.html"
+    ]
+  },
+  {
+    "key": "ui.response_time",
+    "english": "We\\'ll get back to you within 24-48 hours.",
+    "files": [
+      "done-for-you.html",
+      "sos-hotline.html"
+    ]
+  },
+  {
+    "key": "ui.response_time_business",
+    "english": "We'll get back to you within one business day.",
+    "files": [
+      "about.html",
+      "index.html"
+    ]
+  }
+]

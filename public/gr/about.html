@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Review My Emails</title>
-    <meta name="description" content="Meet Yanna-Torry Aspraki, the deliverability expert behind Review My Emails. Years of experience helping senders understand what validation tools miss.">
+    <title>Review My Emails | Επαγγελματικός Έλεγχος & Καθαρισμός Λίστας Email</title>
+    <meta name="description" content="Τα εργαλεία validation βλέπουν διευθύνσεις. Εμείς βλέπουμε μοτίβα και προβλήματα παραδοσιμότητας. Όχι αυτόματο validation, αλλά ανθρώπινος έλεγχος που σας λέει ακριβώς τι να κάνετε (Keep, Monitor, Suppress).">
     <link rel="canonical" href="https://reviewmyemails.com/about/">
 
     <!-- Open Graph -->
@@ -784,15 +784,15 @@
 
     <header class="header">
         <div class="header__inner">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
             <nav class="header__nav">
-                <a href="/done-for-you" class="header__link">How It Works</a>
-                <a href="/pricing" class="header__link">Pricing</a>
-                <a href="/sos-hotline" class="header__link">SOS Hotline</a>
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get My List Cleaned</a>
-                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">Πώς Λειτουργεί</a>
+                <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Τιμές</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">Καθαρίστε τη Λίστα Μου</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
             </nav>
@@ -802,22 +802,22 @@
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav__header">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
-            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
                 <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
         <div class="mobile-nav__links">
-            <a href="/done-for-you" class="mobile-nav__link">How It Works</a>
-            <a href="/pricing" class="mobile-nav__link">Pricing</a>
-            <a href="/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
-            <a href="/about" class="mobile-nav__link">About</a>
-            <a href="/partner" class="mobile-nav__link">Partner</a>
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">Πώς Λειτουργεί</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Τιμές</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">Σχετικά</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Συνεργάτες</a>
         </div>
         <div class="mobile-nav__cta">
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get My List Cleaned</a>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.cta">Καθαρίστε τη Λίστα Μου</a>
         </div>
     </nav>
 
@@ -827,8 +827,8 @@
 
     <section class="hero">
         <div class="container">
-            <h1 class="hero__headline">About</h1>
-            <p class="hero__subhead">The person behind Review My Emails.</p>
+            <h1 class="hero__headline" data-i18n="about.title">Σχετικά</h1>
+            <p class="hero__subhead" data-i18n="about.subtitle">Το άτομο πίσω από το Review My Emails.</p>
         </div>
     </section>
 
@@ -841,26 +841,26 @@
             <div class="about-photo">
                 <img src="../assets/team/Yanna-Torry.jpg" alt="Yanna-Torry Aspraki">
                 <p class="about-photo__name">Yanna-Torry Aspraki</p>
-                <p class="about-photo__title">Founder, Review My Emails</p>
+                <p class="about-photo__title" data-i18n="about.founder_title">Ιδρύτρια, Review My Emails</p>
             </div>
 
             <div class="about-content">
-                <p>I started Review My Emails because I kept seeing the same problem. Marketers would run their lists through validation tools, get a clean bill of health, and then watch their deliverability tank anyway.</p>
+                <p data-i18n="about.bio_p1">Ξεκίνησα το Review My Emails γιατί έβλεπα συνεχώς το ίδιο πρόβλημα. Οι marketers περνούσαν τις λίστες τους από εργαλεία επικύρωσης, έπαιρναν καθαρό πιστοποιητικό υγείας, και μετά έβλεπαν την παραδοσιμότητά τους να καταρρέει ούτως ή άλλως.</p>
 
-                <p>The tools were not lying. They just were not telling the whole story.</p>
+                <p data-i18n="about.bio_p2">Τα εργαλεία δεν έλεγαν ψέματα. Απλά δεν έλεγαν όλη την ιστορία.</p>
 
-                <p>Validation checks if an address exists. It does not check if sending there is safe. It does not know about complaint histories, engagement patterns, or domain-level risk signals that accumulate over time.</p>
+                <p data-i18n="about.bio_p3">Η επικύρωση ελέγχει αν υπάρχει μια διεύθυνση. Δεν ελέγχει αν είναι ασφαλές να στείλεις εκεί. Δεν γνωρίζει για ιστορικά παραπόνων, μοτίβα αλληλεπίδρασης ή σήματα κινδύνου σε επίπεδο domain που συσσωρεύονται με τον καιρό.</p>
 
-                <p>I spent years in email deliverability, working with senders of all sizes. I learned that list health is not binary. An address can be technically valid and still damage your reputation. The question is not "will this bounce?" but "should I send here?"</p>
+                <p data-i18n="about.bio_p4">Πέρασα χρόνια στην παραδοσιμότητα email, δουλεύοντας με αποστολείς κάθε μεγέθους. Έμαθα ότι η υγεία της λίστας δεν είναι δυαδική. Μια διεύθυνση μπορεί να είναι τεχνικά έγκυρη και να βλάπτει τη φήμη σου. Το ερώτημα δεν είναι "θα γυρίσει πίσω;" αλλά "πρέπει να στείλω εδώ;"</p>
 
-                <p>That is what Review My Emails answers. Every address gets labeled Keep, Monitor, or Suppress. And every label comes with the reasoning behind it. No black boxes. No guessing.</p>
+                <p data-i18n="about.bio_p5">Αυτό απαντά το Review My Emails. Κάθε διεύθυνση παίρνει ετικέτα Keep, Monitor ή Suppress. Και κάθε ετικέτα συνοδεύεται από την αιτιολόγηση πίσω από αυτήν. Χωρίς μαύρα κουτιά. Χωρίς εικασίες.</p>
 
-                <p>If you have questions about your list or your deliverability, I am happy to talk. That is what the SOS Hotline is for.</p>
+                <p data-i18n="about.bio_p6">Αν έχεις ερωτήσεις για τη λίστα σου ή την παραδοσιμότητά σου, είμαι στη διάθεσή σου. Γι' αυτό υπάρχει το SOS Hotline.</p>
             </div>
 
             <div class="about-links">
                 <a href="https://linkedin.com/in/yannatorry" target="_blank">LinkedIn</a>
-                <a href="#" onclick="openContactModal('about-yt-email'); return false;">Email</a>
+                <a href="#" onclick="openContactModal('about-yt-email'); return false;" data-i18n="about.email_link">Email</a>
             </div>
         </div>
     </section>
@@ -872,11 +872,11 @@
     <section class="section">
         <div class="container">
             <div class="cta-section">
-                <h2>Questions?</h2>
-                <p>Talk through your situation. No pitch. Just answers.</p>
+                <h2 data-i18n="about.cta_title">Ερωτήσεις;</h2>
+                <p data-i18n="about.cta_subtitle">Συζήτησε την κατάστασή σου. Χωρίς πώληση. Μόνο απαντήσεις.</p>
                 <div class="cta-buttons">
-                    <a href="/sos-hotline" class="btn btn-primary">Learn About SOS Hotline</a>
-                    <a href="/pricing" class="btn btn-secondary">See Pricing</a>
+                    <a href="sos-hotline.html" class="btn btn-primary" data-i18n="about.cta_sos">Μάθε για το SOS Hotline</a>
+                    <a href="pricing.html" class="btn btn-secondary" data-i18n="about.cta_pricing">Δες τις Τιμές</a>
                 </div>
             </div>
         </div>
@@ -888,10 +888,10 @@
 
     <section class="team-section">
         <div class="container">
-            <h2>The Team</h2>
-            <p class="team-section__subtitle">Need a hand (or eight)? We have got you covered.</p>
+            <h2 data-i18n="about.team_title">Η Ομάδα</h2>
+            <p class="team-section__subtitle" data-i18n="about.team_subtitle">Χρειάζεσαι ένα χέρι (ή οκτώ); Σε καλύπτουμε.</p>
 
-            <p class="team-section__members">
+            <p class="team-section__members" data-i18n="about.team_members">
                 Bruno S. Brasil, CTO &amp; Co-Founder<br>
                 YT Aspraki, CEO &amp; Co-Founder<br>
                 Daniel J. Evans, Director of Business Development<br>
@@ -900,7 +900,7 @@
             </p>
 
             <p class="team-section__contact">
-                Get in touch: <a href="#" onclick="openContactModal('about-team-contact'); return false;">ahoy@reviewmyemails.com</a>
+                <span data-i18n="about.team_contact">Επικοινώνησε:</span> <a href="#" onclick="openContactModal('about-team-contact'); return false;">ahoy@reviewmyemails.com</a>
             </p>
 
         </div>
@@ -919,45 +919,45 @@
     <div class="modal-overlay" id="contactModal">
         <div class="modal">
             <div class="modal__header">
-                <h3 class="modal__title">Get in Touch</h3>
-                <button class="modal__close" onclick="closeContactModal()" aria-label="Close">
+                <h3 class="modal__title" data-i18n="contact.modal_title">Επικοινωνήστε μαζί μας</h3>
+                <button class="modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">
                     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
             <div class="modal__body">
-                <p class="modal__subtitle">Tell us what you're working on. We'll get back to you within one business day.</p>
+                <p class="modal__subtitle" data-i18n="contact.modal_subtitle">Πείτε μας τι δουλεύετε. Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.</p>
                 <form id="contactForm">
                     <input type="hidden" id="contactSource" name="source" value="">
                     <div class="form-group">
-                        <label for="contactName">Name *</label>
-                        <input type="text" id="contactName" name="name" required>
+                        <label for="contactName" data-i18n="form.name_label">Όνομα *</label>
+                        <input type="text" id="contactName" name="name" required data-i18n-placeholder="form.name_placeholder">
                     </div>
                     <div class="form-group">
-                        <label for="contactEmail">Email *</label>
-                        <input type="email" id="contactEmail" name="email" required>
+                        <label for="contactEmail" data-i18n="form.email_label">Email *</label>
+                        <input type="email" id="contactEmail" name="email" required data-i18n-placeholder="form.email_placeholder">
                     </div>
                     <div class="form-group">
-                        <label for="contactTimezone">Timezone</label>
+                        <label for="contactTimezone" data-i18n="form.timezone_label">Ζώνη ώρας (προαιρετικό)</label>
                         <select id="contactTimezone" name="timezone">
-                            <option value="">Select your timezone (optional)</option>
-                            <option value="PT">Pacific Time (PT)</option>
-                            <option value="MT">Mountain Time (MT)</option>
-                            <option value="CT">Central Time (CT)</option>
-                            <option value="ET">Eastern Time (ET)</option>
-                            <option value="GMT">GMT / UTC</option>
-                            <option value="CET">Central European Time (CET)</option>
-                            <option value="Other">Other</option>
+                            <option value="" data-i18n="form.timezone_select_optional">Επιλέξτε τη ζώνη ώρας σας (προαιρετικό)</option>
+                            <option value="PT" data-i18n="form.tz_pacific">Ειρηνική Ώρα (PT)</option>
+                            <option value="MT" data-i18n="form.tz_mountain">Ορεινή Ώρα (MT)</option>
+                            <option value="CT" data-i18n="form.tz_central">Κεντρική Ώρα (CT)</option>
+                            <option value="ET" data-i18n="form.tz_eastern">Ανατολική Ώρα (ET)</option>
+                            <option value="GMT" data-i18n="form.tz_gmt">GMT / UTC</option>
+                            <option value="CET" data-i18n="form.tz_cet">Κεντροευρωπαϊκή Ώρα (CET)</option>
+                            <option value="Other" data-i18n="form.tz_other">Άλλο</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="contactMessage">Message</label>
-                        <textarea id="contactMessage" name="message" placeholder="What can we help you with?"></textarea>
-                        <small>Optional - but helps us prepare for the conversation.</small>
+                        <label for="contactMessage" data-i18n="form.message_label">Μήνυμα</label>
+                        <textarea id="contactMessage" name="message" placeholder="What can we help you with?" data-i18n-placeholder="form.message_placeholder"></textarea>
+                        <small data-i18n="form.message_hint">Προαιρετικό - αλλά μας βοηθά να προετοιμαστούμε για τη συζήτηση.</small>
                     </div>
                 </form>
             </div>
             <div class="modal__footer">
-                <button type="submit" form="contactForm" class="btn btn-primary">Send Message</button>
+                <button type="submit" form="contactForm" class="btn btn-primary" data-i18n="contact.submit" data-i18n-sending="modal.form_sending">Αποστολή Μηνύματος</button>
             </div>
         </div>
     </div>
@@ -967,14 +967,14 @@
         <div class="modal">
             <div class="modal__header">
                 <span></span>
-                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close">
+                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close" data-i18n-aria="ui.close">
                     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
             <div class="form-success">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-                <h3>Message Sent!</h3>
-                <p>We'll get back to you within one business day.</p>
+                <h3 data-i18n="ui.message_sent">Το Μήνυμα Εστάλη!</h3>
+                <p data-i18n="ui.response_time_business">Θα επικοινωνήσουμε μαζί σας εντός μίας εργάσιμης ημέρας.</p>
             </div>
         </div>
     </div>
@@ -987,28 +987,29 @@
         <div class="footer__inner">
             <div class="footer__brand">
                 <img src="../assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
-                <p>We see what algorithms can't.</p>
+                <p data-i18n="footer.tagline">Βλέπουμε αυτά που οι αλγόριθμοι αδυνατούν να δουν.</p>
             </div>
 
             <div class="footer__column">
-                <h4>Services</h4>
-                <a href="/pricing">Pricing</a>
-                <a href="/sos-hotline">SOS Hotline</a>
+                <h4 data-i18n="footer.services">Υπηρεσίες</h4>
+                <a href="pricing.html" data-i18n="nav.pricing">Τιμές</a>
+                <a href="sos-hotline.html" data-i18n="nav.sos_hotline">SOS Hotline</a>
             </div>
 
             <div class="footer__column">
-                <h4>Company</h4>
-                <a href="/about">About</a>
-                <a href="/partner">Partner</a>
+                <h4 data-i18n="footer.company">Εταιρεία</h4>
+                <a href="about.html" data-i18n="nav.about">Σχετικά</a>
+                <a href="partner.html" data-i18n="nav.partner">Συνεργάτες</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html" data-i18n="footer.security">Ασφάλεια</a>
             </div>
 
             <div class="footer__column">
-                <h4>Contact</h4>
+                <h4 data-i18n="footer.contact">Επικοινωνία</h4>
                 <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
             </div>
 
             <div class="footer__bottom">
-                <span>© 2026 Review My Emails. All rights reserved.</span>
+                <span data-i18n="footer.copyright">© 2026 Review My Emails. Με την επιφύλαξη παντός δικαιώματος.</span>
             </div>
         </div>
     </footer>
@@ -1072,7 +1073,7 @@
 
             const submitBtn = document.querySelector('.modal__footer .btn');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
+            submitBtn.textContent = submitBtn.dataset.i18nSending || 'Sending...';
             submitBtn.disabled = true;
 
             const formData = {
@@ -1112,5 +1113,7 @@
         });
     </script>
 
+    <!-- i18n Translation Loader -->
+    <script src="/js/i18n.js"></script>
 </body>
 </html>

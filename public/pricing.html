@@ -1564,11 +1564,11 @@
                 <img src="assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
             <nav class="header__nav">
-                <a href="done-for-you.html" class="header__link">How It Works</a>
-                <a href="pricing.html" class="header__link header__link--active">Pricing</a>
-                <a href="sos-hotline.html" class="header__link">SOS Hotline</a>
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get My List Cleaned</a>
-                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">How It Works</a>
+                <a href="pricing.html" class="header__link header__link--active" data-i18n="nav.pricing">Pricing</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">Get My List Cleaned</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
             </nav>
@@ -1581,19 +1581,19 @@
             <a href="index.html" class="header__logo">
                 <img src="assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
-            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
                 <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
         <div class="mobile-nav__links">
-            <a href="done-for-you.html" class="mobile-nav__link">How It Works</a>
-            <a href="pricing.html" class="mobile-nav__link">Pricing</a>
-            <a href="sos-hotline.html" class="mobile-nav__link">SOS Hotline</a>
-            <a href="about.html" class="mobile-nav__link">About</a>
-            <a href="partner.html" class="mobile-nav__link">Partner</a>
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">How It Works</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Pricing</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">About</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Partner</a>
         </div>
         <div class="mobile-nav__cta">
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get My List Cleaned</a>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.cta">Get My List Cleaned</a>
         </div>
     </nav>
 
@@ -1603,8 +1603,8 @@
 
     <section class="hero">
         <div class="container">
-            <h1 class="hero__headline">Beyond Validation.<br>We Tell You What Your List Means.</h1>
-            <p class="hero__subhead">Not just pass/fail. Every address comes with reasoning so you know what to keep, what to monitor, and what to suppress.</p>
+            <h1 class="hero__headline"><span data-i18n="pricing.hero_headline1">Beyond Validation.</span><br><span data-i18n="pricing.hero_headline2">We Tell You What Your List Means.</span></h1>
+            <p class="hero__subhead" data-i18n="pricing.hero_subhead">Not just pass/fail. Every address comes with reasoning so you know what to keep, what to monitor, and what to suppress.</p>
         </div>
     </section>
 
@@ -1615,31 +1615,31 @@
     <section class="section section--light">
         <div class="container">
             <div class="section__header">
-                <h2>What You Get</h2>
-                <p>A cleaned list with clear recommendations.</p>
+                <h2 data-i18n="pricing.what_you_get_title">What You Get</h2>
+                <p data-i18n="pricing.what_you_get_subtitle">A cleaned list with clear recommendations.</p>
             </div>
 
             <div class="output-grid">
                 <div class="output-card">
                     <span class="output-card__label output-card__label--keep">Keep</span>
-                    <h3>Cleared After Full Review</h3>
-                    <p>No risk patterns surfaced during review. Domain behavior and historical signals support continued sending.</p>
+                    <h3 data-i18n="pricing.keep_title">Cleared After Full Review</h3>
+                    <p data-i18n="pricing.keep_desc">No risk patterns surfaced during review. Domain behavior and historical signals support continued sending.</p>
                 </div>
 
                 <div class="output-card">
                     <span class="output-card__label output-card__label--monitor">Monitor</span>
-                    <h3>Patterns Worth Watching</h3>
-                    <p>These require judgment. We surface historical patterns and relationship context. You decide how to segment based on your tolerance and goals.</p>
+                    <h3 data-i18n="pricing.monitor_title">Patterns Worth Watching</h3>
+                    <p data-i18n="pricing.monitor_desc">These require judgment. We surface historical patterns and relationship context. You decide how to segment based on your tolerance and goals.</p>
                 </div>
 
                 <div class="output-card">
                     <span class="output-card__label output-card__label--suppress">Suppress</span>
-                    <h3>Clear Risk, Clear Reasoning</h3>
-                    <p>Clear risk signals: known problem domains, disposable patterns, historical trap indicators. Each address includes the specific flags that earned suppression. You will know exactly why.</p>
+                    <h3 data-i18n="pricing.suppress_title">Clear Risk, Clear Reasoning</h3>
+                    <p data-i18n="pricing.suppress_desc">Clear risk signals: known problem domains, disposable patterns, historical trap indicators. Each address includes the specific flags that earned suppression. You will know exactly why.</p>
                 </div>
             </div>
 
-            <p class="output-note">Every decision comes with the reasoning behind it. This is not a pass/fail list. It is a decision-making tool built on historical domain behavior and pattern recognition.</p>
+            <p class="output-note" data-i18n="pricing.output_note">Every decision comes with the reasoning behind it. This is not a pass/fail list. It is a decision-making tool built on historical domain behavior and pattern recognition.</p>
         </div>
     </section>
 
@@ -1650,21 +1650,21 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>Who This Is For</h2>
-                <p>Marketers who already send email and want to protect their sender reputation.</p>
+                <h2 data-i18n="pricing.who_title">Who This Is For</h2>
+                <p data-i18n="pricing.who_subtitle">Marketers who already send email and want to protect their sender reputation.</p>
             </div>
 
             <div class="who-list">
                 <ul>
-                    <li>Running campaigns but seeing declining engagement</li>
-                    <li>Worried about bounces, complaints, or blocklists</li>
-                    <li>Inheriting a list you did not build</li>
-                    <li>Under pressure to "just send" but sensing risk</li>
-                    <li>Trying to explain deliverability to a boss who does not get it</li>
+                    <li data-i18n="pricing.who_item1">Running campaigns but seeing declining engagement</li>
+                    <li data-i18n="pricing.who_item2">Worried about bounces, complaints, or blocklists</li>
+                    <li data-i18n="pricing.who_item3">Inheriting a list you did not build</li>
+                    <li data-i18n="pricing.who_item4">Under pressure to "just send" but sensing risk</li>
+                    <li data-i18n="pricing.who_item5">Trying to explain deliverability to a boss who does not get it</li>
                 </ul>
             </div>
 
-            <p class="output-note">If you care about long-term reputation, not just short-term volume, this is for you.</p>
+            <p class="output-note" data-i18n="pricing.who_note">If you care about long-term reputation, not just short-term volume, this is for you.</p>
         </div>
     </section>
 
@@ -1675,29 +1675,29 @@
     <section class="section section--lighter">
         <div class="container">
             <div class="section__header">
-                <h2>The Problem</h2>
+                <h2 data-i18n="pricing.problem_title">The Problem</h2>
             </div>
 
             <div class="problem-content">
-                <p class="problem-intro">Most list cleaning tools give you a status and leave you guessing. That tells you what to remove. It does not tell you what is actually wrong.</p>
+                <p class="problem-intro" data-i18n="pricing.problem_intro">Most list cleaning tools give you a status and leave you guessing. That tells you what to remove. It does not tell you what is actually wrong.</p>
 
                 <div class="problem-badges">
-                    <span class="status-badge status-badge--deliverable">Deliverable</span>
-                    <span class="status-badge status-badge--undeliverable">Undeliverable</span>
-                    <span class="status-badge status-badge--risky">Risky</span>
-                    <span class="status-badge status-badge--unknown">Unknown</span>
+                    <span class="status-badge status-badge--deliverable" data-i18n="pricing.badge_deliverable">Deliverable</span>
+                    <span class="status-badge status-badge--undeliverable" data-i18n="pricing.badge_undeliverable">Undeliverable</span>
+                    <span class="status-badge status-badge--risky" data-i18n="pricing.badge_risky">Risky</span>
+                    <span class="status-badge status-badge--unknown" data-i18n="pricing.badge_unknown">Unknown</span>
                 </div>
 
                 <div class="problem-grid">
-                    <div class="problem-card">Why is engagement dropping?</div>
-                    <div class="problem-card">Why are complaints rising?</div>
-                    <div class="problem-card">Is it the list, the sending, or both?</div>
-                    <div class="problem-card">Which addresses are actually hurting me?</div>
-                    <div class="problem-card">What patterns should I watch for?</div>
-                    <div class="problem-card">What should I do about the "risky" ones?</div>
+                    <div class="problem-card" data-i18n="pricing.problem_q1">Why is engagement dropping?</div>
+                    <div class="problem-card" data-i18n="pricing.problem_q2">Why are complaints rising?</div>
+                    <div class="problem-card" data-i18n="pricing.problem_q3">Is it the list, the sending, or both?</div>
+                    <div class="problem-card" data-i18n="pricing.problem_q4">Which addresses are actually hurting me?</div>
+                    <div class="problem-card" data-i18n="pricing.problem_q5">What patterns should I watch for?</div>
+                    <div class="problem-card" data-i18n="pricing.problem_q6">What should I do about the "risky" ones?</div>
                 </div>
 
-                <div class="problem-footer">We give you the context to answer those questions.</div>
+                <div class="problem-footer" data-i18n="pricing.problem_footer">We give you the context to answer those questions.</div>
             </div>
         </div>
     </section>
@@ -1709,31 +1709,31 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>What You Are Actually Paying For</h2>
-                <p>The difference between checking and interpreting.</p>
+                <h2 data-i18n="pricing.compare_title">What You Are Actually Paying For</h2>
+                <p data-i18n="pricing.compare_subtitle">The difference between checking and interpreting.</p>
             </div>
 
             <div class="comparison-list">
                 <ul>
                     <li>
-                        <span class="comparison-list__them">Validators check if an inbox exists.</span>
-                        <span class="comparison-list__us">We assess whether sending there is safe.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them1">Validators check if an inbox exists.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us1">We assess whether sending there is safe.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them">Validators give you a status.</span>
-                        <span class="comparison-list__us">We give you the reasoning behind a decision.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them2">Validators give you a status.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us2">We give you the reasoning behind a decision.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them">Validators flag what bounces.</span>
-                        <span class="comparison-list__us">We flag what damages your reputation without bouncing.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them3">Validators flag what bounces.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us3">We flag what damages your reputation without bouncing.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them">Validators process volume.</span>
-                        <span class="comparison-list__us">We interpret patterns across your entire list.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them4">Validators process volume.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us4">We interpret patterns across your entire list.</span>
                     </li>
                     <li>
-                        <span class="comparison-list__them">Validators leave you guessing.</span>
-                        <span class="comparison-list__us">We tell you what to do and why.</span>
+                        <span class="comparison-list__them" data-i18n="pricing.compare_them5">Validators leave you guessing.</span>
+                        <span class="comparison-list__us" data-i18n="pricing.compare_us5">We tell you what to do and why.</span>
                     </li>
                 </ul>
             </div>
@@ -1747,44 +1747,44 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>Service Options</h2>
+                <h2 data-i18n="pricing.options_title">Service Options</h2>
             </div>
 
             <div class="options-grid options-grid--three">
                 <a href="sos-hotline.html" class="option-card">
-                    <span class="option-card__badge">Guidance</span>
+                    <span class="option-card__badge" data-i18n="pricing.option_guidance">Guidance</span>
                     <h3>SOS Hotline</h3>
-                    <p>Free expert support for deliverability questions. No data touched. No list processed. Just honest answers.</p>
-                    <p class="option-card__status">Use it before, during, or after cleaning to understand your situation.</p>
-                    <span class="option-card__cta">Learn more →</span>
+                    <p data-i18n="pricing.sos_desc">Free expert support for deliverability questions. No data touched. No list processed. Just honest answers.</p>
+                    <p class="option-card__status" data-i18n="pricing.sos_status">Use it before, during, or after cleaning to understand your situation.</p>
+                    <span class="option-card__cta" data-i18n="pricing.learn_more">Learn more →</span>
                 </a>
 
                 <a href="https://anchor.reviewmyemails.com/" class="option-card option-card--featured">
-                    <span class="option-card__badge">Execution</span>
-                    <h3>Done-For-You</h3>
-                    <p>Send us your list. We process it, label every address, and return results with clear reasoning.</p>
-                    <p class="option-card__status">You get the decisions made for you. Available now.</p>
-                    <span class="option-card__cta">Get started →</span>
+                    <span class="option-card__badge" data-i18n="pricing.option_execution">Execution</span>
+                    <h3 data-i18n="pricing.dfy_title">Done-For-You</h3>
+                    <p data-i18n="pricing.dfy_desc">Send us your list. We process it, label every address, and return results with clear reasoning.</p>
+                    <p class="option-card__status" data-i18n="pricing.dfy_status">You get the decisions made for you. Available now.</p>
+                    <span class="option-card__cta" data-i18n="pricing.get_started">Get started →</span>
                 </a>
 
                 <div class="option-card option-card--waitlist" id="selfServeCard">
-                    <span class="option-card__badge">Automation</span>
-                    <h3>Self-Serve <span style="font-size: 12px; font-weight: 500; color: var(--color-muted);">(Coming Soon)</span></h3>
-                    <p>Upload your list. Download results. Same methodology as done-for-you, but you run it yourself.</p>
-                    <p class="option-card__status">Coming soon. Join the waitlist to get notified.</p>
+                    <span class="option-card__badge" data-i18n="pricing.option_automation">Automation</span>
+                    <h3><span data-i18n="pricing.selfserve_title">Self-Serve</span> <span style="font-size: 12px; font-weight: 500; color: var(--color-muted);" data-i18n="pricing.coming_soon">(Coming Soon)</span></h3>
+                    <p data-i18n="pricing.selfserve_desc">Upload your list. Download results. Same methodology as done-for-you, but you run it yourself.</p>
+                    <p class="option-card__status" data-i18n="pricing.selfserve_status">Coming soon. Join the waitlist to get notified.</p>
                     <div class="waitlist-form" id="waitlistForm">
-                        <input type="email" class="waitlist-input" id="waitlistEmail" placeholder="your@email.com">
-                        <button type="button" class="waitlist-btn" id="waitlistBtn">Join Waitlist</button>
+                        <input type="email" class="waitlist-input" id="waitlistEmail" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                        <button type="button" class="waitlist-btn" id="waitlistBtn" data-i18n="pricing.join_waitlist" data-i18n-joining="ui.joining" data-i18n-retry="modal.form_try_again">Join Waitlist</button>
                     </div>
                     <label class="waitlist-checkbox" id="waitlistCheckboxLabel">
                         <input type="checkbox" id="waitlistNewsletter">
-                        <span>Monthly deliverability insights (no spam, just signal) <span style="background: var(--color-light); color: var(--color-accent); font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; margin-left: 4px;">+1,500 free credits</span></span>
+                        <span><span data-i18n="pricing.newsletter_opt">Monthly deliverability insights (no spam, just signal)</span> <span style="background: var(--color-light); color: var(--color-accent); font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px; margin-left: 4px;">+1,500 free credits</span></span>
                     </label>
-                    <p class="waitlist-success" id="waitlistSuccess" style="display: none;">You're on the list! We'll notify you when self-serve launches.</p>
+                    <p class="waitlist-success" id="waitlistSuccess" style="display: none;" data-i18n="pricing.waitlist_success">You're on the list! We'll notify you when self-serve launches.</p>
                 </div>
             </div>
 
-            <p class="option-note">SOS tells you what to think about. Done-for-you does the thinking for you. Self-serve lets you do the thinking yourself.</p>
+            <p class="option-note" data-i18n="pricing.options_note">SOS tells you what to think about. Done-for-you does the thinking for you. Self-serve lets you do the thinking yourself.</p>
         </div>
     </section>
 
@@ -1795,51 +1795,51 @@
     <section class="section section--gradient">
         <div class="container">
             <div class="section__header">
-                <h2>Pricing Calculator</h2>
-                <p>Pay only for what you need. Credits never expire.</p>
+                <h2 data-i18n="pricing.calc_title">Pricing Calculator</h2>
+                <p data-i18n="pricing.calc_subtitle">Pay only for what you need. Credits never expire.</p>
             </div>
 
             <div class="calculator-card">
                 <div class="calculator-layout">
                     <div class="calculator-left">
-                        <h3>Calculate Your Price</h3>
-                        <p class="calculator-intro">Simple. More volume, lower rate.</p>
+                        <h3 data-i18n="pricing.calc_heading">Calculate Your Price</h3>
+                        <p class="calculator-intro" data-i18n="pricing.calc_intro">Simple. More volume, lower rate.</p>
 
                         <div class="slider-container">
-                            <p class="slider-label">How many emails?</p>
+                            <p class="slider-label" data-i18n="pricing.how_many_emails">How many emails?</p>
                             <div class="slider-input-group">
                                 <input type="text" class="slider-number-input" id="sizeInput" value="50,000" inputmode="numeric">
-                                <span class="slider-unit">emails</span>
+                                <span class="slider-unit" data-i18n="pricing.emails_unit">emails</span>
                             </div>
                             <input type="range" class="slider-input" id="sizeSlider" min="1000" max="1000000" value="50000" step="100">
                         </div>
 
                         <div class="pricing-result">
                             <div class="pricing-result__row">
-                                <span class="pricing-result__label">Price per email</span>
+                                <span class="pricing-result__label" data-i18n="pricing.price_per_email">Price per email</span>
                                 <span class="pricing-result__value" id="pricePerEmail">$0.0074</span>
                             </div>
                             <div class="pricing-result__row pricing-result__total">
-                                <span class="pricing-result__label">Total</span>
+                                <span class="pricing-result__label" data-i18n="pricing.total">Total</span>
                                 <span class="pricing-result__value" id="totalPrice">$370</span>
                             </div>
                         </div>
 
                         <div class="calculator-cta">
-                            <a href="https://anchor.reviewmyemails.com/" class="btn btn-primary">Get Started</a>
+                            <a href="https://anchor.reviewmyemails.com/" class="btn btn-primary" data-i18n="pricing.get_started_btn">Get Started</a>
                         </div>
 
-                        <p class="calculator-note">Need more than 1 million? <a href="#" onclick="openContactModal('calculator-1m-plus'); return false;">Contact us</a> for custom pricing.</p>
+                        <p class="calculator-note"><span data-i18n="pricing.need_more">Need more than 1 million?</span> <a href="#" onclick="openContactModal('calculator-1m-plus'); return false;" data-i18n="pricing.contact_us">Contact us</a> <span data-i18n="pricing.for_custom">for custom pricing.</span></p>
                     </div>
 
                     <div class="calculator-right">
                         <div class="pricing-tiers">
-                            <h4>Volume Pricing</h4>
+                            <h4 data-i18n="pricing.volume_pricing">Volume Pricing</h4>
                             <table>
                                 <thead>
                                     <tr>
-                                        <th>List Size</th>
-                                        <th>Per Email</th>
+                                        <th data-i18n="pricing.list_size">List Size</th>
+                                        <th data-i18n="pricing.per_email">Per Email</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1877,7 +1877,7 @@
                                     </tr>
                                     <tr class="contact-row">
                                         <td>1,000,000+</td>
-                                        <td>Contact us</td>
+                                        <td data-i18n="pricing.contact_us">Contact us</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -1895,18 +1895,18 @@
     <section class="section section--light">
         <div class="container">
             <div class="section__header">
-                <h2>SOS Email Hotline</h2>
+                <h2 data-i18n="pricing.sos_section_title">SOS Email Hotline</h2>
             </div>
 
             <div class="sos-pricing">
-                <p class="sos-pricing__intro">Free email support for any email-related question.</p>
+                <p class="sos-pricing__intro" data-i18n="pricing.sos_section_intro">Free email support for any email-related question.</p>
 
                 <div class="sos-card">
                     <img src="assets/team/Yanna-Torry.jpg" alt="Yanna-Torry Aspraki" class="sos-card__headshot">
-                    <h3>Free Email Help</h3>
-                    <p>Ask any email question. Get a real answer from a real expert. No sales pitch, no strings attached.</p>
-                    <p class="sos-card__duration">Response within 48 hours. Usually faster.</p>
-                    <a href="sos-hotline.html" class="btn btn-secondary" style="margin-top: var(--space-md);">Learn More About SOS Hotline</a>
+                    <h3 data-i18n="pricing.free_help_title">Free Email Help</h3>
+                    <p data-i18n="pricing.free_help_desc">Ask any email question. Get a real answer from a real expert. No sales pitch, no strings attached.</p>
+                    <p class="sos-card__duration" data-i18n="pricing.response_time">Response within 48 hours. Usually faster.</p>
+                    <a href="sos-hotline.html" class="btn btn-secondary" style="margin-top: var(--space-md);" data-i18n="pricing.learn_more_sos">Learn More About SOS Hotline</a>
                 </div>
             </div>
         </div>
@@ -1919,35 +1919,35 @@
     <section class="section section--gradient">
         <div class="container">
             <div class="section__header">
-                <h2>Ready to Clean Your List?</h2>
-                <p>Choose what works for you.</p>
+                <h2 data-i18n="pricing.cta_title">Ready to Clean Your List?</h2>
+                <p data-i18n="pricing.cta_subtitle">Choose what works for you.</p>
             </div>
 
             <div class="cta-grid">
                 <div class="cta-card">
-                    <h3>Get My List Cleaned</h3>
-                    <p>Done-for-you service. Send your list, get results.</p>
-                    <a href="https://anchor.reviewmyemails.com/" class="btn btn-primary">Get Started</a>
+                    <h3 data-i18n="pricing.cta_clean_title">Get My List Cleaned</h3>
+                    <p data-i18n="pricing.cta_clean_desc">Done-for-you service. Send your list, get results.</p>
+                    <a href="https://anchor.reviewmyemails.com/" class="btn btn-primary" data-i18n="pricing.get_started_btn">Get Started</a>
                 </div>
 
                 <div class="cta-card">
-                    <h3>Join the Waitlist</h3>
-                    <p>Be first to access self-serve when it launches.</p>
+                    <h3 data-i18n="pricing.cta_waitlist_title">Join the Waitlist</h3>
+                    <p data-i18n="pricing.cta_waitlist_desc">Be first to access self-serve when it launches.</p>
                     <div class="waitlist-form" id="waitlistForm2">
-                        <input type="email" class="waitlist-input" id="waitlistEmail2" placeholder="your@email.com">
-                        <button type="button" class="waitlist-btn" id="waitlistBtn2">Join</button>
+                        <input type="email" class="waitlist-input" id="waitlistEmail2" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
+                        <button type="button" class="waitlist-btn" id="waitlistBtn2" data-i18n="pricing.join" data-i18n-joining="ui.joining" data-i18n-retry="modal.form_try_again">Join</button>
                     </div>
                     <label class="waitlist-checkbox" id="waitlistCheckboxLabel2">
                         <input type="checkbox" id="waitlistNewsletter2">
-                        <span>Monthly deliverability insights (no spam, just signal) <span style="background: var(--color-light); color: var(--color-accent); font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px;">+1,500 credits</span></span>
+                        <span><span data-i18n="pricing.newsletter_opt">Monthly deliverability insights (no spam, just signal)</span> <span style="background: var(--color-light); color: var(--color-accent); font-size: 10px; font-weight: 600; padding: 2px 6px; border-radius: 4px;">+1,500 credits</span></span>
                     </label>
-                    <p class="waitlist-success" id="waitlistSuccess2" style="display: none;">You're on the list!</p>
+                    <p class="waitlist-success" id="waitlistSuccess2" style="display: none;" data-i18n="pricing.waitlist_success_short">You're on the list!</p>
                 </div>
 
                 <div class="cta-card">
-                    <h3>Get Free Help</h3>
-                    <p>Email our SOS hotline with your questions.</p>
-                    <a href="sos-hotline.html" class="btn btn-secondary">Learn More</a>
+                    <h3 data-i18n="pricing.cta_help_title">Get Free Help</h3>
+                    <p data-i18n="pricing.cta_help_desc">Email our SOS hotline with your questions.</p>
+                    <a href="sos-hotline.html" class="btn btn-secondary" data-i18n="pricing.learn_more">Learn More</a>
                 </div>
             </div>
         </div>
@@ -1960,12 +1960,12 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <h2>Questions?</h2>
-                <p><a href="#" onclick="openContactModal('questions-block'); return false;">Send us a message</a></p>
+                <h2 data-i18n="pricing.questions_title">Questions?</h2>
+                <p><a href="#" onclick="openContactModal('questions-block'); return false;" data-i18n="pricing.send_message">Send us a message</a></p>
             </div>
 
             <div class="questions-block">
-                <p class="questions-block__response">We respond within 48 hours. Usually faster.</p>
+                <p class="questions-block__response" data-i18n="pricing.response_time">We respond within 48 hours. Usually faster.</p>
             </div>
         </div>
     </section>
@@ -1978,30 +1978,30 @@
         <div class="footer__inner">
             <div class="footer__brand">
                 <img src="assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
-                <p>We see what algorithms can't.</p>
+                <p data-i18n="footer.tagline">We see what algorithms can't.</p>
             </div>
 
             <div class="footer__column">
-                <h4>Services</h4>
-                <a href="pricing.html">Pricing</a>
-                <a href="sos-hotline.html">SOS Hotline</a>
+                <h4 data-i18n="footer.services">Services</h4>
+                <a href="pricing.html" data-i18n="nav.pricing">Pricing</a>
+                <a href="sos-hotline.html" data-i18n="nav.sos_hotline">SOS Hotline</a>
             </div>
 
             <div class="footer__column">
-                <h4>Company</h4>
-                <a href="about.html">About</a>
-                <a href="partner.html">Partner</a>
-                <a href="https://anchor.reviewmyemails.com/security-page.html">Security</a>
+                <h4 data-i18n="footer.company">Company</h4>
+                <a href="about.html" data-i18n="nav.about">About</a>
+                <a href="partner.html" data-i18n="nav.partner">Partner</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html" data-i18n="footer.security">Security</a>
             </div>
 
             <div class="footer__column">
-                <h4>Contact</h4>
+                <h4 data-i18n="footer.contact">Contact</h4>
                 <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
             </div>
 
             <div class="footer__bottom">
-                <span>© 2026 Review My Emails. All rights reserved.</span>
-                <span>Privacy Policy · Terms</span>
+                <span data-i18n="footer.copyright">© 2026 Review My Emails. All rights reserved.</span>
+                <span data-i18n="footer.legal">Privacy Policy · Terms</span>
             </div>
         </div>
     </footer>
@@ -2139,7 +2139,7 @@
                 }
 
                 waitlistBtn.disabled = true;
-                waitlistBtn.textContent = 'Joining...';
+                waitlistBtn.textContent = waitlistBtn.dataset.i18nJoining || 'Joining...';
                 waitlistEmail.style.borderColor = '';
 
                 try {
@@ -2175,7 +2175,7 @@
                 } catch (error) {
                     console.error('Waitlist error:', error);
                     waitlistBtn.disabled = false;
-                    waitlistBtn.textContent = 'Try Again';
+                    waitlistBtn.textContent = waitlistBtn.dataset.i18nRetry || 'Try Again';
                     waitlistEmail.style.borderColor = '#dc2626';
                 }
             });
@@ -2207,7 +2207,7 @@
                 }
 
                 waitlistBtn2.disabled = true;
-                waitlistBtn2.textContent = 'Joining...';
+                waitlistBtn2.textContent = waitlistBtn2.dataset.i18nJoining || 'Joining...';
                 waitlistEmail2.style.borderColor = '';
 
                 try {
@@ -2240,7 +2240,7 @@
                 } catch (error) {
                     console.error('Waitlist error:', error);
                     waitlistBtn2.disabled = false;
-                    waitlistBtn2.textContent = 'Try Again';
+                    waitlistBtn2.textContent = waitlistBtn2.dataset.i18nRetry || 'Try Again';
                     waitlistEmail2.style.borderColor = '#dc2626';
                 }
             });
@@ -2270,40 +2270,40 @@
     <div class="contact-modal" id="contactModal">
         <div class="contact-modal__content">
             <div class="contact-modal__header">
-                <h3 class="contact-modal__title">Get in Touch</h3>
-                <button class="contact-modal__close" onclick="closeContactModal()">&times;</button>
+                <h3 class="contact-modal__title" data-i18n="modal.contact_title">Get in Touch</h3>
+                <button class="contact-modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">&times;</button>
             </div>
             <div class="contact-modal__body">
-                <p class="contact-modal__subtitle">Tell us about your situation and we'll get back to you within 24 hours.</p>
+                <p class="contact-modal__subtitle" data-i18n="modal.subtitle">Tell us about your situation and we'll get back to you within 24 hours.</p>
                 <form id="contactForm" onsubmit="submitContactForm(event)">
                     <input type="hidden" id="contactSource" value="">
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Name *</label>
-                        <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name">
+                        <label class="contact-modal__label" data-i18n="modal.form_name">Name *</label>
+                        <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="modal.name_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Email *</label>
-                        <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com">
+                        <label class="contact-modal__label" data-i18n="modal.form_email">Email *</label>
+                        <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Timezone (optional)</label>
+                        <label class="contact-modal__label" data-i18n="modal.form_timezone">Timezone (optional)</label>
                         <select class="contact-modal__select" id="contactTimezone">
-                            <option value="">Select your timezone</option>
-                            <option value="America/New_York">Eastern Time (ET)</option>
-                            <option value="America/Chicago">Central Time (CT)</option>
-                            <option value="America/Denver">Mountain Time (MT)</option>
-                            <option value="America/Los_Angeles">Pacific Time (PT)</option>
-                            <option value="Europe/London">London (GMT/BST)</option>
-                            <option value="Europe/Paris">Central European Time</option>
-                            <option value="Asia/Singapore">Singapore Time</option>
-                            <option value="Australia/Sydney">Australian Eastern Time</option>
+                            <option value="" data-i18n="modal.form_timezone_placeholder">Select your timezone</option>
+                            <option value="America/New_York" data-i18n="modal.timezone_et">Eastern Time (ET)</option>
+                            <option value="America/Chicago" data-i18n="modal.timezone_ct">Central Time (CT)</option>
+                            <option value="America/Denver" data-i18n="modal.timezone_mt">Mountain Time (MT)</option>
+                            <option value="America/Los_Angeles" data-i18n="modal.timezone_pt">Pacific Time (PT)</option>
+                            <option value="Europe/London" data-i18n="modal.timezone_london">London (GMT/BST)</option>
+                            <option value="Europe/Paris" data-i18n="modal.timezone_cet">Central European Time</option>
+                            <option value="Asia/Singapore" data-i18n="modal.timezone_singapore">Singapore Time</option>
+                            <option value="Australia/Sydney" data-i18n="modal.timezone_sydney">Australian Eastern Time</option>
                         </select>
                     </div>
                     <div class="contact-modal__field">
-                        <label class="contact-modal__label">Message (optional)</label>
-                        <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..."></textarea>
+                        <label class="contact-modal__label" data-i18n="modal.form_message">Message (optional)</label>
+                        <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..." data-i18n-placeholder="modal.message_placeholder"></textarea>
                     </div>
-                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn">Send Request</button>
+                    <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="modal.form_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Send Request</button>
                 </form>
             </div>
         </div>
@@ -2335,7 +2335,7 @@
             const message = document.getElementById('contactMessage').value.trim();
             const source = document.getElementById('contactSource').value;
             btn.disabled = true;
-            btn.textContent = 'Sending...';
+            btn.textContent = btn.dataset.i18nSending || 'Sending...';
             try {
                 const response = await fetch('/api/contact-request', {
                     method: 'POST',
@@ -2352,10 +2352,13 @@
             } catch (error) {
                 console.error('Contact form error:', error);
                 btn.disabled = false;
-                btn.textContent = 'Try Again';
+                btn.textContent = btn.dataset.i18nRetry || 'Try Again';
             }
         }
     </script>
+
+    <!-- Translation Loader -->
+    <script src="/js/i18n.js"></script>
 
 </body>
 </html>

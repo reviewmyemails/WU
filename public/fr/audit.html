@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inbox Placement Self-Audit | Review My Emails</title>
-    <meta name="description" content="A guided self-audit to check your email infrastructure, list health, and sending practices. Find out where your deliverability gaps are.">
+    <title>Review My Emails | Nettoyage Expert de Liste Email</title>
+    <meta name="description" content="Services experts de nettoyage de liste email. Pas de Validation automatisée - une analyse manuelle qui détecte les spam traps, contacts à risque et facteurs nuisibles à votre réputation.">
     <link rel="canonical" href="https://reviewmyemails.com/audit/">
 
     <!-- Open Graph -->
@@ -1233,7 +1233,7 @@
 
     <header class="header">
         <div class="container header__inner">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails">
             </a>
             <div class="header__progress" id="headerProgress" style="display: none;">
@@ -1243,11 +1243,11 @@
                 <span id="progressText">0 / 10</span>
             </div>
             <nav class="header__nav">
-                <a href="/done-for-you" class="header__link">How It Works</a>
-                <a href="/pricing" class="header__link">Pricing</a>
-                <a href="/sos-hotline" class="header__link">SOS Hotline</a>
-                <a href="https://anchor.reviewmyemails.com" class="header__cta">Get My List Cleaned</a>
-                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">Comment Ça Marche</a>
+                <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Tarifs</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="header__cta" data-i18n="nav.cta">Nettoyer ma liste</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
             </nav>
@@ -1257,22 +1257,22 @@
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav__header">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
-            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
                 <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
         <div class="mobile-nav__links">
-            <a href="/done-for-you" class="mobile-nav__link">How It Works</a>
-            <a href="/pricing" class="mobile-nav__link">Pricing</a>
-            <a href="/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
-            <a href="/about" class="mobile-nav__link">About</a>
-            <a href="/partner" class="mobile-nav__link">Partner</a>
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">Comment Ça Marche</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Tarifs</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">À Propos</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Partenaires</a>
         </div>
         <div class="mobile-nav__cta">
-            <a href="https://anchor.reviewmyemails.com">Get My List Cleaned</a>
+            <a href="https://anchor.reviewmyemails.com" data-i18n="nav.cta">Nettoyer ma liste</a>
         </div>
     </nav>
 
@@ -1283,46 +1283,46 @@
     <div class="screen active" id="introScreen">
         <div class="container">
             <div class="intro">
-                <span class="intro__badge">Free Self-Assessment</span>
-                <h1>Inbox Placement Self-Audit</h1>
-                <p class="intro__subtitle">What most senders never check. Use this monthly. Be honest. This is how problems get caught before revenue drops.</p>
+                <span class="intro__badge" data-i18n="audit.badge">Auto-évaluation Gratuite</span>
+                <h1 data-i18n="audit.title">Auto-audit de Placement en Boîte de Réception</h1>
+                <p class="intro__subtitle" data-i18n="audit.subtitle">Ce que la plupart des expéditeurs ne vérifient jamais. Utilisez-le mensuellement. Soyez honnête. C'est ainsi que les problèmes sont détectés avant que le chiffre d'affaires ne baisse.</p>
 
                 <div style="background: var(--color-light); border-radius: 12px; padding: var(--space-md); margin-bottom: var(--space-md); text-align: left;">
-                    <p style="font-size: 14px; color: var(--color-dark); margin: 0;"><strong>Important:</strong> This audit covers general best practices. Every business is different. A monthly newsletter has different needs than a daily SaaS notification. Some items here may not apply to you at all. The goal is awareness, not a perfect score.</p>
+                    <p style="font-size: 14px; color: var(--color-dark); margin: 0;"><strong data-i18n="audit.important">Important :</strong> <span data-i18n="audit.disclaimer">Important : Cet audit couvre les meilleures pratiques générales. Chaque entreprise est différente. Une newsletter mensuelle a des besoins différents d'une notification SaaS quotidienne. Certains éléments ici peuvent ne pas s'appliquer du tout à vous. L'objectif est la prise de conscience, pas un score parfait.</span></p>
                 </div>
 
                 <div class="intro__meta">
                     <div class="intro__meta-item">
                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        <span>5-7 minutes</span>
+                        <span data-i18n="audit.meta_time">5-7 minutes</span>
                     </div>
                     <div class="intro__meta-item">
                         <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                        <span>10 sections</span>
+                        <span data-i18n="audit.meta_sections">10 sections</span>
                     </div>
                     <div class="intro__meta-item">
                         <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        <span>Personalized tips</span>
+                        <span data-i18n="audit.meta_tips">Conseils personnalisés</span>
                     </div>
                 </div>
 
                 <div class="intro__sections">
-                    <div class="intro__sections-title">What we'll cover</div>
+                    <div class="intro__sections-title" data-i18n="audit.what_cover">Ce que nous allons couvrir</div>
                     <div class="intro__sections-list">
-                        <span>Automation Timing</span>
-                        <span>Header & Footer Hygiene</span>
-                        <span>Tracking Domain Risk</span>
-                        <span>Engagement Logic</span>
-                        <span>Layout Pattern Risk</span>
-                        <span>Send Time Logic</span>
-                        <span>ESP Migration Risk</span>
-                        <span>Subject vs Preview Trust</span>
-                        <span>Spam Folder Rendering</span>
-                        <span>Validation Frequency</span>
+                        <span data-i18n="audit.section_automation">Timing d'Automatisation</span>
+                        <span data-i18n="audit.section_header">Hygiène d'En-tête & Pied de page</span>
+                        <span data-i18n="audit.section_tracking">Risque de Domaine de Suivi</span>
+                        <span data-i18n="audit.section_engagement">Logique d'Engagement</span>
+                        <span data-i18n="audit.section_layout">Risque de Modèle de Mise en Page</span>
+                        <span data-i18n="audit.section_sendtime">Logique d'Heure d'Envoi</span>
+                        <span data-i18n="audit.section_migration">Risque de Migration d'ESP</span>
+                        <span data-i18n="audit.section_subject">Confiance Objet vs Aperçu</span>
+                        <span data-i18n="audit.section_spam">Rendu dans le Dossier Spam</span>
+                        <span data-i18n="audit.section_validation">Fréquence de Validation</span>
                     </div>
                 </div>
 
-                <button class="btn btn-primary btn-lg" onclick="startQuiz()">
+                <button class="btn btn-primary btn-lg" onclick="startQuiz()" data-i18n="audit.start_button">
                     Start Audit
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>
@@ -1341,9 +1341,9 @@
             <div class="quiz-nav">
                 <a class="quiz-nav__back" id="backBtn" onclick="previousSection()">
                     <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                    Back
+                    <span data-i18n="audit.back">Retour</span>
                 </a>
-                <button class="btn btn-primary" id="nextBtn" onclick="nextSection()">
+                <button class="btn btn-primary" id="nextBtn" onclick="nextSection()" data-i18n="audit.next_section">
                     Next Section
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>
@@ -1367,7 +1367,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p>Built by <a href="/">Review My Emails</a> · <a href="/done-for-you">Get Your List Cleaned</a> · <a href="/sos-hotline">SOS Hotline</a></p>
+            <p><span data-i18n="audit.built_by">Créé par</span> <a href="index.html">Review My Emails</a> · <a href="done-for-you.html" data-i18n="audit.get_cleaned">Faire Nettoyer Votre Liste</a> · <a href="sos-hotline.html">SOS Hotline</a></p>
         </div>
     </footer>
 
@@ -2404,7 +2404,7 @@
                     </div>
                     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                         <button type="button" onclick="openContactModal()" class="btn" style="background: var(--color-accent); color: white; flex: 1; justify-content: center;">Talk to a Specialist</button>
-                        <a href="/sos-hotline" class="btn" style="background: rgba(255,255,255,0.15); color: white; flex: 1; justify-content: center;">Learn About SOS Hotline</a>
+                        <a href="sos-hotline.html" class="btn" style="background: rgba(255,255,255,0.15); color: white; flex: 1; justify-content: center;">Learn About SOS Hotline</a>
                     </div>
                 </div>
             `;
@@ -2443,7 +2443,7 @@
 
                 <div class="results__actions">
                     <button class="btn btn-secondary" onclick="restartQuiz()">Retake Audit</button>
-                    <a href="/done-for-you" class="btn btn-primary">Get Expert List Cleaning</a>
+                    <a href="done-for-you.html" class="btn btn-primary">Get Expert List Cleaning</a>
                 </div>
             `;
 
@@ -2511,7 +2511,7 @@
             const btn = event.target.querySelector('button');
 
             btn.disabled = true;
-            btn.textContent = 'Sending...';
+            btn.textContent = btn.dataset.i18nSending || 'Sending...';
 
             try {
                 const response = await fetch('/api/quiz-results', {
@@ -2559,7 +2559,7 @@
             } catch (error) {
                 console.error('Audit capture error:', error);
                 btn.disabled = false;
-                btn.textContent = 'Try Again';
+                btn.textContent = btn.dataset.i18nRetry || 'Try Again';
             }
         }
 
@@ -2618,7 +2618,7 @@
             const message = document.getElementById('contactMessage').value.trim();
 
             btn.disabled = true;
-            btn.textContent = 'Sending...';
+            btn.textContent = btn.dataset.i18nSending || 'Sending...';
 
             try {
                 const response = await fetch('/api/contact-request', {
@@ -2651,7 +2651,7 @@
             } catch (error) {
                 console.error('Contact form error:', error);
                 btn.disabled = false;
-                btn.textContent = 'Try Again';
+                btn.textContent = btn.dataset.i18nRetry || 'Try Again';
             }
         }
     </script>
@@ -2660,50 +2660,53 @@
 <div class="contact-modal" id="contactModal">
     <div class="contact-modal__content">
         <div class="contact-modal__header">
-            <h3 class="contact-modal__title">Talk to a Specialist</h3>
-            <button class="contact-modal__close" onclick="closeContactModal()">&times;</button>
+            <h3 class="contact-modal__title" data-i18n="quiz.modal_title">Parler à un Spécialiste</h3>
+            <button class="contact-modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">&times;</button>
         </div>
         <div class="contact-modal__body">
-            <p class="contact-modal__subtitle">Tell us about your situation and we'll get back to you within 24 hours.</p>
+            <p class="contact-modal__subtitle" data-i18n="modal.subtitle">Décrivez-nous votre situation et nous vous répondrons dans les 24 heures.</p>
             <form id="contactForm" onsubmit="submitContactForm(event)">
                 <div class="contact-modal__field">
-                    <label class="contact-modal__label">Name *</label>
-                    <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name">
+                    <label class="contact-modal__label" data-i18n="modal.form_name">Nom</label>
+                    <input type="text" class="contact-modal__input" id="contactName" required placeholder="Your name" data-i18n-placeholder="modal.name_placeholder">
                 </div>
                 <div class="contact-modal__field">
-                    <label class="contact-modal__label">Email *</label>
-                    <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com">
+                    <label class="contact-modal__label" data-i18n="modal.form_email">Email</label>
+                    <input type="email" class="contact-modal__input" id="contactEmail" required placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                 </div>
                 <div class="contact-modal__field">
-                    <label class="contact-modal__label">Timezone (optional)</label>
+                    <label class="contact-modal__label" data-i18n="modal.form_timezone">Fuseau horaire</label>
                     <select class="contact-modal__select" id="contactTimezone">
-                        <option value="">Select your timezone</option>
-                        <option value="America/New_York">Eastern Time (ET)</option>
-                        <option value="America/Chicago">Central Time (CT)</option>
-                        <option value="America/Denver">Mountain Time (MT)</option>
-                        <option value="America/Los_Angeles">Pacific Time (PT)</option>
-                        <option value="America/Anchorage">Alaska Time</option>
-                        <option value="Pacific/Honolulu">Hawaii Time</option>
-                        <option value="Europe/London">London (GMT/BST)</option>
-                        <option value="Europe/Paris">Central European Time</option>
-                        <option value="Europe/Athens">Eastern European Time</option>
-                        <option value="Asia/Dubai">Gulf Standard Time</option>
-                        <option value="Asia/Kolkata">India Standard Time</option>
-                        <option value="Asia/Singapore">Singapore Time</option>
-                        <option value="Asia/Tokyo">Japan Standard Time</option>
-                        <option value="Australia/Sydney">Australian Eastern Time</option>
-                        <option value="Pacific/Auckland">New Zealand Time</option>
+                        <option value="" data-i18n="modal.form_timezone_placeholder">Sélectionnez votre fuseau horaire (optionnel)</option>
+                        <option value="America/New_York" data-i18n="modal.timezone_et">Heure de l'Est (ET)</option>
+                        <option value="America/Chicago" data-i18n="modal.timezone_ct">Heure Centrale (CT)</option>
+                        <option value="America/Denver" data-i18n="modal.timezone_mt">Heure des Rocheuses (MT)</option>
+                        <option value="America/Los_Angeles" data-i18n="modal.timezone_pt">Heure du Pacifique (PT)</option>
+                        <option value="America/Anchorage" data-i18n="modal.timezone_alaska">Heure de l'Alaska</option>
+                        <option value="Pacific/Honolulu" data-i18n="modal.timezone_hawaii">Heure d'Hawaï</option>
+                        <option value="Europe/London" data-i18n="modal.timezone_london">Londres (GMT/BST)</option>
+                        <option value="Europe/Paris" data-i18n="modal.timezone_cet">Heure d'Europe Centrale (CET)</option>
+                        <option value="Europe/Athens" data-i18n="modal.timezone_eet">Heure d'Europe de l'Est</option>
+                        <option value="Asia/Dubai" data-i18n="modal.timezone_gulf">Heure du Golfe</option>
+                        <option value="Asia/Kolkata" data-i18n="modal.timezone_india">Heure de l'Inde</option>
+                        <option value="Asia/Singapore" data-i18n="modal.timezone_singapore">Heure de Singapour</option>
+                        <option value="Asia/Tokyo" data-i18n="modal.timezone_japan">Heure du Japon</option>
+                        <option value="Australia/Sydney" data-i18n="modal.timezone_sydney">Heure de l'Est Australien</option>
+                        <option value="Pacific/Auckland" data-i18n="modal.timezone_nz">Heure de Nouvelle-Zélande</option>
                     </select>
                 </div>
                 <div class="contact-modal__field">
-                    <label class="contact-modal__label">Message (optional)</label>
-                    <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..."></textarea>
+                    <label class="contact-modal__label" data-i18n="modal.form_message">Message</label>
+                    <textarea class="contact-modal__textarea" id="contactMessage" placeholder="Tell us about your situation..." data-i18n-placeholder="modal.message_placeholder"></textarea>
                 </div>
-                <button type="submit" class="contact-modal__submit" id="contactSubmitBtn">Send Request</button>
+                <button type="submit" class="contact-modal__submit" id="contactSubmitBtn" data-i18n="modal.form_submit" data-i18n-sending="modal.form_sending" data-i18n-retry="modal.form_try_again">Envoyer le Message</button>
             </form>
         </div>
     </div>
 </div>
+
+<!-- Translation Loader -->
+<script src="/js/i18n.js"></script>
 
 </body>
 </html>

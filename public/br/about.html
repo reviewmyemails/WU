@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Review My Emails</title>
-    <meta name="description" content="Meet Yanna-Torry Aspraki, the deliverability expert behind Review My Emails. Years of experience helping senders understand what validation tools miss.">
+    <title>Review My Emails | Limpeza Profissional de Lista de Email</title>
+    <meta name="description" content="Serviços profissionais de limpeza de lista de email. Não é Validation automatizado - análise manual que identifica spam traps, contatos arriscados e problemas que prejudicam sua reputação.">
     <link rel="canonical" href="https://reviewmyemails.com/about/">
 
     <!-- Open Graph -->
@@ -784,15 +784,15 @@
 
     <header class="header">
         <div class="header__inner">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
             <nav class="header__nav">
-                <a href="/done-for-you" class="header__link">How It Works</a>
-                <a href="/pricing" class="header__link">Pricing</a>
-                <a href="/sos-hotline" class="header__link">SOS Hotline</a>
-                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta">Get My List Cleaned</a>
-                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu">
+                <a href="done-for-you.html" class="header__link" data-i18n="nav.how_it_works">Como Funciona</a>
+                <a href="pricing.html" class="header__link" data-i18n="nav.pricing">Preços</a>
+                <a href="sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+                <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">Limpar Minha Lista</a>
+                <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
             </nav>
@@ -802,22 +802,22 @@
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav__header">
-            <a href="/" class="header__logo">
+            <a href="index.html" class="header__logo">
                 <img src="../assets/logos/Horizontal-Logo.svg" alt="Review My Emails" height="40">
             </a>
-            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu">
+            <button class="mobile-nav__close" onclick="closeMobileNav()" aria-label="Close menu" data-i18n-aria="ui.menu_close">
                 <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
         </div>
         <div class="mobile-nav__links">
-            <a href="/done-for-you" class="mobile-nav__link">How It Works</a>
-            <a href="/pricing" class="mobile-nav__link">Pricing</a>
-            <a href="/sos-hotline" class="mobile-nav__link">SOS Hotline</a>
-            <a href="/about" class="mobile-nav__link">About</a>
-            <a href="/partner" class="mobile-nav__link">Partner</a>
+            <a href="done-for-you.html" class="mobile-nav__link" data-i18n="nav.how_it_works">Como Funciona</a>
+            <a href="pricing.html" class="mobile-nav__link" data-i18n="nav.pricing">Preços</a>
+            <a href="sos-hotline.html" class="mobile-nav__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
+            <a href="about.html" class="mobile-nav__link" data-i18n="nav.about">Sobre</a>
+            <a href="partner.html" class="mobile-nav__link" data-i18n="nav.partner">Parceiros</a>
         </div>
         <div class="mobile-nav__cta">
-            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;">Get My List Cleaned</a>
+            <a href="https://anchor.reviewmyemails.com" class="btn btn-primary" style="width: 100%; justify-content: center;" data-i18n="nav.cta">Limpar Minha Lista</a>
         </div>
     </nav>
 
@@ -827,8 +827,8 @@
 
     <section class="hero">
         <div class="container">
-            <h1 class="hero__headline">About</h1>
-            <p class="hero__subhead">The person behind Review My Emails.</p>
+            <h1 class="hero__headline" data-i18n="about.title">Sobre</h1>
+            <p class="hero__subhead" data-i18n="about.subtitle">A pessoa por trás do Review My Emails.</p>
         </div>
     </section>
 
@@ -841,26 +841,26 @@
             <div class="about-photo">
                 <img src="../assets/team/Yanna-Torry.jpg" alt="Yanna-Torry Aspraki">
                 <p class="about-photo__name">Yanna-Torry Aspraki</p>
-                <p class="about-photo__title">Founder, Review My Emails</p>
+                <p class="about-photo__title" data-i18n="about.founder_title">Fundadora, Review My Emails</p>
             </div>
 
             <div class="about-content">
-                <p>I started Review My Emails because I kept seeing the same problem. Marketers would run their lists through validation tools, get a clean bill of health, and then watch their deliverability tank anyway.</p>
+                <p data-i18n="about.bio_p1">Comecei o Review My Emails porque eu via o mesmo problema constantemente. Profissionais de marketing passavam suas listas por ferramentas de validação, recebiam um atestado de saúde perfeito, e depois viam sua entregabilidade despencar mesmo assim.</p>
 
-                <p>The tools were not lying. They just were not telling the whole story.</p>
+                <p data-i18n="about.bio_p2">As ferramentas não estavam mentindo. Só não estavam contando toda a história.</p>
 
-                <p>Validation checks if an address exists. It does not check if sending there is safe. It does not know about complaint histories, engagement patterns, or domain-level risk signals that accumulate over time.</p>
+                <p data-i18n="about.bio_p3">A validação verifica se um endereço existe. Não verifica se é seguro enviar para lá. Não sabe sobre históricos de reclamações, padrões de engajamento ou sinais de risco em nível de domínio que se acumulam ao longo do tempo.</p>
 
-                <p>I spent years in email deliverability, working with senders of all sizes. I learned that list health is not binary. An address can be technically valid and still damage your reputation. The question is not "will this bounce?" but "should I send here?"</p>
+                <p data-i18n="about.bio_p4">Passei anos em entregabilidade de email, trabalhando com remetentes de todos os tamanhos. Aprendi que a saúde da lista não é binária. Um endereço pode ser tecnicamente válido e ainda prejudicar sua reputação. A pergunta não é "isso vai retornar?" mas "devo enviar para aqui?"</p>
 
-                <p>That is what Review My Emails answers. Every address gets labeled Keep, Monitor, or Suppress. And every label comes with the reasoning behind it. No black boxes. No guessing.</p>
+                <p data-i18n="about.bio_p5">É isso que o Review My Emails responde. Cada endereço recebe o rótulo Keep, Monitor ou Suppress. E cada rótulo vem com o raciocínio por trás dele. Sem caixas pretas. Sem adivinhação.</p>
 
-                <p>If you have questions about your list or your deliverability, I am happy to talk. That is what the SOS Hotline is for.</p>
+                <p data-i18n="about.bio_p6">Se você tem perguntas sobre sua lista ou sua entregabilidade, fico feliz em conversar. É para isso que o SOS Hotline existe.</p>
             </div>
 
             <div class="about-links">
                 <a href="https://linkedin.com/in/yannatorry" target="_blank">LinkedIn</a>
-                <a href="#" onclick="openContactModal('about-yt-email'); return false;">Email</a>
+                <a href="#" onclick="openContactModal('about-yt-email'); return false;" data-i18n="about.email_link">Email</a>
             </div>
         </div>
     </section>
@@ -872,11 +872,11 @@
     <section class="section">
         <div class="container">
             <div class="cta-section">
-                <h2>Questions?</h2>
-                <p>Talk through your situation. No pitch. Just answers.</p>
+                <h2 data-i18n="about.cta_title">Perguntas?</h2>
+                <p data-i18n="about.cta_subtitle">Converse sobre sua situação. Sem vendas. Apenas respostas.</p>
                 <div class="cta-buttons">
-                    <a href="/sos-hotline" class="btn btn-primary">Learn About SOS Hotline</a>
-                    <a href="/pricing" class="btn btn-secondary">See Pricing</a>
+                    <a href="sos-hotline.html" class="btn btn-primary" data-i18n="about.cta_sos">Conheça o SOS Hotline</a>
+                    <a href="pricing.html" class="btn btn-secondary" data-i18n="about.cta_pricing">Ver Preços</a>
                 </div>
             </div>
         </div>
@@ -888,10 +888,10 @@
 
     <section class="team-section">
         <div class="container">
-            <h2>The Team</h2>
-            <p class="team-section__subtitle">Need a hand (or eight)? We have got you covered.</p>
+            <h2 data-i18n="about.team_title">A Equipe</h2>
+            <p class="team-section__subtitle" data-i18n="about.team_subtitle">Precisa de uma mão (ou oito)? Nós te cobrimos.</p>
 
-            <p class="team-section__members">
+            <p class="team-section__members" data-i18n="about.team_members">
                 Bruno S. Brasil, CTO &amp; Co-Founder<br>
                 YT Aspraki, CEO &amp; Co-Founder<br>
                 Daniel J. Evans, Director of Business Development<br>
@@ -900,7 +900,7 @@
             </p>
 
             <p class="team-section__contact">
-                Get in touch: <a href="#" onclick="openContactModal('about-team-contact'); return false;">ahoy@reviewmyemails.com</a>
+                <span data-i18n="about.team_contact">Entre em contato:</span> <a href="#" onclick="openContactModal('about-team-contact'); return false;">ahoy@reviewmyemails.com</a>
             </p>
 
         </div>
@@ -919,45 +919,45 @@
     <div class="modal-overlay" id="contactModal">
         <div class="modal">
             <div class="modal__header">
-                <h3 class="modal__title">Get in Touch</h3>
-                <button class="modal__close" onclick="closeContactModal()" aria-label="Close">
+                <h3 class="modal__title" data-i18n="contact.modal_title">Entre em Contato</h3>
+                <button class="modal__close" onclick="closeContactModal()" aria-label="Close" data-i18n-aria="ui.close">
                     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
             <div class="modal__body">
-                <p class="modal__subtitle">Tell us what you're working on. We'll get back to you within one business day.</p>
+                <p class="modal__subtitle" data-i18n="contact.modal_subtitle">Conte-nos no que você está trabalhando. Responderemos em um dia útil.</p>
                 <form id="contactForm">
                     <input type="hidden" id="contactSource" name="source" value="">
                     <div class="form-group">
-                        <label for="contactName">Name *</label>
-                        <input type="text" id="contactName" name="name" required>
+                        <label for="contactName" data-i18n="form.name_label">Nome *</label>
+                        <input type="text" id="contactName" name="name" required data-i18n-placeholder="form.name_placeholder">
                     </div>
                     <div class="form-group">
-                        <label for="contactEmail">Email *</label>
-                        <input type="email" id="contactEmail" name="email" required>
+                        <label for="contactEmail" data-i18n="form.email_label">Email *</label>
+                        <input type="email" id="contactEmail" name="email" required data-i18n-placeholder="form.email_placeholder">
                     </div>
                     <div class="form-group">
-                        <label for="contactTimezone">Timezone</label>
+                        <label for="contactTimezone" data-i18n="form.timezone_label">Fuso horário (opcional)</label>
                         <select id="contactTimezone" name="timezone">
-                            <option value="">Select your timezone (optional)</option>
-                            <option value="PT">Pacific Time (PT)</option>
-                            <option value="MT">Mountain Time (MT)</option>
-                            <option value="CT">Central Time (CT)</option>
-                            <option value="ET">Eastern Time (ET)</option>
-                            <option value="GMT">GMT / UTC</option>
-                            <option value="CET">Central European Time (CET)</option>
-                            <option value="Other">Other</option>
+                            <option value="" data-i18n="form.timezone_select_optional">Selecione seu fuso horário (opcional)</option>
+                            <option value="PT" data-i18n="form.tz_pacific">Horário do Pacífico (PT)</option>
+                            <option value="MT" data-i18n="form.tz_mountain">Horário das Montanhas (MT)</option>
+                            <option value="CT" data-i18n="form.tz_central">Horário Central (CT)</option>
+                            <option value="ET" data-i18n="form.tz_eastern">Horário do Leste (ET)</option>
+                            <option value="GMT" data-i18n="form.tz_gmt">GMT / UTC</option>
+                            <option value="CET" data-i18n="form.tz_cet">Horário da Europa Central (CET)</option>
+                            <option value="Other" data-i18n="form.tz_other">Outro</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="contactMessage">Message</label>
-                        <textarea id="contactMessage" name="message" placeholder="What can we help you with?"></textarea>
-                        <small>Optional - but helps us prepare for the conversation.</small>
+                        <label for="contactMessage" data-i18n="form.message_label">Mensagem</label>
+                        <textarea id="contactMessage" name="message" placeholder="What can we help you with?" data-i18n-placeholder="form.message_placeholder"></textarea>
+                        <small data-i18n="form.message_hint">Opcional - mas nos ajuda a preparar para a conversa.</small>
                     </div>
                 </form>
             </div>
             <div class="modal__footer">
-                <button type="submit" form="contactForm" class="btn btn-primary">Send Message</button>
+                <button type="submit" form="contactForm" class="btn btn-primary" data-i18n="contact.submit" data-i18n-sending="modal.form_sending">Enviar Mensagem</button>
             </div>
         </div>
     </div>
@@ -967,14 +967,14 @@
         <div class="modal">
             <div class="modal__header">
                 <span></span>
-                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close">
+                <button class="modal__close" onclick="closeSuccessModal()" aria-label="Close" data-i18n-aria="ui.close">
                     <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </button>
             </div>
             <div class="form-success">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-                <h3>Message Sent!</h3>
-                <p>We'll get back to you within one business day.</p>
+                <h3 data-i18n="ui.message_sent">Mensagem Enviada!</h3>
+                <p data-i18n="ui.response_time_business">Responderemos em um dia útil.</p>
             </div>
         </div>
     </div>
@@ -987,28 +987,29 @@
         <div class="footer__inner">
             <div class="footer__brand">
                 <img src="../assets/logos/Dark-Horizontal-Logo.svg" alt="Review My Emails" height="50">
-                <p>We see what algorithms can't.</p>
+                <p data-i18n="footer.tagline">Vemos o que os algoritmos não conseguem.</p>
             </div>
 
             <div class="footer__column">
-                <h4>Services</h4>
-                <a href="/pricing">Pricing</a>
-                <a href="/sos-hotline">SOS Hotline</a>
+                <h4 data-i18n="footer.services">Serviços</h4>
+                <a href="pricing.html" data-i18n="nav.pricing">Preços</a>
+                <a href="sos-hotline.html" data-i18n="nav.sos_hotline">SOS Hotline</a>
             </div>
 
             <div class="footer__column">
-                <h4>Company</h4>
-                <a href="/about">About</a>
-                <a href="/partner">Partner</a>
+                <h4 data-i18n="footer.company">Empresa</h4>
+                <a href="about.html" data-i18n="nav.about">Sobre</a>
+                <a href="partner.html" data-i18n="nav.partner">Parceiros</a>
+                <a href="https://anchor.reviewmyemails.com/security-page.html" data-i18n="footer.security">Segurança</a>
             </div>
 
             <div class="footer__column">
-                <h4>Contact</h4>
+                <h4 data-i18n="footer.contact">Contato</h4>
                 <a href="#" onclick="openContactModal('footer-contact'); return false;">ahoy@reviewmyemails.com</a>
             </div>
 
             <div class="footer__bottom">
-                <span>© 2026 Review My Emails. All rights reserved.</span>
+                <span data-i18n="footer.copyright">© 2026 Review My Emails. Todos os direitos reservados.</span>
             </div>
         </div>
     </footer>
@@ -1072,7 +1073,7 @@
 
             const submitBtn = document.querySelector('.modal__footer .btn');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
+            submitBtn.textContent = submitBtn.dataset.i18nSending || 'Sending...';
             submitBtn.disabled = true;
 
             const formData = {
@@ -1112,5 +1113,7 @@
         });
     </script>
 
+    <!-- i18n Translation Loader -->
+    <script src="/js/i18n.js"></script>
 </body>
 </html>
