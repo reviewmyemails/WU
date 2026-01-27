@@ -231,6 +231,59 @@
             padding: 10px 20px;
         }
 
+        
+        /* Header Language Icon */
+        .header__lang {
+            position: relative;
+            background: none;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+            color: var(--color-muted);
+            transition: color 180ms ease;
+        }
+        .header__lang:hover { color: var(--color-dark); }
+        .header__lang svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; }
+        body.abyss-active .header__lang { color: var(--abyss-muted); }
+        body.abyss-active .header__lang:hover { color: var(--abyss-glow); }
+
+        .header__lang-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: var(--color-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            min-width: 160px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 180ms ease;
+            z-index: 100;
+        }
+        .header__lang.open .header__lang-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .header__lang-menu button {
+            display: block;
+            width: 100%;
+            padding: 10px 14px;
+            text-align: left;
+            background: transparent;
+            border: none;
+            font-family: var(--font);
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 120ms ease;
+        }
+        .header__lang-menu button:hover { background: var(--color-light); }
+        .header__lang-menu button.active { background: var(--color-light); font-weight: 600; }
+        .header__lang-menu button:first-child { border-radius: 8px 8px 0 0; }
+        .header__lang-menu button:last-child { border-radius: 0 0 8px 8px; }
+
         /* Mobile Menu */
         .header__mobile-toggle {
             display: none;
@@ -985,6 +1038,23 @@
                 <a href="./pricing.html" class="header__link" data-i18n="nav.pricing">តម្លៃ</a>
                 <a href="./sos-hotline.html" class="header__link" data-i18n="nav.sos_hotline">SOS Hotline</a>
                 <a href="https://anchor.reviewmyemails.com" class="btn btn-primary header__cta" data-i18n="nav.cta">សម្អាតបញ្ជីរបស់ខ្ញុំ</a>
+                <div class="header__lang lang-switcher" id="headerLangSwitcher" onclick="toggleLangMenu('headerLangSwitcher')">
+                    <svg viewBox="0 0 24 24"><path d="M5 8l6 6M4 14l6-6 2-3M2 5h12M7 2v3"/><path d="M11 19l4-9 4 9M13 17h6"/></svg>
+                    <div class="header__lang-menu">
+                        <button class="lang-switcher__option active" data-lang="en">English</button>
+                        <button class="lang-switcher__option" data-lang="gr">Ελληνικά</button>
+                        <button class="lang-switcher__option" data-lang="br">Português (BR)</button>
+                        <button class="lang-switcher__option" data-lang="es">Español</button>
+                        <button class="lang-switcher__option" data-lang="fr">Français</button>
+                        <button class="lang-switcher__option" data-lang="de">Deutsch</button>
+                        <button class="lang-switcher__option" data-lang="ar">العربية</button>
+                        <button class="lang-switcher__option" data-lang="tr">Türkçe</button>
+                        <button class="lang-switcher__option" data-lang="th">ไทย</button>
+                        <button class="lang-switcher__option" data-lang="id">Bahasa Indonesia</button>
+                        <button class="lang-switcher__option" data-lang="vi">Tiếng Việt</button>
+                        <button class="lang-switcher__option" data-lang="km">ភាសាខ្មែរ</button>
+                    </div>
+                </div>
                 <button class="header__mobile-toggle" onclick="openMobileNav()" aria-label="Open menu" data-i18n-aria="ui.menu_open">
                     <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
                 </button>
@@ -1434,44 +1504,66 @@
                 return '/' + lang + '/' + page;
             }
 
+            // Fix all internal navigation links to use correct language path
+            function fixNavigationLinks() {
+                const currentLang = getCurrentLang();
+                if (currentLang === 'en') return;
+                const knownPages = ['index.html', 'about.html', 'pricing.html', 'done-for-you.html', 'sos-hotline.html', 'partner.html', 'quiz.html', 'audit.html'];
+                const langBase = '/' + currentLang + '/';
+                document.querySelectorAll('a[href]').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('/' + currentLang + '/')) return;
+                    const pageName = href.replace('./', '').replace('../', '');
+                    if (knownPages.includes(pageName)) {
+                        link.setAttribute('href', langBase + pageName);
+                    }
+                });
+            }
+
             // Initialize switcher
             function initLangSwitcher() {
                 const currentLang = getCurrentLang();
-                const currentLangEl = document.getElementById('currentLang');
+                const currentLangEls = document.querySelectorAll('.current-lang-text');
                 const options = document.querySelectorAll('.lang-switcher__option');
 
-                // Update current language display
+                currentLangEls.forEach(el => {
+                    if (LANGUAGES[currentLang]) {
+                        el.textContent = LANGUAGES[currentLang];
+                    }
+                });
+                const currentLangEl = document.getElementById('currentLang');
                 if (currentLangEl && LANGUAGES[currentLang]) {
                     currentLangEl.textContent = LANGUAGES[currentLang];
                 }
 
-                // Update active state
                 options.forEach(opt => {
                     opt.classList.remove('active');
                     if (opt.dataset.lang === currentLang) {
                         opt.classList.add('active');
                     }
-
-                    // Add click handler
                     opt.addEventListener('click', function() {
                         const lang = this.dataset.lang;
                         const url = buildLangUrl(lang);
                         window.location.href = url;
                     });
                 });
+
+                fixNavigationLinks();
             }
 
             // Toggle menu
-            window.toggleLangMenu = function() {
-                document.getElementById('langSwitcher').classList.toggle('open');
+            window.toggleLangMenu = function(id) {
+                const switcherId = id || 'langSwitcher';
+                document.getElementById(switcherId).classList.toggle('open');
             };
 
             // Close menu on outside click
             document.addEventListener('click', function(e) {
-                const switcher = document.getElementById('langSwitcher');
-                if (switcher && !switcher.contains(e.target)) {
-                    switcher.classList.remove('open');
-                }
+                document.querySelectorAll('.lang-switcher').forEach(switcher => {
+                    if (!switcher.contains(e.target)) {
+                        switcher.classList.remove('open');
+                    }
+                });
             });
 
             // Init on DOM ready

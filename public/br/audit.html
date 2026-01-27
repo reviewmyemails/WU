@@ -2891,45 +2891,67 @@
             return '/' + lang + '/' + page;
         }
 
-        // Initialize switcher
-        function initLangSwitcher() {
-            const currentLang = getCurrentLang();
-            const currentLangEl = document.getElementById('currentLang');
-            const options = document.querySelectorAll('.lang-switcher__option');
-
-            // Update current language display
-            if (currentLangEl && LANGUAGES[currentLang]) {
-                currentLangEl.textContent = LANGUAGES[currentLang];
+        // Fix all internal navigation links to use correct language path
+            function fixNavigationLinks() {
+                const currentLang = getCurrentLang();
+                if (currentLang === 'en') return;
+                const knownPages = ['index.html', 'about.html', 'pricing.html', 'done-for-you.html', 'sos-hotline.html', 'partner.html', 'quiz.html', 'audit.html'];
+                const langBase = '/' + currentLang + '/';
+                document.querySelectorAll('a[href]').forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('/' + currentLang + '/')) return;
+                    const pageName = href.replace('./', '').replace('../', '');
+                    if (knownPages.includes(pageName)) {
+                        link.setAttribute('href', langBase + pageName);
+                    }
+                });
             }
 
-            // Update active state
-            options.forEach(opt => {
-                opt.classList.remove('active');
-                if (opt.dataset.lang === currentLang) {
-                    opt.classList.add('active');
+            // Initialize switcher
+            function initLangSwitcher() {
+                const currentLang = getCurrentLang();
+                const currentLangEls = document.querySelectorAll('.current-lang-text');
+                const options = document.querySelectorAll('.lang-switcher__option');
+
+                currentLangEls.forEach(el => {
+                    if (LANGUAGES[currentLang]) {
+                        el.textContent = LANGUAGES[currentLang];
+                    }
+                });
+                const currentLangEl = document.getElementById('currentLang');
+                if (currentLangEl && LANGUAGES[currentLang]) {
+                    currentLangEl.textContent = LANGUAGES[currentLang];
                 }
 
-                // Add click handler
-                opt.addEventListener('click', function() {
-                    const lang = this.dataset.lang;
-                    const url = buildLangUrl(lang);
-                    window.location.href = url;
+                options.forEach(opt => {
+                    opt.classList.remove('active');
+                    if (opt.dataset.lang === currentLang) {
+                        opt.classList.add('active');
+                    }
+                    opt.addEventListener('click', function() {
+                        const lang = this.dataset.lang;
+                        const url = buildLangUrl(lang);
+                        window.location.href = url;
+                    });
+                });
+
+                fixNavigationLinks();
+            }
+
+            // Toggle menu
+            window.toggleLangMenu = function(id) {
+                const switcherId = id || 'langSwitcher';
+                document.getElementById(switcherId).classList.toggle('open');
+            };
+
+            // Close menu on outside click
+            document.addEventListener('click', function(e) {
+                document.querySelectorAll('.lang-switcher').forEach(switcher => {
+                    if (!switcher.contains(e.target)) {
+                        switcher.classList.remove('open');
+                    }
                 });
             });
-        }
-
-        // Toggle menu
-        window.toggleLangMenu = function() {
-            document.getElementById('langSwitcher').classList.toggle('open');
-        };
-
-        // Close menu on outside click
-        document.addEventListener('click', function(e) {
-            const switcher = document.getElementById('langSwitcher');
-            if (switcher && !switcher.contains(e.target)) {
-                switcher.classList.remove('open');
-            }
-        });
 
         // Init on DOM ready
         if (document.readyState === 'loading') {
