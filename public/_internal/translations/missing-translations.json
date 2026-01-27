@@ -1,42 +1,38 @@
 {
   "ar": {
-    "total": 725,
-    "translated": 725,
+    "total": 724,
+    "translated": 724,
     "missing": 0,
     "missingKeys": []
   },
   "tr": {
-    "total": 725,
-    "translated": 725,
+    "total": 724,
+    "translated": 724,
     "missing": 0,
     "missingKeys": []
   },
   "th": {
-    "total": 725,
-    "translated": 725,
+    "total": 724,
+    "translated": 724,
     "missing": 0,
     "missingKeys": []
   },
   "id": {
-    "total": 725,
-    "translated": 725,
+    "total": 724,
+    "translated": 724,
     "missing": 0,
     "missingKeys": []
   },
   "vi": {
-    "total": 725,
+    "total": 724,
     "translated": 724,
-    "missing": 1,
-    "missingKeys": [
-      "Key"
-    ]
+    "missing": 0,
+    "missingKeys": []
   },
   "km": {
-    "total": 725,
+    "total": 724,
     "translated": 724,
-    "missing": 1,
-    "missingKeys": [
-      "Key"
-    ]
+    "missing": 0,
+    "missingKeys": []
   }
 }
