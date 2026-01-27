@@ -1359,8 +1359,99 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             display: flex;
             justify-content: space-between;
+            align-items: center;
             font-size: 13px;
             opacity: 0.5;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            position: relative;
+            display: inline-block;
+        }
+
+        .lang-switcher__btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: var(--color-white);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 180ms ease;
+            opacity: 0.8;
+        }
+
+        .lang-switcher__btn:hover {
+            opacity: 1;
+            border-color: rgba(255,255,255,0.4);
+        }
+
+        .lang-switcher__btn svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 180ms ease;
+        }
+
+        .lang-switcher.open .lang-switcher__btn svg {
+            transform: rotate(180deg);
+        }
+
+        .lang-switcher__menu {
+            position: absolute;
+            bottom: 100%;
+            right: 0;
+            margin-bottom: 8px;
+            background: var(--color-white);
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            min-width: 160px;
+            max-height: 300px;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 180ms ease;
+            z-index: 100;
+        }
+
+        .lang-switcher.open .lang-switcher__menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-switcher__option {
+            display: block;
+            width: 100%;
+            padding: 10px 14px;
+            text-align: left;
+            background: transparent;
+            border: none;
+            color: var(--color-dark);
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 120ms ease;
+        }
+
+        .lang-switcher__option:hover {
+            background: var(--color-light);
+        }
+
+        .lang-switcher__option.active {
+            background: var(--color-light);
+            font-weight: 600;
+        }
+
+        .lang-switcher__option:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .lang-switcher__option:last-child {
+            border-radius: 0 0 8px 8px;
         }
 
         /* ========================================
@@ -2001,6 +2092,27 @@
 
             <div class="footer__bottom">
                 <span data-i18n="footer.copyright">© 2026 Review My Emails. สงวนลิขสิทธิ์</span>
+                <div class="lang-switcher" id="langSwitcher">
+                    <button class="lang-switcher__btn" onclick="toggleLangMenu()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <span id="currentLang">English</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <div class="lang-switcher__menu" id="langMenu">
+                        <button class="lang-switcher__option active" data-lang="en">English</button>
+                        <button class="lang-switcher__option" data-lang="gr">Ελληνικά</button>
+                        <button class="lang-switcher__option" data-lang="br">Português (BR)</button>
+                        <button class="lang-switcher__option" data-lang="es">Español</button>
+                        <button class="lang-switcher__option" data-lang="fr">Français</button>
+                        <button class="lang-switcher__option" data-lang="de">Deutsch</button>
+                        <button class="lang-switcher__option" data-lang="ar">العربية</button>
+                        <button class="lang-switcher__option" data-lang="tr">Türkçe</button>
+                        <button class="lang-switcher__option" data-lang="th">ไทย</button>
+                        <button class="lang-switcher__option" data-lang="id">Bahasa Indonesia</button>
+                        <button class="lang-switcher__option" data-lang="vi">Tiếng Việt</button>
+                        <button class="lang-switcher__option" data-lang="km">ភាសាខ្មែរ</button>
+                    </div>
+                </div>
                 <span data-i18n="footer.legal">นโยบายความเป็นส่วนตัว · ข้อกำหนด</span>
             </div>
         </div>
@@ -2359,6 +2471,124 @@
 
     <!-- Translation Loader -->
     <script src="/js/i18n.js"></script>
+
+    <!-- Language Switcher -->
+    <script>
+        (function() {
+            const LANGUAGES = {
+                en: 'English',
+                gr: 'Ελληνικά',
+                br: 'Português (BR)',
+                es: 'Español',
+                fr: 'Français',
+                de: 'Deutsch',
+                ar: 'العربية',
+                tr: 'Türkçe',
+                th: 'ไทย',
+                id: 'Bahasa Indonesia',
+                vi: 'Tiếng Việt',
+                km: 'ភាសាខ្មែរ'
+            };
+
+            // Detect current language from URL path
+            function getCurrentLang() {
+                const path = window.location.pathname;
+                const match = path.match(/^\/(gr|br|es|fr|de|ar|tr|th|id|vi|km)\//);
+                return match ? match[1] : 'en';
+            }
+
+            // Get current page filename
+            function getCurrentPage() {
+                const path = window.location.pathname;
+                const parts = path.split('/').filter(Boolean);
+                const lastPart = parts[parts.length - 1] || 'index.html';
+                // If it's a language folder, get the next part
+                if (['gr', 'br', 'es', 'fr', 'de', 'ar', 'tr', 'th', 'id', 'vi', 'km'].includes(lastPart)) {
+                    return 'index.html';
+                }
+                return lastPart.includes('.html') ? lastPart : 'index.html';
+            }
+
+            // Check if we're on the .gr domain
+            function isGreekDomain() {
+                return window.location.hostname === 'reviewmyemails.gr' || window.location.hostname === 'www.reviewmyemails.gr';
+            }
+
+            // Build URL for language switch
+            function buildLangUrl(lang) {
+                const page = getCurrentPage();
+                const isGr = isGreekDomain();
+
+                if (lang === 'en') {
+                    // English goes to root of .com
+                    if (isGr) {
+                        return 'https://reviewmyemails.com/' + page;
+                    }
+                    return '/' + page;
+                }
+
+                if (lang === 'gr' && isGr) {
+                    // Greek on .gr stays on .gr
+                    return '/' + page;
+                }
+
+                if (isGr) {
+                    // Other languages on .gr redirect to .com
+                    return 'https://reviewmyemails.com/' + lang + '/' + page;
+                }
+
+                // On .com, navigate to language folder
+                return '/' + lang + '/' + page;
+            }
+
+            // Initialize switcher
+            function initLangSwitcher() {
+                const currentLang = getCurrentLang();
+                const currentLangEl = document.getElementById('currentLang');
+                const options = document.querySelectorAll('.lang-switcher__option');
+
+                // Update current language display
+                if (currentLangEl && LANGUAGES[currentLang]) {
+                    currentLangEl.textContent = LANGUAGES[currentLang];
+                }
+
+                // Update active state
+                options.forEach(opt => {
+                    opt.classList.remove('active');
+                    if (opt.dataset.lang === currentLang) {
+                        opt.classList.add('active');
+                    }
+
+                    // Add click handler
+                    opt.addEventListener('click', function() {
+                        const lang = this.dataset.lang;
+                        const url = buildLangUrl(lang);
+                        window.location.href = url;
+                    });
+                });
+            }
+
+            // Toggle menu
+            window.toggleLangMenu = function() {
+                document.getElementById('langSwitcher').classList.toggle('open');
+            };
+
+            // Close menu on outside click
+            document.addEventListener('click', function(e) {
+                const switcher = document.getElementById('langSwitcher');
+                if (switcher && !switcher.contains(e.target)) {
+                    switcher.classList.remove('open');
+                }
+            });
+
+            // Init on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initLangSwitcher);
+            } else {
+                initLangSwitcher();
+            }
+        })();
+    </script>
 
 </body>
 </html>
