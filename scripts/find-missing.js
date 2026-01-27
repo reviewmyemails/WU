@@ -71,13 +71,24 @@ async function findMissing() {
 
     console.log(`Loaded ${Object.keys(englishMap).length} English strings from editor`);
 
-    // Also create CSV files for each language with missing keys
+    // Create one combined CSV file with all languages separated by header rows
+    const langNames = {
+        ar: 'Arabic',
+        tr: 'Turkish',
+        th: 'Thai',
+        id: 'Indonesian',
+        vi: 'Vietnamese',
+        km: 'Khmer'
+    };
+
+    const combinedLines = [];
+
     for (const lang of newLangs) {
         if (report[lang].missingKeys.length > 0) {
-            const csvPath = path.join(__dirname, '..', 'public', '_internal', 'translations', `missing-${lang}.csv`);
+            // Add header row for this language
+            combinedLines.push(`Key,Page,English,${langNames[lang]}`);
 
-            // Find English text for each missing key
-            const csvLines = ['Key,Page,English'];
+            // Add data rows
             report[lang].missingKeys.forEach(key => {
                 const entry = arr.find(t => t.key === key);
                 const page = entry?.page || '';
@@ -86,13 +97,14 @@ async function findMissing() {
                 const escapedEnglish = english.includes(',') || english.includes('"')
                     ? `"${english.replace(/"/g, '""')}"`
                     : english;
-                csvLines.push(`${key},${page},${escapedEnglish}`);
+                combinedLines.push(`${key},${page},${escapedEnglish},`);
             });
-
-            fs.writeFileSync(csvPath, csvLines.join('\n'));
-            console.log(`Created: missing-${lang}.csv (${report[lang].missingKeys.length} keys)`);
         }
     }
+
+    const combinedPath = path.join(__dirname, '..', 'public', '_internal', 'translations', 'missing-all.csv');
+    fs.writeFileSync(combinedPath, combinedLines.join('\n'));
+    console.log(`\nCreated: missing-all.csv (combined file with all languages)`);
 }
 
 findMissing().catch(console.error);
