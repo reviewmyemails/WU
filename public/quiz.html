@@ -1761,5 +1761,46 @@
 <!-- Translation Loader -->
 <script src="/js/i18n.js"></script>
 
+<!-- Language Navigation Fix -->
+<script>
+    (function() {
+        // Detect current language from URL path
+        function getCurrentLang() {
+            const path = window.location.pathname;
+            const match = path.match(/^\/(gr|br|es|fr|de|ar|tr|th|id|vi|km)\//);
+            return match ? match[1] : 'en';
+        }
+
+        // Fix all internal navigation links to use correct language path
+        function fixNavigationLinks() {
+            const currentLang = getCurrentLang();
+            if (currentLang === 'en') return; // English links are already correct
+
+            const knownPages = ['index.html', 'about.html', 'pricing.html', 'done-for-you.html', 'sos-hotline.html', 'partner.html', 'quiz.html', 'audit.html'];
+            const langBase = '/' + currentLang + '/';
+
+            // Fix all internal links
+            document.querySelectorAll('a[href]').forEach(link => {
+                const href = link.getAttribute('href');
+                // Skip external links, anchors, and already-fixed links
+                if (!href || href.startsWith('http') || href.startsWith('#') || href.startsWith('/' + currentLang + '/')) return;
+
+                // Check if it's an internal page link
+                const pageName = href.replace('./', '').replace('../', '');
+                if (knownPages.includes(pageName)) {
+                    link.setAttribute('href', langBase + pageName);
+                }
+            });
+        }
+
+        // Run on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', fixNavigationLinks);
+        } else {
+            fixNavigationLinks();
+        }
+    })();
+</script>
+
 </body>
 </html>
