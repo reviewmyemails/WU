@@ -148,6 +148,40 @@ function applyTranslations(html, translations, langConfig) {
         );
     }
 
+    // Update Open Graph title
+    const ogTitleKey = 'home.og_title';
+    if (translations[ogTitleKey]) {
+        result = result.replace(
+            /<meta\s+property="og:title"\s+content="[^"]*"/,
+            `<meta property="og:title" content="${translations[ogTitleKey].replace(/"/g, '&quot;')}"`
+        );
+    }
+
+    // Update Open Graph description
+    const ogDescKey = 'home.og_desc';
+    if (translations[ogDescKey]) {
+        result = result.replace(
+            /<meta\s+property="og:description"\s+content="[^"]*"/,
+            `<meta property="og:description" content="${translations[ogDescKey].replace(/"/g, '&quot;')}"`
+        );
+    }
+
+    // Update Twitter title
+    if (translations[ogTitleKey]) {
+        result = result.replace(
+            /<meta\s+name="twitter:title"\s+content="[^"]*"/,
+            `<meta name="twitter:title" content="${translations[ogTitleKey].replace(/"/g, '&quot;')}"`
+        );
+    }
+
+    // Update Twitter description
+    if (translations[ogDescKey]) {
+        result = result.replace(
+            /<meta\s+name="twitter:description"\s+content="[^"]*"/,
+            `<meta name="twitter:description" content="${translations[ogDescKey].replace(/"/g, '&quot;')}"`
+        );
+    }
+
     // Update canonical URL to point to language version
     result = result.replace(
         /<link\s+rel="canonical"\s+href="https:\/\/reviewmyemails\.com\/"/,
