@@ -949,7 +949,7 @@
 <div class="diagnostic-container">
 
     <div class="diag-header" id="diagHeader">
-        <h3 data-i18n="quiz.title">Is Your List Safe?</h3>
+        <h3 data-i18n="quiz.title">ลิสต์ของคุณปลอดภัยไหม?</h3>
         <div class="diag-step" id="stepIndicator" data-i18n="quiz.step_1_of_4">คำถามที่ 1 จาก 4</div>
         <div class="diag-progress"><div class="diag-bar" id="progressBar"></div></div>
     </div>
@@ -962,35 +962,35 @@
         <!-- Q1: Source -->
         <div class="question-step active" id="q1">
             <p class="q-text" data-i18n="quiz.q1_text">อีเมลส่วนใหญ่ในรายชื่อนี้มาได้อย่างไร?</p>
-            <button class="answer-btn" data-short="Organic" data-context="Organic lists decay too. About 22% go stale every year. Normal." onclick="handleAnswer(1, 'organic', this)" data-i18n="quiz.q1_a1">They filled out a form on my website or app</button>
-            <button class="answer-btn" data-short="No consent" data-context="No consent means higher risk. We can still help clean it—just important to set expectations." onclick="handleAnswer(1, 'no_consent', this)" data-i18n="quiz.q1_a2">Purchased, scraped, or cold outreach (no opt-in)</button>
-            <button class="answer-btn" data-short="Mixed" data-context="Mixed lists hide surprises. The risky part is always what you didn't build." onclick="handleAnswer(1, 'mixed', this)" data-i18n="quiz.q1_a3">Mixed sources / I inherited this list</button>
+            <button class="answer-btn" data-short="Organic" data-context="Organic lists decay too. About 22% go stale every year. Normal." onclick="handleAnswer(1, 'organic', this)" data-i18n="quiz.q1_a1">พวกเขากรอกฟอร์มบนเว็บไซต์หรือแอปของฉัน</button>
+            <button class="answer-btn" data-short="No consent" data-context="No consent means higher risk. We can still help clean it—just important to set expectations." onclick="handleAnswer(1, 'no_consent', this)" data-i18n="quiz.q1_a2">ซื้อ scrape หรือ cold outreach (ไม่มี opt-in)</button>
+            <button class="answer-btn" data-short="Mixed" data-context="Mixed lists hide surprises. The risky part is always what you didn't build." onclick="handleAnswer(1, 'mixed', this)" data-i18n="quiz.q1_a3">แหล่งผสม / ฉันรับช่วงลิสต์นี้มา</button>
         </div>
 
         <!-- Q2: Authentication -->
         <div class="question-step" id="q2">
             <p class="q-text" data-i18n="quiz.q2_text">โดเมนส่งอีเมลของคุณมีการยืนยันตัวตนด้วย DMARC หรือไม่?</p>
-            <button class="answer-btn" data-short="Yes" data-context="Good. Infrastructure isn't your problem." onclick="handleAnswer(2, 'dmarc_yes', this)" data-i18n="quiz.q2_a1">Yes, DMARC is set to Reject or Quarantine</button>
-            <button class="answer-btn" data-short="Partial" data-context="Partial setup confuses inboxes. Inconsistency signals risk." onclick="handleAnswer(2, 'dmarc_partial', this)" data-i18n="quiz.q2_a2">I think so, but I'm not sure of the settings</button>
-            <button class="answer-btn" data-short="No" data-context="Even a clean list won't save you without auth." onclick="handleAnswer(2, 'dmarc_no', this)" data-i18n="quiz.q2_a3">No / What is DMARC?</button>
+            <button class="answer-btn" data-short="Yes" data-context="Good. Infrastructure isn't your problem." onclick="handleAnswer(2, 'dmarc_yes', this)" data-i18n="quiz.q2_a1">ใช่ DMARC ตั้งค่าเป็น Reject หรือ Quarantine</button>
+            <button class="answer-btn" data-short="Partial" data-context="Partial setup confuses inboxes. Inconsistency signals risk." onclick="handleAnswer(2, 'dmarc_partial', this)" data-i18n="quiz.q2_a2">ฉันคิดว่าใช่ แต่ไม่แน่ใจเรื่องการตั้งค่า</button>
+            <button class="answer-btn" data-short="No" data-context="Even a clean list won't save you without auth." onclick="handleAnswer(2, 'dmarc_no', this)" data-i18n="quiz.q2_a3">ไม่ / DMARC คืออะไร?</button>
         </div>
 
         <!-- Q3: Validation Experience -->
         <div class="question-step" id="q3">
             <p class="q-text" data-i18n="quiz.q3_text">คุณเคยนำรายชื่อนี้ไปผ่านเครื่องมือตรวจสอบ (Validation) หรือไม่?</p>
-            <button class="answer-btn" data-short="Never" data-context="Six months is a long time. Lists go stale fast." onclick="handleAnswer(3, 'never', this)" data-i18n="quiz.q3_a1">No, never / Not in the last 6 months</button>
-            <button class="answer-btn" data-short="Valid but issues" data-context="Valid means deliverable, not safe. There's a gap between syntax and reputation." onclick="handleAnswer(3, 'valid_issues', this)" data-i18n="quiz.q3_a2">Yes, it said "Valid" but I'm still seeing issues</button>
-            <button class="answer-btn" data-short="Catch-all flagged" data-context="Catch-all domains accept everything, which is why tools mark them unknown." onclick="handleAnswer(3, 'catchall', this)" data-i18n="quiz.q3_a3">Yes, it flagged a lot as "Unknown" or "Catch-All"</button>
-            <button class="answer-btn" data-short="Clean" data-context="If everything looks fine, the problem isn't technical." onclick="handleAnswer(3, 'clean', this)" data-i18n="quiz.q3_a4">Yes, and everything seems fine</button>
+            <button class="answer-btn" data-short="Never" data-context="Six months is a long time. Lists go stale fast." onclick="handleAnswer(3, 'never', this)" data-i18n="quiz.q3_a1">ไม่เคย / ไม่ได้ทำใน 6 เดือนที่ผ่านมา</button>
+            <button class="answer-btn" data-short="Valid but issues" data-context="Valid means deliverable, not safe. There's a gap between syntax and reputation." onclick="handleAnswer(3, 'valid_issues', this)" data-i18n="quiz.q3_a2">ใช่ มันบอกว่า "Valid" แต่ฉันยังมี bounces</button>
+            <button class="answer-btn" data-short="Catch-all flagged" data-context="Catch-all domains accept everything, which is why tools mark them unknown." onclick="handleAnswer(3, 'catchall', this)" data-i18n="quiz.q3_a3">ใช่ มันระบุว่าหลายอันเป็น "Unknown" หรือ "Catch-All"</button>
+            <button class="answer-btn" data-short="Clean" data-context="If everything looks fine, the problem isn't technical." onclick="handleAnswer(3, 'clean', this)" data-i18n="quiz.q3_a4">ใช่ และทุกอย่างดูปกติ</button>
         </div>
 
         <!-- Q4: Pain Point -->
         <div class="question-step" id="q4">
             <p class="q-text" data-i18n="quiz.q4_text">อะไรพาคุณมาที่นี่วันนี้?</p>
-            <button class="answer-btn" data-short="Declining rates" data-context="Slow decline. Hardest to spot." onclick="handleAnswer(4, 'declining', this)" data-i18n="quiz.q4_a1">Open rates are slowly dropping over time</button>
-            <button class="answer-btn" data-short="ESP warning" data-context="That's already affecting your reputation." onclick="handleAnswer(4, 'crisis', this)" data-i18n="quiz.q4_a2">ESP warning or suspension</button>
-            <button class="answer-btn" data-short="Preventive" data-context="You're early. Smart." onclick="handleAnswer(4, 'preventive', this)" data-i18n="quiz.q4_a3">I want to be safe before a big send</button>
-            <button class="answer-btn" data-short="Conflicting tools" data-context="Tools disagree when behaviour is the issue." onclick="handleAnswer(4, 'confused', this)" data-i18n="quiz.q4_a4">Tools give conflicting answers</button>
+            <button class="answer-btn" data-short="Declining rates" data-context="Slow decline. Hardest to spot." onclick="handleAnswer(4, 'declining', this)" data-i18n="quiz.q4_a1">อัตราเปิดค่อยๆ ลดลงเรื่อยๆ</button>
+            <button class="answer-btn" data-short="ESP warning" data-context="That's already affecting your reputation." onclick="handleAnswer(4, 'crisis', this)" data-i18n="quiz.q4_a2">คำเตือนหรือระงับจาก ESP</button>
+            <button class="answer-btn" data-short="Preventive" data-context="You're early. Smart." onclick="handleAnswer(4, 'preventive', this)" data-i18n="quiz.q4_a3">ฉันต้องการความปลอดภัยก่อนการส่งครั้งใหญ่</button>
+            <button class="answer-btn" data-short="Conflicting tools" data-context="Tools disagree when behaviour is the issue." onclick="handleAnswer(4, 'confused', this)" data-i18n="quiz.q4_a4">เครื่องมือให้คำตอบที่ขัดแย้งกัน</button>
         </div>
 
         <!-- Loading -->
@@ -1021,7 +1021,7 @@
 
             <div class="result-capture" data-result="no-consent">
                 <div class="result-capture__title" data-i18n="quiz.save_diagnosis">บันทึกผลวินิจฉัยของคุณ</div>
-                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">รับผลลัพธ์ทางอีเมลและเลือกเข้าร่วมรายชื่อรอสำหรับเครื่องมือ self-serve</div>
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
@@ -1061,7 +1061,7 @@
 
             <div class="result-capture" data-result="crisis">
                 <div class="result-capture__title" data-i18n="quiz.save_diagnosis">บันทึกผลวินิจฉัยของคุณ</div>
-                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">รับผลลัพธ์ทางอีเมลและเลือกเข้าร่วมรายชื่อรอสำหรับเครื่องมือ self-serve</div>
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
@@ -1101,7 +1101,7 @@
 
             <div class="result-capture" data-result="tool-failure">
                 <div class="result-capture__title" data-i18n="quiz.save_diagnosis">บันทึกผลวินิจฉัยของคุณ</div>
-                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">รับผลลัพธ์ทางอีเมลและเลือกเข้าร่วมรายชื่อรอสำหรับเครื่องมือ self-serve</div>
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
@@ -1141,7 +1141,7 @@
 
             <div class="result-capture" data-result="infra">
                 <div class="result-capture__title" data-i18n="quiz.save_diagnosis">บันทึกผลวินิจฉัยของคุณ</div>
-                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">รับผลลัพธ์ทางอีเมลและเลือกเข้าร่วมรายชื่อรอสำหรับเครื่องมือ self-serve</div>
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
@@ -1181,7 +1181,7 @@
 
             <div class="result-capture" data-result="catchall">
                 <div class="result-capture__title" data-i18n="quiz.save_diagnosis">บันทึกผลวินิจฉัยของคุณ</div>
-                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">รับผลลัพธ์ทางอีเมลและเลือกเข้าร่วมรายชื่อรอสำหรับเครื่องมือ self-serve</div>
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
@@ -1221,7 +1221,7 @@
 
             <div class="result-capture" data-result="decay">
                 <div class="result-capture__title" data-i18n="quiz.save_diagnosis">บันทึกผลวินิจฉัยของคุณ</div>
-                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">รับผลลัพธ์ทางอีเมลและเลือกเข้าร่วมรายชื่อรอสำหรับเครื่องมือ self-serve</div>
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
@@ -1261,7 +1261,7 @@
 
             <div class="result-capture" data-result="preventive">
                 <div class="result-capture__title" data-i18n="quiz.save_diagnosis">บันทึกผลวินิจฉัยของคุณ</div>
-                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">Get your results emailed and optionally join our waitlist for self-serve tools.</div>
+                <div class="result-capture__subtitle" data-i18n="quiz.capture_subtitle">รับผลลัพธ์ทางอีเมลและเลือกเข้าร่วมรายชื่อรอสำหรับเครื่องมือ self-serve</div>
                 <div class="result-capture__form">
                     <input type="email" class="result-capture__input" placeholder="your@email.com" data-i18n-placeholder="ui.email_placeholder">
                     <label class="result-capture__checkbox">
