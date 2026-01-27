@@ -1,0 +1,51 @@
+Key,Page,Thai
+modal.contact_title,common,ติดต่อเรา
+modal.contact_subtitle,common,บอกเราว่าคุณกำลังทำอะไรอยู่ เราจะติดต่อกลับภายในหนึ่งวันทำการ
+modal.form_name,common,ชื่อ
+modal.form_email,common,อีเมล
+modal.form_timezone,common,เขตเวลา
+modal.form_timezone_placeholder,common,เลือกเขตเวลาของคุณ (ไม่บังคับ)
+modal.form_message,common,ข้อความ
+modal.form_message_placeholder,common,เราสามารถช่วยอะไรคุณได้บ้าง?
+modal.form_message_helper,common,ไม่บังคับ - แต่ช่วยให้เราเตรียมตัวสำหรับการสนทนา
+modal.form_submit,common,ส่งข้อความ
+modal.success_title,common,ส่งข้อความแล้ว!
+modal.success_message,common,เราจะติดต่อกลับภายในหนึ่งวันทำการ
+dfy.consult_call_title,done-for-you,โทรคุยตัวต่อตัวกับ YT
+dfy.contact_first,done-for-you,ติดต่อเราก่อน
+dfy.how_read_title,done-for-you,ฉันอ่านลิสต์ของคุณอย่างไร
+dfy.keep_desc,done-for-you,"ไม่พบปัญหา โดเมนผ่านการตรวจสอบ การยืนยันผ่าน ไม่มีสัญญาณเสี่ยง สามารถส่งได้อย่างปลอดภัย"
+dfy.keep_title,done-for-you,ปลอดภัยที่จะส่ง
+dfy.modal_submit,done-for-you,ส่งคำขอ
+dfy.modal_subtitle,done-for-you,บอกเราเกี่ยวกับสถานการณ์ของคุณ เราจะติดต่อกลับภายใน 24 ชั่วโมง
+dfy.monitor_desc,done-for-you,แต่ละที่อยู่มาพร้อมกับป้ายกำกับที่อธิบายว่าทำไมถึงอยู่ที่นี่ บริบทสำคัญ
+dfy.monitor_title,done-for-you,ธงเหลือง
+dfy.pricing_ask,done-for-you,แค่ถาม
+dfy.pricing_questions,done-for-you,มีคำถามก่อนไหม?
+dfy.read1_desc,done-for-you,"พฤติกรรมโดเมน ประวัติ และรูปแบบทั่วทั้งลิสต์ของคุณ บริบท ไม่ใช่แค่การมีอยู่"
+dfy.read1_title,done-for-you,ฉันมองไกลกว่าที่อยู่
+dfy.read2_desc,done-for-you,"กับดัก บัญชีบทบาท โดเมนเป็นพิษ รูปแบบชั่วคราว สิ่งที่ไม่ตีกลับแต่ยังทำร้ายคุณ"
+dfy.read2_title,done-for-you,ฉันตรวจสิ่งที่คนอื่นพลาด
+dfy.read3_desc,done-for-you,ไม่ใช่แค่ป้ายกำกับ คุณได้รับความคิดเบื้องหลังทุกการตัดสินใจเพื่อให้เข้าใจว่าทำไม
+dfy.read3_title,done-for-you,ฉันอธิบายเหตุผล
+dfy.sos_cta,done-for-you,เรียนรู้เกี่ยวกับ SOS Hotline
+dfy.sos_desc,done-for-you,มีคำถามก่อนตัดสินใจ? ใช้ SOS Hotline ฟรี ไม่มีการขาย
+dfy.sos_title,done-for-you,ยังไม่แน่ใจ?
+dfy.suppress_desc,done-for-you,"แต่ละที่อยู่มาพร้อมป้ายกำกับที่อธิบายเหตุผล ไม่ถูกต้อง มีแนวโน้มเป็นกับดัก ชั่วคราว หรือสัญญาณเสี่ยงอื่น อย่าส่งที่นี่"
+dfy.suppress_title,done-for-you,อย่าส่ง
+dfy.who_for1,done-for-you,กำลังรันแคมเปญแต่เห็นการมีส่วนร่วมลดลง
+dfy.who_for2,done-for-you,"กังวลเรื่อง bounces ข้อร้องเรียน หรือ blocklists"
+dfy.who_for3,done-for-you,รับช่วงลิสต์ที่คุณไม่ได้สร้าง
+dfy.who_for4,done-for-you,"ถูกกดดันให้ ""ส่งเลย"" แต่รู้สึกว่ามีความเสี่ยง"
+dfy.who_for5,done-for-you,พยายามอธิบายความเสี่ยงด้าน deliverability ภายในองค์กร
+dfy.who_for_title,done-for-you,เหมาะกับคุณถ้า
+dfy.who_not1,done-for-you,คุณต้องการคนเขียนหรือส่งแคมเปญให้
+dfy.who_not2,done-for-you,คุณต้องการความช่วยเหลือย้ายหรือตั้งค่า ESP
+dfy.who_not3,done-for-you,คุณต้องการบริการจัดการต่อเนื่อง
+dfy.who_not4,done-for-you,คุณต้องการงานเนื้อหาหรือออกแบบ
+dfy.who_not_title,done-for-you,ไม่เหมาะกับคุณถ้า
+dfy.who_partner_cta,done-for-you,เชื่อมต่อกับพาร์ทเนอร์
+dfy.who_title,done-for-you,เหมาะสำหรับใคร
+home.manifesto,homepage,คุณอาจเคยรันลิสต์ผ่านเครื่องมือมาก่อน มันบอกว่า 95% valid คุณก็ส่งไป bounces เกิดขึ้น นั่นคือช่องว่างระหว่างการตรวจสอบกับการเข้าใจ
+home.quiz_cta_btn,homepage,ทำแบบทดสอบความเสี่ยง 2 นาที
+home.quiz_cta_desc,homepage,"ทำแบบประเมินตนเอง 2 นาที สี่คำถามเกี่ยวกับวิธีที่คุณสร้างลิสต์ เราจะบอกระดับความเสี่ยงที่คุณน่าจะอยู่"

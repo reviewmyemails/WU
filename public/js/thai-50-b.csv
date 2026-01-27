@@ -1,0 +1,51 @@
+Key,Page,Thai
+pricing.compare_them1,pricing,ตัวตรวจสอบตรวจว่า inbox มีอยู่หรือไม่
+pricing.compare_them2,pricing,ตัวตรวจสอบให้สถานะคุณ
+pricing.compare_them3,pricing,ตัวตรวจสอบระบุว่าอะไร bounce
+pricing.compare_them4,pricing,ตัวตรวจสอบประมวลผลปริมาณ
+pricing.compare_them5,pricing,ตัวตรวจสอบทิ้งให้คุณเดา
+pricing.compare_us1,pricing,เราประเมินว่าการส่งไปที่นั่นปลอดภัยหรือไม่
+pricing.compare_us2,pricing,เราให้เหตุผลเบื้องหลังการตัดสินใจ
+pricing.compare_us3,pricing,เราระบุสิ่งที่ทำลายชื่อเสียงของคุณโดยไม่ bounce
+pricing.compare_us4,pricing,เราตีความรูปแบบทั่วทั้งลิสต์ของคุณ
+pricing.compare_us5,pricing,เราบอกคุณว่าต้องทำอะไรและทำไม
+modal.timezone_pt,common,เวลาแปซิฟิก (PT)
+modal.timezone_mt,common,เวลาภูเขา (MT)
+modal.timezone_ct,common,เวลากลาง (CT)
+modal.timezone_et,common,เวลาตะวันออก (ET)
+modal.timezone_gmt,common,GMT / UTC
+modal.timezone_cet,common,เวลายุโรปกลาง (CET)
+modal.timezone_other,common,อื่นๆ
+modal.form_sending,common,กำลังส่ง...
+modal.form_try_again,common,ลองอีกครั้ง
+modal.form_error,common,เกิดข้อผิดพลาด กรุณาลองอีกครั้งหรืออีเมลหาเราโดยตรงที่ ahoy@reviewmyemails.com
+modal.request_received,common,ได้รับคำขอแล้ว
+modal.timezone_london,common,ลอนดอน (GMT/BST)
+modal.timezone_singapore,common,เวลาสิงคโปร์
+modal.timezone_sydney,common,เวลาออสเตรเลียตะวันออก
+modal.timezone_alaska,common,เวลาอะแลสกา
+modal.timezone_hawaii,common,เวลาฮาวาย
+modal.timezone_eet,common,เวลายุโรปตะวันออก
+modal.timezone_gulf,common,เวลามาตรฐานอ่าว
+modal.timezone_india,common,เวลามาตรฐานอินเดีย
+modal.timezone_japan,common,เวลามาตรฐานญี่ปุ่น
+modal.timezone_nz,common,เวลานิวซีแลนด์
+dfy.process_title,done-for-you,วิธีการทำงาน
+dfy.process_subtitle,done-for-you,กระบวนการง่าย การดำเนินการโดยผู้เชี่ยวชาญ
+dfy.step1_title,done-for-you,ส่งลิสต์ให้เรา
+dfy.step2_title,done-for-you,ฉันอ่านลิสต์ของคุณ
+dfy.step3_title,done-for-you,รับผลลัพธ์ที่มีป้ายกำกับกลับ
+dfy.step4_title,done-for-you,ตัวเลือก: จองโทรแนะนำ
+dfy.consult_title,done-for-you,ไม่แน่ใจว่าต้องการอะไร?
+dfy.consult_card,done-for-you,โทรคุยตัวต่อตัวกับ YT
+dfy.consult_cta,done-for-you,จองปรึกษาฟรี
+dfy.whofor_title,done-for-you,เหมาะสำหรับใคร
+dfy.whofor_yes,done-for-you,เหมาะกับคุณถ้า
+dfy.whofor_no,done-for-you,ไม่เหมาะกับคุณถ้า
+dfy.whofor_partner,done-for-you,เชื่อมต่อกับพาร์ทเนอร์
+dfy.pricing_title,done-for-you,ราคา
+dfy.notsure_title,done-for-you,ยังไม่แน่ใจ?
+dfy.notsure_cta,done-for-you,เรียนรู้เกี่ยวกับ SOS Hotline
+dfy.cta_title,done-for-you,พร้อมที่จะรู้ว่าลิสต์ของคุณมีอะไรจริงๆ?
+dfy.cta_subtitle,done-for-you,"ส่งมาเลย ฉันจะบอกว่าอะไรควรเก็บ อะไรควรดู และอะไรไม่ควรส่งอีกเลย พร้อมเหตุผลทุกการตัดสินใจ"
+dfy.cta_footer,done-for-you,ลิสต์ส่วนใหญ่ส่งคืนภายใน 24-48 ชั่วโมง
