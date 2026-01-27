@@ -1,0 +1,110 @@
+{
+  "batch": 3,
+  "description": "Fix incomplete translations - Batch 3 (sos, audit keys)",
+  "status": "completed",
+  "translations": [
+    {
+      "key": "sos.topics_headline",
+      "page": "sos-hotline",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "إذا كان يتعلق بالبريد الإلكتروني، يمكننا المساعدة."
+        },
+        {
+          "language": "tr",
+          "value": "E-posta ile ilgiliyse, yardımcı olabiliriz."
+        },
+        {
+          "language": "th",
+          "value": "ถ้าเกี่ยวกับอีเมล เราช่วยได้"
+        },
+        {
+          "language": "id",
+          "value": "Jika tentang email, kami bisa membantu."
+        },
+        {
+          "language": "vi",
+          "value": "Nếu liên quan đến email, chúng tôi có thể giúp."
+        }
+      ]
+    },
+    {
+      "key": "sos.testimonial3_quote",
+      "page": "sos-hotline",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "RME, ESP'mizin kaçırdığı derin içgörüler sağlıyor ve daha akıllı segmentasyon yapmamıza yardımcı oldu."
+        }
+      ]
+    },
+    {
+      "key": "audit.disclaimer",
+      "page": "audit",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "مهم: يغطي هذا التدقيق أفضل الممارسات العامة. كل عمل مختلف. النشرة الشهرية لها احتياجات مختلفة عن تنبيه SaaS اليومي. بعض العناصر هنا قد لا تنطبق عليك إطلاقاً. الهدف هو الوعي، وليس النتيجة المثالية."
+        },
+        {
+          "language": "tr",
+          "value": "Önemli: Bu denetim genel en iyi uygulamaları kapsar. Her işletme farklıdır. Aylık bir bültenin günlük SaaS uyarısından farklı ihtiyaçları vardır. Buradaki bazı öğeler sizin için hiç geçerli olmayabilir. Amaç farkındalık, mükemmel puan değil."
+        },
+        {
+          "language": "th",
+          "value": "สำคัญ: การตรวจสอบนี้ครอบคลุมแนวปฏิบัติที่ดีทั่วไป ทุกธุรกิจแตกต่างกัน จดหมายข่าวรายเดือนมีความต้องการแตกต่างจากการแจ้งเตือน SaaS รายวัน บางรายการที่นี่อาจไม่ใช้กับคุณเลย เป้าหมายคือการตระหนักรู้ ไม่ใช่คะแนนเต็ม"
+        },
+        {
+          "language": "id",
+          "value": "Penting: Audit ini mencakup praktik terbaik umum. Setiap bisnis berbeda. Newsletter bulanan memiliki kebutuhan berbeda dari alert SaaS harian. Beberapa item di sini mungkin tidak berlaku untuk Anda sama sekali. Tujuannya adalah kesadaran, bukan skor sempurna."
+        },
+        {
+          "language": "vi",
+          "value": "Quan trọng: Kiểm tra này bao gồm các best practice chung. Mỗi doanh nghiệp khác nhau. Bản tin hàng tháng có nhu cầu khác với cảnh báo SaaS hàng ngày. Một số mục ở đây có thể không áp dụng cho bạn. Mục tiêu là nhận thức, không phải điểm hoàn hảo."
+        }
+      ]
+    },
+    {
+      "key": "audit.sos_desc",
+      "page": "audit",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "كل عمل مختلف. ما هو حاسم لمرسل يومي قد يكون غير ذي صلة لنشرة شهرية. إذا لم تكن متأكداً أي العناصر مهمة فعلاً لحالتك، تحدث مع شخص رأى كل شيء."
+        },
+        {
+          "language": "tr",
+          "value": "Her işletme farklıdır. Günlük gönderici için kritik olan, aylık bülten için alakasız olabilir. Hangi öğelerin durumunuz için gerçekten önemli olduğundan emin değilseniz, her şeyi görmüş biriyle konuşun."
+        },
+        {
+          "language": "th",
+          "value": "ทุกธุรกิจแตกต่างกัน สิ่งที่สำคัญสำหรับผู้ส่งรายวันอาจไม่เกี่ยวข้องกับจดหมายข่าวรายเดือน หากคุณไม่แน่ใจว่ารายการใดสำคัญจริงๆ สำหรับสถานการณ์ของคุณ ให้คุยกับคนที่เคยเห็นมาทั้งหมด"
+        },
+        {
+          "language": "id",
+          "value": "Setiap bisnis berbeda. Apa yang kritis untuk pengirim harian mungkin tidak relevan untuk newsletter bulanan. Jika Anda tidak yakin item mana yang benar-benar penting untuk situasi Anda, bicaralah dengan seseorang yang sudah melihat semuanya."
+        },
+        {
+          "language": "vi",
+          "value": "Mỗi doanh nghiệp khác nhau. Điều quan trọng với người gửi hàng ngày có thể không liên quan với bản tin hàng tháng. Nếu bạn không chắc mục nào thực sự quan trọng với tình huống của bạn, hãy nói chuyện với người đã thấy tất cả."
+        }
+      ]
+    },
+    {
+      "key": "audit.testimonial_quote",
+      "page": "audit",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Review My Emails, diğerlerinin kaçırdığı tehlikeli kalıpları tespit ederek standart araçların ötesine geçiyor."
+        }
+      ]
+    }
+  ],
+  "pushedAt": "2026-01-27T01:48:43.706Z",
+  "result": {
+    "success": true,
+    "message": "17 translations saved"
+  }
+}

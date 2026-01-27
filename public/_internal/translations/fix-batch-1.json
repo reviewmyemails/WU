@@ -1,0 +1,232 @@
+{
+  "batch": 1,
+  "description": "Fix incomplete translations - Batch 1 (modal, dfy, pricing keys)",
+  "status": "completed",
+  "translations": [
+    {
+      "key": "modal.subtitle",
+      "page": "common",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Durumunuzu bize anlatın, 24 saat içinde size geri dönelim."
+        }
+      ]
+    },
+    {
+      "key": "dfy.read2_desc",
+      "page": "done-for-you",
+      "fixes": [
+        {
+          "language": "id",
+          "value": "Jebakan spam trap, role accounts, domain beracun, pola disposable. Hal-hal yang tidak bounce tapi merusak reputasi Anda."
+        }
+      ]
+    },
+    {
+      "key": "pricing.calc_intro",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "بسيط. كلما زاد الحجم، انخفض السعر."
+        },
+        {
+          "language": "tr",
+          "value": "Basit. Daha fazla hacim, daha düşük fiyat."
+        },
+        {
+          "language": "th",
+          "value": "เรียบง่าย ยิ่งปริมาณมาก ราคายิ่งถูก"
+        },
+        {
+          "language": "id",
+          "value": "Sederhana. Semakin banyak volume, semakin rendah harga."
+        },
+        {
+          "language": "vi",
+          "value": "Đơn giản. Khối lượng càng lớn, giá càng thấp."
+        }
+      ]
+    },
+    {
+      "key": "pricing.cta_clean_desc",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "خدمة done-for-you. أرسل قائمتك، احصل على النتائج."
+        },
+        {
+          "language": "tr",
+          "value": "Done-for-you hizmeti. Listenizi gönderin, sonuçları alın."
+        },
+        {
+          "language": "th",
+          "value": "บริการ done-for-you ส่งรายชื่อของคุณมา รับผลลัพธ์กลับไป"
+        },
+        {
+          "language": "id",
+          "value": "Layanan done-for-you. Kirim daftar Anda, dapatkan hasilnya."
+        },
+        {
+          "language": "vi",
+          "value": "Dịch vụ done-for-you. Gửi danh sách của bạn, nhận kết quả."
+        }
+      ]
+    },
+    {
+      "key": "pricing.suppress_desc",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "th",
+          "value": "สัญญาณความเสี่ยงที่ชัดเจน: โดเมนที่มีปัญหา, รูปแบบ disposable, ตัวบ่งชี้ spam trap ในอดีต"
+        }
+      ]
+    },
+    {
+      "key": "pricing.suppress_title",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Net Risk, Net Gerekçe"
+        }
+      ]
+    },
+    {
+      "key": "pricing.who_item2",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Bounce'lar, şikayetler veya kara listeler konusunda endişeleniyorsunuz"
+        }
+      ]
+    },
+    {
+      "key": "pricing.output_risk",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Net Risk, Net Gerekçe"
+        },
+        {
+          "language": "id",
+          "value": "Risiko Jelas, Alasan Jelas"
+        }
+      ]
+    },
+    {
+      "key": "pricing.output_risk_desc",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "إشارات خطر واضحة: نطاقات معروفة بالمشاكل، أنماط disposable، مؤشرات تاريخية لفخاخ السبام. كل عنوان يتضمن علامات محددة أدت إلى الإزالة. ستعرف بالضبط لماذا."
+        },
+        {
+          "language": "tr",
+          "value": "Net risk sinyalleri: bilinen sorunlu domainler, tek kullanımlık desenler, geçmiş tuzak göstergeleri. Her adres, kaldırılmasına yol açan belirli işaretlerle birlikte gelir. Tam olarak nedenini bileceksiniz."
+        },
+        {
+          "language": "id",
+          "value": "Sinyal risiko yang jelas: domain bermasalah, pola disposable, indikator spam trap historis. Setiap alamat menyertakan flag spesifik yang menyebabkan penghapusan. Anda akan tahu persis alasannya."
+        },
+        {
+          "language": "vi",
+          "value": "Tín hiệu rủi ro rõ ràng: domain có vấn đề, mẫu disposable, chỉ số spam trap lịch sử. Mỗi địa chỉ đều có cờ cụ thể giải thích lý do bị xóa. Bạn sẽ biết chính xác tại sao."
+        }
+      ]
+    },
+    {
+      "key": "pricing.whofor_item2",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Bounce'lar, şikayetler veya kara listeler konusunda endişeleniyorsunuz"
+        }
+      ]
+    },
+    {
+      "key": "pricing.sos_status",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "استخدمه قبل أو أثناء أو بعد التنظيف لفهم حالتك."
+        },
+        {
+          "language": "tr",
+          "value": "Temizlik öncesinde, sırasında veya sonrasında durumunuzu anlamak için kullanın."
+        }
+      ]
+    },
+    {
+      "key": "pricing.calculator_intro",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "بسيط. كلما زاد الحجم، انخفض السعر."
+        },
+        {
+          "language": "tr",
+          "value": "Basit. Daha fazla hacim, daha düşük fiyat."
+        },
+        {
+          "language": "id",
+          "value": "Sederhana. Semakin banyak volume, semakin rendah harga."
+        },
+        {
+          "language": "vi",
+          "value": "Đơn giản. Khối lượng càng lớn, giá càng thấp."
+        }
+      ]
+    },
+    {
+      "key": "pricing.sos_card_desc",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "اطرح أي سؤال عن البريد الإلكتروني. احصل على إجابة حقيقية من خبير حقيقي. بدون بيع، بدون التزامات."
+        },
+        {
+          "language": "tr",
+          "value": "E-posta hakkında herhangi bir soru sorun. Gerçek bir uzmandan gerçek bir cevap alın. Satış yok, bağlayıcılık yok."
+        }
+      ]
+    },
+    {
+      "key": "pricing.cta_getstarted_desc",
+      "page": "pricing",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "خدمة شاملة. أرسل قائمتك، احصل على النتائج."
+        },
+        {
+          "language": "tr",
+          "value": "Tam hizmet. Listenizi gönderin, sonuçları alın."
+        },
+        {
+          "language": "id",
+          "value": "Layanan lengkap. Kirim daftar Anda, dapatkan hasilnya."
+        },
+        {
+          "language": "vi",
+          "value": "Dịch vụ trọn gói. Gửi danh sách của bạn, nhận kết quả."
+        }
+      ]
+    }
+  ],
+  "pushedAt": "2026-01-27T01:48:42.732Z",
+  "result": {
+    "success": true,
+    "message": "34 translations saved"
+  }
+}

@@ -1,0 +1,264 @@
+{
+  "batch": 2,
+  "description": "Fix incomplete translations - Batch 2 (dfy, partner, quiz keys)",
+  "status": "completed",
+  "translations": [
+    {
+      "key": "dfy.output_yellow_desc",
+      "page": "done-for-you",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Her adres, neden burada olduğunu açıklayan belirli etiketlerle gelir. Bağlam önemlidir. Bunları nasıl segmente edip gönderdiğiniz sonucu belirler."
+        }
+      ]
+    },
+    {
+      "key": "dfy.consult_card_desc",
+      "page": "done-for-you",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "أخبرني ما يحدث مع قائمتك، إرسالك، مخاوفك. سأعطيك رأيي الصادق فيما تحتاجه—حتى لو لم أكن أنا."
+        },
+        {
+          "language": "tr",
+          "value": "Listeniz, gönderiminiz, endişeleriniz hakkında bana anlatın. Size neye ihtiyacınız olduğu konusunda dürüst görüşümü vereceğim—ben olmasam bile."
+        },
+        {
+          "language": "id",
+          "value": "Ceritakan apa yang terjadi dengan daftar Anda, pengiriman Anda, kekhawatiran Anda. Saya akan memberikan pendapat jujur saya tentang apa yang Anda butuhkan—bahkan jika itu bukan saya."
+        },
+        {
+          "language": "vi",
+          "value": "Hãy cho tôi biết điều gì đang xảy ra với danh sách của bạn, việc gửi của bạn, những lo ngại của bạn. Tôi sẽ cho bạn ý kiến thành thật về những gì bạn cần—dù đó không phải là tôi."
+        }
+      ]
+    },
+    {
+      "key": "dfy.whofor_yes2",
+      "page": "done-for-you",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Bounce'lar, şikayetler veya kara listeler konusunda endişeleniyorsun"
+        }
+      ]
+    },
+    {
+      "key": "partner.agency_desc",
+      "page": "partner",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "تقدم نظافة القائمة كجزء من خدمات التسويق عبر البريد الإلكتروني. امنح عملاءك توصيات واضحة، وليس فقط درجات التحقق."
+        },
+        {
+          "language": "tr",
+          "value": "E-posta pazarlama hizmetlerinizin bir parçası olarak liste hijyeni sunun. Müşterilerinize sadece doğrulama puanları değil, net öneriler verin."
+        },
+        {
+          "language": "th",
+          "value": "นำเสนอ list hygiene เป็นส่วนหนึ่งของบริการ email marketing ของคุณ มอบคำแนะนำที่ชัดเจนให้ลูกค้า ไม่ใช่แค่คะแนนการตรวจสอบ"
+        },
+        {
+          "language": "id",
+          "value": "Tawarkan list hygiene sebagai bagian dari layanan email marketing Anda. Berikan klien rekomendasi yang jelas, bukan hanya skor validasi."
+        },
+        {
+          "language": "vi",
+          "value": "Cung cấp list hygiene như một phần dịch vụ email marketing của bạn. Đưa ra khuyến nghị rõ ràng cho khách hàng, không chỉ điểm xác thực."
+        }
+      ]
+    },
+    {
+      "key": "partner.modal_subtitle",
+      "page": "partner",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "İşletmeniz hakkında bize bilgi verin, 24 saat içinde size geri dönelim."
+        }
+      ]
+    },
+    {
+      "key": "quiz.res_noconsent_reality",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "id",
+          "value": "Kami mendeteksi alamat tidak valid, spam trap, role accounts, dan pola berisiko tinggi yang terlewat oleh alat lain."
+        }
+      ]
+    },
+    {
+      "key": "quiz.res_preventive_reality",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Doğru şeyleri yapıyorsunuz. Bir güvenlik kontrolü, yanlışlıkla bir tuzağa düşmeyeceğinizden emin olmanızı sağlar."
+        }
+      ]
+    },
+    {
+      "key": "quiz.res_toolfail_reality",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "id",
+          "value": "Alat otomatis tidak dapat melihat riwayat perilaku. Mereka memeriksa kode, bukan konteks."
+        }
+      ]
+    },
+    {
+      "key": "quiz.result_infra_subhead",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "بدون مصادقة DMARC المناسبة، حتى القائمة النظيفة يمكن أن تذهب للسبام. هذا قابل للإصلاح، لكنه يحتاج اهتماماً قبل أن يكون لتنظيف القائمة معنى."
+        },
+        {
+          "language": "tr",
+          "value": "Doğru DMARC kimlik doğrulaması olmadan, temiz bir liste bile spam'a düşebilir. Bu düzeltilebilir, ancak liste temizliğinin önemli olması için önce buna dikkat edilmesi gerekir."
+        },
+        {
+          "language": "id",
+          "value": "Tanpa autentikasi DMARC yang benar, bahkan daftar yang bersih bisa masuk spam. Ini bisa diperbaiki, tapi perlu perhatian sebelum pembersihan daftar berarti."
+        },
+        {
+          "language": "vi",
+          "value": "Không có xác thực DMARC đúng, ngay cả danh sách sạch cũng có thể rơi vào spam. Điều này có thể khắc phục, nhưng cần chú ý trước khi việc làm sạch danh sách có ý nghĩa."
+        }
+      ]
+    },
+    {
+      "key": "quiz.reality_toolfailure",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "الأدوات الآلية لا يمكنها رؤية سجل السلوك. إنها تتحقق من الكود، وليس السياق. أنا أجد العناوين 'الصالحة ولكن الخطرة' التي تفوتها."
+        },
+        {
+          "language": "tr",
+          "value": "Otomatik araçlar davranış geçmişini göremez. Kod kontrol ederler, bağlam değil. Ben onların kaçırdığı 'Geçerli ama Tehlikeli' adresleri buluyorum."
+        },
+        {
+          "language": "id",
+          "value": "Alat otomatis tidak dapat melihat riwayat perilaku. Mereka memeriksa kode, bukan konteks. Saya menemukan alamat 'Valid tapi Berbahaya' yang mereka lewatkan."
+        },
+        {
+          "language": "vi",
+          "value": "Các công cụ tự động không thể xem lịch sử hành vi. Chúng kiểm tra mã, không phải ngữ cảnh. Tôi tìm ra các địa chỉ 'Hợp lệ nhưng Nguy hiểm' mà chúng bỏ sót."
+        }
+      ]
+    },
+    {
+      "key": "quiz.reality_infra",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "مصادقة النطاق تخبر مزودي البريد الوارد أنك من تدعي أنك إياه. بدونها، تبدو رسائلك مشبوهة بغض النظر عن جودة القائمة."
+        },
+        {
+          "language": "tr",
+          "value": "Domain kimlik doğrulaması, gelen kutusu sağlayıcılarına söylediğiniz kişi olduğunuzu söyler. Bu olmadan, e-postalarınız liste kalitesinden bağımsız olarak şüpheli görünür."
+        },
+        {
+          "language": "id",
+          "value": "Autentikasi domain memberi tahu penyedia inbox bahwa Anda adalah siapa yang Anda klaim. Tanpanya, email Anda terlihat mencurigakan terlepas dari kualitas daftar."
+        },
+        {
+          "language": "vi",
+          "value": "Xác thực domain cho các nhà cung cấp hộp thư biết bạn là ai như bạn tuyên bố. Không có nó, email của bạn trông đáng ngờ bất kể chất lượng danh sách."
+        }
+      ]
+    },
+    {
+      "key": "quiz.reality_catchall",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "İş domainlerinin büyük bir yüzdesi catch-all'dır. Doğrulama bunları 'Bilinmiyor' olarak işaretler çünkü doğrulayamaz. Desen tanıma ve etkileşim geçmişi farklı bir hikaye anlatır."
+        }
+      ]
+    },
+    {
+      "key": "quiz.reality_decay",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "هذه أصعب مشكلة للتشخيص لأنه لا يوجد حدث. قائمتك تراكمت تدهوراً، وهو يسحب مشتركيك المتفاعلين للأسفل."
+        },
+        {
+          "language": "tr",
+          "value": "Bu teşhis edilmesi en zor problemdir çünkü bir olay yoktur. Listeniz çürüme biriktirdi ve etkileşimde bulunan abonelerinizi aşağı çekiyor."
+        },
+        {
+          "language": "id",
+          "value": "Ini adalah masalah yang paling sulit didiagnosis karena tidak ada kejadian. Daftar Anda telah mengumpulkan kerusakan, dan ini menarik turun subscriber yang engaged."
+        },
+        {
+          "language": "vi",
+          "value": "Đây là vấn đề khó chẩn đoán nhất vì không có sự kiện nào. Danh sách của bạn đã tích lũy sự suy giảm, và nó đang kéo những subscriber tương tác xuống."
+        }
+      ]
+    },
+    {
+      "key": "quiz.reality_preventive",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Doğru şeyleri yapıyorsunuz. Bir güvenlik kontrolü, son gönderiminizden bu yana oluşan bir tuzağa yanlışlıkla düşmeyeceğinizi garanti eder."
+        }
+      ]
+    },
+    {
+      "key": "quiz.modal_subtitle",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "tr",
+          "value": "Durumunuzu bize anlatın, 24 saat içinde size geri dönelim."
+        }
+      ]
+    },
+    {
+      "key": "quiz.capture_credits_bonus",
+      "page": "quiz",
+      "fixes": [
+        {
+          "language": "ar",
+          "value": "لقد ربحت أيضاً 1,500 رصيد مجاني."
+        },
+        {
+          "language": "tr",
+          "value": "Ayrıca 1.500 ücretsiz kredi kazandınız."
+        },
+        {
+          "language": "th",
+          "value": "คุณยังได้รับ 1,500 เครดิตฟรีด้วย"
+        },
+        {
+          "language": "id",
+          "value": "Anda juga mendapatkan 1.500 kredit gratis."
+        },
+        {
+          "language": "vi",
+          "value": "Bạn cũng đã nhận được 1.500 credit miễn phí."
+        }
+      ]
+    }
+  ],
+  "pushedAt": "2026-01-27T01:48:43.339Z",
+  "result": {
+    "success": true,
+    "message": "39 translations saved"
+  }
+}
