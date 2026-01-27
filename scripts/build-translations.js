@@ -194,14 +194,16 @@ function applyTranslations(html, translations, langConfig) {
     result = result.replace(/href="assets/g, 'href="../assets');
     result = result.replace(/src="assets/g, 'src="../assets');
 
-    // Fix links to other pages (should stay within language folder)
-    result = result.replace(/href="index\.html"/g, 'href="index.html"');
-    result = result.replace(/href="about\.html"/g, 'href="about.html"');
-    result = result.replace(/href="pricing\.html"/g, 'href="pricing.html"');
-    result = result.replace(/href="done-for-you\.html"/g, 'href="done-for-you.html"');
-    result = result.replace(/href="sos-hotline\.html"/g, 'href="sos-hotline.html"');
-    result = result.replace(/href="partner\.html"/g, 'href="partner.html"');
-    result = result.replace(/href="quiz\.html"/g, 'href="quiz.html"');
+    // Fix links to other pages (use ./ prefix to ensure they stay within language folder)
+    // This is needed because accessing /br/ without index.html makes browser treat base as /br not /br/
+    result = result.replace(/href="index\.html"/g, 'href="./index.html"');
+    result = result.replace(/href="about\.html"/g, 'href="./about.html"');
+    result = result.replace(/href="pricing\.html"/g, 'href="./pricing.html"');
+    result = result.replace(/href="done-for-you\.html"/g, 'href="./done-for-you.html"');
+    result = result.replace(/href="sos-hotline\.html"/g, 'href="./sos-hotline.html"');
+    result = result.replace(/href="partner\.html"/g, 'href="./partner.html"');
+    result = result.replace(/href="quiz\.html"/g, 'href="./quiz.html"');
+    result = result.replace(/href="audit\.html"/g, 'href="./audit.html"');
 
     return result;
 }
